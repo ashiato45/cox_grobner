@@ -1,0 +1,818 @@
+% -*- coding: euc-jp -*-
+
+%%% mwmlist -- List processing library for mwmath
+
+\RequirePackage{mwmlist}
+
+
+\newcount\mwml@@counter
+\newcount\mwml@@countera
+\newif\if@mwml
+%\def\mwml@false{\@mwml@false}
+
+%% Local variables
+\def\mwml@tempa{}
+\def\mwml@tempb{}
+\def\mwml@tempc{}
+\def\mwml@tempd{}
+%% Non-local variables
+\def\mwml@tempflasque{}
+%% Temporary local variables for arguments
+% One may only use these variables to contain arguments, e.g. #1, to avoid overwritting them,
+% which causes a problem in the case that one of arguments is a control sequence like \mwml@tempa .
+% It is not allowed to pass these variables as control sequence. Expand them.
+\def\mwml@arga{}
+\def\mwml@argb{}
+\def\mwml@argc{}
+\def\mwml@argd{}
+
+%% Data constructers
+% LIST := \mwml@NULL | \mwml@CONS{ELEM}{LIST}
+% ELEM := anything
+\def\mwml@CONS#1#2{}
+\def\mwml@NULL{}
+
+
+
+%%% Logic
+% implemented: is@true is@false not and or not@and not@or
+
+\def\mwml@is@true#1{% :: boolian -> nothing
+  \mwml@not{\mwml@is@false{#1}}%
+}
+\def\mwml@is@false#1{% :: boolian -> nothing
+  \ifx#1\mwml@false
+    \@mwmltrue
+  \else
+    \@mwmlfalse
+  \fi
+}
+
+\def\mwml@not#1{% (not #1)
+  #1%
+  \if@mwml
+    \@mwmlfalse
+  \else
+    \@mwmltrue
+  \fi
+}
+\def\mwml@and#1#2{% (and #1 #2)
+  #1%
+  \if@mwml
+    #2%
+  \else
+    \@mwmlfalse
+  \fi
+}
+\def\mwml@or#1#2{% (or #1 #2)
+  #1%
+  \if@mwml
+  \else
+    #2%
+  \fi
+}
+\def\mwml@not@and#1#2{% (not (and #1 #2))
+  \mwml@not{\mwml@and{#1}{#2}}%
+}
+\def\mwml@not@or#1#2{% (not (or #1 #2))
+  \mwml@not{\mwml@or{#1}{#2}}%
+}
+
+
+
+%%% Auxiliary macro
+\def\mwml@with@freezed@list#1{%
+  \let\mwml@CONS@before\mwml@CONS
+  \let\mwml@NULL@before\mwml@NULL
+  \let\mwml@CONS\relax
+  \let\mwml@NULL\relax
+  #1%
+  \let\mwml@CONS\mwml@CONS@before
+  \let\mwml@NULL\mwml@NULL@before
+}
+
+
+%%% Fundamentals
+% \mwml@set@null \mwml@set@copy \mwml@apply
+
+\def\mwml@set@null#1{%
+  \def#1{\mwml@NULL}%
+}
+\def\mwml@set@copy#1#2{%
+% Bind copy of #2 to #1
+  \mwm@in@group@with@nonlocal#1#1{%
+    \mwml@with@freezed@list{%
+      \toks2\expandafter{#2}%
+      \edef#1{\the\toks2}%
+    }%
+  }%
+}
+\def\mwml@apply#1#2{% :: proc -> [a] -> nothing, apply proc to [a]
+  \mwml@set@fold\mwml@tempflasque\mwml@apply@kons{}{#2}%
+  \expandafter#1\mwml@tempflasque
+}
+    \def\mwml@apply@kons#1#2{%
+      \toks1{#1}%
+      \toks2{{#2}}%
+      \edef\mwml@tempflasque{\the\toks1 \the\toks2}%
+    }
+
+
+
+%%% Auxiliary macnros with side effect
+\def\mwml@push#1#2{%
+  \mwml@set@cons#2{#1}{#2}%
+}
+\def\mwml@drop@one#1{%
+  \mwml@set@cdr#1#1%
+}
+
+
+
+%%% Constructors
+% implemented: cons make-list iota
+
+% \def\mwml@set@cons#1#2#3{%
+% % Bind cons of #2 and #3 to #1
+%   \mwml@with@freezed@list{%
+%     \edef#1{\mwml@CONS{#2}{#3}}%
+%   }%
+% }
+\def\mwml@set@cons#1#2#3{%
+% Bind cons of #2 and #3 to #1
+  \mwm@in@group@with@nonlocal#1#1{%
+    \mwml@with@freezed@list{%
+      \toks2{#2}%
+      \toks3\expandafter{#3}%
+      \edef#1{\mwml@CONS{\the\toks2}{\the\toks3}}%
+    }%
+  }%
+}
+
+\def\mwml@set@make@list#1#2#3{% :: cs -> length -> a -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@@counter=#2
+    \mwml@set@copy\mwml@argc{#3}%
+    \mwml@set@null\mwml@tempa
+    \ifnum\mwml@@counter>0
+      \loop
+        \mwm@exnr\mwml@push\mwml@argc\mwml@tempa
+        \advance \mwml@@counter by -1
+      \ifnum\mwml@@counter>0 \repeat
+    \fi
+  }%
+}
+
+\def\mwml@set@iota#1#2#3#4{% :: cs -> count -> start -> step -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@@counter=#2\relax% count
+    \mwml@@countera=#3\relax% start
+    \mwml@set@null\mwml@tempa
+    \ifnum\mwml@@counter>0
+      \loop
+        \mwm@exnr\mwml@push{\the\mwml@@countera}\mwml@tempa
+        \advance \mwml@@counter by -1
+        \advance \mwml@@countera by #4
+      \ifnum\mwml@@counter>0 \repeat
+    \fi
+    \mwml@reverse\mwml@tempa
+  }%
+}
+
+
+
+%%% Predicates
+% implemented: is-null eq-nth test-nth
+
+\def\mwml@is@null#1{%
+  \let\mwml@NULL@before\mwml@NULL
+  \let\mwml@CONS@before\mwml@CONS
+  \let\mwml@NULL\@mwmltrue
+  \let\mwml@CONS\mwml@is@null@cons
+  #1%
+  \let\mwml@NULL\mwml@NULL@before
+  \let\mwml@CONS\mwml@CONS@before
+}
+    \def\mwml@is@null@cons#1#2{%
+      \@mwmlfalse
+    }
+
+\def\mwml@eq@nth#1#2#3{% :: a -> i -> [a] -> nothing
+  \mwml@set@list@ref\mwml@tempflasque{#3}{#2}%
+  \def\@tempa{#1}%
+  \ifx\@tempa\mwml@tempflasque
+    \@mwmltrue
+  \else
+    \@mwmlfalse
+  \fi
+}
+
+\def\mwml@test@nth#1#2#3{% :: (a -> nothing, predicate) -> i -> [a] -> nothing
+  \mwml@set@list@ref\@tempa{#3}{#2}%
+  #1\@tempa
+}
+
+
+
+%%% Selectors
+% implemented: car cdr cadr caddr cadddr list-ref
+%              take drop split-at
+% take/nth/drop
+
+% \def\mwml@set@car#1#2{%
+% % Bind car of #2 to #1
+%   \begingroup
+%   \def\mwml@CONS##1##2{\def#1{##1}}%
+%   \let\mwml@NULL\undefined
+%   #2%
+% %  \mwm@endgroup@with@nonlocal#1#1
+%   \global\let\mwml@result#1
+%   \endgroup
+%   \let#1\mwml@result
+% }
+% \def\mwml@set@cdr#1#2{%
+% % Bind cdr of #2 to #1
+%   \begingroup
+%   \def\mwml@CONS##1##2{\def#1{##2}}%
+%   \let\mwml@NULL\undefined
+%   #2%
+%   \global\let\mwml@result#1
+%   \endgroup
+%   \let#1\mwml@result
+% }
+\def\mwml@set@car#1#2{%
+% Bind car of #2 to #1
+  \mwm@in@group@with@nonlocal#1#1{%
+    \def\mwml@CONS##1##2{\def#1{##1}}%
+    \let\mwml@NULL\undefined
+    #2%
+  }%
+}
+\def\mwml@set@cdr#1#2{%
+% Bind cdr of #2 to #1
+  \mwm@in@group@with@nonlocal#1#1{%
+    \def\mwml@CONS##1##2{\def#1{##2}}%
+    \let\mwml@NULL\undefined
+    #2%
+  }%
+}
+\def\mwml@set@cadr#1#2{\mwml@set@list@ref{#1}{#2}{1}}
+\def\mwml@set@caddr#1#2{\mwml@set@list@ref{#1}{#2}{2}}
+\def\mwml@set@cadddr#1#2{\mwml@set@list@ref{#1}{#2}{3}}
+
+\def\mwml@set@list@ref#1#2#3{% :: cs -> [a] -> i -> a
+% imported from srfi-1
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@@counter=#3
+    \let\mwml@NULL\undefined
+    \let\mwml@CONS\mwml@set@list@ref@cons
+    #2%
+  }%
+}
+    \def\mwml@set@list@ref@cons#1#2{%
+%      \ifnum\mwml@@counter=0
+%        \def\mwml@tempa{#1}%
+%        \let\mwml@CONS\@gobbletwo
+%        \let\mwml@NULL\relax
+%      \else
+%        \advance \mwml@@counter by -1
+%      \fi
+%      #2%
+      \ifnum\mwml@@counter=0
+        \def\mwml@tempa{#1}%
+      \else
+        \advance \mwml@@counter by -1
+        #2%
+      \fi
+    }
+
+\def\mwml@set@take#1#2#3{% cs -> [a] -> index -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal#1#1{%
+    \mwml@set@split@at#1\mwm@devnull{#2}{#3}%
+  }%
+}
+\def\mwml@set@drop#1#2#3{% cs -> [a] -> index -> nothing
+  \mwm@in@group@with@nonlocal#1#1{%
+    \mwml@set@split@at\mwm@devnull#1{#2}{#3}%
+  }%
+}
+\def\mwml@set@split@at#1#2#3#4{%
+% :: cs-take -> cs-drop -> [a] -> index -> nothing, [a] in cs-take, [a] in cs-drop
+% return (take x i), (drop x i)
+  \mwm@in@group@with@nonlocal@two\mwml@tempa#1\mwml@tempb#2{%
+    \mwml@set@copy\mwml@argc{#3}%
+    \mwml@set@null\mwml@tempa
+    \mwml@@counter=0
+    \mwml@@countera=#4
+    \ifnum\mwml@@countera=0
+      \let\mwml@tempb\mwml@argc
+    \else
+      \let\mwml@NULL\undefined
+      \let\mwml@CONS\mwml@set@split@at@cons
+      \mwml@argc
+    \fi
+    \mwml@reverse\mwml@tempa
+  }%
+}
+    \def\mwml@set@split@at@cons#1#2{%
+      \mwml@push{#1}\mwml@tempa
+      \advance \mwml@@counter by 1
+      \ifnum\mwml@@counter=\mwml@@countera
+        \def\mwml@tempb{#2}%
+      \else
+        #2%
+      \fi
+    }
+
+
+\def\mwml@set@take@nth@drop#1#2#3#4#5{% :: cs-take -> cs-nth -> cs-drop -> [a] -> index -> nothing,
+% [a] in cs-take, a in cs-nth, [a] in cs-drop
+% return (take x i), (nth i x), (drop x (+ i 1))
+  \mwm@in@group@with@nonlocal@three\mwml@tempa#1#2#2#3#3{%
+    \mwm@ennxnr\mwml@set@split@at\mwml@tempa\mwml@tempb{#4}{#5}%
+    \mwml@set@car#2\mwml@tempb
+    \mwml@set@cdr#3\mwml@tempb
+  }%
+}
+
+
+%%% Selectors with side effect
+% Do not use them, they often causes bugs.
+\def\mwml@car#1{%
+  \mwml@set@car\mwml@tempa{#1}%
+  \mwml@tempa
+}
+\def\mwml@cadr#1{\mwml@list@ref{#1}{1}}
+\def\mwml@caddr#1{\mwml@list@ref{#1}{2}}
+\def\mwml@cadddr#1{\mwml@list@ref{#1}{3}}
+\def\mwml@list@ref#1#2{% :: [a] -> i -> a
+  \mwml@set@list@ref\mwml@tempa{#1}{#2}%
+  \mwml@tempa
+}
+\def\mwml@nth#1#2{% :: i -> [a] -> a
+  \mwml@set@list@ref\mwml@tempa{#2}{#1}%
+  \mwml@tempa
+}
+
+
+
+%%% Miscellaneous: length, append, concatenate, reverse, zip & count
+% implemented: length, append, concatenate reverse, append-reverse, zip (2,3)
+
+% \def\mwml@set@length#1#2{% cs -> [a] -> nothing, length in cs
+%   \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+%     \mwml@set@fold\mwml@tempa\mwml@set@length@kons{0}{#2}%
+%   }%
+% }
+%     \def\mwml@set@length@kons#1#2{%
+%       \mwml@@counter=#1
+%       \advance \mwml@@counter by 1
+%       \edef\mwml@tempa{\the\mwml@@counter}%
+%     }
+\def\mwml@set@length#1#2{% cs -> [a] -> nothing, length in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@fold\mwml@tempa\mwml@set@length@kons{0}{#2}%
+  }%
+}
+    \def\mwml@set@length@kons#1#2{%
+      \mwml@@counter=#1
+      \advance \mwml@@counter by 1
+      \edef\mwml@tempa{\the\mwml@@counter}%
+    }
+\def\mwml@set@length@counter#1#2{% counter -> [a] -> nothing, length in counter
+  \mwm@in@group@with@nonlocal\mwml@tempa\mwml@tempflasque{%
+    \mwml@set@length\mwml@tempa{#2}%
+  }
+  #1=\mwml@tempflasque
+}
+
+
+\def\mwml@set@append#1#2#3{% :: cs -> [a] -> [a] -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal#1#1{%
+%    \mwml@set@reverse#1{#2}%
+%    \mwml@set@append@reverse#1#1{#3}%
+    \mwml@set@reverse\mwml@append@@lis{#2}%
+    \mwm@enxnr\mwml@set@append@reverse#1\mwml@append@@lis{#3}%
+  }%
+}
+\def\mwml@set@append@reverse#1#2#3{% :: cs -> [a] -> [a] -> nothing, [a] in cs
+% (append (reverse #1) #2)
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@copy\mwml@argb{#2}%
+    \mwml@set@copy\mwml@tempa{#3}%
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@append@reverse@cons
+    \mwml@argb
+  }%
+}
+    \def\mwml@set@append@reverse@cons#1#2{%
+      \mwml@push{#1}\mwml@tempa
+      #2%
+    }
+
+
+\def\mwml@set@concatenate#1#2{% :: cs -> [[a]] -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@reverse\mwml@tempb{#2}%
+    \mwml@set@fold\mwml@tempa\mwml@set@concatenate@kons\mwml@NULL\mwml@tempb
+  }%
+}
+    \def\mwml@set@concatenate@kons#1#2{%
+      \mwml@set@append\mwml@tempa{#2}{#1}%
+    }
+
+
+\def\mwml@reverse#1{%
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@reverse\mwml@tempa{#1}%
+  }%
+}
+\def\mwml@set@reverse#1#2{% :: cs -> [a] -> nothing, [a] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@copy\mwml@argb{#2}%
+    \mwml@set@null\mwml@tempa
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@reverse@cons
+    \mwml@argb
+  }%
+}
+    \def\mwml@set@reverse@cons#1#2{%
+      \mwml@push{#1}\mwml@tempa
+      #2%
+    }
+
+
+\def\mwml@set@zip@two#1#2#3{% :: cs -> [a] -> [b] -> nothing, [(a,b)] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+%    \mwml@set@copy\mwml@tempb{#2}%
+%    \mwml@set@copy\mwml@tempc{#3}%
+%    \mwml@set@null\mwml@tempa
+%    \let\mwml@NULL\relax
+%    \let\mwml@CONS\mwml@set@zip@two@cons
+%    \mwml@tempb
+%    \mwml@reverse\mwml@tempa
+    \mwml@set@copy\mwml@argb{#2}%
+    \mwml@set@copy\mwml@argc{#3}%
+    \mwml@set@null\mwml@tempa
+    \mwml@set@copy\mwml@tempb\mwml@argb
+    \mwml@set@copy\mwml@tempc\mwml@argc
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@zip@two@cons
+    \mwml@tempb
+    \mwml@reverse\mwml@tempa
+  }%
+}
+    \def\mwml@set@zip@two@cons#1#2{%
+      \mwml@is@null\mwml@tempb \if@mwml \else
+      \mwml@is@null\mwml@tempc \if@mwml \else
+        \mwml@set@car\@tempb\mwml@tempb
+        \mwml@drop@one\mwml@tempb
+        \mwml@set@car\@tempc\mwml@tempc
+        \mwml@drop@one\mwml@tempc
+        \mwml@set@null\@tempa
+        \mwm@exnr\mwml@push\@tempc\@tempa
+        \mwm@exnr\mwml@push\@tempb\@tempa
+        \mwm@exnr\mwml@push\@tempa\mwml@tempa% (push `(,\@tempb ,\@tempc) \mwml@tempa)
+        % I think the below null check is not necessarily needed, but the rack causes an error. Hum...
+%        \def\@tempa{#2}%
+%        \mwml@is@null\@tempa \if@mwml
+%        \else
+          #2%
+%        \fi
+      \fi\fi
+    }
+\def\mwml@set@zip@three#1#2#3#4{% :: cs -> [a] -> [b] -> [c] -> nothing, [(a,b,c)] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+%    \mwml@set@copy\mwml@tempb{#2}%
+%    \mwml@set@copy\mwml@tempc{#3}%
+%    \mwml@set@copy\mwml@tempd{#4}%
+%    \mwml@set@null\mwml@tempa
+%    \let\mwml@NULL\relax
+%    \let\mwml@CONS\mwml@set@zip@three@cons
+%    \mwml@tempb
+%    \mwml@reverse\mwml@tempa
+    \mwml@set@copy\mwml@argb{#2}%
+    \mwml@set@copy\mwml@argc{#3}%
+    \mwml@set@copy\mwml@argd{#4}%
+    \mwml@set@null\mwml@tempa
+    \mwml@set@copy\mwml@tempb\mwml@argb
+    \mwml@set@copy\mwml@tempc\mwml@argc
+    \mwml@set@copy\mwml@tempd\mwml@argd
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@zip@three@cons
+    \mwml@tempb
+    \mwml@reverse\mwml@tempa
+  }%
+}
+    \def\mwml@set@zip@three@cons#1#2{%
+      \mwml@is@null\mwml@tempb \if@mwml \else
+      \mwml@is@null\mwml@tempc \if@mwml \else
+      \mwml@is@null\mwml@tempd \if@mwml \else
+        \mwml@set@car\@tempb\mwml@tempb
+        \mwml@drop@one\mwml@tempb
+        \mwml@set@car\@tempc\mwml@tempc
+        \mwml@drop@one\mwml@tempc
+        \mwml@set@car\@tempd\mwml@tempd
+        \mwml@drop@one\mwml@tempd
+        \mwml@set@null\@tempa
+        \mwm@exnr\mwml@push\@tempd\@tempa
+        \mwm@exnr\mwml@push\@tempc\@tempa
+        \mwm@exnr\mwml@push\@tempb\@tempa
+        \mwm@exnr\mwml@push\@tempa\mwml@tempa% (push `(,\@tempb ,\@tempc ,\@tempd) \mwml@tempa)
+        % see the comment in \mwml@set@zip@two@cons
+%        \def\@tempa{#2}%
+%        \mwml@is@null\@tempa \if@mwml
+%        \else
+          #2%
+%        \fi
+      \fi\fi\fi
+    }
+
+
+
+%%% Fold, unfold & map
+% implemented: fold map
+
+% \def\mwml@set@fold{\mwml@set@fold@cont\relax}
+% \def\mwml@set@fold@cont#1#2#3#4#5{% :: cont -> cs -> (a -> b -> a) -> a -> [b] -> a
+% % #3 have to return value in cs
+% % #1: cont (continuation)
+% % #2: cs (control sequence used in #3 to return value)
+% % #3: a -> b -> a
+% % #4: a (accumulator)
+% % #5: [b]
+%   \mwm@in@group@with@nonlocal#2#2{%
+%     \def\mwml@fold@kons##1##2{%
+%       \mwm@exnr#3{#2}{##1}%
+%       ##2%
+%     }%
+%     \let\mwml@NULL\relax
+%     \let\mwml@CONS\mwml@fold@kons
+%     \def#2{#4}%
+%     #5%
+%   }%
+% }
+\def\mwml@set@fold#1#2#3#4{% :: cs -> (a -> b -> nothing, a in cs) -> a -> [b] -> nothing, a in cs
+% #2 have to return value in #1
+% Note that this macro is imported from Haskell (foldl), not from Scheme.
+% Take care of the order of arguments of #2.
+% #1: cs (control sequence used in #3 to return value)
+% #2: a -> b -> a
+% #3: a (accumulator)
+% #4: [b]
+  \mwm@in@group@with@nonlocal#1#1{%
+    \def\mwml@fold@kons##1##2{%
+      \mwm@exnr#2{#1}{##1}%
+      ##2%
+    }%
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@fold@kons
+    \mwml@set@copy\mwml@argd{#4}%
+    \def#1{#3}%
+    \mwml@argd
+  }%
+}
+
+
+\def\mwml@set@map#1#2#3{% :: cs -> (a -> nothing, b in cs) -> [a] -> nothing, [b] in cs
+  \mwm@in@group@with@nonlocal\mwml@map@@res#1{%
+    \def\mwml@set@map@kons##1##2{%
+      #2{##2}%
+      \mwm@enxnr\mwml@set@cons\mwml@map@@res#1{##1}%
+    }%
+    \mwml@set@fold\mwml@map@@res\mwml@set@map@kons\mwml@NULL{#3}%
+    \mwml@reverse\mwml@map@@res
+  }%
+}
+\def\mwml@set@map@two#1#2#3#4{%
+% :: cs -> (a -> b -> nothing, c in cs) -> [a] -> [b] -> nothing, [c] in cs
+  \mwm@in@group@with@nonlocal#1#1{%
+    \def\mwml@map@proc##1{%
+      \mwml@apply#2{##1}%
+    }%
+    \mwml@set@zip@two#1{#3}{#4}%
+    \mwm@ennxr\mwml@set@map#1\mwml@map@proc{#1}%
+  }%
+}
+\def\mwml@set@map@three#1#2#3#4#5{%
+% :: cs -> (a -> b -> c -> nothing, d in cs) -> [a] -> [b] -> [c] -> nothing, [d] in cs
+  \mwm@in@group@with@nonlocal#1#1{%
+    \def\mwml@map@proc##1{%
+      \mwml@apply#2{##1}%
+    }%
+    \mwml@set@zip@three#1{#3}{#4}{#5}%
+    \mwm@ennxr\mwml@set@map#1\mwml@map@proc{#1}%
+  }%
+}
+
+
+
+%%% Filtering & partitioning
+% implemented: filter
+
+% TODO: delete
+\def\mwml@filter#1#2{%
+  \mwml@set@filter\mwml@tempa{#1}{#2}%
+  \let#2\mwml@tempa
+}
+\def\mwml@set@filter#1#2#3{% :: cs -> (a -> nothing, predicate) -> [a] -> nothing, [a] in cs
+%  \begingroup
+%  \mwml@set@null\mwml@tempa
+%  \let\mwml@NULL\relax
+%  \let\mwml@CONS\mwml@set@filter@cons
+%  \let\mwml@temp@pred#2%
+%  #3%
+%  \mwml@set@reverse\mwml@@result\mwml@tempa
+%  \global\let\mwml@@result\mwml@@result
+%  \endgroup
+%  \let#1\mwml@@result
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \let\mwml@temp@pred#2%
+    \mwml@set@copy\mwml@argc{#3}%
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@filter@cons
+    \mwml@set@null\mwml@tempa
+    \mwml@argc
+    \mwml@reverse\mwml@tempa
+  }%
+}
+    \def\mwml@set@filter@cons#1#2{%
+      \mwml@temp@pred{#1}%
+      \if@mwml
+        \mwml@push{#1}\mwml@tempa
+      \else
+      \fi
+      #2%
+    }
+
+
+
+%%% Searching
+% implemented: memq
+
+\def\mwml@memq#1#2{% :: a -> [a] -> nothing
+  \let\mwml@NULL\@mwmlfalse
+  \let\mwml@CONS\mwml@memq@cons
+  \mwml@set@copy\mwml@argb{#2}%
+  \def\mwml@tempa{#1}%
+  \mwml@argb
+}
+    \def\mwml@memq@cons#1#2{%
+      \def\@tempa{#1}%
+      \ifx\@tempa\mwml@tempa
+        \@mwmltrue
+      \else
+        #2%
+      \fi
+    }
+
+
+
+%%% Conversion
+
+\def\mwml@csl@from@list#1{%
+  \begingroup
+  \mwml@set@csl@from@list\mwml@tempa{#1}%
+  \mwml@tempa
+  \endgroup
+}
+\def\mwml@set@csl@from@list#1#2{% :: cs -> [a] -> nothing, CSL in cs
+% Convert a list #2 to csl #1
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@copy\mwml@argb{#2}%
+    \let\mwml@NULL\relax
+    \let\mwml@CONS\mwml@set@csl@from@list@loop@first
+    \mwml@argb
+  }%
+}
+    \def\mwml@set@csl@from@list@loop@first#1#2{%
+      \toks1{{#1}}%
+      \edef\mwml@tempa{\the\toks1}%
+      \let\mwml@CONS\mwml@set@csl@from@list@loop
+      #2%
+    }
+    \def\mwml@set@csl@from@list@loop#1#2{%
+      \toks0\expandafter{\mwml@tempa}%
+      \toks1{{#1}}%
+      \edef\mwml@tempa{\the\toks0,\the\toks1}%
+      #2%
+    }
+
+\def\mwml@list@from@csl#1{%
+  \begingroup
+  \mwml@set@list@from@csl\mwml@tempa{#1}%
+  \mwml@tempa
+  \endgroup
+}
+\def\mwml@set@list@from@csl#1#2{% :: cs -> CSL -> nothing, [a] in cs
+% Convert a CSL #2 to list #1
+% One can't use \mwml@tempa for #2. Expand it.
+  \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+    \mwml@set@null\mwml@tempa
+    \def\mwml@argb{#2}%
+    \ifx\mwml@argb\@empty
+    \else
+      \mwml@set@list@from@csl@loop#2,\@nil
+    \fi
+    \mwml@reverse\mwml@tempa
+  }%
+}
+    \def\mwml@set@list@from@csl@loop#1,#2\@nil{%
+      \mwml@push{#1}\mwml@tempa
+      \def\@tempa{#2}%
+      \ifx\@tempa\@empty
+        \let\@next\@gobble
+      \else
+        \let\@next\mwml@set@list@from@csl@loop
+      \fi
+      \@next#2\@nil
+    }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\mwml@set@make@matrix#1#2#3#4{% :: cs -> row -> column -> a -> nothing, [[a]] in cs
+  \mwm@in@group@with@nonlocal\mwml@tempb#1{%
+  \def\mwml@proc##1{%
+    \def\mwml@tempb{#4}%
+  }%
+  \mwml@set@empty@matrix\mwml@tempa{#2}{#3}%
+  \mwml@set@map@matrix\mwml@tempb\mwml@proc\mwml@tempa
+  }%
+}
+
+\def\mwml@set@empty@matrix#1#2#3{% :: cs -> row -> column -> nothing, [[a]] in cs
+  \begingroup
+  \def\mwml@proc{%
+    \mwml@set@make@list\mwml@tempa{#3}{}%
+  }%
+  \mwml@set@make@list\mwml@tempa{#2}{}%
+  \mwm@ennxr\mwml@set@map\mwml@tempa\mwml@proc\mwml@tempa
+  \global\let\mwml@result\mwml@tempa
+  \endgroup
+  \let#1\mwml@result
+}
+
+\def\mwml@set@map@matrix#1#2#3{% :: cs -> (a -> b) -> [[a]] -> nothing, [[b]] in cs
+% (a -> b) returns value with cs
+  \begingroup
+  \def\mwml@map@matrix@proc##1{%
+    \mwml@set@map#1#2{##1}%
+  }%
+  \mwm@ennxr\mwml@set@map#1\mwml@map@matrix@proc{#3}%
+  \global\let\mwml@result#1
+  \endgroup
+  \let#1\mwml@result
+}
+
+
+
+%% output
+\def\mwml@output@matrix@with@pmatrix#1{% :: [[a]] -> output
+  \begingroup
+  \mwml@set@make@matrix@contents\mwml@tempa{#1}%
+  \begin{pmatrix}
+    \mwml@tempa
+  \end{pmatrix}
+  \endgroup
+}
+\def\mwml@set@make@matrix@contents#1#2{% :: cs -> [[a]] -> nothing, matrix contents in cs
+ \mwm@in@group@with@nonlocal\mwml@tempa#1{%
+   % consider the case that #2 = \mwml@tempa
+   % \mwml@set@car\mwml@tempa{#2}%
+   % \mwm@exr\mwml@matrix@join@with@tab\mwml@tempa
+   % \mwml@set@cdr\mwml@tempb{#2}%
+   \mwml@set@copy\mwml@tempb{#2}%
+   \mwml@set@car\mwml@tempa\mwml@tempb
+   \mwm@exr\mwml@matrix@join@with@tab\mwml@tempa
+   \mwml@drop@one\mwml@tempb
+   \mwm@ennxxr\mwml@set@fold\mwml@tempa\mwml@matrix@join@with@newline\mwml@tempa\mwml@tempb
+ }%
+}
+   \def\mwml@matrix@join@with@newline#1#2{%
+     \toks0{\\}%
+     \toks1{#1}%
+     \mwml@matrix@join@with@tab{#2}%
+     \toks2\expandafter{\mwml@tempa}%
+     \edef\mwml@tempa{\the\toks1 \the\toks0 \the\toks2}%
+   }
+   \def\mwml@matrix@join@with@tab#1{% :: [a] -> value in \mwml@tempa
+     % (string-join lis " & ")
+     \mwm@in@group@with@nonlocal\mwml@tempa\mwml@tempa{%
+       \mwml@set@car\mwml@tempa{#1}%
+       \mwml@set@cdr\mwml@tempb{#1}%
+       \mwm@ennxnr\mwml@set@fold\mwml@tempa\mwml@matrix@join@with@tab@aux\mwml@tempa\mwml@tempb
+     }%
+   }
+       \def\mwml@matrix@join@with@tab@aux#1#2{%
+         \toks1{#1}%
+         \toks2{#2}%
+         \def\mwml@tempa{#1 & #2}%
+       }
+
+
+
+%\def\datum{1: #1, 2: #2, 11: ##1, 22: ##2}\show\datum
