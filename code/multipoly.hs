@@ -1,3 +1,5 @@
+module MultiPoly where
+
 import Control.Applicative
 import Data.List
 import Distribution.Simple.Utils
@@ -11,6 +13,7 @@ data PlainMonomial = PlainMonomial [Int]|EmptyMonomial deriving Show
 data Term coef multideg = Term {coef :: coef, multideg :: multideg} deriving Show
 data Poly coef multideg = Poly Int [Term coef multideg] deriving Show
 newtype Lex = Lex PlainMonomial deriving Show
+newtype GrLex = GrLex PlainMonomial deriving Show
 
 class (Ord a) => MultiDeg a where
     moPlus :: a -> a -> a
@@ -21,6 +24,7 @@ class (Ord a) => MultiDeg a where
     moZero :: a
     moTotalOrder :: a -> Maybe Int
     moAlign :: Int -> a -> a
+    moMake :: PlainMonomial -> a
     moGetPlain :: a -> PlainMonomial
     moShow :: a -> String
 
@@ -36,6 +40,7 @@ instance Eq Lex where
 instance Ord Lex where
     compare (Lex (PlainMonomial [])) _ = error "Invalid PlainMonomial"
     compare _ (Lex (PlainMonomial [])) = error "Invalid PlainMonomial"
+    compare (Lex EmptyMonomial) (Lex EmptyMonomial) = EQ
     compare (Lex EmptyMonomial) _ = LT
     compare _ (Lex EmptyMonomial) = GT
     compare (Lex (PlainMonomial [x])) (Lex (PlainMonomial [y])) = compare x y
@@ -56,8 +61,40 @@ instance MultiDeg Lex where
     moTotalOrder (Lex (PlainMonomial xs)) = Just $ sum xs
     moAlign n (Lex EmptyMonomial) = Lex EmptyMonomial
     moAlign n (Lex (PlainMonomial xs)) = Lex $ PlainMonomial $ take n (xs ++ (repeat 0))
+    moMake p = Lex p
     moGetPlain (Lex p) = p
     moShow l = show l
+
+instance Eq GrLex where
+    (GrLex x) == (GrLex y) = x == y
+
+instance Ord GrLex where
+    compare (GrLex (PlainMonomial [])) _ = error "Invalid PlainMonomial"
+    compare _ (GrLex (PlainMonomial [])) = error "Invalid PlainMonomial"
+    compare (GrLex EmptyMonomial) (GrLex EmptyMonomial) = EQ
+    compare (GrLex EmptyMonomial) _ = LT
+    compare _ (GrLex EmptyMonomial) = GT
+    compare (GrLex xa@(PlainMonomial xs)) (GrLex ya@(PlainMonomial ys)) = if sum xs == sum ys
+                                                                          then compare (Lex xa) (Lex ya)
+                                                                          else compare (sum xs) (sum ys)
+
+instance MultiDeg GrLex where
+    moPlus _ (GrLex EmptyMonomial) = GrLex EmptyMonomial
+    moPlus (GrLex EmptyMonomial) _ = GrLex EmptyMonomial
+    -- moPlus (GrLex (PlainMonomial xs)) (GrLex (PlainMonomial ys)) = GrLex $ PlainMonomial $ (+) <$> xs <*> ys
+    moPlus (GrLex (PlainMonomial xs)) (GrLex (PlainMonomial ys)) = GrLex $ PlainMonomial $ zipWith (+) (xs ++ (repeat 0)) (ys ++ (repeat 0))
+    moNeg (GrLex EmptyMonomial) = error "No reciprocal of EmptyMonomial! It's just the zero division!!"
+    moNeg (GrLex (PlainMonomial xs)) = GrLex $ PlainMonomial $ negate <$> xs
+    moEmpty = GrLex EmptyMonomial
+    moZero = GrLex $ PlainMonomial $ repeat 0
+    moTotalOrder (GrLex EmptyMonomial) = Nothing
+    moTotalOrder (GrLex (PlainMonomial xs)) = Just $ sum xs
+    moAlign n (GrLex EmptyMonomial) = GrLex EmptyMonomial
+    moAlign n (GrLex (PlainMonomial xs)) = GrLex $ PlainMonomial $ take n (xs ++ (repeat 0))
+    moMake p = GrLex p
+    moGetPlain (GrLex p) = p
+    moShow l = show l
+
 
 zeroTerm :: (Fractional coef, MultiDeg multideg) => Term coef multideg
 zeroTerm = Term {coef = 0, multideg = moEmpty}
@@ -267,7 +304,7 @@ texIndeterminate :: String -> Int -> String
 texIndeterminate s n = case n of
                          0 -> ""
                          1 -> s
-                         otherwise -> s ++ "^" ++ (show n)
+                         otherwise -> s ++ "^{" ++ (show n)  ++ "}"
 
 texMultideg :: (MultiDeg multideg) => Int -> multideg -> String
 texMultideg n d = let p = moGetPlain $ d
@@ -352,7 +389,13 @@ makeLexPoly' n (r, xs) = Term r (Lex (PlainMonomial xs))
 makeLexPoly :: Int -> [(Rational, [Int])] -> Poly Rational Lex
 makeLexPoly n xs = Poly n $ map (makeLexPoly' n) xs
 
-main = do
+makePoly' :: (MultiDeg multideg) => Int -> (Rational, [Int]) -> Term Rational multideg
+makePoly' n (r, xs) = Term r (moMake (PlainMonomial xs))
+
+makePoly :: (MultiDeg multideg) => Int -> [(Rational, [Int])] -> Poly Rational multideg
+makePoly n xs = normalize $ Poly n $ map (makePoly' n) xs
+
+main' = do
   -- putStrLn $ show $ (Lex (PlainMonomial [1])) `moPlus` (Lex (PlainMonomial [2]))
   let p = Poly 2 [Term (3%1) (Lex (PlainMonomial [1,2])), Term (4%1) (Lex (PlainMonomial [1,2])), Term (1%1) (Lex (PlainMonomial [1,1]))]
   let q = Poly 2 [Term (3%1) (Lex (PlainMonomial [1,2])), Term (1%1) (Lex (PlainMonomial [1,1]))]
@@ -368,6 +411,13 @@ main = do
   let t3 = [makeLexPoly 2 [(1%1, [2,1]), (1%1, [1,2]), (1%1, [0,2])],
             makeLexPoly 2 [(1%1, [1,1]), (-1%1, [0,0])],
             makeLexPoly 2 [(1%1, [0,2]), (-1%1, [0,0])]]
+  let tt = [[(1%1, [7,2]), (1%1, [3,2]), (-1%1, [0,1]), (1%1, [0,0])],
+            [(1%1, [1,2]), (-1%1, [1,0])],
+            [(1%1, [1,0]), (-1%1, [0,3])]]
+  let t4 = (map (makePoly 2) tt) :: [Poly Rational Lex]
+  let t5 = (map (makePoly 2) tt) :: [Poly Rational GrLex]
+  let t6 = [t4!!0, t4!!2, t4!!1]
+  let t7 = [t5!!0, t5!!2, t5!!1]
   -- putStrLn $ show $ p
   -- --putStrLn $ show $ simplify p
   -- putStrLn $ show $ normalize p
@@ -405,5 +455,10 @@ main = do
          --tell $ texAlignPoly $ normalize $ remainder $ divide (head t3) (reverse $ tail t3)
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t3) (reverse $ tail t3)
          tell $ texDivisionLogs $ reverse.divLog $ divide c [d]
+         tell $ "\\newpage{}"         
+         tell $ texDivisionLogs $ reverse.divLog $ divide (head t4) (tail t4)
+         tell $ texDivisionLogs $ reverse.divLog $ divide (head t5) (tail t5)
+         tell $ texDivisionLogs $ reverse.divLog $ divide (head t6) (tail t6)
+         tell $ texDivisionLogs $ reverse.divLog $ divide (head t7) (tail t7)
          texTellDocumentEnd
     

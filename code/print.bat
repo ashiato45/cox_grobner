@@ -1,4 +1,4 @@
 del test.tex
-multipoly > test.tex
+%1 > test.tex
 platex test.tex
 dvipdfmx test
