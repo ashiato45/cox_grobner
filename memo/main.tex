@@ -2922,6 +2922,239 @@ $a_1,\dots,a_s,r_0=0$を意味するが，背理法の仮定に矛盾する．
 $c_1 a_i+c_2 b_i \in \Delta_i$であり，$c_1 r+c_2 r\in \overline \Delta$となっている．一意性より，実際に$c_1 r+ c_2 r'$が余りとなる．
 \end{enumerate}
 
+\subsection{単項式イデアルとディクソンの補題}
+イデアルのうち，(係数1の)単項式だけを基底として持つものを単項式イデアルという．
+
+$I=\gen{x^{\alpha} | \alpha \in A}$が単項式イデアルのとき，
+$x^\beta \in I \iff \Exists{\alpha \in A} x^{\alpha}|x^\beta$．
+\begin{myproof}
+ \begin{itemize}
+  \item $\Rightarrow$：$x^\beta = \sum_{i=1}^s h_i x^{\alpha(i)}$となる$h_i \in k[x_1,\dots,x_s]$と$\alpha(i)\in \Zge^n$が存在する．右辺は，「単項式はすべて，なんらかの$x^{\alpha(i)}$で割り切れる」という性質を持つので，これと等しい右辺も同様の性質を持ち，$x^\beta$もなんらかの$x^{\alpha(i)}$で割り切れる．
+  \item $\Leftarrow$：自明．
+ \end{itemize}
+\end{myproof}
+
+$x^\alpha | x^\beta$は，$\beta \in \alpha + \Zge^n$と等価なので，
+単項式イデアルへある単項式が所属するかどうかは，その単項式イデアルの基底
+$\alpha$について，$\alpha + \Zge^n$に属するかということを逐一調べ，
+1つでも属する基底があれば属する，ないならば属さないという正確な判定条件が得られる．これを$\Zge^n$で図示すると，$\alpha$から$\infty$の向きに無限の長方形が作られているように見える．基底が複数個あるなら，これらの和集合として見える．
+
+次は等価である．$I$は単項式イデアルとする．
+\begin{enumerate}[label=(\arabic*)]
+ \item $f\in I$．
+ \item $f$の各項は$I$に属する．
+ \item $f$は$I$の単項式\footnote{基底ではない!}の$k$係数1次結合である．
+\end{enumerate}
+\begin{myproof}
+ (3)$\implies$(2)$\implies$(1)は自明．(1)を仮定する．$f\in I$とすると．
+\begin{align}
+ f= h_1 x^{\alpha(1)} + \dots + h_s x^{\alpha(s)}
+\end{align}
+となる$I$の基底$\alpha(1),\dots,\alpha(s)$と，$k[x_1,\dots,x_n]$の元
+$h_1,\dots,h_s$が存在する．右辺はあきらかに，$\alpha(1)$か$\alpha(2)$か…$\alpha(s)$の倍数，であり，(3)が満たされる．
+\end{myproof}
+
+単項式イデアル$I,I'$があり，$\set{Iの単項式}=\set{I'の単項式}$が成立していたとする．このとき，
+\begin{align}
+ f\in I \iff \set{fのすべての項} \subset I 
+\iff \set{fのすべての項} \subset I'
+\iff
+f\in I'.
+\end{align}
+となる．よって，$I=I'$となる．つまり，単項式イデアルは，そこに含まれる単項式で定まり，それのみで定まる．
+\footnote{単なるイデアルでは，単項式が同じなのに異なるということがあるか？
+$k[x]$上で，$\gen{1}$と$\gen{x}$は含まれる単項式は同じだが，$\gen{1}$のほうが真に広い．}
+
+ディクソンの補題を示す．$k[x_1,\dots,x_n]$で考える．単項式イデアル$I=\gen{x^{\alpha}|\alpha \in A}$について，$\alpha(1),\dots,\alpha(s)\in A$が存在して，$I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$となる．
+\begin{myproof}
+$n=1$のとき，単項式順序の性質より，$\set{x^\alpha | \alpha \in A}$には最小の元がある．この最小元を$x^{\alpha'}$とする．今は1変数多項式で考えているので，
+$I=\gen{x^{\alpha'}}$となる．
+
+以降，$n>1$とする．$n-1$以下で成立していると仮定し，$n$での成立を示す．
+多項式は$k[x_1,\dots,x_n]$で考えるが，$x_n$のことを$y$ともよぶことにする．
+\begin{align}
+ J &= \gen{x^\alpha | x^\alpha y^\beta \in I} \subset k[x_1,\dots,x_{n-1}]
+\end{align}
+とする．すなわち，$I$の単項式の$k[x_1,\dots,x_{n-1}]$への射影のなすイデアルである．
+$J$は$k[x_1,\dots,x_{n-1}]$．なので，帰納法の仮定より，
+$J=\gen{x^{\alpha(1)},\dots,x^{\alpha(j)}}$となる$\alpha(1),\dots,\alpha(j) \in \Zge^{n-1}$が存在する．$J$の定義により，$i=1,\dots,j$について，
+\begin{align}
+ x^{\alpha(i)}y^{\beta(i)} \in I
+\end{align}
+となる$\beta(i)\in \Zge$が存在する．このような$\beta(i)$のうち最小のものを，
+$\gamma(i)$とよぶことにする．そして，
+\begin{align}
+ \gamma = \max(\gamma(1),\dots,\gamma(j))
+\end{align}
+とする．このように定義しておくと，
+\begin{align}
+J\cdot \gen{y^\gamma} = I \cap \set{(yの次数) \ge \gamma}
+\end{align}
+となる． $\gamma \ge \gamma(1),\dots,\gamma(j)$なので，
+$y^\gamma$以上を$J$の元にかけることで，$I$に属することを保証できるからである．
+これで，$I\cap \set{(yの次数)\ge \gamma}$は，$J$が有限生成であることから有限的に書けることになった．$y$が他の次数のときの$I$もこのように書いていこう．
+
+$0\le \delta < \gamma$とする．
+\begin{align}
+ J_{\delta} = \gen{x^\alpha | x^\alpha y^\delta \in I} \subset k[x_1,\dots,x_{n-1}]
+\end{align}
+とする．つまり，$y$の次数が$\delta$であるような$I$の単項式の$k[x_1,\dots,x_{n-1}]$への射影をなすイデアルである．
+これは$k[x_1,\dots,x_{n-1}]$のイデアルなので，帰納法の仮定より，
+\begin{align}
+ J_\delta = \gen{x^{\alpha(\delta;1)},\dots,x^{\alpha(\delta;j_\delta)}}
+\end{align}
+となる$\alpha(\delta;1),\dots,\alpha(\delta;j_\delta) \in \Zge^{n-1}$が存在する．このように定義しておくと，
+\begin{align}
+ J_\delta\cdot y^\delta = I\cap \set{(yの次数) = \delta}
+\end{align}
+となる．
+以上のことをまとめると，
+\begin{align}
+ I\cap \set{(yの次数) \ge \gamma} &= \gen{x^{\alpha(1)},\dots,x^{\alpha(j)}} \cdot \gen{y^\gamma}\\
+ I \cap \set{(yの次数) = \gamma -1} &= \gen{x^{\alpha(\gamma-1;1)},\dots, x^{\alpha(\gamma-1;j_{\gamma-1})}}\\
+ & \vdots\\
+ I\cap \set{(yの次数)=0}& = \gen{x^{\alpha(0;1)},\dots, x^{\alpha(0;j_0)}}.
+\end{align}
+である．これらの和集合をとることで，
+\begin{align}
+ I &= \langle x^{\alpha(1)}y^\gamma ,\dots, x^{\alpha(j)}y^\gamma \\
+ &\quad x^{\alpha(\gamma-1;1)},\dots, x^{\alpha(\gamma-1;j_{\gamma-1})} \\
+ &\quad \vdots\\
+ & \quad x^{\alpha(0;1)} ,\dots, x^{\alpha(0;j_{0})} \rangle
+\end{align}
+であることがわかる．よって，$I$を，$I$の元の有限生成単項式イデアルとして書くことができた．これで帰納法を終わる．
+
+次に，$I$の単項式の有限生成である$I$を，$A$を多重指数に持つ単項式の有限生成に書き直そう．
+\begin{align}
+ I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}
+\end{align}
+と，$\beta(1),\dots,\beta(s)\in \Zge^n$が存在して書けることは上の段落で示した．
+これらの$\beta(i)$は，$I=\gen{x^\alpha | \alpha \in A}$なので，
+$x^{\beta(i)}$は$\gen{x^{\alpha}|\alpha \in A}$の，1次結合で書ける．
+ここで，$I$は単項式イデアルだったので，特に$k$係数の単項式の1次結合で
+書けることが先の補題より分かり，$x^{\beta(i)}$は単項式だったので，
+$x^{\beta(i)}=h_i x^{\gamma(i)+\alpha(i)}$となる$\alpha(i)\in A, \gamma(i)\in \Zge^n$が存在することがわかる．よって，
+\begin{align}
+ I=\gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}
+\end{align}
+となる．$\alpha(1)< \alpha(2)< \dots$として一般性を失なわない(何の順序でも良い．)．また，$I$はどの「1つの基底を取り除くと$I$でなくなる」という仮定を置いてよい．なぜなら，もしも取り除いても影響がない基底があるならば，$I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}$と書いた時点でそのようなものを取り除いても良いからである．$x^{\alpha(1)}\in I$なので，$x^{\alpha(1)}\in \gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}$．単項式イデアルの性質により，何らかの
+$i$について，$\alpha(1) \in \alpha(i)+\gamma(i) + \Zge^n$となる．
+ つまり，何らかの$\delta(i)\in \Zge^n$が存在して，
+$\alpha(1)=\alpha(i)+\gamma(i)+\delta(i)$となる．$i\ge 2$ならば
+$\alpha(i)>\alpha(1)=\alpha(i)+\gamma(i)+\delta(i)$となり，単項式順序の性質より矛盾が導かれる．よって，$i=1$となるしかない．
+ このとき，$\alpha(1)=\alpha(1)+\gamma(1)+\delta(1)$となり，
+$\gamma(1)=\delta(1)=0$となるしかない．よって，$\gamma(1)=0$がわかった．
+$I=\gen{x^{\alpha(1)},x^{\alpha(2)+\delta(2)},\dots,x^{\alpha(s)}+\gamma(s)}$である．$x^{\alpha(2)}\in I$なので，$x^{\alpha(2)}\in \gen{x^{\alpha(1)},x^{\alpha(2)+\gamma(2)},\dots,x^{\alpha(s)+\gamma(s)}}$となる．
+よって，何らかの$i$について，$\alpha(2)\in \alpha(i) + \gamma(i)+\Zge^n$となる．
+よって，$\alpha(2)=\alpha(i)+\gamma(i)+\delta(i)$となる$\delta(i)\in \Zge^n$が存在する．$i=1$ならば，$\alpha(2)=\alpha(1)+\gamma(1)+\delta(1)=\alpha(1)+\delta(1)$となる．これは，$x^{\alpha(1)}|x^{\alpha(2)}|x^{\alpha(2)+\gamma(2)}$を意味し，$x^{\alpha(2)+\gamma(2)}$を取り除いても$x^{\alpha(1)}$の倍数として表現できるために$I$でありつづけるということになり，「1つの基底を取り除くと$I$でなくなる」の仮定に反する．よって，$i\neq 1$であり，$i\ge 2$である．$i\ge 3$であったときには，先と同様に$\alpha(i)>\alpha(2)>\alpha(i)+\gamma(i)+\delta(i)$という矛盾が生じる．よって，$i=2$であり，$\gamma(2)=\delta(2)=0$である．以降同様に繰替えし，$\gamma(1)=\gamma(2)=\dots = \gamma(s)$を得て，
+\begin{align}
+ I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}
+\end{align}
+を得る．
+\end{myproof}
+
+このディクソンの補題の応用について述べる．
+まず，単項式イデアルについては，イデアルの所属問題を完全に解くことができる．すなわち：$I \subset k[x_1,\dots,x_n]$を単項式イデアルとし，$f\in k[x_1,\dots,x_n]$を一般の多項式とすると，ディクソンの補題により$I=\gen{x^{\alpha(1)},\dots, x^{\alpha(s)}}$と書くと，
+\begin{align}
+ f\in I \iff f を (x^{\alpha(1)},\dots,x^{\alpha(s)})で割ったあまりは0.
+\end{align}
+\begin{myproof}
+\begin{align}
+ f\in I
+&\iff
+f\in \gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}\\
+ & \desciff{補題}
+f は x^{\alpha(1)},\dots,x^{\alpha(s)} のk係数1次結合で書ける\\
+ & \iff
+f を (x^{\alpha(1)},\dots,x^{\alpha(s)})で割ったあまりは0.
+\end{align}
+\end{myproof}
+
+また，ディクソンの補題を使って単項式順序であることを確認するのを楽にすることができる．すなわち：$\Zge^n$の順序$>$が「全順序である」「かけ算で保つ」を満たすとする．このとき，
+\begin{align}
+ > は整列順序 \iff \Forall{\alpha \in \Zge^n} \alpha \ge 0.
+\end{align}
+\begin{myproof}
+ \begin{itemize}
+  \item $\Rightarrow$：$\Zge^n$の部分集合として$\Zge^n$そのものをとる．$>$は整列順序なので，$\Zge^n$に$>$の最小元が存在する．それを$\alpha$とよぶ．
+仮に$\alpha < 0$であるとする(背理法)．「かけ算を保つ」より，
+$2\alpha < \alpha$となり，$\alpha$より真に小さい元が存在することになるが，これは矛盾である．よって，$\alpha \ge 0$である．任意の$\beta \in \Zge^n$について，
+$\beta \ge \alpha \ge 0$なので，示された．
+  \item $\Leftarrow$：
+$\emptyset \neq A \subset \Zge^n$とする．
+$A$に最小元があることを示そう．$A$で生成される単項式イデアル$I$を考える．
+ディクソンの補題により，$I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$
+となる$\alpha(1),\dots,\alpha(s)\in A$が存在する．
+$>$は「全順序である」から，一般性を失なわず，$\alpha(1)<\dots<\alpha(s)$としてよい．$\beta \in A$とする．$x^{\beta} \in I = \gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$なので，単項式イデアルの性質より，$x^\beta$は$x^{\alpha(1)},\dots,x^{\alpha(s)}$のうちで割り切られる．それを$x^{\alpha(j)}$とする．
+よって，$\beta = \alpha(j) + \gamma$となる$\gamma \in \Zge^n$が存在する．
+仮定より，$\gamma\ge 0$であり，「かけ算で保つ」より，
+$\alpha(j)+\gamma \ge \alpha(j)$である．よって，
+\begin{align}
+ \beta = \alpha(j) + \gamma \descle{仮定!} \alpha(j) \le \alpha(1)
+\end{align}
+である．よって，$\alpha(1)$が$A$の最小元である．
+ \end{itemize}
+\end{myproof}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item 
+$I$を，「$f\in I$ならば$f$の各単項式も$\in I$となる」を満たすイデアルとする．
+$I'$を，$I$の単項式すべてが生成するイデアルとする．$I'$は単項式イデアルである．
+$I=I'$を示そう．$I' \subset I$は自明．$f\in I$とする．
+\begin{align}
+ f = h_1 x^{\alpha(1)} + \dots + h_s x^{\alpha(s)}
+\end{align}
+となる$h_1,\dots,h_s \in k[x_1,\dots,x_n]$と$\alpha(1),\dots,\alpha(s)\in \Zge^n$が存在する．$I$に関する条件より，$x^{\alpha(1)},\dots,x^{\alpha(s)} \in I$であり，$I'$の構成より$x^{\alpha(1)},\dots,x^{\alpha(s)}\in I'$である．
+よって，これらの$k[x_1,\dots,x_s]$係数1次結合である$f$も$f\in I'$となる．
+$I\subset I'$である．
+ \item 
+やった．
+ \item 
+\begin{enumerate}[label=(\alph*)]
+ \item 
+\easypicture{ex_2_4_3.png}
+ \item 
+$x >_{lex} y$を採用するなら，$x$の1次項があるので，余りは$y$の式になる．
+\end{enumerate}
+ \item 
+\begin{enumerate}[label=(\alph*)]
+ \item 
+まず$I$の$k[x]$への射影$J$を求めると，これは$J=\gen{x^3}$．
+$x^3y^b \in I$となる最小の$b$は$b=6$であり，これ以外に
+$J$の生成元がないので，高さ6のスライスを考える．
+\begin{align}
+ J_0 &= \gen{x^6},\\
+ J_1 & = \gen{x^6},\\
+ J_2& = \gen{x^6},\\
+ J_3 & = \gen{x^6},\\
+ J_4 & = \gen{x^5},\\
+ J_5& =\gen{x^5}.\\
+\end{align}
+よって，
+\begin{align}
+ I=\gen{x^3y^6, x^5y^5, x^5y^4, x^6y^3, x^6 y^2, x^6 y, x^6}.
+\end{align}
+ \item 取り除けて，
+\begin{align}
+ I=\gen{x^3y^6, x^5y^4, x^6}.
+\end{align}
+このうちのどれを除いても真に縮んで，角のものが入らなくなってしまう．
+\end{enumerate}
+
+ \item 
+$S$の最小元を$\alpha$とし，$\alpha \notin A$であるとする．
+$x^\alpha \in I$ではあるので，単項式イデアルの性質より，
+$\alpha \in \beta + \Zge^n$となる$\beta \in A$が存在する．
+$\alpha$は$A$の最小元だったので，$\alpha < \beta$である．
+よって，$\gamma \in \Zge^n$が存在して，
+$\alpha = \beta + \gamma$となる．
+$\alpha < \beta$に代入して，$\beta+\gamma < \beta$である．
+すると，$\beta > \beta + \gamma > \beta + 2\gamma > \beta + 3\gamma + \dots$という無限減少列が得られる．これは，$>$が単項式順序であることに矛盾する．
+ \item 
+これが切っ掛けで証明を直した．上のディクソンを参照．「無駄がない」を使った．
+\end{enumerate}
+
+
 \end{document}
 
 

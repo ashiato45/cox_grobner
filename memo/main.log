@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (sjis) (TeX Live 2014/W32TeX) (preloaded format=platex 2014.9.18)  9 MAR 2015 02:19
+This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (sjis) (TeX Live 2014/W32TeX) (preloaded format=platex 2014.9.18)  10 MAR 2015 02:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -684,19 +684,21 @@ File: images/div3_1b.png Graphic file (type bmp)
 
 <images/div3_1b.png> [44] [45] [46]
 File: images/div3_2_9.png Graphic file (type bmp)
- <images/div3_2_9.png> [47] [48]
+ <images/div3_2_9.png> [47] [48] [49]
+[50] [51] [52]
+File: images/ex_2_4_3.png Graphic file (type bmp)
+ <images/ex_2_4_3.png>
 \tf@thm=\write3
 \openout3 = `main.thm'.
 
- [49]
-(./main.aux) ) 
+ [53] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 11341 strings out of 493800
- 187245 string characters out of 6154449
- 248757 words of memory out of 5000000
- 14683 multiletter control sequences out of 15000+600000
- 21361 words of font info for 100 fonts, out of 8000000 for 9000
+ 11346 strings out of 493800
+ 187330 string characters out of 6154449
+ 248766 words of memory out of 5000000
+ 14687 multiletter control sequences out of 15000+600000
+ 21697 words of font info for 102 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  36i,17n,37p,10373b,758s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.dvi (49 pages, 306920 bytes).
+Output written on main.dvi (53 pages, 332820 bytes).
