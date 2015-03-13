@@ -1,9 +1,9 @@
-\newcommand{\casedoc}[1]{\left\{\begin{matrix}#1\end{matrix}\right\}}
+ï»¿\newcommand{\casedoc}[1]{\left\{\begin{matrix}#1\end{matrix}\right\}}
 \newcommand{\tatev}[1]{\left(\begin{matrix}
 			     #1
 			    \end{matrix}\right)}
 \newcommand{\diff}{\textrm{d}}
-\newcommand{\dx}[1]{\textrm{d}#1} %argument‚ğ‹ó‚É‚·‚é‚Æd‚¾‚¯o‚é
+\newcommand{\dx}[1]{\textrm{d}#1} %argumentã‚’ç©ºã«ã™ã‚‹ã¨dã ã‘å‡ºã‚‹
 \newcommand{\ddx}[1]{\frac{\textrm{d}}{\textrm{d}#1}}
 \newcommand{\mathnote}[1]{\hspace{\stretch{1}}\text{(#1)}} %todo:fix
 %\newcommand{\combination}[2]{\tatev{#1\\ #2}}
@@ -17,9 +17,9 @@
 \end{matrix}
 \right)
 }
-\newcommand{\douchi}{\Leftrightarrow} %‚²‚ß‚ñ
-\newcommand{\Forall}[1]{{}^{\forall}\hiderel{#1}\mathrm{\colon\;}}
-\newcommand{\Exists}[1]{{}^{\exists}\hiderel{#1}\mathrm{\colon\;}}
+\newcommand{\douchi}{\Leftrightarrow} %ã”ã‚ã‚“
+\newcommand{\Forall}[1]{{}^{\forall}{#1}\mathrm{\colon\;}}
+\newcommand{\Exists}[1]{{}^{\exists}{#1}\mathrm{\colon\;}}
 \newcommand{\realnumber}{\mathbb{R}}
 \newcommand{\naturalnumber}{\mathbb{N}}
 \newcommand{\complexnumber}{\mathbb{C}}
@@ -80,13 +80,13 @@
 \newcommand{\ho}[1]{{#1}^c}
 \newcommand{\ub}[1]{\underbrace{#1}}
 %\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\mataha}{\text{‚Ü‚½‚Í}}
+\newcommand{\mataha}{\text{ã¾ãŸã¯}}
 
-\newcommand{\why}{$^\text{\tiny[‚È‚ºH]}$}
+\newcommand{\why}{$^\text{\tiny[ãªãœï¼Ÿ]}$}
 \renewcommand{\tilde}{\widetilde}
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\var}{\textbf V}
-\newcommand{\myabs}[1]{\abs|#1|}
+\newcommand{\myabs}[1]{\left|#1\right|}
 \newcommand{\ideal}{\textbf I}
 \newcommand{\LT}{{\rm LT}}
 \newcommand{\LC}{{\rm LC}}
@@ -98,7 +98,7 @@
 #1 & 1 \\
 1 & 0
 \end{pmatrix}}
-\newcommand{\nashi}[1]{\banme{ƒiƒV}{#1}}
+\newcommand{\nashi}[1]{\banme{ãƒŠã‚·}{#1}}
 \newcommand{\Zge}{\Z_{\ge 0}}
 \newcommand{\ovparen}[1]{^{(#1)}}
 \newcommand{\multidegree}{\mathrm{multideg}}
@@ -106,7 +106,7 @@
 \newcommand{\false}{{\tt false}}
 \newcommand{\true}{{\tt true}}
 \newcommand{\easypicture}[1]{
-(}\ref{easypicture_#1}){\tt #1}QÆD
+(å›³\ref{easypicture_#1}){\tt #1}å‚ç…§ï¼
 \begin{figure}[H]
 \caption{\tt #1}
 \centering
@@ -114,3 +114,13 @@
 \label{easypicture_#1}
 \end{figure}
 }
+
+\newcommand{\F}{\bbold F}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\C}{\bbold C}
+\newcommand{\inv}[1]{^{-1}}
+\newcommand{\Z}{\bbold Z}
+\newcommand{\R}{\bbold R}
+\newcommand{\Q}{\bbold Q}
+\newcommand{\defeq}{:=}
+\newcommand{\red}{red}
