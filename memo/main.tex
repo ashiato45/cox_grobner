@@ -10,136 +10,14 @@
 %\usepackage{okumacro}
 \def\MARU#1{\textcircled{\scriptsize #1}}
 \usepackage{graphicx}
-\usepackage{proof}
 \usepackage{ulem}
 \usepackage{framed}
-\usepackage[framed]{ntheorem}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{here}
+\usepackage{mytheorems}
 \title{グレブナ基底と代数多様体入門(Ideals, Varieties, and Algorithms)}
 \author{ashiato45のメモ，著者はD.Cox,\,J.Little,\,D.O'Shea}
-
-
-%\theoremheaderfont{\normalfont}
-\theorembodyfont{\normalfont}
-
-\newtheorem{Theorem}{定理}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mytheorem}[Theorem]{定理}
-
-\newtheorem{Proposition}{命題}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myproposition}[Proposition]{命題}
-
-\newtheorem{Corollary}{系}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mycorollary}[Corollary]{系}
-
-\newtheorem{Lemma}{補題}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mylemma}[Lemma]{補題}
-
-\newtheorem{Definition}{定義}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mydefinition}[Definition]{定義}
-
-\newtheorem{PropDefinition}{Prop-Def}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mypropdefinition}[PropDefinition]{PropDef}
-
-\newtheorem{Prop}{Prop}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myprop}[Prop]{Prop}
-
-
-\newtheorem{Example}{例}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myexample}[Example]{例}
-
-\newtheorem{Scribble}{自分用補足}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myscribble}[Scribble]{自分用補足}
-
-\newtheorem{Tips}{Tips}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mytips}[Tips]{Tips}
-
-\newtheorem{Exercise}{Exercise}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myexercise}[Exercise]{問}
-
-\newtheorem{Memo}{Memo}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mymemo}[Memo]{メモ}
-
-\newtheorem{Rem}{Rem}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myremember}[Rem]{Rem}
-
-\newtheorem{Notation}{Notation}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{mynotation}[Notation]{Notation}
-
-\newtheorem{Review}{Review}[subsection]
-%\theoremclass{Theorem}
-\theoremstyle{break}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myreview}[Review]{Review}
-
-%\theoremclass{Theorem}
-\theoremstyle{nonumberbreak}
-\theoremprework{}
-\theorempostwork{(証終)}
-\newtheorem{myproof}{証明}
-
-\theoremstyle{nonumberbreak}
-\theoremprework{\bigskip\hrule\bigskip}
-\theorempostwork{\hrule\bigskip}
-\newtheorem{myattention}{注意}
 
 \renewcommand{\bf}{\mathbf}
 
@@ -3150,6 +3028,97 @@ $\alpha < \beta$に代入して，$\beta+\gamma < \beta$である．
 すると，$\beta > \beta + \gamma > \beta + 2\gamma > \beta + 3\gamma + \dots$という無限減少列が得られる．これは，$>$が単項式順序であることに矛盾する．
  \item
 これが切っ掛けで証明を直した．上のディクソンを参照．「無駄がない」を使った．
+
+
+ \item
+「有限個の$a_1,\dots,a_s \in A$が存在して〜」は0個も許すのかよくわからなくなったが，「$A$の部分集合で，要素数が有限なものが存在して〜」と解釈すればOKということにする．
+
+\begin{align}
+ ディクソンの補題
+&\iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \gen{x^\alpha | \alpha \in A} = \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+&\iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \gen{x^\alpha | \alpha \in A} \subset \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} x^{\alpha} \in \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} \Exists{i=1,\dots,s} \alpha \in \alpha_i + \Zge^n\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} \Exists{i=1,\dots,s} \Exists{\gamma \in \Zge^n}\alpha = \alpha_i + \gamma.
+\end{align}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+
+ \begin{algorithm}[H]
+\begin{algorithmic}[1]
+  \STATE{$basis \defeq (\alpha(1),\dots,\alpha(s))$}
+  \STATE{$divided \defeq \true$}
+  \WHILE{$divided = \true$}
+  \STATE{$divided \defeq \false$}
+  \STATE{$i\defeq 1$}
+  \WHILE{$i \le \# basis$ かつ $divided = \false$}
+  \STATE{$j\defeq 1$}
+  \WHILE{$j \le \# basis$ かつ $divided = \false$}
+  \IF{$i \neq j$ かつ $x^{basis[i]}| x^{basis[j]}$}
+  \STATE{$basis$から$j$番目を除去する．}
+  \STATE{$divided \Leftarrow \true$}
+  \ENDIF{}
+  \ENDWHILE{}
+  \STATE{$j \Leftarrow j+1$}
+  \ENDWHILE{}
+  \STATE{$i \Leftarrow i+1$}
+  \ENDWHILE{}
+\end{algorithmic}
+ \end{algorithm}
+というアルゴリズムにより得られる．
+ \item
+ディクソンの補題と上のアルゴリズムより，$I$の極小基底
+$\alpha_1,\dots,\alpha_s$が得られる．
+$I$の極小基底$S$を考える．$I=\gen{x^{\beta}|\beta \in S},\, S=\set{\beta_1,\dots,\beta_t}$となっている． $\alpha_1,\dots,\alpha_s \in S$となることを示そう．
+仮に，$\alpha_i \notin S$であったとする．しかし，$x^{\alpha_i}\in I=\gen{\beta_1,\dots,\beta_t}$でなくてはならない．よって，単項式イデアルの性質より何か$j=1,\dots,t$が存在して，$\alpha_i \in \beta_j + \Zge^n$とならなければならない．
+よって，$\alpha_i = \beta_j + \gamma$となる$\gamma \in \Zge^n$が存在する．さらに，$\beta_j \in I$なので，何か$k=1,\dots,s$が存在して，$\beta_j \in \alpha_k + \Zge^n$とならなければならない．よって，$\beta_j = \alpha_k + \delta$となる$\delta \in \Zge^n$となる$\delta$が存在する．よって，
+\begin{align}
+ \alpha_i = \beta_j + \gamma = (\alpha_l + \delta) + \gamma = \alpha_l + (\gamma + \delta)
+\end{align}
+となり，$\alpha_i \in \alpha_l + \Zge^n$となる．これは，$\set{\alpha_1,\dots,\alpha_s}$が極小基底であることに反する．よって，$\set{\alpha_1,\dots,\alpha_s}\subset \set{\beta_1,\dots,\beta_t}$となる．$I$極小基底であるためには，少なくとも$\alpha_1,\dots,\alpha_s$を含んでいることが必要で，さらにそれで$I$を生成するので，極小基底は$\alpha_1,\dots,\alpha_s$のみで，一意性が示された．
+\end{enumerate}
+ \item やった．
+ \item
+$x^\alpha y^\beta$の多重指数を$(\alpha;\beta)$と書くことにする．
+\begin{itemize}
+ \item 全順序であること：
+$(\alpha;\beta) >_{mixed} (\gamma;\delta)$でも$(\alpha;\beta)<_{mixed}(\gamma;\delta)$でもないと仮定する．$(\alpha;\beta) >_{mixed} (\gamma;\delta)$ではないので，
+\begin{align}
+& \neg ((\alpha >_{lex} \beta) \lor ((\alpha = \beta) \land (\gamma >_{grlex} \delta)))\\
+ \iff&
+(\alpha \le_{lex} \beta) \land ((\alpha \neq \beta) \lor (\gamma \le_{grlex}\delta)).
+\end{align}
+同様に，$(\alpha;\beta)<_{mixed}(\gamma;\delta)$なので，$(\alpha \ge_{lex}\beta)\land ((\alpha\neq \beta)\lor (\gamma \ge_{grlex} \delta))$．
+$\alpha \ge_{lex} \beta$かつ$\alpha \le_{lex}\beta$なので，$\alpha = \beta$．
+さらに，$((\alpha\neq \beta)\lor (\gamma \ge_{grlex}\delta))$より，
+$\gamma \ge_{grlex}\delta$．同様に，$\gamma \le_{grlex}\delta$．よって，$\gamma=\delta$．
+ \item かけ算で保つ：
+$(\alpha;\beta)>(\gamma;\delta)$を仮定する．
+\begin{align}
+ (\alpha >_{lex} \gamma) \lor ((\alpha = \gamma )\land (\beta >_{grlex} \delta)).
+\end{align}
+まず，$\alpha >_{lex}\gamma$が成立しているときを考える．このときは，
+$\alpha + \epsilon >_{lex} \gamma + \epsilon$が成立する．よって，
+$(\alpha+\epsilon ; \beta + \zeta) >_{mixed} (\gamma+\epsilon, \delta+\zeta)$．
+
+次に，$(\alpha = \beta) \land (\gamma >_{grlex} \delta)$が成立しているときを考える．このときは，$\alpha + \epsilon = \beta + \epsilon$が成立する．また，
+$\gamma + \zeta >_{grlex} \delta+\zeta$も成り立つ．よって，
+$(\alpha + \epsilon = \beta + \epsilon) \land(\gamma + \zeta > \delta + \zeta)$も成り立つ．
+
+以上のことより，$(\alpha;\beta) + (\epsilon;\zeta) >_{mixed} (\gamma,\delta) + (\epsilon;\zeta)$が成立する．
+ \item 整列順序であること：補題より，$(\alpha;\beta) \ge_{mixed} (0;0)$を示せば十分である．
+$(\alpha,\beta)=(0;0)$のときはあきらかに成立する．
+よって，$(\alpha,\beta)\neq (0;0)$と仮定してよい．$(\alpha;\beta) >_{mixed} (0;0)$を示せばよい．
+$\alpha >_{lex} 0$のときは成立するので，以降$\alpha \le_{lex} 0$とする．
+これは，単項式順序の性質より$\alpha = 0$を意味する．このとき，$(\alpha = 0) \land (\beta >_{grlex} 0) $を示せばよい．$\alpha = 0$は今成立している．$\beta >_{grlex} 0$はgrlexが単項式順序なので成立する．よって，成立する．
+\end{itemize}
+ \item
 \end{enumerate}
 
 
