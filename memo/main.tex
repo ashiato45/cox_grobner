@@ -2799,7 +2799,7 @@ $c_1 a_i+c_2 b_i \in \Delta_i$であり，$c_1 r+c_2 r\in \overline \Delta$と�
 \end{enumerate}
 
 \subsection{単項式イデアルとディクソンの補題}
-イデアルのうち，(係数1の)単項式だけを基底として持つものを単項式イデアルという．
+イデアルのうち，(係数1の)単項式だけを基底aとして持つものを単項式イデアルという．
 
 $I=\gen{x^{\alpha} | \alpha \in A}$が単項式イデアルのとき，
 $x^\beta \in I \iff \Exists{\alpha \in A} x^{\alpha}|x^\beta$．
@@ -2827,7 +2827,8 @@ $\alpha$について，$\alpha + \Zge^n$に属するかということを逐一�
  f= h_1 x^{\alpha(1)} + \dots + h_s x^{\alpha(s)}
 \end{align}
 となる$I$の基底$\alpha(1),\dots,\alpha(s)$と，$k[x_1,\dots,x_n]$の元
-$h_1,\dots,h_s$が存在する．右辺はあきらかに，$\alpha(1)$か$\alpha(2)$か…$\alpha(s)$の倍数，であり，(3)が満たされる．
+$h_1,\dots,h_s$が存在する．右辺の$h_ix^{\alpha(i)}$は展開するとすべて
+$x^{\alpha(i)}$の倍多項式であり、かつ単項式なので、(3)が満たされる。
 \end{myproof}
 
 単項式イデアル$I,I'$があり，$\set{Iの単項式}=\set{I'の単項式}$が成立していたとする．このとき，
@@ -3119,7 +3120,204 @@ $\alpha >_{lex} 0$のときは成立するので，以降$\alpha \le_{lex} 0$と
 これは，単項式順序の性質より$\alpha = 0$を意味する．このとき，$(\alpha = 0) \land (\beta >_{grlex} 0) $を示せばよい．$\alpha = 0$は今成立している．$\beta >_{grlex} 0$はgrlexが単項式順序なので成立する．よって，成立する．
 \end{itemize}
  \item
+ \begin{enumerate}[label=(\alph*)]
+   \item まず、全順序であることを示す。$\alpha >_{\bbold u} \beta$でも$\alpha <_{\bbold u} \beta$でもないとする。
+   $\alpha >_{\bbold u} \beta$ではないので、$\bbold u\cdot \alpha > \bbold u \cdot \beta$ではなく、$\bbold u\cdot \alpha \le \bbold u\cdot \beta$である。$\alpha <_{\bbold u}\beta$でないことから同様に、$\bbold u\cdot \alpha \ge \bbold u\cdot \beta$である。よって、
+   $\bbold u\cdot \alpha = \bbold u\cdot \beta$であり、$\bbold u\cdot (\alpha -\beta) = 0$である。$\bbold u$の成分が線形独立なので、$\alpha  = \beta$である。
+
+   次に、かけ算で順序を保つことを示す。$\alpha >_{\bbold u} \beta$とする。
+   $\bbold u\cdot \alpha > \bbold u\cdot \beta$となる。自明に、
+   $\bbold u \cdot \gamma = \bbold u\cdot \gamma$が成立する。不等式の両辺にこれを加えても不等式が保たれ、$\bbold u\cdot (\alpha + \gamma ) > \bbold u\cdot (\beta +\gamma)$となる。
+   よって、$\alpha + \gamma >_{\bbold u} \beta + \gamma$となる。
+
+   最後に、整列順序であることを系を用いて示す。任意の$\alpha \in \Zge^n$について、
+   $\alpha \ge_{\bbold u} 0$であることを示せばよい。$\bbold u$の各成分は正であり、
+   $\alpha$の各成分は非負なので、$\bbold u\cdot \alpha \ge 0$である。よって、
+   $\alpha \ge_{\bbold u} 0$となる。
+
+   \item $1,\sqrt{2}$が$\Q$上線形独立であることを示せばよい。$\sqrt{2} = \frac{a}{b}\cdot 1$と、既約な有理数を用いてあらわされたと仮定する。$2b^2 = a^2$となる。よって、$a^2$が$2$の倍数である。$2$が素数なので、$2|a\cdot a$であることから、$2|a$であり、$a$は$2$の倍数である。
+   よって、$a^2$は$4$の倍数である。よって、$2|b^2$である。$2$は素数なので、
+   $2|b$となる。これは、$a,b$がともに$2$の倍数であることを意味するが、既約という仮定に反する。
+
+   \item $1,\sqrt{2}$が独立なことは示したので、$\sqrt{3}$がこの2つのなす部分空間に属していないことを示せばよい。$\sqrt{3} = \frac{a}{b} + \frac{c}{d}\sqrt{2}$となったとする。$a/b,c/d$は既約としておく。$bd\sqrt{3} = ad + cb\sqrt{2}$である。
+   二乗して、$3 b^2d^2 = a^2d^2 + 2\sqrt{2}abcd + 2b^2c^2$となる。ここから、
+   \begin{align}
+     \sqrt{2} = \frac{3b^2d^2 - a^2d^2 - 2b^2c^2}{2abcd}
+   \end{align}
+   がわかるが、これは$\sqrt{2} \in \Q$を意味し、(b)に矛盾する。
+ \end{enumerate}
+ \item
+ 多分誤植。「$\bbold u\cdot \alpha >_\sigma \bbold u\cdot \beta$」→「$\bbold u\cdot \alpha > \bbold u\cdot \beta$」だよね。
+ \begin{enumerate}[label=(\alph*)]
+   \item 略。
+   \item $\bbold u = (1,\dots, 1)$とすれば、$\bbold u\cdot \alpha = \myabs{\alpha}$となる。
+   \item 問題文が不正確？$n=1$のときには切り分けが不必要な場合がある。このとき、
+   $\bbold u \neq 0$であるとする。今、$\bbold u \in \Zge$である。
+   $\bbold u\cdot \alpha = \bbold u\cdot \beta$とする。$\bbold u\cdot (\alpha-\beta) = 0$である。$\bbold u \neq 0$で、$n=1$ゆえ定数なので、割って$\alpha -\beta = 0$を得る。よって、$\alpha = \beta$が導かれてしまう。
+
+   そういうわけで、$n\ge 2$という仮定をつけたして問題を解く。$\bbold u\cdot \xi=0$となる$\xi \in \Q^n\setminus\zeroset$を考える。$\bbold u = 0$のときはなんでもよい。
+   $\bbold u \neq 0$とする。$\bbold u = (u_1,\dots, u_n)$とする。$u_1 > 0$として一般性を失なわない。
+   \begin{align}
+     \bbold u\cdot \xi = \sum_{i=1}^n u_i \xi_i = 0
+   \end{align}
+   である。よって、
+   \begin{align}
+     \xi_1 = \frac{-1}{u_1}\sum_{i=2}^n u_i \xi_i.
+   \end{align}
+   そこで、$\xi_2=\xi_3=\dots = \xi_n = 1$とすると、$\xi_1 < 0$となる。
+   これで、$\xi$が条件をみたす。
+   このとき、$\xi$の分母を払っても$\bbold u\cdot \xi = 0$であり続け、
+   $\xi \in \Z^n$である。
+   さらに、$\beta = (-\xi_1,0,\dots,0),\alpha = (0,\xi_2,\dots,\xi_n)$
+   とすると、$\alpha,\beta \in \Zge^n$となり、
+   \begin{align}
+     \bbold u\cdot (\alpha - \beta) = \bbold u\cdot \xi = 0.
+   \end{align}
+   しかし、あきらかに$\alpha \neq \beta$である。
+   \item
+   \begin{align}
+     \bbold u \cdot \alpha
+     &=
+     \sum_{k=1}^n u_k \alpha_k\\
+     &=
+     \sum_{k=1}^i u_k \alpha_k\\
+     &=
+     \sum_{k=1}^i \alpha_k\\
+     &>
+     0\\
+     &=
+     \sum_{k=1}^n u_k \beta_k\\
+     &=
+     \bbold u\cdot \beta.
+   \end{align}
+
+ \end{enumerate}
 \end{enumerate}
+
+\subsection{ヒルベルトの基底定理とグレブナ基底}
+\label{sub:ヒルベルトの基底定理とグレブナ基底}
+これまで単項式イデアルを考えてきたが、一般の多項式のイデアルについて考えていく。
+
+0でないイデアル$I\subset k[x_1,\dots,x_n]$について、以下を定義する。
+\begin{itemize}
+  \item  $\LT(I) = \set{\LT(f) ; f\in I}$ とする。これはただの$k[x_1,\dots,x_n]$の集合である。
+  \item  $\gen{\LT(I)}$ を$\LT(I)$で生成されたイデアルとする。こちらはイデアルである。まとめて書くと、
+  \begin{align}
+    \gen{\LT(I)} = \gen{\LT(f) ; f\in I}
+  \end{align}
+  であり、$I$の$\LT$全体で生成されるイデアルとも呼べる。
+\end{itemize}
+
+$I$が有限生成であって、$I=\gen{f_1,\dots,f_s}$のときには、
+\begin{align}
+  \gen{\LT(I)} = \gen{\LT(\gen{f_1,\dots,f_s})}
+\end{align}
+であって、$f_1,\dots,f_s$に、「イデアルをとる→$\LT$をとる→イデアルをとる」という
+ある意味二度イデアルをとる操作をしているが、もっと簡単に
+「$\LT$をとる→イデアルをとる」とした$\gen{\LT(f_1),\dots,\LT(f_s)}$との関係はどうなっているのだろうか。まずこの操作の順序から、前者のほうがあきらかに広い。すなわち、
+\begin{align}
+  \gen{\LT(f_1),\dots,\LT(f_s)} \subset \gen{\LT(\gen{f_1,\dots,f_s})}.
+\end{align}
+正確に見るなら、$\LT(f_i) \in \LT(\gen{f_1,\dots,f_s})$となることから、
+\begin{align}
+  \set{\LT(f_1),\dots,\LT(f_s)} \subset \LT(\gen{f_1,\dots,f_s})
+\end{align}
+となり、両側でイデアルを取ることにより従う。逆が成り立つか、この両者が等しくなるかというと、常にはそうならない。右辺の$\gen{\LT(\gen{f_1,\dots,f_s})}$のほうが、
+最後に$f_1,\dots,f_s$の先頭項LTを消してしまうというような小手技が使えるというのがなんとなくの理由になる。例をあげると、$f_1 = y, f_2 = xy+1$というのが等号不成立となる。
+まず、「イデアルをとる→LTをとる→イデアルをとる」を考えてみると、
+\begin{align}
+  f_2 - x\cdot f_1 = (xy+1) - xy = 1
+\end{align}
+となり、$1\in \gen{f_1, f_2}$となるので、$\gen{f_1,f_2} = \gen{1}$となり、
+$\LT(\gen{f_1,f_2}) = \LT(\gen{1}) = \gen{1}$となり、よって
+$\gen{\LT(\gen{f_1,f_2})} = \gen{1}$となる。一方、「LTをとる→イデアルをとる」のほうは、
+$\LT(\set{f_1,f_2}) = \set{y,xy}$となり、$\gen{\LT(\set{f_1,f_2})} = \gen{y,xy} = \gen{y}$となる。これは$\gen{1}$より真に狭い。
+この例を作るには、イデアルでのたしひきのときにはかならず係数をかけなければならないのだろうかと考えてみたら、もうちょっと簡単になった。$f_1 = x+1,f_2 = x$とする。
+このとき、「イデアルをとる→LTをとる→イデアルをとる」のほうは、
+\begin{align}
+  \gen{\LT(\gen{f_1,f_2})} = \gen{\LT(\gen{x+1,x})}
+  =
+  \gen{\LT(\gen{1})}
+  =
+  \gen{\gen{1}}
+  =
+  \gen{1}.
+\end{align}
+一方、「LTをとる→イデアルをとる」は、
+\begin{align}
+  \gen{\LT(\set{f_1,f_2})}
+  =
+  \gen{\LT(\set{x+1,x})}
+  =
+  \gen{\set{x}}
+  =
+  \gen{x}.
+\end{align}
+よって、「イデアルをとる→LTをとる→イデアルとる」のほうが真に広くなった。
+先頭項を打ち消せる分前者のほうが広いということがよくわかる。
+
+一般のイデアル$I\subset k[x_1,\dots,x_s]$について、あたりまえだが以下のことが言える。
+定数倍が大丈夫だということの確認である。
+\begin{enumerate}
+  \item $\gen{\LT(I)}$は単項式イデアルである。
+  \item さらに、単項式イデアル$\gen{\LT(I)}$の生成元について、
+  $f_1,\dots,f_s \in I$として$\LT(f_1),\dots,\LT(f_s)$がとれる。
+\end{enumerate}
+\begin{myproof}
+  \begin{enumerate}
+    \item イデアルはその元の定数倍をすべて含んでいることに注意すれば、
+    \begin{align}
+      \gen{\LT(I)} = \gen{\LT(f) ; f\in I} = \gen{\LM(f);f\in I}
+    \end{align}
+    であり、確かに単項式イデアルである。
+    \item 上で、$\gen{\LT(I)} = \gen{\LM(f);f\in I}$を示した。
+    $\gen{\LM(f);f\in I}$はディクソンの補題より、$f_1,\dots,f_s \in I$があって、
+    \begin{align}
+      \gen{\LM(f);f\in I} = \gen{\LM(f_1),\dots,\LM(f_s)}
+    \end{align}
+    となる。また定数倍がどうでもいいことに注意すれば、
+    \begin{align}
+      \gen{\LM(f_1),\dots,\LM(f_s)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+    \end{align}
+    となる。よって、
+    \begin{align}
+      \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}.
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+これでイデアルと先頭項との関係がよくわかり、イデアルと割り算との相性が良くなった。これで、任意の多項式イデアルについて、その生成元から有限個を選んで生成元とできる「ヒルベルトの基底定理」が証明できる。
+\begin{myproof}
+  $I\subset k[x_1,\dots,x_n]$をイデアルとする。$I=\zeroset$のときはあきらかなので、$I\neq \zeroset$とする。すると、$\LT(I)$を考えることができ、さらに$\gen{\LT(I)}$を考えることができる。これに先の定理を適用し、
+  \begin{align}
+    \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+  \end{align}
+  となる$f_1,\dots,f_s \in k[x_1,\dots,x_s]$が選べる。
+  このとき、実は$I = \gen{f_1,\dots,f_s}$となることを示そう。
+  $\supset$はあきらかなので、$I\subset \gen{f_1,\dots,f_s}$を示す。$f \in I$とする。$f$を$(f_1,\dots,f_s)$で割り、
+  \begin{align}
+    f = \sum_{i=1}^s f_i h_i + r
+  \end{align}
+  となる$f_1,\dots,f_s,r \in k[x_1,\dots,x_m]$が存在する。
+  さらに、$r$は余りなので、$r$のどの項も$\LT(f_1),\dots,\LT(f_s)$のどれでも割り切れない。$f\in I$であり、$f_\bullet \in I$なので、
+  $r\in I$である。仮に、$r\neq 0$であるとする。
+  このとき$\LT(r)$を考えることができ、(ここがポイント！)$\LT(r) \in \LT(I)$となり、$\gen{\LT(I)}$は有限生成となるようにしておいたので、
+  \begin{align}
+    \LT(r) \in \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+  \end{align}
+  となる。よって、$\LT(r)$は$\LT(f_1),\dots,\LT(f_s)$のいずれかの倍数とならなければならないが、これは$r$が余りであることに反する。よって、$r=0$である。よって、
+  \begin{align}
+    f= \sum_{i=1}^s f_i h_i
+  \end{align}
+  となる。よって、$f\in \gen{f_1,\dots,f_s}$となる。
+  $f$は$I$の任意の元だったので、$I\subset \gen{f_1,\dots,f_s}$となる。よって、
+  \begin{align}
+    I = \gen{f_1,\dots,f_s}
+  \end{align}
+  である。
+\end{myproof}
+
+
 
 
 \end{document}

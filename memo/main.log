@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  15 MAR 2015 10:47
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  21 MAR 2015 03:11
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.028 seconds
+luaotfload | main : fontloader loaded in 0.027 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -998,20 +998,21 @@ Package pdftex.def Info: images/div3_2_9.png used on input line 2718.
 File: images/ex_2_4_3.png Graphic file (type png)
 
 <use images/ex_2_4_3.png>
-Package pdftex.def Info: images/ex_2_4_3.png used on input line 2991.
+Package pdftex.def Info: images/ex_2_4_3.png used on input line 2992.
 (pdftex.def)             Requested size: 245.08942pt x 196.61574pt.
- [53<./images/ex_2_4_3.png>] [54]
+ [53<./images/ex_2_4_3.png>] [54] [55] [56] [57]
 \tf@thm=\write3
- [55] (./main.aux))
+
+[58] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11733 strings out of 494694
+ 11734 strings out of 494694
  195328,266212 words of node,token memory allocated
- 5876 words of node memory still in use:
+ 5904 words of node memory still in use:
    10 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 467 attribute, 916 glue_
 spec, 29 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62724,3:1192,4:2682,5:405,6:2033,7:322,9:962,10:120
- 14908 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:62724,3:1220,4:2654,5:412,6:2033,7:322,9:962,10:120
+ 14909 multiletter control sequences out of 65536+600000
  86 fonts using 38155183 bytes
  58i,18n,44p,997b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
@@ -1040,10 +1041,10 @@ cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (55 pages, 1135592 bytes).
+Output written on main.pdf (58 pages, 1153500 bytes).
 
-PDF statistics: 351 PDF objects out of 1000 (max. 8388607)
- 245 compressed objects within 3 object streams
+PDF statistics: 360 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
