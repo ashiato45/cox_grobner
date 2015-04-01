@@ -3317,7 +3317,439 @@ $\LT(\set{f_1,f_2}) = \set{y,xy}$となり、$\gen{\LT(\set{f_1,f_2})} = \gen{y,
   である。
 \end{myproof}
 
+この途中で、$I=\gen{f_1,\dots,f_s}$が$\gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}$となっていた。このようなイデアルの性質に名前をつける:イデアル$I\subset k[x_1,\dots,x_n]$について、その有限部分集合$\set{f_1,\dots,f_s} \subset I$が$I$のGroebner基底であるとは、
+\begin{align}
+  \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+\end{align}
+となることである。ここでは$I=\gen{f_1,\dots,f_s}$となっているかどうかは何も言っていないが、先の証明のなかで、$f\in I$について$(f_1,\dots,f_s)$で割った余りを考察することのより、$f\in \gen{f_1,\dots,f_s}$となることを示していたのでOKである。
+さらに、さきほどのヒルベルトの基底定理で作ったイデアルは$\gen{\LT(I)}=\gen{\LT(f_1),\dots,\LT(f_s)}$を満たしているので、
+ヒルベルトの基底定理はもっと強めて、「任意のイデアルにはGroebner基底がある」と言える。これのくだけた言い換えとして、「$I$のどの先頭項も$\LT(f_1),\dots,\LT(f_s)$のどれかで割り切れる」とうのがある。両方とも単項式イデアルなので、その特殊性が使えることに注意する。
 
+先程見たように、$x+1,x$は$\gen{x+1,x}$のgrlex順序での(なんでもいいが)Groebner基底ではない。
+$\gen{\LT(x+1),\LT(x)} = \gen{x}$であり、$\gen{\LT(\gen{x+1,x})} = \gen{1}$であったからだ。
 
+次の例は、$\gen{x+z,y-z}$である($z$が仲間外れ)。これのlex順序でのGroebner基底として、$x+z,y-z$が取れることを示す。Groebner基底の言い換えより、
+$\gen{x+z,y-z}$のどの先頭項も$\LT(x+z) = x$あるいは$\LT(y-z)=y$で割り切れることを示せば必要十分である。仮に$f\in \gen{x+z,y-z}\setminus \zeroset$で、$x$でも$y$でも$\LT(f)$が割り切れないようなものがあるとする。このとき、$\LT(f) \in k[z]$である。今はlex順序を採用しているので、$f\in k[z]$でもあることがわかる。
+ところで、$f\in \gen{x+z,y-z}$であったから、$\set{(-t,t,t)}$上で$f$は消えなければならない。よって、$\R$上で$f$が消えなければならないが、今は無限体で考えているので、これは$f$が多項式として0であることを意味する(無数に根を持つ)。これは矛盾である。よって、$\gen{x+z,y-z}\setminus\zeroset$のどの先頭項もすべて$x,y$で割り切れ、
+$x+z,y-z$は$\gen{x+z,y-z}$のGroebner基底である。
+
+$\gen{x+z,y-z}$のGroebner基底を考えるには、実は
+\begin{align}
+  \begin{pmatrix}
+    1 & 0 & 1 \\
+    0 & 1 & -1
+  \end{pmatrix}
+\end{align}
+の階段行列を考えればよい。
+このことを一般的に示す。
+\begin{myproof}
+  $A=(a_{ij})_{ij} \in M(\R,m,n)$とし、$I\subset k[x_1,\dots,x_n]$を
+  $I = \gen{\sum_{j=1}^n a_{ij} x_j ; 1 \le i \le m}$とする。
+  $A$の狭義階段行列を$A'$としたとき、この各行からなる多項式たち
+  $\set{\sum_{j=1}^n a'_{ij}x_j ; 1\le i \le \rank A}$が$I$のあるlex順序についてのGroebner基底であることを示す。
+
+  体$\R$で考えているから、$A$を狭義階段行列$A'$に変形することができる。
+  $x_{F(1)},\dots,x_{F(\rank A)}$がこの狭義階段行列に変形したことで得られたピボットであるとする。そして、$x_{F(1)}>_{lex}x_{F(2)}>_{lex}\dots >x_{F(\rank A)}>_{lex}\dots(残り)$というlex順序を採用する。
+  変形の過程で基本変形をするが、変形しても各行のなすイデアルは変化しないことは確かめられる。よって、
+  \begin{align}
+    I
+    =
+    \gen{\sum_{j=1}^n a_{ij}' x_j ; 1\le i \le \rank A}
+    =
+    \gen{\sum_{j=F(i)}^{F(i+1)-1} a_{ij}' x_j ; 1 \le i \le \rank A}
+  \end{align}
+  がわかる(ただし、$F(\rank A + 1) = n+1$とした)。この元の先頭項すべてが
+  \begin{align}
+    \set{\LT(\sum_{j=1}^n a_{ij}' x_j) ; 1\le i \le \rank A}
+    =
+    \set{\LT(\sum_{j=F(i)}^{F(i+1)-1} a_{ij}' x_j) ; 1\le i \le \rank A}
+    =
+    \set{x_{F(i)}; 1 \le i \le \rank A}
+  \end{align}
+  のどれかで割り切れることを示せばよい。
+  しかし、lex順序をの入れ方から、これはあきらか。
+\end{myproof}
+
+ヒルベルトの基底定理を応用する。多項式環の昇鎖条件を考える。
+$k[x_1,\dots,x_n]$のイデアルの昇鎖列
+\begin{align}
+  I_1 \subset I_2 \dots
+\end{align}
+を考える。このとき、ある$N$があって、$I_N = I_{N+1}=\dots$となる。
+\begin{myproof}
+  $I=\bigcup_{i} I_i$を考える。これがイデアルであることを示す。
+  \begin{itemize}
+    \item 和について閉じる:$f,g\in I$とする。$f\in I$なので、$a\in \N$が存在して、
+    $f \in I_a$となり、同様に$b\in \N$について$g\in I_b$となる。
+    $a\le b$として一般性を失なわない。このとき、昇鎖であることから、
+    $f,g\in I_b$となる。よって、$f+g \in I_b$であり、$f+g \in I$である。
+    \item 定数倍で閉じる:$f$を上と同様とする。$cf \in I_a \subset I$である。
+  \end{itemize}
+  よって、$I$はイデアルである。
+
+  $I\subset k[x_1,\dots,x_n]$はイデアルなので、ヒルベルトの基底定理より、
+  \begin{align}
+    I = \gen{f_1,\dots,f_s}
+  \end{align}
+  となる。$f_1,\dots,f_s \in I$なので、$f_i \in I_{F(i)}$となる$F(i)$が存在する。そのうち最大のものを$N$とすると、昇鎖であることより、$f_1,\dots,f_s \in I_{N}$である。よって、$I\subset I_N$であり、$I = I_N$である。昇鎖であることより、
+  $I=I_N = I_{N+1}=\dots$である。
+\end{myproof}
+
+この、昇鎖があるところで一定する条件を昇鎖条件(Ascending Chain Condition, ACC)という。したがって、$k[x_1,\dots,x_n]$のイデアルはACCを満足する。
+
+いままで、アフィン多様体は有限個の多項式で作るものだったが、
+イデアルで作ることを考える。イデアル$I$について、アフィン多様体と同じ記号を使って$\var(I)$を、
+\begin{align}
+  \var(I) = \set{(\xi_1,\dots,\xi_n); \Forall{f\in k[x_1,\dots,x_n]} f(\xi_1,\dots,\xi_n) = 0}
+\end{align}
+と定義する。実は$\var(I)$はアフィン多様体で、さらに$\var(f_1,\dots,f_s) = \var(\gen{f_1,\dots,f_s})$となる。
+\begin{myproof}
+ヒルベルトの基底定理より、$I\subset k[x_1,\dots,x_n]$について、
+$I=\gen{f_1,\dots,f_s}$となる。よって、$\var(f_1,\dots,f_s) = \var(\gen{f_1,\dots,f_s})$を示せば十分である。
+\begin{itemize}
+  \item $\subset$:$x\in \var(f_1,\dots,f_s)$とする。
+  $f_\bullet(x) = 0$となる。$(\xi_1,\dots,\xi_)\in \var(\gen{f_1,\dots,f_s})$かどうかを調べたいので、任意に$g\in \gen{f_1,\dots,f_s}$とする。
+  \begin{align}
+    g = \sum_{i=1}^s f_i h_i
+  \end{align}
+  となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。すると、
+  \begin{align}
+    g(\xi_1,\dots,\xi_s) = \sum_{i=1}^s (f_i \cdot h_i)(\xi_1,\dots,\xi_s) = 0.
+  \end{align}
+  よって、$f\in \var(\gen{f_1,\dots,f_s})$である。
+  \item $\supset$:$(\xi_1,\dots,\xi_n) \in \var(\gen{f_1,\dots,f_s})$とする。
+  $\var(\gen{f_1,\dots,f_s})$の定義より、
+  $f_\bullet(\xi_1,\dots,\xi_n) = 0$となる。
+\end{itemize}
+\end{myproof}
+よって、先に示したように、アフィン多様体は、それの作る多項式のなすイデアルによってのみ定まる。
+
+\begin{enumerate}[label=(問題\arabic*)]
+  \item
+\begin{align}
+  \gen{\LT(g_1),\LT(g_2),\LT(g_3)} = \gen{xy^2,xy,x} = \gen{x}.
+\end{align}
+一方、
+\begin{align}
+  g_1 - yg_2 +zg_3
+  &=
+  (xy^2-xz+y) - y(xy-z^2) +z(x-yz^4)\\
+  &=
+  y+yz^2 -yz^5.
+\end{align}
+これはあきらかに$\gen{x}$に属さない。
+  \item
+  \begin{description}
+    \item[問題5について] $f_1=x^2y-z,f_2=xy-1$である。
+    (d)より、$1-yz \in \gen{f_1,f_2}$であり、
+    $yz = \LM(1-yz) \in \gen{\LT(\gen{f_1,f_2})}$となる。一方、
+    $\gen{\LT(f_1),\LT(f_2)} = \gen{x^2y,xy}$であり、$yz$を含まない。よって、
+    「イデアルをとる→LTをとる→イデアルをとる」のほうが真に広い。
+    \item[問題6について] $f_1=2xy^2-x,f_2=3x^2y-y-1$である。
+    $-3x^2-2y^2-2y \in \gen{f_1,f_2}$であり、
+    $x^2 \in \gen{\LT(\gen{f_1,f_2})}$である。一方、
+    $\gen{\LT(f_1),\LT(f_2)} = \gen{xy^2,x^2y}$なので、$x^2$を含まない。よって、
+    真に広い。
+    \item[問題7について] $f_1=x^4y^2-z,f_2=x^3y^3-1,f_3=x^2y^4-2z$である。
+    $2x^2z-xy \in \gen{f_1,f_2,f_3}$であり、$x^2z \in \gen{\LT(\gen{f_1,f_2,f_3})}$である。一方、
+    $\gen{\LT(f_1),\LT(f_2),\LT(f_3)} = \gen{x^4y^2,x^3y^3,x^2y^4}$であり、
+    $x^2z$を含まない。よって、真に広い。
+  \end{description}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  $\gen{\LT(f_1),\dots,\LT(f_s)}$は$\gen{\LT(\gen{f_1,\dots,f_s})}$より真に小さいので、$\LT(f)\in \gen{\LT(\gen{f_1,\dots,f_s})}\setminus\gen{\LT(f_1),\dots,\LT(f_s)}$となる$f \in k[x_1,\dots,x_n]$が存在する。$\LT(f)$が何か$\LT(f_\bullet)$
+  で割り切れてしまうと、$\LT(f) \in \gen{\LT(f_1),\dots,\LT(f_s)}$になってしまうので、$\LT(f)$はどの$\LT(f_\bullet)$でも割り切れない。
+  $f$の項のうち、$\LT(f_\bullet)$のどれかで割りきれるものがあったとする。
+  その次数を$\alpha$とする。すると、$\alpha \le \multideg(f)$であり、かつ
+  $\alpha = \multideg(f_\bullet) + \alpha'$となる$\alpha' \in \Zge^n$が存在する。
+よって、$\multideg(f)-\multideg(f_\bullet)\in \Zge^n$であり、
+\begin{align}
+  \multideg(f) = (\multideg(f)-\multideg(f_\bullet)) + \multideg(f_\bullet)
+\end{align}
+となり、$\LT(f)$は$\LT(f_\bullet)$で割りきれるが、これは矛盾である。よって、
+$f$のどの項も$f_bullet$のどれでも割り切れず、$f$を$(f_1,\dots,f_s)$で割ったあまりは$f$そのものである。よって、存在する。
+\item
+「イデアルをとる→LTをとる→イデアルをとる」と「LTをとる→イデアルをとる」が一致しない場合は、
+$(f_1,\dots,f_s)$で割って余りが0とならなかったとしても、
+イデアルに属するようなものが存在する。
+\item ？
+\end{enumerate}
+\item 定数倍を含むのであきらか
+\item
+\begin{align}
+  &\set{g_1,\dots,g_t} は I のグレブナ基底 \\
+  \iff &
+  \gen{\LT(\gen{g_1,\dots,g_t})} = \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \gen{\LT(\gen{g_1,\dots,g_t})} \subset \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \Forall{\LT(g) \in \LT(\gen{g_1,\dots,g_t})} \LT(g) \in \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \Forall{\LT(g) \in \LT(\gen{g_1,\dots,g_t})} \LT(g) は \LT(g_1),\dots,\LT(g_t)のいずれかで割り切れる
+\end{align}
+\item 割り算アルゴリズムのなかで語ることになるが、つまり$stock_b \in I$として、
+$stock_a \in I$が成立することを言えばよい。
+初期では$stock_b = f$なのだから、$stock_b \in I$が成立する。
+$\LT(stock_b) \in \LT(I) = \gen{\LT(g_1),\dots,\LT(g_t)}$が成り立つ。
+よって、$\LT(stock_b)$は何か$\LT(g_\bullet)$で割り切れる。
+$g_\bullet$を$g_1$としても一般性は失なわない。
+\begin{align}
+  stock_a = stock_b - \frac{\LT(stock_b)}{\LT(g_1)}g_1
+\end{align}
+$g_1 \in I$であり、$\frac{\LT(stock_b)}{\LT(g_1)} \in k[x_1,\dots,x_n]$であり、
+$stock_b \in i$なので、$stock_a \in I$である。あとは書いてあるとおり。
+\item
+\begin{align}
+  \gen{\LT(x^4y^2-z^5),\LT(x^3y^3-1),\LT(x^2y^4-2z)}
+  =
+  \gen{x^4y^2,x^3y^3,x^2y^4}.
+\end{align}
+一方、
+\begin{align}
+  y\cdot(x^4y^2-z^5) - x\cdot(x^3y^3-1) = -yz^5+x
+\end{align}
+となり、このLMは$yz^5$なので、これは「LTをとる→イデアルをとる」に入らず、
+「イデアルをとる→LTをとる→イデアルをとる」は真に広い。よって、Groebner基底ではない。
+\item Groebner基底であることを示す。
+\begin{align}
+  \gen{\LT(x-z^2),\LT(y-z^3)} = \gen{x,y}
+\end{align}
+である。$\gen{\LT(\gen{x-z^2,y-z^3})}\subset \gen{x,y}$であることを示せばよい。
+$f\in \LT(\gen{x-z^2,y-z^3})$とする。$f\in \gen{x,y}$を示す。
+$f=h_1\cdot (x-z^2) + h_2 \cdot (y-z^3)$となる$h_1,h_2 \in k[x_1,\dots,x_n]$
+が存在する。
+仮に$f\notin \gen{x,y}$であるとする。このときは、$f\in k[z]$とならなければならない。$f=h_1\cdot(x-z^2) + h_2\cdot (y-z^3)$なので、これは$(t^2,t^3,t)$
+上で消え、$f\in k[z]$だったが、$z=t$全体で消える。よって、無限体上では$f$は多項式として0にならなればならない。
+\item やった
+\item 生成元をこの主イデアルに対応するものとすればそうだ？
+$I$の有限部分集合を$f,g_1,\dots,g_s$とする。
+$h\in I = \gen{f}$とし、$\LT(h)$が$\LT(f),\LT(g_1),\dots,\LT(g_s)$のどれかで割きれればよい。$h \in \gen{f}$なので、$h = f h'$となり、$\LT(h) = \LT(f)\LT(h')$となる。よって、$\LT(f)$で割り切れる。
+\item $f$に定数項がないときには$f\in \gen{x_1,\dots,x_n}$となって矛盾である。
+よって、$f$には定数項があり、$f$を$(x_1,\dots,x_n)$で割った余り$r$は
+定数になる。この$r \in I$となり、$I = \gen{r} = \gen{1} = k[x_1,\dots,x_n]$となる。
+\item 一般のほうを示す。
+\begin{itemize}
+  \item 有限生成$\Rightarrow$ 昇鎖条件:
+  先と同様。昇鎖$I_1 \subset I_2 \subset \dots$を考える。
+  $I=\bigcup_{i} I_i$は先と同様にイデアルとなる。仮定より\footnote{「すべての」イデアルが有限生成と言っている。}
+  $I=\gen{f_1,\dots,f_s}$となる。$f_1,\dots,f_s$の入っている$f_\bullet$の番号のうち最大のものを$N$とすると、$I_N = I$となる。よって、$I_{N} = I_{N+1}=\dots$である。
+  \item 昇鎖条件 $\Rightarrow$ 有限生成:
+  $R$が有限生成でないとする。$G_0 = \emptyset$とし、$I_0 = \gen{G_0} = \zeroset$とする。
+  $G_{n+1}$を、$G$に$R\setminus I_n$の元どれかを付け加えたものとし、
+  $I_{n+1} = \gen{G_{n+1}}$とする。$R\setminus I_n$は、$R$が有限生成でなく、$I_n$が有限生成であることから空でなく、常に元が選択できる。この構成より、$(I_n)_n$は真の昇鎖となる。これは昇鎖条件に反する。
+\end{itemize}
+\item 仮にこの降鎖が安定しなかったとすると、1章4節の演習問題の「$V \subsetneq W \iff I(V) \supsetneq I(W)$」より、安定しない昇鎖$I(V_1) \subset I(V_2) \subset\ \dots$が得られるが、これは$k[x_1,\dots,x_n]$の昇鎖条件に反する。
+\item 昇鎖$I_n = \gen{f_1,\dots,f_n}$を考える。昇鎖条件よりこの昇鎖は安定し、
+ある$N$について$I_N = I_{N+1} = \dots$となる。
+$m \le N$については$f_m \in I_N$だし、$m> N$については$f_m \in I_m = I_N$であるから、$I$を生成するのに使った元全てが$I_N$に属している。よって、$I_N = I$である。
+\item $V_i = \var(f_1,\dots,f_i)$とすると、$(V_i)_i$は降鎖となる。
+(13)より、この降鎖は安定し、ある$N$以降$V_N = V_{N+1} = \dots$となる。
+$V_N = \var(f_1,f_2,\dots)$となることを示す。$\supset$は自明なので、
+$\subset$を示す。$x\in V_N$とする。$x \in \var(f_1,\dots)$を示せばよく、
+任意の$M$について$f_M(x)=0$を示せばよい。$M\le N$については、
+$x\in V_N \subset V_M$より$f_M(x)=0$である。$M > N$については、
+$x \in V_N = V_{N+1} = \dots = V_M$なので、$f_M(x)=0$である。
+\item
+$V$は多様体なので、$V=\var(f_1,\dots,f_s)$なる$f_1,\dots,f_s \in k[x_1,\dots,x_n]$がある。
+\begin{itemize}
+  \item $\subset$:$x\in \var(\ideal(V)) = \var(\ideal(\var(f_1,\dots,f_s)))$とする。$x$は任意の$\ideal(\var(f_1,\dots,f_s))$に属する多項式で消える。
+  $i=1,\dots,s$とする。$f_i \in \var(f_1,\dots,f_s)$なので、
+  $f_i \in \ideal(\var(f_1,\dots,f_s))$である。よって、$f_i(x)=0$である。
+  $i$は任意だったので、$x$は$f_1,\dots,f_s$の全てで消える。よって、
+  $x\in \var(f_1,\dots,f_s)$となる。よって、$\var(\ideal(V)) \subset V$である。
+  \item $\supset$:$x\in \var(f_1,\dots,f_s)$とする。
+  $g\in \ideal(\var(f_1,\dots,f_s))$とする。$\var(f_1,\dots,f_s)$の点全てを消す多項式$g_1,\dots,g_t$と$h_1,\dots,h_t \in k[x_1,\dots,x_n]$が存在して、
+  \begin{align}
+    g = \sum_{i=1}^t h_i g_i
+  \end{align}
+  となる。$x\in \var(f_1,\dots,f_s)$となので、$g_1,\dots,g_t$がこれを消し、
+  \begin{align}
+    g(x) = \sum_{i=1}^t (h_i g_i)(t) = 0
+  \end{align}
+  となり、$g$は$x$を消す。$g$は$\ideal(\var(f_1,\dots,f_s))$の任意の多項式だったので、$x\in \var(\ideal(\var(f_1,\dots,f_s)))$となる。よって、
+  $V\subset \var(\ideal(V))$となる。
+  \end{itemize}
+  (先に示したのは、$\ideal(\var(f_1,\dots,f_s)) = \gen{f_1,\dots,f_s}$
+  は一般には成立しないということである。今回示したのは$\var(\ideal(\var(f_1,\dots,f_s)))=\var(f_1,\dots,f_s)$である。イデアルが多様体を定めるという感じが出ている。)
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item $I=\gen{x^2-y,y+x^2-4} = \gen{x^2-y,2y-4}=\gen{x^2-y,x^2-2}$.
+    \item
+    \begin{align}
+      \var(I)
+      \desceq{イデアルが多様体を決める}
+      \var(x^2-y,x^2-2)
+      =
+      \set{(x,y) ; x^2=y, x^2=2}
+      =
+      \set{(\pm\sqrt{2},2)}.
+    \end{align}
+  \end{enumerate}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  \begin{align}
+    \var(f,g)
+    &=
+    \var(f,g_1 g_2)\\
+    &=
+    \set{p ; f(p)=0 \land ((g_1 g_2)(p) = 0)}\\
+    &=
+    \set{p ; f(p) = 0 \land g_1(p)g_2(p) = 0}\\
+    &=
+    \set{p ; f(p) = 0 \land ((g_1(p) = 0) \lor (g_2(p)=0))}\\
+    &=
+    \set{p ; ((f(p)=0) \land (g_1(p)=0))\lor ((f(p)=0) \land (g_2(p)=0))}\\
+    &=
+    \set{p ; (f(p)=0) \land (g_1(p)=0)} \cup \set{p ; (f(p)=0) \land (g_2(p)=0)} \\
+    &=
+    \var(f,g_1)\cup \var(f,g_2).
+  \end{align}
+  \item
+  \begin{align}
+    \var(y-x^2,xz-y^2)
+    &=
+     \var(\gen{y-x^2,xz-y^2})\\
+     &=
+     \var(\gen{y-x^2,xz-x^4})\\
+     &=
+     \var(y-x^2,xz-x^4).
+  \end{align}
+\item
+  (b)より、
+  \begin{align}
+    \var(y-x^2,xz-y^2)
+    &=
+    \var(y-x^2,xz-^4)\\
+    &=
+    \var(y-x^2,x(z-x^3))\\
+    &=
+    \var(y-x^2,x) \cup \var(y-x^2,z-x^3).
+  \end{align}
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{グレブナ基底の性質}
+\label{sub:グレブナ基底の性質}
+これまではヒルベルトの基底定理の応用を見ていて、
+Groebner基底はおまけだったが、Groebner基底の性質を見ていく。
+まず、Groebner基底で割り算をすると、その余りが順序によらない。
+すなわち:$I\subset k[x_1,\dots,x_n]$をイデアルとする。
+$g_1,\dots,g_s$が$I$のGroebner基底であるとする。このとき、
+$f\in k[x_1,\dots,x_n]$について、$f=\tilde f + r$となる
+$\tilde f,r \in k[x_1,\dots,x_n]$で、
+\begin{itemize}
+  \item $r$のどの項も$\LT(g_1),\dots,\LT(g_s)$で割り切れない
+  \item $\tilde f \in I$となる
+\end{itemize}
+となるものが一意的に存在する。特に、$f$は$g_1,\dots,g_s$をどの順序で並べて割っても余りが同じになる。
+\begin{myproof}
+  \begin{itemize}
+    \item 存在:$f$を$(g_1,\dots,g_s)$で割れば得られる。
+    \item 一意性: $f=\tilde f_1 + r_1 = \tilde f_2 + r_2$と2つ得られたとする。
+    $\tilde f_1 - \tilde f_2 = r_2 - r_1$なので、$r_2 - r_1 \in I$となる。
+    仮に$r_2 - r_1 = 0$であるとすると、$\LT(r_2-r_2)$を考えることができる。
+    Groebner基底の性質より、
+    \begin{align}
+      \LT(r_2-r_1) \in \LT(I) \subset \gen{\LT(I)}
+      =
+       \gen{\LT(g_1,\dots,g_s)}.
+    \end{align}
+    よって、$\LT(r_2-r_1)$は$\LT(g_1),\dots,\LT(g_s)$のどれかで割り切れるが、
+    これは$\LT(r_2)$か$\LT(r_1)$のどちらかが$\LT(g_1),\dots,\LT(g_s)$
+    のどれかで割り切れることになる。これは、$r_1,r_2$に課した条件に反する。
+    よって、$r_2 =r_1$となる。
+  \end{itemize}
+\end{myproof}
+
+順序によらないので、$r$を$f$の$\set{g_1,\dots,g_s}$での正規形とよぶ。
+
+Groebner基底がわかっていれば、イデアルへの所属問題が解ける。
+すなわち:$I\subset k[x_1,\dots,x_n]$をイデアルとし、$g_1,\dots,g_s$を
+このGroebner基底とする。このとき、
+\begin{align}
+  f \in I \iff f は (g_1,\dots,g_s) で割り切れる .
+\end{align}
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:$f=f+0$なので、$f$のGroebner基底$\set{g_1,\dots,g_s}$
+    での割り算の余りの一意性より、割り切れる。
+    \item $\Leftarrow$:$f$は$g_1,\dots,g_s$の$k[x_1,\dots,x_n]$の線形結合になる。
+  \end{itemize}
+\end{myproof}
+
+余りは便利なので、記号を与える。$f$を$F=(f_1,\dots,f_s)$で割った余りを
+\begin{align}
+  \overline f^{F}
+\end{align}
+と書く。$F$がGroebner基底の列なら、その順序によらないことになる。
+
+ある$I$の元の組$\set{f_1,\dots,f_s}$のGroebner基底でない、というのは
+$\gen{\LT(\gen{f_1,\dots,f_s})}$の元であって$\gen{\LT(f_1),\dots,\LT(f_s)}$の元でないものがあるからであり、つまり$f_1,\dots,f_s$の線形結合で
+その先頭項が$\LT(f_\bullet)$の倍数にならないものが作れてしまうからである。
+もっと考えると、その線形結合でどの先頭項も消えないならば、
+線形結合全体の先頭項も$f_\bullet$の先頭項でありつづけることになってしまう。
+ということで、Groebner基底でなくなってしまうためには、
+線形結合で先頭項が消えてしまうことが必要である。
+そこで、先頭項が消えるという状況を考えてみる。
+2つの多項式について、先頭項の消し方で次のようなものを定義する。
+
+$f,g\in k[x_1,\dots,x_n]$を0でない多項式とする。
+$\LM(f)$と$\LM(g)$の最小公倍式(LCM)を、
+\begin{align}
+  \LCM(\LM(f),\LM(g)) = x^{\multideg(f) \vee \multideg(g)}
+\end{align}
+とする。そして、$f$と$g$のS多項式を、
+\begin{align}
+  S(f,g) = \frac{x^{\LCM(\LM(f),\LM(g))}}{\LT(f)}f - \frac{x^{\LCM(\LM(f),\LM(g))}}{\LT(g)}g
+\end{align}
+とする。これでどちらの項の先頭項も次数が一致し、しかもモニックになっているので、
+先頭項が消えることになる。
+
+すべての先頭項が同じ次数の多項式について、その$k$係数線形結合
+の次数が落ちるのなら、その$k$係数線形結合がS多項式の$k$係数線形結合で
+書ける。すなわち:
+$f_1,\dots,f_s \in k[x_1,\dots,x_n]$とし、$\multideg(f_\bullet ) = \delta$
+と、全て等しいとする。さらに、
+$c_\bullet \in k[x_1,\dots,x_n]$を係数とした線形結合$\sum_{i=1}^s c_i f_i$が、
+$\multideg(\sum_{i=1}^s c_i f_i) < \delta$となるなら(次数が落ちるなら)、
+$\sum_{i=1}^s c_i f_i$は$S(f_a,f_b)\quad (1 \le a,b \le s)$
+の$k$係数線形結合となる。
+\begin{myproof}
+  線形結合$\sum_{i=1}^s c_i f_i$の次数が落ちているので、
+  \begin{align}
+    \sum_{i=1}^s c_i \LC(f_i) = 0
+  \end{align}
+  となる。次数の話をしたいのでモニックにしておきたい。
+  $\LC(f_\bullet)p_\bullet = f_\bullet$と、$p_\bullet$を定義する。
+  \begin{align}
+    \sum_{i=1}^s c_i f_i
+    &=
+    \sum_{i=1}^s c_i \LC(f_i)p_i\\
+    &=
+    c_1 \LC(f_1) p_1 + \sum_{i=2}^s c_i f_i \\
+    &=
+    c_1 \LC(f_1) (p_1 - p_2 + p_2) + \sum_{i=2}^s c_i f_i \\
+    &=
+    c_1 \LC(f_1) (p_1 - p_2)
+    + (c_1 \LC(f_1) + c_2 \LC(f_2))p_2
+    + \sum_{i=3}^s c_i f_i\\
+    &=\dots\\
+    &=
+    \sum_{i=1}^{s-1} (\sum_{j=1}^i c_j \LC(f_j))(p_i - p_{i+1})
+    + \sum_{j=1}^s c_j \LC(f_j)p_s.
+  \end{align}
+  先の次数が落ちている条件より、
+  \begin{align}
+    \sum_{i=1}^s c_i f_i
+    &=
+    \sum_{i=1}^{s-1}(\sum_{j=1}^i c_j \LC(f_j))(p_i - p_{i+1})\\
+    &=
+    \sum_{i=1}^{s-1}(\sum_{j=1}^i c_j \LC(f_j))S(p_i,p_{i+1}).
+  \end{align}
+
+\end{myproof}
 
 \end{document}
