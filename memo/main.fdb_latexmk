@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1427157626 "main.tex" "main.pdf" "main" 1427157642
+["pdflatex"] 1428133768 "main.tex" "main.pdf" "main" 1428133777
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-cid-auto-adobe-japan1.luc" 1426154369 1649592 0317259f471e6b1354f80a1f10f5cc52 ""
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-jisx0208.luc" 1426154370 201428 86fe11785abbeb6a87b6c8dee36b92ec ""
-  "ashiato45.sty" 1427004518 4146 d95e636940ba3870711de65f3861983c ""
+  "ashiato45.sty" 1428080478 4179 19d0c08ebe431851e993f7e5671ed905 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1410962984 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1410962984 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1410962985 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -227,12 +227,12 @@
   "images/div3_1b.png" 1425800652 231701 4cb7a99823e2585e02db2e15eddfc021 ""
   "images/div3_2_9.png" 1425822629 23781 edc0ebb2001c08b358344d7ead2ab82a ""
   "images/ex_2_4_3.png" 1425908086 61915 01531d35fe340b943b3a88b9c61a33d2 ""
-  "main.aux" 1427157642 5260 b8fb36e753a0e3807bfc2e624fc0e8e3 ""
-  "main.tex" 1427157626 201075 7b6f7edeaf4942d322ca4e2b164abea7 ""
+  "main.aux" 1428133776 5322 3829badfaec7eae662c9a2803569f512 ""
+  "main.tex" 1428133766 207135 e8a8f8600a3c97b8c6b822377a0abbea ""
   "mytheorems.sty" 1426384006 3389 863e5e3c13a98ca44a86c9f17244d375 ""
   (generated)
   "main.thm"
   "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"
-  "main.pdf"
   "main.aux"
+  "main.pdf"
   "main.log"

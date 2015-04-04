@@ -3716,7 +3716,8 @@ $f_1,\dots,f_s \in k[x_1,\dots,x_n]$とし、$\multideg(f_\bullet ) = \delta$
 $c_\bullet \in k[x_1,\dots,x_n]$を係数とした線形結合$\sum_{i=1}^s c_i f_i$が、
 $\multideg(\sum_{i=1}^s c_i f_i) < \delta$となるなら(次数が落ちるなら)、
 $\sum_{i=1}^s c_i f_i$は$S(f_a,f_b)\quad (1 \le a,b \le s)$
-の$k$係数線形結合となる。
+の$k$係数線形結合となる。さらにこのとき、各$S(f_a,f_b)$は、
+$\multideg(S(f_a,f_b))<\delta$となる。
 \begin{myproof}
   線形結合$\sum_{i=1}^s c_i f_i$の次数が落ちているので、
   \begin{align}
@@ -3749,7 +3750,117 @@ $\sum_{i=1}^s c_i f_i$は$S(f_a,f_b)\quad (1 \le a,b \le s)$
     &=
     \sum_{i=1}^{s-1}(\sum_{j=1}^i c_j \LC(f_j))S(p_i,p_{i+1}).
   \end{align}
+ここで、各$S(p_i,p_{i+1})$は実態は$p_i-p_{i+1}$だったのだから、次数が落ちて
+$\multideg{S(p_i,p_{i+1})}<\delta$となる。
+\end{myproof}
 
+これを使って、あるイデアルの基底がGroebner基底であるかどうかの判定条件を、
+S-多項式をつかって作ることができる:「$I\subset k[x_1,\dots,x_n]$をイデアルとする。
+$G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下は同値である。
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$は$I$のGroebner基底である。
+  \item $G$で作るどのS-多項式$S(g_i,g_j)\, (i\neq j)$も、$G$の任意の順序で割り切れる。
+  \item $G$で作るどのS-多項式$S(g_i,g_j)\, (i\neq j)$も、何か$G$の適切な順序が存在して、その順序つきの$G$で割り切れる。
+\end{enumerate}
+\begin{myproof}
+  \begin{itemize}
+    \item (2)$\implies$ (3):自明。
+    \item (1)$\implies$ (2):
+    $S(g_i,g_j)$は$G$の$k[x_1,\dots,x_n]$線形結合であり、$G$がGroebner基底であるから、
+    割り切れる。
+    \item (3)$\implies$ (1):
+    Groebner基底であることを示すには、
+    $\gen{\LT\gen{G}}\subset \gen{\LT(G)}$であることを示せばよく、
+    生成元の所属を示すために、$\LT(I) = \LT{\gen{G}} \subset \gen{\LT(G)}$であることを示せばよい。$f\in I$として、$\LT(f)\in \gen{\LT(G)}$を示せばよい。
+    これを示す。
+
+    少し記法を定める。
+    \begin{itemize}
+      \item $\multideg$だと長いので、$\deg$と書くことにする。
+      \item $\delta(h_\bullet)$で、
+      $\max\set{\deg(h_ig_i) ; i=1,\dots,s}$をあらわすことにする。
+      同じ値に対しても表示によって変わってしまうので、本当は
+      $(h_1,\dots,h_s)$に対する関数とするのが正当だろうがこのように略記する。
+      \item $\LCM(\LM(f),\LM(g))$を、$\LCM(f,g)$と略記する。
+      これは、入ってきたものに自動的に$\LM$をあてるようにすればいいだけなので、
+      旧来の記法とも矛盾せず、曖昧さはない。
+    \end{itemize}
+
+    $f\in I=\gen{G}$なので、
+    $f = \sum_{i=1}^s h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。
+    和で次数が落ちる可能性があるので、$f=\sum_{i=1}^s h_i g_i$より、
+    $\deg(f)\le \delta(\sum_{i=1}^s h_i g_i)$となっている。
+    いま、$\deg(f) < \delta(\sum_{i=1}^s h_i g_i)$であるとする。
+    このとき、
+    \begin{align}
+      \delta(\sum_{i=1}^s h_i' g_i) < \delta(\sum_{i=1}^s h_i g_i),\quad
+      f = \sum_{i=1}^s h_i' g_i
+    \end{align}
+    となる$h_\bullet'$が存在することを示そう。
+    まずは次数を気にせず$h_\bullet'$を構成する。
+    \begin{align}
+      & \sum_{i=1}^s h_i g_i \\
+      =&
+      \sum_{\deg(h_ig_i)= \delta(\sum h_i g_i)} \LT(h_i)g_i
+      +
+      \sum_{\deg(h_i g_i)=\delta(\sum h_i g_i)} (h_i - \LT(h_i))g_i
+      +
+      \sum_{\deg(h_ig_i) < \delta(\sum h_i g_i)} h_i g_i
+    \end{align}
+    と書ける。
+    この第1項について、「同次のものを足して次数が落ちて」いるので、定理が使えて、
+    \begin{align}
+      \sum_{\deg(h_ig_i)=\delta(\sum h_i g_i)} \LT(h_i)g_i
+       =
+       \sum_{j,k} c_{j,k}S(\LT(h_j)g_j, \LT(h_k)g_k)
+    \end{align}
+    となる$c_\bullet \in k$が存在する。Sの中身の特殊性を使って計算してみると、
+    \begin{align}
+      S(\LT(h_j)g_j, \LT(h_k)g_k)
+      &=
+      \frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} S(g_j,g_k)
+    \end{align}
+    である。仮定より、$G$の適切な順序での割り算を適用して
+    \begin{align}
+      S(g_j,g_k) = \sum_{i=1}^s a_{ijk}g_i
+    \end{align}
+    となる$a_{ijk}\in k[x_1,\dots,x_n]$が存在する。
+    まとめると、
+    \begin{align}
+      \sum_{i=1}^s h_i g_i
+      =
+      \ub{\sum_{j,k}\sum_{i=1}^s c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} a_{ijk}g_i}_{\MARU{1}}
+      +
+      \ub{\sum_{\deg(h_i g_i)=\delta(\sum h_i g_i)} (h_i - \LT(h_i))g_i}_{\MARU{2}}
+      +
+      \ub{\sum_{\deg(h_ig_i) < \delta(\sum h_i g_i)} h_i g_i}_{\MARU{3}}
+    \end{align}
+    となる。この右辺は、$f=\sum_{i=1}^s h_i g_i$の$g_\bullet$での線形結合の表現になっているので、これにあわせて$h'_\bullet$を定めればよい。これが次数の条件を満たすことを示す。$\MARU{2},\MARU{3}$については、$\sum$の条件よりあきらかなので、
+    $\MARU{1}$の中身が全て、「次数が$\delta(\sum h_i g_i)$未満」を満たせば十分である。
+    $i,j,k$を固定して考える。
+    \begin{align}
+      &\deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} a_{ijk}g_i)\\
+      \le&
+      \deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} \sum_{i=1}^s a_{ijk}g_i)\\
+      & \fbox{割り算の性質。(商)\times (割る式)の次数は(割られる式)の次数を越えない。アルゴリズム参照。}\\
+      =&
+      \deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} S(g_j,g_k))\\
+      &\fbox{S多項式を割っていたのだった。}\\
+      =&
+      \deg(c_{jk}S(\LT(h_j)g_j, \LT(h_k)g_k))\\
+      <&
+      \deg(\delta(\sum_{i=1}^s h_i g_i))\\
+      &
+      \fbox{「同次のものを足して次数が落ちて」の主張。}
+    \end{align}
+    よって、条件を満たす$h'_\bullet$が構成できた。この操作は、
+    $\deg(f)<\delta(\sum_{i=1}^s h_i g_i)$が満たされる限り繰替えせるので、
+    有限回繰替えすことにより、$\deg(f)=\delta(\sum_{i=1}^s h_i g_i)$をみたす
+    $h_\bullet$が求まる。つまり、$\deg(f) = \deg(h_i g_i)$となる
+    $i=1,\dots,s$が存在する。よって、$\LM(f)=\LM(h_ig_i)=\LM(h_i)\LM(g_i)$であり、
+    $\LT(f)$は$\LT(g_i)$で割り切れる。よって、
+    $\LT(f) \in \gen{\LT{G}}$である。
+  \end{itemize}
 \end{myproof}
 
 \end{document}
