@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  4 APR 2015 16:49
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  5 APR 2015 00:55
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.051 seconds
+luaotfload | main : fontloader loaded in 0.035 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1082,18 +1082,35 @@ LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
 
 LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
 
-[65]
+[65] <images/1428152186061.png, id=251, 616.55344pt x 524.71031pt>
+File: images/1428152186061.png Graphic file (type png)
+
+<use images/1428152186061.png>
+Package pdftex.def Info: images/1428152186061.png used on input line 3894.
+(pdftex.def)             Requested size: 245.08942pt x 208.57535pt.
+ [66]
+<images/1428152296875.png, id=255, 752.8125pt x 603.75563pt>
+File: images/1428152296875.png Graphic file (type png)
+
+<use images/1428152296875.png>
+Package pdftex.def Info: images/1428152296875.png used on input line 3897.
+(pdftex.def)             Requested size: 245.08942pt x 196.55911pt.
+ [67<./images/1428152186061.png><./images/1428152296875.png>]
+Overfull \hbox (26.88367pt too wide) in paragraph at lines 3963--3963
+[][] 
+ []
+
 \tf@thm=\write3
- [66] (./main.aux))
+[68] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11738 strings out of 494694
+ 11754 strings out of 494694
  195334,266212 words of node,token memory allocated
- 7004 words of node memory still in use:
+ 7023 words of node memory still in use:
    10 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 467 attribute, 916 glue_
 spec, 29 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62724,3:2314,4:2546,5:434,6:2033,7:317,9:962,10:120
- 14913 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:62724,3:2333,4:2527,5:438,6:2033,7:317,9:962,10:120
+ 14923 multiletter control sequences out of 65536+600000
  86 fonts using 38155183 bytes
  58i,19n,44p,997b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
@@ -1122,10 +1139,10 @@ cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (66 pages, 1215081 bytes).
+Output written on main.pdf (68 pages, 1254605 bytes).
 
-PDF statistics: 385 PDF objects out of 1000 (max. 8388607)
- 268 compressed objects within 3 object streams
+PDF statistics: 395 PDF objects out of 1000 (max. 8388607)
+ 272 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

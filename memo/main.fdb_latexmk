@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1428133768 "main.tex" "main.pdf" "main" 1428133777
+["pdflatex"] 1428162907 "main.tex" "main.pdf" "main" 1428162918
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-cid-auto-adobe-japan1.luc" 1426154369 1649592 0317259f471e6b1354f80a1f10f5cc52 ""
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-jisx0208.luc" 1426154370 201428 86fe11785abbeb6a87b6c8dee36b92ec ""
   "ashiato45.sty" 1428080478 4179 19d0c08ebe431851e993f7e5671ed905 ""
@@ -220,6 +220,8 @@
   "c:/texlive/2014/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty" 1410974425 6581 7a80eda55ddbc429d29967b117abe6b5 ""
   "c:/texlive/2014/texmf-dist/tex/luatex/luatexja/patches/lltjfont.sty" 1410974425 22490 35abfa88d2759220f5660e040c4bc19a ""
   "c:/texlive/2014/texmf-var/web2c/luatex/lualatex.fmt" 1410980417 676272 9d211289b7e73212e8e19ef2358636b0 ""
+  "images/1428152186061.png" 1428152280 22332 d4e5ff1c18fae4ca164ef12d2a2bfd22 ""
+  "images/1428152296875.png" 1428152365 22896 a860ce2a574548de70b8de83dfd288d5 ""
   "images/div1.png" 1425567432 24012 3f9bf3cf8f45b0ae73e0683d7ea6f6af ""
   "images/div2.png" 1425567774 51670 32042aaa6a5d59a6712b6c1f4887f047 ""
   "images/div3.png" 1425568114 30956 fd0d640dccf2b2a38be5343991f8f8a6 ""
@@ -227,12 +229,12 @@
   "images/div3_1b.png" 1425800652 231701 4cb7a99823e2585e02db2e15eddfc021 ""
   "images/div3_2_9.png" 1425822629 23781 edc0ebb2001c08b358344d7ead2ab82a ""
   "images/ex_2_4_3.png" 1425908086 61915 01531d35fe340b943b3a88b9c61a33d2 ""
-  "main.aux" 1428133776 5322 3829badfaec7eae662c9a2803569f512 ""
-  "main.tex" 1428133766 207135 e8a8f8600a3c97b8c6b822377a0abbea ""
+  "main.aux" 1428162918 5622 bf57a0d868e0e144ca403510068a3c73 ""
+  "main.tex" 1428162906 211143 a9f3e91699520413ea53869553d6e90e ""
   "mytheorems.sty" 1426384006 3389 863e5e3c13a98ca44a86c9f17244d375 ""
   (generated)
-  "main.thm"
+  "main.log"
   "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"
   "main.aux"
+  "main.thm"
   "main.pdf"
-  "main.log"

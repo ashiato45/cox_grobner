@@ -3650,7 +3650,7 @@ $\tilde f,r \in k[x_1,\dots,x_n]$で、
     \item 存在:$f$を$(g_1,\dots,g_s)$で割れば得られる。
     \item 一意性: $f=\tilde f_1 + r_1 = \tilde f_2 + r_2$と2つ得られたとする。
     $\tilde f_1 - \tilde f_2 = r_2 - r_1$なので、$r_2 - r_1 \in I$となる。
-    仮に$r_2 - r_1 = 0$であるとすると、$\LT(r_2-r_2)$を考えることができる。
+    仮に$r_2 - r_1 \neq 0$であるとすると、$\LT(r_2-r_1)$を考えることができる。
     Groebner基底の性質より、
     \begin{align}
       \LT(r_2-r_1) \in \LT(I) \subset \gen{\LT(I)}
@@ -3862,5 +3862,113 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
     $\LT(f) \in \gen{\LT{G}}$である。
   \end{itemize}
 \end{myproof}
+つまり、ある多項式の組がイデアルのGroebner基底であるかどうかを見るには、
+その多項式の組からすべてのS多項式を作って、それを好きな順序の多項式の組で
+割って、すべて余りが0であることを見れば必要十分である。
+
+例として、3次ねじれ曲線のイデアル$I=\gen{y-x^2,z-x^3}$
+のGroebner基底として、$\set{y-x^2,z-x^3}$が取れることを示そう。
+ただし、$y>z>x$のlex順序とする。
+これは、$S(y-x^2,z-x^3)$が$(y-x^2,z-x^3)$で割り切れればよい。
+\begin{align}
+  S(y-x^2,z-x^3) = yx^3-zx^2
+\end{align}
+である。これを割ってみると、
+\begin{align}
+  yx^3-zx^2 = x^3(y-x^2) + (-x^2)(z-x^3)
+\end{align}
+となり、割り切れたので、Groebner基底であることがわかった。
+
+\begin{enumerate}[label=(問題 \arabic*)]
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item $I$のGroebner基底$G$を作ることができるので、
+    それで$f$を割ればよい。
+    \item $f=g+r=g'+r'$と与えられたとする。先のGrobner基底を考えると、
+    この$g+r=g'+r'$はすでに$G$で$I$の元と正規形とに分けた形になっているので、
+    Groebner基底の性質より、$r=r'$となる。
+  \end{enumerate}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \easypicture{1428152186061.png}
+    $-z^2$が余り。商は$(y,-z)$である。
+    \item
+    \easypicture{1428152296875.png}
+    $-z^2$が余りで先と一致する。しかし、商は$(x,z)$となり、さっきとは全然違う。
+  \end{enumerate}
+  \item
+  基底といったら、有限生成なイデアルに対しての有限個の生成元たちのことであったから、
+  $G$は有限集合である。確認した。$G=\set{g_1,\dots,g_s}$とする。
+  $S(g_i,g_j)$を考える。ただし、$i\neq j$である。$S(g_i,g_j)\in \gen{G} = I$なので、
+  仮定より$\overline{S(g_i,g_j)}^G = 0$である。$i,j$は任意であった。よって、ブッフベルガーのSペア判定条件より、$G$はGroebner基底である。
+  \item
+  $G$での割り算と$G'$での割り算と$I$での割り算が一致することを問題1で見た。
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item 先頭を$x^2yz^2$にあわせる。
+    \begin{align}
+      S(f,g)
+      =
+      \frac{yz}{4}f - xg
+      =
+      (x^2yz^2 - \frac{7}{4}y^3z) - (x^2yz^2 + 3x^2z^4)
+      =
+      -3x^2z^4 - \frac{7}{4}y^3z.
+    \end{align}
+    \item 先頭を$x^4yz^2$にあわせる。
+    \begin{align}
+      S(f,g)
+      =
+      z^2f - \frac{x^3y}{3}g
+      =
+      (x^4yz^2 - z^4) - (x^4yz^2 + \frac{x^3y^2}{3})
+      =
+      \frac{-1}{3}x^3y^2 -z^4.
+    \end{align}
+    \item 先頭を$x^7y^2z$にあわせる。
+    \begin{align}
+      f- \frac{1}{2}g =
+      (x^7y^2z+2ixyz) - (x^7y^2z + 2)
+      =
+      2ixyz - 2.
+    \end{align}
+    \item 先頭を$xyz^2$にあわせる。
+    \begin{align}
+      (z^2)f - (xy)g
+      =
+      (xyz^2+z^5) - (xyz^2-3xyz)
+      =
+      3xyz + z^5.
+    \end{align}
+  \end{enumerate}
+  \item
+  異なる。$x>y$ならば$S(x+y,x)=y$だが、$y>x$ならば$S(y+x,x)= x^2$である。
+  \item
+  \begin{align}
+    \deg(S(f,g))
+    &=
+    \deg(\frac{\LCM(f,g)}{\LT(f)}(\LT(f)+(f-\LT(f))) - \frac{\LCM(f,g)}{\LT(g)}(\LT(g)+(g-\LT(g))))\\
+    &=
+    \deg(\frac{\LCM(f,g)}{\LT(f)}(f-\LT(f)) - \frac{\LCM(f,g)}{\LT(g)}(g-\LT(g)))\\
+    &=
+    \max\set{\deg(\frac{\LCM(f,g)}{\LT(f)}(f-\LT(f))), \deg(\frac{\LCM(f,g)}{\LT(g)}(g-\LT(g)))}\\
+    &=
+    \max\set{\deg(\LCM(f,g))-\deg(\LT(f))+\deg(f-\LT(f)),
+    \deg(\LCM(f,g))-\deg(\LT(g))+\deg(g-\LT(g))}\\
+    &=
+    \deg(\LCM(f,g)) + \max\set{\deg(f-\LT(f))-\deg(\LT(f)), \deg(g-\LT(g))-\deg(\LT(g))}\\
+    &<
+    \deg(\LCM(f,g)).
+  \end{align}
+  \item
+  $S(-x^2+y,-x^3+z) = xy-z$である。これを$(-x^2+y,-x^3+z)$で割ったあまりは
+  $xy-z$そのものであり、0でないのでSペア判定法よりGroebner基底でない。
+  \item
+  
+
+\end{enumerate}
+
+
 
 \end{document}
