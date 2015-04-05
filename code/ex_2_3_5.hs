@@ -1,6 +1,6 @@
-import MultiPoly
-import Data.Ratio
-import Control.Monad.Writer    
+import           Control.Monad.Writer
+import           Data.Ratio
+import           MultiPoly
 
 main = do
   let tt = [[(1%1, [3,0,0]), (-1%1, [2,1,0]), (-1%1, [2,0,1]), (1%1, [1,0,0])],

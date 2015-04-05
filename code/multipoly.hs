@@ -1,13 +1,13 @@
 module MultiPoly where
 
-import Control.Applicative
-import Data.List
-import Distribution.Simple.Utils
-import Data.Ratio
-import Control.Monad.Writer
-import Control.Monad.State
-import Data.Maybe
-import qualified Data.Map as DMap
+import           Control.Applicative
+import           Control.Monad.State
+import           Control.Monad.Writer
+import           Data.List
+import           Data.Maybe
+import           Data.Ratio
+import           Distribution.Simple.Utils
+-- import qualified Data.Map as DMap
 
 data PlainMonomial = PlainMonomial [Int]|EmptyMonomial deriving Show
 data Term coef multideg = Term {coef :: coef, multideg :: multideg} deriving Show
@@ -27,6 +27,7 @@ class (Ord a) => MultiDeg a where
     moMake :: PlainMonomial -> a
     moGetPlain :: a -> PlainMonomial
     moShow :: a -> String
+    moMax :: a -> a-> a
 
 instance Eq PlainMonomial where
     EmptyMonomial == EmptyMonomial = True
@@ -59,11 +60,14 @@ instance MultiDeg Lex where
     moZero = Lex $ PlainMonomial $ repeat 0
     moTotalOrder (Lex EmptyMonomial) = Nothing
     moTotalOrder (Lex (PlainMonomial xs)) = Just $ sum xs
-    moAlign n (Lex EmptyMonomial) = Lex EmptyMonomial
+    moAlign _ (Lex EmptyMonomial) = Lex EmptyMonomial
     moAlign n (Lex (PlainMonomial xs)) = Lex $ PlainMonomial $ take n (xs ++ (repeat 0))
     moMake p = Lex p
     moGetPlain (Lex p) = p
     moShow l = show l
+    moMax (Lex (PlainMonomial xs)) (Lex (PlainMonomial ys)) =
+      Lex $ PlainMonomial $ zipWith max xs ys
+    moMax _ _ = Lex EmptyMonomial
 
 instance Eq GrLex where
     (GrLex x) == (GrLex y) = x == y
@@ -89,11 +93,15 @@ instance MultiDeg GrLex where
     moZero = GrLex $ PlainMonomial $ repeat 0
     moTotalOrder (GrLex EmptyMonomial) = Nothing
     moTotalOrder (GrLex (PlainMonomial xs)) = Just $ sum xs
-    moAlign n (GrLex EmptyMonomial) = GrLex EmptyMonomial
+    moAlign _ (GrLex EmptyMonomial) = GrLex EmptyMonomial
     moAlign n (GrLex (PlainMonomial xs)) = GrLex $ PlainMonomial $ take n (xs ++ (repeat 0))
     moMake p = GrLex p
     moGetPlain (GrLex p) = p
     moShow l = show l
+    moMax (GrLex (PlainMonomial xs)) (GrLex (PlainMonomial ys)) =
+      GrLex $ PlainMonomial $ zipWith max xs ys
+    moMax _ _ = GrLex EmptyMonomial
+
 
 
 zeroTerm :: (Fractional coef, MultiDeg multideg) => Term coef multideg
@@ -209,13 +217,13 @@ data DivisionLog coef multideg = DLogMove (Poly coef multideg)
                                | DLogDivides (Poly coef multideg) (Poly coef multideg)
                                | DLogCompleted [(Poly coef multideg)] (Poly coef multideg)
                                | DLogStart (Poly coef multideg) [(Poly coef multideg)]
-                               
-          
-data DivisionState coef multideg = DivisionState {dividend :: Poly coef multideg,
-                                                  divisors :: [((Poly coef multideg),(Poly coef multideg))],
-                                                  stock :: Poly coef multideg,
+
+
+data DivisionState coef multideg = DivisionState {dividend  :: Poly coef multideg,
+                                                  divisors  :: [((Poly coef multideg),(Poly coef multideg))],
+                                                  stock     :: Poly coef multideg,
                                                   remainder :: Poly coef multideg,
-                                                  divLog :: [DivisionLog coef multideg]}
+                                                  divLog    :: [DivisionLog coef multideg]}
 
 polyDivides :: (Ord coef, Fractional coef, MultiDeg multideg) => Poly coef multideg -> Poly coef multideg -> Bool
 polyDivides p1 p2 = let l1 = getMultideg p1
@@ -227,7 +235,7 @@ polyDivides p1 p2 = let l1 = getMultideg p1
                             else let PlainMonomial i1 = moGetPlain l1
                                      PlainMonomial i2 = moGetPlain l2
                                  in and $ zipWith (<=) i1 i2
-                                                    
+
 
 tellDivLog :: (Ord coef, Fractional coef, MultiDeg multideg) => (DivisionLog coef multideg) -> State (DivisionState coef multideg) ()
 tellDivLog s = do
@@ -297,9 +305,9 @@ divide p1 p2s = snd $ runState  divide' (DivisionState{dividend=p1,
                                                        stock=p1,
                                                        remainder=Poly (getPolyNumber p1) [],
                                                        divLog=[DLogStart p1 p2s]})
-                                                       
-                                                                  
-                                     
+
+
+
 texIndeterminate :: String -> Int -> String
 texIndeterminate s n = case n of
                          0 -> ""
@@ -311,7 +319,7 @@ texMultideg n d = let p = moGetPlain $ d
                   in if p == EmptyMonomial
                      then "0"
                      else foldr (++) "" $ zipWith (texIndeterminate) (chooseChars n) (getMultidegList p)
-                               
+
 --(map (("^" ++).show) $ getMultidegList p)
 
 texTerm :: (MultiDeg multideg) => Int -> Term Rational multideg -> String
@@ -361,9 +369,9 @@ texDivisionLog p = case p of DLogDivides divisor stock -> execWriter $ do
                                                  sequence $ map (tell.(\x -> "\\item " ++ x ++ ", \n").texBraceDoller.texPoly) gs
                                                  tell "\\end{itemize} .  \n"
 
-                                                     
-                                                            
-                               
+
+
+
 
 texDivisionLogs ::(MultiDeg multideg) => [DivisionLog Rational multideg] -> String
 texDivisionLogs ps = execWriter $ do
@@ -394,6 +402,28 @@ makePoly' n (r, xs) = Term r (moMake (PlainMonomial xs))
 
 makePoly :: (MultiDeg multideg) => Int -> [(Rational, [Int])] -> Poly Rational multideg
 makePoly n xs = normalize $ Poly n $ map (makePoly' n) xs
+
+lcmPoly :: (MultiDeg multideg, Fractional coef, Ord coef) => Poly coef multideg -> Poly coef multideg -> Poly coef multideg
+lcmPoly p q = let
+                (Poly n _) = p
+                mp = getMultideg p
+                mq = getMultideg q
+              in
+                Poly n [Term{coef = 1, multideg = mp `moMax` mq}]
+
+
+calcSPoly :: (MultiDeg multideg, Ord coef, Fractional coef, Show multideg, Show coef)
+  => Poly coef multideg -> Poly coef multideg -> Poly coef multideg
+calcSPoly f g =
+  let
+    l = lcmPoly f g
+    (Poly n _) = f
+    df = l `divide` [Poly n $ [getLT(f)]]
+    dg = l `divide` [Poly n $ [getLT(g)]]
+    qf = snd.(!! 0).divisors $ df
+    qg = snd.(!! 0).divisors $ dg
+  in
+    normalize $ qf * f - qg * g
 
 main' = do
   -- putStrLn $ show $ (Lex (PlainMonomial [1])) `moPlus` (Lex (PlainMonomial [2]))
@@ -455,10 +485,9 @@ main' = do
          --tell $ texAlignPoly $ normalize $ remainder $ divide (head t3) (reverse $ tail t3)
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t3) (reverse $ tail t3)
          tell $ texDivisionLogs $ reverse.divLog $ divide c [d]
-         tell $ "\\newpage{}"         
+         tell $ "\\newpage{}"
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t4) (tail t4)
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t5) (tail t5)
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t6) (tail t6)
          tell $ texDivisionLogs $ reverse.divLog $ divide (head t7) (tail t7)
          texTellDocumentEnd
-    
