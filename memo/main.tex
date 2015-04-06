@@ -3887,6 +3887,10 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
     \item $f=g+r=g'+r'$と与えられたとする。先のGrobner基底を考えると、
     この$g+r=g'+r'$はすでに$G$で$I$の元と正規形とに分けた形になっているので、
     Groebner基底の性質より、$r=r'$となる。
+    \item[(b')] $f=g+r=g'+r'$と与えられたとする。$(g-g')+(r-r') = 0$である。
+    $r-r'$は$r,r'$の性質より、$\LT(I)$のどれでも割り切れないので、
+    この$0$の表示はすでに$I$とその余りとで分けた形になっている。よって、
+    $r-r',g-g'$となる。
   \end{enumerate}
   \item
   \begin{enumerate}[label=(\alph*)]
@@ -3964,9 +3968,189 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
   \item
   $S(-x^2+y,-x^3+z) = xy-z$である。これを$(-x^2+y,-x^3+z)$で割ったあまりは
   $xy-z$そのものであり、0でないのでSペア判定法よりGroebner基底でない。
-  \item
-  
+  \item   {\tt code/ex_2_3_6.hs}で計算。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+      Groebner基底でない。
+      Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $x^{2}+(-1)y$\item $x^{3}+(-1)z$\end{itemize} .
+      \begin{enumerate}
+      \item $S(x^{2}+(-1)y, x^{3}+(-1)z) = (-1)xy+z$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xy+z\div $\begin{itemize}
+      \item $x^{2}+(-1)y$,
+      \item $x^{3}+(-1)z$,
+      \end{itemize} .
 
+      \item Remainder: $(-1)xy$ moved to remainder.
+      \item Remainder: $z$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \end{itemize} .
+      remainder is $(-1)xy+z$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+    \item
+      Groebner基底である。
+      Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $(-1)y+x^{2}$\item $(-1)z+x^{3}$\end{itemize} .
+      \begin{enumerate}
+      \item $S((-1)y+x^{2}, (-1)z+x^{3}) = (-1)x^{2}z+x^{3}y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)x^{2}z+x^{3}y\div $\begin{itemize}
+      \item $(-1)y+x^{2}$,
+      \item $(-1)z+x^{3}$,
+      \end{itemize} .
+
+      \item Division: $(-1)z+x^{3}$ divides stock. stock is $x^{3}y+(-1)x^{5}$ .
+      \item Division: $(-1)y+x^{2}$ divides stock. stock is $0$ .
+      \item Completed: quotients are \begin{itemize}
+      \item $(-1)x^{3}$,
+      \item $x^{2}$,
+      \end{itemize} .
+      remainder is $0$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+    \item
+    Groebner基底でない。
+    Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $xy^{2}+(-1)xz+y$\item $xy+(-1)z^{2}$\item $x+(-1)yz^{4}$\end{itemize} .
+      \begin{enumerate}
+      \item $S(xy^{2}+(-1)xz+y, xy+(-1)z^{2}) = (-1)xz+yz^{2}+y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xz+yz^{2}+y\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Division: $x+(-1)yz^{4}$ divides stock. stock is $(-1)yz^{5}+yz^{2}+y$ .
+      \item Remainder: $(-1)yz^{5}$ moved to remainder.
+      \item Remainder: $yz^{2}$ moved to remainder.
+      \item Remainder: $y$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $(-1)z$,
+      \end{itemize} .
+      remainder is $(-1)yz^{5}+yz^{2}+y$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\item $S(xy^{2}+(-1)xz+y, x+(-1)yz^{4}) = (-1)xz+y^{3}z^{4}+y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xz+y^{3}z^{4}+y\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Division: $x+(-1)yz^{4}$ divides stock. stock is $y^{3}z^{4}+(-1)yz^{5}+y$ .
+      \item Remainder: $y^{3}z^{4}$ moved to remainder.
+      \item Remainder: $(-1)yz^{5}$ moved to remainder.
+      \item Remainder: $y$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $(-1)z$,
+      \end{itemize} .
+      remainder is $y^{3}z^{4}+(-1)yz^{5}+y$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\item $S(xy+(-1)z^{2}, x+(-1)yz^{4}) = y^{2}z^{4}+(-1)z^{2}$.  Calculation is \begin{enumerate}
+      \item Start: calculates $y^{2}z^{4}+(-1)z^{2}\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Remainder: $y^{2}z^{4}$ moved to remainder.
+      \item Remainder: $(-1)z^{2}$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $0$,
+      \end{itemize} .
+      remainder is $y^{2}z^{4}+(-1)z^{2}$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+  \end{enumerate}
+  \item
+  この状況では、$\LT(f)=\LM(f),\, \LT(g)=\LM(g)$ということになる。
+  あと、$\GCD(\LM(f),\LM(g))=\GCD(f,g)=f\wedge g$とかき、
+  $\LCM(\LM(f),\LM(g))=\LCM(f,g) = f\vee g$とかくことにする。
+  一般に$\max(a,b)+\min(a,b)=a+b$が成立することを考えると、
+  $(f\wedge g) + (f \vee g) = \LM(f) + \LM(g)$となる。
+  さらに、互いに素なので、$f\vee g = 1$である。
+  \begin{enumerate}[labe=(\alph*)]
+    \item
+    \begin{align}
+      S(f,g)
+      &=
+      \frac{f\vee g}{\LT(f)}f - \frac{f\vee g}{\LT(g)}g\\
+      &=
+      \frac{f\vee g}{\LM(f)}f - \frac{f\vee g}{\LM(g)}g\\
+      &=
+      \frac{\LM(f)\LM(g)/(f\wedge g)}{\LM(f)}f - \frac{\LM(f)\LM(g)/(f\wedge g)}{\LM(g)}g\\
+      &=
+      \LM(g)f-\LM(f)g\\
+      &=
+      \LM(g)((f-\LT(f))+\LT(f)) - \LM(f)((g-\LT(g))+\LT(g))\\
+      &=
+      \LM(g)((f-\LM(f))+\LM(f)) - \LM(f)((g-\LM(g))+\LM(g))\\
+      &=
+      \LM(g)(f-\LM(f)) - \LM(f)(g-\LM(g))\\
+      &=
+      \LM(g)f - \LM(f)g
+    \end{align}
+    あとは余計なのを足せばできる。
+    \item
+    先の展開より、$S(f,g)$のすべての項が$\LM(g)$か$\LM(f)$かの倍元になる。
+  \end{enumerate}
+  \item
+  \begin{align}
+    x^\gamma S(f,g)
+    &=
+    \frac{(x^\alpha f)\vee (x^\beta g)}{f \vee g}S(f,g)\\
+    &=
+    \frac{(x^\alpha f)\vee (x^\beta g)}{f \vee g} (\frac{f\vee g}{\LT(f)}f - \frac{f\vee g}{\LT(g)}g)\\
+    &=
+    \frac{(x^\alpha f)\vee(x^\beta g)}{\LT(f)}f - \frac{(x^\alpha f)\vee (x^\beta g)}{\LT(g)}g\\
+    &=
+    S(x^\alpha f, x^\beta g).
+  \end{align}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    $\overline f^G = \overline g^G \implies f-g\in I$:
+    問題1のように、$I$で割り算して$f=\tilde f + \overline f^G$と
+    $g=\tilde g + \overline g^G$と書く。
+    $f-g = (\tilde f - \tilde g ) + (\overline f^G - \overline g^G)$である。
+    \begin{itemize}
+      \item
+      上の表示は$f-g$を$I$で割った形になっており、$\overline f^G =\overline g^G$より、
+      $\overline{f-g}^G = 0$である。
+      \item $f-g\in I \implies \overline f^G = \overline g^G$:
+      $f-g\in I$なので、$I$でわった余りは0であり、$\overline f^G - \overline g^G = 0$となる。よって、$\overline f^G = \overline g^G$である。
+    \end{itemize}
+    \item $f=\tilde f + \ovd{f}{G},\, g=\tilde g + \ovd{g}{G}$としておく。
+    すると、$f+g = (\tilde f + \tilde g) + (\ovd{f}{G} + \ovd{g}{G})$となり、
+    これはすでに$G$でわった形なので、$\ovd{f+g}{G} = \ovd{f}{G} + \ovd{g}{G}$である。
+    \item
+    $f,g$を上と同じに書く。
+    \begin{align}
+      fg = (\tilde f \tilde g + \tilde f \ovd{g}{G} + \tilde g \ovd{f}{G}) + \ovd{f}G\ovd{g}G
+    \end{align}
+    となる。
+    $\ovd{f}G\ovd{g}G$を$I$で割って、$\ovd{f}G\ovd{g}G = \tilde h + \ovd{\ovd{f}G\ovd{g}G}G$を得る。代入し、
+    \begin{align}
+      fg = (\tilde f \tilde g + \tilde f \ovd{g}{G} + \tilde g \ovd{f}{G} + \tilde h) + \ovd{\ovd{f}G\ovd{g}G}G
+    \end{align}
+    を得る。これは$I$で割った形なので、
+    \begin{align}
+      \ovd{fg}G = \ovd{\ovd{f}G \ovd{g}G}G.
+    \end{align}
+  \end{enumerate}
 \end{enumerate}
 
 
