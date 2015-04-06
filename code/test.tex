@@ -7,5 +7,123 @@ xy
 \begin{align}
 xz^{3}+(-1)yz^{2}
 \end{align}
+Checking if following bases are Groebner basis.  
+Divisors and bases are 
+\begin{itemize}
+\item $x+(-1)z^{2}$\item $y+(-1)z^{3}$\end{itemize} .  
+\begin{enumerate}
+\item $S(x+(-1)z^{2}, y+(-1)z^{3}) = xz^{3}+(-1)yz^{2}$.  Calculation is \begin{enumerate}
+\item Start: calculates $xz^{3}+(-1)yz^{2}\div $\begin{itemize}
+\item $x+(-1)z^{2}$, 
+\item $y+(-1)z^{3}$, 
+\end{itemize} .  
+
+\item Division: $x+(-1)z^{2}$ divides stock. stock is $(-1)yz^{2}+z^{5}$ .  
+\item Division: $y+(-1)z^{3}$ divides stock. stock is $0$ .  
+\item Completed: quotients are \begin{itemize}
+\item $z^{3}$, 
+\item $(-1)z^{2}$, 
+\end{itemize} .  
+remainder is $0$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\end{enumerate}
+Checking if following bases are Groebner basis.  
+Divisors and bases are 
+\begin{itemize}
+\item $x^{2}+(-1)y$\item $x^{3}+(-1)z$\end{itemize} .  
+\begin{enumerate}
+\item $S(x^{2}+(-1)y, x^{3}+(-1)z) = (-1)xy+z$.  Calculation is \begin{enumerate}
+\item Start: calculates $(-1)xy+z\div $\begin{itemize}
+\item $x^{2}+(-1)y$, 
+\item $x^{3}+(-1)z$, 
+\end{itemize} .  
+
+\item Remainder: $(-1)xy$ moved to remainder.  
+\item Remainder: $z$ moved to remainder.  
+\item Completed: quotients are \begin{itemize}
+\item $0$, 
+\item $0$, 
+\end{itemize} .  
+remainder is $(-1)xy+z$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\end{enumerate}
+Checking if following bases are Groebner basis.  
+Divisors and bases are 
+\begin{itemize}
+\item $(-1)y+x^{2}$\item $(-1)z+x^{3}$\end{itemize} .  
+\begin{enumerate}
+\item $S((-1)y+x^{2}, (-1)z+x^{3}) = (-1)x^{2}z+x^{3}y$.  Calculation is \begin{enumerate}
+\item Start: calculates $(-1)x^{2}z+x^{3}y\div $\begin{itemize}
+\item $(-1)y+x^{2}$, 
+\item $(-1)z+x^{3}$, 
+\end{itemize} .  
+
+\item Division: $(-1)z+x^{3}$ divides stock. stock is $x^{3}y+(-1)x^{5}$ .  
+\item Division: $(-1)y+x^{2}$ divides stock. stock is $0$ .  
+\item Completed: quotients are \begin{itemize}
+\item $(-1)x^{3}$, 
+\item $x^{2}$, 
+\end{itemize} .  
+remainder is $0$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\end{enumerate}
+Checking if following bases are Groebner basis.  
+Divisors and bases are 
+\begin{itemize}
+\item $xy^{2}+(-1)xz+y$\item $xy+(-1)z^{2}$\item $x+(-1)yz^{4}$\end{itemize} .  
+\begin{enumerate}
+\item $S(xy^{2}+(-1)xz+y, xy+(-1)z^{2}) = (-1)xz+yz^{2}+y$.  Calculation is \begin{enumerate}
+\item Start: calculates $(-1)xz+yz^{2}+y\div $\begin{itemize}
+\item $xy^{2}+(-1)xz+y$, 
+\item $xy+(-1)z^{2}$, 
+\item $x+(-1)yz^{4}$, 
+\end{itemize} .  
+
+\item Division: $x+(-1)yz^{4}$ divides stock. stock is $(-1)yz^{5}+yz^{2}+y$ .  
+\item Remainder: $(-1)yz^{5}$ moved to remainder.  
+\item Remainder: $yz^{2}$ moved to remainder.  
+\item Remainder: $y$ moved to remainder.  
+\item Completed: quotients are \begin{itemize}
+\item $0$, 
+\item $0$, 
+\item $(-1)z$, 
+\end{itemize} .  
+remainder is $(-1)yz^{5}+yz^{2}+y$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\item $S(xy^{2}+(-1)xz+y, x+(-1)yz^{4}) = (-1)xz+y^{3}z^{4}+y$.  Calculation is \begin{enumerate}
+\item Start: calculates $(-1)xz+y^{3}z^{4}+y\div $\begin{itemize}
+\item $xy^{2}+(-1)xz+y$, 
+\item $xy+(-1)z^{2}$, 
+\item $x+(-1)yz^{4}$, 
+\end{itemize} .  
+
+\item Division: $x+(-1)yz^{4}$ divides stock. stock is $y^{3}z^{4}+(-1)yz^{5}+y$ .  
+\item Remainder: $y^{3}z^{4}$ moved to remainder.  
+\item Remainder: $(-1)yz^{5}$ moved to remainder.  
+\item Remainder: $y$ moved to remainder.  
+\item Completed: quotients are \begin{itemize}
+\item $0$, 
+\item $0$, 
+\item $(-1)z$, 
+\end{itemize} .  
+remainder is $y^{3}z^{4}+(-1)yz^{5}+y$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\item $S(xy+(-1)z^{2}, x+(-1)yz^{4}) = y^{2}z^{4}+(-1)z^{2}$.  Calculation is \begin{enumerate}
+\item Start: calculates $y^{2}z^{4}+(-1)z^{2}\div $\begin{itemize}
+\item $xy^{2}+(-1)xz+y$, 
+\item $xy+(-1)z^{2}$, 
+\item $x+(-1)yz^{4}$, 
+\end{itemize} .  
+
+\item Remainder: $y^{2}z^{4}$ moved to remainder.  
+\item Remainder: $(-1)z^{2}$ moved to remainder.  
+\item Completed: quotients are \begin{itemize}
+\item $0$, 
+\item $0$, 
+\item $0$, 
+\end{itemize} .  
+remainder is $y^{2}z^{4}+(-1)z^{2}$.  $\blacksquare$
+\end{enumerate}
+.  $\blacksquare{}$\end{enumerate}
 \end{document}
 
