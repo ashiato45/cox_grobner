@@ -3891,6 +3891,7 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
     $r-r'$は$r,r'$の性質より、$\LT(I)$のどれでも割り切れないので、
     この$0$の表示はすでに$I$とその余りとで分けた形になっている。よって、
     $r-r',g-g'$となる。
+    \item[(備考)] \warn{これで、割り算のあまりが$I$の基底、あるいはその順序によらずに$I$だけで決まることがわかった。そういうわけで、採用する順序を変えてもその余りは変化せず、Groebner基底かどうかを調べるには何か1つ基底を選んで調べればよい。他の順序を使ったらあまりが出てしまったということはない。}
   \end{enumerate}
   \item
   \begin{enumerate}[label=(\alph*)]
@@ -4082,7 +4083,7 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
   一般に$\max(a,b)+\min(a,b)=a+b$が成立することを考えると、
   $(f\wedge g) + (f \vee g) = \LM(f) + \LM(g)$となる。
   さらに、互いに素なので、$f\vee g = 1$である。
-  \begin{enumerate}[labe=(\alph*)]
+  \begin{enumerate}[label=(\alph*)]
     \item
     \begin{align}
       S(f,g)
@@ -4153,6 +4154,200 @@ $G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下
   \end{enumerate}
 \end{enumerate}
 
+\subsection{ブッフベルガーのアルゴリズム}
+\label{sub:ブッフベルガーのアルゴリズム}
+これまで、任意の$k[x_1,\dots,x_n]$のイデアルにGroebner基底が存在することは示したが、
+その構成まではわからなかった。そこで、イデアル$I=\gen{g_1,\dots,g_s}$に対して
+のGroebner基底を求める方法を考えてみる。
+先の章より、Sペア判定法から、どの$g_i,g_j$についても、$S(g_i,g_j) \in I$となっていることが必要十分だった。そこで、イデアル$I$の生成元$g_1,\dots,g_s$に
+$S(g_i,g_j)$をすべてつけ足したらどうかという気分になる。
+それもGroebner基底にならなければ、その生成元についてまたSペアを増やす。
+実はこれを繰り返すと有限回でGroebner基底になり、これはアルゴリズムになる。
+
+「$\gen{f_1,\dots,f_s} \subset I$のGroebner基底を構成するアルゴリズムが存在する。」
+\begin{myproof}
+  以下のアルゴリズムで構成できることを示す。
+\begin{algorithm}[H]
+  \caption{Groebner基底のアルゴリズム}
+  \begin{algorithmic}[1]
+    \STATE{$G \defeq \set{f_1,\dots,f_s}$}
+    \REPEAT{}
+    \STATE{$G' \defeq G$}
+    \STATE{$G \Leftarrow G\cup \set{\ovd{S(g_1,g_2)}{G'} ; g_1\neq g_2 \in G'}$}
+    \UNTIL{$G = G'$}
+  \end{algorithmic}
+\end{algorithm}
+これについて、以下を示す必要がある。
+\begin{itemize}
+  \item 正しい答えが得られること:
+  このアルゴリズムが停止したとき、
+  \begin{align}
+    \set{\ovd{S(g_1,g_2)}{G'} ; g_1 \neq g_2 \in G'} \subset G'
+  \end{align}
+  となっている。つまり、任意の$g_1\neq g_2 \in G'$について、
+  $\ovd{S(g_1,g_2)}{G'}\in G'$となっている。
+  $\ovd{S(g_1,g_2)}{G'}$は$G'$でわった余りなので、これが$G'$の元であるということは、
+  $\ovd{S(g_1,g_2)}{G'} = 0$である。よって、停止したとき確かに$G'=G$は
+  $\gen{G'}=\gen{G}$のGroebner基底になっている。
+
+  さらに、$\gen{G} = I$であることを示さなければならない。はじめはあきらかに$I$の基底になっているので、ループの途中で$I$をはみ出さなければよいが、L.4で加えているのは
+  $\ovd{S(g_1,g_2)}{G'}$である。$S(g_1,g_2) \in \gen{G'} = \gen{G} = I$であり、
+  それを$I$の部分集合である$G'$で割っているのだから、$\ovd{S(g_1,g_2)}{G'}\in I$となり、基底として無駄なものを足していることになるので、ずっと$G\subset I$でありつづける。$G$は$I$の生成元である$f_1,\dots,f_s$を含んでいるのだから$G\supset I$であり、
+  常に$G=I$である。
+  \item 停止すること:
+  仮に、このアルゴリズムが停止しなかったとし、順次得られる$G$を$G_\bullet$とする。
+  停止条件より、真の{\textit 部分集合の}昇鎖
+  \begin{align}
+    G = G_0 \subsetneq G_1 \subsetneq G_2 \subsetneq \dots
+  \end{align}
+  が得られる。部分集合の昇鎖であって、イデアルの昇鎖ではないのでこれそのものは問題ではない。さらに、アルゴリズムのL.3より、$G_i \subsetneq G_{i+1}$について、
+  $g_1\neq g_2 \in G_i$で、$\ovd{S(g_1,g_2)}{G_i} \in G_{i+1}\setminus G_i$となるものが存在する。 あまりの定義により、$\ovd{S(g_1,g_2)}{G_i}$のどの項も
+  、$\LT(G_i)$のどの項でも割りきることができない。したがって特に、
+  $\LT(\ovd{S(g_1,g_2)}G_i)$のどの項も、$\LT(G_i)$のどの項でも割り切ることができず、当然$\ovd{S(g_1,g_2)}{g_i} \in G_{i+1}$なので、
+  \begin{align}
+    \gen{\LT(G_i)} \subsetneq \gen{\LT(G_{i+1})}
+  \end{align}
+  となる。つまり、先の$G_\bullet$の昇鎖から、
+  \begin{align}
+    \gen{\LT(G) } = \gen{\LT(G_0) } \subsetneq \gen{\LT(G_1)} \subsetneq
+    \gen{\LT(G_2)} \subsetneq \dots
+  \end{align}
+  という、$k[x_1,\dots,x_n]$の真の昇鎖が得られる。しかしこれは、
+  $k[x_1,\dots,x_n]$がネーター環であり、ACCを満たすことに矛盾する。よって、
+  アルゴリズムは停止する。
+\end{itemize}
+\end{myproof}
+
+上のアルゴリズムでは$\set{\ovd{S(g_1,g_2)}{G'} ; g_1\neq g_2 \in G'}$と書いてしまったが、これは有限の手続で作れることがあきらかなのでこのように書いた。
+
+しかし、これではやたらと無駄な基底が加わってしまっている。
+そこで、余計なものを除去することを考える。
+「$G$がイデアル$I$のGroebner基底であり、$p\in G$が、
+$\LT(p) \in \gen{\LT(G\setminus \set{p})}$をみたすとする。このとき、
+$G\setminus\set{p}$は$I$のGroebner基底である。」
+\begin{myproof}
+ 仮定より、$\gen{\LT(G\setminus \set{p})} = \gen{\LT(G)}$となっている。
+ さらに、$G$は$I$のGroebner基底なので、$\gen{\LT(G)} = \gen{\LT(I)}$である。よって、
+ $\gen{\LT(G\setminus \set{p})} = \gen{\LT(I)}$となる。
+\end{myproof}
+これで、「$G\setminus \set{p}$は$I$の基底になっているのか？」と不安になったが、
+それがGroebner基底のあとの定義でやった。復習する。つまり、$G$が$\gen{\LT(G)} = \gen{\LT(I)}$をみたせば、$\gen{G} = I$となるのである。$\gen{G}\subset I$はあきらかなので、逆をしめす。$f\in I$とする。このとき、$\LT(f) \in \gen{\LT(I)} = \gen{\LT(G)}$となる。単項式イデアルの性質より、$f$の先頭項が$G$のどれかの先頭項で割り切れることになるので、$f$は$G$のどれかで「一回分」割り算がでて、暫定的な余りがでる。この余りは
+、$f\in I$であることと$G\subset I$ であることから、やはり$I$に入る。
+するとこの余りの先頭項が$\LT(I)$に入るので、これにあわせてまた$G$を選んで、と、計算がおわるまで暫定的な余りが$I$に入り続け、割り切れることになる。
+復習おわり。
+
+この命題を使ってGroebner基底を削り続けて、削りきれなくなったところがある意味標準形であると考えられるので、次のように定義する。「$G$がイデアル$I$の極小Groebner基底であるとは、
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$からどれを外してもGroebner基底でなくなる: $p \in G \implies \LT(p) \notin \gen{\LT(G\setminus \set{p})}$である。
+  \item $G$のどれもがモニックである
+\end{enumerate}
+である」と定める。Groebner基底をモニックにするのは$\LC$で割るだけである。
+実際に計算するには、1つ基底をとって、その$\LT$がほかの$\LT$で書けるか、単項式イデアルであることに注目するとほかの$\LT$で割り切れるかを見て、割りきれたらそれを取り除くという操作を基底の個数分繰替えせばよい。極小という名の通り、極小Groebner基底は無数に存在する。たとえば$\gen{x+z,y+z} = \gen{x+2z,y+z} = \gen{x+3z,y+z}=\dots$はどれも極小Groebner基底である。\warn{←極小Groebner基底には間違いないが、どれもイデアルが違っている！}
+
+しかし、極小Groebner基底のうち、さらに強い簡約Groebner基底を「
+$G$がイデアル$I$の簡約Groebner基底であるとは、
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$からどれを外してもGroebner基底でなくなる: $p \in G \implies $ $p$のどの項も$\gen{\LT(G\setminus \set{p})}$に入らない。(先頭項だけではなく、すべての項になった！)
+  \item $G$のどれもがモニックである。
+\end{enumerate}
+
+\begin{myproof}
+  $G=\set{f_1,\dots,f_s}$を$I$の極小Groebner基底とする。ここから簡約Groebner基底を作ることを考える。
+  \begin{algorithm}[H]
+    \caption{簡約Groebner基底を作る}
+    \begin{algorithmic}[1]
+      \STATE{$i=0$}
+      \STATE{$G=[f_1,\dots,f_s]$}
+      \FOR{$i=1,\dots,s$}
+      \STATE{$G[i] \Leftarrow \ovd{f_i}{G\setminus \set{f_i}}$}
+      \ENDFOR{}
+    \end{algorithmic}
+  \end{algorithm}
+  L.3に入ったとき$i$であるとし、
+このときの$G$を$G_b$とする。L.5に次に到達したとき、$G$を$G_a$とする。
+$G_b$は1～$i-1$番目は$G$について簡約されているとしてよい。停止は自明。
+
+まず、どの時点でも$\LT(G)$が一定であることを示す。$\LT(G_b) = \LT(G_a)$を示す。
+$G_b$と$G_a$は$i$番目だけ異なるので、$\LT(G_b[i]) = \LT(G_a[i])$を示せばよい。
+L.4より、$\LT(G_b[i]) = \LT(f_i)$であり、$\LT(G_a[i]) = \LT(\ovd{f_i}{G_b\setminus\set{f_i}})$なので、$\LT(f_i) = \LT(\ovd{f_i}{G_b\setminus \set{f_i}})$を示せばよい。$G_b$は(帰納法の仮定より)極小Groebner基底になっているので、
+$\LT(f_i) \notin \gen{\LT(G_b\setminus\set{f_i})}$となっている。
+したがって、$\LT(f_i)$は$\LT(G_b\setminus\set{f_i})$のいずれでも割り切れない。
+ここで割り算のアルゴリズムを思い出すと、初手で割り算が発生せず、割られる式の先頭項が余りに移動するので、$\ovd{f_i}{G_b\setminus\set{f_i}}$の$\LT$は$\LT(f_i)$になる\footnote{余りが$f_i$になるわけではない。初手では割り算がおこらないかもしれないが、2手め以降ならわからない。}。よって、$\LT(f_i) = \LT(\ovd{f_i}{G_b\setminus\set{f_i}})$となる。よって、$\LT(G_b) = \LT(G_a)$である。
+
+次に、どの時点でも$G$がGroebner基底であることを示す。L.2の時点では仮定よりGroebnerなので、ループ中を考える。$G_b$は帰納法の仮定よりGrobnerである。
+\begin{align}
+  \gen{\LT(G_a)} = \gen{\LT(G_b)} \desceq{$G_b$はGroebner} \gen{\LT(\gen{G_b})}
+  =
+  \gen{\LT(\gen{G_a})}
+\end{align}
+なので、$G_a$もGroebner基底である。
+
+次に、どの時点でも$G$が極小Groebner基底であることを示す。
+極小Groebner基底であることの定義は、「どの基底$f_i$についても、$\LT(f_i) \notin \gen{G\setminus\set{\LT(f_i)}}$となる」ことである。しかし、先に
+「どの時点でも$\LT(G)$が一定である」ことを示したので、即座に従う。
+
+次に、L.2,L.5時点で$G[1],\dots,G[i]$は$G$について簡約されていることを示す。
+「$f$が$G$について簡約されている」とは、「$f$のどの項も$\LT(G-\set{f})$で割り切れない」言い換えるなら、「$\Forall{x^\alpha \colon fの項} x^\alpha \notin \gen{\LT(G-\set{f})}$」となることであった。L.2の時点では$i=0$なので自明である。
+L.5を考える。帰納法の仮定より、$G_b[1],\dots,G_b[i-1]$は$G$について簡約されている。
+先に、「どの時点でも$\LT(G)$は一定」であることを示したので、
+$G_a[1],\dots,G_a[i-1]$も$G$について簡約されている。あとは、$G_a[i] = \ovd{f_i}{G-\set{f_i}}$が$G$について簡約されていることを示せばよい。
+しかし、割り算の余りの定義より、$\ovd{f_i}{G-\set{f_i}}$のすべての項は
+$G-\set{f_i}$で一度も割ることができない。
+
+L.5の時点で「$G[1],\dots,G[i]$は$G$について簡約されている」ことを示したので、
+アルゴリズムが停止したとき、すなわち$i=n$となったときは$G[1],\dots,G[n]$は$G$について簡約されている。よって、$G$は簡約Groebner基底である。前半は示せた。
+
+後半の、簡約Groebner基底の一意性を示す。$G,G'$がイデアル$I$の簡約Groebner基底であるとする。
+
+まず、$\LT(G) = \LT(G')$であることを示す。
+$G=\set{g_1,\dots,g_s}$とし、$G'=\set{g_1',\dots,g_t'}$とする。
+$G,G'$がGroebner基底なので、$\gen{\LT(g_1),\dots,\LT(g_s)} = \gen{\LT(g_1'),\dots,\LT(g_t')}$である。$i=1,\dots,s$とする。
+$\LT(g_i) \in \gen{\LT(g_1',\dots,\LT(g_t'))}$であり、単項式イデアルの性質より、
+$F(i) \in \set{1,\dots,t}$が存在して、$\LT(g_{F(i)}')|\LT(g_i)$となる。さらに
+同様の考察を$\LT(g'_{F(i)})$にして、$G(i)\in \set{1,\dots,s}$が存在して、
+$\LT(g_{G(i)})|\LT(g_{F(i)}')$となることがわかる。まとめると、
+$\LT(g_{G(i)})|\LT(g_{F(i)}')|\LT(g_{i})$となる。仮に$G(i)\neq i$であるとすると、
+$\LT(g_{G(i)})|\LT(g_i)$となり、これは$G$が極小であることに反する。よって、
+$G(i)=i$である。すると、$\LT(g_i)|\LT(g'_{F(i)})|\LT(g_i)$となるので、
+$\LT(g'_{F(i)})  = \LT(g_i)$である。$i\neq j$なら$G$の極小性から
+$\LT(g_i) \neq \LT( g_j)$であり、よって$\LT(g'_{F(i)})\neq \LT(g'_{F(j)})$
+であり、極小性より再び$F(i) \neq F(j)$となる。よって、$F$は単射であり、
+$\# G \le \# G'$となる。同様の考察をすると$\# G' \le \# G$となり、
+$s = \# G = \# G' = t$となる。$F$が同じ大きさの有限集合間の単射なので、
+これは全射でもあり、$F$が$G$と$G'$との間に全単射をつけ、$\LT(g_i) = \LT(g'_{F(i)})$とする。これで、$\LT(G) = \LT(G')$が示された。
+
+次に、$G=G'$を示す。対称性から、$g\in G$として$g\in G'$が示せればよい。
+さきに示したことより、$\LT(G) = \LT(G')$なので、$\LT(g) = \LT(g')$となる$g' \in G'$が存在する。
+もしも$g=g'$であれば$g  = g' \in G'$となるので証明がおわる。$g=g'$を示す。
+$G,G'$は$I$のGroebner基底なので、$I=\gen{G}=\gen{G'}$であり、
+$\ub{g}_{\in G}-\ub{g'}_{\in G'} \in I$なので、$\ovd{g-g'}{G} = \ovd{g-g'}{I} = 0$となる\footnote{イデアルでの割り算は先の演習でやった。}。
+
+一方、実は$\ovd{g-g'}{G}=g-g'$となる。まず、$G$は簡約Groebner基底なので、
+$g$の各項は$G-\set{g}$のいずれでも一度も割れず、
+$\ovd{g-\LT(g)}{G-\set{g}} = g-\LT(g)$である。さらに、$g-\LT(g)$の各項が
+$g$で一度も割れないのも明らかなので、$\ovd{g-\LT(g)}{\set{g}} = g-\LT(g)$でもあり、
+$\ovd{g-\LT(g)}{I} \ovd{g-\LT(g)}{G} = g-\LT(g)$となる。
+同様の考察を$g'$にもして、$\ovd{g'-\LT(g')}{I} = g'-\LT(g')$となる。先の演習問題から、
+あまりはたしひきできるので、
+\begin{align}
+  \ovd{g-g'}{I}
+  &\desceq{$\LT(g)=\LT(g')$}
+  \ovd{(g-\LT(g))-(g'-\LT(g'))}{I}\\
+  &=
+  \ovd{g-\LT(g)}{I} - \ovd{g'-\LT(g')}{I}\\
+  &=
+  (g-\LT(g)) - (g'-\LT(g'))\\
+  &\desceq{$\LT(g)=\LT(g')$}
+  g-g'
+\end{align}
+となる。
+
+以上で、$\ovd{g-g'}{I}=0$と$\ovd{g-g'}{I}=g-g'$とを示したので、$g-g'=0$となり、$g=g'$である。
+よって、$g\in G'$であり、$G\subset G'$となる。同様に$G'\subset G$も成立し、$G=G'$である。
+\end{myproof}
+
+これで、多項式のイデアルから、それを特徴づける一意なデータが引き出せることがわかった。
+つまり、ある2つの有限生成なイデアル$I,J$があれば、その簡約Groebner基底を計算し、あっていれば$I=J$だし、あっていなければ$I\neq J$である。
 
 
 \end{document}

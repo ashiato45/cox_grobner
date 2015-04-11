@@ -310,6 +310,7 @@ INPUT ./images/1428152186061.png
 INPUT images/1428152186061.png
 INPUT ./images/1428152296875.png
 INPUT images/1428152296875.png
+INPUT c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 OUTPUT main.thm
 INPUT ./main.aux
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb

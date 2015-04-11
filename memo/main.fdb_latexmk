@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1428329253 "main.tex" "main.pdf" "main" 1428329263
+["pdflatex"] 1428741177 "main.tex" "main.pdf" "main" 1428741188
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-cid-auto-adobe-japan1.luc" 1426154369 1649592 0317259f471e6b1354f80a1f10f5cc52 ""
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-jisx0208.luc" 1426154370 201428 86fe11785abbeb6a87b6c8dee36b92ec ""
   "ashiato45.sty" 1428328362 4221 5d6600424665b9a74c102685ac2e6ebb ""
@@ -40,6 +40,7 @@
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1410965084 1116 933a60c408fc0a863a92debe84b2d294 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmsy7.tfm" 1410965084 1120 2b3f9b25605010c69bc328bea6ac000f ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1410965084 1120 8b7d695260f3cff42e636090a8002094 ""
+  "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1410965085 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1410965085 768 1321e9409b4137d6fb428ac9dc956269 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm" 1410965085 768 d7b9a2629a0c353102ad947dc9221d49 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm" 1410965085 764 c98a2af25c99b73a368cf7336e255190 ""
@@ -229,12 +230,12 @@
   "images/div3_1b.png" 1425800652 231701 4cb7a99823e2585e02db2e15eddfc021 ""
   "images/div3_2_9.png" 1425822629 23781 edc0ebb2001c08b358344d7ead2ab82a ""
   "images/ex_2_4_3.png" 1425908086 61915 01531d35fe340b943b3a88b9c61a33d2 ""
-  "main.aux" 1428329262 5622 bf57a0d868e0e144ca403510068a3c73 ""
-  "main.tex" 1428329245 218769 688981588bbbcdb0474d90f068073187 ""
+  "main.aux" 1428741187 6213 5d8d78252c8369b00b2d2ad6c9699f82 ""
+  "main.tex" 1428741176 234267 b4862bcd3744590652642dbb268fc1d0 ""
   "mytheorems.sty" 1426384006 3389 863e5e3c13a98ca44a86c9f17244d375 ""
   (generated)
-  "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"
-  "main.pdf"
   "main.thm"
+  "main.pdf"
   "main.aux"
+  "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"
   "main.log"
