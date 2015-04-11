@@ -150,7 +150,7 @@ texSPairCheckLog xs = execWriter $ do
 texItemize :: [String] -> String
 texItemize xs = execWriter $ do
   tell "\\begin{itemize}\n"
-  sequence $ map tell $ map (\x -> "\\item " ++ x) xs
+  sequence $ map tell $ map (\x -> "\\item " ++ x ++ "\n") xs
   tell "\\end{itemize}  . \n"
   return ()
 

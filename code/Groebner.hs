@@ -79,9 +79,9 @@ data CGroebnerLog coef multideg =
   }
 
 calcSPolyLog :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
-  (Poly coef multideg) -> (Poly coef multideg) -> Writer [CGroebnerLog coef multideg] (Poly coef multideg)
-calcSPolyLog x y = do
-            let s = calcSPoly x y
+  (Poly coef multideg) -> (Poly coef multideg) -> [Poly coef multideg] -> Writer [CGroebnerLog coef multideg] (Poly coef multideg)
+calcSPolyLog x y ds = do
+            let s = calcRemainder (calcSPoly x y)  ds
             tell [CGLogCalcSPoly x y s]
             return s
 
@@ -89,7 +89,7 @@ calcGroebner' :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
   [Poly coef multideg] -> [Poly coef multideg] ->
   Writer [CGroebnerLog coef multideg] [Poly coef multideg]
 calcGroebner' xs ys = do
-  let f = calcSPolyLog
+  let f x y = calcSPolyLog x y xs
   oldNew <- sequence $ [f x y  | x <- xs, y <- ys]
   newNew <- sequence $ [f a b | (a, b) <- makePairs ys]
   let nonzeroOldNew = nub oldNew

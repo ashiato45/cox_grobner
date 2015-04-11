@@ -205,6 +205,13 @@ divide p1 p2s = snd $ runState  divide' (DivisionState{dividend=p1,
                                                        divLog=[DLogStart p1 p2s]})
 
 
+calcRemainder :: (Ord coef, Fractional coef, Show coef, Show multideg, MultiDeg multideg) =>
+  (Poly coef multideg) -> [Poly coef multideg] -> (Poly coef multideg)
+calcRemainder p1 p2s =
+  let
+    (DivisionState{dividend=_, divisors=_, stock=_, remainder=r_, divLog=_}) = divide p1 p2s
+  in
+    r_
 
 
 makeLexPoly' :: Int -> (Rational, [Int]) -> Term Rational Lex
