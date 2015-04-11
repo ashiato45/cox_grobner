@@ -9,6 +9,8 @@ import           Data.Ratio
 import           Distribution.Simple.Utils
 import MultiDeg
 import MultiPoly
+import Debug.Trace
+
 -- import qualified Data.Map as DMap
 
 calcSPoly :: (MultiDeg multideg, Ord coef, Fractional coef, Show multideg, Show coef)
@@ -59,3 +61,52 @@ sPairCheck xs = let
     do
       rs <- sequence s2
       return $ or rs
+
+data CGroebnerLog coef multideg =
+  CGLogStart{
+    cglInit :: [Poly coef multideg]
+  }
+  |CGLogCalcSPoly{
+    cglP1 :: Poly coef multideg,
+    cglP2 :: Poly coef multideg,
+    cglRemainder :: Poly coef multideg
+  }
+  |CGLogAppend{
+    cglAppend :: [Poly coef multideg]
+  }
+  |CGLogCompleted{
+    cglCompleted :: [Poly coef multideg]
+  }
+
+calcSPolyLog :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  (Poly coef multideg) -> (Poly coef multideg) -> Writer [CGroebnerLog coef multideg] (Poly coef multideg)
+calcSPolyLog x y = do
+            let s = calcSPoly x y
+            tell [CGLogCalcSPoly x y s]
+            return s
+
+calcGroebner' :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> [Poly coef multideg] ->
+  Writer [CGroebnerLog coef multideg] [Poly coef multideg]
+calcGroebner' xs ys = do
+  let f = calcSPolyLog
+  oldNew <- sequence $ [f x y  | x <- xs, y <- ys]
+  newNew <- sequence $ [f a b | (a, b) <- makePairs ys]
+  let nonzeroOldNew = nub oldNew
+  let nonzeroNewNew = nub newNew
+  let a = filter (\x -> moEmpty /= getMultideg x) $ nub $ nonzeroOldNew ++ nonzeroNewNew
+  let b = trace (show $ a) ()
+  let next = xs ++ ys
+  if a == []
+  then do
+          tell [CGLogCompleted {cglCompleted = next}]
+          return next
+  else do
+          tell [CGLogAppend a]
+          calcGroebner' next a
+
+calcGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> Writer [CGroebnerLog coef multideg] [Poly coef multideg]
+calcGroebner xs = do
+  tell $ [CGLogStart xs]
+  calcGroebner' [] xs

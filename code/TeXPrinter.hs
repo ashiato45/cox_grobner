@@ -147,6 +147,46 @@ texSPairCheckLog xs = execWriter $ do
   tell "\\end{enumerate}\n"
   return ()
 
+texItemize :: [String] -> String
+texItemize xs = execWriter $ do
+  tell "\\begin{itemize}\n"
+  sequence $ map tell $ map (\x -> "\\item " ++ x) xs
+  tell "\\end{itemize}  . \n"
+  return ()
+
+texCalcGroebnerLog' :: (MultiDeg multideg) =>
+  CGroebnerLog Rational multideg -> String
+texCalcGroebnerLog' (CGLogStart {cglInit = i_}) =
+  execWriter $ do
+    tell "Calculates groebner basis of \n"
+    tell $ texItemize $ map (texBraceDoller.texPoly) i_
+    tell ".  \n"
+    return ()
+texCalcGroebnerLog' (CGLogCalcSPoly {cglP1 = p1_, cglP2 = p2_, cglRemainder = r_}) =
+  execWriter $ do
+    tell "$S("
+    tell $ texPoly p1_
+    tell ", "
+    tell $ texPoly p2_
+    tell $ ") = "
+    tell $ texPoly r_
+    tell $ "$.  \n"
+    return ()
+texCalcGroebnerLog' (CGLogAppend {cglAppend = as_}) =
+  execWriter $ do
+    tell "Not enough.  Appends "
+    tell $ texItemize $ map (texBraceDoller.texPoly) as_
+    tell ".  \n"
+texCalcGroebnerLog' (CGLogCompleted {cglCompleted = cs_}) =
+  execWriter $ do
+    tell "Enough for groebner basis.  Result is "
+    tell $ texItemize $ map (texBraceDoller.texPoly) cs_
+    tell ".  \n"
+
+texCalcGroebnerLog :: (MultiDeg multideg) =>
+  [CGroebnerLog Rational multideg] -> String
+texCalcGroebnerLog = unlines.(map texCalcGroebnerLog')
+
 main' :: IO ()
 main' = do
   -- putStrLn $ show $ (Lex (PlainMonomial [1])) `moPlus` (Lex (PlainMonomial [2]))
