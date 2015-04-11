@@ -89,21 +89,20 @@ calcGroebner' :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
   [Poly coef multideg] -> [Poly coef multideg] ->
   Writer [CGroebnerLog coef multideg] [Poly coef multideg]
 calcGroebner' xs ys = do
-  let f x y = calcSPolyLog x y xs
+  let f x y = calcSPolyLog x y (xs++ys)
   oldNew <- sequence $ [f x y  | x <- xs, y <- ys]
   newNew <- sequence $ [f a b | (a, b) <- makePairs ys]
   let nonzeroOldNew = nub oldNew
   let nonzeroNewNew = nub newNew
   let a = filter (\x -> moEmpty /= getMultideg x) $ nub $ nonzeroOldNew ++ nonzeroNewNew
-  let b = trace (show $ a) ()
   let next = xs ++ ys
   if a == []
   then do
           tell [CGLogCompleted {cglCompleted = next}]
           return next
   else do
-          tell [CGLogAppend a]
-          calcGroebner' next a
+          tell [CGLogAppend [head a]]
+          calcGroebner' next [head a]
 
 calcGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
   [Poly coef multideg] -> Writer [CGroebnerLog coef multideg] [Poly coef multideg]

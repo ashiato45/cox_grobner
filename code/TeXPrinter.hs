@@ -160,7 +160,7 @@ texCalcGroebnerLog' (CGLogStart {cglInit = i_}) =
   execWriter $ do
     tell "Calculates groebner basis of \n"
     tell $ texItemize $ map (texBraceDoller.texPoly) i_
-    tell ".  \n"
+    tell "\n"
     return ()
 texCalcGroebnerLog' (CGLogCalcSPoly {cglP1 = p1_, cglP2 = p2_, cglRemainder = r_}) =
   execWriter $ do
@@ -176,12 +176,12 @@ texCalcGroebnerLog' (CGLogAppend {cglAppend = as_}) =
   execWriter $ do
     tell "Not enough.  Appends "
     tell $ texItemize $ map (texBraceDoller.texPoly) as_
-    tell ".  \n"
+    tell "\n"
 texCalcGroebnerLog' (CGLogCompleted {cglCompleted = cs_}) =
   execWriter $ do
     tell "Enough for groebner basis.  Result is "
     tell $ texItemize $ map (texBraceDoller.texPoly) cs_
-    tell ".  \n"
+    tell "\n"
 
 texCalcGroebnerLog :: (MultiDeg multideg) =>
   [CGroebnerLog Rational multideg] -> String
