@@ -144,3 +144,30 @@ minimalizeGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) 
 minimalizeGroebner xs = do
   tell [MGLogStart xs]
   minimalizeGroebner' xs xs
+
+data RGroebnerLog coef multideg =
+  RGLogStart{
+    rglInit :: [Poly coef multideg]
+  }
+  |RGLogReduce{
+    rglBefore :: Poly coef multideg,
+    rglAfter :: Poly coef multideg}
+  |RGLogCompleted{
+    rglCompleted :: [Poly coef multideg]
+  }
+
+reduceGroebner' :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> [Poly coef multideg] -> Writer [RGroebnerLog coef multideg] [Poly coef multideg]
+reduceGroebner' [] ys = do
+  tell [RGLogCompleted ys]
+  return ys
+reduceGroebner' (x:xs) ys = do
+  let a = x `calcRemainder` (delete x ys)
+  tell [RGLogReduce x a]
+  reduceGroebner' xs (a:(delete x ys))
+
+reduceGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> Writer [RGroebnerLog coef multideg] [Poly coef multideg]
+reduceGroebner xs = do
+  tell [RGLogStart xs]
+  reduceGroebner' xs xs

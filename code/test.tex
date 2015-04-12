@@ -8,40 +8,40 @@ Calculates groebner basis of
 \end{itemize}  . 
 
 
-$S(x^{3}+(-2)xy, x^{2}y+(-2)y^{2}+x) = (-1)x^{2}$.  
+$\overline{S(x^{3}+(-2)xy, x^{2}y+(-2)y^{2}+x)} = (-1)x^{2}$.  
 
 Not enough.  Appends \begin{itemize}
 \item $(-1)x^{2}$
 \end{itemize}  . 
 
 
-$S(x^{3}+(-2)xy, (-1)x^{2}) = (-2)xy$.  
+$\overline{S(x^{3}+(-2)xy, (-1)x^{2})} = (-2)xy$.  
 
-$S(x^{2}y+(-2)y^{2}+x, (-1)x^{2}) = (-2)y^{2}+x$.  
+$\overline{S(x^{2}y+(-2)y^{2}+x, (-1)x^{2})} = (-2)y^{2}+x$.  
 
 Not enough.  Appends \begin{itemize}
 \item $(-2)xy$
 \end{itemize}  . 
 
 
-$S(x^{3}+(-2)xy, (-2)xy) = 0$.  
+$\overline{S(x^{3}+(-2)xy, (-2)xy)} = 0$.  
 
-$S(x^{2}y+(-2)y^{2}+x, (-2)xy) = (-2)y^{2}+x$.  
+$\overline{S(x^{2}y+(-2)y^{2}+x, (-2)xy)} = (-2)y^{2}+x$.  
 
-$S((-1)x^{2}, (-2)xy) = 0$.  
+$\overline{S((-1)x^{2}, (-2)xy)} = 0$.  
 
 Not enough.  Appends \begin{itemize}
 \item $(-2)y^{2}+x$
 \end{itemize}  . 
 
 
-$S(x^{3}+(-2)xy, (-2)y^{2}+x) = 0$.  
+$\overline{S(x^{3}+(-2)xy, (-2)y^{2}+x)} = 0$.  
 
-$S(x^{2}y+(-2)y^{2}+x, (-2)y^{2}+x) = 0$.  
+$\overline{S(x^{2}y+(-2)y^{2}+x, (-2)y^{2}+x)} = 0$.  
 
-$S((-1)x^{2}, (-2)y^{2}+x) = 0$.  
+$\overline{S((-1)x^{2}, (-2)y^{2}+x)} = 0$.  
 
-$S((-2)xy, (-2)y^{2}+x) = 0$.  
+$\overline{S((-2)xy, (-2)y^{2}+x)} = 0$.  
 
 Enough for groebner basis.  Result is \begin{itemize}
 \item $x^{3}+(-2)xy$
@@ -70,6 +70,50 @@ Minimalized groebner basis is
 \item $x^{2}$
 \item $xy$
 \item $y^{2}+(\frac{-1}{2})x$
+\end{itemize}  . 
+$\blacksquare{}$
+
+Reduce groebner basis 
+\begin{itemize}
+\item $x^{2}$
+\item $xy$
+\item $y^{2}+(\frac{-1}{2})x$
+\end{itemize}  . 
+
+
+Reducing: $\overline{x^{2}} = x^{2}$.  
+
+Reducing: $\overline{xy} = xy$.  
+
+Reducing: $\overline{y^{2}+(\frac{-1}{2})x} = y^{2}+(\frac{-1}{2})x$.  
+
+Reduced groebner basis is 
+\begin{itemize}
+\item $y^{2}+(\frac{-1}{2})x$
+\item $xy$
+\item $x^{2}$
+\end{itemize}  . 
+$\blacksquare{}$
+
+Reduce groebner basis 
+\begin{itemize}
+\item $x^{2}+xy$
+\item $xy$
+\item $y^{2}+(\frac{-1}{2})x$
+\end{itemize}  . 
+
+
+Reducing: $\overline{x^{2}+xy} = x^{2}$.  
+
+Reducing: $\overline{xy} = xy$.  
+
+Reducing: $\overline{y^{2}+(\frac{-1}{2})x} = y^{2}+(\frac{-1}{2})x$.  
+
+Reduced groebner basis is 
+\begin{itemize}
+\item $y^{2}+(\frac{-1}{2})x$
+\item $xy$
+\item $x^{2}$
 \end{itemize}  . 
 $\blacksquare{}$
 

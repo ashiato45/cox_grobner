@@ -9,9 +9,16 @@ main :: IO ()
 main = do
   let t1 = makePoly 2 [(1%1, [3,0]), (-2%1, [1,1])] :: Poly Rational GrLex
   let t2 = makePoly 2 [(1%1, [2,1]), (-2%1, [0,2,0]), (1%1, [1,0])] :: Poly Rational GrLex
+  let tt = [[(1%1, [2,0]), (1%1, [1,1])],
+            [(1%1, [1,1])],
+            [(1%1, [0,2]), (-1%2, [1,0])]]
+  let tt3 = map (makePoly 2) tt :: [Poly Rational GrLex]
   putStrLn $ execWriter $ do
          texTellDocumentStart
          let c = runWriter $ calcGroebner [t1, t2]
          tell $ texCalcGroebnerLog $ snd $ c
-         tell $ texMinimalizeGroebnerLog $ execWriter $ minimalizeGroebner $ fst c
+         let m = runWriter $ minimalizeGroebner $ fst c
+         tell $ texMinimalizeGroebnerLog $ snd m
+         tell $ texReduceGroebnerLog $ execWriter $ reduceGroebner $ fst m
+         tell $ texReduceGroebnerLog $ execWriter $ reduceGroebner tt3
          texTellDocumentEnd
