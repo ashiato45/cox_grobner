@@ -181,11 +181,37 @@ texCalcGroebnerLog' (CGLogCompleted {cglCompleted = cs_}) =
   execWriter $ do
     tell "Enough for groebner basis.  Result is "
     tell $ texItemize $ map (texBraceDoller.texPoly) cs_
-    tell "\n"
+    tell $ texBraceDoller "\\blacksquare{}"
 
 texCalcGroebnerLog :: (MultiDeg multideg) =>
   [CGroebnerLog Rational multideg] -> String
 texCalcGroebnerLog = unlines.(map texCalcGroebnerLog')
+
+texMinimalizeGroebnerLog' :: (MultiDeg multideg) =>
+  MGroebnerLog Rational multideg -> String
+texMinimalizeGroebnerLog' (MGLogStart is_) =
+  execWriter $ do
+    tell "Minimalizes groebner basis \n"
+    tell $ texItemize $ map (texBraceDoller.texPoly) is_
+    tell "\n"
+    return ()
+texMinimalizeGroebnerLog' (MGLogRemove removed_ removing_) =
+  execWriter $ do
+    tell $ texBraceDoller.texPoly $ removed_
+    tell " is removed by "
+    tell $ texBraceDoller.texPoly $ removing_
+    tell ".  \n"
+texMinimalizeGroebnerLog' (MGLogCompleted cs_) =
+  execWriter $ do
+    tell $ "Minimalized groebner basis is \n"
+    tell $ texItemize $ map (texBraceDoller.texPoly) cs_
+    tell "$\\blacksquare{}$"
+    tell "\n"
+    return ()
+
+texMinimalizeGroebnerLog :: (MultiDeg multideg) =>
+  [MGroebnerLog Rational multideg] -> String
+texMinimalizeGroebnerLog = unlines.(map texMinimalizeGroebnerLog')
 
 main' :: IO ()
 main' = do

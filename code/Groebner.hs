@@ -109,3 +109,38 @@ calcGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
 calcGroebner xs = do
   tell $ [CGLogStart xs]
   calcGroebner' [] xs
+
+data MGroebnerLog coef multideg =
+  MGLogStart{
+    mglInit :: [Poly coef multideg]
+  }
+  |MGLogRemove{
+    mglRemoved :: Poly coef multideg,
+    mglRemoving :: Poly coef multideg}
+  |MGLogCompleted{
+    mglCompleted :: [Poly coef multideg]
+  }
+
+minimalizeGroebner' :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> [Poly coef multideg] -> Writer [MGroebnerLog coef multideg] [Poly coef multideg]
+minimalizeGroebner' [] ys = do
+  let mys = map monicalize ys
+  tell [MGLogCompleted {mglCompleted = mys}]
+  return mys
+minimalizeGroebner' (x:xs) ys = do
+  let pr p2 = (getMultideg x) `moGEAll` (getMultideg p2)
+  let fn = find pr (delete x ys)
+  case fn of
+    Nothing -> minimalizeGroebner' xs ys
+    Just p -> do
+      tell [MGLogRemove{
+        mglRemoved = x,
+        mglRemoving = p
+      }]
+      minimalizeGroebner' xs (delete x ys)
+
+minimalizeGroebner :: (MultiDeg multideg, Fractional coef, Show coef, Ord coef) =>
+  [Poly coef multideg] -> Writer [MGroebnerLog coef multideg] [Poly coef multideg]
+minimalizeGroebner xs = do
+  tell [MGLogStart xs]
+  minimalizeGroebner' xs xs

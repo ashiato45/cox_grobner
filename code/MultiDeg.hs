@@ -69,6 +69,18 @@ class (Ord a, Show a) => MultiDeg a where
         (PlainMonomial _, EmptyMonomial) -> pm1
         (EmptyMonomial, PlainMonomial _) -> pm2
         _ -> EmptyMonomial
+  moGEAll :: a -> a -> Bool
+  moGEAll a1 a2 =
+    let
+      pm1 = moGetPlain a1
+      pm2 = moGetPlain a2
+    in
+      case (pm1, pm2) of
+        (EmptyMonomial, EmptyMonomial) -> True
+        (EmptyMonomial, (PlainMonomial _)) -> False
+        ((PlainMonomial _), EmptyMonomial) -> True
+        ((PlainMonomial l1), (PlainMonomial l2)) ->
+          and $ zipWith (>=) l1 l2
 
 trivialComparator :: (MultiDeg a) =>
   ([Int] -> [Int] -> Ordering) -> a -> a -> Ordering

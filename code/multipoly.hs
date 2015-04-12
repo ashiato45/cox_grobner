@@ -233,3 +233,10 @@ lcmPoly p q = let
                 mq = getMultideg q
               in
                 Poly n [Term{coef = 1, multideg = mp `moMax` mq}]
+
+monicalize :: (MultiDeg multideg, Fractional coef, Ord coef) => (Poly coef multideg) -> Poly coef multideg
+monicalize p@(Poly n_ terms_) =
+  let
+    f (Term c_ m_) = Term (c_ / getLC p) (m_)
+  in
+    Poly n_ (map f terms_)

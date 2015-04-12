@@ -11,5 +11,7 @@ main = do
   let t2 = makePoly 2 [(1%1, [2,1]), (-2%1, [0,2,0]), (1%1, [1,0])] :: Poly Rational GrLex
   putStrLn $ execWriter $ do
          texTellDocumentStart
-         tell $ texCalcGroebnerLog $ execWriter $ calcGroebner [t1, t2]
+         let c = runWriter $ calcGroebner [t1, t2]
+         tell $ texCalcGroebnerLog $ snd $ c
+         tell $ texMinimalizeGroebnerLog $ execWriter $ minimalizeGroebner $ fst c
          texTellDocumentEnd
