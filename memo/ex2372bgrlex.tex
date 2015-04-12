@@ -1,0 +1,58 @@
+Calculates groebner basis of
+\begin{itemize}
+\item $x^{2}+y$
+\item $x^{4}+2x^{2}y+y^{2}+3y$
+\end{itemize}  .
+
+
+$\overline{S(x^{2}+y, x^{4}+2x^{2}y+y^{2}+3y)} = (-3)y$.
+
+Not enough.  Appends \begin{itemize}
+\item $(-3)y$
+\end{itemize}  .
+
+
+$\overline{S(x^{2}+y, (-3)y)} = 0$.
+
+$\overline{S(x^{4}+2x^{2}y+y^{2}+3y, (-3)y)} = 0$.
+
+Enough for groebner basis.  Result is \begin{itemize}
+\item $x^{2}+y$
+\item $x^{4}+2x^{2}y+y^{2}+3y$
+\item $(-3)y$
+\end{itemize}  .
+$\blacksquare{}$
+Minimalizes groebner basis
+\begin{itemize}
+\item $x^{2}+y$
+\item $x^{4}+2x^{2}y+y^{2}+3y$
+\item $(-3)y$
+\end{itemize}  .
+
+
+$x^{4}+2x^{2}y+y^{2}+3y$ is removed by $x^{2}+y$.
+
+Minimalized groebner basis is
+\begin{itemize}
+\item $x^{2}+y$
+\item $y$
+\end{itemize}  .
+$\blacksquare{}$
+
+Reduce groebner basis
+\begin{itemize}
+\item $x^{2}+y$
+\item $y$
+\end{itemize}  .
+
+
+Reducing: $\overline{x^{2}+y} = x^{2}$.
+
+Reducing: $\overline{y} = y$.
+
+Reduced groebner basis is
+\begin{itemize}
+\item $y$
+\item $x^{2}$
+\end{itemize}  .
+$\blacksquare{}$

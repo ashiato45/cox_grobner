@@ -127,3 +127,7 @@
 \newcommand{\red}{red}
 \newcommand{\LCM}{\mathrm{LCM}}
 \newcommand{\ovd}[2]{\overline{#1}^{#2}}
+\newenvironment{calcenv}{\begin{multicols}{2} \small}{\end{multicols}}
+\newcommand{\insertcalc}[1]{\begin{calcenv}
+\input{#1}
+\end{calcenv}}

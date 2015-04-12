@@ -1,0 +1,73 @@
+Calculates groebner basis of
+\begin{itemize}
+\item $x^{2}y+(-1)$
+\item $xy^{2}+(-1)x$
+\end{itemize}  .
+
+
+$\overline{S(x^{2}y+(-1), xy^{2}+(-1)x)} = x^{2}+(-1)y$.
+
+Not enough.  Appends \begin{itemize}
+\item $x^{2}+(-1)y$
+\end{itemize}  .
+
+
+$\overline{S(x^{2}y+(-1), x^{2}+(-1)y)} = y^{2}+(-1)$.
+
+$\overline{S(xy^{2}+(-1)x, x^{2}+(-1)y)} = y^{3}+(-1)y$.
+
+Not enough.  Appends \begin{itemize}
+\item $y^{2}+(-1)$
+\end{itemize}  .
+
+
+$\overline{S(x^{2}y+(-1), y^{2}+(-1))} = 0$.
+
+$\overline{S(xy^{2}+(-1)x, y^{2}+(-1))} = 0$.
+
+$\overline{S(x^{2}+(-1)y, y^{2}+(-1))} = 0$.
+
+Enough for groebner basis.  Result is \begin{itemize}
+\item $x^{2}y+(-1)$
+\item $xy^{2}+(-1)x$
+\item $x^{2}+(-1)y$
+\item $y^{2}+(-1)$
+\end{itemize}  .
+$\blacksquare{}$
+Minimalizes groebner basis
+\begin{itemize}
+\item $x^{2}y+(-1)$
+\item $xy^{2}+(-1)x$
+\item $x^{2}+(-1)y$
+\item $y^{2}+(-1)$
+\end{itemize}  .
+
+
+$x^{2}y+(-1)$ is removed by $x^{2}+(-1)y$.
+
+$xy^{2}+(-1)x$ is removed by $y^{2}+(-1)$.
+
+Minimalized groebner basis is
+\begin{itemize}
+\item $x^{2}+(-1)y$
+\item $y^{2}+(-1)$
+\end{itemize}  .
+$\blacksquare{}$
+
+Reduce groebner basis
+\begin{itemize}
+\item $x^{2}+(-1)y$
+\item $y^{2}+(-1)$
+\end{itemize}  .
+
+
+Reducing: $\overline{x^{2}+(-1)y} = x^{2}+(-1)y$.
+
+Reducing: $\overline{y^{2}+(-1)} = y^{2}+(-1)$.
+
+Reduced groebner basis is
+\begin{itemize}
+\item $y^{2}+(-1)$
+\item $x^{2}+(-1)y$
+\end{itemize}  .
+$\blacksquare{}$

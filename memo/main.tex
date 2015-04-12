@@ -16,6 +16,7 @@
 \usepackage{algorithmic}
 \usepackage{here}
 \usepackage{mytheorems}
+\usepackage{multicol}
 \title{グレブナ基底と代数多様体入門(Ideals, Varieties, and Algorithms)}
 \author{ashiato45のメモ，著者はD.Cox,\,J.Little,\,D.O'Shea}
 
@@ -4349,5 +4350,26 @@ $\ovd{g-\LT(g)}{I} \ovd{g-\LT(g)}{G} = g-\LT(g)$となる。
 これで、多項式のイデアルから、それを特徴づける一意なデータが引き出せることがわかった。
 つまり、ある2つの有限生成なイデアル$I,J$があれば、その簡約Groebner基底を計算し、あっていれば$I=J$だし、あっていなければ$I\neq J$である。
 
+\begin{enumerate}[label=(問題\arabic*)]
+  \item 略
+  \item {\tt code/ex_2_3_7.hs}で計算。
+  \begin{enumerate}[label=(\alph*)]
+    \item lexだと以下の通り。
+    \insertcalc{ex2372alex.tex}
+    grLexだと、
+    \insertcalc{ex2372agrlex.tex}
+    となる。
+    \item lexだと以下の通り。
+    \insertcalc{ex2372blex.tex}
+    grlexだと以下の通り。
+    \insertcalc{ex2372bgrlex.tex}
+    よって、多様体は$\var(I) = 0$となる。
+    \item
+    lexだと以下のとおり。
+    \insertcalc{ex2372clex.tex}
+    grlexだと以下のとおり。
+    \insertcalc{ex2372cgrlex.tex}
+  \end{enumerate}
+\end{enumerate}
 
 \end{document}
