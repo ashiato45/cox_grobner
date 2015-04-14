@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  12 APR 2015 18:22
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  14 APR 2015 15:44
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.032 seconds
+luaotfload | main : fontloader loaded in 0.027 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1050,21 +1050,21 @@ File: images/div3_2_9.png Graphic file (type png)
 Package pdftex.def Info: images/div3_2_9.png used on input line 2719.
 (pdftex.def)             Requested size: 245.08942pt x 245.08618pt.
  [47] [48<./images/div3_2_9.png>] [49] [50] [51]
-[52] <images/ex_2_4_3.png, id=210, 673.76718pt x 540.51938pt>
+<images/ex_2_4_3.png, id=207, 673.76718pt x 540.51938pt>
 File: images/ex_2_4_3.png Graphic file (type png)
 
 <use images/ex_2_4_3.png>
-Package pdftex.def Info: images/ex_2_4_3.png used on input line 2993.
+Package pdftex.def Info: images/ex_2_4_3.png used on input line 3000.
 (pdftex.def)             Requested size: 245.08942pt x 196.61574pt.
- [53<./images/ex_2_4_3.png>] [54] [55] [56] [57]
-[58] [59]
-Underfull \hbox (badness 1515) in paragraph at lines 3462--3468
+ [52] [53<./images/ex_2_4_3.png>] [54] [55] [56]
+[57] [58] [59]
+Underfull \hbox (badness 1515) in paragraph at lines 3469--3475
 [][]$[]$ \JY3/mc/m/n/10 は $[]$ よ り 真 に 小 さ い の で [] $[]\OT1
 /cmr/m/n/10 (\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 2 [] n
  []
 
 [60] [61] [62]
-Underfull \hbox (badness 1303) in paragraph at lines 3690--3699
+Underfull \hbox (badness 1303) in paragraph at lines 3697--3706
 [][]\JY3/mc/m/n/10 あ る $\OML/cmm/m/it/10 I$ \JY3/mc/m/n/10 の 元 の 組 
 $[]$ の \OT1/cmr/m/n/10 Groebner \JY3/mc/m/n/10 基 底 で な い [] と 
 い う の は $[]$ の 元 で あ っ て
@@ -1072,103 +1072,104 @@ $[]$ の \OT1/cmr/m/n/10 Groebner \JY3/mc/m/n/10 基 底 で な い [] と
 
 [63] [64]
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3838.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
 
 
-Overfull \hbox (0.79907pt too wide) in paragraph at lines 3838--3838
+Overfull \hbox (0.79907pt too wide) in paragraph at lines 3845--3845
 [][] 
  []
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3839.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3840.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3847.
 
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3840.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 3847.
 
 [65] <images/1428152186061.png, id=251, 616.55344pt x 524.71031pt>
 File: images/1428152186061.png Graphic file (type png)
 
 <use images/1428152186061.png>
-Package pdftex.def Info: images/1428152186061.png used on input line 3900.
+Package pdftex.def Info: images/1428152186061.png used on input line 3907.
 (pdftex.def)             Requested size: 245.08942pt x 208.57535pt.
- [66]
-<images/1428152296875.png, id=255, 752.8125pt x 603.75563pt>
+
+<images/1428152296875.png, id=252, 752.8125pt x 603.75563pt>
 File: images/1428152296875.png Graphic file (type png)
 
 <use images/1428152296875.png>
-Package pdftex.def Info: images/1428152296875.png used on input line 3903.
+Package pdftex.def Info: images/1428152296875.png used on input line 3910.
 (pdftex.def)             Requested size: 245.08942pt x 196.55911pt.
- [67<./images/1428152186061.png><./images/1428152296875.png>]
-Overfull \hbox (26.88367pt too wide) in paragraph at lines 3969--3969
+ [66<./images/1428152186061.png>]
+Overfull \hbox (26.88367pt too wide) in paragraph at lines 3976--3976
 [][] 
  []
 
-[68] [69] [70]
+[67<./images/1428152296875.png>] [68] [69] [70]
 LaTeX Font Info:    Font shape `JY3/mc/m/it' in size <10> not available
-(Font)              Font shape `JY3/mc/m/n' tried instead on input line 4200.
+(Font)              Font shape `JY3/mc/m/n' tried instead on input line 4207.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 9.24866pt on input line 4200.
- [71] [72] [73] (./ex2372alex.tex
+(Font)              scaled to size 9.24866pt on input line 4207.
+ [71] [72] [73]
+(./ex2372alex.tex
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
-) [74] (./ex2372agrlex.tex)
-(./ex2372blex.tex) (./ex2372bgrlex.tex [75]) (./ex2372clex.tex)
-(./ex2372cgrlex.tex [76])
+) (./ex2372agrlex.tex [74]) (./ex2372blex.tex)
+(./ex2372bgrlex.tex [75]) (./ex2372clex.tex) (./ex2372cgrlex.tex [76])
 \tf@thm=\write3
- [77] (./main.aux))
+ [77]
+(./main.aux))
 
 Here is how much of LuaTeX's memory you used:
  11933 strings out of 494694
  195332,266212 words of node,token memory allocated
- 7357 words of node memory still in use:
+ 7313 words of node memory still in use:
    11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
 spec, 30 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62706,3:2618,4:2782,5:521,6:2851,7:317,9:961,10:120
+   avail lists: 1:1,2:62706,3:2574,4:2446,5:522,6:2553,7:344,9:961,10:120
  15044 multiletter control sequences out of 65536+600000
  95 fonts using 41014319 bytes
  58i,19n,44p,997b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1200,7 +1201,7 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (77 pages, 1336735 bytes).
+Output written on main.pdf (77 pages, 1338769 bytes).
 
 PDF statistics: 437 PDF objects out of 1000 (max. 8388607)
  301 compressed objects within 4 object streams

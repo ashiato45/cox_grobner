@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1428830538 "main.tex" "main.pdf" "main" 1428830548
+["pdflatex"] 1428993862 "main.tex" "main.pdf" "main" 1428993872
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-cid-auto-adobe-japan1.luc" 1426154369 1649592 0317259f471e6b1354f80a1f10f5cc52 ""
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-jisx0208.luc" 1426154370 201428 86fe11785abbeb6a87b6c8dee36b92ec ""
   "ashiato45.sty" 1428826178 4366 84f0b3f119a5308d2643a6a966128f41 ""
@@ -243,12 +243,12 @@
   "images/div3_1b.png" 1425800652 231701 4cb7a99823e2585e02db2e15eddfc021 ""
   "images/div3_2_9.png" 1425822629 23781 edc0ebb2001c08b358344d7ead2ab82a ""
   "images/ex_2_4_3.png" 1425908086 61915 01531d35fe340b943b3a88b9c61a33d2 ""
-  "main.aux" 1428830548 6213 5d8d78252c8369b00b2d2ad6c9699f82 ""
-  "main.tex" 1428830530 234936 8c3be87cf57631b625aece5d19a9a0b8 ""
+  "main.aux" 1428993871 6213 9a2d034c7bbbf23955ffe18bd3967ad4 ""
+  "main.tex" 1428993861 236223 08ba379a0c1b7272cf54d10cc1023191 ""
   "mytheorems.sty" 1426384006 3389 863e5e3c13a98ca44a86c9f17244d375 ""
   (generated)
+  "main.pdf"
   "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"
+  "main.aux"
   "main.log"
   "main.thm"
-  "main.aux"
-  "main.pdf"

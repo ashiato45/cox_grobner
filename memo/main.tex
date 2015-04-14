@@ -2319,7 +2319,7 @@ $f=\sum_\alpha a_\alpha x^\alpha$，$g=\sum_\beta b_\beta x^\beta$とする．
 \max\set{\alpha + \beta  | a_\alpha b_\beta \neq 0}\\
  & =
 \max\set{\alpha + \beta  | a_\alpha \neq 0 \land b_\beta \neq 0}\\
- & =
+ & \desceq{\warn{かけ算で保つ}}
 \max\set{\alpha + \max\set{\beta | b_\beta \neq 0} | a_\alpha \neq 0}\\
  & =
 \max\set{\alpha + \multideg(g) | a_\alpha \neq 0}\\
@@ -2410,7 +2410,7 @@ $a_{\multideg(f)}+b_{\multideg(f)} \neq 0$である．
 \end{align}
  \item
 $r$のすべての単項式は$\LT(f_1),\dots,\LT(f_s)$のどれでもわりきれない
- \item $a_i f_i \implies \multideg(a_i f_i) \le \multideg(f)$
+ \item $a_i f_i \neq 0 \implies \multideg(a_i f_i) \le \multideg(f)$
 \end{itemize}
 $a_1,\dots,a_n,r \in k[x_1,\dots,x_n]$を求めることとする．このようなものを求める手続があることを示そう．a
 \begin{myproof}
@@ -2425,7 +2425,7 @@ $a_1,\dots,a_n,r \in k[x_1,\dots,x_n]$を求めることとする．このよう
    \STATE{$i \defeq 1$}
    \STATE{/* まず割るだけ割ってみる */}
    \WHILE{$divisionoccured = \false$ かつ $i \le s$}
-   \IF{$\LT(f_i) \le \LT(stock)$}
+   \IF{$\LT(f_i) \warn{|} \LT(stock)$}
    \STATE{$\displaystyle a_i \Leftarrow a_i + \frac{\LT(stock)}{\LT(f_i)}$}
    \STATE{$\displaystyle stock \Leftarrow stock - \frac{\LT(stock)}{\LT(f_i)}f_i$}
    \STATE{$divisionoccured \Leftarrow \true$}
@@ -2499,7 +2499,7 @@ a_{1b}f_{1b} + \dots + a_{sb} f_{sb} + stock_b + r_b.
 $a_1 f_1 + \dots + a_s f_s + stock + r$は実行中保たれることになる．
 \end{itemize}
   \item アルゴリズムの停止：
-まず，L.8からL.15のループは，高々$s$回で停止する．そこで，L.4からL.21のループが有限回で停止することを示す．もしも$\LT(f_1),\dots,\LT(f_s)$のうち，$\LT(stock)$を割り切るものがあるならば，L.11で$stock$の全次数が真に減少する．もしもそうでなく，$\LT(f_1),\dots,\LT(f_s)$はどれも$\LT(stock)$を割りきらないならば，
+まず，L.8からL.15のループは，高々$s$回で停止する．そこで，L.4からL.21のループが有限回で停止することを示す．もしも$\LT(f_1),\dots,\LT(f_s)$のうち，$\LT(stock)$を割り切るものがあるならば，L.11で$stock$の全次数が真に減少する．\warn{詳しく考えると、$\LC(\frac{\LT(stock)}{\LT(f_i)}f_i)=\LC(stock)$であり、$\deg(\frac{\LT(stock)}{\LT(f_i)}f_i)=\deg(stock)$となるので、先頭項が消えるからである。}もしもそうでなく，$\LT(f_1),\dots,\LT(f_s)$はどれも$\LT(stock)$を割りきらないならば，
 L.19で$stock$の全次数が真に減少する．よって，L.5からL.20の間で全次数は真に減少する．もしもL.4-L.21のループが永遠に止まらないとすると，変化していく$stock$で列を作ることで，$\Zge^n$の単調減少列が得られる．これは，$>$が単項式順序であり，整列順序であることに矛盾する．よって，L.4-L.21のループは停止し，アルゴリズムは停止する．
   \item $r$が所定の条件を満たす：
 $r$が，L.4とL.20の時点で，「$r$のどの項も$\LT(f_1),\dots,\LT(f_s)$のどれでも割り切れない」という条件を満たしつつけることを示せば十分である．
@@ -2523,11 +2523,11 @@ $\multideg(stock_b) \le \multideg(f)$である．よって，$\multideg(a_{ia}f_
 \begin{align}
  a_{ia} = a_{ib} + \frac{\LT(stock_b)}{\LT(f_i)}
 \end{align}
-である．払って，$\LT(f_i)a_{ia} = a_{ib} + \LT(stock_b)$である．
+である．払って，$\LT(f_i)a_{ia} = a_{ib}\LT(f_i) + \LT(stock_b)$である．
 よって，
 \begin{align}
  \multideg(a_{ia} f_i)
-&\le \max(\multideg(a_{ib}),\LT(stock_b))
+&\le \max(\multideg(a_{ib}f_i),\LT(stock_b))
 \end{align}
 先と同様に，$\multideg(stock_b)\le \multideg(f)$である．これと，$\multideg(a_{ib}f_i)\le \multideg(f)$をまとめて，
 \begin{align}
@@ -2830,13 +2830,18 @@ $\alpha$について，$\alpha + \Zge^n$に属するかということを逐一�
 となる$I$の基底$\alpha(1),\dots,\alpha(s)$と，$k[x_1,\dots,x_n]$の元
 $h_1,\dots,h_s$が存在する．右辺の$h_ix^{\alpha(i)}$は展開するとすべて
 $x^{\alpha(i)}$の倍多項式であり、かつ単項式なので、(3)が満たされる。
+真面目に書くと、$f=\sum_{i=1}^s h_i x^{\alpha(i)}$となっている。
+各$h_\bullet$について、$h_i = \sum_{j=1}^{N(i)} c_{ij}x^{\beta(i,j)}$となる
+$N(i),c_{i\bullet},\beta(i,\bullet)$が存在する。すると、
+$f=\sum_{i=1}^s \sum_{j=1}^{N(i)}c_{ij} x^{\beta(i,j)+\alpha(i)}$となる。
+これで(3)がみたされていることがわかった。
 \end{myproof}
 
 単項式イデアル$I,I'$があり，$\set{Iの単項式}=\set{I'の単項式}$が成立していたとする．このとき，
 \begin{align}
- f\in I \iff \set{fのすべての項} \subset I
-\iff \set{fのすべての項} \subset I'
-\iff
+ f\in I \desciff{上の(2)} \set{fのすべての単項式} \subset I
+\desciff{単項式の一致} \set{fのすべての項} \subset I'
+\desciff{上の(2)}
 f\in I'.
 \end{align}
 となる．よって，$I=I'$となる．つまり，単項式イデアルは，そこに含まれる単項式で定まり，それのみで定まる．
@@ -2865,12 +2870,9 @@ $\gamma(i)$とよぶことにする．そして，
  \gamma = \max(\gamma(1),\dots,\gamma(j))
 \end{align}
 とする．このように定義しておくと，
-\begin{align}
-J\cdot \gen{y^\gamma} = I \cap \set{(yの次数) \ge \gamma}
-\end{align}
-となる． $\gamma \ge \gamma(1),\dots,\gamma(j)$なので，
 $y^\gamma$以上を$J$の元にかけることで，$I$に属することを保証できるからである．
-これで，$I\cap \set{(yの次数)\ge \gamma}$は，$J$が有限生成であることから有限的に書けることになった．$y$が他の次数のときの$I$もこのように書いていこう．
+イデアルの図で言うところの、一番上の長方形が表現できたことになる。
+$x^{\alpha(\bullet)}y^\gamma$たちは一番上の長方形を表現するのに足る「角」の情報を持っている(あとで示すが)。
 
 $0\le \delta < \gamma$とする．
 \begin{align}
@@ -2881,41 +2883,46 @@ $0\le \delta < \gamma$とする．
 \begin{align}
  J_\delta = \gen{x^{\alpha(\delta;1)},\dots,x^{\alpha(\delta;j_\delta)}}
 \end{align}
-となる$\alpha(\delta;1),\dots,\alpha(\delta;j_\delta) \in \Zge^{n-1}$が存在する．このように定義しておくと，
-\begin{align}
- J_\delta\cdot y^\delta = I\cap \set{(yの次数) = \delta}
-\end{align}
-となる．
-以上のことをまとめると，
-\begin{align}
- I\cap \set{(yの次数) \ge \gamma} &= \gen{x^{\alpha(1)},\dots,x^{\alpha(j)}} \cdot \gen{y^\gamma}\\
- I \cap \set{(yの次数) = \gamma -1} &= \gen{x^{\alpha(\gamma-1;1)},\dots, x^{\alpha(\gamma-1;j_{\gamma-1})}}\\
- & \vdots\\
- I\cap \set{(yの次数)=0}& = \gen{x^{\alpha(0;1)},\dots, x^{\alpha(0;j_0)}}.
-\end{align}
-である．これらの和集合をとることで，
+となる$\alpha(\delta;1),\dots,\alpha(\delta;j_\delta) \in \Zge^{n-1}$が存在する．
+これで、高さ$\delta$での必要な「角」の情報が得られたことになる。
+
+これらを集めて，
 \begin{align}
  I &= \langle x^{\alpha(1)}y^\gamma ,\dots, x^{\alpha(j)}y^\gamma \\
  &\quad x^{\alpha(\gamma-1;1)},\dots, x^{\alpha(\gamma-1;j_{\gamma-1})} \\
  &\quad \vdots\\
  & \quad x^{\alpha(0;1)} ,\dots, x^{\alpha(0;j_{0})} \rangle
 \end{align}
-であることがわかる．よって，$I$を，$I$の元の有限生成単項式イデアルとして書くことができた．これで帰納法を終わる．
+となっていることを示そう。$\supset$は自明なので、$\subset$を考える。
+$I$の単項式が右辺に属することを言えば十分であり、つまり$I$の単項式が
+右辺の基底のどれかで割り切れることを言えば十分である。$x^{\xi}y^\eta\in I$
+とし、$x^\xi y^\eta$が右辺の基底のどれかで割り切れることを示す。
+\begin{itemize}
+  \item $\eta \ge \gamma$のとき:
+  $J$の定義より、$x^\xi \in J$である。$J$に対する考察より、
+  $x^{\alpha(i)}|x^\xi$となる$i=1,\dots,j$が存在する。
+  さらに、$x^{\alpha(i)}y^\gamma \in I$となるように$\gamma$を定義したのだった。
+  $\eta \ge \gamma$なので、$y^\gamma | y^\eta$である。よって、
+  $x^{\alpha(i)}y^\gamma | x^\xi y^\eta$である。$x^{\alpha(i)}y^\gamma$は基底の1つであった。
+  \item $\eta < \gamma$のとき:
+  $J_\eta$の定義より、$x^\xi \in J_\eta$である。$J_\eta$に対する考察より、
+  $x^{\alpha(\gamma,i)} | x^\xi $となる$i=1,\dots, j_\gamma$が存在する。
+  よって、$x^{\alpha(\gamma,i)}y^\eta | x^\xi y^\eta$となる。$x^{\alpha(\gamma,i)}$は基底の1つであった。
+  \end{itemize}
+よって，$I$を，$I$の元の有限生成単項式イデアルとして書くことができた．これで帰納法を終わる．
 
 次に，$I$の単項式の有限生成である$I$を，$A$を多重指数に持つ単項式の有限生成に書き直そう．
 \begin{align}
  I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}
 \end{align}
 と，$\beta(1),\dots,\beta(s)\in \Zge^n$が存在して書けることは上の段落で示した．
-これらの$\beta(i)$は，$I=\gen{x^\alpha | \alpha \in A}$なので，
-$x^{\beta(i)}$は$\gen{x^{\alpha}|\alpha \in A}$の，1次結合で書ける．
-ここで，$I$は単項式イデアルだったので，特に$k$係数の単項式の1次結合で
-書けることが先の補題より分かり，$x^{\beta(i)}$は単項式だったので，
-$x^{\beta(i)}=h_i x^{\gamma(i)+\alpha(i)}$となる$\alpha(i)\in A, \gamma(i)\in \Zge^n$が存在することがわかる．よって，
+$x^{\beta(\bullet)} \in I = \gen{x^\alpha | \alpha \in A}$となっているので、
+この節のはじめの「単項式が単項式イデアルに属するとき」の性質より、
+$x^{\beta(\bullet)}$は$x^\alpha$のいずれかで割り切れ、
 \begin{align}
  I=\gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}
 \end{align}
-となる．$\alpha(1)< \alpha(2)< \dots$として一般性を失なわない(何の順序でも良い．)．また，$I$はどの「1つの基底を取り除くと$I$でなくなる」という仮定を置いてよい．なぜなら，もしも取り除いても影響がない基底があるならば，$I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}$と書いた時点でそのようなものを取り除いても良いからである．$x^{\alpha(1)}\in I$なので，$x^{\alpha(1)}\in \gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}$．単項式イデアルの性質により，何らかの
+となる$\alpha(\bullet) A$と、$\gamma(\bullet )\in \Zge^n$とが存在する．(この時点ではまだ「$A$の」指数で書けているかは分からない。$x^{\gamma(\bullet)}$がかかっている。)$\alpha(1)< \alpha(2)< \dots$として一般性を失なわない(何の順序でも良い．)．また，$I$はどの「1つの基底を取り除くと$I$でなくなる」という仮定を置いてよい．なぜなら，もしも取り除いても影響がない基底があるならば，$I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}$と書いた時点でそのようなものを取り除いても良いからである．$x^{\alpha(1)}\in I$なので，$x^{\alpha(1)}\in \gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}$．単項式イデアルの性質により，何らかの
 $i$について，$\alpha(1) \in \alpha(i)+\gamma(i) + \Zge^n$となる．
  つまり，何らかの$\delta(i)\in \Zge^n$が存在して，
 $\alpha(1)=\alpha(i)+\gamma(i)+\delta(i)$となる．$i\ge 2$ならば
@@ -2942,7 +2949,7 @@ $I=\gen{x^{\alpha(1)},x^{\alpha(2)+\delta(2)},\dots,x^{\alpha(s)}+\gamma(s)}$で
 &\iff
 f\in \gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}\\
  & \desciff{補題}
-f は x^{\alpha(1)},\dots,x^{\alpha(s)} のk係数1次結合で書ける\\
+f は x^{\alpha(1)},\dots,x^{\alpha(s)} のk[x_1,\dots,x_n]係数1次結合で書ける\\
  & \iff
 f を (x^{\alpha(1)},\dots,x^{\alpha(s)})で割ったあまりは0.
 \end{align}
@@ -2968,7 +2975,7 @@ $>$は「全順序である」から，一般性を失なわず，$\alpha(1)<\do
 仮定より，$\gamma\ge 0$であり，「かけ算で保つ」より，
 $\alpha(j)+\gamma \ge \alpha(j)$である．よって，
 \begin{align}
- \beta = \alpha(j) + \gamma \descle{仮定!} \alpha(j) \le \alpha(1)
+ \beta = \alpha(j) + \gamma \ge \alpha(j) >{仮定} \alpha(1)
 \end{align}
 である．よって，$\alpha(1)$が$A$の最小元である．
  \end{itemize}
