@@ -1,552 +1,63 @@
 \documentclass{jsarticle}
 \usepackage{amsmath,amssymb,amsfonts}
 \begin{document}
-\section{}Calculates groebner basis of 
+\section{are}Calculates groebner basis of
 \begin{itemize}
-\item $x^{3}+(-2)xy$
-\item $x^{2}y+(-2)y^{2}+x$
-\end{itemize}  . 
+\item $xy+(-1)$
+\item $xz+(-1)$
+\end{itemize}  .
 
 
-$\overline{S(x^{3}+(-2)xy, x^{2}y+(-2)y^{2}+x)} = (-1)x^{2}$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-1)x^{2}$
-\end{itemize}  . 
-
-
-$\overline{S(x^{3}+(-2)xy, (-1)x^{2})} = (-2)xy$.  
-
-$\overline{S(x^{2}y+(-2)y^{2}+x, (-1)x^{2})} = (-2)y^{2}+x$.  
+$\overline{S(xy+(-1), xz+(-1))} = y+(-1)z$.
 
 Not enough.  Appends \begin{itemize}
-\item $(-2)xy$
-\end{itemize}  . 
+\item $y+(-1)z$
+\end{itemize}  .
 
 
-$\overline{S(x^{3}+(-2)xy, (-2)xy)} = 0$.  
+$\overline{S(xy+(-1), y+(-1)z)} = 0$.
 
-$\overline{S(x^{2}y+(-2)y^{2}+x, (-2)xy)} = (-2)y^{2}+x$.  
-
-$\overline{S((-1)x^{2}, (-2)xy)} = 0$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-2)y^{2}+x$
-\end{itemize}  . 
-
-
-$\overline{S(x^{3}+(-2)xy, (-2)y^{2}+x)} = 0$.  
-
-$\overline{S(x^{2}y+(-2)y^{2}+x, (-2)y^{2}+x)} = 0$.  
-
-$\overline{S((-1)x^{2}, (-2)y^{2}+x)} = 0$.  
-
-$\overline{S((-2)xy, (-2)y^{2}+x)} = 0$.  
+$\overline{S(xz+(-1), y+(-1)z)} = 0$.
 
 Enough for groebner basis.  Result is \begin{itemize}
-\item $x^{3}+(-2)xy$
-\item $x^{2}y+(-2)y^{2}+x$
-\item $(-1)x^{2}$
-\item $(-2)xy$
-\item $(-2)y^{2}+x$
-\end{itemize}  . 
+\item $xy+(-1)$
+\item $xz+(-1)$
+\item $y+(-1)z$
+\end{itemize}  .
 $\blacksquare{}$
-Minimalizes groebner basis 
+Minimalizes groebner basis
 \begin{itemize}
-\item $x^{3}+(-2)xy$
-\item $x^{2}y+(-2)y^{2}+x$
-\item $(-1)x^{2}$
-\item $(-2)xy$
-\item $(-2)y^{2}+x$
-\end{itemize}  . 
+\item $xy+(-1)$
+\item $xz+(-1)$
+\item $y+(-1)z$
+\end{itemize}  .
 
 
-$x^{3}+(-2)xy$ is removed by $(-1)x^{2}$.  
-
-$x^{2}y+(-2)y^{2}+x$ is removed by $(-1)x^{2}$.  
+$xy+(-1)$ is removed by $y+(-1)z$.
 
 Minimalized groebner basis is 
 \begin{itemize}
-\item $x^{2}$
-\item $xy$
-\item $y^{2}+(\frac{-1}{2})x$
-\end{itemize}  . 
+\item $xz+(-1)$
+\item $y+(-1)z$
+\end{itemize}  .
 $\blacksquare{}$
 
-Reduce groebner basis 
+Reduce groebner basis
 \begin{itemize}
-\item $x^{2}$
-\item $xy$
-\item $y^{2}+(\frac{-1}{2})x$
-\end{itemize}  . 
+\item $xz+(-1)$
+\item $y+(-1)z$
+\end{itemize}  .
 
 
-Reducing: $\overline{x^{2}} = x^{2}$.  
+Reducing: $\overline{xz+(-1)} = xz+(-1)$.
 
-Reducing: $\overline{xy} = xy$.  
+Reducing: $\overline{y+(-1)z} = y+(-1)z$.
 
-Reducing: $\overline{y^{2}+(\frac{-1}{2})x} = y^{2}+(\frac{-1}{2})x$.  
-
-Reduced groebner basis is 
+Reduced groebner basis is
 \begin{itemize}
-\item $y^{2}+(\frac{-1}{2})x$
-\item $xy$
-\item $x^{2}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x^{2}+xy$
-\item $xy$
-\item $y^{2}+(\frac{-1}{2})x$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x^{2}+xy} = x^{2}$.  
-
-Reducing: $\overline{xy} = xy$.  
-
-Reducing: $\overline{y^{2}+(\frac{-1}{2})x} = y^{2}+(\frac{-1}{2})x$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y^{2}+(\frac{-1}{2})x$
-\item $xy$
-\item $x^{2}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{}Calculates groebner basis of 
-\begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), xy^{2}+(-1)x)} = x^{2}+(-1)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $x^{2}+(-1)y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), x^{2}+(-1)y)} = y^{2}+(-1)$.  
-
-$\overline{S(xy^{2}+(-1)x, x^{2}+(-1)y)} = y^{3}+(-1)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), y^{2}+(-1))} = 0$.  
-
-$\overline{S(xy^{2}+(-1)x, y^{2}+(-1))} = 0$.  
-
-$\overline{S(x^{2}+(-1)y, y^{2}+(-1))} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-$x^{2}y+(-1)$ is removed by $x^{2}+(-1)y$.  
-
-$xy^{2}+(-1)x$ is removed by $y^{2}+(-1)$.  
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x^{2}+(-1)y} = x^{2}+(-1)y$.  
-
-Reducing: $\overline{y^{2}+(-1)} = y^{2}+(-1)$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y^{2}+(-1)$
-\item $x^{2}+(-1)y$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{}Calculates groebner basis of 
-\begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), xy^{2}+(-1)x)} = x^{2}+(-1)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $x^{2}+(-1)y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), x^{2}+(-1)y)} = y^{2}+(-1)$.  
-
-$\overline{S(xy^{2}+(-1)x, x^{2}+(-1)y)} = y^{3}+(-1)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}y+(-1), y^{2}+(-1))} = 0$.  
-
-$\overline{S(xy^{2}+(-1)x, y^{2}+(-1))} = 0$.  
-
-$\overline{S(x^{2}+(-1)y, y^{2}+(-1))} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $x^{2}y+(-1)$
-\item $xy^{2}+(-1)x$
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-$x^{2}y+(-1)$ is removed by $x^{2}+(-1)y$.  
-
-$xy^{2}+(-1)x$ is removed by $y^{2}+(-1)$.  
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x^{2}+(-1)y$
-\item $y^{2}+(-1)$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x^{2}+(-1)y} = x^{2}+(-1)y$.  
-
-Reducing: $\overline{y^{2}+(-1)} = y^{2}+(-1)$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y^{2}+(-1)$
-\item $x^{2}+(-1)y$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{b-lex}Calculates groebner basis of 
-\begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}+y, x^{4}+2x^{2}y+y^{2}+3y)} = (-3)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-3)y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}+y, (-3)y)} = 0$.  
-
-$\overline{S(x^{4}+2x^{2}y+y^{2}+3y, (-3)y)} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\item $(-3)y$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\item $(-3)y$
-\end{itemize}  . 
-
-
-$x^{4}+2x^{2}y+y^{2}+3y$ is removed by $x^{2}+y$.  
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $x^{2}+y$
-\item $y$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x^{2}+y$
-\item $y$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x^{2}+y} = x^{2}$.  
-
-Reducing: $\overline{y} = y$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y$
-\item $x^{2}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{b-grlex}Calculates groebner basis of 
-\begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}+y, x^{4}+2x^{2}y+y^{2}+3y)} = (-3)y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-3)y$
-\end{itemize}  . 
-
-
-$\overline{S(x^{2}+y, (-3)y)} = 0$.  
-
-$\overline{S(x^{4}+2x^{2}y+y^{2}+3y, (-3)y)} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\item $(-3)y$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $x^{2}+y$
-\item $x^{4}+2x^{2}y+y^{2}+3y$
-\item $(-3)y$
-\end{itemize}  . 
-
-
-$x^{4}+2x^{2}y+y^{2}+3y$ is removed by $x^{2}+y$.  
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $x^{2}+y$
-\item $y$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x^{2}+y$
-\item $y$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x^{2}+y} = x^{2}$.  
-
-Reducing: $\overline{y} = y$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y$
-\item $x^{2}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{c-lex}Calculates groebner basis of 
-\begin{itemize}
-\item $x+(-1)z^{4}$
-\item $y+(-1)z^{5}$
-\end{itemize}  . 
-
-
-$\overline{S(x+(-1)z^{4}, y+(-1)z^{5})} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $x+(-1)z^{4}$
-\item $y+(-1)z^{5}$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $x+(-1)z^{4}$
-\item $y+(-1)z^{5}$
-\end{itemize}  . 
-
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $x+(-1)z^{4}$
-\item $y+(-1)z^{5}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $x+(-1)z^{4}$
-\item $y+(-1)z^{5}$
-\end{itemize}  . 
-
-
-Reducing: $\overline{x+(-1)z^{4}} = x+(-1)z^{4}$.  
-
-Reducing: $\overline{y+(-1)z^{5}} = y+(-1)z^{5}$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $y+(-1)z^{5}$
-\item $x+(-1)z^{4}$
-\end{itemize}  . 
-$\blacksquare{}$
-
-\section{c-grlex}Calculates groebner basis of 
-\begin{itemize}
-\item $(-1)z^{4}+x$
-\item $(-1)z^{5}+y$
-\end{itemize}  . 
-
-
-$\overline{S((-1)z^{4}+x, (-1)z^{5}+y)} = (-1)xz+y$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-1)xz+y$
-\end{itemize}  . 
-
-
-$\overline{S((-1)z^{4}+x, (-1)xz+y)} = yz^{3}+(-1)x^{2}$.  
-
-$\overline{S((-1)z^{5}+y, (-1)xz+y)} = 0$.  
-
-Not enough.  Appends \begin{itemize}
-\item $yz^{3}+(-1)x^{2}$
-\end{itemize}  . 
-
-
-$\overline{S((-1)z^{4}+x, yz^{3}+(-1)x^{2})} = 0$.  
-
-$\overline{S((-1)z^{5}+y, yz^{3}+(-1)x^{2})} = 0$.  
-
-$\overline{S((-1)xz+y, yz^{3}+(-1)x^{2})} = (-1)y^{2}z^{2}+x^{3}$.  
-
-Not enough.  Appends \begin{itemize}
-\item $(-1)y^{2}z^{2}+x^{3}$
-\end{itemize}  . 
-
-
-$\overline{S((-1)z^{4}+x, (-1)y^{2}z^{2}+x^{3})} = 0$.  
-
-$\overline{S((-1)z^{5}+y, (-1)y^{2}z^{2}+x^{3})} = 0$.  
-
-$\overline{S((-1)xz+y, (-1)y^{2}z^{2}+x^{3})} = x^{4}+(-1)y^{3}z$.  
-
-$\overline{S(yz^{3}+(-1)x^{2}, (-1)y^{2}z^{2}+x^{3})} = 0$.  
-
-Not enough.  Appends \begin{itemize}
-\item $x^{4}+(-1)y^{3}z$
-\end{itemize}  . 
-
-
-$\overline{S((-1)z^{4}+x, x^{4}+(-1)y^{3}z)} = 0$.  
-
-$\overline{S((-1)z^{5}+y, x^{4}+(-1)y^{3}z)} = 0$.  
-
-$\overline{S((-1)xz+y, x^{4}+(-1)y^{3}z)} = 0$.  
-
-$\overline{S(yz^{3}+(-1)x^{2}, x^{4}+(-1)y^{3}z)} = 0$.  
-
-$\overline{S((-1)y^{2}z^{2}+x^{3}, x^{4}+(-1)y^{3}z)} = 0$.  
-
-Enough for groebner basis.  Result is \begin{itemize}
-\item $(-1)z^{4}+x$
-\item $(-1)z^{5}+y$
-\item $(-1)xz+y$
-\item $yz^{3}+(-1)x^{2}$
-\item $(-1)y^{2}z^{2}+x^{3}$
-\item $x^{4}+(-1)y^{3}z$
-\end{itemize}  . 
-$\blacksquare{}$
-Minimalizes groebner basis 
-\begin{itemize}
-\item $(-1)z^{4}+x$
-\item $(-1)z^{5}+y$
-\item $(-1)xz+y$
-\item $yz^{3}+(-1)x^{2}$
-\item $(-1)y^{2}z^{2}+x^{3}$
-\item $x^{4}+(-1)y^{3}z$
-\end{itemize}  . 
-
-
-$(-1)z^{5}+y$ is removed by $(-1)z^{4}+x$.  
-
-Minimalized groebner basis is 
-\begin{itemize}
-\item $z^{4}+(-1)x$
-\item $xz+(-1)y$
-\item $yz^{3}+(-1)x^{2}$
-\item $y^{2}z^{2}+(-1)x^{3}$
-\item $x^{4}+(-1)y^{3}z$
-\end{itemize}  . 
-$\blacksquare{}$
-
-Reduce groebner basis 
-\begin{itemize}
-\item $z^{4}+(-1)x$
-\item $xz+(-1)y$
-\item $yz^{3}+(-1)x^{2}$
-\item $y^{2}z^{2}+(-1)x^{3}$
-\item $x^{4}+(-1)y^{3}z$
-\end{itemize}  . 
-
-
-Reducing: $\overline{z^{4}+(-1)x} = z^{4}+(-1)x$.  
-
-Reducing: $\overline{xz+(-1)y} = xz+(-1)y$.  
-
-Reducing: $\overline{yz^{3}+(-1)x^{2}} = yz^{3}+(-1)x^{2}$.  
-
-Reducing: $\overline{y^{2}z^{2}+(-1)x^{3}} = y^{2}z^{2}+(-1)x^{3}$.  
-
-Reducing: $\overline{x^{4}+(-1)y^{3}z} = x^{4}+(-1)y^{3}z$.  
-
-Reduced groebner basis is 
-\begin{itemize}
-\item $x^{4}+(-1)y^{3}z$
-\item $y^{2}z^{2}+(-1)x^{3}$
-\item $yz^{3}+(-1)x^{2}$
-\item $xz+(-1)y$
-\item $z^{4}+(-1)x$
-\end{itemize}  . 
+\item $y+(-1)z$
+\item $xz+(-1)$
+\end{itemize}  .
 $\blacksquare{}$
 
 \end{document}
-

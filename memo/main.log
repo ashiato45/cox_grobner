@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  14 APR 2015 15:44
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  17 APR 2015 01:23
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.027 seconds
+luaotfload | main : fontloader loaded in 0.032 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -963,248 +963,69 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 27.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.31805pt on input line 31.
+(Font)              scaled to size 13.31805pt on input line 32.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 13.31805pt on input line 31.
+(Font)              scaled to size 13.31805pt on input line 32.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09839pt on input line 32.
+(Font)              scaled to size 11.09839pt on input line 43.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 6.47406pt on input line 36.
+(Font)              scaled to size 6.47406pt on input line 47.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 4.62433pt on input line 36.
+(Font)              scaled to size 4.62433pt on input line 47.
 LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 45.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 50.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.24866pt on input line 45.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
+(Font)              scaled to size 9.24866pt on input line 50.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 52.
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
  [1
 
-{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
- [6] [7] [8] [9]
-[10] [11] [12] [13] [14] [15]
-Overfull \hbox (5.34904pt too wide) in paragraph at lines 1003--1005
-[][]$\OMS/cmsy/m/n/10 $ [] \JY3/mc/m/n/10 基 底 の 所 属 を 言 え ば 
-十 分 [] $\OML/cmm/m/it/10 x[] \OMS/cmsy/m/n/10   \OT1/cmr/m/n/10 4 = [](2\OM
-L/cmm/m/it/10 x[] \OT1/cmr/m/n/10 + 3\OML/cmm/m/it/10 y[] \OMS/cmsy/m/n/10   \O
-T1/cmr/m/n/10 11) + [](\OML/cmm/m/it/10 x[] \OMS/cmsy/m/n/10   \OML/cmm/m/it/10
- y[] \OMS/cmsy/m/n/10   \OT1/cmr/m/n/10 3) \OMS/cmsy/m/n/10 2 []$ []
- []
-
-[16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28]
-Overfull \hbox (51.15123pt too wide) in paragraph at lines 1808--1808
-[][] 
- []
-
-[29]
-Overfull \vbox (92.60252pt too high) has occurred while \output is active []
-
-
-[30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41]
+{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.32379pt on input line 2544.
+(Font)              scaled to size 8.32379pt on input line 134.
+ (./calc_3_1.tex
+LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 8.32379pt on input line 2544.
-
-<images/div1.png, id=164, 752.8125pt x 752.8125pt>
-File: images/div1.png Graphic file (type png)
- <use images/div1.png>
-Package pdftex.def Info: images/div1.png used on input line 2544.
-(pdftex.def)             Requested size: 245.08942pt x 245.08618pt.
-
-<images/div2.png, id=165, 830.35219pt x 1129.21875pt>
-File: images/div2.png Graphic file (type png)
- <use images/div2.png>
-Package pdftex.def Info: images/div2.png used on input line 2551.
-(pdftex.def)             Requested size: 245.08942pt x 333.30618pt.
-
-[42<./images/div1.png>] <images/div3.png, id=172, 830.35219pt x 891.33pt>
-File: images/div3.png Graphic file (type png)
-
-<use images/div3.png>
-Package pdftex.def Info: images/div3.png used on input line 2558.
-(pdftex.def)             Requested size: 245.08942pt x 263.08968pt.
- [43<./images/div2.png>]
-<images/div3_1a.png, id=176, 3011.25pt x 3011.25pt>
-File: images/div3_1a.png Graphic file (type png)
- <use images/div3_1a.png>
-Package pdftex.def Info: images/div3_1a.png used on input line 2568.
-(pdftex.def)             Requested size: 245.08942pt x 245.08618pt.
-
-<images/div3_1b.png, id=177, 3011.25pt x 3011.25pt>
-File: images/div3_1b.png Graphic file (type png)
- <use images/div3_1b.png>
-Package pdftex.def Info: images/div3_1b.png used on input line 2570.
-(pdftex.def)             Requested size: 245.08942pt x 245.08618pt.
-
-[44<./images/div3.png><./images/div3_1a.png>] [45<./images/div3_1b.png>]
-[46] <images/div3_2_9.png, id=189, 752.8125pt x 752.8125pt>
-File: images/div3_2_9.png Graphic file (type png)
-
-<use images/div3_2_9.png>
-Package pdftex.def Info: images/div3_2_9.png used on input line 2719.
-(pdftex.def)             Requested size: 245.08942pt x 245.08618pt.
- [47] [48<./images/div3_2_9.png>] [49] [50] [51]
-<images/ex_2_4_3.png, id=207, 673.76718pt x 540.51938pt>
-File: images/ex_2_4_3.png Graphic file (type png)
-
-<use images/ex_2_4_3.png>
-Package pdftex.def Info: images/ex_2_4_3.png used on input line 3000.
-(pdftex.def)             Requested size: 245.08942pt x 196.61574pt.
- [52] [53<./images/ex_2_4_3.png>] [54] [55] [56]
-[57] [58] [59]
-Underfull \hbox (badness 1515) in paragraph at lines 3469--3475
-[][]$[]$ \JY3/mc/m/n/10 は $[]$ よ り 真 に 小 さ い の で [] $[]\OT1
-/cmr/m/n/10 (\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 2 [] n
- []
-
-[60] [61] [62]
-Underfull \hbox (badness 1303) in paragraph at lines 3697--3706
-[][]\JY3/mc/m/n/10 あ る $\OML/cmm/m/it/10 I$ \JY3/mc/m/n/10 の 元 の 組 
-$[]$ の \OT1/cmr/m/n/10 Groebner \JY3/mc/m/n/10 基 底 で な い [] と 
-い う の は $[]$ の 元 で あ っ て
- []
-
-[63] [64]
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3845.
-
-
-Overfull \hbox (0.79907pt too wide) in paragraph at lines 3845--3845
-[][] 
- []
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3846.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3847.
-
-
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3847.
-
-[65] <images/1428152186061.png, id=251, 616.55344pt x 524.71031pt>
-File: images/1428152186061.png Graphic file (type png)
-
-<use images/1428152186061.png>
-Package pdftex.def Info: images/1428152186061.png used on input line 3907.
-(pdftex.def)             Requested size: 245.08942pt x 208.57535pt.
-
-<images/1428152296875.png, id=252, 752.8125pt x 603.75563pt>
-File: images/1428152296875.png Graphic file (type png)
-
-<use images/1428152296875.png>
-Package pdftex.def Info: images/1428152296875.png used on input line 3910.
-(pdftex.def)             Requested size: 245.08942pt x 196.55911pt.
- [66<./images/1428152186061.png>]
-Overfull \hbox (26.88367pt too wide) in paragraph at lines 3976--3976
-[][] 
- []
-
-[67<./images/1428152296875.png>] [68] [69] [70]
-LaTeX Font Info:    Font shape `JY3/mc/m/it' in size <10> not available
-(Font)              Font shape `JY3/mc/m/n' tried instead on input line 4207.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 9.24866pt on input line 4207.
- [71] [72] [73]
-(./ex2372alex.tex
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
-) (./ex2372agrlex.tex [74]) (./ex2372blex.tex)
-(./ex2372bgrlex.tex [75]) (./ex2372clex.tex) (./ex2372cgrlex.tex [76])
+(Font)              scaled to size 8.32379pt on input line 2.
+) [2]
 \tf@thm=\write3
- [77]
-(./main.aux))
+ [3] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11933 strings out of 494694
- 195332,266212 words of node,token memory allocated
- 7313 words of node memory still in use:
-   11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
-spec, 30 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62706,3:2574,4:2446,5:522,6:2553,7:344,9:961,10:120
- 15044 multiletter control sequences out of 65536+600000
- 95 fonts using 41014319 bytes
- 58i,19n,44p,997b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 11755 strings out of 494694
+ 156259,266212 words of node,token memory allocated
+ 5032 words of node memory still in use:
+   11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 450 attribute, 916 glue_
+spec, 28 attribute_list, 1 write nodes
+   avail lists: 2:55368,3:491,4:3064,5:286,6:2831,7:154,9:668,10:75
+ 14937 multiletter control sequences out of 65536+600000
+ 86 fonts using 38155083 bytes
+ 58i,13n,44p,459b,431s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/
-type1/public/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pf
-b><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><<c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><<c:/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fonts/type
-1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (77 pages, 1338769 bytes).
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
+pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/m
+sam10.pfb>
+Output written on main.pdf (3 pages, 157898 bytes).
 
-PDF statistics: 437 PDF objects out of 1000 (max. 8388607)
- 301 compressed objects within 4 object streams
+PDF statistics: 108 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
