@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  17 APR 2015 01:23
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  19 APR 2015 15:20
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -993,39 +993,66 @@ LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <9> not available
 (Font)              Font shape `JY3/gt/m/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 8.32379pt on input line 2.
-) [2]
+) [2] [3]
+! Undefined control sequence.
+<argument> ...ubsetneq \var (\gen {f_1,\dots ,f_s}_l))} \う 
+                                                  \ub {\var (\gen {f_1,\dots...
+l.231   \end{align}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ubsetneq \var (\gen {f_1,\dots ,f_s}_l))} \う 
+                                                  \ub {\var (\gen {f_1,\dots...
+l.231   \end{align}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[4] [5]
 \tf@thm=\write3
- [3] (./main.aux))
+ [6] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11755 strings out of 494694
- 156259,266212 words of node,token memory allocated
- 5032 words of node memory still in use:
-   11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 450 attribute, 916 glue_
-spec, 28 attribute_list, 1 write nodes
-   avail lists: 2:55368,3:491,4:3064,5:286,6:2831,7:154,9:668,10:75
- 14937 multiletter control sequences out of 65536+600000
+ 11795 strings out of 494694
+ 195325,266212 words of node,token memory allocated
+ 5251 words of node memory still in use:
+   11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
+spec, 30 attribute_list, 1 write nodes
+   avail lists: 1:1,2:55854,3:636,4:2942,5:301,6:2857,7:154,9:678,10:75
+ 14977 multiletter control sequences out of 65536+600000
  86 fonts using 38155083 bytes
- 58i,13n,44p,459b,431s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 58i,17n,44p,504b,761s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><<c:/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
-pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/m
-sam10.pfb>
-Output written on main.pdf (3 pages, 157898 bytes).
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9
+.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
+b><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (6 pages, 231107 bytes).
 
-PDF statistics: 108 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+PDF statistics: 148 PDF objects out of 1000 (max. 8388607)
+ 109 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
