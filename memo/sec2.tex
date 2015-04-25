@@ -2718,4 +2718,221 @@ TODO: 残りをとく
 
 \subsection{(選択)ブッフベルガーのアルゴリズムの改良}
 \label{sub:(選択)ブッフベルガーのアルゴリズムの改良}
-TODO: いったん飛ばす
+ブッフベルガーのアルゴリズムの高速化を考える。基本的に、割り算の計算コストが高いので、
+割り算をしなくてすむときにしないようにすることで高速化する。
+
+まず、「余りが0である」ことを一般化して、次のものをいれる。「
+$G=\set{g_1,\dots,g_s} \subset k[x_1,\dots,x_n]$と$f\in k[x_1,\dots,x_n]$
+について、『$f \toG 0$』『$f$は$G$を法として0に簡約される』とは、
+$a_ig_i \neq 0 \implies \deg(a_i g_i) \le \deg(f)$となる$a_\bullet \in k[x_1,\dots,x_n]$が存在し、
+\begin{align}
+  f = \sum_{i=1}^s a_i f_i
+\end{align}
+となる」ことである。
+
+あたりまえだが、$f$を$(g_1,\dots,g_s)$で割り算して0のとき、すなわち$\ovd{f}{G}=0$には$f\toG 0$となる。まえの割り算の順序の議論より、割り算して0にならなかったからといって
+$f\toG 0$とならないとは言えない。
+
+グレブナ基底とS多項式の余りとの関係を見たが、これをグレブナ基底とS多項式の0への簡約を見る。「$\set{g_1,\dots,g_s}$がグレブナ基底である$\iff$ $i\neq j$について、$S(g_i,g_j) \toG 0$」
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:
+    先の「グレブナ基底とS多項式の余りとの関係」より、
+    $\ovd{S(g_i,g_j)}{G}=0$となり、あきらかに$S(g_i,g_j) \toG 0$である。
+    \item $\Leftarrow$:
+    復習することになる。
+    $f\in \gen{G}$とする。このとき、$\LT(f)\in \gen{\LT(G)}$となることを示せばよい。
+    $f\in \gen{G}$であるから$f=\sum_{i=1}^s h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。和のほうが次数が下がるかもしれないので、
+    $\deg(f)\le \deg(h_\bullet g_\bullet)$となる。
+    打ち消しの雰囲気を見るために、
+    $m\colon \set{1,\dots,s} \to \Zge^n$を$m(i) = \deg(h_i g_i)$と定義する。
+    そして、$m'\colon (g_\bullet の線形結合の表現) \to \Zge^n$を、
+    \begin{align}
+      m'(\sum_{i=1}^s a_i g_i) = \max\set{\deg(a_ig_i) ; i=1,\dots,s}
+    \end{align}
+    と定義する。ただし、$\deg(0)=-\infty$としておき、$-\infty$は$\Zge^n$のどれよりも小さいということにする。
+    そして、$\delta = m'(\sum_{i=1}^s h_i g_i)$とする。ここで、$\deg$
+    と和の関係(和を取ったら次数が落ちうる)より、$\delta \ge \deg(f)$である。
+    $f=\sum_{i=1}^s h_i g_i$という$f$の表現のうち、
+    $h_\bullet$を走らせて$m'$が最小となるようなものがあるはずなので、
+    $h_\bullet$をそのように選びなおしておく。
+
+    $\delta \ge \deg(f)$であったが、仮に$\delta > \deg(f)$であるとする(背理法)。
+    \begin{align}
+      f =
+      \sum_{m(i)=\delta} \LT(h_i) g_i
+      +
+      \sum_{m(i)=\delta}(h_i - \LT(h_i)) g_i
+      +
+      \sum_{m(i)<\delta} h_i g_i
+    \end{align}
+    $\delta > \deg(f)$だったので、$\sum_{m(i)=\delta}h_i g_i$の
+    先頭項が落ちなければならない。
+
+    これから$\sum_{m(i)=\delta}h_i g_i$を別の表現にして、
+    $m'(f)<\delta$となってしまう(矛盾)$f$の表現を作ることを目指す。
+    「同次のものを足して次数が落ちた」ので、$S$多項式の和で書ける。さらに計算して、
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i) g_i
+      &=
+      \sum_{j,k=1}^s S(\LT(h_j)g_j, \LT(h_k)g_k)\\
+      &=
+      \sum_{j,k=1}^s
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(h_j)\LT(g_j)}\LT(h_j)g_j
+      -
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(h_k)\LT(g_k)}\LT(h_k)g_k\\
+      &=
+      \sum_{j,k=1}^s
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(g_j)}g_j
+      -
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(g_k)}\LT(h_k)g_k\\
+      &=
+      \sum_{j,k=1}^s
+      (\LT(h_j)g_j)\vee (\LT(h_k)g_k) \cdot
+      \frac{1}{g_j \vee g_k}S(g_j,g_k)
+    \end{align}
+    となる。各$j,k$について、今回の仮定$S(g_j,g_k)\toG 0$より、
+    \begin{align}
+      S(g_j,g_k)
+      =
+      \sum_{i=1}^s a_{ijk}g_i,\quad
+      \deg(S(g_j,g_k))\ge \deg(a_{\bullet jk}g_\bullet)
+    \end{align}
+    となる$a_{\bullet} \in k[x_1,\dots,x_n]$が存在する。
+    よって、
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i
+      =
+      \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee(\LT(h_k)g_k)}{g_j\vee g_k}a_{ijk} g_i.
+    \end{align}
+    となる。これで$f$の新たな表現
+    \begin{align}
+      f =
+      \sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i
+      +
+      \sum_{m(i)=\delta} (h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta}h_i g_i
+    \end{align}
+    が得られた。これの$m'$を計算する。
+    \begin{align}
+      m'(新しい表現)
+      &=
+      \max(\delta-1, m'(\sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i))\\
+      &\fbox{足したほう(左)のほうが小さい}\\
+      &\le
+      \max(\delta-1, \max_{i,j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i))\\
+      &\fbox{足したほう(左)のほうが小さい}\\
+      &\le
+      \max(\delta-1, \max_{j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} S(g_j,g_k)))\\
+      &\fbox{S多項式の計算}\\
+      &=
+      \max(\delta-1, \max_{j,k}\deg(S(\LT(h_j)g_j, \LT(h_k)g_k))\\
+      &\fbox{「同次を足したら次数が(真に)落ちてS多項式で書ける」の逆向き}\\
+      &\le
+      \max(\delta-1, \deg(\sum_{j,k}S(\LT(h_j)g_j, \LT(h_k)g_k))\\
+      &\fbox{上の続き}\\
+      &=
+      \max(\delta-1, \deg(\sum_{m(i)=\delta} \LT(h_i)g_i) )\\
+      &\fbox{$f$の定義}\\
+      &\le
+      \deg(f)\\
+      &\fbox{帰納法の仮定}\\
+      &<
+      \delta.
+    \end{align}
+    $\delta = m'(\sum_{i=1}^s h_i g_i)$で、$h_\bullet$は$m'$が最小になるように選んでおいたので、$m'(新しい表現)<\delta$に矛盾する。よって、$m'(新しい表現) = \delta$となる。
+
+    ということで、$f=\sum_{i=1}^s h_i g_i$を$m'$が最小になるように表示すると、
+    \begin{align}
+      \deg(f)
+      \desceq{さっきの}
+      \delta
+      =
+      m'(\sum_{i=1}^s h_i g_i)
+      \desceq{$m'$の定義}
+      \max_{i} \deg(h_i g_i)
+    \end{align}
+    この最大を与える$i$を$I$とよぶことにする。このとき、$\LT(g_i)|\LT(f)$となる。
+    よって、$\LT(f) \in \gen{\LT(G)}$となり、
+    $\LT(\gen{G}) \subset \gen{\LT(G)}$となり、よって、
+    $\gen{\LT(\gen{G})} \subset \gen{\LT(G)}$となる。よって、$G$はグレブナ基底である。
+  \end{itemize}
+\end{myproof}
+
+割り算することなく$S(f,g) \toG 0$かどうかを判定する方法の1つを見る。
+「$\LM(f)$と$\LM(g)$が互いに素ならば、$S(f,g) \toG 0$である。」
+\begin{myproof}
+  \begin{align}
+    S(f,g)
+    &\desceq{互いに素}
+    \LT(g)f - \LT(f)g\\
+    &=
+    \LT(g)(\LT(f) + (f-\LT(f))) - \LT(f)(\LT(g) + (g-\LT(g)))\\
+    &=
+    \LT(g)(f-\LT(f)) - \LT(f)(g-\LT(g)).
+  \end{align}
+  よって、
+  \begin{align}
+    \deg(S(f,g)) \le \max(\LT(g)(f-\LT(f)), \LT(f)(g-\LT(g)))
+  \end{align}
+  となっている。実際には等号が成立していることを見る。仮に$<$だとする。
+  このとき、先頭項の打ち消しが起こらなくてはならないから、
+  $\LT(g)\LT(f-\LT(f)) = \LT(f)\LT(g-\LT(g))$となっている。
+  $\LT(g)$と$\LT(f)$は互いに素なので、
+  $\LT(g)|\LT(g-\LT(g))$とならなければならないが、これは矛盾である。よって、
+  \begin{align}
+    \deg(S(f,g)) = \max(\LT(g)(f-\LT(f)),\LT(f)(g-\LT(g)))
+  \end{align}
+  となっている。これで、$S(f,g)$が$f,g$の線形結合で書けた上に、
+  次数の条件が満たされ、$S(f,g)\toG 0$となる。
+\end{myproof}
+
+次に、$S$多項式の一般化を考える。
+$F=\set{f_1,\dots,f_s}$とする。「$F$の先頭項のシチギー」あるいは
+「$\LT(f_1),\dots,\LT(f_s)$のシチギー」とは、
+\begin{align}
+  (h_1,\dots,h_s)\tatev{\LT(f_1) \\ \vdots \\ \LT(f_s)} = 0
+\end{align}
+を満たす多項式の組$(h_1,\dots,h_s) \in (k[x_1,\dots,x_n])^s$のことである。そして、
+$S(F) \subset (k[x_1,\dots,x_n])^s$を$F$の先頭項のシチギー全体のなす集合とする。
+これは$k[x_1,\dots,x_n]$の一次方程式の自明でない解集合と考えるとよいかもしれない。
+
+シチギーとS多項式との関係を見る。$F=\set{f_1,\dots,f_s}$について、
+\begin{align}
+  S_{ij} = \frac{f_i\vee f_j}{\LT(f_i)}f_i \bbold e_i
+   -
+    \frac{f_i \vee f_j}{\LT(f_j)}f_j \bbold e_j
+\end{align}
+と$S_{ij} \in S(F)$を定義する。そうしておくと、
+\begin{align}
+  S(f_i,f_j) = S_{ij}\tatev{0 \\ \vdots \\ f_i \\ \vdots \\ f_j \\ \vdots \\ 0}
+  =
+  S_{ij}(f_i \bbold e_i^T + f_j \bbold e_j^T)
+\end{align}
+となっている。
+
+分解の基本になる特殊なシチギーを定義する。あるシチギー$S\in S(F)$が
+多重次数$\alpha$次斉次であるとは、
+\begin{itemize}
+  \item $S=(c_1 x^{\alpha(1)},\dots,c_s x^{\alpha(s)})$
+  \item $c_i \neq 0 \implies \alpha(i) + \deg(f_i) = \alpha$
+\end{itemize}
+であることである。雑に言うと、単項式だけでできたシチギー$S$で、
+どの第$i$項も$f_i$の次数を足すと$\alpha$になるようなものである。
+一般のシチギーはそもそも単項式ですらない。
+
+$S(F)$のすべての元(シチギー)は$S(F)$の斉次な元の和に一意的に分解できる。
+\begin{myproof}
+  $S\in S(F)$とする。これを分解する。単位ベクトルで
+  $S= \sum_{i=1}^s f_i \bbold e_i$と書ける。
+  $f_i = \sum_{j=1}^{N(i)} c_{ij}x^{\alpha(i,j)}$となる
+  $N(i)=0,1,\dots$と$c_{ij}\in k$と$\alpha(i,j) \in \Zge^n$が一意的に存在する。
+  それで、
+  \begin{align}
+    S = \sum_{i=1}^s \bbold e_i \sum_{j=1}^{N(i)} c_{ij} x^{\alpha(i,j)}
+  \end{align}
+  となる。
+
+  一意性は、「$i$番目$\alpha$次の係数」というのが一意に定まってしまうので明らか。
+\end{myproof}
