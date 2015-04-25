@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  26 APR 2015 00:33
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  26 APR 2015 02:30
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.026 seconds
+luaotfload | main : fontloader loaded in 0.039 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1146,17 +1146,17 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
 ) (./ex2372agrlex.tex [47]) (./ex2372blex.tex)
 (./ex2372bgrlex.tex [48]) (./ex2372clex.tex) (./ex2372cgrlex.tex [49]) [50]
-[51] [52])
+[51] [52] [53])
 \tf@thm=\write3
- [53] [54] (./main.aux))
+ [54] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
  11952 strings out of 494694
  195321,266212 words of node,token memory allocated
- 6576 words of node memory still in use:
+ 6578 words of node memory still in use:
    11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
 spec, 30 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62706,3:1700,4:2420,5:512,6:2553,7:344,9:1111,10:120
+   avail lists: 1:1,2:62706,3:1702,4:2418,5:513,6:2553,7:344,9:1111,10:120
  15050 multiletter control sequences out of 65536+600000
  95 fonts using 41014099 bytes
  58i,19n,44p,1015b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1188,10 +1188,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (54 pages, 1193140 bytes).
+Output written on main.pdf (54 pages, 1196981 bytes).
 
-PDF statistics: 360 PDF objects out of 1000 (max. 8388607)
- 249 compressed objects within 3 object streams
+PDF statistics: 365 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

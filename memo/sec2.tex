@@ -2900,9 +2900,9 @@ $S(F) \subset (k[x_1,\dots,x_n])^s$を$F$の先頭項のシチギー全体のな
 
 シチギーとS多項式との関係を見る。$F=\set{f_1,\dots,f_s}$について、
 \begin{align}
-  S_{ij} = \frac{f_i\vee f_j}{\LT(f_i)}f_i \bbold e_i
+  S_{ij} = \frac{f_i\vee f_j}{\LT(f_i)} \bbold e_i
    -
-    \frac{f_i \vee f_j}{\LT(f_j)}f_j \bbold e_j
+    \frac{f_i \vee f_j}{\LT(f_j)} \bbold e_j
 \end{align}
 と$S_{ij} \in S(F)$を定義する。そうしておくと、
 \begin{align}
@@ -2936,3 +2936,29 @@ $S(F)$のすべての元(シチギー)は$S(F)$の斉次な元の和に一意的
 
   一意性は、「$i$番目$\alpha$次の係数」というのが一意に定まってしまうので明らか。
 \end{myproof}
+
+$F=(f_1,\dots,f_s)$として、先の$S_{ij}$でシチギー全体$S(F)$
+を生成することができる。「
+$F=(f_1,\dots,f_s)$とする。すべてのシチギー$S\in S(F)$には
+\begin{align}
+  S = \sum_{i<j} u_{ij}S_{ij}
+\end{align}
+となる$u_{ij}\in k[x_1,\dot,x_n]$が存在する。
+$S_{ij} = \frac{f_i \vee f_j}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_j}{\LT(f_j)}\bbold e_j$であった。」
+\begin{myproof}
+  まず$S$が$\alpha$次斉次であるとする。
+  シチギーの定義を考えると、$S$のうち非0な要素が2つ以上なければならない。
+  それらが$i$番目と$j$番目($i<j$)であるとし、$S[i]=c_i x^{\alpha(i)},\, S[j] = c_j x^{\alpha(j)}$とする。$S$は$F$のシチギーなので、$SF=0$
+  である。ここで、$S' \in (k[x_1,\dots,x_n])^s$を、$i$番目を0にするように
+  \begin{align}
+    S' &=  S - \ub{S_{ij}\frac{\LT(f_i)}{f_i\vee f_j}}_{係数1}S[i]\\
+    &=
+    S - S_{ij}\frac{\LT(f_i)}{f_i\vee f_j} c_i x^{\alpha(i)}\\
+  \end{align}
+  と定義する。どちらもシチギーであって、$SF=0$と$S_{ij}F=0$がなりたつので、
+  線形性より$S'F=0$となる。よって、$S'$もシチギーである。このシチギーにも同様の操作を繰り返して、0にたっする。このとき、$S$は$S_{ij}\quad (i<j)$の線形結合でかける。
+
+  あとは斉次を$S_{ij}$で書いたものを足せばよい。
+\end{myproof}
+
+ただし、$F$に対して$S_{ij}$すべてが必要とは限らないので、余分なものを取り除く方法を考える。
