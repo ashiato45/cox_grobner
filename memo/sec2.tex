@@ -2814,33 +2814,31 @@ $f\toG 0$とならないとは言えない。
       +
       \sum_{m(i)<\delta}h_i g_i
     \end{align}
-    が得られた。これの$m'$を計算する。
+    が得られた。これの$m'$を計算する。まず第1の総和を計算する。
     \begin{align}
-      m'(新しい表現)
+      m'(新しい表現の第1の総和)
       &=
-      \max(\delta-1, m'(\sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i))\\
-      &\fbox{足したほう(左)のほうが小さい}\\
-      &\le
-      \max(\delta-1, \max_{i,j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i))\\
-      &\fbox{足したほう(左)のほうが小さい}\\
-      &\le
-      \max(\delta-1, \max_{j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} S(g_j,g_k)))\\
+      m'(\sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i)\\
+      &\fbox{足し算をしたほうが小さくなる}\\
+      &=
+      \max_{i,j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i)\\
+      &\fbox{足し算したほうが小さくなる}\\
+      &=
+      \max_{j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} S(g_j,g_k))\\
       &\fbox{S多項式の計算}\\
       &=
-      \max(\delta-1, \max_{j,k}\deg(S(\LT(h_j)g_j, \LT(h_k)g_k))\\
-      &\fbox{「同次を足したら次数が(真に)落ちてS多項式で書ける」の逆向き}\\
-      &\le
-      \max(\delta-1, \deg(\sum_{j,k}S(\LT(h_j)g_j, \LT(h_k)g_k))\\
-      &\fbox{上の続き}\\
-      &=
-      \max(\delta-1, \deg(\sum_{m(i)=\delta} \LT(h_i)g_i) )\\
-      &\fbox{$f$の定義}\\
-      &\le
-      \deg(f)\\
-      &\fbox{帰納法の仮定}\\
+      \max_{j,k}\deg(S(\LT(h_j)g_j, \LT(h_k)g_k)\\
+      &\fbox{同次を足したら次数が真に落ちてS多項式で書ける}\\
       &<
+      \deg(\sum_{m(i)=\delta} \LT(h_i)g_i)\\
+      &=
       \delta.
     \end{align}
+    第2の総和、第3の総和はそもそも$m'$は$\delta$未満なので、結局
+    \begin{align}
+      m'(新しい表現) < \delta
+    \end{align}
+    となる。
     $\delta = m'(\sum_{i=1}^s h_i g_i)$で、$h_\bullet$は$m'$が最小になるように選んでおいたので、$m'(新しい表現)<\delta$に矛盾する。よって、$m'(新しい表現) = \delta$となる。
 
     ということで、$f=\sum_{i=1}^s h_i g_i$を$m'$が最小になるように表示すると、
@@ -2962,3 +2960,110 @@ $S_{ij} = \frac{f_i \vee f_j}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_j}{\LT(f_j)
 \end{myproof}
 
 ただし、$F$に対して$S_{ij}$すべてが必要とは限らないので、余分なものを取り除く方法を考える。
+
+これで、グレブナ基底の判定条件を$\toG 0$を使って拡張する。
+「イデアル$I$の基底$G=(g_1,\dots,g_t)$がグレブナ基底である
+$\iff$
+\begin{align}
+  \Exists{S_1,\dots,S_m はS(G)の斉次な基底}
+  \Forall{i=1,\dots,m}
+  S_i G \toG 0.
+\end{align}
+」
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:$S(G)$の斉次な基底として$S_{ij}$全体をとっておく。
+    すると、$S_{ij}G\toG 0$を確かめればよいが、これは$\ovd{S(g_i,g_j)}{G}=0$
+    を示せばよく、これは先のS多項式とグレブナ基底の関係である。
+    \item $\Leftarrow$:
+    $f\in I$とする。$\LT(f)\in \gen{\LT(G)}$を示せばグレブナ基底であることが示せる。
+    $f\in I = \gen{G}$なので、$f = \sum_{i=1}^t h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。$m\colon \set{1,\dots,t} \to \Zge^n$を
+    $m(i) = \deg(h_i g_i)$とする。
+    そして、$m'\colon (g_\bullet の線形結合の表現) \to \Zge^n$を
+    \begin{align}
+      m'(\sum_{i=1}^t a_i g_i) = \max_{i=1,\dots,t} \deg(a_ig_i)
+    \end{align}
+    と定義する。そして、$\delta = m'(\sum_{i=1}^t h_i g_i)$とする。
+    $\delta$が最小になるように$h_\bullet$選んでおくことができるので、
+    そうしておく。
+    $f=\sum_{i=1}^t h_i g_i$だったので、$\deg(f)\le \delta$である。
+    ここで、仮に$\deg(f)<\delta$だったとして矛盾を導こう。
+
+    \begin{align}
+      f = \sum_{m(i)=\delta} \LT(h_i)g_i
+      +
+      \sum_{m(i)=\delta} (h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta} h_i g_i
+    \end{align}
+    と書ける。$\deg(f)<\delta$と仮定したので、第1の総和の$\sum_{m(i)=\delta}\LT(h_i)g_i$の$m'$は$\delta$未満でなければならない。
+    このためには、この和のなかで先頭項の打ち消しが起こらなければならないので、
+    $\sum_{m(i)=\delta}\LT(h_i)\LT(g_i)=0$とならなければならない。
+    よって、
+    \begin{align}
+      S = \sum_{m(i)=\delta} \LT(h_i)\bbold e_i
+    \end{align}
+    とすると、これは$S(G)$に属するシチギーとなる。
+    これは0でないところは単項式になっているので、$\delta$次斉次のシチギーになっていることがわかる。仮定より、斉次な基底$S_1,\dots,S_m$が存在するので、
+    \begin{align}
+      S = \sum_{j=1}^m u_i S_i
+    \end{align}
+    となる$u_i \in k[x_1,\dots,x_n]$が存在する。$S$が$\delta$次斉次であり、
+    $S_j$らも斉次なので、係数を比較することにより$u_j S_j$が\footnote{「$S_j$が」ではない。}$\delta$次斉次でないなら、
+    $u_j = 0$である\footnote{それならはじめから書かなきゃいいじゃないかという気がするが、基底が来るのが$f$が来るより先なので仕方無い。}。
+    よって、$S=\sum_{u_j \neq 0} u_j S_j$である。$u_j S_j$は$G$の$\delta$次斉次なシチギーなので、
+    \begin{align}
+      \deg((u_j S_j)G) < \delta
+    \end{align}
+    と、真に次数が落ちる。
+    さらに、次数の条件の準備をする。仮定より、$S_j G \toG 0$なので、
+    \begin{align}
+      S_j G = \sum_{i=1}^t a_{ij} g_i
+    \end{align}
+    なる$a_{ij}\in k[x_1,\dots,x_n]$が存在し、さらに次数の条件
+    \begin{align}
+      \deg(a_{ij}g_i) \le \deg(S_j G)
+    \end{align}
+    がかかる。
+
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i
+      =
+      SG
+      =
+      (\sum_{j=1}^m u_j S_j)G
+      =
+      \sum_{u_j\neq 0}u_j \sum_{i=1}^t a_{ij}g_i
+    \end{align}
+    なので、新たな$f$の表現
+    \begin{align}
+      f= \sum_{u_j \neq 0}u_j \sum_{i=1}^t a_{ij}g_i
+      +
+      \sum_{m(i)=\delta}(h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta}h_i g_i
+    \end{align}
+    が得られる。これの$m'$を計算する。まず第1の総和について計算する。
+    \begin{align}
+      m'(新しい表現の第1の総和)
+      &=
+      m'( \sum_{u_j \neq 0}u_j \sum_{i=1}^t a_{ij}g_i)\\
+      &=
+      \max_{i,j}m(u_j a_{ij}g_i)\\
+      &\fbox{$m'$の定義}\\
+      &\le
+      \max_{i,j}m(u_j S_j G)\\
+      &\fbox{次数の条件}\\
+      &<
+      \delta\\
+      &\fbox{$u_j S_j$は$\delta$次斉次のシチギー}.\\
+    \end{align}
+第2、第3の総和についてはそもそも$m'$は$\delta$未満である。
+
+よって、
+$m'(新しい表現) < \delta$がわかった。これは、はじめに表現を最小に取っておいたことに矛盾する。よって、$\deg(f)=\delta=\max_{i}\deg(h_ig_i)$である。最大を与える$i$を
+$I$とすると、$\deg(f)=\deg(h_I g_I)$となり、$\LT(g_I)|\LT(f)$となる。よって、
+$\LT(f)\in \gen{\LT(G)}$となり、$\LT(I) \subset \gen{\LT(G)}$となる。
+よって、$\gen{\LT(I)} \subset \gen{\LT(G)}$となり、$G$はグレブナ基底である。
+  \end{itemize}
+\end{myproof}
