@@ -3067,3 +3067,288 @@ $\LT(f)\in \gen{\LT(G)}$となり、$\LT(I) \subset \gen{\LT(G)}$となる。
 よって、$\gen{\LT(I)} \subset \gen{\LT(G)}$となり、$G$はグレブナ基底である。
   \end{itemize}
 \end{myproof}
+
+シチジーの基底から余計なものを取り除く条件を考える。シチジーの基底は
+ペアのシチジーで張れることがさっきわかったので、そのときを考えてみる。
+「$G=(g_1,\dots,g_s)$とする。
+$\cal S \subset \set{S_{ij}; 1\le i < j \le n}$とし、
+$\cal S$が$S(G)$を張るとする。さらに、相異なる$i,j,k$について、
+\begin{itemize}
+  \item $\LT(f_k)| (f_i \vee f_j)$
+  \item $S_{ik},\, S_{jk} \in \cal S$
+\end{itemize}
+となっているとする。このとき、$\cal S - \set{S_{ij}}$も$S(G)$の基底になっている。」
+\begin{myproof}
+  $S_{ij}$が$S_{ik}$と$S_{jk}$で書ければよい。$i < j < k$としておく。
+  \begin{align}
+    S_{ij}
+    &=
+    \frac{f_i \vee f_j}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_j}{\LT(f_j)}\bbold e_j\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}\cdot \frac{f_i \vee f_k}{\LT(f_i)}\bbold e_i
+    -
+    \frac{f_i \vee f_j}{f_j \vee f_k}\cdot \frac{f_j \vee f_k}{\LT(f_j)}\bbold e_j\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}(\frac{f_i\vee f_k}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_k}{\LT(f_k)}\bbold e_k + \frac{f_i \vee f_k}{\LT(f_k)}\bbold e_k)
+    -
+    \frac{f_i \vee f_j}{f_j \vee f_k}(\frac{f_j \ve f_k}{\LT(f_j)}\bbold e_j -
+    \frac{f_j \vee f_k}{\LT(f_k)}\bbold e_k + \frac{f_j \vee f_k}{\LT(f_k)}\bbold e_k)\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}S_{ik} - \frac{f_i \vee f_j}{f_j \vee f_k}S_{jk}.
+  \end{align}
+\end{myproof}
+
+アルゴリズム。$[a,b] = (\min(a,b),\max(a,b))$としておく。
+\begin{myproof}
+  \begin{itemize}
+    \item どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+    $G$に含まれること:
+    初期ではあきらか。$G$は増えるだけなことに注意。そのため、$B$が減少することは問題にならない。
+    $B$が増えるときも、増やした$G$にあわせている。
+    \item どの段階でも$B$が次の性質を持つことを示す:
+    \begin{align}
+      \begin{cases}
+        1 \le i < j \le t \\
+        かつ \\
+        (i,j) \notin B
+      \end{cases}
+      \implies
+      \begin{cases}
+        S(f_i,f_j) \toG 0 \\
+        または \\
+        \Criterion(f_i,f_j,B)
+      \end{cases}
+    \end{align}
+    いままで同様、メインループ前の変数は$b$を、後は$a$をつける。
+    初期では$(i,j)\in B$がどの$i,j$についてもみたされ、前件が否定されるので自明に成立する。$B_b$が条件
+    \begin{align}
+      \begin{cases}
+        1 \le i_b < j_b \le t_b \\
+        かつ \\
+        (i_b,j_b) \notin B_b
+      \end{cases}
+      \implies
+      \begin{cases}
+        S(f_{i_b},f_{j_b}) \rightarrow_{G_b} 0 \\
+        または \\
+        \Criterion(f_{i_b},f_{j_b},B_b)
+      \end{cases}
+    \end{align}
+    を満たしているとし、さらに
+    \begin{align}
+      1\le i_a < j_a \le t_a \quad かつ \quad (i_a,j_a)\notin B_a
+    \end{align}
+    が満たされているとして、
+    \begin{align}
+      S(f_{i_a},f_{j_a}) \rightarrow_{G_a} 0 \quad または
+      \quad
+      \Criterion(f_{i_a},f_{j_a},B_a)
+    \end{align}
+    を示そう。
+    \begin{enumerate}[label=(\alph*)]
+      \item $(i_a,j_a) \in B_b$のとき:
+      $(i_a,j_a)\notin B_a$でかつ$(i_a,j_a)\in B_b$となっている。
+      これは、$B$のプログラム中の遷移を見ると、プログラム中で$(i,j)$
+      として$(i_a,j_a)$がえらばれている。
+      この$(i_a,j_a)$を追跡する。
+      \begin{enumerate}[label=(\Alph*)]
+        \item \MARU{1}でYesのとき:
+        \begin{align}
+          B_a &= B_b - \set{(i_a,j_a)}\\
+          t_a &= t_b \\
+          G_a &= G_b
+        \end{align}
+        である。
+         このときは$\LT(f_{i_a})$と$\LT(f_{j_a})$が互いに素である。
+
+         このとき、「どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+         $G$に含まれる」と$(i_a,j_a)\in B_b$より、$f_{i_a},f_{j_a} \in G_b = G_a$である。よって、先の命題により
+         $S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+        \item \MARU{2}でYesのとき:
+        \begin{align}
+          B_a &= B_b - \set{(i_a,j_a)}\\
+          t_a &= t_b \\
+          G_a &= G_b
+        \end{align}
+        である。
+
+        自明に$\Criterion(f_{i_a},f_{j_a},B_a)$が成立する。
+        \item \MARU{3}でYesのとき:
+        \begin{align}
+          B_a &= B_b - \set{(i_a,j_a)}\\
+          t_a &= t_b \\
+          G_a &= G_b
+        \end{align}
+        である。このとき、「どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+        $G$に含まれる」と$(i_a,j_a)\in B_b$より、$f_{i_a},f_{j_a} \in G_b = G_a$である。よって、
+        \begin{align}
+          \ovd{S(f_{i_a},f_{j_a})}{G_a} = \ovd{S(f_{i_a},f_{j_a})}{G_b}= S= 0
+        \end{align}
+        となる。よって、$S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+        \item \MARU{3}でNoのとき:
+        \begin{align}
+          t_a &= t_b + 1 \\
+          f_{t_a} &= S = \ovd{S(f_{i_a},f_{j_a})}{G_b}\\
+          G_a &= G_b + [f_{t_a}]\\
+          B_a &= B_b \cup \set{(i,t_{a}) ; 1\le i \le t_b} - \set{(i_a,j_a)}\\
+        \end{align}
+        となっている。このとき、$q_\bullet$を商として、
+        \begin{align}
+          S(f_{i_a},f_{j_a}) = \sum_{I=1}^{t_b} q_I f_I + \ovd{S(f_{i_a},f_{j_a})}{G_b}
+        \end{align}
+        となっている。さらにすすめると、
+        \begin{align}
+          S(f_{i_a},f_{j_a}) = \sum_{I=1}^{t_b} q_I f_I + f_{t_a}
+        \end{align}
+        となっており、$S(f_{i_a},f_{j_a})$を$G_a$で割ったあまりが0になることがわかる。よって、$S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+      \end{enumerate}
+      \item $(i_a,j_a) \notin B_b$のとき:
+      $(i_a,j_a)\notin B_a$でかつ$(i_a,j_a)\notin B_b$となっている。
+      何か$i<j$なる$(i,j)\in B_b$がアルゴリズム中で選択されて、
+      \begin{align}
+        B_a = B_b - \set{(i,j)}
+      \end{align}
+      となっている。$(i,j)\in B_b$でかつ$(i_a,j_a)\notin B_b$なので、
+      $(i,j)\neq (i_a,j_a)$となっている。$(i,j)$のアルゴリズム中での振舞によって場合分けする。
+      \begin{enumerate}[label=(\Alph*)]
+        \item \MARU{1}がYesのとき:
+        \begin{align}
+          B_a &= B_b - \set{(i,j)}\\
+          t_a &= t_b \\
+          G_a &= G_b
+        \end{align}
+        となる。$1\le i_a < j_a \le t_a = t_b$となり、かつ$(i_a,j_a) \notin B_b$なので、$B_b$の条件が満たされ、
+        \begin{align}
+          S(f_{i_a},f_{j_a}) \to_{G_b} 0 \quad
+          または \quad
+          \Criterion(f_{i_a},f_{j_a},B_b)
+        \end{align}
+        $S(f_{i_a},f_{j_a}) \to_{G_b} 0$がみたされるなら$G_b = G_a$より
+        $S(f_{i_a},f_{j_a}) \to_{G_a} 0$となり、示される。
+
+        $\Criterion(f_{i_a},f_{j_a},B_b)$のときを考える。
+        このとき、
+        \begin{itemize}
+          \item $[i_a,k] \notin B_b$
+          \item $[j_a,k] \notin B_b$
+          \item $\LT(f_k)|(f_{i_a}\vee f_{j_a})$
+        \end{itemize}
+        のすべてをみたす$k \in \set{1,\dots,t_b}-\set{i_a,j_a}$が存在する。
+        $B_a = B_b -\set{(i_a,j_a)}$なので、
+        $B_a \subset B_b$なので、$B_b^c \subset B_a^c$である。
+        $[i_a,k] \in B_b^c \subset B_a^c$となり、$[i_a,k]\notin B_a$となる。
+        同様に$[j_a,k] \notin B_a$となる。また、$t_a = t_b$なので、
+        $k\in \set{1,\dots,t_a}-\set{i_a,j_a}$である。まとめると、$k$が
+        \begin{itemize}
+          \item $[i_a,k]\notin B_a$
+          \item $[j_a,k]\notin B_a$
+          \item $\LT(f_k)|(f_{i_a} \vee f_{j_a})$
+          \item $k\in \set{1,\dots, t_a}-\set{i_a,j_a}$
+        \end{itemize}
+        をみたす。よって、$\Criterion(f_{i_a},f_{j_a},B_a)$が満足される。
+        \item \MARU{2}がYesのとき:
+        \begin{align}
+          B_a &= B_b - \set{(i,j)}\\
+          t_a &= t_b \\
+          G_a &= G_b
+        \end{align}
+        なので、「$\MARU{1}$がYesのとき」と同様に通る。
+        \item \MARU{3}がYesのとき:
+        やはり同様。
+        \item \MARU{3}がNoのとき:
+        このとき、
+        \begin{align}
+          S &= \ovd{S(f_{i},f_{j})}{G_b}\\
+          t_a &= t_b + 1\\
+          f_{t_a} &= S = \ovd{S(f_{i},f_{j})}{G_b}\\
+          G_a &= G_b + [f_{t_a}]\\
+          B_a &= (B_b \cup \set{(I,t_a); 1\le I \le t_b})-\set{(i,j)}
+        \end{align}
+        となっている。
+        \begin{enumerate}[label=(\roman*)]
+          \item $j_a = t_a$のとき:
+          2番目の要素を見ると、あきらかに$(i_a,j_a) = (i_a,t_a) \in B_b \cup \set{(I,t_a); 1 \le I \le t_b}$である。また、$(i_a,j_a) = (i_a,t_a) \neq (i,j)$であることを先に言ったので、
+          \begin{align}
+            (i_a,j_a) \in (B_b \cup \set{(I,t_a); 1 \le I \le t_b}) - \set{(i,j)}
+            =
+            B_a
+          \end{align}
+          である。一方、(b)に入ったときの仮定により、$(i_a,j_a)\notin B_a$である。
+          これは矛盾であるから、この(a-D-i)という状況は起こらない。
+          \item $j_a < t_a$のとき:
+            このとき、$B_b$の条件を満たすので、
+            \begin{align}
+              S(f_{i_a},f_{j_b})\to_{G_b} 0 \quad
+              または \quad
+              \Criterion(f_{i_a},f_{j_a},B_b)
+            \end{align}
+            となる。$S(f_{i_a},f_{j_a})\to_{G_b} 0$を満たすときには、
+            $G_a$は$G_b$より広いので$S(f_{i_a},f_{j_a})\to_{G_a}0$となり、示される。
+
+            $\Criterion(f_{i_a},f_{j_a},B_b)$が満たされるときは、
+            \begin{itemize}
+              \item $[i_a,k]\notin B_b$
+              \item $[j_a,k]\notin B_b$
+              \item $\LT(f_k)|(f_{i_a}\vee f_{j_a})$
+            \end{itemize}
+            のすべてをみたす$k\in \set{1,\dots,t_b}-\set{i_a,j_a}$が存在する。
+            仮に$[i_a,k]\in B_a$とする。$i_a$も$k$も$\set{1,\dots,t_b}$の元なので、
+            $\set{(I,t_a); 1\le I \le t_b}$には属さない。よって、$B_b$に属する。よって、$[i_a,k]\notin B_a$がわかった。同様に、
+            $[j_a,k]\notin B_a$もわかる。引き続き
+            $\LT(f_k)|(f_{i_a}\vee f_{j_a})$もみたされるので、
+            $\Criterion(f_{i_a}f_{j_a},B_a)$も満たされる。
+        \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
+    \item $B=\emptyset \implies Gはグレブナ基底$:
+    $t$を$G$の長さとする。
+    \begin{align}
+      \cal I =
+      \set{(i,j); 1\le i < j \le t,\quad \Criterion(f_i,f_j,B)は(i,j)が選択されたときfalse.}
+    \end{align}
+    とする。このとき、あとで証明する主張がなりたつ:
+    「$\cal S = \set{S_{ij}; (i,j)\in \cal I}$は『$S_{ij}G = S(f_i,f_j)\toG 0$がすべての$S_{ij}\in \cal S$について成立する』という性質を持つ$S(G)$の基底である。」
+
+    $\cal S$を考えると、これは$S_{ij}$だけでできた基底なので斉次基底であり、さらに
+    「$S_{ij}G \toG 0$がすべての$S_{ij}\in \cal S$について成立する」という性質を持つので、先のグレブナ基底の$\toG 0$での判定の定理を利用し、$G$がグレブナ基底であることがわかる。
+
+    $B=\emptyset$はなんだったのかという気がするが、それはこの「主張」を示すのに使う。
+    \item 「主張」の証明:$B\neq \emptyset$とする。
+    「どの段階でも$B$が次の性質を持つことを示す」と$B\neq \emptyset$より、前件が自明に満足されるので、
+    \begin{align}
+      1 \le i < j \le t
+      \implies
+      \begin{cases}
+        S(f_i,f_j)\toG 0 \\
+        または \\
+        \Criterion(f_i,f_j,B)
+      \end{cases}
+    \end{align}
+    となる。$\cal I$の定義より、$(i,j)$について、
+    $\Criterion(f_i,f_j,B)=false$がその$B$において成立するので、「または」の一方が潰され、$S(f_i,f_j)\toG 0$が成立する。
+
+    あとは、$\cal S$が$S(G)$の基底になることを示す。
+    $list$を、$B$から$(i,j)$のペアを外したときのものを順に入れたものにする。
+    次に、その$list$を逆順に並べ替える。このはじめの時点では、
+    $S_{ij}$をすべて含んでいるので、$S(G)$を張る。
+    この$list$を先頭から走って、$\Criterion(f_i,f_j,B_{(i,j)が選択されたとき})$が$true$なら除去するという作業をくりかえす。取り除くとき、
+    $\Criterion(f_i,f_j,B_{(i,j)が選択されたとき})$が$true$なので、
+    「何か$k\notin \set{i,j}$が存在して、これに対して
+    \begin{itemize}
+      \item $[i,k]\notin B$
+      \item $[j,k] \notin B$
+      \item $\LT(f_k)|(f_i \vee f_j)$
+      」となっている。この時点で$[i,k]\notin B$で$[j,k]\notin B$なので、
+      $list$が逆順になっていることから、$[i,k],[j,k]\in list$となっている。
+      そして、$\LT(f_k)|(f_i \vee f_j)$となっているので、
+      「シチジーの基底から余計なものを取り除く条件」より、
+      除去したあとでも$S(G)$を張る。この操作を$list$を最後まで走ると、
+      $\cal I$となる。よって、$\cal I$が所与の性質を持つ。
+    \end{itemize}
+  \item アルゴリズムの停止:
+  停止しなかったとしよう。このとき、$B$は毎回減少するので、
+  停止しないためには永遠に$B$の追加が行なわれなければならず、これに伴なって$G$は
+  余りで増やされていく。余りの定義より、$\gen{\LT(G)}$は真に増加し続けることになるが、これは多項式環がACCを満たすことに矛盾する。
+
+  \end{itemize}
+\end{myproof}
