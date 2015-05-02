@@ -3352,3 +3352,370 @@ $\cal S$が$S(G)$を張るとする。さらに、相異なる$i,j,k$につい�
 
   \end{itemize}
 \end{myproof}
+
+\begin{handcopy}
+  アルゴリズムの基本的なアイディアは、$B$に考慮すべきペア$(i,j)$を記録しておくことである。
+  さらに、我々は命題4も命題10も適用できないS多項式$S(g_i,g_j)$に対してだけ余りを計算すれっばよい。
+
+  このアルゴリズムが有効に機能することを証明するために、まず、アルゴリズムのすべての段階において、$B $が次の性質を持つことを観察する。すなわち、もし
+  $1\le i<j\le t$かつ$(i,j)\notin B$であるならば、
+  \begin{align}
+    S(f_i,f_j)\toG 0 あるいは \Criterion(f_i,f_j,B)が成り立つ
+  \end{align}
+  初期状態ではこれはただしい。なぜなら$B$はすべての可能なペアを持った集合として始まるからである。我々は、$B$のある中間の状態に対して(8)が成り立っているならば、
+  $B$の状態が変化して(それを例えば$B'$とする)も
+  引き続いて(8)が成り立っていることを示す必要がある。
+
+  これを証明するために、$(i,j)\notin B'$としよう。もし$(i,j)\in B$ならば、
+  アルゴリズムを調べると$B'=B-\set{(i,j)}$となることがわかる。
+  さて、$B$から$(i,j)$を取り除く前のステップを見よう。もし、
+  $\LCM(\LT(f_i),\LT(f_j))=\LT(f_i)\LT(f_j)$であるならば、
+  命題4により$S(f_i,f_j)\toG 0$で(8)は成り立つ。また、
+  $\Criterion(f_i,f_j,B)$が真であるならば(8)は明らかに成り立つ。そこで、どちらも真でなかったと仮定しよう。この場合は、アルゴリズムは余り$S=\ovd{S(f_i,f_j)}{G}$を計算する。もし、$S=0$ならば、補題2より$S(f_i,f_j)\toG 0$という期待していた結果が出る。
+  再度に、もし$S\neq 0$であるならば、$G$を$G'=G\cup \set{S}$まで拡張する。
+  すると$S(f_i,f_j)\to_{G'}0$となるが、これが正しいことの検証は読者にまかせる。
+
+  しかしまだ$(i,j)\notin B$の場合を調べることがん怒っている。ここで(8)は$B$に対しては成立する。これから(8)が$B'$に対しても成立することが導かれるが、この証明は読者の演習問題として残す。
+
+  次に、$B=\emptyset$であるときも、$G$がグレブナ基底であることを示す必要がある。これを証明するために、$t$を$G$の長さとし、次の性質を見たすペア$(i,j) (1\le i<j\le t)$全体の集合$\cal I$を考える: 判定条件$\Criterion(f_i,f_j,B)$はペア$(i,j)$がアルゴリズムの中で選択されたとき偽である。このとき次の主張が成り立つ:$\cal S=\set{S_{ij}:(i,j)\in \cal I}$は、$S_{ij}G = S(f_i,f_j)\toG 0$がすべての
+  $S_{ij}\in \cal S$に対して成り立つという性質を持つ、$S(G)$の来手いである。この主張と定理9によって、$G$がグレブナ基底であることが証明される。
+
+  主張を証明するために、(8)が$1\le i < j\le t$であるすべてのペア$(i,j)$に対して成り立つことが、$B=\emptyset$から導かれることに注意する。これより、すべての$(i,j)\in \cal I$に対して$S(f_i,f_j)\toG 0$であることが従う。残ったのは、$\cal S$が$S(G)$の基底になることを証明することである。これを証明するために、まず、アルゴリズムにおいて、いつそれが$B$から取り除かれたかに従って、ペア$(i,j)$を順序付けることができることに注意しよう(この順序付けの詳細については演習問題10を参照)。さて、最後に取り除かれたものから出発して、順序を逆にしてペアの順序集合をたどる。そして、アルゴリズムのその時点で$\Criterion(f_i,f_j,B)$が真となるペア$(i,j)$を取り除いていく。すべてのペアを通過して、取り除くべきものは取り除いたあとの集合に残ったペアがちょうど$\cal I$
+  の元になる。このアルゴリズム実行する各段階において、まだ取り除かれていないペア
+  $(i,j)$に対応するシチギーは$S(G)$の基底を作ることを示す。
+  $S_{ij}$全体は$S(G)$の基底となり、初期状態はすべての$S_{ij}$から始めているので、この主張はアルゴリズムの初期状態では正しい。さらに、ある時点でペア$(i,j)$を取り除いたとすれば、$\Criterion(f_i,f_j,B)$の定義から、$k$が存在して$\LT(f_k)$は
+  LCM条件を満たし、$[i,k],[j,k]\notin B$であることが導かれる。こうして、
+  $[i,k]$と$[j,k]$は早いうちに$B$から取り除かれ、したがって、$S_{ik}$と$S_{jk}$は今計算している集合にまだのこっている。なぜならペアの集合を逆の順序でたどっているからである。命題10より、$S_{ij}$を消した後でも残った元が基底となっていることが従う。
+
+  最後に、アルゴリズムが停止することを証明する必要がある。もとのアルゴリズムの証明と同様に(sec 7の定理2)、$G$はいうでもイデアルの基底である。元を付け加えて$G$を拡張するたびに、単項式イデアル$(\gen{\LT(G)})$は真に大きくなる。昇鎖条件ACC
+  により、いずれかの時点で$G$はそれ以上おおきくならない。したがって、
+  最終的に$B$には元は加えられなくなる。アルゴリズムのWHILE...DOループを通過するたびに
+  $B$の元が1つ取り除かれるので、最終的には$B=\emptyset$とならなければならず、ここでアルゴリズムは停止する。
+  \end{handcopy}
+
+
+命題4について。
+「有限集合$G\subset k[x_1,\dots,x_n]$を考える。$f,g\in G$が
+\begin{align}
+  \LCM(\LM(f),\LM(g)) = \LM(f)\cdot \LM(g)
+\end{align}
+を満たしているとする。これは、$f$と$g$の先頭単項式が互いに素であることを意味している。
+このとき$S(f,g)\toG 0$である。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item 簡単のために、$\LC(f)=\LC(g)=1$とする。
+    \item Define $p$ as $f = \LM(f) + p$.
+    \item Define $q$ as $g = \LM(g) + q$.
+    \item
+    \begin{align}
+      S(f,g) &=
+      \LM(g) f - \LM(f)g\\
+      &=
+      (g-q)f - (f-p)g\\
+      &=
+      pg-qf.
+    \end{align}
+    \item Set a subgoal:
+    \begin{align}
+      \multideg(S(f,g)) = \max(\multideg(pg),\multideg(qf)) ?
+    \end{align}
+    \item Because of (4) and "multidegree of a sum $\le$ multidegree of terms"
+    \begin{align}
+      \deg(S(f,g)) \le \max(\deg(pg), \deg(qf)).
+    \end{align}
+    \item Make assumption: (6) satisfies $<$.
+    \item Because (4) and (6), (4)'s LT vanishes, and $\LT(pg) = \LT(qf)$.
+    And $\LT(p)\LT(g) = \LT(q) \LT(f)$.
+    \item Because of (8), $\LT(f)$ divides $\LT(g)\LT(p)$.  Assumption $\LT(f)\perp \LT(g)$ implies $\LT(f)$ divides $\LT(p)$.
+    \item Definition (2) means $\deg(\LT(p)) < \deg(\LT(f))$, but this contradicts (9).
+    \item Contradiction (10) negates assumption (7), and we get
+    \begin{align}
+      \deg(S(f,g)) = \max(\deg(pg), \deg(qf)).
+    \end{align}
+    This completes subgoal (5).
+    \item We get a representation (4) $S(f,g)= pg-qf$, and (11) satisfies "contraction by G to 0"'s degree condition $\deg(S(f,g)) \ge \deg(pg), \deg(qf)$.  $S(f,g) \toG 0$.
+  \end{enumerate}
+\end{myproof}
+
+補題7: 「$S(F)$のすべての元は、$S(F)$の斉次な元の和に一意に分解できる。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Let $S=(h_1,\dots,h_s) \in S(F)$.  (This means $SF=0$.)
+    \item Fix $\alpha \in \Zge^n$.
+    \item Fix $i$.
+    \item Fix $h_{i\alpha}$ a term of $h_i$, and $\deg(h_{i\alpha}f_i) = \alpha$.
+    \item $h_{i\alpha}\LT(f_i)$ is the term of $\sum_{i=1}^s h_i \LT(f_i) = 0$ whose degree is $\alpha$.
+    \item Free $i$ fixed in (3).
+    \item Take terms whose degrees are $\alpha$ of $\sum_{i=1}^s h_i \LT(f_i)=0$, and we get $\sum_{i=1}^s h_{i\alpha}\LT(f_i) = 0$.
+    \item Free $\alpha$ fixed in (2).  $\alpha$ runs over $\Zge^n$, so $h_i = \sum_{\alpha \in \Zge^n} h_{i\alpha}$.
+    $S= (\sum_{\alpha \in \Zge^n} h_{i\alpha})_{i} = \sum_{\alpha\in \Zge^n} (h_{i\alpha})_i$.  For each $i$, $(h_{i\alpha})$ are syzygys whose multidegree are $\alpha$.
+  \end{enumerate}
+\end{myproof}
+
+命題8:$F=(f_1,\dots,f_s)$を考える。すべてのシチギー$S\in S(F)$は
+\begin{align}
+  S=\sum_{i<j} u_{ij}S_{ij}
+\end{align}
+とかける。ここで、$u_{ij} \in k[x_1,\dots,x_n]$で、シチギー$S_{ij}$は
+\begin{align}
+  S_{ij} = \frac{x^{\gamma}}{\LT(f)}\bbold e_i - \frac{x^\gamma}{\LT(g)}\bbold e_j
+  ,\quad
+  x^\gamma = \LCM(\LT(f),\LT(g))
+\end{align}
+である。
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+      \item Fix $S\in S(F)$.
+      \item Assume $S$ has degree of $\alpha$.  This also means $S \neq 0$.
+      \item Because $S$ is a syzygy, so $S$ has at least 2 non-zero components.  Let their indexes are $i < j$, and let $S[i] = c_i x^{\alpha(i)},\, S[j] = c_j x^{\alpha(j)}$ where $c_i, c_j \in k,\, \alpha(i), \alpha(j) \in \Zge^n$.
+      Without loss of generarity, we can assume that $\alpha(i) \ge \alpha(j)$.
+      \item Because of (2), $\alpha(i) + \deg(f_i) = \alpha$ and $\alpha(j) + \deg(f_j) = \alpha$.
+      \item Because of (4),
+      \begin{align}
+          \alpha - \gamma
+          =
+          \alpha - \max(\alpha(i),\alpha(j))
+          =
+          \alpha - \alpha(j)
+          =
+          \multideg(f_j)
+          \ge
+          0.
+      \end{align}
+      So, $x^{\alpha-\gamma}$ is polynomial (not fractional function).  Using this fact, calculate $S' = S-c_i \LC(f_i)x^{\alpha - \gamma}S_{ij}$.  Its $i$-th component is
+      \begin{align}
+        S'[i]
+        &=
+        S[i] - (c_i \LC(f_i)x^{\alpha-\gamma}S_{ij})[i]\\
+        &=
+        c_i x^{\alpha(i)} - c_i \LC(f_i)x^{\alpha-\gamma} \frac{x^{\gamma}}{\LT(f_i)}\\
+        &=
+        0.
+      \end{align}
+      \item The $i$-th component of $S'$ is zero, and zeros in $S$ are also zero in $S'$, so zeros of $S'$ is less than $S$.
+      \item The fact that syzygy $S(F)$ is $k[x_1,\dots,x_n]$ module implies that $S'$ is also syzygy, because $S, S_{ij}$ are syzygy of $\LT(F)$.
+      \item (6)(7) implies that $S'$ is a syzygy, and has less zeros than $S$.
+      Procedure from (3) to here is repeated until $S$ become $0$.
+      This means that $S$ is written as $k[x_1,\dots,x_n]$-coefficient linear combination of $(S_{ij})_{ij}$.  This completes the proof.
+  \end{enumerate}
+\end{myproof}
+
+定理9:「イデアル$I$の基底$G=(g_1,\dots,g_t)$がグレブナ基底であることと、
+シチギー全体の集合$S(G)$において、その1つの斉次基底のすべての元
+$S=(h_1,\dots,h_t)$に対して
+\begin{align}
+  SG = \sum_{i=1}^t h_i g_i \toG 0
+\end{align}
+となることは同値である。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Fix $f\in S(G)$.  $f$ can be represented as $f = \sum_{i=1}^t h_i g_i$ using $h_i \in k[x_1,\dots,x_n]$.
+    \item Define $m(i) = \deg(h_i g_i)$.
+    \item Define $\delta = \max(m(i); i=1,\dots,t)$.
+    \item Retake $h_1,\dots,h_t$ in (1) $\delta$ to be smallest.
+    \item (1) and definition (3) implies $\deg(f) \le \delta$.
+    \item Assume that $\deg(f) < \delta$.
+    \item (6) implies that the cancellation of leading terms in $\sum_{m(i)=\delta} \LT(h_i)g_i$ occurs.
+    \item (7) implies $\sum_{m(i)=\delta} \LT(h_i)\LT(g_i) = 0$.
+    \item Define $S=\sum_{m(i)=\delta} \LT(h_i)\bbold e_i$.
+    \item Because of (8), $S \in S(G)$.
+    \item Because of definition (2), when $m(i)=\delta$, the multidegree of $S$ is $\delta$.
+    \item By assumption, there exists homogeneous syzygy basis $S_1,\dots,S_m \in S(G)$, and $S_j G \toG 0$ holds for all $j$.
+    \item Because of (12), $S$ is written as $S=u_1 S_1 + \dots + u_m S_m$ using $u_1,\dots, u_m \in k[x_1,\dots,x_n]$.
+    \item Because $S$ is homogeneous syzygy of multidegree $\delta$,
+    for all $i$ $u_i$ is zero or monomial of degree $\delta - \multideg(S_j)$.
+    \item In the situation (14), for all $i$, $u_j = 0$ or $u_j S_j$ is homogeneous syzygy of degree $\delta$.
+    \item Define $\gamma_j = \multidegree(S_j) = \delta - \multidegree(u_j)$.
+    \item Define $u_j = c_j x^{\delta-\gamma_j}$ for all $j$ such that $u_j \neq 0$.  Because of (16), $x^{\delta-\gamma_j}$ is exactly monomial.
+    \item Because (13), (15) and (17) holds,
+    \begin{align}
+      S = \sum_{u_j \neq 0} c_j x^{\delta-\gamma_j}S_j.
+    \end{align}
+    \item From (18),
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i) g_i = SG = \sum_j c_j x^{\delta-\gamma_j} S_j G.
+    \end{align}
+    \item Because of (12), forall $i,j$, there exists $a_{1j},\dots,a_{tj} \in k[x_1,\dots,x_n]$ such that $S_j G = \sum_{i=1}^t a_{ij} g_i$, and
+    \begin{align}
+      \deg(a_{ij} g_i) \le \deg(S_j G)
+    \end{align}
+    holds.
+    \item Forall $j$, $S_j$ is a syzygy, so $\deg(S_j G) < \delta$.
+    \item
+    \begin{align}
+      \max_{ij}\deg(a_{ij}g_i)
+      &\descle{(20)}
+      \max_{j} \deg(S_j G)\\
+      & \desclt{(21)}
+      \delta.
+    \end{align}
+    \item
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i \desceq{(19)} \sum_j c_j x^{\delta-\gamma_j}S_j G
+      \desceq{(20)}
+      \sum_j c_j x^{\delta^\gamma_j} \sum_{i=1}^t a_{ij}g_i.
+    \end{align}
+    So (23) and this equation means we get a new representation of $f$ of new $delta$ which is smaller than $\delta$ defined in (3).
+    \item This contradicts to (4), so $\delta = \deg(f)$.
+    \item This means $\LT(f)$ equals to some $h_i g_i$, so $\LT(g_i)|\LT(f)$.
+    \item This means $\LT(f) \in \gen{\LT(G)}$, so $G$ is Groebner basis.  This completes the proof.
+  \end{enumerate}
+\end{myproof}
+
+命題10: 「$G=(g_1,\dots,g_t)$を考える。部分集合$\cal S\subset \set{S_{ij}: 1\le i < j \le t}$が$S(G)$の基底になっていると仮定する。さらに、異なった$g_i,g_j,g_k \in G$が条件
+『$\LT(g_k)$は$\LCM(\LT(g_i),\LT(g_j))$を割り切る』を満たしているとするこのとき、もし$S_{ik},S_{jk} \in \cal S$ならば$\cal S-\set{S_{ij}}$もまた$S(G)$の基底である
+(注意:もし$i>j$ならば$S_{ij}=S_{ji}$とおく)。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Fix $g_i,g_j,g_k \in G$.
+    \item Without loss of generarity, assume $i < j < k$.
+    \item Define $\gamma_{ij}$ as
+    \begin{align}
+      x^{\gamma_{ij}} = \LCM(\LM(g_i),\LM(g_j)).
+    \end{align}
+    Define $\gamma_{ik},\gamma_{jk}$ similary.
+    \item
+    \begin{align}
+      S_{ij}
+      &=
+      \frac{x^{\gamma_{ij}}}{\LT(g_i)}\bbold e_i - \frac{x^{\gamma_{ij}}}{\LT(g_j)}\bbold e_j\\
+      &=
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{ik}}}\frac{x^{\gamma_{ik}}}{\LT(g_i)}\bbold e_i
+      -
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{jk}}}\frac{x^{\gamma_{jk}}}{\LT(g_j)}\bbold e_j\\
+      &=
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{ik}}}S_{ik} - \frac{x^{\gamma_{ij}}}{x^{\gamma_{jk}}}S_{jk}.
+    \end{align}
+    In this calculation, $x^{\gamma_{ij}}/x^{\gamma_{ik}}$ is polynomial because assmption $\LT(g_k)|x^{\gamma_{ij}}$.  $x^{\gamma_{ij}}/x^{\gamma_{jk}}$ is also polynomial.
+  \end{enumerate}
+\end{myproof}
+
+定理11: $I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成できる。～アルゴリズム～
+ここで、$\Criterion(f_i,f_j,B)$は次の条件が満たされるとき真である:
+「$k\notin \set{i,j}$が存在して、これに対して$[i,k]$と$[j,k]$は$B$に属さず、
+さらに$\LT(f_k)$は$\LCM(\LT(f_i),\LT(f_j))$を割り切る。
+
+アレンジ版を書いてみる。
+\begin{myproof}
+  \begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \STATE{$B\defeq \set{(i,j); 1 \le i < j \le s}$}
+      \STATE{ $G\defeq F$ }
+      \STATE{ $TRASH\defeq []$}
+      \STATE{ $BASIS \defeq []$}
+      \WHILE{ $B\neq \emptset$}
+        \STATE{Choose $(i,j)\in B$}
+        \IF{$Criterion(i,j,TRASH,BASIS) = true$}
+          \STATE{Move $(i,j)$ from $B$ to $TRASH$}
+        \ELSE{}
+          \IF{$f_i$と$f_j$が互いに素でない}
+            \STATE{$S \Leftarrow \ovd{S(f_i,f_j)}{G}$}
+            \IF{$S\neq 0$}
+              \STATE{Add $S$ to $G$}
+              \STATE{Add $(1,t+1),\dots,(t,t+1)$ to $B$ where $t+1$ is the last of $G$.}
+            \ENDIF{}
+          \ENDIF{}
+          \STATE{Move $(i,j)$ from $B$ to $BASIS$}
+        \ENDIF{}
+      \ENDWHILE{}
+    \end{algorithmic}
+  \end{algorithm}
+  $\Criterion(i,j,TRASH,BASIS,G)$は、$g_k \in G$なる$k$が存在して、
+  \begin{itemize}
+    \item $k$は$i$でも$j$でもない。
+    \item $[i,k] \in TRASH \cup BASIS$
+    \item $[j,k] \in TRASH \cup BASIS$
+    \item $\LT(g_k)| \LCM(\LT(g_i),\LT(g_j))$
+  \end{itemize}
+  を満たすこととする。
+  \begin{itemize}
+    \item $\set{(i,j); 1\le i < j \le t}= B\sqcup BASIC \sqcup TRASH$:あきらか。
+    \item $BASIS \cup B$は$S(G)$の基底である:
+    上のbulletより、$TRASH$は$BASIS \cup B$でかけることを言えばよい。
+    \begin{itemize}
+      \item L.17が実行されるとき:$BASIS\cup B$も$TRASH$も不変である。
+      $G$も変化しないならばあきらかなので、
+      L.13,14が実行されるときだけを考えればよい。
+      このとき、$G$に追加されたのは$\ovd{S(f_i,f_j)}{G}$であり、
+      \begin{align}
+        G_a = G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}
+      \end{align}
+      である。さらに、
+      \begin{align}
+        B_a = B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        (BASIS_b \cup \set{(i,j)}) \cup ((B_b\cup \set{(1,t+1),\dots,(t,t+1)})-\set{(i,j)})\\
+        &=
+        BASIS_b \cup B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      よって、$BASIS_b \cup B_b$は帰納法の仮定で$S(G_b)$の基底になっているから、
+      $BASIS_a \cup B_a$は$S(G_a)$の基底である。
+
+      \item L.8が実行されるとき:
+      \begin{align}
+        (i,j) & \in B_b\\
+        B_a &= B_b - \set{(i,j)}\\
+        TRASH_a  &= TRASH_a \cup \set{(i,j)}\\
+        BASIS_a &= BASIS_b\\
+        G_a &= G_b
+      \end{align}
+      $BASIS_b \cup B_b$が$S(G)$の基底で、L.7より$f_i,f_j \in B_b$のどちらとも異なる
+      $f_k \in G_b$が存在して、
+      $f_i,f_j,f_k$は相異なり、$[i,k],[j,k] \in TRASH_b \cup BASIS_b$となり、
+      さらに$\LT(f_k)|\LCM(\LT(f_i),\LT(f_j))$となるので、
+      命題10より、$(BASIS_b \cup B_b)-\set{(i,j)}$もまた$S(G_b)$の基底である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        BASIS_b \cup (B_b - \set{(i,j)})\\
+        &=
+        (BASIS_b \cup B_b) - \set{(i,j)}
+      \end{align}
+      なので、$BASIS_a \cup B_a$も$S(G_b)$の基底であり、$G_a = G_b$なので、
+      $S(G_a)$の基底である。
+    \end{itemize}
+    \item $(i,j)\in BASIS$について、$S(f_i,f_j)\toG 0$となる:
+    $G$は増加し続けるので、$(i,j)\in BASIS_b$について$S(f_i,f_j)\to_{G_b} 0$ならば、
+    $S(f_i,f_j) \to_{G_a} 0 $である。$BASIS$が変化しない場合はこれより明らかなので、
+    L.17が実行されるときだけを考えればよい。
+    \begin{align}
+      B_a &= B_b - \set{(i,j)}\\
+      BASIS_a &= BASIS_b \cup \set{(i,j)}
+    \end{align}
+    である。新たに加わった$(i,j)$について、$S(f_i,f_j)\to_{G_a} 0$を示せばよい。
+    \begin{itemize}
+      \item L.10の条件が満たされないとき:
+      $f_i,f_j \in G_b = G_a$であり、$f_i,f_j$が互いに素なので、
+      定理より$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件は満たされるがL.12の条件を満たさないとき:
+      $\ovd{S(f_i,f_j)}{G_a}= \ovd{S(f_i,f_j)}{G_b}=0$なので、
+      割り算アルゴリズムより$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件が満たされ、L.12の条件も満たされるとき:
+      \begin{align}
+        G_a &= G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}\\
+        B_a &= B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      $G_b$での割り算を考え、
+      \begin{align}
+        S(f_i,f_j) &= \sum_{I=1}^t a_I f_I + \ovd{S(f_i,f_j)}{G_b}
+      \end{align}
+      である。しかしこれは$G_a$では既に割り切った形になっているので、
+      $\ovd{S(f_i,f_j)}{G_a} = 0$であり、割り算アルゴリズムいより
+      $S(f_i,f_j) \to_{G_a} 0$である。
+    \end{itemize}
+    \item 停止すること:
+    停止しなかったとすると、L.17で$B$を減らし続けていることから、
+    L.14が無数に実行されなければならないことがわかる。これは、
+    L.13より$G$および$G$のイデアルが無限に増大し続けることを意味するが、
+    これは多項式環のACCに反する。
+    \item 正しい答えが得られること:
+    停止時点で$BASIS = BASIS\cup B$が$S(G)$の基底であり、さらに
+    $(i,j) \in BASIS \implies S(f_i,f_j)_\toG 0$なので、
+    「ある斉次基底について、それらすべて$G$との積がすべて$G$を法として0に簡約されるならグレブナ基底」より(斉次基底として$BASIS$、$G$として$G$をとる。)、$G$はグレブナ基底である。
+  \end{itemize}
+
+\end{myproof}
