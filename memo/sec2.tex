@@ -3719,3 +3719,190 @@ $S=(h_1,\dots,h_t)$に対して
   \end{itemize}
 
 \end{myproof}
+
+
+もう1回。
+$I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。
+$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成することができる。
+入力:$F=(f_1,\dots,f_s)$。出力:$G$、これは$I=\gen{f_1,\dots,f_s}$のグレブナ基底。
+\begin{algorithm}[H]
+  \begin{algorithmic}[1]
+    \STATE{$B\defeq \set{(i,j); 1\le i < j \le s}$}
+    \STATE{$G\defeq F$}
+    \STATE{$t\defeq s$}
+    \WHILE{$B\neq \emptyset$}
+    \STATE{Select $(i,j)\in B$}
+    \IF{$\LCM(\LT(f_i),\LT(f_j))\neq \LT(f_i)\LT(f_j)$ かつ
+    $\Criterion(f_i,f_j,B) = false$}
+    \STATE{$S\defeq \ovd{S(f_i,f_j)}{G}$}
+    \IF{$S\neq 0$}
+    \STATE{$t\defeq t+1$}
+    \STATE{$f_t \defeq S$}
+    \STATE{$G\defeq G\cup \set{f_t}$}
+    \STATE{$B\defeq B\cup \set{(a,t); 1\le a \le t-1}$}
+    \ENDIF{}
+    \STATE{$B\defeq B-\set{(i,j)}$}
+    \ENDIF{}
+    \ENDWHILE{}
+  \end{algorithmic}
+\end{algorithm}
+\begin{align}
+  [i,j]=
+  \begin{cases}
+    (i,j) & i \le j\\
+    (j,i) & j \le i
+  \end{cases}.
+\end{align}
+としておく。
+ここで、$\Criterion(f_i,f_j,B)$は次の条件がみたされるとき真である:
+\begin{align}
+  \Exists{k: 1\le k \le t,\, kはiでもjでもない}
+  \begin{cases}
+    [i,k] \in \set{(a,b); 1 \le a < b \le t}-B\\
+    [j,k] \in \set{(a,b); 1 \le a < b \le t}-B\\
+    \LT(f_k)|\LCM(\LT(f_i),\LT(f_j))
+  \end{cases}.
+\end{align}
+
+\begin{myproof}
+  \begin{itemize}
+    \item アルゴリズムの各段階で、$B$は次の性質を持つ:
+    \begin{align}
+      (i,j) \in \set{(a,b); 1\le a < b \le t}-B
+      \implies
+      S(f_i,f_j)\toG 0 \quad
+      または
+      \quad
+      \Criterion(f_i,f_j,B).
+    \end{align}
+    初期では$B$が全体なので、自明に「性質」は成立する。
+
+    途中でも大丈夫なことを示す。$(I,J)\in \set{(a,b); 1\le a < b \le t_a}-B_a$とする。$(I,J)\in B_b$と$(I,J)\notin B_b$のときで場合分けする。
+    \begin{enumerate}[label=(場合\arabic*)]
+      \item $(I,J)\in B_b$のとき:
+      $(I,J)\in B_b$でかつ$(I,J)\notin B_a$なので、アルゴリズムを調べると
+      L.5で選択された$(i,j)$は$(I,J)$である。
+      次の場合分けをする。
+      \begin{enumerate}[label=(場合\roman*)]
+        \item $\LCM(\LT(f_I),\LT(f_J))=\LT(f_I)\LT(f_J)$のとき:
+        $G_b = G_a$なので$f_I,f_J \in G_a$であり、
+        先の定理より、$S(f_i,f_j)\toG 0$である。
+        \item 上をみたさず、$\Criterion(f_I,f_J,B_b)$のとき:
+        $B_a = B_b -\set{(i,j)}$であり、$t_a = t_b$である。
+        $B$の補集合は広がるだけなので、あきらかに$\Criterion(f_I,f_J,B_a)$が満たされる。
+
+        正確に言うと、$t=t_b=t_a$として、
+        $\Criterion(f_I,f_J,B_b)$なので、$1\le K \le t$で$k$は$I$でも$J$でもなく、
+        \begin{align}
+          [I,K] \in \set{(a,b); 1\le a < b \le t}-B_b\\
+          [J,K] \in \set{(a,b); 1\le a < b \le t}-B_b\\
+          \LT(f_K)|\LCM(\LT(f_I),\LT(f_J))
+        \end{align}
+        となる$K$がある。
+        $B_a \subset B_b$なので、
+        \begin{align}
+          [I,J] \in (\set{(a,b); 1\le a < b \le t}-B_b) \subset
+          (\set{(a,b); 1\le a < b \le t}-B_a)\\
+          [K,J] \in (\set{(a,b); 1\le a < b \le t}-B_b) \subset
+          (\set{(a,b); 1\le a < b \le t}-B_a)\\
+        \end{align}
+        であり、$K$がそのまま使えて、$\Criterion(f_I,f_J,B_a)$が成立する。
+        \item 上をみたさず、$S=0$のとき:
+        $G_b = G_a$でかつ、$\ovd{S(f_I,f_J)}{G_b} = 0$がわかったので、
+        $\ovd{S(f_I,f_J)}{G_a}=0$であり、
+        割り算アルゴリズムより$S(f_I,f_J) \to_{G_a} 0$である。
+        \item 上をみたさず、$S\neq 0$のとき:
+        $t_a = t_b + 1$である。
+        $G_a = G_b \cup \set{f_{t_a}}$である。
+        $S(f_I,f_J)$を$G_b$で割り、
+        \begin{align}
+          S(f_I,f_J) = h_1 f_1 + \dots + h_{t_b} f_{t_b} + \ovd{S(f_I,f_J)}{G_b}
+        \end{align}
+        と、商$(h_1,\dots,h_{t_b})$と余り$\ovd{S(f_I,f_J)}{G_b}$が得られたとする。
+        $S(f_I,f_J)$を$G_a$で割ると、商$(h_1,\dots,h_{t_b},1)$で割り切れる。
+        よって、$\ovd{S(f_I,f_J)}{G_a} = 0$であり、
+        $\ovd{S(f_I,f_J)}{G_a} \to_{G_a}0$である。
+      \end{enumerate}
+      \item $(I,J)\notin B_b$のとき:
+      \begin{align}
+        (I,J) \in \set{(a,b); 1\le a < b \le t_b}-B_b
+      \end{align}
+      である。よって、「性質」より、
+      \begin{align}
+        S(f_{I},f_{J})\to_{G_b} 0 \quad
+        または
+        \quad
+        \Criterion(f_I,f_J,B_b)
+      \end{align}
+      が満たされる。
+      \begin{enumerate}[label=(場合\roman*)]
+        \item $S(f_I,f_J)\to_{G_b}0$のとき:
+        $G$は増えるかそのままなので、$G_b \subset G_a$であり、
+        $S(f_I,f_J)\to_{G_a}0$となる。
+        \item 上がみたされず、$\Criterion(f_I,f_J,B_b)$のとき:
+        L.5で$(i,j)\in B_b$が選ばれたとする。L.12が実行されるときには、$t_a = t_b + 1$であり、
+        \begin{align}
+          \set{(a,b); 1\le a < b\le t_a}-B_a
+          &=
+          \set{(a,b);1\le a < b \le t_a}
+          -
+          ((B_b \cup \set{(a,t_a); 1\le a \le t_b})-\set{(i,j)})\\
+          &=
+          \set{(a,b); 1\le a < b \le t_b}-(B_b - \set{(i,j)})\\
+          &=
+          (\set{(a,b); 1\le a < b \le t_b}-B_b)\cup \set{(i,j)}
+        \end{align}
+        となる。
+
+        $B$の補集合が膨らむだけなので、$\Criterion(f_I,f_J,B_a)$も満たされる。
+      \end{enumerate}
+    \end{enumerate}
+    よって、どの場合でも
+    \begin{align}
+      S(f_I,f_J)\to_{G_a}0 \quad または \quad \Criterion(f_I,f_J,B_a)
+    \end{align}
+    がみたされる。
+    \item $B=\emptyset$となったとき(アルゴリズムが停止したとき)$G$はグレブナ基底である:
+    \begin{align}
+      \cal I &= \set{(i,j); 1\le i < j \le t,\quad \Criterion(f_i,f_j,B)は選択されたときにfalseである。}\\
+      \cal S &= \set{S_{ij}; (i,j)\in \cal I}
+    \end{align}
+    と定義する。そして、$\cal S$が「$S_{ij}G = S(f_i,f_j) \to_G 0$がすべての
+    $S_{ij} \in \cal S$に対して成立する」という性質を持つ$S(G)$の基底であることを示す。
+
+    先に「アルゴリズムの各段階で、$B$は『性質』を持つ」ことを示していたので、
+    \begin{align}
+      (i,j)\in \set{(a,b); 1\le a < b \le t} \implies
+      (S(f_i,f_j) \to_G 0\quad
+      または
+      \quad
+      \Criterion(f_i,f_j,\emptyset))
+    \end{align}
+    が成立する。よって、任意の$S_{ij}\in \cal S$について、$S_{ij}$
+    上の証明中で、ひとたび$\Criterion(f_i,f_j,B)$がfalseになったなら、
+    以降ずっとfalseになることがわかっている(「$B$の補集合は膨らむだけ」)ので、すべての$(i,j)\in \cal I$について
+    $S(f_i,f_j)\to_{G}0$となる。
+
+    あとは、$\cal S$が$S(G)$の基底になることを示せばよい。
+    $B$から取り除かれた順に添字のペアを並べ、その逆順のリストを考える。
+    この時点で、リストは$\set{(a,b); 1\le a < b\le t}$全てを含んでいるので、
+    ここから$S_{ij}$たちを作ると
+    $S(G)$の基底になっている。
+    このリストを先頭から走り、$(i,j)$のその時点での$B$について、
+    $\Criterion(f_i,f_j,B)$がtrueであるとき、その$(i,j)$をリストから取り除くという操作を最後までやる。
+    リストを逆順にしてあるので、$\Criterion(f_i,f_j,B)$が真であることから得られる$k$について、$[i,k],[j,k]$がリストのその先に存在し、先の定理より除去しても
+    リストは$S(G)$の基底を作り続ける。
+    そして、リストの取り除きかたより、操作が終了したときにはリストに残っているものは$\cal I$と一致する。よって、$\cal I$は$S(G)$の基底となる。
+
+    よって、、$\cal S$は$S_{ij}G = S(f_i,f_j) \to_G 0$がすべての
+    $S_{ij} \in \cal S$に対して成立する」という性質を持つ$S(G)$の基底である。
+    よって、「$G$の斉次基底で、そのすべての基底$S$について$SG \to_G 0$となる」もの
+    である$\cal S$がみつかったので、$G$はグレブナ基底である。
+    $G$には$f_1,\dots,f_s$たちのあまりしか追加していないので、
+    $G$は$\gen{f_1,\dots,f_s}$のグレブナ基底になっている。
+
+  \item 停止すること:
+  もしも停止しなかったとすると、L.14で毎回$B$が減少することから
+  L.12が無数回実行されなければならず、それに伴なってL.11が無数に実行されなければならないが、これは$\gen{\LT(G)}$の無限上昇列を生んでしまい、多項式環がネーター環であることに違反する。
+  \end{itemize}
+\end{myproof}
