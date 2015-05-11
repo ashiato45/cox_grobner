@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1431278126 "main.tex" "main.pdf" "main" 1431278137
+["pdflatex"] 1431309684 "main.tex" "main.pdf" "main" 1431309695
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-cid-auto-adobe-japan1.luc" 1426154369 1649592 0317259f471e6b1354f80a1f10f5cc52 ""
   "C:/Users/tak/.texlive2014/texmf-var/luatexja/ltj-jisx0208.luc" 1426154370 201428 86fe11785abbeb6a87b6c8dee36b92ec ""
   "ashiato45.sty" 1430313775 4518 5556f234a26266283208079e72968a5a ""
@@ -21,6 +21,7 @@
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/bbold/bbold8.tfm" 1410964065 768 b3927d32cc38bf306f676b7e9ddf7414 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/bbold/bbold9.tfm" 1410964065 768 728e575cd98bc8b78b5579f7cba845be ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1410965083 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm" 1410965083 1328 5442e22a7072966dbaf88ca900acf3f0 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1410965083 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1410965084 1528 abec98dbc43e172678c11b3b9031252a ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1410965084 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -51,6 +52,7 @@
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm" 1410965085 764 c98a2af25c99b73a368cf7336e255190 ""
   "c:/texlive/2014/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1410973115 520 4889cce2180234b97cad636b6039c722 ""
   "c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1410962985 34811 78b52f49e893bcba91bd7581cdc144c0 ""
+  "c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb" 1410962985 32298 c6d25bb16d1eac01ebdc6d7084126a1e ""
   "c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1410962985 30251 6afa5cb1d0204815a708a080681d4674 ""
   "c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1410962985 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1410962985 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
@@ -229,6 +231,7 @@
   "c:/texlive/2014/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty" 1410974425 6581 7a80eda55ddbc429d29967b117abe6b5 ""
   "c:/texlive/2014/texmf-dist/tex/luatex/luatexja/patches/lltjfont.sty" 1410974425 22490 35abfa88d2759220f5660e040c4bc19a ""
   "c:/texlive/2014/texmf-var/web2c/luatex/lualatex.fmt" 1410980417 676272 9d211289b7e73212e8e19ef2358636b0 ""
+  "calc_3_1.tex" 1429156633 997 f00ed8805c1fe22d700e6c4c34d706c9 ""
   "ex2372agrlex.tex" 1428826351 1469 b63b84fc03bfa55c67fcbe1ebff4ab86 ""
   "ex2372alex.tex" 1428825648 1469 b63b84fc03bfa55c67fcbe1ebff4ab86 ""
   "ex2372bgrlex.tex" 1428827684 1071 338c3d37f0c6ee551b4e2fe9c2f4a2bd ""
@@ -244,10 +247,11 @@
   "images/div3_1b.png" 1425800652 231701 4cb7a99823e2585e02db2e15eddfc021 ""
   "images/div3_2_9.png" 1425822629 23781 edc0ebb2001c08b358344d7ead2ab82a ""
   "images/ex_2_4_3.png" 1425908086 61915 01531d35fe340b943b3a88b9c61a33d2 ""
-  "main.aux" 1431278136 5541 822d0ff926571920f8012421ed541dba ""
-  "main.tex" 1431252729 1154 d6683930a729fc13a042379bccec755b ""
+  "main.aux" 1431309694 6398 edae322aac62718c90f6a94cb780ebd9 ""
+  "main.tex" 1431278240 1153 216fb4eb3b6edfd48974fd2203f03cd2 ""
   "mytheorems.sty" 1426384006 3389 863e5e3c13a98ca44a86c9f17244d375 ""
-  "sec2.tex" 1431278126 217861 f527600ed1f5a99245a01e00a267f24d ""
+  "sec2.tex" 1431309672 218878 14288d847b3ddf86de447a5c693f56c6 ""
+  "sec3.tex" 1431307069 31105 0eabdc936de7f41349735bba382b5dc3 ""
   (generated)
   "main.thm"
   "C:/texlive/2014/texmf-var/m_t_x_t_e_s_t.tmp"

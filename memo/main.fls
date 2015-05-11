@@ -336,11 +336,17 @@ INPUT ./ex2372clex.tex
 INPUT ./ex2372clex.tex
 INPUT ./ex2372cgrlex.tex
 INPUT ./ex2372cgrlex.tex
+INPUT ./sec3.tex
+INPUT ./sec3.tex
+INPUT ./calc_3_1.tex
+INPUT ./calc_3_1.tex
+INPUT c:/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm
 OUTPUT main.thm
 INPUT ./main.aux
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb

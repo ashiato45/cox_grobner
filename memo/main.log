@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  11 MAY 2015 02:15
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  11 MAY 2015 11:01
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.030 seconds
+luaotfload | main : fontloader loaded in 0.034 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1146,7 +1146,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
 ) (./ex2372agrlex.tex [47]) (./ex2372blex.tex)
 (./ex2372bgrlex.tex [48]) (./ex2372clex.tex) (./ex2372cgrlex.tex [49]) [50]
-[51] [52] [53] [54] [55]
+[51] [52] [53]
 ! Undefined control sequence.
 <argument> f_j \ve 
         f_k
@@ -1169,71 +1169,92 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[56] [57]
+[54] [55] [56]
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3255.
+! LaTeX Error: \begin{document} ended by \end{myproof}.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3721 \end{myproof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-LaTeX Warning: Command \textcircled invalid in math mode on input line 3255.
+! Extra \endgroup.
+<recently read> \endgroup 
+          
+l.3721 \end{myproof}
+                  
+Things are pretty mixed up, but I think the worst is over.
 
-[58] [59] [60] [61] [62]
+[57] [58] [59]) (./sec3.tex [60] (./calc_3_1.tex
+LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 8.32379pt on input line 2.
+ [61]) [62] [63] [64] [65]
+[66] [67]
 ! Undefined control sequence.
-<argument>  $B\neq \emptset 
-                 $
-l.3606       \WHILE{ $B\neq \emptset$}
-                                    
+<argument> \V 
+   
+l.534   よって、$F(\C^m)\subset Z_\C = \var_{\V}
+                                                  (I_m)\subset Z_\C$であ�...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[63] [64] [65] [66] [67])
+)
 \tf@thm=\write3
  [68] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11957 strings out of 494694
+ 11980 strings out of 494694
  195321,266212 words of node,token memory allocated
- 6935 words of node memory still in use:
+ 6920 words of node memory still in use:
    11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
 spec, 30 attribute_list, 1 write nodes
-   avail lists: 1:1,2:62706,3:2059,4:2411,5:557,6:2553,7:833,9:1111,10:120
- 15055 multiletter control sequences out of 65536+600000
- 95 fonts using 41014099 bytes
- 58i,19n,44p,1062b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
+   avail lists: 1:1,2:62706,3:2044,4:3377,5:565,6:3541,7:344,9:1111,10:120
+ 15062 multiletter control sequences out of 65536+600000
+ 97 fonts using 43579759 bytes
+ 58i,19n,44p,1064b,947s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
 live/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb><<c:/texlive/2014
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/
-type1/public/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pf
-b><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><<c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><<c:/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fonts/type
-1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (68 pages, 1286849 bytes).
+st/fonts/type1/public/amsfonts/cm/cmbx9.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pf
+b><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><<c:/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2014/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
+><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><<c:/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/texlive/2014/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmss10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb>
+<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><<c:/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><<c:/texlive/2014/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/a
+msfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfo
+nts/symbols/msbm10.pfb>
+Output written on main.pdf (68 pages, 1303690 bytes).
 
-PDF statistics: 408 PDF objects out of 1000 (max. 8388607)
- 282 compressed objects within 3 object streams
+PDF statistics: 412 PDF objects out of 1000 (max. 8388607)
+ 285 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

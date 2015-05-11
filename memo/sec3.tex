@@ -455,3 +455,88 @@ $F(k^n)$を包む最小の多様体を$Z_k$とする。このとき、$\pi_m(i(k
 \end{itemize}
 
 次に有理パラメタ表示の陰関数表示を考える。
+\begin{align}
+  x_1 = \frac{f_1}{g_1},\dots,x_n=\frac{f_n}{g_n}
+\end{align}
+の陰関数表示を考える。
+分母を処理するために、$g=g_1 \dots g_n$とし、パラメタ$y$を次のように導入し、
+$k[y,t_1,\dots,t_m,x_1,\dots,x_n]$で考える。
+「$g(x)$は0になる$\iff$ $g_1(x),\dots,g_n(x)$の1つ以上は0になる」
+であり、「$g(x)$はnonzero$\iff$ $g_1(x),\dots,g_n(x)$はどれも0にならない」
+となる。$W=\var(g)$とする。
+\begin{align}
+  J=\gen{g_1x_1-f_1,\dots,g_n x_n - f_n , 1-gy}
+\end{align}
+とする($1-gy$で$W$を避ける)。
+\begin{align}
+  j(t_1,\dots,t_m)=
+  (\frac{1}{g(t_1,\dots,t_m)},
+  t_1,\dots,t_m,
+  \frac{f_1(t_1,\dots,t_m)}{g_1(t_1,\dots,t_m)},
+  \dots,
+  \frac{f_n(t_1,\dots,t_m)}{g_n(t_1,\dots,t_m)}).
+\end{align}
+こうしておくと、実は$j(k^m-W)=\var(J)$となる。
+\begin{myproof}
+  \begin{itemize}
+    \item $\subset$:
+    あきらか。実際、
+    $(t_1,\dots,t_m) \in k^m-W$とする。
+    \begin{align}
+      j(t_1,\dots,t_m)=
+      (\ub{\frac{1}{g(t_1,\dots,t_m)}}_{\Rightarrow y},t_1,\dots,t_m,
+      \ub{\frac{f_1(t_1,\dots,t_m)}{g_1(t_1,\dots,t_m)}}_{\Rightarrow x_1},\dots, \ub{\frac{f_n(t_1,\dots,t_m)}{g_n(t_1,\dots,t_m)}}_{\Rightarrow x_n}).
+    \end{align}
+    これは$J$の生成元を考えれば、$\var(J)$に属する。
+    \item $\supset$:
+    $(y,t_1,\dots,t_m,x_1,\dots,x_n)\in \var(J)$とする。
+    $yg(t_1,\dots,t_m)=1$となるので$g(t_1,\dots,t_m)$がnonzeroで、
+    $g_1(t_1,\dots,t_m),\dots,g_n(t_1,\dots,t_m)$はどれもnonzeroになる。
+    よって割り算が考えられて、
+    $x_i = \frac{f_i(t_1,\dots,t_m)}{g_i(t_1,\dots,t_m)}$を考えられる。
+    すると、$j(t_1,\dots,t_m)=(y,t_1,\dots,t_m,x_1,\dots,x_n)$となり、
+    $(y,t_1,\dots,t_m,x_1,\dots,x_n)\in j(k^m-W)$となる。
+  \end{itemize}
+\end{myproof}
+$F=\pi_{m+1}\circ j$なので、
+\begin{align}
+  F(k^m-W)=\pi_{m+1}(j(k^m-W))=\pi_{m+1}(\var(J))
+\end{align}
+となる。これで、パラメタ表示の図形をアフィン多様体の射影であらわせたので閉包定理が使える。有理陰関数表示化:「$k$を無限体とする。
+$F\colon k^m - W \to k^n$を有理関数によるパラメタ付けとする。
+$J$をイデアル
+\begin{align}
+    J=\gen{g_1x_1-f_1,\dots,g_nx_n-f_n,1-gy}\subset k[y,t_1,\dots,t_m,x_1,\dots,x_n]
+\end{align}
+とする。$g=g_1\dots g_n$とした。
+$J_{m+1}=J\cap k[x_1,\dots,x_n]$を$(m+1)$次消去イデアルとする。このとき、
+$\var(J_{m+1})$は$F(k^m-W)$を含む$k^n$の最小の多様体である。」
+\begin{myproof}
+  $k=\C$のときには$\pi_{m+1}(\var(J))=F(k^m-W)$と閉包定理よりあきらか。
+
+  $k\subsetneq \C$とする。$k$は無限体である。
+  $\C$上の多様体と$k$上の多様体を区別するため、$\var_\C,\var_k$を考える。
+  $V_k = \var_k(J),\, V_\C = \var_\C(J)$とする。
+  \begin{align}
+    F(k^m-W) \desceq{さっきの} \pi_m(V_k)  \descsubset{射影が小さい補題} \var_k(J_{m+1}).
+  \end{align}
+  これで$F(k^m-W)\subset \var_k(J_{m+1})$は示された。
+  あとは最小性を示せばよい。$Z_k = \var_k(h_1,\dots,h_s)\subset k^n$を
+  $F(k^m-W)$を包む多様体とする。
+  各$i=1,\dots,s$について、$F(k^m-W)\subset Z_k$なので、$h_i$は
+  $F(k^m-W)$上消えてしまう。よって、$h_i\circ F$は$k^m-W$上消える。
+  仮に$h_i\circ F$が0多項式でないとする。$g$は0多項式ではないので、
+  $(h_i\circ F)\cdot g$は0多項式ではない。しかし、
+  $h_i\circ F$は$k^m-W$上消え、$g$は$W$上消えるので、$(h_i\circ F)\cdot g$は
+  $k^m$で消える。無限体上で0関数になる多項式は0多項式なので$(h_i \circ F)\cdot g$は
+  0多項式である。これは矛盾であり、$h_i\circ F$は0多項式である。
+  よって、$(h_i\circ F)(\C^m)=0$であり、$h_i$は$F(\C^m)$上で消える。
+  よって、$F(\C^m)\subset Z_\C = \var_{\V}(I_m)\subset Z_\C$である。
+  両方で$k^n$の結びをとって、
+  \begin{align}
+    \var_k(J_{m+1}) = \var_{\C}(J_{m+1})\cap k^n
+    \subset
+    \Z_\C \cap k^n = Z_k
+  \end{align}
+  である。これで、$F(k^m)$を含む多様体のうち最小のものは$\var_k(J_{m+1})$であることが示された。
+\end{myproof}
