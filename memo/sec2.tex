@@ -3590,134 +3590,134 @@ $S=(h_1,\dots,h_t)$に対して
   \end{enumerate}
 \end{myproof}
 
-% 定理11: $I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成できる。～アルゴリズム～
-% ここで、$\Criterion(f_i,f_j,B)$は次の条件が満たされるとき真である:
-% 「$k\notin \set{i,j}$が存在して、これに対して$[i,k]$と$[j,k]$は$B$に属さず、
-% さらに$\LT(f_k)$は$\LCM(\LT(f_i),\LT(f_j))$を割り切る。
-%
-% アレンジ版を書いてみる。
-% \begin{myproof}
-%   \begin{algorithm}[H]
-%     \begin{algorithmic}[1]
-%       \STATE{$B\defeq \set{(i,j); 1 \le i < j \le s}$}
-%       \STATE{ $G\defeq F$ }
-%       \STATE{ $TRASH\defeq []$}
-%       \STATE{ $BASIS \defeq []$}
-%       \WHILE{ $B\neq \emptset$}
-%         \STATE{Choose $(i,j)\in B$}
-%         \IF{$Criterion(i,j,TRASH,BASIS) = true$}
-%           \STATE{Move $(i,j)$ from $B$ to $TRASH$}
-%         \ELSE{}
-%           \IF{$f_i$と$f_j$が互いに素でない}
-%             \STATE{$S \Leftarrow \ovd{S(f_i,f_j)}{G}$}
-%             \IF{$S\neq 0$}
-%               \STATE{Add $S$ to $G$}
-%               \STATE{Add $(1,t+1),\dots,(t,t+1)$ to $B$ where $t+1$ is the last of $G$.}
-%             \ENDIF{}
-%           \ENDIF{}
-%           \STATE{Move $(i,j)$ from $B$ to $BASIS$}
-%         \ENDIF{}
-%       \ENDWHILE{}
-%     \end{algorithmic}
-%   \end{algorithm}
-%   $\Criterion(i,j,TRASH,BASIS,G)$は、$g_k \in G$なる$k$が存在して、
-%   \begin{itemize}
-%     \item $k$は$i$でも$j$でもない。
-%     \item $[i,k] \in TRASH \cup BASIS$
-%     \item $[j,k] \in TRASH \cup BASIS$
-%     \item $\LT(g_k)| \LCM(\LT(g_i),\LT(g_j))$
-%   \end{itemize}
-%   を満たすこととする。
-%   \begin{itemize}
-%     \item $\set{(i,j); 1\le i < j \le t}= B\sqcup BASIC \sqcup TRASH$:あきらか。
-%     \item $BASIS \cup B$は$S(G)$の基底である:
-%     上のbulletより、$TRASH$は$BASIS \cup B$でかけることを言えばよい。
-%     \begin{itemize}
-%       \item L.17が実行されるとき:$BASIS\cup B$も$TRASH$も不変である。
-%       $G$も変化しないならばあきらかなので、
-%       L.13,14が実行されるときだけを考えればよい。
-%       このとき、$G$に追加されたのは$\ovd{S(f_i,f_j)}{G}$であり、
-%       \begin{align}
-%         G_a = G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}
-%       \end{align}
-%       である。さらに、
-%       \begin{align}
-%         B_a = B_b \cup \set{(1,t+1),\dots,(t,t+1)}
-%       \end{align}
-%       である。
-%       \begin{align}
-%         BASIS_a \cup B_a
-%         &=
-%         (BASIS_b \cup \set{(i,j)}) \cup ((B_b\cup \set{(1,t+1),\dots,(t,t+1)})-\set{(i,j)})\\
-%         &=
-%         BASIS_b \cup B_b \cup \set{(1,t+1),\dots,(t,t+1)}
-%       \end{align}
-%       よって、$BASIS_b \cup B_b$は帰納法の仮定で$S(G_b)$の基底になっているから、
-%       $BASIS_a \cup B_a$は$S(G_a)$の基底である。
-%
-%       \item L.8が実行されるとき:
-%       \begin{align}
-%         (i,j) & \in B_b\\
-%         B_a &= B_b - \set{(i,j)}\\
-%         TRASH_a  &= TRASH_a \cup \set{(i,j)}\\
-%         BASIS_a &= BASIS_b\\
-%         G_a &= G_b
-%       \end{align}
-%       $BASIS_b \cup B_b$が$S(G)$の基底で、L.7より$f_i,f_j \in B_b$のどちらとも異なる
-%       $f_k \in G_b$が存在して、
-%       $f_i,f_j,f_k$は相異なり、$[i,k],[j,k] \in TRASH_b \cup BASIS_b$となり、
-%       さらに$\LT(f_k)|\LCM(\LT(f_i),\LT(f_j))$となるので、
-%       命題10より、$(BASIS_b \cup B_b)-\set{(i,j)}$もまた$S(G_b)$の基底である。
-%       \begin{align}
-%         BASIS_a \cup B_a
-%         &=
-%         BASIS_b \cup (B_b - \set{(i,j)})\\
-%         &=
-%         (BASIS_b \cup B_b) - \set{(i,j)}
-%       \end{align}
-%       なので、$BASIS_a \cup B_a$も$S(G_b)$の基底であり、$G_a = G_b$なので、
-%       $S(G_a)$の基底である。
-%     \end{itemize}
-%     \item $(i,j)\in BASIS$について、$S(f_i,f_j)\toG 0$となる:
-%     $G$は増加し続けるので、$(i,j)\in BASIS_b$について$S(f_i,f_j)\to_{G_b} 0$ならば、
-%     $S(f_i,f_j) \to_{G_a} 0 $である。$BASIS$が変化しない場合はこれより明らかなので、
-%     L.17が実行されるときだけを考えればよい。
-%     \begin{align}
-%       B_a &= B_b - \set{(i,j)}\\
-%       BASIS_a &= BASIS_b \cup \set{(i,j)}
-%     \end{align}
-%     である。新たに加わった$(i,j)$について、$S(f_i,f_j)\to_{G_a} 0$を示せばよい。
-%     \begin{itemize}
-%       \item L.10の条件が満たされないとき:
-%       $f_i,f_j \in G_b = G_a$であり、$f_i,f_j$が互いに素なので、
-%       定理より$S(f_i,f_j) \to_{G_a} 0$である。
-%       \item L.10の条件は満たされるがL.12の条件を満たさないとき:
-%       $\ovd{S(f_i,f_j)}{G_a}= \ovd{S(f_i,f_j)}{G_b}=0$なので、
-%       割り算アルゴリズムより$S(f_i,f_j) \to_{G_a} 0$である。
-%       \item L.10の条件が満たされ、L.12の条件も満たされるとき:
-%       \begin{align}
-%         G_a &= G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}\\
-%         B_a &= B_b \cup \set{(1,t+1),\dots,(t,t+1)}
-%       \end{align}
-%       $G_b$での割り算を考え、
-%       \begin{align}
-%         S(f_i,f_j) &= \sum_{I=1}^t a_I f_I + \ovd{S(f_i,f_j)}{G_b}
-%       \end{align}
-%       である。しかしこれは$G_a$では既に割り切った形になっているので、
-%       $\ovd{S(f_i,f_j)}{G_a} = 0$であり、割り算アルゴリズムいより
-%       $S(f_i,f_j) \to_{G_a} 0$である。
-%     \end{itemize}
-%     \item 停止すること:
-%     停止しなかったとすると、L.17で$B$を減らし続けていることから、
-%     L.14が無数に実行されなければならないことがわかる。これは、
-%     L.13より$G$および$G$のイデアルが無限に増大し続けることを意味するが、
-%     これは多項式環のACCに反する。
-%     \item 正しい答えが得られること:
-%     停止時点で$BASIS = BASIS\cup B$が$S(G)$の基底であり、さらに
-%     $(i,j) \in BASIS \implies S(f_i,f_j)_\toG 0$なので、
-%     「ある斉次基底について、それらすべて$G$との積がすべて$G$を法として0に簡約されるならグレブナ基底」より(斉次基底として$BASIS$、$G$として$G$をとる。)、$G$はグレブナ基底である。
-%   \end{itemize}
-%
+定理11: $I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成できる。～アルゴリズム～
+ここで、$\Criterion(f_i,f_j,B)$は次の条件が満たされるとき真である:
+「$k\notin \set{i,j}$が存在して、これに対して$[i,k]$と$[j,k]$は$B$に属さず、
+さらに$\LT(f_k)$は$\LCM(\LT(f_i),\LT(f_j))$を割り切る。
+
+アレンジ版を書いてみる。
+\begin{myproof}
+  \begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \STATE{$B\defeq \set{(i,j); 1 \le i < j \le s}$}
+      \STATE{ $G\defeq F$ }
+      \STATE{ $TRASH\defeq []$}
+      \STATE{ $BASIS \defeq []$}
+      \WHILE{ $B\neq \emptset$}
+        \STATE{Choose $(i,j)\in B$}
+        \IF{$Criterion(i,j,TRASH,BASIS) = true$}
+          \STATE{Move $(i,j)$ from $B$ to $TRASH$}
+        \ELSE{}
+          \IF{$f_i$と$f_j$が互いに素でない}
+            \STATE{$S \Leftarrow \ovd{S(f_i,f_j)}{G}$}
+            \IF{$S\neq 0$}
+              \STATE{Add $S$ to $G$}
+              \STATE{Add $(1,t+1),\dots,(t,t+1)$ to $B$ where $t+1$ is the last of $G$.}
+            \ENDIF{}
+          \ENDIF{}
+          \STATE{Move $(i,j)$ from $B$ to $BASIS$}
+        \ENDIF{}
+      \ENDWHILE{}
+    \end{algorithmic}
+  \end{algorithm}
+  $\Criterion(i,j,TRASH,BASIS,G)$は、$g_k \in G$なる$k$が存在して、
+  \begin{itemize}
+    \item $k$は$i$でも$j$でもない。
+    \item $[i,k] \in TRASH \cup BASIS$
+    \item $[j,k] \in TRASH \cup BASIS$
+    \item $\LT(g_k)| \LCM(\LT(g_i),\LT(g_j))$
+  \end{itemize}
+  を満たすこととする。
+  \begin{itemize}
+    \item $\set{(i,j); 1\le i < j \le t}= B\sqcup BASIC \sqcup TRASH$:あきらか。
+    \item $BASIS \cup B$は$S(G)$の基底である:
+    上のbulletより、$TRASH$は$BASIS \cup B$でかけることを言えばよい。
+    \begin{itemize}
+      \item L.17が実行されるとき:$BASIS\cup B$も$TRASH$も不変である。
+      $G$も変化しないならばあきらかなので、
+      L.13,14が実行されるときだけを考えればよい。
+      このとき、$G$に追加されたのは$\ovd{S(f_i,f_j)}{G}$であり、
+      \begin{align}
+        G_a = G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}
+      \end{align}
+      である。さらに、
+      \begin{align}
+        B_a = B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        (BASIS_b \cup \set{(i,j)}) \cup ((B_b\cup \set{(1,t+1),\dots,(t,t+1)})-\set{(i,j)})\\
+        &=
+        BASIS_b \cup B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      よって、$BASIS_b \cup B_b$は帰納法の仮定で$S(G_b)$の基底になっているから、
+      $BASIS_a \cup B_a$は$S(G_a)$の基底である。
+
+      \item L.8が実行されるとき:
+      \begin{align}
+        (i,j) & \in B_b\\
+        B_a &= B_b - \set{(i,j)}\\
+        TRASH_a  &= TRASH_a \cup \set{(i,j)}\\
+        BASIS_a &= BASIS_b\\
+        G_a &= G_b
+      \end{align}
+      $BASIS_b \cup B_b$が$S(G)$の基底で、L.7より$f_i,f_j \in B_b$のどちらとも異なる
+      $f_k \in G_b$が存在して、
+      $f_i,f_j,f_k$は相異なり、$[i,k],[j,k] \in TRASH_b \cup BASIS_b$となり、
+      さらに$\LT(f_k)|\LCM(\LT(f_i),\LT(f_j))$となるので、
+      命題10より、$(BASIS_b \cup B_b)-\set{(i,j)}$もまた$S(G_b)$の基底である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        BASIS_b \cup (B_b - \set{(i,j)})\\
+        &=
+        (BASIS_b \cup B_b) - \set{(i,j)}
+      \end{align}
+      なので、$BASIS_a \cup B_a$も$S(G_b)$の基底であり、$G_a = G_b$なので、
+      $S(G_a)$の基底である。
+    \end{itemize}
+    \item $(i,j)\in BASIS$について、$S(f_i,f_j)\toG 0$となる:
+    $G$は増加し続けるので、$(i,j)\in BASIS_b$について$S(f_i,f_j)\to_{G_b} 0$ならば、
+    $S(f_i,f_j) \to_{G_a} 0 $である。$BASIS$が変化しない場合はこれより明らかなので、
+    L.17が実行されるときだけを考えればよい。
+    \begin{align}
+      B_a &= B_b - \set{(i,j)}\\
+      BASIS_a &= BASIS_b \cup \set{(i,j)}
+    \end{align}
+    である。新たに加わった$(i,j)$について、$S(f_i,f_j)\to_{G_a} 0$を示せばよい。
+    \begin{itemize}
+      \item L.10の条件が満たされないとき:
+      $f_i,f_j \in G_b = G_a$であり、$f_i,f_j$が互いに素なので、
+      定理より$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件は満たされるがL.12の条件を満たさないとき:
+      $\ovd{S(f_i,f_j)}{G_a}= \ovd{S(f_i,f_j)}{G_b}=0$なので、
+      割り算アルゴリズムより$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件が満たされ、L.12の条件も満たされるとき:
+      \begin{align}
+        G_a &= G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}\\
+        B_a &= B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      $G_b$での割り算を考え、
+      \begin{align}
+        S(f_i,f_j) &= \sum_{I=1}^t a_I f_I + \ovd{S(f_i,f_j)}{G_b}
+      \end{align}
+      である。しかしこれは$G_a$では既に割り切った形になっているので、
+      $\ovd{S(f_i,f_j)}{G_a} = 0$であり、割り算アルゴリズムいより
+      $S(f_i,f_j) \to_{G_a} 0$である。
+    \end{itemize}
+    \item 停止すること:
+    停止しなかったとすると、L.17で$B$を減らし続けていることから、
+    L.14が無数に実行されなければならないことがわかる。これは、
+    L.13より$G$および$G$のイデアルが無限に増大し続けることを意味するが、
+    これは多項式環のACCに反する。
+    \item 正しい答えが得られること:
+    停止時点で$BASIS = BASIS\cup B$が$S(G)$の基底であり、さらに
+    $(i,j) \in BASIS \implies S(f_i,f_j)_\toG 0$なので、
+    「ある斉次基底について、それらすべて$G$との積がすべて$G$を法として0に簡約されるならグレブナ基底」より(斉次基底として$BASIS$、$G$として$G$をとる。)、$G$はグレブナ基底である。
+  \end{itemize}
+
 \end{myproof}
 
 

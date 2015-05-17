@@ -531,7 +531,7 @@ $\var(J_{m+1})$は$F(k^m-W)$を含む$k^n$の最小の多様体である。」
   $k^m$で消える。無限体上で0関数になる多項式は0多項式なので$(h_i \circ F)\cdot g$は
   0多項式である。これは矛盾であり、$h_i\circ F$は0多項式である。
   よって、$(h_i\circ F)(\C^m)=0$であり、$h_i$は$F(\C^m)$上で消える。
-  よって、$F(\C^m)\subset Z_\C = \var_{\V}(I_m)\subset Z_\C$である。
+  よって、$F(\C^m)\subset Z_\C = \var_{\C}(I_m)\subset Z_\C$である。
   両方で$k^n$の結びをとって、
   \begin{align}
     \var_k(J_{m+1}) = \var_{\C}(J_{m+1})\cap k^n
@@ -539,4 +539,397 @@ $\var(J_{m+1})$は$F(k^m-W)$を含む$k^n$の最小の多様体である。」
     \Z_\C \cap k^n = Z_k
   \end{align}
   である。これで、$F(k^m)$を含む多様体のうち最小のものは$\var_k(J_{m+1})$であることが示された。
+\end{myproof}
+
+\subsection{特異点と包絡線}
+\label{sub:特異点と包絡線}
+略
+
+\subsection{因数分解の一意性と終結式}
+\label{sub:因数分解の一意性と終結式}
+定義1:
+$k$を体とする。$f\in k[x_1,\dots,x_n]$が既約であるとは、
+$f$が定数でない$k[x_1,\dots,x_n]$の2つの積で書けないことである
+\footnote{$f=gh$と書いたとき$g=const.$か$h=const.$となること。}
+。
+
+命題2:すべての定数でない多項式$f\in k[x_1,\dots,x_n]$は、
+$k$上で既約な多項式の積に分解できる。
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Define $f$: $f\in k[x_1,\dots,x_n]$とする。既約ならば終わっているので、既約でないとする。
+    \item Define $g,h$: 定数でない$g,h\in k [x_1,\dots,x_n]$で$f=gh$と分解する。
+    \item $\deg g < \deg f$かつ$\deg h < \deg f$となっている。
+    \item $g,h$が既約でないならさらに(2)のように分解する。これを繰替えすと次数が落ちていくので、どこかで停止し既約に分解される。
+  \end{enumerate}
+\end{myproof}
+
+定理3:
+$f\in k[x_1,\dots,x_n]$を$k$上既約な多項式とし、
+$f$は積$gh$を割り切ると仮定する。ここで、$g,h\in k[x_1,\dots,x_n]$である。
+このとき、$f$は$g$か$h$かのどちらかを割り切る。
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item $\implies$: 帰納法にする。$n=1$であるとする。
+    \item $f$は$gh$を割り切るとする(仮定)。
+    \item Define $p$: $p=\GCD(f,g)$とする。
+    \item $\implies$: $p$が定数でないとする。
+    \item (3)で$p$は$\GCD$なので、$p|f$であり、仮定より
+    $f$は既約なので$p$は定数か$f$かだが、(4)より$f$は$p$の定数倍($f\simeq p$)である。
+    \item (3)で$p$はGCDなので$p|g$であり、(5)より$f|g$である。
+    \item (4)おわり。
+    \item $\implies$: $p$は定数とする。$p=1$としてよい
+    \footnote{GCDは定数倍はどうでもいい。}。
+    \item Get $A,B$: (3)より、$Af+Bg = 1$となる$A,B\in k[x_1]$が存在する。
+    \item (9)に$h$をかける。
+    \begin{align}
+      h = h(Af+Bg) = Ahf + Bgh.
+    \end{align}
+    \item (2)より$f|gh|Bgh$で、$f|Ahf$なので、(9)より$f|h$となる。
+    \item (8)おわり。
+    \item (1)おわり。$n=1$で示された。
+    \item $\implies$: $n-1$で成立すると仮定する。
+    \item Def $u$: $u\in k[x_2,\dots,x_n]$は既約で、$u|gh$とする。
+    ($u$という特殊な$f$について結論「$u|g$または$u|h$を示す。」)
+    \item $a_\bullet,b_\bullet$: を $g=\sum_{i=0}^l a_i x_1^i$とし、
+    $h=\sum_{i=0}^m x_1^i$とする。
+    \item
+  \end{enumerate}
+\end{myproof}
+
+\subsection{終結式と拡張定理}
+\label{sub:終結式と拡張定理}
+終結式の定義:
+$f,g\in k[x_1,\dots,x_n]$として、
+\begin{align}
+  f&=a_0x_1^l + \dots + a_l,\quad a_0\neq 0\\
+  g&= b_0 x_1^m + \dots + b_m ,\quad b_0\neq 0
+\end{align}
+とする。これについて、終結式を
+\easypicture{1431709536336.png}
+とする。
+
+命題1:
+$f,g\in k[x_1,\dots,x_n]$の$x_1$に関する次数が正であると仮定する
+\footnote{$\deg(f;x_1)>0$？}
+。
+\begin{enumerate}[label=(\roman*)]
+  \item $\Res(f,g,x_1)$は$x_1$を消去した1次の消去イデアル
+  $\gen{f,g}\cap k[x_2,\dots,x_n]$に含まれる。
+  \item $\Res(f,g,x_1)=0$であることと、
+  $f$と$g$が$k[x_1,\dots,x_n]$において$x_1$に関する
+  次数が正の共通因子を持つことは同値である。
+\end{enumerate}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}[label=(\arabic*)]
+    \item Get $l,m,a_\bullet,b_\bullet$:
+    \begin{align}
+      f &= a_0 x^l + \dots + a_l \\
+      g &= b_0 x^m + \dots + b_m
+    \end{align}
+    ただし、$a_\bullet,b_\bullet \in k[x_2,\dots,x_n]$
+    と書く。
+    \item
+    終結式$\Res(f,g,x_1)$は定義より$a_\bullet,b_\bullet$の積と和なので、
+    $\Res(f,g,x_1)\in k[x_2,\dots,x_n]$である。
+    \item
+    Get $A,B$: $Af + Bg = \Res(f,g,x_1)$となる$A,B\in (k[x_2,\dots,x_n])[x_1]$が存在する
+    \footnote{$\Res(f,g,x_1)=0$のときは$A=B=0$でよい。
+    $\Res(f,g,x_1)\neq 0$のときには、$f,g\in k(x_2,\dots,x_n)[x_1]$とする。
+    $A=c_0 x^{l-1} + \dots + c_{l-1},\,
+    B=d_0 x^{m-1} + \dots + d_{m-1}$と、1つ低い次数で$c_\bullet,d_\bullet \in k(x_2,\dots,x_n)$の変数で表しておく。
+    $Af+Bg=1$という方程式を考え、係数比較して
+    $\Syl(f,g,x_1) (c_0,\dots,c_{l-1},d_0,\dots,d_{m-1})^T = (0,\dots,1)^T$
+    という線型方程式を得る。$\Res(f,g,x_1)\neq 0$なのでこれは一意に解けて、
+    クラメールの公式より
+    各$c_\bullet,\,d_\bullet$は$\det(\Syl(f,g,x_1)のある行を(0,\dots,1)^T に交換)/\Res(f,g,x_1)$である。よって、$A,B$の係数はすべて
+    $(\Syl(f,g,x_1)の積と和)/\Res(f,g,x_1)$である。よって、$A=\tilde A/\Res(f,g,x_1),\, B=\tilde B/\Res(f,g,x_1)$で、
+    $\tilde A,\tilde B$は$\Syl(f,g,x_1)$の積と和となるものがある。
+    よって、$Af+Bg=1$にこれを入れて$\tilde A f + \tilde B g = \Res(f,g,x_1)$となる。
+    }
+    。
+    \item
+    (3)より、$\Res(f,g,x_1)=Af+Bg \in \gen{f,g}$である。
+    \item (2)(4)より、$\Res(f,g,x_1) \in \gen{f,g}\cap k[x_2,\dots,x_n]$となる。
+  \end{enumerate}
+  (ii)を示す。
+  \begin{enumerate}[label=(\arabic*)]
+    \item Section5-Prop8
+    \footnote{1変数多項式について、共通因子と終結式が消えることの同値}
+    を$f,g \in k[x_1,\dots,x_n] \subset k(x_2,\dots,x_n)[x_1]$に適用し、「
+    $\Res(f,g,x_1)=0 \iff $ $f$と$g$は$x_1$に関して正の次数を持つ$k(x_2,\dots,x_n)[x_1]$の多項式を共通因子として持つ」となる。
+    \item
+    Section5-Cor4を適用して、「$f,g$は$k(x_2,\dots,x_n)[x_1]$で共通因子を持つ$\iff$ $f,g$は$k[x_1,\dots,x_n]$で共通因子を持つ」となる。
+    \item (1),(2)より、
+    「$\Res(f,g,x_1)=0 \iff$ $f,g$は$k[x_1,\dots,x_n]$で共通因子を持つ」となる。
+  \end{enumerate}
+\end{myproof}
+
+系2:$f,g\in \C[x]$とする。このとき、$\Res(f,g,x)=0$であることと、
+$f$と$g$が$\C$において共通根を持つことは同値である。」
+\begin{myproof}
+  $\C[x]$で2つの共通因子を持つことと、共通根を持つことは同値である。
+\end{myproof}
+
+命題3:$f,g\in \C[x_1,\dots,x_n]$に対して、$a_0,b_0\in k[x_2,\dots,x_n]$を
+\begin{align}
+  f &= a_0 x^l + \dots + a_l,\quad a_0\neq 0\\
+  g &= b_0 x^m + \dots + b_m,\quad b_0\neq 0.
+\end{align}
+ととる。もし$\Res(f,g,x_1) \in \C[x_2,\dots,x_n]$が
+$(c_2,\dots,c_n)\in \C^{n-1}$において消えるとすると次が成立する。
+\begin{enumerate}[label=(\roman*)]
+  \item $a_0$または$b_0$が$(c_2,\dots,c_n)\in \C^{n-1}$で消える。
+  \item $c_1 \in \C$が存在して、$f$と$g$は
+  $(c_1,\dots,c_n)\in \C^n$で消える。
+\end{enumerate}
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Def $\bbold c$: $\bbold c = (c_2,\dots,c_n)$とする。
+    \item $\implies$: $a_0(\bbold c)\neq 0$かつ$b_0(\bbold c)\neq 0$だとする。(結論の片方を持ってくる。)
+    \item
+    (2)の仮定より、
+    \begin{align}
+      f(x_1,\bbold c)&=
+      a_0(\bbold c)x_1^l + \dots + a_l(\bbold c),\quad a_0(\bbold c)\neq 0\\
+      g(x_1,\bbold c)&=
+      b_0(\bbold c)x_1^m + \dos + b_m(\bbold c),\quad b_0(\bbold c)\neq 0
+    \end{align}
+    となっている。
+    \item
+    Def $h$: $h=\Res(f,g,x_1)$とする。
+    \item
+    仮定より$h = \Res(f,g,x_1) = 0$となる。
+    \item
+    \easypicture{1431792619123.png}
+    \item
+    $f,g$の$a_\bullet,b_\bullet$の表現より、
+    $f(x_1,\bbold c)$と$g(x_1,\bbold c)$の終結式は、上の
+    行列式である。
+    \item 上2つより、
+    \begin{align}
+      0 = h(\bbold c) = \Res(f(x_1,\bbold c),g(x_1,\bbold c),x_1).
+    \end{align}
+    \item Get $c_1$:
+    系2より、$f(x_1,\bbold c)$と$g(x_1,\bbold c)$は共通根を持つ。
+    この$x_1$を$c_1 = x_1$とおく。
+    \item
+    (9)より、
+    $f(c_1,\bbold c) = g(c_1,\bbold c) = 0$となる。$c_1$が求めるものだった。
+    \item (2)おわり。前件を後ろに否定して「または」で結論を得る。
+  \end{enumerate}
+\end{myproof}
+
+定理4(2つの多項式に対する拡張定理):
+$I=\gen{f,g}\subset \C[x_1,\dots,x_n]$とし、
+$I_1$を$I$の1次の消去イデアルとする。
+また、$a_0,b_0 \in \C[x_2,\dots,x_n]$を
+\begin{align}
+  f &= a_0 x^l + \dots a_l,\quad a_0 \neq 0 \\
+  g &= b_0 x^m + \dots b_m, \quad b_0\neq 0
+\end{align}
+のものとする。
+部分解$(c_2,\dots,c_n)\in \var(I_1)$があるとする。
+もし、$(c_2,\dots,c_n) \notin \var(a_0,b_0)$ならば、
+$c_1\in \C$が存在して$(c_1,\dots,c_n) \in \var(I)$となる
+\footnote{拡張できた。}
+。
+\begin{myproof}
+\begin{enumerate}[label=(\arabic*)]
+  \item Def $\bbold c$: $\bbold c = (c_2,\dots,c_n)$とする。
+  \item 命題1より、$\Res(f,g,x_1) \in I_1$となる。
+  \item 上より、
+  $\bbold c = (c_2,\dots,c_n) \in \var(I_1)$なので、
+  終結式$\Res(f,g,x_1)$は$\bbold c$で消える。
+  \item
+  $\implies$: $a_0(\bbold c) \neq 0$かつ$b_0(\bbold c)\neq 0$とする。
+  \item Get $c_1$:
+  命題3より拡張した$c_1$がある。$(c_1,\bbold c) \in \var(f,g)$となる。
+  \item (3)おわり。
+  \item $\implies$: $a_0(\bbold c),b_0(\bbold c)$の一方が0でもう一方が0でないとする。$a_0(\bbold c) \neq 0$かつ$b_0(\bbold c)=0$として一般性をうしなわない。
+  \item Def $N$: $N$を十分大きいとする。
+  $x_1^N f$の$x_1$についての次数は$g$の$x_1$についての次数より大きい。
+  \item $\gen{f,g} = \gen{f,g+x_1^N}$となる。
+  \item $g+x_1^N f$の$x_1$についてのLTは$a_0$になっている。この係数は
+  (7)より$a_0(\bbold c)\neq 0$である。
+  \item Get $c_1$: 上より(4)-(6)が$f,g+x_1^N f$に適用でき、
+  $(c_1,\bbold c) \in \var(f,g+x_1^N f)$となる。
+  \item 上と(9)より、
+  $(c_1,\bbold c) \in \var(f,g)$となる。
+  \item (7)おわり。
+  \item (4)-(6),(7)-(13)が示されたものだった。
+\end{enumerate}
+\end{myproof}
+
+一般終結式を定義する。
+3変数以上に対する終結式を定義したかった。
+$f_1,\dots,f_s$の一般終結式を、変数$x_1,\dots,x_n$に$u_2,\dots,u_s$を追加して、
+\begin{align}
+  \Res(f_1, u_2f_2+\dots + u_s f_s, x_1)
+  =
+  \sum_\alpha h_\alpha(x_2,\dots,x_n)u^\alpha
+\end{align}
+と書いたときの$h_\alpha$たちと定義する
+\footnote{$f_1,f_2$なら$u_2$だけ追加する。$\alpha$は1個になって、
+$\Res(f_1,u_2f_2,x_1)=h_{e_2}(x_2,\dots,x_n)u^{\alpha_2}$となる。}
+。
+
+定理5:
+拡張定理。
+イデアル$I=\gen{f_1,\dots,f_s}\subset k[x_1,\dots,x_n]$をとり、
+$I_1$を$I$の1次の消去イデアルとする。
+各$1\le i \le s$にたいして、$f_i$を次の形に書く
+\footnote{$g_i \in k[x_2,\dots,x_n]$は$f$の$x_1$に関する最高次}。
+\begin{align}
+  f_i = g_i(x_2,\dots,x_n)x_1^{N_i} + (x_1 の次数が <N_i である頃).
+\end{align}
+ここで、$N_i \ge 0$であり、$g_i \in \C[x_2,\dots,x_n]$は0でない。
+部分解$(c_2,\dots,c_n) \in \var(I_1)$であると仮定する。
+もし$(c_2,\dots,c_n)\notin \var(g_1,\dots,g_s)$であるならば、
+$c_1\in \C$が存在して、$(c_1,\dots,c_n)\in \var(I)$となる。
+
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Def $\bbold c$: $\bbold c = (c_2,\dots,c_n)$とする。
+    \item ($f_1(x_1,\bbold c),\dots,f_s(x_1,\bbold c)$の共通根を求めたい。)
+    \item $\implies$: $s\ge 3$とする。
+    \item 仮定の「多様体に属さない」の仮定より、$\bbold c\notin \var(g_1,\dots,g_s)$とする。一般性を失なわず、
+    $g_1(\bbold c)\neq 0$と仮定してよい\footnote{$g_1(\bbold c)=\dots=g_s(\bbold c)=0$だとするとおかしいので少なくとも1個はnonzeroでないといけず、それを1番にした。}。
+    \item Get $h_\alpha$: $f_1,\dots,f_s$の一般終結式を名付ける。
+    \begin{align}
+      \Res(f_1,u_2f_2+\dots+u_sf_s,x_1)
+      =
+      \sum_\alpha h_\alpha u^\alpha
+    \end{align}
+    とする。
+    \item Get $A,B$:
+    命題1の終結式の性質より、$A,B\in \C[u_2,\dots,u_s,x_1,\dots,x_n]$で
+    \begin{align}
+      Af_1 + B(u_2f_2 + \dots + u_s f_s) =
+      \Res(f_1,u_2f_2 + \dots + u_s f_s, x_1)
+    \end{align}
+    となるものが存在する。
+    \item
+    Get $A_\bullet, B_\bullet$:
+    $A=\sum_{\alpha}A_\alpha u^\alpha,\quad
+    B=\sum_{\beta}B_\beta u^\beta$とおく。
+    ここで、$A_\alpha,B_\beta \in \C[x_1,\dots,x_n]$である。
+    \item
+    ($h_\alpha \in \gen{f_1,\dots,f_s} = I$を示す。 )
+    \item
+    Def $e_\bullet$:
+    \begin{align}
+      e_2 = (1,0,\dots,0),\dots, e_s = (0,\dots,0,1)
+    \end{align}
+    とする。ここで長さは$n-1$。
+    \item
+    (9)の定義を使って、
+    \begin{align}
+      u_2 f_2 + \dots + u_s f_s = \sum_{i\ge 2}u^{e_i}f_i.
+    \end{align}
+    \item
+    \begin{align}
+      \sum_\alpha h_\alpha u^\alpha
+      &\desceq{(5),(6),(10)}
+      (\sum_\alpha A_\alpha u^\alpha)f_i
+      +
+      (\sum_\beta B_\beta u^\beta)(\sum_{i\ge 2}u^{e_i}f_i)\\
+      &=
+      \sum_\alpha (A_\alpha f_1)u^\alpha
+      +
+      \sum_{i\ge 2,\bea}B_\beta f_i u^{\beta + e_i}\\
+      &=
+      \sum_\alpha(A_\alpha f_1)u^\alpha
+      +
+      \sum_\alpha (\sum_{\substack{i\ge 2,\beta \\ \beta+e_i = \alpha}}B_\beta f_i)u^\alpha\\
+      &=
+      \sum_\alpha(A_\alpha f_1 + \sum_{\substack{i\ge 2,\beta \\ \beta+e_i = \alpha}}B_\beta f_i)u^\alpha.
+    \end{align}
+    \item Fix $\alpha$.
+    \item
+    上の両辺の$u^\alpha$係数を比較し\footnote{decode}、
+    \begin{align}
+      h_\alpha = A_\alpha f_1 + \sum_{\substack{i\ge 2,\beta \\ \beta+e_i = \alpha}} B_\beta f_i.
+    \end{align}
+    \item
+    $I=\gen{f_1,\dots,f_s}$だったので、上の式は$h_\alpha$をこれらの結合であらわしていることから$h_\alpha \in I$である。
+    \item
+    Free (12), $\alpha$。任意の$\alpha \in \Zge^{n-1}$について、
+    $h_\alpha \in I$となる。
+    \item
+    (5)より、$h_\alpha \in \C[x_2,\dots,x_n]$だったので、
+    上とあわせて$h_\alpha \in I_1$となる。
+    \item
+    仮定(部分解)より、$\bbold c\in \var(I_1)$なので、
+    上より$h_\alpha(\bbold c)  = 0$である。
+    \item
+    Def $h$: $h=\Res(f_1,u_2f_2+\dots + u_s f_s, x_1)$とする。
+    \item
+    \begin{align}
+      h(\bbold c)
+      \desceq{(18)}
+      \Res(f_1,u_2f_2+\dots+u_sf_s,x_1)(\bbold c)
+      \desceq{(5)}
+      \sum_\alpha (h_\alpha u^\alpha)(\bbold c)
+      \desceq{(17)}
+      0.
+    \end{align}
+    すなわち、終結式が$\bbold c$で消える。
+    \item
+    Def $h(\bbold c,u_2,\dots,u_n)$:$\C[x_1,u_2,\dots,u_s]$の多項式
+    $h(\bbold c,u_2,\dots,u_n)$を、
+    終結式$h$に$(x_2,\dots,x_n) \leftarrow \bbold c$を代入して
+    得られた多項式と定義する。(実際は$x_1$もないよね？)
+    \item
+    (19),(20)より、$h(\bbold c,u_2,\dots,u_n) = 0$となる。
+    \item
+    $\implies$:
+    $g_2(\bbold c)\neq 0$かつ$f_2$は変数$x_1$に関する次数が$f_3,\dots,f_s$のどれよりも大きいとする。
+    \item
+    \begin{align}
+      h(\bbold c,u_2,\dots,u_n) =
+      \Res(f_1(x_1,\bbold c), u_2f_2(x_1,\bbold c)+\dots+u_sf_s(x_1,\bbold c),x_1).
+    \end{align}
+    (「終結式を計算してから代入」と「代入してから終結式」が一致する)
+    これは、仮定より$f_1$の最高次が$\bbold c$で消えないこと、
+    (22)の仮定より$u_2f_2+\dots+u_sf_s$の最高次が$u_2g_2$であり、
+    再び(22)の仮定より$g_2(\bbold c\neq 0$であることから従う。
+    \item (19)と(23)より、
+    \begin{align}
+      \Res(f_1(x_1,\bbold c),u_2f_2(x_1,\bbold c)+\dots+u_sf_s(x_1,\bbold c),x_1)=0.
+    \end{align}
+    \item Get $F$:
+    $f_1(x_1,\bbold c)$も$u_2f_2(x_1,\bbold c)+\dots+u_sf_s(x_1,\bbold c)$もどちらも$k[x_1,u_2,\dots,u_s]$
+    の元なので、命題1が使えて(24)より、
+    この2式に$x_1$について正の次数を持った共通因子$F$が得られる。
+    \item $F$の定義より、$F$は$f_1(x_1,\bbold c)$を割り切る。
+    よって、$F\in \C[x_1]$である。
+    \item $F$は$u_2f_2(x_1,\bbold c)+\dots+u_sf_s(x_1,\bbold c)$を割り切るが、$f_\bullet(x_1,\bbold c)\in \C[x_1]$であることと、
+    $u_\bullet \in \C[u_2,\dots,u_n]$であることから(正確には係数比較して)、
+    $F$は$f_2(x_1,\bbold c),\dots,f_s(x_1,\bbold c)$をすべて割り切る。
+    \item (26),(27)より、$F$は$f_1(x_1,\bbold c),\dots,f_s(x_1,\bbold c)$すべての、$x_1$について正の次数を持つ共通因子である。
+    \item
+    Def $c_1$: (25)より$F$は$x_1$について正の次数を持つので、$F$の根$c_1 \in \C$が存在する(代数閉体)。
+    \item
+    (27),(28)より、$c_1$は$f_i(x_1,\bbold c)$すべての共通根であり、
+    部分解$\bbold c$が拡張されて$(c_1,\bbold c)$となった。
+    \item (22)おわり。
+    \item $\implies$: (22)がみたされないとき:
+    \item Get $N$: 十分大きい
+    \item (33)より、$f_2+x_1^N f_1$の$x_1$に関する最高次の係数は$g_1$である。
+    \item (33)より、$f_2+x_1^N f_1$の$x_1$に関する次数は$f_3,\dots,f_s$のどれよりも大きい。
+    \item Get $c_1$: 上2つより、(22)-(31)の議論が$f_1,f_2+x_1^N f_1,f_3,\dots,f_s$に適用でき、これに関する$\bbold c$の拡張$c_1$を得る。
+    \item 上より、
+    \begin{align}
+      f_1(x_1,\bbold c) &= 0\\
+      (f_2+x^Nf_1)(x_1,\bbold c) &= 0\\
+      &\vdots\\
+      f_s(x_1,\bbold c) &= 0
+    \end{align}
+    となっている。引き算して、$f_2(x_1,\bbold c)=0$も得られ、
+    $c_1$は$\bbold c$の拡張になっている。
+    \item (32)おわり。
+    \item (31),(38)より、示された。
+  \end{enumerate}
 \end{myproof}
