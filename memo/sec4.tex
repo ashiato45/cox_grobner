@@ -1,0 +1,125 @@
+\label{sec:代数と幾何の対応}
+
+\subsection{ヒルベルトの零点定理}
+\label{sub:ヒルベルトの零点定理}
+
+問題3:
+\begin{enumerate}[label=(\arabic*)]
+  \item
+  \begin{align}
+    f(x_1,x_2,\dots,x_n)
+    &=
+    f(\tilde x_1,\tilde x_2 + a_2 \tilde x_1,\dots, \tilde x_n + a_n \tilde x_1)\\
+    &=
+    (\sum_{d=0}^N h_d)(\tilde x_1,\tilde x_2 + a_2 \tilde x_1,\dots, \tilde x_n + a_n \tilde x_1)\\
+    &=
+    h_N(\tilde x_1,\tilde x_2 + a_2 \tilde x_1,\dots, \tilde x_n + a_n \tilde x_1)
+    +
+    (ゴミ)
+    \\
+    &=
+    (\sum_{\myabs{\alpha}=N}c_\alpha x^\alpha)(\tilde x_1,\tilde x_2 + a_2 \tilde x_1,\dots, \tilde x_n + a_n \tilde x_1)
+    +
+    (ゴミ)\\
+    &=
+    \sum_{\myabs{\alpha}=N}c_\alpha \tilde x_1^{\alpha_1}(\tilde x_2 + a_2 \tilde x_1)^{\alpha_2} \dots (\tilde x_n + a_n \tilde x_1)^{\alpha_n}
+    +
+    (ゴミ)\\
+    &=
+    \sum_{\myabs{\alpha}=N} c_\alpha \tilde x_1^{\alpha_1}(a_2\tilde x_1)^{\alpha_2}\dots (a_n \tilde x_1)^{\alpha_n}
+    +
+    (ゴミ)\\
+    &=
+    \tilde x_1^N \sum_{\myabs{\alpha}=N}c_\alpha (1\cdot a_2^{\alpha_2}\cdot \dots \cdot a_n^{\alpha_n})
+    +
+    (ゴミ)\\
+    &=
+    \tilde x_1^N \sum_{\myabs{\alpha}=N}c_\alpha (1,a_2,\dots,a_n)^\alpha
+    +
+    (ゴミ)\\
+    &=
+    \tilde x_1^N h_N(1,a_2,\dots,a_n) + (ゴミ).
+    \end{align}
+\end{enumerate}
+
+問題4:
+代数的閉体$K$を考える。これが仮に有限体であり、
+$a_1,\dots,a_n$が$K$のすべての元であるとする。
+このとき、
+\begin{align}
+  (x-a_1)\dots (x-a_n) = 1
+\end{align}
+という方程式を考える。左辺は
+$a_\bullet$のどれを入れても0になるので、
+$a_\bullet$はどれも根にならない。
+しかし、$K$は代数的閉体なのでこの根は$K$に属さなければならないが、
+先の考察よりこれは$a_1,\dots,a_n$のどれでもない。
+
+弱系の零点定理:$I\subset k[x_1,\dots,x_n]$は$\var(I)=\emptyset$
+とする。このとき、$I$は全体になってしまう。
+証明する。
+まず1次元で考える。PIDなので$I=\gen{f}$なる$f$がある。
+$\deg f \ge 1$のときには、代数的閉体で考えてるので解が出てしまって、
+$\var(I)$は空でなくなるので矛盾。よって、$\deg f = 0$となり、
+$f$は定数になる。よって、$1 \in I$である。
+次に$n$次元で考える。$I=\gen{f_1,\dots,f_s}$とする。
+変数変換
+\begin{align}
+  x_1 \mapsto \tilde x_1,\quad x_i \mapsto \tilde x_i + a_i \tilde x_1
+\end{align}
+をかけて、
+$f_1$の$\tilde x_1$についての最高次の係数は定数であるとしてよい。
+変数変換の性質より、$f$が解を持つ$\iff$ $\tilde f$が解を持つので、
+$\var(f) = \emptyset \iff \var(\tilde f)=\emptyset$である。
+また、$\tilde \bullet$が定数に影響しないので$1\in I \iff 1\in \tilde I$となる。
+\begin{align}
+  \var(\tilde I_1)
+  &=
+  \pi_1(\var(\tilde I))\\
+  &
+  \fbox{$f_1$の$\tilde x_1$の係数は定数、拡張定理}\\
+  &=
+  \pi_1(\emptyset)\\
+  &
+  \fbox{$\var(I)=\emptyset$で$\var(I)=\emptyset \iff \var(\tilde I)=\emptyset$}\\
+  &=
+  \emptyset.
+\end{align}
+帰納法の仮定より、$\tilde I_1 = k[\tilde x_2,\dots,\tilde x_n]$である。
+よって、$1\in \tilde I_1 \subset \tilde I$となる。
+$1\in \tilde I$なので、($\tilde I$で定数は変化しない。)$1\in I$である。
+よって、$I$は全体である。
+
+ヒルベルトの零点定理
+\begin{enumerate}
+  \item $f$は$f_1,\dots,f_s$の共通零点$\var(f_1,\dots,f_s)$で消えるとする。
+  \item $f^m = \sum_{i=1}^s A_i f_i$なる$A_i$たちを探す。
+  \begin{enumerate}
+    \item $\tilde I = \gen{f_1,\dots,f_s,1-yf} \subset k[x_1,\dots,x_n,y]$とする。
+    \item $\var(\tilde I) = \emptyset$となる。
+    \begin{enumerate}
+      \item どの$(a_1,\dots,a_n,a_{n+1})\in  k^{n+1}$も$\var(\tilde I)$に属さなければよい。
+      \item 頭$n$個で作った点が$f_1,\dots,f_s$のすべてで消えるとき、
+      $1-yf$はこの点で消えない。$yf$がこの点で消えるからである。
+      \item そうでないとき、どこかで消えないときはその$f_i$をそのまま使えば
+      消えない。
+    \end{enumerate}
+    \item $1 \in \tilde I$が弱い零点定理からわかる。
+    \item
+    \begin{align}
+      1 = \sum_{i=1}^s p_i(x_1,\dots,x_n,y)f_i
+      +
+      q(x_1,\dots,x_n,y)(1-yf)
+    \end{align}
+    となるように$p,q$がとれる。
+    \item
+    $y=1/f$とする。
+    \begin{align}
+      1=\sum_{i=1}^s p_i(x_1,\dots,x_n,1/f)f_i.
+    \end{align}
+    \item
+    $f^m$をたくさんかければ、上の$1/f$が消えてのぞむ式が得られる。
+  \end{enumerate}
+\end{enumerate}
+
+逆のほうは「強い」ほうで言ってる。

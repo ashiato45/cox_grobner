@@ -1,0 +1,686 @@
+\label{sec:多様体上の多項式関数と有理関数}
+
+
+\begin{enumerate}
+  \item $V=\var(I),\, V\neq \emptyset$
+  \item
+  ($V$が既約のとき) ($I=\ideal(V)$としてよい。)
+  \begin{enumerate}
+    \item ($l=1$のとき)
+  \begin{enumerate}
+    \item $W_0 \subsetneq V$
+    \item $\exists$: $(a_1,\dots,a_n) \in V-W_0$
+    \item $\exists$: $f\in \ideal(W_0)$、$f(a_1,\dots,a_n) \neq 0$
+    \item (場合1)
+    \begin{enumerate}
+      \item $m,g_\bullet$:
+      \begin{align}
+        f=\sum_{i=0}^m g_i(x_2,\dots,x_n) x_i^i
+      \end{align}
+      \item $W_1 = \var(I_1)\cap \var(g_0,\dots,g_m)$
+      \item $(c_2,\dots,c_n) \in \var(I_1)-W_1$
+      \item $\exists$: $c_1 \in k$、$f(c_1,\dots,c_n) \neq 0$
+    \end{enumerate}
+    \item (場合2)
+    \begin{enumerate}
+      \item $\exists (b_2,\dots,b_n) \in \var(I_1) \exists b_1 \in k$:
+      $(b_1,\dots,b_n) \notin V$
+      \item $\exists h\in I$: $h(b_1,\dots,b_n) \neq 0$
+      \item $r, u_\bullet$:
+      \begin{align}
+        h=\sum_{i=0}^r u_i(x_2,\dots,x_n) x_1^i.
+      \end{align}
+      \item 「(4)～を示そう」
+      \begin{itemize}
+        \item $0\le j\le r,\, N_j,\, v_{j0},\dots, v_{j,r-1}$:
+        \begin{align}
+          u_r^{N_j}f^j =
+          q_j h + \ub{v_{j0}}_{\in k[x_2,\dots,x_n]} + v_{j1}x_1  + \dots + v_{j,r-1}x_1^{r-1}.
+        \end{align}
+        \item $K$: $k[\var(I_1)]$の分数体
+        \item $\exists$ $\phi_0,\dots,\phi_r \in K$(すべては0でない):
+        \begin{align}
+          \Forall{0\le i \le r-1} \sum_{j=0}^r \phi_j [v_{ji}] = [0]
+        \end{align}
+        あるいは、
+        \begin{align}
+          \sum_{j=0}^r \phi_j ([v_{j0}],\dots,[v_{j,r-1}]) = ([0],\dots, [0]).
+        \end{align}
+        \item
+        とりなおし:$\phi_\bullet \in k[x_2,\dots,x_n]/I_1$
+        \item
+        $\exists w_j \in k[x_2,\dots,x_n]$: $\phi_j = [w_j]$.
+        うち少なくとも1つは$w_j \notin I_1$
+        \item
+        $ v_j = w_j u_r^{N_j}$
+      \end{itemize}
+      \item $g=u_r v_0$
+      \item $W_1 = \var(g) \cap \var(I_1)$
+    \end{enumerate}
+  \end{enumerate}
+  \item $l-1$について:
+  \end{enumerate}
+  \item ($V$は既約とはかぎらない)
+  \item $\exists$: $V_\bullet: V = V_1\cup \dots \cup V_m.$既約
+  \item
+  $V_i'$: $\pi_l(V_i)$のザリスキ閉包
+  \item
+  $V_1' \not\subset V_i'$
+  \item
+  $W_1$: $V_1$と$\emptyset$に定理を適用したもの。
+  $V_1' - W_1 \subset \pi_l(V_1)$、$W_1 \subsetneq V_1'$。
+  \item
+  $W = W_1 \cup V_2' \cup \dots \cup V_m'$
+\end{enumerate}
+
+\begin{enumerate}
+  \item $W_1 = \var(I_l)$
+  \item
+  $Z_1$: 閉包定理。$W_1 - Z_1 \subset \pi_l(V)$、$Z_1 \subsetneq W_1$
+  \item $V_1$:
+  \begin{align}
+    V_1 = V \cap \set{(a_1,\dots,a_n)\in k^n; (a_{l+1},\dots,a_n)\in Z_1}
+  \end{align}
+  $V_1 \subsetneq V$、$\pi_l(V) = (W_1-Z_1) \cup \pi_l(V_1)$
+  \item
+  $W_2$: $\pi_l(V_1)$のザリスキ閉包
+  \item
+  $Z_2$:閉包定理。$W_2 - Z_2 \subset \pi_l(V_1)$、$Z_2 \subsetneq W_2$
+  \item
+  $V_2$:
+  \begin{align}
+    V_2 = V_1 \cap \set{(a_1,\dots,a_n)\in k^n; (a_{l+1},\dots,a_n)\in Z_2}
+  \end{align}
+  \item
+  3-4を、できた$V_\bullet$が$\emptyset$になるまでくりかえす。
+\end{enumerate}
+
+\subsubsection{演習}
+\label{subs:演習}
+\begin{enumerate}[label=(\arabic*)]
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    $a,b \notin I\cap k[x_{l+1},\dots,x_n]$とする。
+    \begin{itemize}
+      \item $a\notin I$かつ$b\notin I$のとき:
+      $I$が素イデアルなので、$ab \notin I$となる。よって、
+      $ab \notin I_l$となる。
+      \item $a\notin I$かつ$b\notin k[x_{l+1},\dots,x_n]$のとき:
+      $b$は$x_1,\dots,x_l$の1文字以上を含まなければならない。
+      よって、$ab$も同様で、$ab\notin k[x_{l+1},\dots,x_n]$となる。
+      よって、$ab\notin I_l$となる。
+      \item $a\notin k[x_{l+1},\dots,x_n]$かつ$b\notin I$のとき:
+      上と同様。
+      \item $a,b \notin k[x_{l+1},\dots,x_n]$のとき:
+      上と同様。
+    \end{itemize}
+    \item
+    ?案。
+    $\var(I_l)$が既約でないとし、
+    \begin{align}
+      \var(I_l) &= \var(fg,h_1,h_2,\dots,h_s)\\
+      &=
+      \var(f,h_1,\dots,h_s) \cup \var(g,h_1,\dots,h_s)
+    \end{align}
+    であるとする。ただし、最後2つで$\var(I_l)$を覆い、
+    どちらかだけで全てを覆うということはない(既約でないから)。
+
+    $\var(I_l)$は$k[x_{l+1},\dots,x_n]$のsubsetだが、
+    これを$k[x_1,\dots,x_n]$で捉えると、
+    $\var(I)$よりも広い(？)。
+    したがて、
+    \begin{align}
+      \var(I)
+      &=
+      \var(F_1,\dots,F_s)\\
+      &=
+      \var(F_1,\dots,F_S)\cap \var(I_l)\\
+      &=
+      \ub{(\var(F_1,\dots,F_S)\cap \var(f,h_1,\dots,h_s))}_{A}
+      \cup
+      \ub{(\var(F_1,\dots,F_S)\cap V(g,h_1,\dots,h_s))}_{B}
+    \end{align}
+    $A$と$B$で$\var(I)$が覆えていて、しかもどちらかだけで覆ってはいない。
+    (後者は、先の「どちらかだけで全て$(\var(I_l))$を覆うことはない」による。)
+    よって、$\var(I)$は既約でなく、対偶がしめされた。
+  \end{enumerate}
+  \item
+  体でやって戻せばいいと思っていた。つまり、
+  $h$を$u_r$でわって先頭の$x_1$に関する係数を$1$にしておく。
+  このとき、わったあとの係数の分母はすべて$u_r$のべきになる。
+  これで$k(x_2,\dots,x_n)$係数で割り算して、最後に
+  $u_r$のべきを解消する。
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    $x=(z,y) \in V_y $とする。$\pi_1(x) = y$となる。
+    $(z,y)\in \C \times \set{y}$はあきらか(実際はもっとせまい)。
+
+    $V_y\neq \emptyset$とする$\pi_1(x)=y$となる$x=(z,y) \in V$が存在する。
+    $\pi_1(x) = y$なので、$y$にうつる$V$の元として
+    $x$が見つかったことになり、$y \in\pi_1(V)$である。
+    逆に、$y\in \pi_1(V)$とする。$\pi_1(x) = y$となる$x\in V$が存在する。
+    すると、$x\in V_y$である。よって、$V_y \neq \emptyset$である。
+    \item
+    場合1は
+    \begin{quote}
+      すべての$(b_2,\dots,b_n)\in \var(I_1)$とすべての
+      $b_1 \in k$にたいして、$(b_1,\dots,b_n) \in V$となる
+    \end{quote}
+    ときだった。
+    $\pi_1(V)\subset \var(I_1)$は一般に成立するが、
+    さらに部分解$\var(I_1)$から筒状に伸ばしたものが$V$であるというのがこの場合であるから、
+    $\pi_1(V) = \var(I_1)$である。
+
+    $V_y \subset \C \times \set{y}$は一般に成立する。
+    $(z,y)\in \C \times \set{y}$とする。$y\in \pi_1(V)=\var(I_1)$であり、
+    $z\in \C$なので、$(z,y)\in V$である(場合1)。
+    さらに、$\pi_1(z,y)  = y$なので、$(z,y) \in V_y$となる。
+    \item
+    場合2は
+    \begin{quote}
+      ある$(b_2,\dots,b_n) \in \var(I_1)$と
+      $b_1 \in k$に対して$(b_1,\dots,b_n) \notin V$となる
+    \end{quote}
+    場合だった。$I=\ideal(V)$としてあるので、
+    (与えられた$b_\bullet$を使って)$h(b_1,\dots,b_n)\neq 0$となる
+    多項式$h\in I$が存在する。
+    $h$を$x_1$の多項式として、
+    \begin{align}
+      h=\sum_{i=0}^r u_i(x_2,\dots,x_n)x_1^i
+    \end{align}
+    とあらわす。$h(b_1,\dots,b_n)\neq 0$より、ある$i$に対して
+    $u_i(b_2,\dots,b_n)\neq 0$となり、$u_i \notin I_1$となる
+    \footnote{これは最高次の$x_1^r$の係数ではないかもしれない}。
+    もし、$u_r \in I_1$ならば$h-u_r x_1^r$も$(b_1,\dots,b_n)$
+    で消えない\footnote{最高次をつぶして$h$を置き換える。
+    このとき、消えないのは$(b_2,\dots,b_n)\in \var(I_1)$という仮定
+    が条件2でかかっていたから。}から、$h-u_r x_1^r$で置き換えることができる。
+    このおきかえを繰替えして(次数を下げて)$u_r \notin I_1$と仮定してもよい。
+
+    $\tilde W = \var(u_r)$とする。
+    まず、$\pi_1(V) \not\subset \tilde W$をしらべる。
+    $u_r \notin I_1$となるようにしておいたので、
+    $u_r(b_2,\dots,b_n) \neq 0$である。すると、
+    \begin{align}
+      h(x_1,b_2,\dots,b_n) = \sum_{i=0}^r u_i(b_2,\dots,b_n)x_1^i
+    \end{align}
+    という$x_1$についての方程式が得られる。
+    代数学の基本定理より、これをみたす$\tilde b_1$が存在する。
+    ?
+
+  \end{enumerate}
+  \item
+  \begin{align}
+    (\tilde \pi_{l-1} \circ \pi_1)(x_1,\dots,x_n)
+    &=
+    \tilde \pi_{l-1}(x_2,\dots,x_n)\\
+    &=
+    (x_{n-l+1},\dots,x_n)\\
+    &=
+    \pi_l (x_1,\dots,x_n).
+  \end{align}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  \begin{align}
+    (V \subset V_1\cup V_2)
+    &\iff
+     (\ideal(V) \supset \ideal(V_1 \cup V_2))\\
+     &\iff
+     (\ideal (V) \supset \ideal(V_1) \ideal(V_2))\\
+     &\iff
+     ((\ideal (V) \supset \ideal(V_1)) \vee (\ideal(V)\supset \ideal(V_2)))\\
+     &\iff
+     ((V\subset V_1)\vee (V\subset V_2)).
+  \end{align}
+  \item
+  $n=2$のときは示されている。
+  $n$で成立するとする。$n+1$のとき示す。
+  \begin{align}
+    (V \subset V_1\cup \dots \cup V_{n+1})
+    &\iff
+    (V \subset (V_1 \cup \dots \cup V_n) \cup V_{n+1})\\
+    &\iff
+    ((V\subset (V_1\cup \dots \cup V_n))\vee (V\subset V_{n+1}))\\
+    &\iff
+    ((V\subset V_1)\vee \dots \vee (V\subset V_{n+1})).
+  \end{align}
+  \end{enumerate}
+  \item
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{align}
+      Z_1 &= \var_{W_1}([\phi_1],\dots,[\phi_s])\\
+      &=
+      \set{(x_1,\dots,x_{n-l})\in W_1; \Forall{[\phi] \in \gen{[\phi_1],\dots,[\phi_{s}]}} [\phi](x_1,\dots,x_{n-l}) = 0}\\
+      &=
+      \set{(x_1,\dots,x_{n-l})\in W_1; \Forall{\phi \in \gen{\phi_1,\dots,\phi_{n-l}}} \phi(x_1,\dots,x_{n-l}) = 0}.
+    \end{align}
+    よって、
+    \begin{align}
+      \set{(a_1,\dots,a_n)\in k^n; (a_{l+1},\dots,a_n)\in Z_1}
+      &=
+      \set{(a_1,\dots,a_n)\in k^n; \Forall{\phi\in \gen{\phi_1,\dots,\phi_{n-l}}} \phi(a_{l+1},\dots,a_n)  = 0}\\
+      &=
+      \gen{\phi_1,\dots,\phi_{n-l}}.
+    \end{align}
+    これはアフィン多様体になっている。$V_1$はこれと$V$との
+    交わりなのでOK。
+    \item
+    \begin{align}
+      (W_1-Z_1)\cup \pi_l(V_1)
+      &=
+      (W_1-Z_1)\cup \pi_l(\set{(a_1,\dots,a_n)\in k^n ; (a_{l+1},\dots,a_n)\in Z_1}\cap V)\\
+      &=
+      (W_1-Z_1)\cup (Z_1\cap \pi_l(V))\\
+      &=
+      ((W_1-Z_1)\cup Z_1) \cap ((W_1-Z_1)\cup \pi_l(V))\\
+      &=
+      W_1 \cap ((W_1-Z_1)\cup \pi_l(V))\\
+      & \fbox{$Z_1 \subsetneq W_1$}\\
+      &=
+      W_1 \cap \pi_l(V)\\
+      &\fbox{$W_1 - Z_1 \subset \pi_l(V)$(閉包定理)}\\
+      &=
+      \var(V_1) \cap \pi_l(V)\\
+      &=
+      \pi_l(V)\\
+      &
+      \fbox{$\pi_l(V)$のほうがせまい}.
+    \end{align}
+  \end{enumerate}
+\end{enumerate}
+
+\begin{framed}
+  定理1(閉包定理の後半)
+  $k$を代数的閉体とし、$V=\var(I)\subset k^n$とする。
+  $V\neq \emptyset$ならば、
+  \begin{align}
+    \var(I_l) - W \subset \pi_l(V)
+  \end{align}
+  となるようなアフィン多様体$W\subsetneq \var(I_l)$が存在する。
+\end{framed}
+
+\begin{enumerate}
+  \item ？？？:$l=1$のときは済んでいる。
+  \item ？？？:$l>1$を考える。
+
+  \item
+  $V=\var(I)$としていたが、$V=\var(\ideal(V))$が成立しているので、
+  $I=\ideal(V)$としてもよい。
+  (「$V$を定義するどのイデアル$I$も同じ$\var(I_l)$を与える。)
+  \item
+  $V$が既約なとき:
+  \begin{enumerate}
+    \item
+    $V$は既約なので、$I=\ideal(V)$は素イデアル
+    \item
+    Fact: $I$が素イデアル$\implies$ $I_l$は素イデアル。演習1。
+
+    略証:$a,b \notin I\cap k[x_{l+1},\dots,x_n]$とする。あとは4通りにわける。
+    $I$が素イデアルであることを使うパートと、$a,b$が$x_1,\dots,x_l$を含んでしまうパートに分かれる。
+    \item
+    Fact: $V$が既約$\implies$ $\var(I_l)$は既約。
+
+    略証: (3)で$I=\ideal(V)$とした。$I$は素イデアルなので(a)、
+    $I_l$も素イデアルであり(b)、代数的閉体上では
+    素イデアルと既約多様体が対応するので
+    \footnote{4-5-Prop3 一般の体で、$V$が既約$\iff$ $\ideal(V)$は素イデアル。}
+    、$\var(I_l)$は既約。
+    \item
+    「$\var(I_l)-W \subset \pi_l(V)$となる$W\subsetneq \var(I_l)$が存在する」
+    よりも強い、
+    \begin{framed}
+      任意の多様体$W_0 \subsetneq V$にたいして、
+      \begin{align}
+        \var(I_l) - W_l \subset \pi_l(V-W_0)
+      \end{align}
+      となる多様体$W_l \subsetneq \var(I_l)$が存在する
+    \end{framed}
+    を示す。
+    \begin{enumerate}
+      \item $l=1$のとき
+      \item $\exists a_\bullet$: $W_0\neq V$なので、$(a_1,\dots,a_n) \in V-W_0$なる点が存在する。
+      \item $\exists f$: $f\in \ideal(W_0)$($W_0$できえる)で、$f(a_1,\dots,a_n) \neq 0$となる多項式が存在する。(なぜ？)
+      \item 場合I: すべての$(b_2,\dots,b_n) \in \var(I_l)$とすべての
+      $b_1 \in k$に対して$(b_1,\dots,b_n)\in V$となる場合:
+      \begin{enumerate}
+        \item $m,g_\bullet$: $f$を$x_1$について$m$次であり、
+        \begin{align}
+          f=\sum_{i=0}^m g_i(x_2,\dots,x_n) x_1^i
+        \end{align}
+        とかく。
+        \item $\exists W_1$:
+        $W_1 = \var(I_1) \cap \var(g_0,\dots,g_m)$とする。(これが条件をみたす)
+        \item Fact: $W_1 \subsetneq \var(I_1)$である。($\subset$はあきらか。)
+
+        実際$(a_2,\dots,a_n) \in \var(I_1)\setminus W_1$である。なぜなら、
+        $f(a_1,\dots,a_n) \neq 0$なので(iii)、$g_i$のどれかは$(a_2,\dots,a_n)$
+        で非零である。よって、$(a_2,\dots,a_n)\notin W_1$にはなっている。
+        また、$(a_1,\dots,a_n) \in V$なので$(a_2,\dots,a_n)$は
+        その部分解$\var(I_1)$になっている。
+        \item $\forall c_\bullet$:
+        $(c_2,\dots,c_n) \in \var(I_1)-W_1$とする。
+        \item
+        $(c_1,\dots,c_n)\notin W_1 = \var(I_1)\cap \var(g_0,\dot,g_m)$
+        なので、$g_0,\dots,g_m$のいずれかで消えない。
+        \item
+        よって、$f(x_1,\dots,c_2,\dots,c_n)\in k[x_1]$は非零な多項式。
+        \item $\exists c_1$:
+        $k$は無限体なので、$f(c_1,\dots,c_n) \neq 0$となる$c_1 \notin k$が存在する。
+        \item
+        $f$は$W_0$で消えるようにとっていたので(iii)、$f$で消えないやつ$(c_1,\dots,c_n) \notin W_0$。
+        \item
+        場合Iの仮定の、ファイバーがちゃんとのびているというやつより、
+        $(c_1,\dots,c_n) \in V$。
+        \item
+        $(c_1,\dots,c_n) \in V-W_0$となる。(H,I)
+        \item
+        $(c_2,\dots,c_n) \in \pi_1(V-W_0)$となる。
+      \end{enumerate}
+      \item 場合 II: ある$(b_2,\dots,b_n) \in \var(I_1)$と
+      ある$b_1 \in k$に対して$(b_1,\dots,b_n) \notin V$となるとき。
+      \begin{enumerate}
+        \item $\exists h$:
+        $(b_1,\dots,b_n)\notin V$なので、
+        $h(b_1,\dots,b_n)\neq 0$となる$h\in I$が存在する。(なぜ？)
+        \item
+        $r,u_i$: $h$を$x_1$について整理する。
+        \begin{align}
+          h = \sum_{i=0}^r u_i(x_2,\dots,x_n) x_1^i.
+        \end{align}
+        \item
+        $h(b_1,\dots,b_n) \neq 0$なので、ある$i$について
+        $u_i(b_2,\dots,b_n) \neq 0$となり($(b_2,\dots,b_n)\notin \var(I_1)$なので)、$u_i \notin I_1$となる。
+        \item
+        $u_r \in I_1$(最高次)ならば、$h-u_rx_1^r$も$(b_1,\dots,b_n)$
+        で消えないのでこれを置き換えて、最高次$u_r\notin I_1$となるようにできる。
+        \item
+        \begin{framed}
+          $v_i \in k[x_2,\dots,x_n]$で、
+          \begin{align}
+            \sum_{i=0}^r v_i f^i \in I かつ
+            v_0 \notin I_1
+          \end{align}
+          なるものが存在することを示す。
+        \end{framed}
+        \item
+        $q,v_\bullet$:
+        $0\le j \le r$にたいして、
+        \begin{align}
+          u_r^{N_j} f^j = q_j h+ v_{j0}+ v_{j1}x_1 + \dots + v_{j,r-1}x_1^{r-1}.
+        \end{align}
+        とする。$f$を$k(x_2,\dots,x_n)$係数で割り算して最後に払えばよい。
+        \item
+        $I_1 = \ideal(\var(I_1))$だたので、$k[x_2,\dots,x_n]/I_1 \simeq k[\var(I_1)]$となる。
+        \item $K$:
+        $\var(I_1)$は既約なので(a,b)、この環は整域で分数体$K$が考えられる。
+        \item
+        $K$を元とする$(r+1)\times r$行列
+        \begin{align}
+          \begin{pmatrix}
+            [v_{00}] & \ldots & [v_{0,r-1}]\\
+            \vdots & & \vdots \\
+            [v_{r0}] & \ldots & [v_{r,r-1}]
+          \end{pmatrix}
+        \end{align}
+        を作る。横に先の割り算の結果が並んで、縦には$1,f,\dots,f^r$となっている。
+        \item $\exists \phi_\bullet$:
+        行は$r+1$個あり、その行たちは$K^r$に属しているので、線型従属であり、
+        係数$\phi_0,\dots,\phi_r \in K$で、
+        \begin{align}
+          0\le i \le r-1 \implies \sum_{j=0}^r \phi_j [v_{ji}] = [0]
+        \end{align}
+        となるものがある。あるいは、
+        \begin{align}
+          \sum_{j=0}^r \phi_j ([v_{j0}] ,\dots, [v_{j,r-1}]) = ([0],\dots,[0]).
+        \end{align}
+        \item
+        $\phi_\bullet$たちの分母を払って、$\phi_\bullet \in k[x_2,\dots,x_n] \I_1$と思ってよい。
+        \item
+        $w_\bullet$: $\phi_j = [w_j]$となる$w_j \in k[x_2,\dots,x_n]$が存在する。
+        \item
+        $\phi_\bullet$すべては0ではないのだから、$w_\bullet$の少なくとも1つは$I_1$に入らない。
+        \item Jを書き直せば、
+        \begin{align}
+          \sum_{j=0}^r [w_j]([v_{j0}],\dots,[v_{j,r-1}]) = ([0],\dots,[0]).
+        \end{align}
+        \item
+        上は、
+        \begin{align}
+          \sum_{j=0}^r w_j(v_{j0},\dots,v_{j,r-1}) \in (I_1)^r
+        \end{align}
+        であり、
+        \begin{align}
+          \Forall{i} \sum_{j=0}^r w_j v_{ji} \in I_1
+        \end{align}
+        となっている。
+        \item
+        擬除算の式に$w_j$をかけて$\sum_{j=0}^r$をとる。
+        \begin{align}
+          \sum_{j=0}^r w_j(u_r^{N_j} f^j) \mod I
+          &=
+          \sum_{j=0}^r w_j(q_j h + v_{j0} + v_{j1}x_1 + \dots + v_{j,r-1}x_1^{r-1}) \mod I \\
+          &=
+          \sum_{j=0}^r w_j (q_j h) \mod I\\
+          & \fbox{O, $\sum w_j v_{ji} \in I_1$}\\
+          &=
+          0 \mod I\\
+          & \fbox{Aより。$h\in I$}.
+        \end{align}
+        よって、
+        \begin{align}
+          \sum_{j=0}^r w_j(u_r^{N_j} f^j)\in I.
+        \end{align}
+        \item
+        $v_\bullet$: $v_j = w_j u_r^{N_j}$
+        \item
+        $u_r \notin I_1$であり(擬除算「分母」にするためだった。Dより。)
+        、
+        ある$j$に対し$w_j \notin I_1$であるから(線型従属より。M。)
+        、
+        $I_1$が素イデアルであること(既約と仮定している。a,b)より、$v_j \notin I_1$となる。
+        いまのところ、多項式として
+        \begin{align}
+          \sum_{v_j f^j}
+        \end{align}
+        まで作った。うちどれか$v_j \notin I_1$までわかっている。
+        \item
+        ($1=f^0$の係数$v_0 \notin I_1$となるようにとりなおす。)
+        \item $\exists t$:
+        $v_0,\dots,v_{t-1}\in I_1$かつ$v_t \notin I_1$とする。
+        \item
+        \begin{align}
+          f^t \sum_{j=t}^r v_t f^{j-t} \in I
+        \end{align}
+        を考える。
+        $f\notin I$なので(iii。$f$は$(a_1,\dots,a_n)$で消えず、この点は$V-W_0$の元だった。)
+        、
+        \begin{align}
+          \sum_{j=t}^r v_t f^{j-t} \in I.
+        \end{align}
+        これは定数の係数$v_t$が(Tより)$v_t \notin I_1$となっている。
+        \item
+        Dおわり。$v_i \in k[x_2,\dots,x_n]$で、
+        $\sum_{i=0}^r v_i f^i \in I$かつ$v_0 \notin I_1$となるものが存在する。
+        \item
+        次を示す:
+        \begin{align}
+          \pi_1(V) \cap (k^{n-1}-\var(v_0)) \subset \pi_1(V-W_0).
+        \end{align}
+
+        実際、
+        $\sum_{i=0}^r v_i f^i \in I$なので、
+        任意の$(c_1,\dots,c_n) \in V$に対して、
+        \begin{align}
+          v_0(c_2,\dots,c_n)
+          +
+          f(c_1,\dots,c_n)\sum_{i=1}^r v_i(c_2,\dots,c_n) f(c_1,\dots,c_n)^{i-1} = 0
+        \end{align}
+        となる。したがって、$v_0(c_2,\dots,c_n)\neq 0$ならば
+        $f(c_1,\dots,c_n)\neq 0$となり($ab=0 \implies a=0 \vee b=0$)、
+        (iiiより、$f$は$W_0$上消えるので)$(c_1,\dots,c_n)\notin W_0$である。
+        (まず$V$をとって、そこから射影を考え、引き算の条件をならばにして示した。)
+        \item $g$:
+        $u_r\notin I_1$(Dより。最高次係数はこうしておいた。)であり、
+        $v_0 \notin I_1$(Uより。定数の係数はこうしておいた)であり、
+        $I_1$は素イデアルなので、$g=u_r v_0$とすると
+        $g\notin I_1$である。
+        \item
+        $W_1$: $W_1 = \var(g)\cap \var(I_1)$とする。
+        \item
+        Xの$g\notin I_1$より、$W_1 \subsetneq \var(I_1)$である。
+        \item[AA]
+        示したいのは、(d)の
+        \begin{align}
+          \var(I_1) - W_1 \subset \pi_1(V-W_0)
+        \end{align}
+        だった。$(c_2,\dots,c_n)\in \var(I_1)-W_1$をとる。
+        $(c_2,\dots,c_n)\notin W_1$なので、
+        「$u_r$で消えるか$v_0$消える」の否定で、$u_r,v_0$のどちらでも消えない。
+        \item[AB]
+        $\exists f_\bullet$: $I=\gen{f_1,\dots,f_s}$とする。
+        \item[AC]
+        $h\in I$なので(A)、$I=\gen{h,f_1,\dots,f_s}$となる。
+        \item[AD] $\exists c_1$:
+        拡張定理と、$h$の先頭係数$u_r(c_2,\dots,c_n) \neq 0$であること(AA)、
+        より、ある$c_1 \in k$で、$(c_1,\dots,c_n) \in V$となるものが存在する。
+        \item[AE]
+        Wの式(の左側から自由にとって),
+        $v_0(c_2,\dots,c_n) \neq 0$より、$(c_2,\dots,c_n)\in \pi_1(V-W_0)$となり、
+        AA、あるいは(d)の式が示される。($\pi(I_1)-W_1$から元をとると、それは自動的に$\var(I_1)-W_1$に入り、AAの式が使える。)
+      \end{enumerate}
+      \item $l=1$のときは示したので、$l-1$で成立を仮定する。
+      \item $\forall W_0$:
+      $W_0\subset \neq V$を自由にとる。
+      \item $\exists W_1$:
+      $l=1$のときは示したので適用する。
+      \begin{align}
+        W_1 \subsetneq \var(I_1) かつ \var(I_1) - W_1 \subset \pi_1(V-W_0)
+      \end{align}
+      をみたすものがある。
+      \item
+      $I=l = (I_1)_{l-1}$である。
+      \item
+      $\var(I_1)$は既約である。(a,b,c)
+      \item $\exists W_l$:
+    帰納法の仮定を使う。
+    \begin{align}
+      W_l \subsetneq \var(I_l) かつ \var(I\1) - W_1 \subset \tilde \pi_{l-1}(\var(I_1)-W_1)
+    \end{align}
+    なるものが存在する。
+    \item
+    ここで、$\tilde \pi_{l-1} \colon k^{n-1} \to k^{n-l}$は射影であるが、
+    domainが違ったので区別している。$\pi_l = \tilde \pi_{l-1}\circ \pi_1$なので
+    \begin{align}
+      \var(I_l)- W_l
+      \descsubset{xi}
+      \tilde \pi_{l-1}(\var(I_1)-W_1)
+      \descsubset{viii}
+      \pi_l(V-W_0).
+    \end{align}
+    となる。
+    \item $l$全体で示され、既約な多様体について、定理1(の強いやつ)が成立する。
+    \end{enumerate}
+  \end{enumerate}
+  \item
+  既約でない(！！)場合に示す。
+  \item $V_\bullet$:
+  \begin{align}
+    V = V_1 \cup \dots \cup V_m
+  \end{align}
+  と分解する。$V_\bullet$は既約。
+  \item
+  $V_\bullet'$: $\pi_l(V_\bullet)$のザリスキ閉包。$V_\bullet' = \var(\ideal(\pi_l(V_\bullet)))$。
+  \item
+  \begin{framed}
+    \begin{align}
+    \var(I_l) = V_1' \cup \dots \cup V_m'
+    \end{align}
+  \end{framed}
+  を示す。
+  \begin{enumerate}
+    \item
+    $V_1'\cup \dots \cup V_m7$は$\pi_l(V_1)\cup \dots \cup \pi_l(V_m)= \pi_l(V)$を含む多様体である。
+    \item
+    $\var(I_l)$は$\pi_l(V)$のザリスキ閉包なので(代数的閉体、閉包定理)
+    \begin{align}
+      \var(I_l) \subset V_1' \cup \dots \cup V_m'.
+    \end{align}
+    \item 逆を示す。各$i$にたいし、
+    \begin{align}
+      \pi_l(V_i) \subset \pi_l(V) \subset \var(I_l).
+    \end{align}
+    \item
+    $V_i'$は$\pi_l(V_i)$のザリスキ閉包なので、
+    \begin{align}
+      V_i' \subset \var(I_l).
+    \end{align}
+    \item
+      \begin{align}
+        V_1' \cup \dots V_m' \subset \var(I_l).
+      \end{align}
+  \end{enumerate}
+  \item
+  4-4-定理3によれば、$\var(I_l)$は$\pi_l(V)$のザリスキ閉包なので、(代数的閉体だし)
+  \begin{align}
+    V_i' = (\pi_l(V_i)のザリスキ閉包)
+    =
+    \var(\ideal(V_i)_l).
+  \end{align}
+  \item
+  $V_i$は既約としておいたので$\ideal(V_i)$は既約で、
+  $\ideal(V_i)_l$も既約で、$V_i'$も既約になる。よって、(7)の分解は既約分解である。
+  \item
+  他のものには含まれない$V_\bullet'$があるはずなので、
+  それを番号をつけかえて$V_1'$が他のものに含まれないということにしておく。
+
+  すべての$V_\bullet'$が等しいということはおこらない。なぜなら、
+  すべてが等しいとしたら$\var(I_l)$が既約ということになる。
+  すると、$I_l$は素イデアルになる。
+  5により、$V$は既約でないとしたのだから、$I$は素イデアルでなく、
+  $I_l$も素イデアルでない？？
+  \item $W_1$: $V_1$にいままでの「既約にたいする強い定理」を使って、
+  定理の$W_0=\emptyset$とすることで、
+  \begin{align}
+    \var(\ideal(V_1)_l)- W_1 \subset \pi_l(V_1)
+  \end{align}
+  となる$W_1 \subsetneq V_1'$が存在する。
+  \item
+  9と上より、
+  \begin{align}
+    V_1' - W_1 \subset \pi_l(V_1).
+  \end{align}
+  \item
+  $W$: $W=W_1 \cup V_2' \cup \dots \cup V_m'$とする。(これがみたす！)
+  \item
+  $W\subset \var(I_l)$となる。($W_1\subsetneq V_1'$だし、$\var(I_l)$の分解がある。)
+  \item
+  \begin{align}
+    \var(I_l) - W
+    &=
+    (V_1' \cup \dots \cup V_m')  - (W_1 \cup V_2' \cup \dots \cup V_m')\\
+    &=
+    V_1' -  (W_1 \cup V_2' \cup \dots \cup V_m')\\
+    &\subset
+    V_1'-W_1 \subset \pi_l(V_1) \subset \pi_l(V).
+  \end{align}
+  \item
+  $W\neq \var(I_l)$を示す。$W=\var(I_l)$とする。
+  \begin{enumerate}
+    \item
+    \begin{align}
+      W_1 \cup V_2' \cup \dots \cup V_m' = \var(I_l) = V_1' \cup \dots \cup V_m'.
+    \end{align}
+    \item
+    \begin{align}
+      V_1' \subset W_1 \cup V_2' \cup \dots \cup V_m'.
+    \end{align}
+    \item
+    $V_1'$は既約なので、$W_1,\, V_2',\, \dots ,\, V_m'$のどれかに含まれなければならない。矛盾。
+  \end{enumerate}
+
+\end{enumerate}

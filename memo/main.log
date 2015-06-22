@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  18 MAY 2015 01:31
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  22 JUN 2015 11:45
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -886,23 +886,23 @@ Package: multicol 2014/04/23 v1.8e multicolumn formatting (FMi)
 \mc@col@check@num=\count389
 )
 (./ashiato45lua.sty) (./main.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
  (I search kanjifont definition file)
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 27.
+LaTeX Info: Redefining \selectfont on input line 28.
 
 (c:/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -945,68 +945,61 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 
 ))
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 15.98167pt on input line 28.
+(Font)              scaled to size 15.98167pt on input line 29.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 11.09839pt on input line 28.
+(Font)              scaled to size 11.09839pt on input line 29.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 5.5492pt on input line 28.
-LaTeX Font Info:    Try loading font information for U+bbold on input line 28.
+(Font)              scaled to size 5.5492pt on input line 29.
+LaTeX Font Info:    Try loading font information for U+bbold on input line 29.
 
 (c:/texlive/2014/texmf-dist/tex/latex/bbold/ubbold.fd)
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 
 (c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.31805pt on input line 33.
+(Font)              scaled to size 13.31805pt on input line 34.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 13.31805pt on input line 33.
- (./sec3.tex
+(Font)              scaled to size 13.31805pt on input line 34.
+ (./sec4.tex
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09839pt on input line 2.
+(Font)              scaled to size 11.09839pt on input line 3.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 6.47406pt on input line 6.
+(Font)              scaled to size 6.47406pt on input line 9.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 4.62433pt on input line 6.
-LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 9.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.24866pt on input line 9.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 11.
+(Font)              scaled to size 4.62433pt on input line 9.
+ [1
+
+{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./sec5.tex [2
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
- [1
-
-{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.32379pt on input line 93.
- (./calc_3_1.tex
-LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 2.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 8.32379pt on input line 2.
-) [2] [3] [4] [5]
-[6] [7] [8] [9] <images/1431709536336.png, id=63, 1244.39906pt x 656.4525pt>
-File: images/1431709536336.png Graphic file (type png)
-
-<use images/1431709536336.png>
-Package pdftex.def Info: images/1431709536336.png used on input line 609.
-(pdftex.def)             Requested size: 245.08942pt x 129.28484pt.
- [10<./images/1431709536336.png>]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
+ [3] [4] [5] [6] [7]
 ! Undefined control sequence.
-<argument> ...\\ g(x_1,\bbold c)&= b_0(\bbold c)x_1^m + \dos 
-                                                  + b_m(\bbold c),\quad b_0(...
-l.698     \end{align}
+l.442 ...て、$\phi_\bullet \in k[x_2,\dots,x_n] \I
+                                                  _1$と思ってよい。󿿿
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[8]
+! Undefined control sequence.
+<argument>  W_l \subsetneq \var (I_l) かつ \var (I\1
+                                           ) - W_1 \subset \tilde \pi _{l-1}(\v
+l.573     \end{align}
                    
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1015,9 +1008,9 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument> ...\\ g(x_1,\bbold c)&= b_0(\bbold c)x_1^m + \dos 
-                                                  + b_m(\bbold c),\quad b_0(...
-l.698     \end{align}
+<argument>  W_l \subsetneq \var (I_l) かつ \var (I\1
+                                           ) - W_1 \subset \tilde \pi _{l-1}(\v
+l.573     \end{align}
                    
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1025,80 +1018,44 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-<images/1431792619123.png, id=75, 1775.13188pt x 671.50874pt>
-File: images/1431792619123.png Graphic file (type png)
-
-<use images/1431792619123.png>
-Package pdftex.def Info: images/1431792619123.png used on input line 705.
-(pdftex.def)             Requested size: 245.08942pt x 92.70929pt.
- [11<./images/1431792619123.png>] [12]
-! Undefined control sequence.
-<argument> i\ge 2,\bea 
-            
-l.848     \end{align}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> i\ge 2,\bea 
-            
-l.848     \end{align}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[13])
+[9] [10])
 \tf@thm=\write3
- [14] (./main.aux))
+ [11] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11846 strings out of 494694
- 195325,266212 words of node,token memory allocated
- 5300 words of node memory still in use:
-   11 hlist, 2 vlist, 4 rule, 3 glue, 32 kern, 1 glyph, 484 attribute, 917 glue_
-spec, 30 attribute_list, 1 write nodes
-   avail lists: 1:1,2:55854,3:685,4:2893,5:323,6:2857,7:210,9:678,10:75
- 15006 multiletter control sequences out of 65536+600000
- 88 fonts using 38238939 bytes
- 58i,17n,44p,521b,761s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 11777 strings out of 494694
+ 156254,266212 words of node,token memory allocated
+ 4733 words of node memory still in use:
+   10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 830 glue_
+spec, 28 attribute_list, 1 write nodes
+   avail lists: 2:48260,3:360,4:2345,5:226,6:1536,7:79,9:906,10:26
+ 14952 multiletter control sequences out of 65536+600000
+ 79 fonts using 35379931 bytes
+ 58i,17n,44p,459b,633s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmbx9.pfb><<c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
-ic/amsfonts/cmextra/cmex8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
-><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><<c:/texlive/2014/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
-<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/texlive/2014/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><<c:/texlive/2014/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><<
-c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><<c:/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><<c:/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><<c:/texlive/2014/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/
-type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (14 pages, 467677 bytes).
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><<c:/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (11 pages, 262521 bytes).
 
-PDF statistics: 226 PDF objects out of 1000 (max. 8388607)
- 164 compressed objects within 2 object streams
+PDF statistics: 164 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
