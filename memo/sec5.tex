@@ -1,6 +1,104 @@
 \label{sec:多様体上の多項式関数と有理関数}
 
+\subsection{多項式写像}
+\label{sub:多項式写像}
+\begin{enumerate}[label=(\arabic*)]
+  \item
+  $V=\set{(t,t^2,t^3)}$。
+  \begin{align}
+    \phi(t,t^2,t^3)=
+    (t(t^2),t^3+t^2(t^2)^2)
+    =
+    (t^3, t^3+t^6).
+  \end{align}
+  \begin{align}
+    v-u-u^2 = (t^3+t^6)-t^3-(t^3)^2 = 0.
+  \end{align}
+  よって、$\phi(V) \subset W$となる。
+  \item
+  $\set{(t^2-t,t^2,t-3t^2)}$の陰関数表示を求める。
+  \begin{align}
+    x=t^2-t,\quad y = t^2,\quad z=t-3t^2
+  \end{align}
+  から、$\gen{x-t^2+t,\, y-t^2,\, z-t+3t^2}$の
+  グレブナ基底を求める。
+  %\insertcalc{ex5112.tex}
+  よって、このグレブナ基底は
+  \begin{itemize}
+    \item $y^4 + \frac{2}{3}y^3 z - \frac{10}{9}y^3 + \frac{1}{9}y^2 z^2 -\frac{2}{3}y^2 z + \frac{1}{9}y^2 - \frac{1}{9}yz^2$
+    \item $xy + 2y^2 + yz$
+    \item $x^2 + 5y^2 + 2yz - y$
+    \item $t + x - y$
+  \end{itemize}
+  である。よって、先のイデアルの1次消去イデアルを考えれば、$\phi(\R^2)$
+  を包む最小の多様体になる。さらに、$\phi(\R^2)$が$\var(I_1)$と一致することを示す。
+  任意の$(x,y,z)\in \var(I_1)$をとる。
+  これに対し、条件をみたす$t$があること、解が拡張できることを示せばよい。
+  まず、$t+x-y$の$t$の係数が$1$で係数なので、常にこれは$\C$で拡張できる。
+  さらに、$x,y,z\in \R$なので、$t+x-y$を見れば$t\in \R$となる。
+  よって、常に拡張できて、一致する。
+  \item
 
+\end{enumerate}
+
+\subsection{多項式環の商}
+\label{sub:多項式環の商}
+
+\subsection{$k[x_1,\dots,x_n]/I$のアルゴリズム的計算}
+\label{sub:のアルゴリズム的計算}
+
+\subsection{アフィン多様体の座標環}
+\label{sub:アフィン多様体の座標環}
+
+\begin{framed}
+命題3:
+$V\subset k^n$をアフィン多様体とする。
+\begin{enumerate}[label=(\roman*)]
+  \item イデアル$J\subset k[V]$に対して、$W=\var_V(J)$は
+  $V$に含まれる$k^n$のアフィン多様体となる。
+  \item
+  部分集合$W\subset V$に対して、$\ideal_V(W)$は$k[V]$のイデアルとなる。
+  \item
+  イデアル$J\subset k[V]$に対して、$J\subset \sqrt{J} \subset \ideal_V(\var_V(J))$
+  \item
+  部分多様体$W\subset V$に対して、$W=\var_V(\ideal_V(W))$。
+\end{enumerate}
+\end{framed}
+まず、(i)を示す。
+\begin{enumerate}
+  \item
+  $J \subset k[V] \simeq k[x_1,\dots,x_n]/\ideal(V)$なので、
+  対応する$k[x_1,\dots,x_n]$のイデアル
+  $\tilde J$が存在する。$\ideal(V) \subset \tilde J$となる。
+  \item
+  \begin{align}
+    \tilde J = \set{f \in k[x_1,\dots,x_n]; [f]\in J}.
+  \end{align}
+  \item
+  $\gen{0}\subset J$に対応して、$\ideal(V) \subset \tilde J$となる。
+  \item
+  上で両辺$\var$をとって、$\var(J)\subset V$となる。
+  \begin{align}
+    \var(J)
+    &=
+    \set{p\in k^n; \Forall{[f]\in J}[f](p)=0}\\
+    &=
+    \set{p\in k^n; \Forall{[f]\in J}f(p)=0}\\
+    &=
+    \set{p\in k^n; \Forall{f\in \tilde J} f(p)=0}\\
+    &=
+    \var(\tilde J)\\
+    &\subset
+    \var(\ideal(V))\\
+    &=
+    V.
+  \end{align}
+  \item
+  $\var(\tilde J) = \var_V(J)$
+  \item 4,5より$\var(\tilde J) \subset V$
+\end{enumerate}
+
+\newpage
 \begin{enumerate}
   \item $V=\var(I),\, V\neq \emptyset$
   \item

@@ -1,63 +1,242 @@
 \documentclass{jsarticle}
 \usepackage{amsmath,amssymb,amsfonts}
 \begin{document}
-\section{are}Calculates groebner basis of
+\section{are}Calculates groebner basis of 
 \begin{itemize}
-\item $xy+(-1)$
-\item $xz+(-1)$
-\end{itemize}  .
+\item $(-1)x^{2}+x+y$
+\item $(-1)x^{2}+z$
+\item $3x^{2}+(-1)x+w$
+\end{itemize}  . 
 
 
-$\overline{S(xy+(-1), xz+(-1))} = y+(-1)z$.
+$\overline{S((-1)x^{2}+x+y, (-1)x^{2}+z)} = (-1)x+(-1)y+z$.  
+
+$\overline{S((-1)x^{2}+x+y, 3x^{2}+(-1)x+w)} = (\frac{-2}{3})x+(-1)y+(\frac{-1}{3})w$.  
+
+$\overline{S((-1)x^{2}+z, 3x^{2}+(-1)x+w)} = \frac{1}{3}x+(-1)z+(\frac{-1}{3})w$.  
 
 Not enough.  Appends \begin{itemize}
-\item $y+(-1)z$
-\end{itemize}  .
+\item $(-1)x+(-1)y+z$
+\end{itemize}  . 
 
 
-$\overline{S(xy+(-1), y+(-1)z)} = 0$.
+$\overline{S((-1)x^{2}+x+y, (-1)x+(-1)y+z)} = y^{2}+(-2)yz+z^{2}+(-1)z$.  
 
-$\overline{S(xz+(-1), y+(-1)z)} = 0$.
+$\overline{S((-1)x^{2}+z, (-1)x+(-1)y+z)} = y^{2}+(-2)yz+z^{2}+(-1)z$.  
+
+$\overline{S(3x^{2}+(-1)x+w, (-1)x+(-1)y+z)} = y^{2}+(-2)yz+\frac{1}{3}y+z^{2}+(\frac{-1}{3})z+\frac{1}{3}w$.  
+
+Not enough.  Appends \begin{itemize}
+\item $y^{2}+(-2)yz+z^{2}+(-1)z$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, y^{2}+(-2)yz+z^{2}+(-1)z)} = 0$.  
+
+$\overline{S((-1)x^{2}+z, y^{2}+(-2)yz+z^{2}+(-1)z)} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, y^{2}+(-2)yz+z^{2}+(-1)z)} = \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw$.  
+
+$\overline{S((-1)x+(-1)y+z, y^{2}+(-2)yz+z^{2}+(-1)z)} = 0$.  
+
+Not enough.  Appends \begin{itemize}
+\item $\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw)} = 0$.  
+
+$\overline{S((-1)x^{2}+z, \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw)} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw)} = \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw$.  
+
+$\overline{S((-1)x+(-1)y+z, \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw)} = (\frac{-2}{343})yzw^{2}+(\frac{-16}{343})yzw+(\frac{-32}{343})yz+(\frac{-9}{49})z^{4}+(\frac{-24}{343})z^{3}w+\frac{142}{343}z^{3}+\frac{1}{343}z^{2}w^{2}+\frac{8}{49}z^{2}w+(\frac{-79}{343})z^{2}+(\frac{-1}{343})zw^{2}+(\frac{-32}{343})zw$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, \frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw)} = \frac{2}{343}yzw^{2}+\frac{16}{343}yzw+\frac{32}{343}yz+\frac{9}{49}z^{4}+\frac{24}{343}z^{3}w+(\frac{-142}{343})z^{3}+(\frac{-1}{343})z^{2}w^{2}+(\frac{-8}{49})z^{2}w+\frac{79}{343}z^{2}+\frac{1}{343}zw^{2}+\frac{32}{343}zw$.  
+
+Not enough.  Appends \begin{itemize}
+\item $\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$.  
+
+$\overline{S((-1)x^{2}+z, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$.  
+
+$\overline{S(3x^{2}+(-1)x+w, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = (\frac{-1}{84})yzw+(\frac{-1}{21})yz+(\frac{-63}{2})z^{5}+(\frac{-39}{2})z^{4}w+\frac{137}{4}z^{4}+(\frac{-5}{2})z^{3}w^{2}+\frac{113}{6}z^{3}w+(\frac{-215}{84})z^{3}+\frac{1}{6}z^{2}w^{3}+\frac{29}{12}z^{2}w^{2}+\frac{5}{7}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{6})zw^{3}+\frac{1}{12}zw^{2}+(\frac{-1}{21})zw$.  
+
+$\overline{S((-1)x+(-1)y+z, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = (\frac{-1}{4})yzw+(-1)yz+(\frac{-27}{2})z^{5}+(-9)z^{4}w+\frac{69}{4}z^{4}+(\frac{-3}{2})z^{3}w^{2}+\frac{21}{2}z^{3}w+(\frac{-7}{4})z^{3}+\frac{7}{4}z^{2}w^{2}+(\frac{-1}{2})z^{2}w+(-2)z^{2}+(\frac{-1}{4})zw^{2}+(-1)zw$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = \frac{1}{4}yzw+yz+(-18)z^{5}+(-12)z^{4}w+\frac{71}{4}z^{4}+(-2)z^{3}w^{2}+\frac{21}{2}z^{3}w+(\frac{-7}{4})z^{3}+\frac{7}{4}z^{2}w^{2}+\frac{1}{2}z^{2}w+2z^{2}+\frac{1}{4}zw^{2}+zw$.  
+
+$\overline{S(\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw, \frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw)} = (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$.  
+
+Not enough.  Appends \begin{itemize}
+\item $(\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+$\overline{S((-1)x^{2}+z, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$.  
+
+$\overline{S((-1)x+(-1)y+z, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+$\overline{S(\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+$\overline{S(\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw, (\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2})} = 0$.  
+
+Not enough.  Appends \begin{itemize}
+\item $(\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = 0$.  
+
+$\overline{S((-1)x^{2}+z, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$.  
+
+$\overline{S((-1)x+(-1)y+z, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = (\frac{-1}{4})yz+(\frac{-1}{2})z^{2}+(\frac{-1}{4})zw$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = \frac{1}{4}yz+\frac{1}{2}z^{2}+\frac{1}{4}zw$.  
+
+$\overline{S(\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = 0$.  
+
+$\overline{S(\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = \frac{63}{2}z^{4}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$.  
+
+$\overline{S((\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}, (\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw)} = 0$.  
+
+Not enough.  Appends \begin{itemize}
+\item $\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 0$.  
+
+$\overline{S((-1)x^{2}+z, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2}$.  
+
+$\overline{S((-1)x+(-1)y+z, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 9z^{4}+6z^{3}w+(-10)z^{3}+z^{2}w^{2}+(-6)z^{2}w+z^{2}+(-1)zw^{2}$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = (-9)z^{4}+(-6)z^{3}w+10z^{3}+(-1)z^{2}w^{2}+6z^{2}w+(-1)z^{2}+zw^{2}$.  
+
+$\overline{S(\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 0$.  
+
+$\overline{S(\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = (-18)z^{4}w^{2}+36z^{4}+(-12)z^{3}w^{3}+20z^{3}w^{2}+15z^{3}w+(-4)z^{3}+(-2)z^{2}w^{4}+12z^{2}w^{3}+(-4)z^{2}w^{2}+z^{2}w+2zw^{4}+(-1)zw^{3}$.  
+
+$\overline{S((\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = 0$.  
+
+$\overline{S((\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw, \frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw)} = (-18)z^{4}w+(-9)z^{4}+(-12)z^{3}w^{2}+14z^{3}w+z^{3}+(-2)z^{2}w^{3}+11z^{2}w^{2}+(-2)z^{2}w+2zw^{3}$.  
+
+Not enough.  Appends \begin{itemize}
+\item $3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2}$
+\end{itemize}  . 
+
+
+$\overline{S((-1)x^{2}+x+y, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S((-1)x^{2}+z, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S(3x^{2}+(-1)x+w, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S((-1)x+(-1)y+z, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S(y^{2}+(-2)yz+z^{2}+(-1)z, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S(\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S(\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S((\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S((\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
+
+$\overline{S(\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw, 3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2})} = 0$.  
 
 Enough for groebner basis.  Result is \begin{itemize}
-\item $xy+(-1)$
-\item $xz+(-1)$
-\item $y+(-1)z$
-\end{itemize}  .
+\item $(-1)x^{2}+x+y$
+\item $(-1)x^{2}+z$
+\item $3x^{2}+(-1)x+w$
+\item $(-1)x+(-1)y+z$
+\item $y^{2}+(-2)yz+z^{2}+(-1)z$
+\item $\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw$
+\item $\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw$
+\item $(\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$
+\item $(\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$
+\item $\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$
+\item $3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2}$
+\end{itemize}  . 
 $\blacksquare{}$
-Minimalizes groebner basis
+Minimalizes groebner basis 
 \begin{itemize}
-\item $xy+(-1)$
-\item $xz+(-1)$
-\item $y+(-1)z$
-\end{itemize}  .
+\item $(-1)x^{2}+x+y$
+\item $(-1)x^{2}+z$
+\item $3x^{2}+(-1)x+w$
+\item $(-1)x+(-1)y+z$
+\item $y^{2}+(-2)yz+z^{2}+(-1)z$
+\item $\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw$
+\item $\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw$
+\item $(\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$
+\item $(\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$
+\item $\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$
+\item $3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2}$
+\end{itemize}  . 
 
 
-$xy+(-1)$ is removed by $y+(-1)z$.
+$(-1)x^{2}+x+y$ is removed by $(-1)x^{2}+z$.  
+
+$(-1)x^{2}+z$ is removed by $3x^{2}+(-1)x+w$.  
+
+$3x^{2}+(-1)x+w$ is removed by $(-1)x+(-1)y+z$.  
+
+$\frac{7}{3}yz^{2}+\frac{2}{3}yzw+\frac{1}{3}yz+(\frac{-4}{3})z^{3}+(\frac{-1}{3})z^{2}w+\frac{4}{3}z^{2}+\frac{1}{3}zw$ is removed by $\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$.  
+
+$\frac{2}{147}yzw^{2}+\frac{3}{49}yzw+\frac{4}{147}yz+\frac{3}{7}z^{4}+\frac{8}{49}z^{3}w+(\frac{-79}{147})z^{3}+(\frac{-1}{147})z^{2}w^{2}+(\frac{-4}{21})z^{2}w+\frac{16}{147}z^{2}+\frac{1}{147}zw^{2}+\frac{4}{147}zw$ is removed by $(\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$.  
+
+$(\frac{-63}{2})z^{5}+(-21)z^{4}w+35z^{4}+(\frac{-7}{2})z^{3}w^{2}+21z^{3}w+(\frac{-7}{2})z^{3}+\frac{7}{2}z^{2}w^{2}$ is removed by $3z^{4}+2z^{3}w+(\frac{-10}{3})z^{3}+\frac{1}{3}z^{2}w^{2}+(-2)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{3})zw^{2}$.  
+
+$(\frac{-2}{21})yzw+(\frac{-1}{21})yz+\frac{6}{7}z^{3}+\frac{8}{21}z^{2}w+(\frac{-4}{21})z^{2}+(\frac{-1}{21})zw$ is removed by $\frac{1}{12}yz+\frac{3}{2}z^{4}+z^{3}w+(\frac{-5}{3})z^{3}+\frac{1}{6}z^{2}w^{2}+(-1)z^{2}w+\frac{1}{3}z^{2}+(\frac{-1}{6})zw^{2}+\frac{1}{12}zw$.  
 
 Minimalized groebner basis is 
 \begin{itemize}
-\item $xz+(-1)$
-\item $y+(-1)z$
-\end{itemize}  .
+\item $x+y+(-1)z$
+\item $y^{2}+(-2)yz+z^{2}+(-1)z$
+\item $yz+18z^{4}+12z^{3}w+(-20)z^{3}+2z^{2}w^{2}+(-12)z^{2}w+4z^{2}+(-2)zw^{2}+zw$
+\item $z^{4}+\frac{2}{3}z^{3}w+(\frac{-10}{9})z^{3}+\frac{1}{9}z^{2}w^{2}+(\frac{-2}{3})z^{2}w+\frac{1}{9}z^{2}+(\frac{-1}{9})zw^{2}$
+\end{itemize}  . 
 $\blacksquare{}$
 
-Reduce groebner basis
+Reduce groebner basis 
 \begin{itemize}
-\item $xz+(-1)$
-\item $y+(-1)z$
-\end{itemize}  .
+\item $x+y+(-1)z$
+\item $y^{2}+(-2)yz+z^{2}+(-1)z$
+\item $yz+18z^{4}+12z^{3}w+(-20)z^{3}+2z^{2}w^{2}+(-12)z^{2}w+4z^{2}+(-2)zw^{2}+zw$
+\item $z^{4}+\frac{2}{3}z^{3}w+(\frac{-10}{9})z^{3}+\frac{1}{9}z^{2}w^{2}+(\frac{-2}{3})z^{2}w+\frac{1}{9}z^{2}+(\frac{-1}{9})zw^{2}$
+\end{itemize}  . 
 
 
-Reducing: $\overline{xz+(-1)} = xz+(-1)$.
+Reducing: $\overline{x+y+(-1)z} = x+y+(-1)z$.  
 
-Reducing: $\overline{y+(-1)z} = y+(-1)z$.
+Reducing: $\overline{y^{2}+(-2)yz+z^{2}+(-1)z} = y^{2}+5z^{2}+2zw+(-1)z$.  
 
-Reduced groebner basis is
+Reducing: $\overline{yz+18z^{4}+12z^{3}w+(-20)z^{3}+2z^{2}w^{2}+(-12)z^{2}w+4z^{2}+(-2)zw^{2}+zw} = yz+2z^{2}+zw$.  
+
+Reducing: $\overline{z^{4}+\frac{2}{3}z^{3}w+(\frac{-10}{9})z^{3}+\frac{1}{9}z^{2}w^{2}+(\frac{-2}{3})z^{2}w+\frac{1}{9}z^{2}+(\frac{-1}{9})zw^{2}} = z^{4}+\frac{2}{3}z^{3}w+(\frac{-10}{9})z^{3}+\frac{1}{9}z^{2}w^{2}+(\frac{-2}{3})z^{2}w+\frac{1}{9}z^{2}+(\frac{-1}{9})zw^{2}$.  
+
+Reduced groebner basis is 
 \begin{itemize}
-\item $y+(-1)z$
-\item $xz+(-1)$
-\end{itemize}  .
+\item $z^{4}+\frac{2}{3}z^{3}w+(\frac{-10}{9})z^{3}+\frac{1}{9}z^{2}w^{2}+(\frac{-2}{3})z^{2}w+\frac{1}{9}z^{2}+(\frac{-1}{9})zw^{2}$
+\item $yz+2z^{2}+zw$
+\item $y^{2}+5z^{2}+2zw+(-1)z$
+\item $x+y+(-1)z$
+\end{itemize}  . 
 $\blacksquare{}$
 
 \end{document}
+
