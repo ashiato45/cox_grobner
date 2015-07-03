@@ -677,7 +677,7 @@ $\Q \subset k$とする。
   \end{align}
 
   (ii)を示す。
-  \begin{enumerate}[label]
+  \begin{enumerate}
     \item
     $\forall B$: $B\in G$
     \item
@@ -1006,4 +1006,506 @@ $G$の不変式環の生成元全体を求めることができる。
     f = g(f_1,\dots,f_m).
   \end{align}
 
+\end{myproof}
+
+\subsection{生成元の間の関係と軌道の幾何}
+\label{sub:生成元の間の関係と軌道の幾何}
+
+\begin{framed}
+  関係のイデアル:
+  $F=(f_1,\dots,f_m)$としたとき、
+  \begin{align}
+    I_F = \set{h\in k[y_1,\dots,y_m]; h(f_1,\dots,f_m) = 0_{k[x_1,\dots,x_n]}}
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題1:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であるとき、
+  \begin{enumerate}[label=(\roman*)]
+    \item $I_F$は$k[y_1,\dots,y_m]$の素イデアル。
+    \item $f\in k[x_1,\dots,x_n]^G$に対して、
+    $f=g(f_1,\dtos,f_m)$を$f$の$f_1,\dots,f_m$による多項式表示の1つとする。
+    このとき、$f_1,\dots,_m$によるすべての多項式表示は、
+    \begin{align}
+      f=g(f_1,\dots,f_m) + h(f_1,\dots,f_m)
+    \end{align}
+    で与えられる。ここで、$h$は$I_F$をわたって動く。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item 素イデアルの定義どおりやる。
+    \item 2つあったとして、その差は$I_F$に入る。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題2:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$のとき
+  $I_F \subset k[y_1,\\dots,y_m]$を関係のイデアルとする。
+  このとき、$I_F$を法とした商環と不変式環の間には環同型
+  \begin{align}
+    k[y_1,\dots,y_m]/I_F \simeq k[x_1,\dots,x_n]^G
+  \end{align}
+  がある。
+\end{framed}
+\begin{myproof}
+  準同型定理。
+\end{myproof}
+
+\begin{framed}
+  命題3:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であるとし、イデアル
+  \begin{align}
+    J_F = \gen{f_1-y_1,\dots,f_m-y_m} \subset k[x_1,\dots,x_n,y_1,\dots,y_m]
+  \end{align}
+  を考える。
+  \begin{enumerate}[label=(\roman*)]
+    \item $I_F$は$J_F$の$n$次の消去イデアルである。
+    つまり、$I_F = J_F \cap k[y_1,\dots,y_m]$となる。
+    \item
+    $k[x_1,\dots,x_n,y_1,\dots,y_m]$の単項式順序を、
+    $x_1,\dots,x_n$の1つでも含む単項式は$k[y_1,\dots,y_m]$のすべての単項式よりも大きくなるように定め、
+    $G$を$J_F$のグレブナ基底とする。このとき、$G\cap k[y_1,\dots,y_m]$は$k[y_1,\dots,y_m]$乗に誘導された
+    単項式順序に関する$I_F$のグレブナ基底である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item
+    $p\in k[x_1,\dots,x_n,y_1,\dots,y_m]$について、
+    \begin{align}
+      p\in J_F \iff
+      k[x_1,\dots,x_n] において、 p(x_1,\dots,x_n,f_1,\dots,f_m) = 0
+    \end{align}？
+    \begin{enumerate}
+      \item $\Rightarrow$？
+      \begin{enumerate}
+        \item $y_i \Leftarrow f_i$の代入によってあきらか。
+      \end{enumerate}
+      \item $\Leftarrow$？$p(x_1,\dots,x_n,f_1,\dots,f_m) = 0$とする。
+      \begin{enumerate}
+        \item  $\exist B_\bullet$:
+        $p$の$y_\bullet$を$f_\bullet -(f_\bullet - y_\bullet)$に置き換えて展開し、
+        \begin{align}
+          p(x_1,\dots,x_n,y_1,\dots,y_m)
+          =
+          p(x_1,\dots,x_n,f_1,\dots,f_m) + B_1\cdot (f_1-y_1) + \dots + B_m\cdot (f_m-y_m)
+        \end{align}
+        となる$B_1,\dts,B_m \in k[x_1,\dots,x_n,y_1,\dots,y_m]$がある。
+        \item
+        (b)の仮定により、
+        \begin{align}
+          p(x_1,\dots,x_n,y_1,\dots,y_m) = B_1(f_1-y_1) + \dots + B_m(f_m-y_m)\in J_F.
+        \end{align}
+      \end{enumerate}
+    \end{enumerate}
+    これで、
+        $p\in k[x_1,\dots,x_n,y_1,\dots,y_m]$について、
+    \begin{align}
+      p\in J_F \iff
+      k[x_1,\dots,x_n] において、 p(x_1,\dots,x_n,f_1,\dots,f_m) = 0
+    \end{align}は示された。
+    \item
+    上から直ちに
+    \begin{align}
+      p\in J_F\cap k[y_1,\dots,y_m]
+      \iff
+      k[x_1,\dots,x_n] において p(f_1,\dots,f_m) = 0.
+    \end{align}
+  \end{enumerate}
+  (ii)は消去イデアルの議論より直ちに従う。
+\end{myproof}
+
+\begin{framed}
+  定義6:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$のとき、
+  $I_F \subset k[y_1,\dots,y_m]$を
+  $F=(f_1,\dots,f_m)$の関係のいデアルとする。
+  このとき、アフィン多様体$F_V$を次で定義する。
+  \begin{align}
+    V_F = \var(I_F) \subset k^m.
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題7:
+  \begin{enumerate}[label=(\roman*)]
+    \item $V_F$はパラメタ付け
+    \begin{align}
+      y_1 &= f_1(x_1,\dots,x_n),\\
+      &\vdots \\
+      y_m &= f_m(x_1,\dots,x_n)
+    \end{align}
+    を含む$k^m$の最小多様体である。
+    \item
+    $I_F = \ideal(V_F)$である。したがって、
+    $I_F$は$V_F$上で消えるすべての多項式関数全体のなすイデアルである。
+    \item
+    $V_F$は既約多様体である。
+    \item
+    $k[V_F]$を$V_F$の座標環とする。
+    このとき、環同型
+    \begin{align}
+      k[V_F] \simeq k[x_1,\dots,x_n]^G
+    \end{align}
+    が存在する。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)は、$J_F=\gen{f_1-y_1,\dots,f_m-y_m}$の$n$次消去イデアル
+  なので、多項式の陰関数表示化から従う。
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $\subset$を示す。
+    $I_F \subset \ideal(\var(I_F)) = \ideal(V_F)$となる。
+    \item $\supset$を示す。
+    \begin{enumerate}
+      \item
+      $\forall h$: $h\in \ideal(V_F)$とする。
+      \item
+      任意の$(a_1,\dots,a_n)\in k^n$について、(i)より
+      \begin{align}
+        (f_1(a_1,\dots,a_n),\dots,f_m(a_1,\dots,a_n))\in F(k^n) \subset V_F.
+      \end{align}
+      \item
+      (a)より、$h$は$V_F$を全部消すので、
+      \begin{align}
+        h(f_1(a_1,\dots,a_n),\dots,f_m(a_1,\dots,a_n))=0.
+      \end{align}
+      \item
+      上と、標数0の体で考えていることから、
+      \begin{align}
+        h(f_1,\dots,f_m) = 0_{k[x_1,\dots,x_n]}.
+      \end{align}
+      \item
+      $h\in I_F$
+      \item
+      (a)おわり。$\ideal(V_F) \subset I_F$。
+    \end{enumerate}
+  \end{enumerate}
+
+  (iii)を示す。(ii)の$I_F = \ideal(V_F)$と$I_F$が素イデアルであることから従う。
+
+  (iv)を示す。命題2の同型を使い、
+  \begin{align}
+    k[V_F] \simeq k[y_1,\dots,y_m]/I_F \simeq k[x_1,\dots,x_n]^G.
+  \end{align}
+
+\end{myproof}
+
+\begin{framed}
+  系8:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m] = k[f'_1,\dots,f'_{m'}]$と仮定する。
+  $F=(f_1,\dots,f_m)$および$F'=(f_1',\dots,f_{m'}')$とするとき、
+  多様体$V_F \subset k^m$と$V_{F'}\subset k^{m'}$は同型である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item 命題7より、
+    \begin{align}
+      k[V_F]\simeq k[x_1,\dots,x_n]^G \simeq k[V_{F'}].
+    \end{align}
+    \item
+    上の同型を与える同型写像は定数では恒等写像になる。
+    ($k[x_1,\dots,x_n]^G \simeq k[x_1,\dots,x_n]/I_F$だが、$I_F$は定義より0でない定数を含まない(本質的に1次以上)。したがって、$I_F$で割っても定数はそのままになる。)
+    \item
+    1,2と定理5-4-9より、$V_F$と$V_{F'}$は同型。
+  \end{enumerate}
+\end{myproof}
+
+以降$k$は代数的閉体とする。
+\begin{framed}
+  定義9:
+  有限行列群$G\subset GL(n,k)$と$\bbold a \in k^n$に対し、集合
+  \begin{align}
+    G\cdot \bbold a = \set{A\cdot \bbold a; A \in G}
+  \end{align}
+  を$\bbold a$の$G$軌道とよぶ。$k^n$の$G$軌道全体の集合を$k^n/G$で表し、
+  これを軌道空間という。
+\end{framed}
+
+あとで使うので先に示してしまう。
+\begin{framed}
+  定理11:
+  $G\subset GL(n,k)$を有限行列群とし、
+  $f\in k[x_1,\dots,x_n]$とする。
+  $N=\myabs{G}$とする。このとき次の条件を満たす不変式
+  $g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$が存在する。
+  \begin{align}
+    f^N + g_1 f^{N-1} + \dots + g_N = 0.
+  \end{align}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\exists g_1,\dots,g_N$: 多項式の展開を考える。
+    \begin{align}
+      \prod_{A\in G} (X-f(A\cdot \bbold x))
+      =
+      X^N + g_1(\bbold x)X^{N-1} + \dots + g_N(\bbold x)
+    \end{align}
+    となる$g_1,\dots,g_N \in k[x_1,\dots,x_n]$が存在する。
+    \item
+    $g_1,\dots,g_N$は$G$不変？
+    \begin{enumerate}
+      \item $\forall B$: $B\in G$とする。
+      \item sumのインデックスを取り替えて、
+      \begin{align}
+        \prod_{A\in G}(X-f(AB\cdot \bbold x)) = \prod_{A\in G}(X-f(A\cdot \bbold x)).
+      \end{align}
+      \item (a)おわり:
+      \begin{align}
+        \Forall{B\in G}
+        X^N + g_1(B\cdot \bbold x)X^{N-1} + \dots + g_N(B\cdot \bbold x)
+        =
+        X^N + g_1(\bbold x) X^{N-1} + \dots + g_N(\bbold x).
+      \end{align}
+      \item
+      上で係数比較して、$g_1,\dots,g_N \in k[x_1\dots,x_n]^G$.
+    \end{enumerate}
+    よって、
+    $g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$となる。
+    \item
+    1の多項式で$X\leftarrow f$と代入する。
+    左辺の因子で$A = E$のとき、
+    \begin{align}
+      X - f(A\cdot \bbold x)
+      =
+      f - f(E\cdot \bbold x) = 0
+    \end{align}
+    となるので、左辺が0になって、
+    \begin{align}
+      X^N + g_1(\bbold x)X^{N-1} + \dots + g_N(\bbold x)  = 0.
+    \end{align}
+    \item
+    1で作った$g_\bullet$が条件を満たす。示された。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理10:
+  $k$は代数的閉体とし、$G\subset GL(n,k)$を
+  有限行列群とする。
+  \begin{align}
+    k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]
+  \end{align}
+  であるとき、次がなりたつ。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $F=\bbold a = (f_1(\bbold a),\dots,f_m(\bbold a))$で定義される多項式写像
+    $F\colon k^n \to V_F$は全射である
+    \footnote{これの行き先が本当に$V_F$か気になったがあたりまえだった。
+    $((f_1(\bbold a),\dots,f_m(\bbold a))\in V_F) \iff (\Forall{h\in I_F}) h(f_1(\bbold a),\dots,h_m(\bbold a) = 0) \iff \Forall{h\in I_F}h(f_1,\dots,h_m)(\bbold a) = 0$
+    これは、$I_F$が$k[x_1,\dots,x_n]^G$を多項式代入して消える$k[y_1,\dots,y_m]$全体だったのでOK。}
+    。
+    幾何的には、これはパラメタ付け$y_i = f_i(x_1,\dots,x_n)$が
+    $V_F$の全体を覆うことを意味する。
+    \item
+    $G$軌道$G\cdot \bbold a \subset k^n$を$F(\bbold a)\in V_F$に写す写像は一対一対応
+    \begin{align}
+      k^n/G\simeq V_F
+    \end{align}
+    を誘導する。
+  \end{enumerate}
+\end{framed}
+
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $J_F$: $J_F = \gen{f_1-y_1,\dots,f_m-y_m}$
+    \item
+    $I_F$: $I_F = J_F \cap k[y_1,\dots,y_m]$
+    \item $\foall (b_1,\dots,b_m)$:
+    $(b_1,\dots,b_m)\in V_F = \var(I_F)$
+    \item
+    2の$I_F$は消去イデアルなので、上の$(b_1,\dots,b_m)$は
+    \begin{align}
+      y_1 &= f_1(x_1,\dots,x_n) \\
+      &\vdots\\
+      y_m &= f_m(x_1,\dots,x_n)
+    \end{align}
+    の部分解。
+    \item $\exists (a_1,\dots,a_n)$:
+    3の$(b_1,\dots,b_m) \in \var(I_F)$は
+    $(a_1,\dots,a_n,b_1,\dots,b_m)\in \var(J_F)$に拡張できる？
+    \begin{enumerate}
+      \item
+      $N$: $N=\myabs{G}$
+      \item 次は成立？
+      \begin{align}
+        \Forall{i} \Exists{p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]} p_i = x_i^N + (x_1の次数が<N である項).
+      \end{align}
+      \begin{enumerate}
+        \item $\forall i$: $i=1,\dots,n$とする。
+        \item $\exists N, g_\bullet$:
+        補題11を$f=x_i$として適用すると、
+        \begin{align}
+          x_i^N + g_1 x_i^{N-1} + \dots + g_N = 0
+        \end{align}
+        となる$N = \myabs{G}$と、$g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$を得る。
+        \item $\exists h_\bullet$:
+        仮定より、$k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であることと上より、
+        \begin{align}
+          \Forall{j = 1,\dots, N} \Exists{h_j: m変数多項式} g_j = h_j(f_1,\dots,f_m).
+        \end{align}
+        \item ☆$p_i$:
+        \begin{align}
+          p_i(x_i,y_1,\dots,y_m) = x_i^N + h_1(y_1,\dots,y_m)x_i^{N-1} + \dots + h_N(y_1,\dots,y_m).
+        \end{align}
+        とする。
+        \item
+        iiの$x_i^N + g_1 x_i^{N-1} + \dots + g_N = 0$と
+        iii の$g_j = h_j(f_1,\dots,f_m)$より、
+        $p_i$で$y_\bullet \leftarrow f_\bullet$と定義すると、
+        \begin{align}
+          p_i(x_i,f_1,\dots,f_m) = 0.
+        \end{align}
+        \item
+        上と、$J_F$の特徴付け
+        \footnote{命題7-4-3中にあった。$p\in J_F$と$p(x_1,\dots,x_n,f_1,\dots,f_m)=0$は等価である。
+        片方は$y_i \leftarrow f_i$であきらか。もう片方は$y_i = f_i-(f_i-y_i)$で単項式を展開して足し合わせる例のトリックでできる。}
+        より、$p_i \in J_F$となる。
+        \item
+        ivの定義より、$p_i \in k[x_i,\dots,x_n,y_1,\dots,y_m]$である。
+        \item
+        viとviiより、
+        \begin{align}
+          p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]
+        \end{align}
+        である。さらに、ivの定義より、$x_i$に関する先頭項係数が$1$であるという条件も満たされている。
+        よって、ivで作った$p_i$が条件をみたす。
+        \item
+        iおわり:
+        \begin{align}
+          \Forall{i}\Exists{p_i} p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m] \; かつ \; 「x_i についての先頭項係数が1」
+        \end{align}
+      \end{enumerate}
+      よって、
+      \begin{align}
+        \Forall{i} \Exists{p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]} p_i = x_i^N + (x_1の次数が<N である項).
+      \end{align}
+      となる。
+
+      \item
+      $(b_1,\dots,b_m)$が$(a_{i+1},\dots,a_n,b_1,\dots,b_m) \in \var(J_F\cap k[x_{i+1},\dots,x_n,y_1,\dots,y_m])$
+      まで拡張しているとして、もう1つ拡張する。
+      \begin{enumerate}
+        \item $\exists a_i$: 5の$p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]$
+        であることと、$p_i$の$x_i$に関する先頭項係数が1であることから、
+        上の部分解は$(a_i,\dots,a_n,b_1,\dots,b_m)$に拡張できる。
+      \end{enumerate}
+      \item $\exists a_1,\dots,a_n$: 上を繰替えすことで、
+      部分解は解$(a_1,\dots,a_n,b_1,\dots,a_m)$に拡張できる。
+    \end{enumerate}
+    \item 上より、$F(a_1,\dots,a_n) = (b_1,\dots,b_m)$
+    \item 上より、$F\colon k^n \to V_F$は全射。
+  \end{enumerate}
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $F$:
+    $F\colon k^n \to V_F$は(i)の通り、
+    \begin{align}
+      F(\bbold a) = (f_1(\bbold a),\dots,f_m(\bbold a))
+    \end{align}
+    としておく。
+    \item
+    $\tilde F$: $\tilde F\colon k^n/G \to V_F$を$F$から誘導された写像、すなわち
+    \begin{align}
+      \tilde F(G\cdot \bbold a) = F(\bbold a)
+    \end{align}
+    とする。(well-definedかはわからない。)
+    \item
+    $f_\bullet$は不変式と仮定してあるので、$F$は$G$軌道$G\cdot \bbold a$上同じ値をとる。
+    よって、$\tilde F$はwell-definedである。
+    \item
+    (i)より、$F$は全射なので、$\tilde F$も全射。
+    \item
+    $\tilde F$は単射？
+    \begin{enumerate}
+      \item $\forall \bbold a,\bbold b$: 軌道$G\cdot \bbold a$と$G\cdot \bbold b$が異なるとする。
+      \item
+      $\sim_G$は同値関係なので、$G\cdot \bbold a$と$G\cdot \bbold b$は異なる軌道である。
+      \item $\exists g$: $g\in k[x_1,\dots,x_n]^G$で、$g(\bbold a)\neq g(\bbold b)$なるものがある？
+      \begin{enumerate}
+        \item
+        $S$: $S=G\cdot \bbold b \cup G\cdot \bbold a - \set{\bbold a}$とする。
+        \item
+        上の定義より、$S$は有限個の点である。
+        \item
+        上より、$S$はアフィン多様体である。
+        \item
+        $\exists f$:
+        上より、$S$を定義するアフィン多様体$f$が存在する。
+        \item
+        $S$の定義iより、$\bbold a\notin S$である。
+        \item
+        上と、ivの$f$の定義より、$f(\bbold a)\neq 0$である。
+        \item
+        iの$S$の定義と上をまとめると、
+        \begin{align}
+          f(A\cdot \bbold b) &= 0 \\
+          f(A\cdot \bbold a) &=
+          \begin{cases}
+            0 & (A\cdot \bbold a) \neq \bbold a のとき\\
+            f(\bbold a) \neq 0 & (A\cdot \bbold a) = \bbold a のとき
+          \end{cases}.
+        \end{align}
+        \item
+        ☆$g$: $g=R_G(f)$とする。
+        \item
+        viiより、
+        \begin{align}
+          g(\bbold b)
+          =
+          R_G(f)(\bbold b)
+          =
+          \frac{1}{\myabs{G}}\sum_{B\in G}f(B\cdot \bbold b)
+          =
+          0.
+        \end{align}
+        \item
+        $M$:
+        $M$は$A\cdot \bbold a = \bbold a$となる$A\in G$の個数とする。
+        \item
+        viiより、
+        \begin{align}
+          g(\bbold a)
+          =
+          R_G(f)(\bbold a)
+          =
+          \frac{1}{\myabs{G}}\sum_{B\in G}f(B\cdot \bbold a)
+          =
+          \frac{M}{\myabs{G}}f(\bbold a) \neq 0.
+        \end{align}
+        \item
+        よって、$g(\bbold a)\neq g(\bbold b)$であり、viiiの$g\in k[x_1,\dots,x_n]^G$が条件をみたす。
+      \end{enumerate}
+      よって、$g(\bbold a)\neq g(\bbold b)$となる$g\in k[x_1,\dots,x_n]^G$が存在する。
+      \item
+      $\exists h$: $k[x_1,\dots,x_n]^G  = k[f_1,\dots,f_m]$なので、
+      \begin{align}
+        g=h(f_1,\dots,f_m)
+      \end{align}
+      となる$h \in k[y_1,\dots,y_m]$がある。
+      \item
+      (c)の$g$の条件と上より、
+      \begin{align}
+        h(f_1,\dots,f_m)(\bbold a) \neq h(f_1,\dots,f_m)(\bbold b).
+      \end{align}
+      \item $\exists i$:
+      上より、$f_i(\bbold a)\neq f_i(\bbold b)$となる$i$がある。
+      (全部$f_i(\bbold a)=f_i(\bbold b)$だとしたら、(e)にならない。)
+      \item
+      1,2と上より、$\tilde F(G\cdot \bbold a) \neq \tilde F(G\cdot \bbold b)$となる。
+      \item
+      よって、$\tilde F$は単射である。
+    \end{enumerate}
+    よって、$\tilde F$は単射である。
+    \item
+    以上3,4,5より、$\tilde F\colon k^n/G\to V_F$は同型。
+  \end{enumerate}
 \end{myproof}

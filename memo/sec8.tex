@@ -1,0 +1,256 @@
+\label{sec:射影代数幾何}
+
+
+\subsection{射影平面}
+\label{sub:射影平面}
+
+\begin{framed}
+  定義1:
+  $\R$上の射影平面(projective plane)とは、
+  $\P^2(\R)$と表記される次の集合。
+  \begin{align}
+    \P^2(\R)= \R^2 \cup \set{平行な直線からなる同値類ごとに1つの無限遠点}.
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  定義2:
+  $R^3-\zeroset$の$\sim$による同値類の全体を$\P^2(\R)$であらわす。
+  つまり、
+  \begin{align}
+    \P^2(\R) = (\R^3-\zeroset)/\sim.
+  \end{align}
+  3つ組$(x,y,z)\in \R^3-\zeroset$が$p\in \P^2(\R)$に対応するとき、
+  $(x,y,z)$を$p$の斉次座標(homogeneous coordinates)という。
+\end{framed}
+
+\begin{framed}
+  定義3:
+  同時にゼロではない実数$A,B,C$が与えられたとき、次の集合
+  \begin{align}
+    \st{p\in \P^2(\R); pの斉次座標(x,y,z)はAx+By+Cz=0を満たす}
+  \end{align}
+  を$\P^2(\R)$の射影直線とよぶ。
+  これはwell-definedであることは確認できる。
+\end{framed}
+
+\begin{framed}
+  命題4:
+  $R^2 \to \P^2(\R),\quad (x,y)\mapsto i(x,y,1)$は一対一であって、
+  その像は$z=0$で定義される射影直線$H_\infty$に一致する。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\forall p,x,y,x',y'$: $(x,y)$と$(x',y')$が同じ点$p$にうつったとする。
+    \item
+    $\exists \lambda$ $(x,y,1) = \lambda(x',y',1)$
+    \item
+    上より、$\lambda = 1$となる。
+    \item
+    上より、$(x,y)=(x',y')$となる。
+    \item
+    $p$の斉次座標を$(x,y,z)$とする。
+    \item
+    $z=0$のとき、$p\in H_\infty$
+    \item
+    $z\neq 0$のとき、$\pi\colon \R^3 \to \P^2(\R)$を標準的なものとする。
+    $p=\pi(x,y,z) = \pi(x/z,y/z,1)$となり、$(x/z,y/z,1)$は
+    $p$の斉次座標。
+    \item
+    上より、$p$は写像$\R^2 \to \P^2(\R)$の像に($(x/z,y/z)$を引数として)なっている。
+    \item
+    $\pi(\R^2)\cap H_\infty = \emptyset$を示す。
+    \begin{enumerate}
+      \item $\exists$: $\pi(x,y,z) \in p(\R^2)\cap H_\infty$と仮定する。
+      \item
+      $\pi(x,y,z) \in H_\infty$なので、$z=0$である。
+      \item
+      $\pi(x,y,z) \in p(\R^2)$なので、$\pi(x,y,z) = \pi(\xi,\eta,1)$
+      なる$\xi,\eta$が存在する。よって、$z\neq 0$である。
+      \item
+      上2つは矛盾する。
+    \end{enumerate}
+    よって、$\pi(\R^2)\cap H_\infty = \emptyset$となる。
+  \end{enumerate}
+\end{myproof}
+
+\subsection{射影空間と射影多様体}
+\label{sub:射影空間と射影多様体}
+\begin{framed}
+  定義1:
+  $k^{n+1}-\zeroset$の$\sim$による同値類の集合を体$k$上
+  の$n$次元射影空間といい、$\P^n(k)$とあらわす。
+  つまり、
+  \begin{align}
+    \P^n(k) = (k^{n+1}-\zeroset)/\sim
+  \end{align}
+  である。ゼロでないような$(n+1)$個の$k$の要素の組
+  $(x_0,\dots,x_n)\in k^{n+1}$は$\P^n(k)$の点$p$を決めるが、
+  $(x_0,\dots,x_n)$を$p$の斉次座標とよぶ。
+\end{framed}
+
+\begin{framed}
+  $\P^n(k)$の部分集合を
+  \begin{align}
+    U_0 = \set{(x_0,\dots,x_n) \in \P^n(k); x_0 \neq 0}
+  \end{align}
+  とすると、$k^n$の点$(a_1,\dots,a_n)$を$\P^n(k)$の斉次座標
+  $(1,a_1,\dots,a_n)$に写す写像$\phi$は$k^n$と$U_0\subset \P^n(k)$
+  の間の一対一写像である。
+\end{framed}
+\begin{myproof}
+  $\phi(a_1,\dots,a_n)=(1,a_1,\dots,a_n)$の先頭が0でないので、
+  $\phi\colon k^n \to U_0$は定まっている。
+
+  $\psi\colon U_0 \to k^n$を
+  $\psi(\ub{x_0}_{\neq 0},\dots,x_n) = \psi(1,x_1/x_0,\dots,x_n/x_0) = (x_1/x_0,\dots,x_n/x_0)$となる。
+  well-definedと逆写像は示せる。
+\end{myproof}
+
+\begin{align}
+  \P^n(k) = \ub{k^n}_{無限遠超平面。頭が0のところ} \cup \ub{\P^{n-1}(k)}_{頭が非0のところ}
+\end{align}
+
+\begin{framed}
+  系3:
+  $i=0,\dots,n$それぞれに対して、
+  \begin{align}
+    U_i = \set{(x_0,\dots,x_n)\in \P^n(k); x_i\neq 0}
+  \end{align}
+  とおく。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $U_i$の点は$k^n$の点と一対一に対応する。
+    \item
+    補集合$\P^n(k)-U_i$は$\P^{n-1}(k)$同一視できる。
+    \item
+    $\P^n(k) = \bigcup_{i=0}^n U_i$となる。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  i,iiは変数のつけかえで命題2に帰着する。iiiは、
+  $\cup$をとることで$x_1\neq 0 \vee \dots \vee x_n \neq 0$で、
+  $\P^n(k)$は全部座標が0になることはないので全体になっている。
+\end{myproof}
+
+射影空間の多様体は、斉次なものを使わないとうまくいかない。
+\begin{framed}
+  命題4:
+  $f\in k[x_0,\dots,x_n]$を斉次多様体とする。
+  もし$f$が点$p\in\P^n(k)$のある斉次座標の組に対して
+  消えていれば、$f$は$p$の任意の斉次座標に対して消える。
+  とくに$\var(f) = \set{p\in \P^n(k); f(p)=0}$は
+  $\P^n(k)$の部分集合として矛盾なく定義される。
+\end{framed}
+\begin{myproof}
+  略。
+\end{myproof}
+
+\begin{framed}
+  定義5:
+  $k$を体とし、$f_1,\dots,f_s \in k[x_0,\dots,x_n]$を斉次多項式とする。
+  \begin{align}
+    \var(f_1,\dots,f_s)
+    =
+    \set{(a_0,\dots,a_n) \in \P^n(k); f_i(a_0,\dots,a_n) = 0 \quad (1\le i \le s)}
+  \end{align}
+  とおいて、$\var(f_1,\dots,f_s)$を$f_1,\dots,f_s$によって定義された射影多様体とよぶ。
+\end{framed}
+
+「1つの」斉次多項式で定義された射影多様体は「$n$次超曲面」という。
+
+射影多様体と多様体を考える。$x_0=1$として$V\cap U_0$に斉次多項式を落とすことを
+非斉次化という。
+\begin{framed}
+  命題6:
+  $V=\var(f_1,\dots,f_s)$を射影多様体とする。すると
+  $W=V\cap U_0$はアフィン多様体$\var(g_1,\dots,g_s) \subset k^n$
+  と同一視できる。ここで、$1\le i \le s$に対して、
+  $g_i(x_1,\dots,x_n) = f_i(1,x_1,\dots,x_n)$である
+  \footnote{$U_0$は頭が非0のやつ。}
+  。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\psi(W) \subset \var(g_1,\dots,g_s)$となる。$\psi\colon U_0 \to k^n$は、射影座標を頭が1になるように正規化して頭を落とす写像であった。
+    \begin{enumerate}
+      \item $\forall x_\bullet$:
+      $(x_1,\dots,x_n)\in \psi(W)$とする。
+      $\psi(1,x_1,\dots,x_n) = (x_1,\dots,x_n)$であり、
+      $(1,x_1,\dots,x_n) \in V$となっている。
+      \item 任意の$i$について、上の$(1,\dots,x_n)\in V$より
+      \begin{align}
+        g_i(x_1,\dots,x_n)
+        =
+        f_i(1,x_1,\dots,x_n)
+        =0.
+      \end{align}
+      \item (a)おわり:
+      上より、$(x_1,\dots,x_n) \in \var(g_1,\dots,g_s)$となる。
+    \end{enumerate}
+    \item
+    $\supset$を示す。
+    \begin{enumerate}
+      \item $\forall a_\bullet$: $(a_1,\dots,a_n) \in \var(g_1,\dots,g_s)$とする。
+      \item $(1,a_1,\dots,a_n) \in U_0$である。
+      \item 任意の$i$について、
+      \begin{align}
+        f_i(1,a_1,\dots,a_n) = g_i(a_1,\dots,a_n) = 0.
+      \end{align}
+      \item
+      上より、$\phi(\var(g_1,\dots,g_s)) \subset W$となる。
+    \end{enumerate}
+    \item
+    $\phi$と$\psi$は逆写像なので、$W$と$\var(g_1,\dots,g_s)$の点は一対一に対応する。
+  \end{enumerate}
+\end{myproof}
+
+非斉次化の逆を考える。$f\in k[x_1,\dots,x_n]$について、
+すべての項の全次数が$\deg(f)$になるように各項に$x_0$の羃をかけたものを
+$f^h$という。
+
+\begin{framed}
+  命題7:
+  $g(x_1,\dots,x_n) \in k[x_1,\dots,x_n]$を全次数$d$の多項式とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $g$を斉次成分の和に展開して、$g=\sum_{i=0}^d g_i$とかく。
+    ここで$g_i$の全次数は$i$である。すると、
+    \begin{align}
+      g^h(x_0,\dots,x_n)
+      =
+      \sum_{i=0}^d g_i(x_1,\dots,x_n) x_0^{d-i}
+    \end{align}
+    は全次数が$d$であるような$k[x_0,\dots,x_n]$の斉次多項式である。
+    この$g^h$を$g$の斉次化という。
+    \item
+    斉次多項式は次で計算できる。
+    \begin{align}
+      g^h = x_0^d\cdot g(\frac{x_1}{x_0},\dots,xfra x_n x_0).
+    \end{align}
+    \item
+    $g^h$を非斉次化すると$g$になる。
+    \begin{align}
+      g^h(1,x_1,\dots,x_n)  = g(x_1,\dots,x_n).
+    \end{align}
+    \item
+    $F(x_0,\dots,x_n)$を斉次多項式とし、$x_0^e$を$F$を割り切るような
+    $x_0$の冪乗のうち最高次のものとする。もし$f=F(1,x_1,\dots,x_n)$が
+    $F$の非斉次化なら、$F=x_0^e\cdot f^h$がなりたつ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)はあきらか。
+
+  (ii)を示す。
+  \begin{align}
+    g^h(x_0,\dots,x_n) &=
+    \sum_{i=0}^d g_i(x_1,\dots,x_n)x_0^{d-i}\\
+    &=
+    x^d \sum_{i=0}^d \frac{g_i(x_1,\dots,x_n)}{x_0^i} \\
+    &=
+    x^d \sum_{i=0}^d g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})} .
+  \end{align}
+
+  (iii),(iv)はあきらか。
+\end{myproof}
