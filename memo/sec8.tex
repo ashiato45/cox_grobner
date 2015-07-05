@@ -28,7 +28,7 @@
   定義3:
   同時にゼロではない実数$A,B,C$が与えられたとき、次の集合
   \begin{align}
-    \st{p\in \P^2(\R); pの斉次座標(x,y,z)はAx+By+Cz=0を満たす}
+    \set{p\in \P^2(\R); pの斉次座標(x,y,z)はAx+By+Cz=0を満たす}
   \end{align}
   を$\P^2(\R)$の射影直線とよぶ。
   これはwell-definedであることは確認できる。
@@ -249,8 +249,1042 @@ $f^h$という。
     &=
     x^d \sum_{i=0}^d \frac{g_i(x_1,\dots,x_n)}{x_0^i} \\
     &=
-    x^d \sum_{i=0}^d g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})} .
+    x^d \sum_{i=0}^d g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}) .
   \end{align}
 
   (iii),(iv)はあきらか。
+\end{myproof}
+
+\subsection{射影化された代数-幾何対応}
+\label{sub:射影化された代数-幾何対応}
+
+\begin{framed}
+  定義1:
+  $k[x_0,\dots,x_n]$のイデアル$I$が斉次であるとは、
+  各$f\in I$に対して、$f$の斉次成分$f_i$がまた$I$に属しているときに言う。
+\end{framed}
+
+\begin{framed}
+  定理2:
+  $I\subset k[x_0,\dots,x_n]$をイデアルとする。このとき、次は同値である。
+  \begin{enumerate}[label=(\roman*)]
+    \item $I$は$k[x_0,\dots,x_n]$の斉次イデアルである。
+    \item
+    斉次多項式$f_1,\dots,f_s$を用いて、$I=\gen{f_1,\dots,f_s}$とあらわせる。
+    \item
+    任意の多項式順序に対して、$I$の簡約グレブナ基底は斉次多項式からなる。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (ii)$\implies$(i)を示す。そのために、演習問題2を解く。
+  \begin{enumerate}[label=(演習2-\alph*)]
+    \item 「$f=\sum_i f_i$と$g=\sum_i g_i$を2つの多項式の斉次成分の和への分解とする。
+    このとき、$f=g \iff \Forall{i} f_i = g_i$を示せ。」
+    $\Leftarrow$はあきらか。$\Rightarrow$を示す。
+    $f-g$を考え、$f=0 \implies \Forall{i}f_i = 0$を示せば十分。
+    $i$が次数をあらわしているとする。仮に何か$f_i \neq 0$があるなら、
+    それを打ち消すものが他の$f_\bullet$にはない。
+
+    あるいは、$\sum_{j\neq i}f_i = -f_i$と変形し、両方の次数が違うので$f_i=0$である…というのを帰納的にやってもよい。
+    \item
+    「$f=\sum_i f_i$と$g=\sum_i g_i$を2つの多項式の斉次成分の和への分解とする。
+    このとき、$h=fg$の斉次成分は$h_k = \sum_{i+j = k}f_i\cdot g_j$で与えられていることを示せ。」
+    $h=fg$の項は$\set{f_i\cdot g_j; i,j\in \Zge^n}$である。
+    よって、$h$の多重次数$k$なものは、$i+j=k$となる$(i,j)$達だけであり、成り立つ。
+    \item
+    「(ii)$\implies$(i)を示せ。」
+    $f\in I$とし、これの斉次成分への分解$f=\sum_{d}g_d$とする。各$g_d$は$d$次である。
+    $f_i$たちに番号をつけかえて、$f_{ij}$ただし$i$が多重次数で、
+    $j$がそれらのうちの番号とする。$f\in I$なので、$f=\sum_{i,j} h_{ij}f_{ij}$と$h_{ij}\in k[x_1,\dots,x_n]$で表示される。
+    さらに、$h_{ij}=\sum_{k} h_{ijk}f_{ij}$と斉次成分に分解する。各$f_{ijk}$は$k$次である。
+    さらに、(b)より、$f=\sum_d \sum_{i+k=d} \sum_j h'_{ijk}f_{ij}$と和をとりかえる。
+    よって、$\sum_d g_d = \sum_{d}\sum_{i+k=d} \sum_j h'_{ijk} f_{ij}$となる。
+    (a)より、各々の斉次成分が等しいので、
+    $g_d = h'_{ijk}f_{ij}$となっている。よって、$g_d \in I$である。
+    示された。
+  \end{enumerate}
+
+  (i)$\implies$(ii)を示す。$I$は斉次イデアルであるとする。
+  \begin{enumerate}
+    \item $\exists F_\bullet$:
+    ヒルベルトの基底定理より、
+    \begin{align}
+      I=\gen{F_1,\dots,F_t}
+    \end{align}
+    となる$F_1,\dots,F_t \in k[x_1,\dots,x_n]$が存在する。
+    (これは斉次とは限らない。)
+    \item
+    $F_{\bullet \bullet}$:
+    各$j$について、$F_j$を斉次成分に分け、$F_j = \sum_{i}F_{ji}$と描く。
+    \item
+    $I$は斉次イデアルであることと、各$j$について$F_j \in I$であること、
+    各$F_{ji}$が$F_j$の項であることから、$F_{ji} \in I$である。
+    \item $I'$:
+    $I'=\gen{F_{ji}; i,j}$とする。
+    \item
+    2の$F_j = \sum_i F_{ji}$より、$F_j \in I'$がわかり、$I \subset I'$である。
+    \item 3より、$I'\subset I$である。
+    \item 5,6より$I=I'$であり、$I$の基底として斉次なもの$F_{ji}$たちが得られた。
+  \end{enumerate}
+
+  (ii)$\iff$(iii)を示す。演習問題3を解く。
+  \begin{enumerate}[label=(演習3-\alph*)]
+    \item
+    「割り算アルゴリズムを用いて、斉次多項式$f$を斉次多項式たち
+    $f_1,\dots,f_s$で割り算したとせよ。その結果、
+    $f=a_1f_1+\dots+a_s f_s + r$という表示が得られる。
+    このとき、商$a_1,\dots,a_s$および、余り$r$は斉次多項式(0かもしれない。)
+    であることを証明せよ。$r$の全次数はいくらになるか？」
+    はじめに暫定的な余り$r$は$f$になっているが、
+    ここからある単項式$c\alpha x^\alpha$として$f_i \cdot c_\alpha x^\alpha$を引いて次数を下げても、
+    $r$の全次数は変化しない。そしてこのとき、商$a_i$には$cx^\alpha$が追加されるが、
+    これの次数は$\deg(c_\alpha x^\alpha)=\deg(f)-\deg(f_i)$である。
+    よって、商も余りも(0でなければ)斉次であり続ける。$r$は0でなければ全次数は$\deg(f)$である。
+    \item
+    「$f,g$を斉次多項式とすると、S多項式$S(f,g)$もまた斉次であることを示せ。」
+    $x^\gamma = \LCM(\LM(f),\LM(g))$として、
+    \begin{align}
+      S(f,g) = \frac{x^\gamma}{\LT(f)}f - \frac{x^\gamma}{\LT(g)}g
+    \end{align}
+    であった。
+    \begin{align}
+      (x^\gamma/\LT(f) \cdot f の各項の次数)
+      =
+      \deg(\frac{x^\gamma}{\LT(f)}f)
+      =
+      \deg(x^\gamma).
+    \end{align}
+    同様に、$(x^\gamma/\LT(f) \cdot g の各項の次数)  = \deg(x^\gamma)$である。
+    よって、$S(f,g)$のどの項の次数も$\deg(x^\gamma)$であり、斉次である。
+    \item
+    「ブッフベルガーのアルゴリズムを解析することによって、
+    斉次イデアルは斉次多項式からなるグレブナ基底を持つことを示せ。」
+    ブッフベルガーのアルゴリズムはS多項式を追加し続ける
+    ものだが、スタートが斉次だったので追加したものも(b)より斉次しか追加されない。
+    よって、停止時点でも斉次な多項式しかなく、
+    斉次イデアルには斉次なグレブナ基底がある。
+    \item
+    「(ii)$\iff$(iii)を示せ。」
+    (iii)$\implies$(ii)はあきらか。(ii)$\implies$(iii)を示す。
+    (ii)を仮定する。ここからブッフベルガーのアルゴリズムを使うことで、
+    (c)より$I$の斉次なグレブナ基底が得られる。
+    斉次であることを保ちながら、これを極小グレブナ基底にすることができる
+    \footnote{先頭項係数を1にして、不要なものを除く。}
+    。さらにこれに簡約グレブナ基底を作るアルゴリズムを適用しても
+    斉次であり続けることを示す。このアルゴリズムは、
+    グレブナ基底の各元$g$に対して、$g$を$\ovd{g}{G-\set{g}}$で置換するものであった。
+    この操作で、$g$が斉次であることは変化しないことを示す。
+    実際、(a)より余りは斉次であり続けるし(割り算をして0になることはない。仮にそうなれば
+    極小にしたことに反する。)、その次数は$g$と変わらない。
+    よって、$I$の斉次な基底から、斉次な簡約グレブナ基底を作ることができる。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題3:
+  $I\subset k[x_0,\dots,x_n]$を斉次イデアルとして、
+  斉次多項式$f_1,\dots,f_s$に対して、
+  $I=\gen{f_1,\dots,f_s}$であると仮定する。すると、
+  \begin{align}
+    \var(I) = \var(f_1,\dots,f_s)
+  \end{align}
+  であり、したがって$\var(I)$は射影多様体である。
+\end{framed}
+\begin{myproof}
+  演習5を解く。
+  \begin{align}
+    \var(I)
+    &=
+    \set{(a_0:\dots:a_n) \in \P^n(k); \Forall{f\in I}f(a_0,\dots,a_n) = 0}\\
+    &=
+    \set{(a_0:\dots:a_n) \in \P^n(k); \Forall{i=1,\dots,s}f_i(a_0,\dots,a_n) = 0}\\
+    &=
+    \var(f_1,\dots,f_s).
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  射影多様体$V\subset \P^n(k)$に対して、
+  \begin{align}
+    \ideal(V) = \set{f\in k[x_0,\dots,x_n];
+    \Forall{(a_0:\dots:a_n)\in V} f(a_0,\dots,a_n) = 0}
+  \end{align}
+  とおく(ここで$f$は$V$の任意の点のすべての斉次座標に対して消えていなければならないことに注意せよ。)。
+  もし$k$が無限体であれば、$\ideal(V)$は$k[x_0,\dots,x_n]$の斉次イデアルである。
+\end{framed}
+\begin{myproof}
+  イデアルであることはあきらか。
+  $\ideal(V)$が斉次であることを示す。
+  \begin{enumerate}
+    \item $\forall f$: $f\in \ideal(V)$とする。
+    \item $\forall p$: $p\in V$とする。
+    \item 仮定より、$f$は$p$のすべての斉次座標$(a_0,\dots,a_n)$に対して消える。
+    \item $f$の任意の斉次成分$f_i$は$(a_0,\dots,a_n)$で消える？
+    \begin{enumerate}
+      \item     演習問題2-7を解く。(これまでの文字は忘れる。)
+      「$k$を無限体とする。もし$f\in k[x_0,\dots,x_n]$
+      が斉次多項式ではなく、しかも$p\in \P^n(k)$のすべての斉次座標で
+      消え$f$の任意の斉次成分$f_i$も$p$で消えていなければならないことを示そう。
+      \begin{enumerate}[label=(演習2-7-\alph*)]
+        \item
+        「$f$を斉次成分の和として、$f=\sum_i f_i$と表そう。
+        $p=(a_0,\dots,a_n)$とするとき、次の式を示せ。
+        \begin{align}
+          f(\lambda a_0,\dots,\lambda a_n)
+          =
+          \sum f_i(\lambda a_0, \dots, \lambda a_n)
+          =
+          \sum_i \lambda^if_i(a_0,\dots,a_n).
+        \end{align}
+        」
+        自明。
+        \item
+        「$f$がすべての$\lambda\neq 0\in k$に対して消えれば、
+        $f_i(a_0,\dots,a_n)=0$がすべての$i$について成り立つことを示せ。」
+        $f(\lambda a_0,\dots,\lambda a_n)$を$k[\lambda]$の元と見る。
+        これが$\lambda\neq 0$で消えること、
+        それに$k$が無限体であることから、この$\lambda$に関する方程式は
+        無数の解を持つことになる。そのような多項式は0しかないので、
+        $f(\lambda a_0,\dots,\lambda a_n) = 0_{k[\lambda]}$である。
+        (a)より、$\sum_i \lambda^i f_i(a_0,\dots,a_n)$も
+        $\lambda$に関する0多項式であることがわかる。よって、
+        すべての$i$について、
+        $f_i(a_0,\dots,a_n) = 0$である。
+      \end{enumerate}
+      \item
+      3は、$\Forall{\lambda \neq 0}f(\lambda a_0,\dots,\lambda a_n) = 0$を主張しているので、
+      (a)で解いた問と$k$が無限体であることより、
+      $f$のすべての斉次成分$f_i$が$f_i(a_0,\dots,a_n)=0$をみたす。
+    \end{enumerate}
+    よって、$f$の任意の斉次成分$f_i$は$(a_0,\dots,a_n)$で消える。
+    \item
+    2おわり: 上より、任意の$i$について、$f_i \in \ideal(V)$である。
+    \item
+    1おわり: 上より、$f$の任意の斉次成分が$I$に属するので、
+    $\ideal(V)$は斉次である。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理5:
+  $k$を無限体とする。写像
+  \begin{align}
+    射影多様体 \xrightarrow{\ideal} 斉次イデアル
+  \end{align}
+  と
+  \begin{align}
+    斉次イデアル \xrightarrow{\var} 射影多様体
+  \end{align}
+  は包含関係を逆転させる。さらに、任意の射影多様体に対して、
+  \begin{align}
+    \var(\ideal(V)) = V
+  \end{align}
+  が成り立つ。特に$\ideal$は単射である。
+\end{framed}
+\begin{myproof}
+  $\ideal$の反転を示す。$\var(f_1,\dots,f_s) \subset \var(g_1,\dots,g_t)$とする。
+  \begin{align}
+    \ideal(\var(g_1,\dots,g_t))
+    &=
+    \set{f \in k[x_0,\dots,x_n]; f は \var(g_1,\dots,g_t)を消す}\\
+    &\subset
+    \set{f \in k[x_0,\dots,x_n]; f は \var(f_1,\dots,f_s)を消す}\\
+    &=
+    \ideal(\var(f_1,\dots,f_t)).
+  \end{align}
+
+  $\var$の反転を示す。$\gen{f_1,\dots,f_s} \subset \gen{g_1,\dots,g_t}$とする。
+  \begin{align}
+    \var(\gen{g_1,\dots,g_t})
+    &\desceq{命題3}
+    \var(g_1,\dots,g_t)\\
+    &\subset
+    \var(f_1,\dots,f_s)\\
+    &\desceq{命題3}
+    \var(\gen{f_1,\dots,f_s}).
+  \end{align}
+
+  $\var(\ideal(V)) = V$を示す。
+  \begin{enumerate}
+    \item $V=\var(f_1,\dots,f_s)$とする。
+    $\var(\ideal(\var(f_1,\dots,f_s))) = \var(f_1,\dots,f_s)$を示せばよい。
+    \item $\subset$を示す。
+    \begin{enumerate}
+      \item $f_1,\dots,f_s$は$\var(f_1,\dots,f_s)$を消す。
+      \item 上より、
+      $f_1,\dots,f_s \in \ideal(\var(f_1,\dots,f_s))$となる。
+      \item 上より、$\gen{f_1,\dots,f_s} \subset \ideal(\var(f_1,\dots,f_s))$がなりたつ。
+      \item 上と$\var$の反転より、
+      \begin{align}
+        \var(\ideal(\var(f_1,\dots,f_s))) \subset \var(\gen{f_1,\dots,f_s}) \desceq{命題3} \var(f_1,\dots,f_s).
+      \end{align}
+    \end{enumerate}
+    \item $\supset$を示す。
+    \begin{enumerate}
+      \item $\forall (a_0:\dots:a_n)$: $(a_0:\dots:a_n) \in \var(f_1,\dots,f_s)$とする。
+      $f_1,\dots,f_s$全ては$(a_0:\dots:a_n)$を消す。
+      \item
+      $\forall f$: $f\in \ideal(\var(f_1,\dots,f_s))$とする。
+      ($f$は$(a_0:\dots:a_n)$を消す？)
+      \item
+      上より、$f$は$\var(f_1,\dots,f_s)$を消す。
+      \item
+      上と、(a)より、$f$は$(a_0:\dots:a_n)$を消す。
+      \item
+      (b)おわり: $(a_0:\dots:a_n)$は$\ideal(\var(f_1,\dots,f_s))$のどれでも消える。
+      \item
+      (a)おわり: $\var(f_1,\dots,f_s)$は$\ideal(\var(f_1,\dots,f_s))$のどれでも消える。
+      \item
+      上より、
+      \begin{align}
+        \var(\ideal(\var(f_1,\dots,f_s)))
+        &=
+        \set{\ideal(\var(f_1,\dots,f_s))のどれでも消える点}\\
+        &\supset
+        \var(f_1,\dots,f_s).
+      \end{align}
+    \end{enumerate}
+    \item 2,3よりなりたつ。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理6:
+  $k$を無限体とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item $\P^n(k)$に含まれる射影多様体の降鎖
+    \begin{align}
+      V_1 \supset V_2 \supset V_3 \supset \dots
+    \end{align}
+    に対して、ある整数$N$が存在して、$V_N = V_{N+1} = \dots$が成り立つ。
+    \item
+    任意の射影多様体$V\subset \P^n(k)$は、有限個の既約な射影多様体
+    の和集合として一意的に表される。
+    \begin{align}
+      V=V_1 \cup \dots \cup V_m.
+    \end{align}
+    ただし、$i\neq j$に対しては$V_i \not\subset V_j$である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。鎖に$\ideal$をとって昇鎖を作る。
+  ネーター環の昇鎖は安定するので、ある$N$以上$\ideal(V_N) = \ideal(V_{N+1})=\dots$となる。
+  定理5の$\ideal$の単射より、$V_N = V_{N+1} = \dots$となる。
+
+  (ii)を示す。2通りに書いて、1個既約多様体とってもう片方のどこに含まれますか～みたいなことを言っていればできる。
+\end{myproof}
+
+斉次イデアルの演算と射影多様体の演算を考える。
+\begin{framed}
+  演習6:
+  $I_1,\dots,I_l$を$k[x_0,\dots,x_n]$の斉次イデアルとする。
+  \begin{enumerate}[label=(\alph*)]
+    \item $I_1 + \dots + I_l$は斉次。
+    \item $I_1 \cap \dots \cap I_l$は斉次。
+    \item $I_1\dots I_l$は斉次。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (a)を示す。定理2より、各$I_i$には斉次な生成元$f_{i1},\dots,f_{iN_i}$がある。
+  \begin{align}
+  I_1 + \dots + I_l
+  &=
+   \gen{f_1 + \dots + f_l; f_1\in I_1,\dots,f_l \in I_l}  \\
+   &\desceq{命題4-3-2}
+   \gen{f_{11},\dots,f_{1N_1},\dots,f_{i1},\dots,f_{iN_i}, \dots,f_{l1},\dots,f_{lN_l}}.
+  \end{align}
+  生成元がすべて斉次なので、定理2より$I_1+\dots+I_l$も斉次イデアルである。
+
+  (b)を示す。
+  $f\in I_1\cap \dots \cap I_l$とする。$i=1,\dots,l$とする。
+  $f\in I_i$である。$I_i$は斉次なので、$f$の各項も$I_i$に属する。
+  $i$は任意なので、$f$の各項も$I_1 \cap \dots \cap I_l$に属する。
+  $f$は任意なので、$I_1 \cap \dots \cap I_l$は斉次。
+
+  (c)を示す。
+  $I_\bullet$の生成元を(a)のときと同様にする。
+  命題4-6-3によれば、
+  \begin{align}
+    I_1 \dots I_l
+    &=
+    \gen{f_{1i_1}\dots f_{li_l}; 1\le i_1 \le N_1,\dots, 1\le i_N \le N_l}
+  \end{align}
+  となっている。生成元を斉次になるようにとっておいたので、各$j$について
+  $f_{ji_j}$の全次数は$i$に依らず一定であり、
+  $f_{1i_1}\dots f_{li_l}$の全次数は$i_1,\dots,i_l$の選び方に依らず一定である。
+  よって、$I_1\dots I_l$は斉次な基底で生成されており、
+  定理2より$I_1\dots I_l$は斉次イデアルである。
+\end{myproof}
+アフィンと同様に次が成り立つ。
+\begin{framed}
+  練習問題7:
+  $I_1,\dots,I_l$を$k[x_0,\dots,x_n]$の斉次イデアルとして、
+  $V_i = \var(I_i)$を対応する$\P^n(k)$の射影多様体とする。
+  \begin{enumerate}[label=(\alph*)]
+    \item $\var(I_1+\dots+I_l) = \bigcap_{i=1}^l V_i$である。
+    \item
+    \begin{align}
+      \var(I_1 \cap \dots \cap I_l) = \var(I_1 \dots I_l) = \bigcup_{i=1}^l V_i.
+    \end{align}
+  \end{enumerate}
+\end{framed}
+
+斉次イデアルは
+\begin{align}
+  \sqrt{I} = \set{f\in k[x_0,\dots,x_n]; ある m\ge 1 について f^m \in I}.
+\end{align}
+
+\begin{framed}
+  命題7:
+  $I\subset k[x_0,\dots,x_n]$を斉次イデアルとする。
+  すると、$\sqrt{I}$も斉次イデアルである。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\forall f$: $f\in \sqrt{I}$とする。斉次成分に興味があるので、$f\neq 0$としてよい。
+    \item $\exists m$: $m\ge 1$があって、$f^m \in I$となる。
+    \item
+    $f_i$: $f$を斉次成分に分解する。$f=\sum_i f_i$としておく。
+    \item
+    $f_\max$: $f_\max$をゼロでない斉次成分のうち、最大の全次数を持つような成分とする。
+    \begin{align}
+      f = f_\max + \sum_{i < \max} f_i
+    \end{align}
+    となる。
+    \item 4より、$f^m$を展開することを考えると
+    \begin{align}
+      (f^m)_\max = (f_\max)^m
+    \end{align}
+    となる。
+    \item
+    $I$が斉次イデアルであること、2の$f^m \in I$より、$(f^m)_\max \in I$だえる。
+    \item
+    5と上より、$(f_\max)^m \in I$である。
+    \item
+    上より、$f_\max \in \sqrt{I}$である。
+    \item
+    $g$: $g=f-f_\max$とする。
+    \item 1と8より、
+    $f,f_\max \in \sqrt{I}$なので、上より$g\in \sqrt{I}$である。
+    \item
+    2-8の議論を$g$に繰替えすと、$g_\max \in \sqrt{I}$である。
+    \item
+    以降、9-11の議論を繰替えすことによい、$f$のすべての項が$\sqrt{i}$
+    に属することがわかる。
+    \item 1おわり:$f \in \sqrt{I}$は任意だったので、$\sqrt{I}$は斉次イデアルである。
+  \end{enumerate}
+\end{myproof}
+
+射影幾何だと、弱形の零点定理はそのまま持ってこれない。
+\begin{framed}
+  定理8(射影幾何における弱形の零点定理)
+  $k$を代数的閉体として、$I$を$k[x_0,\dots,x_n]$の斉次イデアルとする。
+  すると次は同値である。
+  \begin{enumerate}[label=(\roman*)]
+    \item $\var(I)\subset \P^n(k)$は空である。
+    \item $G$を$I$の(ある単項式順序に関する)簡約グレブナ基底とする。
+    すると任意の$0\le i \le n$に対して、$\LT(g)$が$x_i$の非負羃であるような
+    $g\in G$が存在する。
+    \item
+    任意の$0\le i \le n$に対して、ある整数$m_i \ge 0$が存在して、
+    $x_i^{m_i} \in I$が成り立つ。
+    \item
+    ある$r\ge 1$が存在して、$\gen{x_0,\dots,x_n}^r \subset I$が成り立つ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $C_V$:
+    $C_V=\var_a(I) \subset k^{n+1}$を、$I$で定義されるアフィン多様体とする。
+    (これは、$I$で定義される射影多様体の各点に対応する点をすべて含む。)
+    \item
+    (ii)$\implies$(i)を示す。
+    簡約グレブナ基底$G$で、任意の$i$に対しある$g\in G$が存在して、
+    ある$m_i\ge 0$に対して$\LT(g) = x_i^{m_i}$となるものがあるとする。
+    \begin{enumerate}
+      \item 上の状況は、$\gen{\LT(I)} = \gen{\LT(G)} = \gen{x_0^{m_0}, x_1^{m_1},\dots,x_n^{m_n}}$となっている
+      ($G$は簡約されている。)。
+      \item このとき、定理6-3-6によれば$C_V$は有限集合である。
+      概略を示す。
+      \begin{enumerate}
+        \item $\forall i$: $i=0,\dots,n$
+        \item $\exists g$: (a)より、$\LT(g)=x_i^{m_i}$となる$g$が存在する。
+        \item 上より、$(x_0,\dots,x_n) \in \var(I)$ならば
+        $g=0$を満たさなければならない。
+        \item $g$を$x_i$に関する方程式と見做せば、
+        $x_i$は$m_i$個以下であることがわかる(代数的閉体であることは使っていない。)。
+        \item iおわり。任意の$i$について$x_i$は$m_i$個以下なので、
+        $x$は$m_0\cdot \dots \cdot m_n$個以下である。
+      \end{enumerate}
+      よって、$C_V$は有限集合である。
+      \item
+      $\exists p$: $p\in V$が存在したとする(背理法)。
+      \item
+      $(a_0,\dots,a_n)$: $(a_0,\dots,a_n)$を$p$の斉次座標とする。
+      \item
+      任意の$\lambda$について、$\lambda(a_0,\dots,a_n) \in C_V$となる。
+      \item
+      $k$は代数的閉体ゆえ無限体なので、上より$C_V$は無限に元を含む。
+      \item (c)おわり:
+      上は、(b)に矛盾する。よって、$\var(I)=V=\emptyset$である。
+    \end{enumerate}
+    \item (iii)$\implies$(ii):
+    \begin{enumerate}
+      \item $G$: $G$を $I$のグレブナ基底とする。
+      \item $\forall i$: $i=0,\dots,n$とする。
+      \item $\exists m_i$:
+      (iii)より、$x_i^{m_i} \in I$となる$m_i \ge 0$がある。
+      \item
+      上より、
+      \begin{align}
+        x_i^{m_i}= \LT(x_i^{m_i}) \in \LT(I) = \gen{\LT(I)} = \gen{\LT(G)}
+      \end{align}
+      となる。
+      \item $\exists g$:
+      上より、$\LT(g) | x_i^{m_i}$となる$g\in G$が存在する。
+      \item
+      上より、$\LT(g)$は$x_i$の羃である。
+      \item (b)おわり: 任意の$i=0,\dots,n$について、
+      $g \in G$で$\LT(g_i)$が$x_i$の羃であるものが存在する。
+    \end{enumerate}
+    \item (iv)$\implies$(iii):
+    \begin{enumerate}
+      \item $\forall i$: $i=0,\dots,n$
+      \item $\exists r$: 仮定より、$r\ge 1$で、$\gen{x_0,\dots,x_n}^r \subset I$となるものがある。
+      \item
+      上より、$x_i^r \in I$である。
+      \item
+      (a)おわり: 任意の$i$について、ある整数$m_i \ge 0$が存在して、$x_i^{m_i} \in I$となる。
+    \end{enumerate}
+    \item (i)$\implies$(iv):
+    \begin{enumerate}
+      \item 仮定より、$V=\emptyset$である
+      \item
+      $C_V \subset \set{(\banme{0}{0},\dots,\banme{n}{0})}$？
+      \begin{enumerate}
+        \item $\exists (a_0,\dots,a_n)$:
+        $C_V$がゼロでない点$(a_0,\dots,a_n)$を持つとする(背理法)。
+        \item
+        上より$(a_0,\dots,a_n) \neq 0$なので、
+        $(a_0:\dots:a_n) \in V$となる。
+        \item iおわり:
+        上は(a)に矛盾。
+      \end{enumerate}
+      よって、$C_V \subset \set{(\banme{0}{0},\dots,\banme{n}{0})}$。
+      \item
+      上に$\ideal_a$をかける。$\ideal_a(\set{(0,\dots,0)})\subset \ideal_a(C_V)$となる。
+      \item
+      $\ideal_a(\set{(0,\dots,0)}) = \gen{x_0,\dots,x_n}$である\footnote{$f\in \ideal_a(\set{(0,\dots,0)})$として、$f$を$x_0,\dots,x_n$で割る。}。
+      \item
+      $k$は代数的閉体なので、アフィン多様体の強形の零点定理により、
+      \begin{align}
+        \ideal_a(C_V) = \ideal_a(\var_a(I)) = \sqrt{I}.
+      \end{align}
+      \item
+      (c),(d),(e)より、
+      \begin{align}
+        \gen{x_0,\dots,x_n}
+        \desceq{(d)}
+        \ideal_a(\set{(0,\dots,0)})
+        \descsubset{(c)}
+        \ideal_a(C_V)
+        \desceq{(e)}
+        \sqrt{I}.
+      \end{align}
+      \item
+      $\exists r$: 上より、$\gen{x_0,\dots,x_n}^r \subset I$となる$r\ge 1$が存在する。
+      (なぜなら、各$i$について$x_i^{r_i} \in I$となる$r_i$があるが、
+      このとき$r=r_0+r_1 + \dots +r_n$とすれば、$\gen{x_0,\dots,x_n}^r$からどうとっても$x_i^{r_i}$が因子として入っている。)
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理9(射影幾何における強形の零点定理):
+  $k$を代数的閉体として、$I$を$k[x_0,\dots,x_n]$の斉次イデアルとする。
+  $V=\var(I)$が$\P^n(k)$の空でない射影多様体であれば、
+  $\ideal(\var(I)) = \sqrt{I}$が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $V$:
+    $V=\var(I) \subset \P^n(k)$とする。
+    \item $C_V$:
+    $C_V = \var_a(I) \subset k^{n+1}$とする。
+    \item
+    仮定より、$V\neq \emptyset$である。
+    \item $\ideal_a(C_V) = \ideal(V)$？
+    \begin{enumerate}
+      \item $\subset$を示す。
+      \begin{enumerate}
+        \item $\forall f$: $f\in \ideal_a(C_V)$とする。
+        \item
+        $\forall p$: $p\in V$とする。
+        \item
+        $\forall (a_0,\dots,a_n)$: $p$の斉次座標を$(a_0,\dots,a_n)$とする。
+        \item 上より、
+        $(a_0,\dots,a_n)\in C_V$となる。
+        \item
+        iより、$f$は$C_V$で消える関数なので、
+        $(a_0,\dots,a_n)$を消す。
+        \item
+        iiiおわり:
+        $f$は$p$の斉次座標をすべて消す。
+        \item
+        iiおわり: $f$は$V$を消す。
+        \item
+        上より、$f\in \ideal(V)$である。
+        \item
+        iおわり: $\ideal(C_V)\subsets \ideal(V)$である。
+      \end{enumerate}
+      よって、 $\ideal(C_V)\subset \ideal(V)$である。
+      \item $\supset$を示す。
+      \begin{enumerate}
+        \item $\forall f$: $f\in \ideal(V)$とする。
+        \item
+        $\forall a_0,\dots,a_n$: $(a_0,\dots,a_n) \in C_V-\zeroset$とする。
+        \item
+        上より、$(a_0:\dots:a_n) \in \ideal(V)$である。
+        \item
+        上と(b)より、$f$は$(a_0:\dots:a_n) \in V$を消す。
+        \item
+        (b)おわり: 上より$f$は$C_V-\zeroset$を消す。
+        \item
+          (a)と$\ideal(V)$は斉次イデアルなので、
+          $f$の斉次成分はまた$\ideal(V)$に属し、$V$を消す。
+        \item
+        上より、$f$の定数項も$V$を消す。
+        \item
+        上と$V\neq \emptyset$より、$f$の定数項は0である。
+        \item
+        上より、$f$は原点$0$を消す。
+        \item
+        上と(e)より、$f$は$C_V$を消す。
+        \item
+        (a)おわり: 上より$\ideal(V) \subset \ideal(C_V)$となる。
+      \end{enumerate}
+      \item
+      (a),(b)より、$\ideal(C_V) = \ideal(V)$となる。
+    \end{enumerate}
+    \item
+    アフィン幾何の強形の零点定理より、$\sqrt{I} = \ideal_a(\var_a(I))$となる。
+    \item
+    \begin{align}
+      \sqrt{I}
+      \desceq{5,零点定理}
+      \ideal_a(\var_a(I))
+      =
+      \ideal_a(C_V)
+      \desceq{4}
+      \ideal(V)
+      =
+      \ideal(\var(I)).
+    \end{align}
+
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  演習問題9(結局使わんかった。):
+  \begin{enumerate}[label=(\alph*)]
+    \item $k[x_0,\dots,x_n]$の任意の斉次イデアルで真部分集合
+    になっているようなものは、$I_0$に含まれることぉお示せ。
+    \item
+    $r$次の羃$I_0^r$は$k[x_0,\dots,x_n]$の全次数が$r$
+    の単項式全体から生成されることを示せ。
+    さらに、このことから全次数が$r$以上であるような任意の斉次多項式は
+    $I_0^r$に含まれていることを示せ。
+    \item
+    $V=\var(I_0)\subset \P^n(k), C_V = \var_a(I_0) \subset k^{n+1}$
+    とおく。$\idael_a(C_V)\neq \ideal(V)$であることを示せ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    斉次イデアル$I\subsetneq k[x_0,\dots,x_n]$とする。
+    仮に$I$が定数を含んでいるならば$I$は全体になってしまうので、
+    $I$は定数を含まない。$f\in I$とする。先のことより、$f$は定数ではない。
+    $f$は斉次なので、これは$f$が定数項を含まないことを意味する。
+    したがって、$f\in I_0$であり、$I\sbuset I_0$である。
+    \item
+    $I_0^r = \gen{k[x_0,\dots,x_n]の全次数rな単項式}$を示す。
+    これは、$I_0=\gen{x_0,\dots,x_n}$なので、イデアルの積の生成元として
+    イデアルの生成元の積たち全体が取れることから明らか。
+
+    全次数が$r$以上であるような任意の斉次多項式が$I_0^r$に属することは、
+    そのような多項式の各項の出鱈目な$r$次の因子を取れば、
+    それが$I_0^r$に属することからわかる。
+
+    \item
+    \begin{align}
+      \ideal_a(C_V)
+      &=
+      \ideal_a(\var_a(I_0))\\
+      &=
+      \gen{x_0,\dots,x_n}.
+    \end{align}
+    一方、
+    \begin{align}
+      \ideal(V)
+      &=
+      \ideal(\var(I_0))\\
+      &=
+      \ideal(\var(\gen{x_0,\dots,x_n}))\\
+      &=
+      \ideal(\emptyset)\\
+      &=
+      k[x_0,\dots,x_n].
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理10:
+  $k$を代数的閉体とする。$\ideal$と$\var$は、空でない射影多様体と、
+  $\gen{x_0,\dots,x_n}$に含まれる根基斉次イデアルとの間の、
+  包含関係を逆転するような全単射写像を与える。つまり写像
+  \begin{align}
+    \set{空でない射影多様体}
+  &  \xrightarrow{\ideal}
+    \set{\gen{x_0,\dots,x_n}に真に含まれる根基斉次イデアル}\\
+    \set{\gen{x_0,\dots,x_n}に真に含まれる根基斉次イデアル}
+    &\xrightarrow{\var}
+    \set{空でない射影多様体}
+  \end{align}
+  は互いに逆写像を与えている。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $I$を根基斉次イデアルとしたとき、
+    $\var(I)\neq \emptyset \iff I \subsetneq \gen{x_0,\dots,x_n}$？
+    \begin{enumerate}
+      \item 定理8より、$\var(I)=\emptyset \iff \Exists{r\ge 1}\gen{x_0,\dots,x_n}^r \subset I$
+      \item 1の仮定より$I$は根基イデアルなので、
+      \begin{align}
+        \Exists{r\ge 1}\gen{x_0,\dots,x_n}^r \subset I
+        \iff
+        \gen{x_0,\dots,x_n}\subset I.
+      \end{align}
+      \item
+      (a)(b)より、
+      \begin{align}
+        \var(I) = \emptyset \iff \gen{x_0,\dots,x_n} \subset I.
+      \end{align}
+      \item 上の対偶をとり、
+      \begin{align}
+        \var(I) \neq \emptyset \iff I \subsetneq \gen{x_0\dots,x_n} .
+      \end{align}
+    \end{enumerate}
+    \item
+    $I$を$I\subsetneq \gen{x_0,\dots,x_n}$となる根基斉次イデアルとして、$\ideal(\var(I)) = I$？
+    \begin{enumerate}
+      \item $I\subsetneq \gen{x_0,\dots,x_n}$で、根基斉次イデアルなので、1より
+      $\var(I)\neq \emptyset$である。
+      \item 上と、$I$が斉次であることから定理9より、$\ideal(\var(I)) = \sqrt{I}$となる。
+      \item $I$は根基なので、$\sqrt{I} = I$である。
+      \item 上と(b)より、$\ideal(\var(I)) = I$である。
+    \end{enumerate}
+    \item
+    $V$を空でない射影多様体として、$\var(\ideal(V)) = V$？
+    \begin{enumerate}
+      \item 定理5と、$k$が代数的閉体ゆえ無限体であることから$\var(\ideal(V)) = V$である。
+    \end{enumerate}
+    \item
+    2,3より$\ideal$と$\var$は互いに逆写像である。
+  \end{enumerate}
+\end{myproof}
+
+
+\subsection{アフィン多様体の射影完備化}
+\label{sub:アフィン多様体の射影完備化}
+\begin{framed}
+  定義1:
+  イデアル$I\subset k[x_1,\dots,x_n]$に対して、$I$の斉次化を
+  次のように定義する。
+  \begin{align}
+    I^h = \gen{f^h; f\in I}\subset k[x_0,\dots,x_n]
+  \end{align}
+  ここで$f^h$は先の斉次化である。
+\end{framed}
+
+\begin{framed}
+  命題2:
+  任意のイデアル$I\subset k[x_1,\dots,x_n]$に対して、その斉次化
+  $I^h$は$k[x_0,\dots,x_n]$の斉次イデアルである。
+\end{framed}
+\begin{myproof}
+  $g\in \gen{f^h; f\in I}$とする。
+  $N,F_\bullet$を使って、$g=\sum_{i=1}^N F_i f_i^h$とする。
+  $f_\bullet$の番号を付け替えて、$f_{ij}$が、$i$が斉次の次数、
+  $j$がそのうちでのインデックスになるようにする。
+  $g=\sum_{i=}^N \sum_j F_{ij} f_{ij}^h$となる。
+  さらに、$F_{ij}$を斉次分解して、$F_{ij} = \sum_l F_{ijl}$とする。
+  $g=\sum_{i=1}^N \sum_j \sum_l F_{ijl} f_{ij}^h$となる。
+  これを次数で分けて書くと、(存在しない添字の項は0として、)
+  \begin{align}
+    g = \sum_{d}\sum_{i+l=d} \sum_j F_{ijl}f_{ij}^h
+  \end{align}
+  となる。このうち、$\sum_{i+l=d} \sum_j F_{ijl}f_{ij}^h$は
+  $d$次斉次成分になっているが、これは$f_{ij}^h$の一次結合なので
+  $I^h$に属する。
+\end{myproof}
+
+$\gen{f_1^h,\dots,f_s^h}$は斉次な基底でできているので斉次イデアルだが、
+上の斉次化はこれよりも大きくなりうる。
+
+\begin{framed}
+  次数つきの単項式順序:
+  単項式順序のうち、$\myabs{\alpha}  > \myabs{\beta}$なら$x^\alpha > x^\beta$となるもの。
+\end{framed}
+
+\begin{framed}
+  定理4:
+  $I$を$k[x_1,\dots,x_n]$のイデアル、
+  $G=\set{g_1,\dots,g_t}$を$k[x_1,\dots,x_n]$の
+  次数付き単項式順序に関する$I$のグレブナ基底とする。
+  すると$G^h = \set{g_1^h, \dots, g_t^h}$は
+  $I^h\subset k[x_0,\dots,x_n]$の基底である。
+\end{framed}
+\begin{myproof}
+  「$G^h$は$k[x_0,\dots,x_n]$の適当な単項式順序について
+  $I^h$の\warn{グレブナ基底}であることを示す。」
+  \begin{enumerate}
+    \item 記号を用意する。$k[x_0,\dots,x_n]$の単項式は、
+    $\alpha \in \Zge^n$と$d\in \Zge$を使って、
+    \begin{align}
+      x_1^{\alpha_1} \dots x_n^{\alpha_n}
+      =
+      x^\alpha x_0^d
+    \end{align}
+    と書く。
+    \item
+    $>_h$: $k[x_0,\dots,x_n]$の順序$>_h$を
+    \begin{align}
+      x^\alpha x_0^d >_h x^\beta x_0^e
+      \iff
+      \begin{cases}
+        x^\alpha > x^\beta  または\\
+        x^\alpha = x^\beta であって、かつd>eが成り立つ。
+      \end{cases}
+    \end{align}
+    と定める。これは単項式順序になっている。
+    \item
+    任意の$i\ge 1$について、$x_i >_h x_0$が成立する。
+    \item
+    任意の$f\in k[x_1,\dots,x_n]$について、
+    $\LM_{>_h}(f^h) = LM_{>}(f)$？
+    \begin{enumerate}
+      \item $\forall f$: $f\in k[x_1,\dots,x_n]$
+      \item $\alpha$: $x^\alpha = \LM_>(f)$
+      \item 上より$x^\alpha$は$f$の最高全次数の斉次部分の単項式である。
+      \item 斉次化の定義より、$f^h$の単項式たちにも$x^\alpha$は存在する。
+      \item $\forall \beta,e$: $x^\beta x_0^e$を$f^h$にあらわれる他の多項式とする。
+      \item $x^\beta$が$f$の$x^\alpha$でない単項式なので、(b)より、$\alpha > \beta$となる。
+      \item
+      上より、$x^\alpha >_h x^\beta x_0^e$である。
+      \item
+      (e)おわり: 上より、$x^\alpha = \LM_{>_h}(f^h)$である。
+      \item (b)と上より、任意の$f$について、$\LM_>(f) = \LM_{>_h}(f^h)$である。
+    \end{enumerate}
+    任意の$f\in k[x_1,\dots,x_n]$について、
+    $\LM_{>_h}(f^h) = \LM_{>}(f)$である。
+    \item 任意の$i$について、
+    $I^h$の定義と、$g_i \in G \subset I$より$g_i^h \in I^h$である。
+    \item
+    上より、$G^h \subset I^h$である。
+    \item
+    $\gen{\LT_{>_h}(I^h)}$は$\LT_{>_h}(G^h)$で生成される？
+    \begin{enumerate}
+      \item $\forall F$: $F\in I^h$とする。
+      \item
+      $I^h$は斉次イデアルなので$F$の各斉次成分は$I^h$に属する。
+      \item
+      上より、(a)でとった$F$は斉次であると仮定してよい(生成を示したくて、$F$を$\gen{\LT_{>_h}(G^h)}$で書けることさえ言えればいい。)。
+      \item $\exists A_j,f_j$:
+      (a)より、
+      \begin{align}
+        F= \sum_j A_j f_j^h
+      \end{align}
+      と$A_j \in k[x_0,\dots,x_n]$と$f_j \in I$を用いて書ける。
+      \item
+      $f$: $f$を$F$の非斉次化とする。すなわち:
+      $f=F(1,x_1,\dots,x_n)$とする。
+      \item
+      (d)(e)と命題2-7(iii)の「斉次化の頭に1を入れると戻る」より、
+      \begin{align}
+        f
+        &=
+        F(1,x_1,\dots,x_n)\\
+        &=
+        \sum_j A_j(1,x_1,\dots,x_n)f_j^h(1,x_1,\dots,x_n)\\
+        &=
+        \sum_j A_j(1,x_1,\dots,x_n)f_j.
+      \end{align}
+      \item
+      (d)で$f_j \in I$としたことを言ったので上より、
+      $f\in I \subset k[x_1,\dots,x_n]$となる。
+      \item $\exists e$:
+      (c)で$F$は斉次としておいたことと、
+      命題2-7(iv)の「斉次多項式$F$を$x_0$で$e$回まで割れるなら、
+      $f=F(1,x_1,\dots,x_n)$として、$F=x_0^e\cdot f^h$となる
+      \footnote{まじ？と思ったが、非斉次化では次数は落ち、
+      斉次化では次数は変わらないので、非斉次化→斉次化だと次数は落ちており、$x_0^e$を補わないとまずい。}
+      」より、
+      \begin{align}
+        F= x_0^e\cdot  f^h
+      \end{align}
+      となる$e \in \Zge$がある。
+      \item
+      4より、
+      \begin{align}
+        \LM_{>_h}(F)
+        \desceq{(h)}
+        x_0^e \cdot \LM_{>_h}(f^h)
+        \desceq{4}
+        x_0^e \cdot \LM_{>}(f).
+      \end{align}
+      \item $\exists i$:
+      $G$は$I$のグレブナ基底であることと、
+      (g)で$f\in I$であることより、
+      $\LM_>(f)$はある$\LM_>(g_i)$で割り切れる。
+      \item 上と、4の$\LM_>(g_i) = \LM_{>_h}(g_i^h)$
+      より、$\LM_{>}(F)$は$\LM_{>_h}(g_i^h)$で割り切れる。
+      \item (a)おわり: 任意の$\LM_>(F) \in \LT_{>_h}(I^h)$は
+      $\LM_{>_h}(g_i^h)$の倍数になっている。示された。
+    \end{enumerate}
+    $\gen{\LT_{>_h}(I^h)}$は$\LT_{>_h}(G^h)$で生成される。
+    \item
+    6の$G^h \subset I^h$と7の$\gen{\LT_{>_h}(I^h)}$が$\LT_{>_h}(G^h)$で生成されることより、
+    $G^h$は$I^h$のグレブナ基底。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定義6:
+  アフィン多様体$W\subset k^n$に対して、$W$の射影完備化とは、
+  射影多様体$\overline{W} = \var(\ideal_a(W)^h)\subset \P^n(k)$
+  のことである。
+\end{framed}
+$W=\zeroset$のときは$\overline W = \emptyset$になってしまう。
+
+$f_\bullet \in k[x_1,\dots,x_n]$は$\var(f_1,\dots,f_s)$は
+アフィン多様体$\subset k^n$とも見えるし、
+射影多様体$\subset \P^n(k) = k^{n+1}/\sim$とも見える。
+また、射影多様体$\subset \P(k^n) = k^{n+1}/\sim$を
+$x_0=1$とした
+アフィン多様体$k^{n+1}$と同一視することがある。
+\begin{framed}
+  命題7:
+
+  $W\subset k^n$をアフィン多様体とし、$\overline W \subset \P^n(k)$
+  をその射影完備化とする。  \warn{(独自)また、$W\neq \zeroset$とする。←そんなことはなかった。$k^n$と$k^{n+1}$で考えてることに注意。}
+  すると、次が成り立つ。
+  \begin{enumerate}[label=(\roman*)]
+    \item $\overline W \cap U_0 = \overline W \cap k^n = W$。(アフィン多様体とみて)
+    \item
+    $\overline W$は$W$を含むような$\P^n(k)$における最小の射影多様体である。
+    \item
+    アフィン多様体$W$が既約ならば、射影多様体$\overline W$もまた既約である。
+    \item
+    $\overline W$のどの既約成分も無限遠超平面$\var(x_0) \subset \P^n(k)$に完全に含まれることはない。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $G$: $k[x_1,\dots,x_n]$の次数付き順序に関する
+    $\ideal_a(W)$のグレブナ基底とする。
+    \item
+    定理4と上より、$\ideal_a(W)^h = \gen{g^h; g\in G}$である。
+    \item
+    $k^n$のサブセットと見て、2より
+    \begin{align}
+      \overline W \cap U_0
+      &=
+      \var(\ideal_a(W)^h) \cap U_0\\
+      &\desceq{2}
+      \var(g^h; g\in G)\cap U_0\\
+      &\desceq{同一視}
+      \var_a(g^h; g\in G) \cap \var_a(x_0=1)\\
+      &=
+      \var_a(g^h(1,x_1,\dots,x_n); g\in G).
+    \end{align}
+    \item
+    命題2-7(iii)の「斉次化して$x_0=1$にすると戻る」より、
+    $g^h(1,x_1,\dots,x_n) = g$となる。
+    \item
+    3,4と1より、
+    \begin{align}
+      \overline W \cap U_0 \desceq{3} \var_a(g^h(1,x_1,\dots,x_n); g\in G) \desceq{4} \var_a(g; g\in G) = \var_a(G) \desceq{1} \var_a(\ideal_a(W)) = W.
+    \end{align}
+  \end{enumerate}
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $\forall V$: $\ub{W}_{\subset k^n} \subset V$なる射影多様体。($V$は一旦$k^{n+1}$と見做すが、射影多様体の条件を満たすものとする。)($\overline W\subset V$？)
+    \item $F_1,\dots,F_s$:
+    $V=\var(F_1,\dots,F_s)$とする。
+    \item $f_1,\dots,f_s$:
+    $f_i$は$F_i$の非斉次化$f_i = F_i(1,x_1,\dots,x_n)$とする。
+    \item 2より各$F_i$は$V$を消す。
+    \item 上と1より$F_i$は$W$も消す。
+    \item 上と各$F_i$が射影多様体$V$の定義方程式であることと、
+    3で各$f_i$が$F_i$の非斉次化であることから、
+    各$f_i$は$W$を消す。
+    \item
+    上より、各$i$について、$f_i \in \ideal_a(W)$となる。
+    \item
+    上より、各$i$について、$f_i^h \in \ideal_a(W)^h$となる。
+    \item
+    上より、各$i$について、$f_i^h$は$\var(\ideal_a(W)^h) = \overline W$を消す。
+    \item
+    $\exists e_1,\dots,e_s$:
+    命題2-7(iv)より、各$i$についてある整数$e_i$があって$F_i=x_0^{e_i}f_i^h$となる。
+    \item
+    上と9より、各$F_i$は$\overline W$を消す。
+    \item
+    上と2より、$\overline W \subset \var(F_1,\dots,F_s) = V$となる。
+    \item 1おわり:
+    任意の$W\subset V$なる任意の射影多様体$V$について$\overline W\subset V$なので、
+    $\overline W$は$W$を包む最小の射影多様体になる。
+  \end{enumerate}
+
+  (iii)を示す。
+  $W$が既約$\iff $ $\overline W$が既約なので、これを示す。
+  対偶を示す。
+  \begin{enumerate}
+    \item $W$が既約でないなら$\overline W$が既約でないことを示す。
+    $W=W_1 \cup W_2$と、空でないアフィン多様体$W_1,W_2 \subset k^n$に分解できるとする。
+    \begin{align}
+      \overline W
+      &=
+      \var(\ideal_a(W)^h)\\
+      &=
+      \var(\ideal_a(W_1 \cup W_2)^h)\\
+      &=
+      \var((\ideal_a(W_1) \cap \ideal_a(W_2))^h)\\
+      &=
+      \var(\ideal_a(W_1)^h \cap \ideal_a(W_2)^h)\\
+      &=
+      \var(\ideal_a(W_1)^h) \cup \var(\ideal_a(W_2)^h)\\
+      &=
+      \overline W_1 \cup \overline W_2.
+    \end{align}
+    (ii)より、$W_1 \subset \overline W_1$かつ$W_2 \subset \overline W_2$
+    であり、$W_1,W_2 \neq \emptyset$なので、$\overline W_1,\overline W_2 \neq \emptyset$
+    であり、$\overline W$は既約ではない。
+    \item
+     $\overline W$が既約でないなら$W$が既約でないことを示す。
+     $\overline W = V_1 \cup V_2$と空でない既約多様体$V_1,V_2 \subset \P^n(k)$
+     に分解されたとする。すると、(i)より
+     \begin{align}
+       W = \overline W \cap U_0 = (V_1 \cap U_0) \cup (V_2 \cap U_0)
+     \end{align}
+     となる。$V_1,V_2$が空でないので、$V_1 \cap U_0,V_2 \cap U_0$は
+     空でないアフィン多様体であり、$W$は既約でない。
+  \end{enumerate}
+
+  (iv)を示す:
+
 \end{myproof}

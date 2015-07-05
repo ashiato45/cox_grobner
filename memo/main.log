@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  3 JUL 2015 12:54
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  6 JUL 2015 01:44
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.029 seconds
+luaotfload | main : fontloader loaded in 0.041 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -967,46 +967,25 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 13.31805pt on input line 33.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 13.31805pt on input line 33.
- (./sec7.tex
+ (./sec8.tex
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09839pt on input line 3.
+(Font)              scaled to size 11.09839pt on input line 4.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 6.47406pt on input line 9.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 4.62433pt on input line 9.
-LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 13.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.24866pt on input line 13.
  [1
 
-{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
- [6]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 468.
-
-(c:/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 468.
- [7] [8] [9] [10]
+{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 43.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 9.24866pt on input line 43.
+ [2] [3] [4] [5] [6]
+[7] [8] [9] [10] [11]
 ! Undefined control sequence.
-<argument> \bulllet 
-         
-l.770        $a_\bulllet
-                      $:
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[11]
-! Undefined control sequence.
-<argument>  S_k &= \sum _{A\in G}(u_1 A_1 \bbold x + \dost 
-                                                + u_n A_n \bbold x)^k\\ &= \sum
-l.833        \end{align}
-                      
+l.838         iおわり: $\ideal(C_V)\subsets
+                                             \ideal(V)$である。󿿿
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1014,32 +993,10 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument>  S_k &= \sum _{A\in G}(u_1 A_1 \bbold x + \dost 
-                                                + u_n A_n \bbold x)^k\\ &= \sum
-l.833        \end{align}
-                      
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[12] [13]
-! Undefined control sequence.
-l.1028     $f=g(f_1,\dtos
-                       ,f_m)$を$f$の$f_1,\dots,f_m$による多項式表�...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[14]
-! Undefined control sequence.
-<recently read> \exist 
+<recently read> \idael 
        
-l.1090         \item  $\exist
-                            B_\bullet$:
+l.899     とおく。$\idael
+                           _a(C_V)\neq \ideal(V)$であることを示せ。...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1047,230 +1004,51 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.1097         となる$B_1,\dts
-                               ,B_m \in k[x_1,\dots,x_n,y_1,\dots,y_m]$が�...
+l.909 ...がって、$f\in I_0$であり、$I\sbuset
+                                                   I_0$である。󿿿
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[15] [16] [17]
-! Undefined control sequence.
-<recently read> \foall 
-       
-l.1321     \item $\foall
-                       (b_1,\dots,b_m)$:
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[18] [19]) (./sec8.tex [20]
-! Undefined control sequence.
-<argument>  \st 
-     {p\in \P ^2(\R ); pの斉次座標(x,y,z)はAx+By+Cz=0を満たす}
-l.32   \end{align}
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument>  \st 
-     {p\in \P ^2(\R ); pの斉次座標(x,y,z)はAx+By+Cz=0を満たす}
-l.32   \end{align}
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[21] [22]
-! Argument of \align has an extra }.
-<inserted text> 
-\par 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've run across a `}' that doesn't seem to match anything.
-For example, `\def\a#1{...}' and `\a}' would produce
-this error. If you simply proceed now, the `\par' that
-I've just inserted will cause me to report a runaway
-argument that might be the root of the problem. But if
-your `}' was spurious, just type `2' and it will go away.
-
-Runaway argument?
- g^h(x_0,\dots ,x_n) &= \sum _{i=0}^d g_i(x_1,\dots ,x_n)x_0^{d-i}\\ \ETC.
-! Paragraph ended before \align was complete.
-<to be read again> 
-\par 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-}
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing \endgroup inserted.
-<inserted text> 
-\endgroup 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Display math should end with $$.
-<to be read again> 
-\@@par 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-[23]
-! Extra }, or forgotten \endgroup.
-\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
-                                                  \fi 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten \endgroup.
-<recently read> }
- 
-l.252 ...g_i(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})}
-                                                   .
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Misplaced \cr.
-\math@cr@@@  -\cr 
-                  
-l.253   \end{align}
-                 
-I can't figure out why you would want to use a tab mark
-or \cr or \span just now. If something like a right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced \noalign.
-\math@cr@@ ... \iffalse }\fi \math@cr@@@ \noalign 
-                                                  {\vskip #1\relax }
-l.253   \end{align}
-                 
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-! Misplaced \noalign.
-\black@ #1\-\noalign 
-                     {\ifdim #1>\displaywidth \dimen@ \prevdepth \nointerlin...
-l.253   \end{align}
-                 
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-! Extra }, or forgotten \endgroup.
-\endalign  -\math@cr \black@ \totwidth@ \egroup 
-                                                \ifingather@ \restorealignst...
-l.253   \end{align}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.253   \end{align}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Display math should end with $$.
-<to be read again> 
-\endgroup 
-l.253   \end{align}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-)
+[12] [13] [14] [15] [16])
 \tf@thm=\write3
- [24] (./main.aux))
+ [17] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11777 strings out of 494694
+ 11747 strings out of 494694
  125004,266212 words of node,token memory allocated
- 5059 words of node memory still in use:
-   10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 416 attribute, 831 glue_
-spec, 26 attribute_list, 1 write nodes
-   avail lists: 2:42796,3:771,4:2095,5:248,6:1404,7:81,9:634,10:23
- 14955 multiletter control sequences out of 65536+600000
- 76 fonts using 32772359 bytes
- 58i,17n,44p,459b,651s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 4890 words of node memory still in use:
+   10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 831 glue_
+spec, 28 attribute_list, 1 write nodes
+   avail lists: 2:45227,3:514,4:2110,5:184,6:1624,7:241,9:567,10:34
+ 14937 multiletter control sequences out of 65536+600000
+ 79 fonts using 37861419 bytes
+ 58i,17n,44p,459b,618s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c
-:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><<c:/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><<c:/texlive/2014/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/symbols/msam10.pfb>
-Output written on main.pdf (24 pages, 341112 bytes).
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/20
+14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (17 pages, 289330 bytes).
 
-PDF statistics: 218 PDF objects out of 1000 (max. 8388607)
- 158 compressed objects within 2 object streams
+PDF statistics: 188 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
