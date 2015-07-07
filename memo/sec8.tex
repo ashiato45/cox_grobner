@@ -835,7 +835,7 @@ $f^h$という。
         \item
         上より、$f\in \ideal(V)$である。
         \item
-        iおわり: $\ideal(C_V)\subsets \ideal(V)$である。
+        iおわり: $\ideal(C_V)\subset \ideal(V)$である。
       \end{enumerate}
       よって、 $\ideal(C_V)\subset \ideal(V)$である。
       \item $\supset$を示す。
@@ -896,7 +896,7 @@ $f^h$という。
     $I_0^r$に含まれていることを示せ。
     \item
     $V=\var(I_0)\subset \P^n(k), C_V = \var_a(I_0) \subset k^{n+1}$
-    とおく。$\idael_a(C_V)\neq \ideal(V)$であることを示せ。
+    とおく。$\ideal_a(C_V)\neq \ideal(V)$であることを示せ。
   \end{enumerate}
 \end{framed}
 \begin{myproof}
@@ -906,7 +906,7 @@ $f^h$という。
     仮に$I$が定数を含んでいるならば$I$は全体になってしまうので、
     $I$は定数を含まない。$f\in I$とする。先のことより、$f$は定数ではない。
     $f$は斉次なので、これは$f$が定数項を含まないことを意味する。
-    したがって、$f\in I_0$であり、$I\sbuset I_0$である。
+    したがって、$f\in I_0$であり、$I\subset I_0$である。
     \item
     $I_0^r = \gen{k[x_0,\dots,x_n]の全次数rな単項式}$を示す。
     これは、$I_0=\gen{x_0,\dots,x_n}$なので、イデアルの積の生成元として
@@ -1286,5 +1286,957 @@ $x_0=1$とした
   \end{enumerate}
 
   (iv)を示す:
+  \begin{enumerate}
+    \item $V_\bullet$: $\overline W = V_1 \cup \dots \cup V_m$を既約な分解とする。さらに、
+    余計なものは除かれているとする。
+    \item どれか既約成分が無限遠超平面$\var(x_0)$に含まれているとする(背理法)。
+    それが$V_1$であるとして一般性を失なわない。
+    \item
+    上の$V_1 \subset \var(x_0)$なので、$V_1 \cap \var(x_0) = \emptyset$である。
+    \item
+    \begin{align}
+      W
+      &\desceq{(i)}
+      \overline W \cap U_0\\
+      &\desceq{1}
+      (V_1\cup \dots \cup V_m)\cap U_0\\
+      &=
+      (V_1 \cap U_0)\cup ((V_2 \cup \dots \cup V_m)\cap U_0)\\
+      &\desceq{3}
+      (V_2 \cup \dots \cup V_m)\cap U_0.
+    \end{align}
 
+    \item
+    上より、$W \subset V_2\cup \dots \cup V_m$となる。
+    \item
+    上と射影完備化の定義より、$\overline W \subset V_2\cup \dots \cup V_m$となる。
+    \item
+    1より$V_2 \cup \dots \cup V_m\subset \overline W$である。
+    \item
+    7,8より、$V_2 \cup \dots \cup V_m = \overline W$である。
+    \item
+    1と上より、$V_1 \subset V_2 \cup \dots \cup V_m$である。
+    \item
+    上で$V_1$との$\cap$をとり、
+    \begin{align}
+      V_1 = (V_2 \cup \dots \cup V_m) \cap V_1
+      =
+      (V_2 \cap V_1)\cup \dots \cup(V_m \cap V_1).
+    \end{align}
+    \item $\exists i$:
+    上と1の$V_1$の既約性より、ある$i$について $V_1 = V_1 \cap V_i$である。
+    \item
+    上より、$V_1 = V_1 \cap V_i \subset V_i$となる。
+    \item 2おわり:
+    上は、1で余計なものを除いたことに矛盾する。
+    よって、どの$\overline W$の既約成分も無限遠超平面$\var(x_0)$に含まれることはない。
+  \end{enumerate}
+
+\end{myproof}
+
+\begin{framed}
+  定理8:
+  $k$を代数的閉体とし、$I\subset k[x_1,\dots,x_n]$を任意の\footnote{これまでは斉次だった。}イデアルとする。
+  すると$\var(I^h) \subset \P^n(k)$は$\var_a(I) \subset k^n$の射影完備化である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $W$: $W=\var_a(I)$とする。
+    \item $Z$:
+    $Z=\var(I^h) \subset \P^n(k)$とする。
+    \item 命題7(i)と$k$が代数的閉体であることより、
+    \begin{align}
+      W
+      &\desceq{命題7(i)}
+      \overline W \cap V_0\\
+      &=
+      \var(\ideal_a(W)^h)\cap V_0\\
+      &=
+      \var(\ideal_a(\var_a(I))^h)\cap V_0\\
+      &\subset
+      \var(\ideal_a(\var_a(I))^h)\\
+      &=
+      \var(\sqrt{I}^h)\\
+      &\descsubset{☆}
+      \var(I^h)\\
+      &=
+      Z.
+    \end{align}
+    よって、$W\subset Z$となっている。
+    \item (最小性を示す)
+    \item
+    $\forall V, F_1,\dots,F_s$: $V=\var(F_1,\dots,F_s)$を$W\subset V$なる射影多様体とする。
+    \item
+    上より、$f_i = F_i(1,x_1,\dots,x_n)$と非斉次化として、
+    \begin{align}
+      W &\subset
+      U(F_1,\dots,F_s)\cap U_0\\
+      &=
+      \var(F_1,\dots,F_s,x_0-1)\\
+      &=
+      \var(f_1,\dots,f_s).
+    \end{align}
+    \item
+    上より、各$i$について$f_i \in \ideal_a(W)$となる。
+    \item
+    上と1と、$k$が代数的閉体であることから$f_i \in \ideal_a(W) = \sqrt{I}$である。
+    \item
+    $\forall i$:
+    \item
+    8より、$f_i \in \sqrt{I}$となる。
+    \item
+    $\exists m$:
+    $m\ge 1$が存在して、$f_i^m \in I$となる。
+    \item
+    上より、$(f_i^m)^h \in I^h$となる。
+    \item
+    上と2より、$(f_i^m)^h$は$Z$を消す。
+    \item
+    $(f_i^m)^h = (f_i^h)^m$？
+    \begin{enumerate}
+      \item $f,g\in k[x_1,\dots,x_n]$として、$(fg)^h = f^h g^h$？
+      \begin{enumerate}
+        \item $f,g$の全次数を$d,e$としておく。
+        \item  命題2-7(ii)より、
+        \begin{align}
+          (fg)^h
+          &=
+          x_0^{d+e} \cdot (fg)(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0})\\
+          &=
+          (x_0^d \cdot f(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}))\cdot
+          (x_0^e \cdot g(\frac{x_1}{x_0},\dots,\frac{x_n}{x_0}))\\
+          &=
+          f^h\cdot g^h.
+        \end{align}
+      \end{enumerate}
+      よって、$(fg)^h = f^h \cdot g^h$となる。
+      \item
+      上よりあきらか。
+      よって、$(f_i^m)^h = (f_i^h)^m$となる。
+    \end{enumerate}
+    \item
+    13と14より、$(f_i^h)^m$は$Z$を消す。
+    \item
+    上より、$f_i^h$は$Z$を消す。
+    \item
+    命題2-7(iv)より、$F_i$は$f_i^h$の倍数である。
+    \item
+    上と16より、$F_i$は$Z$を消す。
+    \item
+    9おわり: 上より、$Z \subset \var(F_1,\dots,F_s) = V$である。
+    \item
+    $Z$は$W$を含む最小の射影多様体である。
+    \item
+    命題7より、$\overline W$も$W$を含む最小の射影多様体なので、
+    上より$\overline W = Z$である。
+  \end{enumerate}
+\end{myproof}
+
+\subsection{射影的消去理論}
+\label{sub:射影的消去理論}
+
+以下、
+\begin{align}
+  (x_1,\dots,x_n,y_1,\dots,y_m)\mapsto
+  (1,x_1,\dots,x_n,y_1,\dots,y_m)
+\end{align}
+によって、$k^n\times k^m$を$\P^n\times k^m$の$x_0\neq 0$
+で決まる部分集合と同一視する。
+
+\begin{framed}
+  定義2:
+  $k$を体とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item 多項式$F\in k[x_0,\dots,x_n,y_1,\dots,y_m]$は、
+    ある整数$l\ge 0$に対して
+    \begin{align}
+      F=\sum_{\myabs{\alpha}=l}h_\alpha(y_1,\dots,y_m)x^\alpha
+    \end{align}
+    と表されるとき、$(x_0,\dots,x_n)$斉次であるという。
+    ただし上の式で、$x^\alpha$は$x_0,\dots,x_n$の多重次数
+    $\alpha$の単項式、また$h_\alpha \in k[y_1,\dots,y_m]$である。
+    \item
+    $(x_0,\dots,x_n)$斉次多項式$F_1,\dots,F_s \in k[x_0,\dots,x_n,y_1,\dots,y_m]$によって
+    定義された多様体$\var(F_1,\dots,F_s) \subset \P^n\times k^m$とは、
+    次の集合
+    \begin{align}
+      \set{(a_0,\dots,a_n,b_1,\dots,b_m)\in \P^n\times k^m;
+      F_i(a_0,\dots,a_n,b_1,\dots,b_m)= 0 \quad (1\le i \le s)}
+    \end{align}
+    のことである。
+  \end{enumerate}
+\end{framed}
+($\P^n \times k^m$の多様体を定義するために斉次多項式の概念を拡張した。)
+(ii)のほうはwell-definedである。
+
+
+\begin{framed}
+  定義4:
+  $(x_0,\dots,x_n)$斉次多項式で生成されたイデアル
+  $I\subset k[x_0,\dots,x_n,y_1,\dots,y_m]$が与えられたとき、
+  $I$の射影的消去イデアルとは集合
+  \begin{align}
+    \hat I =
+    \set{f\in k[y_1,\dots,y_m];
+    \Forall{0\le i \le n}\Exists{e_i\ge 0} x_i^{e_i}f \in I}.
+  \end{align}
+  のことである。
+\end{framed}
+$k[y_1,\dots,y_m]$のイデアルになっていることはあきらか。
+
+\begin{framed}
+  命題5:
+  $V=\var(F_1,\dots,F_s) \subset \P^n \times k^m$を
+  $(x_0,\dots,x_n)$斉次多項式で定義された多様体とし、
+  $\pi\colon \P^n \times k^m \to k^m$を射影とする。
+  このとき、$\hat I$を$I=\gen{F_1,\dots,F_s}$の
+  射影的消去イデアルとすれば、$k^m$の中で
+  \begin{align}
+    \pi(V)\subset \var(\hat I)
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\forall a_\bullet,b_\bullet$: $(a_0,\dots,a_n,b_1,\dots,b_m) \in V$とする。
+    \item
+    $\forall f$: $f\in \hat I$
+    \item $\forall i$:
+    \item $\exists e_i$:
+    2と射影的消去イデアルの定義により、$ x_i^{e_i}f(y_1,\dots,y_m) \in I$となる
+    $e_i \ge 0$が存在する。
+    \item 上より、
+    $x_i^{e_i}f(y_1,\dots,y_m)$は$V$を消す。
+    \item
+    3おわり: 上より、
+    任意の$i$について$a_i^{e_i} f(b_1,\dots,b_m) = 0$となる。
+    \item $\exists i$:
+    1より、$(a_0,\dots,a_n)$は斉次座標なので$a_i \neq 0$となる$i$がある。
+    \item
+    上と4より、$f(b_1,\dots,b_m) = 0$となる。
+    \item
+    1おわり: 上より、$f$は$\pi(V)$を消す。
+    \item 2と上より、
+    $\pi(V) \subset \var(\hat I)$となる。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理6(射影化された拡張定理):
+  $k$を代数的閉体とし、$V=\var(F_1,\dots,F_s) \subset \P^n \times k^m$を
+  $k[x_0,\dots,x_n,y_1,\dots,y_m]$の$(x_0,\dots,x_n)$
+  斉次多項式で定義された多様体とする。$I=\gen{F_1,\dots,F_s}$の射影的消去イデアルを、
+  $\hat I \subset k[y_1,\dots,y_m]$で表す。また
+  \begin{align}
+    \pi\colon \P^n \times k^m \to k^m
+  \end{align}
+  を後半の$m$個への座標空間への射影とするならば、
+  \begin{align}
+    \pi(V) = \var(\hat I)
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+   命題5より$\pi(V)\subset \var(\hat I)$は成立しているので、
+   $\var(\hat I) \subset \pi(V)$を示したい。
+   \begin{enumerate}
+     \item $\forall \bbold c, c_\bullet$:
+     $\bbold c = (c_1,\dots,c_m) \in \var(\hat I)$とする。
+     \item 任意の$i$について、$F(x_0,\dots,x_n,\bbold c)$は
+     $x_0,\dots,x_n$についての斉次多項式である。
+     \item $d_\bullet$:
+      各$i$について、 $F_i(x_0,\dots,x_n,\bbold c)$の
+      $x_0,\dots,x_n$の多項式としての全次数を$d_i$とする。
+    \item $\bbold c \notin \pi(V)$とする。(背理法)
+    \item
+    上より、
+    \begin{align}
+      F_1(x_0,\dots,x_n,\bbold c) = \dots =
+      F_s(x_0,\dots,x_n,\bbold c) = 0
+    \end{align}
+    は$\P^n$の空集合を定義する。(これを満足するような斉次座標の$x_\bullet$は存在しない。)
+    ($\var(F_1(x_0,\dots,x_n,\bbold c),\dots, F_s(x_0,\dots,x_n,\bbold c)) = \emptyset$である。)
+    \item $\exists r$:
+    $k$は代数的閉体であることから、上の空集合であることに
+    射影化された零点定理の弱形(定理3-8)を使って、
+    ある$r\ge 0$が存在して
+    \begin{align}
+      \gen{x_0,\dots,x_n}^r
+      \subset
+      \gen{F_1(x_0,\dots,x_n,\bbold c),\dots,F_s(x_0,\dots,x_n,\bbold c)}.
+    \end{align}
+    \item $\forall \alpha$: $\myabs{\alpha} = r$となる多重次数とする。
+    \item $H_\bullet$:
+    上と6より、$\myabs{\alpha} = r$なる単項式$x^\alpha$は
+    $F_i(x_0,\dots,x_n,\bbold c)$たちの多項式係数線形結合としてあらわされる:
+    \begin{align}
+      x^\alpha = \sum_{i=1}^s H_i(x_0,\dots,x_n) F_i(x_0,\dots,x_n,\bbold c).
+    \end{align}
+    となる$H_\bullet$がある。
+    \item
+    3($d_i$の次数),7($\alpha$の次数),8($x^\alpha$の表現)より、
+    $H_i$は全次数$r-d_i$の斉次多項式として一般性を失なわない。($F_i(x_0,\dots,x_n,\bbold c)$はもともと斉次。)
+    \item
+    7おわり:
+    各$H_i$を$\myabs{\beta_i} =r-d_i$なる$x^{\beta_i}$の$k$係数線形結合で書くと、
+    8より、任意の$\myabs{\alpha} = r$なる$\alpha$について、
+    \begin{align}
+      x^\alpha = \sum_{i=1}^s \sum_{\myabs{\beta_i}=r-d_i} (なにか係数)x^{\beta_i} F_i(x_0,\dots,x_n,\bbold c)
+    \end{align}
+    となっている。
+    \item
+    上より、
+    \begin{align}
+      x^{\beta_i}F_i(x_0,\dots,x_n,\bbold c),\quad i=0,\dots,s,\quad \myabs{\beta_i} = r-d_i
+    \end{align}
+    が$x_0,\dots,x_n$に関する全次数$r$の斉次多項式すべての空間を張る。
+    \item $N_r$:
+    「$x_0,\dots,x_n$に関する全次数$r$の斉次多項式すべての空間」の次元を$N_r$とする。
+    実際はこれは$n+1$文字から$r$文字選ぶ方法の数になっている。
+    \item $G_\bullet$:
+    11の基底たちを、12より$N_r$個選んでこれを「$x_0,\dots,x_n$に関する全次数$r$の斉次多項式すべての空間」の
+    基底にすることができる。その基底を
+    \begin{align}
+      G_j(x_0,\dots,x_n,\bbold c),\quad j=1,\dots,N_r
+    \end{align}
+    とする($x^{\beta_i}$の部分は、これが$x_\bullet$の関数なので折り込んでよい。)。
+    \item $a_{\bullet \bullet}$:
+    13の$G_\bullet$の定義より、これは11のような$x_\bullet$について$r$次の斉次多項式式
+    $x^{\beta_i} F_i(x_0,\dots,x_n,\bbold c)$たちでできているのだから、
+    これを斉次分解することにより
+    各$j=1,\dots,N_r$について
+    \begin{align}
+      G_j = \sum_{\myabs{\alpha}=r} a_{j\alpha}(y_1,\dots,y_m)x^{\alpha}
+    \end{align}
+    となる$a_{j\alpha} \in k$が存在する。
+    \item
+    上について、$\myabs{\alpha} = r$となる単項式の個数は12の定義より
+    $N_r$だったので、$a_{j\alpha}$は$j$を固定すると$N_r$個ある。
+    \item $D(y_1,\dots,y_m)$:
+    上より、$a_\bullet$は正方形に並べられるので行列式
+    \begin{align}
+      D(y_1,\dots,y_m) =
+      \det(a_{j\alpha}(y_1,\dots,y_m); 1\le j \le N_r,\, \myabs{\alpha}=r)
+    \end{align}
+    が考えられる。
+    \item
+    14の式で$(y_1,\dots,y_m)=\bbold c$と代入し$j$を走らせながら並べることにより、
+    \begin{align}
+    \ub{(G_1, \dots ,G_{N_r})(\bbold c)}_{N_r \times N_r}
+    =
+    \ub{(a_{j\alpha}; 1\le j\le N_r, \, \myabs{\alpha}=r)(y_1,\dots,y_m)}_{N_r \times N_r}
+    \cdot
+    \ub{(x_\alpha; \myabs{\alpha}=r)}_{N_r \times N_r}.
+    \end{align}
+    となる。ただし、左の行列と右の行列は多項式なので、それを項毎に
+    $\alpha$についての適当な順序で並べたベクトルと見做している。
+    \item
+    上は、「$x_0,\dots,x_n$に関する全次数$r$の斉次多項式すべての空間」の基底
+    の変換の式になっているので($G_\bullet$が基底なのは13による。$x_\bullet$は標準的な基底。)
+    $(a_{j\alpha}; 1\le j\le N_r, \, \myabs{\alpha}=r)(y_1,\dots,y_m)$
+    は正則である。
+    \item
+    上より、$D(\bbold c)\neq 0$である。
+    \item
+    $D(y_1,\dots,y_m) = 0$だとすると$D(\bbold c) = 0$となるので
+    上に矛盾する。したがって、$D(y_1,\dots,y_m) \neq 0_{k[y_1,\dots,y_m]}$となる。
+    \item
+    17の式
+    \begin{align}
+      {(a_{j\alpha}; 1\le j\le N_r, \, \myabs{\alpha}=r)(y_1,\dots,y_m)}
+      \cdot
+      {(x_\alpha; \myabs{\alpha}=r)}
+      =
+      {(G_1, \dots ,G_{N_r})(\bbold c)}
+    \end{align}
+    は$x_\alpha$たちについての$k(y1,\dots,y_m)$上での
+    \item $M_\alpha$:
+    ${(a_{j\alpha}; 1\le j\le N_r, \, \myabs{\alpha}=r)(y_1,\dots,y_m)}$
+    の第$\alpha$列を$\tatev{G_1 \\ \vdots \\ G_{N_r}}$に取り替えたものとする。
+    \item 上と21とクラメルの公式と20の非零より、
+    \begin{align}
+      x^\alpha = \frac{\det(M_\alpha)}{D(y_1,\dots,y_m)}.
+    \end{align}
+    \item $H_{j\alpha}$:
+    $H_{j\alpha}$を${(a_{j\alpha}; 1\le j\le N_r, \, \myabs{\alpha}=r)(y_1,\dots,y_m)}$
+    から$j$列$\alpha$行を除いた小行列の行列式とする。($j$列$\alpha$行での展開のやつ。)
+    \item 23で、$\det(M_\alpha)$を$\alpha$列目で展開することで、24も利用し
+    \begin{align}
+      x^\alpha D(y_1,\dots,y_m)
+      =
+      \sum_{j=1}^{N_r} H_{j\alpha}(y_1,\dots,y_m) G_j(x_0,\dots,x_n,y_1,\dots,y_m).
+    \end{align}
+    \item
+    13の定義より、各$G_j$は$x^{\beta_i}F_i$の形をしていたので、
+    \begin{align}
+      x^\alpha D(y_1,\dots,y_m)
+      \in
+      \gen{F_1,\dots,F_s} = I.
+    \end{align}
+    \item
+    上より、$D(y_1,\dots,y_m)\in \hat I$となる。
+    \item 上より、$D(y_1,\dots,y_m)$は$\var(\hat I)$を消す。
+    \item 1より$\bbold c \in \var(\hat I)$なので、上より、
+    $D(y_1,\dots,y_m)$は$\bbold c$を消す: $D(\bbold c) = 0$となる。
+    \item 上と19は矛盾する。
+    \item 4おわり: $\bbold c \in \pi(V)$となる。
+    \item 1おわり: $\var(\hat I) \subset \pi(V)$となる。
+   \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題7:
+  $I\subset k[x_0,\dots,x_n,y_1,\dots,y_m]$をイデアルとする。
+  十分大きなすべての整数$e$に対して、
+  \begin{align}
+    \hat I = (I: \gen{x_0^e,\dots,x_n^e})\cap k[y_1,\dots,y_m]
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item イデアル商の定義より、
+    \begin{align}
+      \Forall{0\le i \le n}
+      f\in I:\gen{x_0^e,\dots,x_n^e}
+      \implies
+      x_i^e f \in I
+    \end{align}
+    である。
+    \item
+    上より、任意の$e\ge 0$に対して、
+    \begin{align}
+      (I:\gen{x_0^e,\dots,x_n^e}) \cap k[y_1,\dots,y_m] \subset \hat I
+    \end{align}
+    となる。($f\in \hat I \subset k[y_1,\dots,y_m]$のための条件は、$x_0,\dots,x_n$の適当な羃を$f$にかければ$I$に入るということだった。)
+    \item
+    \begin{align}
+      I:\gen{x_0,\dots,x_n}
+      \subset
+      I:\gen{x_0^2,\dots,x_n^2}
+      \subset
+      \dots
+    \end{align}
+    という昇鎖がある。
+    \item $\exists e$:
+    上の昇鎖は安定するので、$e$以降安定するとする:
+    \begin{align}
+      I:\gen{x_0^e,\dots,x_n^e}
+      =
+      I:\gen{x_0^{e+1},\dots,x_n^{e+1}}=\dots
+    \end{align}
+    である。
+    \item
+    \begin{align}
+      \Forall{d\ge 0} I:\gen{x_0^d,\dots,x_n^d}
+      \subset
+      I:\gen{x_0^e,\dots,x_n^e}.
+    \end{align}
+    \item $\forall f$:
+    $f\in \hat I$とする。
+    \item
+    上より、
+    \begin{align}
+      \Forall{0\le i\le n}\Exists{e_i\ge 0}x_i^{e_i} f \in I.
+    \end{align}
+    \item $d$:
+    $d = \max(e_0,\dots,e_n)$とする。
+    \item
+    上の定義と7より、$x_i^d f \in I$がすべての$i$で成立する。
+    \item
+    上より、$f\in I:\gen{x_0^d,\dots,x_n^d}$である。
+    \item
+    6で、$f\in \hat I \subset k[y_1,\dots,y_n]$と
+    5より、
+    \begin{align}
+      f\in (I:\gen{x_0^e,\dots,x_n^e}) \cap k[y_1,\dots,y_m].
+    \end{align}
+    \item
+    上より、
+    \begin{align}
+      \hat I \subset \gen{I:\gen{x_0^e,\dots,x_n^e}}\cap k[y_1,\dots,y_m].
+    \end{align}
+    \item 2,12より、
+    \begin{align}
+      \hat I = \gen{I:\gen{x_0^e,\dots,x_n^e}} \cap k[y_1,\dots,y_m].
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+
+\begin{framed}
+  定義:
+  $F\in k[x_0,\dots,x_n,y_1,\dots,y_m]$において$x_i = 1$について、
+  \begin{align}
+    F\ovparen{i} =
+    F(x_0,\dots,\banme{i}{1},\dots,x_n,y_1,\dots,y_m) \in
+    k[x_0,\dots,\hat x_i,\dots,x_n,y_1,\dots,y_m].
+  \end{align}
+
+  イデアルの非斉次化を
+  \begin{align}
+    I\ovparen{i} = \set{F\ovparen{i}; F\in I}\subset
+    k[x_0,\dots,\hat x_i,\dots,x_n,y_1,\dots,y_m].
+  \end{align}
+  とする。$I=\gen{F_1,\dots,F_s}$のときには、
+  $I\ovparen{i} = \gen{F_1\ovparen{i},\dots,F_s\ovparen{i}}$が成立する。
+\end{framed}
+
+\begin{framed}
+  命題8:
+  $I\subset k[x_0,\dots,x_n,y_1,\dots,y_m]$を
+  $(x_0,\dots,x_n)$斉次多項式で生成されたイデアルとする。すると、
+  \begin{align}
+    \hat I = I_n\ovparen{0}\cap I_n\ovparen{1} \cap \dots \cap I_n\ovparen{n}
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\hat I = I\ovparen{0}\cap \dots \cap I\ovparen{n}\cap k[y_1,\dots,y_m]$を示す。
+    \item
+    $\forall f$: $f\in \hat I$とする。
+    \item $\forall i$:
+    \item
+    2より、$x_i^{e_i} f(y_1,\dots,y_m) \in I$
+    \item
+    上で$x_i = 1$として、$f(y_1,\dots,y_m)\in I\ovparen{i}$となる。
+    \item
+    3おわり: $f(y_1,\dots,y_m)\in I\ovparen{0}\cap \dots \cap I\ovparen{n}$
+    \item
+    2おわり: $\hat I \subset I\ovparen{0}\cap \dots \cap I\ovparen{n} \cap k[y_1,\dots,y_m]$となる。
+    \item $\forall i$:
+    \item $\forall f$:
+    $f\in I\ovparen{i}$
+    \item $\exists F$:
+    $I\ovparen{i}$の定義より、$f$はある$F\in I$で$x_i = 1$とおくことで得られる。
+    \item $F$は$(x_0,\dots,x_n)$斉次として一般性を失なわない？
+    \begin{enumerate}
+      \item  $F_\bullet$:
+      $F$を$(x_0,\dots,x_n)$斉次に分解する:
+      $F=\sum_{j=0}^d F_j$となる。
+      \item $I$が$(x_0,\dots,x_n)$斉次多項式で生成されていることから、
+      各$F_j \in I$となる。 これは定理3-2と同様に示せる。概略としては、
+      $F\in I$から$F$を$I$の生成元の一次結合で書き、
+      それを$x_\bullet$斉次なものたちで整理する。あとは、
+      次数で$F=\sum_{j=0}^d F_j$と比較し、$F_j \in I$を得る
+      \item
+      $\sum_{j=0}^d x_i^{d-j}F_j$は$I$に含まれる
+      $(x_0,\dots,x_n)$斉次多項式。(全次数は、$F_j$が(a)より$j$となるようにしておいたので、$x_i^{d-i}$をかけて$d$次。)
+      \item
+      上の$\sum_{j=0}^d x_i^{d-j}F_j$は
+      $x_i=1$とすれば非斉次化され$f$に一致する。
+      \item 上より、$F\in I$は$(x_0,\dots,x_n)$斉次と仮定してよい。
+      もとの$F$から、斉次になるように作り直すことができた。
+    \end{enumerate}
+    \item 9おわり: $f\in I\ovparen{i}$について、$(x_0,\dots,x_n)$斉次多項式$F$が存在して、
+    $f=F(x_1,\dots,\banme{i}{x_i},\dots,x_n,y_1,\dots,y_m)$となる。
+    \item $\bullet^h$:
+    記号を定める。$f\in k[x_0,\dots,\hat x_i, \dots, x_n, y_1,\dots,y_m]$に対して、
+    $x_i$を用いて$(x_0,\dots,x_n)$斉次多項式$f^h \in k[x_0,\dots,x_n,y_1,\dots,y_m]$を
+    作ることで斉次化作用素$\bullet^h$を定める。
+    \item
+    $(x_0,\dots,x_n)$ 斉次多項式$F$について、$f=F(x_0,\dots,\banme{i}{1},\dots,x_n,y_1,\dots,y_m)$と
+    非斉次化するとき、ある整数$e\ge 0$について$F=x_i^e f^h$となる？
+    \begin{enumerate}
+      \item $i=0$として一般性を失なわない。
+      \item $F=\sum_{\myabs{\alpha}=l}h_\alpha(y_1,\dots,y_n)x^\alpha$と分解する。
+      \item さらに、$x_0$だけ特別扱いする。
+      \begin{align}
+        F = \sum_{j=0}^l \sum_{\myabs{\beta}=l-j} h_{(j,\beta)}(y_1,\dots,y_n) x^{(j,\beta)}
+      \end{align}
+      とする。
+      \item
+      \begin{align}
+        f = \sum_{j=0}^l \sum_{\myabs{\beta}=l-j} h_{(j,\beta)}(y_1,\dots,y_n) x^{(0,\beta)}
+      \end{align}
+      \item
+      $l'$を、$h_{(l',\beta)}(y_1,\dots,y_n) \neq 0$なる$\beta$があるような
+      $l'$のうち最小のものとする。すると、
+      \begin{align}
+        f = \sum_{j=l'}^l \sum_{\myabs{\beta}=l-j} h_{(j,\beta)}(y_1,\dots,y_n) x^{(0,\beta)}
+      \end{align}
+      となり、$f$の$(x_1,\dots,x_n)$についての全次数は$l-l'$となる。
+      \item 上より、
+      \begin{align}
+        f^h = \sum_{j=l'}^l \sum_{\myabs{\beta}=l-j} h_{(j,\beta)}(y_1,\dots,y_n) x^{(j-l',\beta)}
+      \end{align}
+      となる。全次数は変わらず$l-l'$である。
+      \item (c),(f)より、
+      \begin{align}
+        F = f^h\cdot x_0^{l'}
+      \end{align}
+      となる。
+    \end{enumerate}
+    \item
+    $\forall f$: $f\in I\ovparen{i} \cap k[y_1,\dots,y_m]$とする。
+    \item $\exists F$:
+    9-12より、$f=F(x_i=1)$と、非斉次化して$f$になる$(x_0,\dots,x_n)$斉次多項式 $F\in I$がある。
+    \item
+    15より、$f$は$x_0,\dots,x_n$を含まないので、
+    ($(x_0,\dots,x_n)$に関する全次数が$-\infty$であり、)
+    $f=f^h$である。
+    \item $\exists e$:
+    14より、
+    $F=x_i^e f^h$となる$e\ge 0$が存在する。
+    \item 上と17より、$F=x_i^e f$である。
+    \item 上と16より、$x_i^e f \in I$である。
+    \item 15おわり: 任意の$i$について、$e_i\ge 0$があって、
+    $x_i^{e_i} f \in I$となる。
+    \item 上より、$f \in \hat I$である。
+    \item 15おわり:
+    \begin{align}
+      I\ovparen{0}\cap \dots \cap I\ovparen{n} \cap k[y_1,\dots,y_m] \subset \hat I.
+    \end{align}
+    \item
+    7,23より、
+    \begin{align}
+      I\ovparen{0} \cap \dots \cap I\ovparen{n} \cap k[y_1,\dots,y_m] = \hat I.
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定義:
+  $I\subset k[x_0,\dots,x_n,y_1,\dots,y_m]$について、
+  $I$の$(x_0,\dots,x_n)$斉次化$I^h$を
+  \begin{align}
+    I^h = \gen{f^h; f\in I}\subset
+    k[x_0,\dots,x_n,y_1,\dots,y_m].
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題9:
+  イデアル$I \subset k[x_1,\dots,x_n,y_1,\dots,y_m] $の
+  \xs 斉次化を$I^h$とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item $I^h$の射影的消去イデアルは$I$の第$n$消去イデアルに一致する。
+    つまり$\hat{I^h} = I_n \subset k[y_1,\dots,y_m]$が成り立つ。
+    \item
+    $k$が代数的閉体のとき、$\overline V= \var(I^h)$は、
+    アフィン多様体$V  = \var_a(I) \subset k^n \times k^m$
+    を含む$\P^n \times k^m$における最小の多様体である。
+    $\overline V$を$V$の$\P^n\times k^m$における射影完備化とよぶ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $I^h$を$x_0$について非斉次化すれば、$(I^h)\ovparen{0} = I$
+    となる($h$で$x_0$をつけたし、それを1にしたのでもとにもどる。)。
+    \item
+    命題8より(あるいはその証明より)
+    \begin{align}
+      \hat {I^h} = {(I^h)}_n\ovparen{0} \cap \dots \cap {(I^h)}_n\ovparen{n} \cap k[y_1,\dots,y_n]
+    \end{align}
+    である。
+    \item 1と2より、
+    \begin{align}
+      \hat {I^h} \subset (I^h)_n\ovparen{0} = I_n.
+    \end{align}
+    \item $\forall f$:
+    $\forall f \in I_n$
+    \item
+    $f\in k[y_1,\dots,y_n]$なので、$f$
+    $(x_0,\dots,x_n)$斉次になっている。($-\infty$次。)
+    \item
+    上と4の$f\in I_n \subset I$より、$f=f^h \in I^h$となる。
+    \item
+    上より、
+    任意の$i$について$x_i^0 f \in I^h$である。(1をかけただけ)
+    \item
+    上と射影的消去イデアルの定義より、$f\in \hat{I^h}$となる。
+    \item 4おわり:
+    $I_n \subset \hat{I^h}$となる。
+    \item 3,9より、$I_n = \hat{I^h}$となる。
+  \end{enumerate}
+
+  (ii)を示す。
+  略証。
+  \begin{enumerate}
+    \item (まず$\var_a(I)=V\subset \overline V = \var(I^h)$を示す。)
+    \item
+    \begin{align}
+      V
+      &=
+      \var_a(I)\\
+      &=
+      \var_a(I^h, x_0-1)\\
+      &\subset
+      \var_a(I^h).
+    \end{align}
+    \item
+    (次に、最小性を示す。)
+    \item $\forall F_1,\dots,F_s$:
+    $V=\var_a(I)\subset \var(F_1,\dots,F_s)$と、
+    $F_1,\dots,F_s \in k[x_0,\dots,x_n,y_1,\dots,y_m]$
+    となる\xs 斉次多項式を考える。
+    \item $f_\bullet$:
+    各$i$について、$f_i$を$F_i$の非斉次化とする。
+    \item
+    \begin{align}
+      V
+      &\subset
+      \var(F_1,\dots,F_s) \cap (U_0\times k^m)\\
+      &=
+      \var(F_1,\dots,F_s,x_0-1)\\
+      &=
+      \var(f_1,\dots,f_s).
+    \end{align}
+    \item
+    上より、$f_1,\dots,f_s \in \ideal_a(V) = \sqrt{I}$となる。
+    \item $\exists m_i$:
+    \begin{align}
+      \Forall{i}\Exists{m_i \ge 0} f_i^{m_i}\in I.
+    \end{align}
+    \item
+    上より、
+    \begin{align}
+      \Forall{i} \Exists{m_i \ge 0} (f_i^{m_i})^h \in I^h.
+    \end{align}
+    \item
+    上で、羃と斉次化を交換して(多分できる)
+    \begin{align}
+      \Forall{i} \Exists{m_i \ge 0} (f_i^h)^{m_i} \in I^h.
+    \end{align}
+    \item
+    上より、各$(f_i^h)^{m_i}$は$\var(I^h)$を消す。
+    \item
+    上より、
+    各$f_i^h$は$\var(I^h)$を消す。
+    \item
+    各$F_i$は$f_i^h$の倍数である。
+    \item
+    上と12より、各$F_i$は$\var(I^h)$を消す。
+    \item
+    上より、$\var(I^h) \subset \var(F_1,\dots,F_s)$である。
+    \item 4おわり:
+    4より、$\var_a(I)$を包む$\P^n\times k^m$の多様体は
+    $\var(I^h)$を包む。
+    \item
+    2,16より、$\var(I^h)$は$\var_a(I)$を包む最小の$\P^n\times k^m$の多様体である。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  系10:
+  $k$を代数的閉体とし、イデアル$I\subset k[x_1,\dots,x_n,y_1,\dots,y_m]$
+  に対して$V=\var_a(I)\subset k^n \times k^m$とおく。すると
+  \begin{align}
+    \var(I_n) = \pi(\overline V)
+  \end{align}
+  が成り立つ。ただし$\overline V \subset \P^n \times k^m$
+  は$V$の射影完備化であり、$\pi\colon \P^n \times k^m \to k^m$は射影である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item 命題9より、$\overline V = \var(I^h)$である。
+    \item
+    命題9より、$\hat{I^h} = I_n$である。
+    \item
+    定理6を多様体$\var(I^h)$、イデアル$I^h$に使うと、
+    $\pi(\var(I^h)) = \var(\hat{I^h})$がわかる。
+    \item
+    \begin{align}
+      \var(I_n)
+      \desceq{2}
+      \var(\hat{I^h})
+      \desceq{3}
+      \pi(\var(I^h))
+      \desceq{1}
+      \pi(\overline V).
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題11:
+  $>$を$k[x_1,\dots,x_n,y_1,\dots,y_m]$の単項式順序であって、
+  $x_1,\dots,x_n,y_1,\dots,y_m$の単項式
+  $x^\alpha y^\gamma, x^\beta y^\delta $に対して
+  \begin{align}
+    \myabs{\alpha} > \myabs{\beta} \implies
+    x^\alpha y^\gamma > x^\beta y^\delta
+  \end{align}
+  となるようなものとする。
+  $G=\gen{g_1,\dots,g_s}$が$I\subsest k[x_1,\dots,x_n,y_1,\dots,y_m]$の
+  $>$に関するグレブナ基底であれば、$G^h = \set{g_1^h,\dots,g_s^h}$は
+  $I^h \subset k[x_0,\dots,x_n,y_1,\dots,y_m]$の基底である。
+\end{framed}
+\begin{myproof}
+  Pending.
+\end{myproof}
+
+先に演習問題を解く。
+\begin{framed}
+  演習16:
+  \xs を$\P^n$の斉次座標、$(y_0,\dots,y_m)$を$\P^m$の斉次座標とする。
+  \begin{enumerate}[label=(\alph*)]
+    \item 「
+    $h\in k[x_0,\dots,x_n,y_0,\dots,y_m]$は
+    \begin{align}
+      h=\sum_{\myabs{\alpha}=k,\myabs{\beta}=l}a_{\alpha \beta}x^\alpha y^\beta
+    \end{align}
+    と書けるとき、双斉次とよばれる。このとき、$h$は双次数$(k,l)$を持つという。
+    $h_1,\doots,h_s$が双斉次のとき、多様体
+    \begin{align}
+      \var(h_1,\dots,h_s) \subset \P^n  \times \P^m
+    \end{align}
+    は矛盾なく定義できることを示せ。
+    また$J\subset k[x_0,\dots,x_n,y_0,\dots,y_m]$が双斉次多項式で生成された
+    イデアルであるとき、$\var(J)\subset \P^n \times \P^m$をどのように定義すればよいかを説明せよ。
+    また、$\var(J)$は多様体であることを証明せよ。」
+    明らか。
+    \item
+    「
+    $J$が双斉次多項式で生成されていれば、$V=\var(J)\subset \P^n \times \P^m$が
+    定義できた。$J$は$(x_0,\dots,x_n)$斉次でもあるから、
+    その射影的消去イデアル$\hat J \subset k[y_0,\dots,y_m]$が構成できる。
+    $\hat J$は斉次イデアルであることを証明せよ。」
+    $(x_0,\dots,x_n)$斉次化を$I^h$とする。命題9より
+    $\hat{J^h}=J_n$となる。また、$J$はすでに$(x_0,\dots,x_n)$斉次なので、
+    $J^h = J$である。よって、$\hat J = J_n$となる。
+    $J$は斉次イデアルになっているので(グレブナ基底を考えれば)
+    $J_n$も斉次イデアルになっている。よって、$\hat J$は斉次イデアルである。
+    \item
+    $\var(J)$を$\P^n\times k^{m+1}$の多様体とみなし、定理6より
+    $\pi(V) = \var(\hat J)$を得る。
+  \end{enumerate}
+\end{framed}
+
+\begin{framed}
+  定理12:
+  $k$を代数的閉体とする。すべて同じ全次数を持ち、$\P^n$において
+  共通零点を持たないような斉次多項式$f_0,\dots,f_m \in k[x_0,\dots,x_n]$
+  によって定義される写像を$F\colon \P^n \to \P^m$とする。
+  $k[x_0,\dots,x_n,y_0,\dots,y_m]$における
+  イデアル$I=\gen{y_0-f_0,\dots,y_m-f_m}$を考え、
+  $I_{n+1} = I\cap k[y_0,\dots,y_m]$とおく。すると$I_{n+1}$は
+  $k[y_0,\dots,y_m]$の斉次イデアルであって、
+  \begin{align}
+    F(\P^n)  = \var(I_{n+1})
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $I_{n+1}$は斉次イデアル？
+    \item $d$: 各$f_i$の全次数(これらは仮定より一致する)を$d$とする。
+    \item 各$x_i$にウェイト1を与え、$y_j$にウェイト$d$を与える。
+    \item $f \in k[x_0,\dots,x_n,y_0,\dots,y_m]$がウェイト付き
+    斉次多項式とは、$f$の単項式がすべて同じウェイトを持つ場合をいう。
+    \item
+    $I$の生成元$y_i-f_i$たちはすべてウェイト$d$を持つ。
+    \item
+    上より、$I$はウェイトつき斉次イデアルである。
+    \item $G$:
+    $G$を$I$のグレブナ基底とする。
+    \item 定理3-2と同様の定理が示せて、上と6より$G$はウェイトつきの
+    斉次多項式からなる。
+    \item
+    lex順序をとると、消去定理により、
+    $G\cap k[y_0,\dots,y_m]$は$I_{n+1} = I\cap k[y_0,\dots,y_m]$の基底になる。
+    \item
+    8,9より、$I_{n+1}$はウェイト付き斉次多項式からなる基底を持つ。
+    \item
+    3より$y_i$たちは同じウェイトを持つ。
+    \item
+    上より、$k[y_0,\dots,y_m]$の多項式について、
+    「これが斉次である$\iff$これがウェイト付き斉次である」となる。
+    \item
+    $h\in k[x_0,\dots,x_n,y_0,\dots,y_m]$はもしそれが
+    \begin{align}
+      h=\sum_{\myabs{\alpha}=k,\myabs{\beta}=l} a_{\alpha \beta} x^\alpha y^\beta
+    \end{align}
+    とかけていれば、双斉次であるという。
+    このとき、$h_1,\dots,h_s$が双斉次なら、$\var(h_1,\dots,h_s) \subset \P^n \times \P^m$が定義され、多様体になる。
+    $J\subset k[x_0,\dots,x_n,y_0,\dots,y_m]$が双斉次多項式で生成されたイデアルなら、多様体$\var(J) \subset \P^n\times \P^n$が定義される。
+    \item
+    $J$が双斉次多項式で生成されたイデアルなら、演習16より、$\hat J \subset k[y_0,\dots,y_m]$は斉次イデアルである。
+    \item
+    $J$が双斉次多項式で生成されたイデアルなら
+    $\pi\colon \P^n\times \P^m \to \P^m$で$\pi(\var(J)) = \var(\hat J)$となる。(演習16より。)
+    \item $J$:
+    $J = \gen{y_if_j - y_j f_i}$とする。
+    \item
+    $\var(J) \subset \P^n\times \P^m$が$F\colon \P^n \to \P^m$のグラフ？
+    \begin{enumerate}
+      \begin{enumerate}
+        \item $(Fのグラフ) \subset \var(J)$？
+        \begin{enumerate}
+          \item $\forall p$: $p\in \P^n$とする。
+          \item $\forall i$:
+          \item $y_i = f_i(p)$である。
+          \item A,Bおわり:$(p,F(p))\in \var(J)$となる。
+        \end{enumerate}
+        \item $\var(J)\subset (Fのグラフ)$？
+        \begin{enumerate}
+          \item $\forall p,q$: $(p,q) \in \var(J)$とする。
+          \item $p_\bullet, q_\bullet$: $p$の第$i$斉次座標を$p_i$とし、$q$についても同様にする。
+          \item
+          16より、任意の$i,j$について$q_if_j(p) = q_jf_i(p)$となる。
+          \item $\exists j$:
+          $q_\bullet$は斉次座標なので、$q_j\neq 0$となる$j$がある。
+          \item $\exists i$:
+          仮定より$f_\bullet$たちがすべて0になるようなことはないので、
+          、$f_i(p)\neq 0$となる$i$がある。
+          \item
+          C,D,Eより、$q_if_j(p) = q_jf_i(p) \neq 0$となる。
+          \item
+          上より、$q_i \neq 0$である。
+          \item $\lambda$: $\lambda = q_i / f_i(p)$とする。
+          \item
+          16より、$q=\lambda f(p)$である。
+          \item Aおわり:
+          上より、$(p,q) \in (Fのグラフ)$となる。
+        \end{enumerate}
+      \end{enumerate}
+      よって、$\var(J) = (Fのグラフ)$となる。
+    \end{enumerate}
+    \item 上とグラフ、射影の性質より、$\pi(\var(J)) = F(\P^n)$である。
+    \item
+    15より、$\var(\hat J) = F(\P^n)$である。
+    \item
+    上より、$F$の像は$\P^m$の多様体である。
+    \item
+    $\var(\hat J) = \var(I_{n+1})$？
+    つまり、$\var_a(\hat J) = \var_a(I_{n+1})$？
+    \begin{enumerate}
+      \item $\var_a (I)\subset k^{n+1}\times k^{n+1}$は
+      $(f_0,\dots,f_m)$で決まる写像$k^{n+1}\to k^{n+1}$のグラフである。
+      \item
+      $\pi\colon k^{n+1} \times k^{m+1}\to k^{m+1}$とする。
+      \item $\pi(\var_a(I)) = \var_a(\hat J)$？
+      \begin{enumerate}
+        \item 15より、$\var(\hat J) = F(\P^m)$である。
+        \item 上より、原点を除いて考えれば
+        \begin{align}
+          q \in \var_a(\hat J) \iff \Exists{p\in k^{n+1}} q = F(p).
+        \end{align}
+        \item  $\exists \lambda$:
+        上より、$q=\lambda F(p)$となる$\lambda \neq 0$がある。
+        \item $\lambda'$: $\lambda' = \sqrt[d]{\lambda}$とする。
+        \item
+        $q=F(\lambda' p)$となる。
+        \item 上より、
+        \begin{align}
+          \Exists{p\in k^{n+1}} q = F(p)\iff q \in \pi(\var_a(I)).
+        \end{align}
+        \item ii,viより、
+        \begin{align}
+          q\in \var_a(\hat J) \iff q \in \pi(\var_a(I)).
+        \end{align}
+      \end{enumerate}
+      よて、$\var_a(\hat J) = \var_a(I_{n+1})$となる。
+      \item
+      閉包定理により、$\var_a(I_{n+1})$は$\pi(\var_a(I))$を含む最小の多様体。
+      \item
+      (c)(d)より、$\var_a(\hat J) = \var_a(I_{n+1})$となる。
+    \end{enumerate}
+    よって、$\var_a(\hat J ) = \var_a(I_{n+1})$であり、
+    $\var(\hat J)= \var(I_{n+1})$となる。
+    \item
+    19と21より、$F(\P^n) = \var(I_{n+1})$である。
+  \end{enumerate}
 \end{myproof}
