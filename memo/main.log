@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  8 JUL 2015 02:15
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  12 JUL 2015 02:46
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.025 seconds
+luaotfload | main : fontloader loaded in 0.028 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -1002,76 +1002,47 @@ m/it/10 ; [] ; F[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; [] ; x[]; \U/bbold/m/n
 /10 c\OT1/cmr/m/n/10 )) =
  []
 
-[20] [21] [22] [23] [24] [25] [26]
-! Undefined control sequence.
-l.2063   $G=\gen{g_1,\dots,g_s}$が$I\subsest
-                                            k[x_1,\dots,x_n,y_1,\dots,y_m]$�...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.2082     $h_1,\doots
-                    ,h_s$が双斉次のとき、多様体󿿿
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[27]
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.2166         \item
-                   $(Fのグラフ) \subset \var(J)$？󿿿
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[28])
+[20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34]
+[35] [36] [37] [38] [39] [40] [41] [42] [43])
 \tf@thm=\write3
- [29] (./main.aux))
+ [44] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11750 strings out of 494694
+ 11753 strings out of 494694
  156257,266212 words of node,token memory allocated
- 5102 words of node memory still in use:
+ 5256 words of node memory still in use:
    10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 831 glue_
 spec, 28 attribute_list, 1 write nodes
-   avail lists: 1:1,2:48858,3:726,4:2230,5:216,6:1624,7:241,9:624,10:34
- 14940 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:49236,3:880,4:2098,5:264,6:1624,7:241,9:624,10:34
+ 14943 multiletter control sequences out of 65536+600000
  79 fonts using 37861419 bytes
- 58i,17n,44p,459b,618s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 58i,20n,44p,459b,659s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><<c:/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
-.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/
-texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><<c:/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (29 pages, 369794 bytes).
+live/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmbx8.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/m
+sbm10.pfb>
+Output written on main.pdf (44 pages, 472136 bytes).
 
-PDF statistics: 229 PDF objects out of 1000 (max. 8388607)
- 165 compressed objects within 2 object streams
+PDF statistics: 285 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

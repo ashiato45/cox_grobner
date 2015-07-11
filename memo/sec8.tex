@@ -2060,7 +2060,7 @@ $k[y_1,\dots,y_m]$のイデアルになっていることはあきらか。
     x^\alpha y^\gamma > x^\beta y^\delta
   \end{align}
   となるようなものとする。
-  $G=\gen{g_1,\dots,g_s}$が$I\subsest k[x_1,\dots,x_n,y_1,\dots,y_m]$の
+  $G=\gen{g_1,\dots,g_s}$が$I\subset k[x_1,\dots,x_n,y_1,\dots,y_m]$の
   $>$に関するグレブナ基底であれば、$G^h = \set{g_1^h,\dots,g_s^h}$は
   $I^h \subset k[x_0,\dots,x_n,y_1,\dots,y_m]$の基底である。
 \end{framed}
@@ -2079,7 +2079,7 @@ $k[y_1,\dots,y_m]$のイデアルになっていることはあきらか。
       h=\sum_{\myabs{\alpha}=k,\myabs{\beta}=l}a_{\alpha \beta}x^\alpha y^\beta
     \end{align}
     と書けるとき、双斉次とよばれる。このとき、$h$は双次数$(k,l)$を持つという。
-    $h_1,\doots,h_s$が双斉次のとき、多様体
+    $h_1,\dots,h_s$が双斉次のとき、多様体
     \begin{align}
       \var(h_1,\dots,h_s) \subset \P^n  \times \P^m
     \end{align}
@@ -2162,6 +2162,7 @@ $k[y_1,\dots,y_m]$のイデアルになっていることはあきらか。
     \item
     $\var(J) \subset \P^n\times \P^m$が$F\colon \P^n \to \P^m$のグラフ？
     \begin{enumerate}
+      \item
       \begin{enumerate}
         \item $(Fのグラフ) \subset \var(J)$？
         \begin{enumerate}
@@ -2238,5 +2239,1189 @@ $k[y_1,\dots,y_m]$のイデアルになっていることはあきらか。
     $\var(\hat J)= \var(I_{n+1})$となる。
     \item
     19と21より、$F(\P^n) = \var(I_{n+1})$である。
+  \end{enumerate}
+\end{myproof}
+
+\subsection{2次超曲面の幾何}
+\label{sub:2次超曲面の幾何}
+$A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
+
+\begin{framed}
+  命題1:
+  $A\in GL(n+1,k)$とし、$V\subset \P^n$を多様体とする。
+  すると$A(V)\subset \P^n$はまた多様体となる。
+  このとき$V$と$A(V)$は射影同値であるという。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\exists s, f_\bullet$: $V=\var(f_1,\dots,f_s)$とする。ただしこれらは斉次多項式。
+    \item $B$: $B=A\inv{}$
+    \item $g_\bullet$: 各$i$について、$g_i = f_i\circ B$とする。
+    \item $b_{\bullet \bullet}$ : $B=(b_{ij})$とする。
+    \item
+    \begin{align}
+      g_i(x_0,\dots,x_n)
+      =
+      f_i(\sum_{j=0}^n b_{0j}x_0,\dots, \sum_{j=0}^n b_{nj}x_n)
+    \end{align}
+    となる。
+    \item
+    上の各$g_i$は斉次
+    \item
+    $f_i$と全次数は一致する。
+    \item
+    $A(\var(f_1,\dots,f_s)) = \var(g_1,\dots,g_s)$となる。(計算する。)
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題2:
+  すべての超平面$H \subset \P^n$は射影同値である。
+\end{framed}
+\begin{myproof}
+  $H$が$\var(x_0)$に射影同値なことを示す。
+  \begin{enumerate}
+    \item $\exists x_\bullet,f$
+    $H$は$f=a_0x_0 + \dots + a_n x_n$で定義されるとする。
+    $a_0\neq 0$と仮定する。
+    \item
+    \begin{align}
+      X_0 &= a_0 x_0 + a_1 x_1 + \dots + a_n x_n,\\
+      X_1 &= x_1,\\
+      &\vdots\\
+      X_n &= x_n.
+    \end{align}
+    と斉次座標をとる。
+    \item
+    $\var(f) = \var(X_0)$である。
+    \item $A$:
+    $\var(f)$と$\var(x_0)$が
+    \begin{align}
+      A=
+      \begin{pmatrix}
+        a_0 & a_1 & \ldots & a_n\\
+        0 & 1 & \ldots & 0\\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \ldots & 1
+      \end{pmatrix}
+    \end{align}
+    によって射影同値。
+    \item
+    上は、1の$a_0\neq 0$より可逆。
+    \item
+    $A(\var(f)) = \var(x_0)$となる。
+    \item
+    上より、射影同値。
+  \end{enumerate}
+  $x_0$でなく$x_i$のときには$\var(x_i) \simeq \var(x_0)$を示せばよい。
+\end{myproof}
+
+\begin{framed}
+  定義3:
+  $f$がゼロではない全次数2の斉次多項式のとき、多様体$V=\var(f) \subset \P^n$
+  を2次超曲面、あるいはもっと簡単に2次曲面とよぶ。
+\end{framed}
+
+\begin{framed}
+  定理4(2次曲面の標準形):
+  $f=\sum_{i,j=0}^n a_{ij}x_i x_j \in k[x_0,\dots,x_n]$を
+  ゼロでない全次数が2の斉次多項式とし、$k$は標数が2でない体とする。
+  すると$\var(f)$は
+  \begin{align}
+    c_0 x_0^2 + \dots + c_n x_n^2 = 0
+  \end{align}
+  で定義された2次曲面に射影同値である。ここで
+  $c_0,\dots,c_n$は$k$の元であって、同時にゼロにはならない。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item
+    座標変換$X_i = \sum_{j=0}^n b_{ij}x_j$であって、$f$がの座標に関して
+    \begin{align}
+      c_0 X_0^2 + \dots +c_n X_n^2
+    \end{align}
+    と現わされるようなものを見つけてくればよい。
+    \item
+    帰納法を使う。1変数のときは自明。$n$変数のとき正しいとする。
+    \begin{enumerate}
+      \item $\forall f$: $f = \sum_{i,j=0}^n a_{ij}x_i x_j$とする。
+      \item $a_{00} \neq 0$としてよい？
+      \begin{enumerate}
+        \item $a_{00}=0$であるが、ある$1\le j \le n$については
+        $a_{jj}\neq 0$であるとき:
+        \begin{enumerate}
+          \item
+          \begin{align}
+            X_0 = x_j,\quad _Xj = x_0,\quad X_i = x_i (i\neq 0,j)
+          \end{align}
+          とする。
+          \item
+          上とiより、座標$X_0,\dots,X_n$に関して$f$の$X_0^2$の係数はゼロでない。
+        \end{enumerate}
+        \item すべての$a_{ii}=0$のとき:
+        \begin{enumerate}
+          \item $\exists i,j$:
+          $f\neq 0$なので(仮定)、ある$i\neq j$について$a_{ij} \neq 0$となる。
+          \item
+          座標の入れ替えを行なうことにより、$a_{01}\neq 0$として一般性を失なわない。
+          \item
+          \begin{align}
+            X = x_0,\quad X_1 = x_1-x_0,\quad X_i = x_i (i\ge 2)
+          \end{align}
+          とする。
+          \item
+          $f = \sum_{i,j=0}^n c_{ij}X_i X_j$とあらわすと、
+          計算すれば$c_{00} = a_{01}\neq 0$となる。
+        \end{enumerate}
+        よって、適当な座標変換で$a_{00} \neq 0$としてよい。
+      \end{enumerate}
+      \item
+      \begin{align}
+        \frac{1}{a_{00}}(a_{00}x_0 + \sum_{i=1}^n \frac{a_{i0}}{2}x_i)^2
+        =
+        a_{00}x_0^2 + \sum_{i=1}^n a_{i0}x_0 x_i
+        +
+        \sum_{i,j=1}^n \frac{a_{i0}a_{j0}}{4a_{00}}x_i x_j
+      \end{align}
+      である。標数は2ではないので、上の2での割り算は正当である。
+      \item
+      座標変換
+      \begin{align}
+        X_0 = x_0 + \frac{1}{a_{00}}\sum_{i=1}^n \frac{a_{i0}}{2}x_i,\quad
+        X_i = x_i (i\ge 1).
+      \end{align}
+      \item
+      上で計算すると、
+      \begin{align}
+        a_{00}X_0^2 + \sum_{i,j=1}^n d_{ij}X_i X_j.
+      \end{align}
+      となる。
+      \item
+      帰納法の仮定より、$\sum_{i,j=1}^n d_{ij}X_i X_j$
+      を$e_1 X_1^2 + \dots + e_n X_n^2$に写せる。
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定義5:
+  $V\subset \P^n$を2次超曲面とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item $V$が
+    \begin{align}
+      c_0 x_0^2 + \dots + c_p x_p^2 = 0,\quad c_0,\dots,c_p \neq 0
+    \end{align}
+    によって定義されているとき、$V$は階数$p+1$を持つという。
+    \item
+    もっと一般に、$V$が任意の2次曲面のとき、$V$が階数$p+1$を持つとは、
+    $V$が上で定義される2次曲面と射影同値であるときにいう。
+  \end{enumerate}
+\end{framed}
+上はwell-definedになる。
+
+\begin{framed}
+  命題6:
+  $Q$を$(n+1)\times (n+1)$対称行列として、$f=\bbold x^t Q \bbold x$とおく。
+  \begin{enumerate}[label=(\roman*)]
+    \item $A\in GL(n+1,k)$が与えられたとする。
+    $B=A\inv{} $とおくと、$g=\bbold x^t \bbold B^t Q B \bbold x$に対して、
+    $A(\var(f)) = \var(g)$が成り立つ。
+    \item
+    2次超曲面$\var(f)$の階数は行列$Q$の階数に一致する。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $g$: $g=f\circ B$
+    \item 計算すると、$A(\var(f)) = \var(g)$となる。
+    \item
+    \begin{align}
+      g(\bbold x) =
+      f(B\bbold x)
+      =
+      (B\bbold x)^t Q (B\bbold x)
+      =
+      \bbold x^t B^t Q B \bbold x.
+    \end{align}
+
+  \end{enumerate}
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $\rank Q = \rank B^t QB$となる。
+    \item $\exists A,c_\bullet$:
+    $g=c_0 x_0^2 + \dots + c_p x_p^2$となる$A,C_\bullet$がある。
+    ここで、$c_0,\dots,c_p \neq 0$である。((i)のなかで、$B$も定まる。)
+    \item
+    \begin{align}
+      B^t Q B =
+      \begin{pmatrix}
+        c_0 & & & & & \\
+        & \ddots & & & &\\
+        & & c_p & & & \\
+        & & & 0 & & \\
+        & & & & \ddots & \\
+        & & & & & 0
+      \end{pmatrix}.
+    \end{align}
+    \item
+    $\rank B^t Q  B = p+1$となる。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題7:
+  $k$が代数的閉体であって、その標数が2でないとする。
+  すると、階数が$p+1$の2次超曲面は、次の式で定義される2次曲面に射影同値である。
+  \begin{align}
+    \sum_{i=0}p x_i^2 = 0.
+  \end{align}
+  特に、2つの2次曲面は、等しい階数を持つとき、かつそのときに限り射影同値である。
+\end{framed}
+\begin{myproof}
+  階数$p+1$の2次超曲面が、それに射影同値であることを示す。
+  \begin{enumerate}
+    \item $c_\bullet,p$: 定理4より、2次曲面は$c_0 x_0^2 + \dots + c_p x_p^2=0$としてよい。$p+1$が階数。どの係数も0でない。
+    \item 任意の$i$について、$k$が代数的閉体ということから、
+    $x^2 - c_i = 0$は$k$に根を持つので、その1つを$\sqrt{c_i}$とする。
+    \item
+    1で各$c_i$は0でないので、上の$\sqrt{c_i} \neq 0$である。
+    \item
+    \begin{align}
+      X_i = \sqrt{c_i}x_i \, (0\le i \le p),\quad
+      X_i = x_i,\, (p < i\le n).
+    \end{align}
+    と変換する。
+    \item
+    上の変換を計算すると射影同値である。
+  \end{enumerate}
+
+  射影同値なら同じ階数を示す。
+  \begin{enumerate}
+    \item $f,g$: $\var(f)$と$\var(g)$が射影同値であるとする。
+    \item $Q, B$
+    命題7より、$f$は$Q$に対応しており、$g$は$B^t Q B$に対応する。
+    $B$は可逆。
+    \item
+    上で$B$は可逆なので、$\rank Q = \rank (B^t Q B)$となる。
+    \item
+    上より、$\var(f)$と$\var(g)$は同じ階数である。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定義8:
+  $\P^n$の2次曲面はその階数が$n+1$であるとき、非特異であるという。
+\end{framed}
+
+\begin{framed}
+  系9:
+  $k$を代数的閉体とする。このとき$\P^n$のすべての非特異2次曲面は射影同値である。
+\end{framed}
+
+\begin{framed}
+  命題10:
+  セグレ写像$\sigma\colon \P^1 \times \P^1 \to \P^3$は1対1であって、
+  その像は非特異2次曲面$\var(z_0z_3-z_1z_2)$と一致する。
+  ただし、$\sigma$は$(x_0,x_1,y_0,y_1)\mapsto (x_0y_0,x_0y_1,x_1y_0,x_1y_1)$である。
+\end{framed}
+\begin{myproof}
+  $\sigma(\P^1\times \P^1) \subset \var(z_0z_3-z_1z_2)$を示す。
+  \begin{enumerate}
+    \item
+    $z_\bullet$: $(z_0,z_1,z_2,z_3)\in \sigma(\P^1\times \P^1)$を$\P^3$の斉次座標とする。
+    \item $\exists x_0,x_1,y_0,y_1$:
+    上より、
+    \begin{align}
+      x_0 y_0 &= z_0,\\
+      x_0 y_1 &= z_1,\\
+      x_1 y_0 &= z_2,\\
+      x_1 y_1 &= z_3.
+    \end{align}
+    となる$x_0,x_1,y_0,y_1\in k$が存在する。
+    \item
+    上より、$z_0z_3-z_1 z_2 = 0$となる。
+  \end{enumerate}
+
+  等号を示す。つまり、$\sigma(\P^1\times \P^1) \supset \var(z_0z_3-z_1z_2)$を示す。
+  \begin{enumerate}
+    \item $\forall w_0,w_1,w_2,w_3$:
+    $(w_0,w_1,w_2,w_3) \in \var(z_0z_3-z_1z_2)$とする。
+    \item 上のどれか1つが0でないので、$w_0\neq 0$とする(他は同様。)
+    \item 上より、
+    $(w_0,w_2,w_0,w_1) \in \P^1\times \P^1$となる。
+    \item
+    $\sigma(w_0,w_2,w_0,w_1) = (w_0^2,w_0w_1,w_0w_2,w_1w_2)$となる。
+    \item
+    1より、$w_0w_3-w_1w_2 = 0$である。
+    \item
+    4,5より、
+    \begin{align}
+      \sigma(w_0,w_2,w_0,w_1)
+      =
+      (w_0^2,w_0w_1,w_0w_2,w_0w_3)
+      =
+      w_0(w_0,w_1,w_2,w_3)
+      =
+      (w_0,w_1,w_2,w_3).
+    \end{align}
+  \end{enumerate}
+
+  よって、$\sigma(\P^1\times \P^1) = \var(z_0z_3-z_1z_2)$を示す。
+\end{myproof}
+
+\begin{framed}
+  $p=(a_0,a_1,a_2,a_3) \in k^4$とし、
+  $q=(b_0,b_1,b_2,b_3) \in k^4$とし、
+  $\Omega = \tatev{a_0 & a_1 & a_2 & a_3 \\ b_0 & b_1 & b_2 & b_3}$とする。
+  \begin{align}
+    w_{ij} &= \det \tatev{a_i & a_j \\ b_i & b_j}
+  \end{align}
+  を$(i,j)=(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)$で考え、
+  \begin{align}
+    w(p,q) = (w_{01},w_{02},w_{03},w_{12},w_{13},w_{23}) \in k^6
+  \end{align}
+  とする。これは、$p-q$を通る$\P^3$の直線にのみ依存する。$\omega(L)$と書く。
+  また、この像は$\var(z_{01}z_{23}-z_{02}z_{13}+z_{03}z_{12})$となる。
+\end{framed}
+
+\begin{framed}
+  定理11:
+  直線$L\subset \P^3$をそのプリュッカー座標
+  $\omega(L) \in \var(z_{01}z_{23}-z_{02}z_{13}+z_{03}z_{12})$に対応させる写像
+  \begin{align}
+    \set{\P^3 の直線全体}
+    \to
+    \var(z_{01}z_{23}-z_{02}z_{13}+z_{03}z_{12})
+  \end{align}
+  は全単射である。(プリュッカー座標はあたりまえだが射影化されている。)
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\forall L$: $L$を$\P^3$の直線とする。
+    \item $\forall p,q$: $p,q$を$L$上の点とする。
+    \item $\exists a_\bullet, b_\bullet$:
+    $p=(a_0,a_1,a_2,a_3)$とし、$q=(b_0,b_1,b_2,b_3)$とする。
+    \item $w_\bullet$を
+    $F\colon \P^1 \to \P^3$で
+    \begin{align}
+      F(u,v) = u\cdot (a_0,\dots,a_3) - v\cdot (b_0,\dots,b_3)
+    \end{align}
+    を用いて、
+    \begin{align}
+      b_0 p - a_0 q &= F(b_0,a_0) = (0,-w_{01},-w_{02},-w_{03}),\\
+      b_1 p - a_1 q &= F(b_1,a_1) = (w_{01},0,-w_{12},-w_{13}),\\
+      b_2 p - a_2 q &= F(b_2,a_2) = (w_{02},w_{12},0,-w_{23}),\\
+      b_3 p - a_3 q &= F(b_3,a_3) = (w_{03},w_{13},w_{23},0).
+    \end{align}
+    とする。
+    \item
+    上は$F$で書けており、演習13より$F$の像は$p,q$を通る直線となるので、
+    上の4つが0でないならば、それらは$p,q$を通る直線すなわち$L$を通る。
+    \item $\omega$が単射であることを示す。
+    \begin{enumerate}
+      \item $\forall L, L'$: $\omega(L)$と$\omega(L')$が射影的に等しいような$L,L' \subset \P^3$を考える。
+      \item $\exists \lambda$:
+      $\omega(L)= \lambda \omega(L')$がある非零な$\lambda$になりたつ。
+      \item $\omega(L),\omega(L')$のプリュッカー座標を
+      $w_{ij},w_{ij}'\quad (0\le i < j \le 3)$とする。
+      (プリュッカー座標の定義を確認！)
+      \item
+      (b)と(c)より、$w_{ij} = \lambda w_{ij}'$が$0\le i < j\le 3$
+      となる。
+      \item
+      $w_{01}\neq 0$とする。(他のプリュッカー座標の成分では、次で4からの選びかたを変えれば同様に通る。)
+      \item
+      $P,Q$: (d)より、
+      \begin{align}
+        P
+        &=
+        (0,-w'_{01},-w'_{02},-w'_{03})
+        =
+        (-0,-\lambda w_{01},-\lambda w_{02}, -\lambda w_{03})
+        =
+        (0,-w_{01},-w_{02},-w_{03}),\\
+        Q
+        &=
+        (w'_{01},0,-w'_{12},-w'_{13})
+        =
+        (\lambda w_{01},0,-\lambda w_{12},-\lambda w_{13})
+        =
+        (w_{01},0,-w_{12},-w_{13}).
+      \end{align}
+      \item (f)より、
+      $P = (0,-w'_{01},-w'_{02},-w'_{03})$と、$L'$のプリュッカー座標の
+      4のような並びで書けているので、5より$P \in L'$となる。
+      \item (f)より、
+      $P = (0,-w_{01},-w_{02},-w_{03})$と、$L$のプリュッカー座標の
+      4のような並びで書けているので、5より$P\in L$となる。
+      \item
+      (g)(h)と同様に$Q$も(f)より、$Q\in L,L'$となる。
+      \item
+      演習問題14より、2点を通る直線は一意に定まる。
+      \item
+      (g),(h),(i),(j)より、$L=L'$である。
+      \item
+      (a)おわり: $\omega$は単射である。
+    \end{enumerate}
+
+    全射であることを示す。
+    \begin{enumerate}
+      \item
+      $\forall w_{\bullet}$:
+      $(w_{01},w_{02},w_{03},w_{12},w_{13},w_{23}) \in
+      \var(z_{01}z_{23}-z_{02}z_{13}+z_{03}z_{12})$とする。
+      \item
+      上はプリュッカー座標なので、どれか1つの成分は0ではなく、
+      したがって4の4つのベクトルから0でないものを2つ選ぶことができる。
+      ここでは仮に$w_{01} \neq 0$とし、上2つの
+      $(0,-w_{01},-w_{02},-w_{03})$と$(w_{01},0,-w_{12},w_{13})$
+      を選んだとする。
+      \item $L$:
+      5より、上の2ベクトルが直線$L$を定める。
+      \item
+      $\omega(L)$の定義と$L$のプリュッカー座標から、$L$のプリュッカー座標が
+      (a)で定めた
+      $(w_{ij})$と一致することが計算できる(演習16)。
+      \item
+      (a)おわり: $\omega$は全射。
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+
+\subsection{ベズーの定理}
+\label{sub:ベズーの定理}
+
+\begin{framed}
+  定義(曲線):
+  $f\in \C[x,y,z]$によって定義された射影多様体
+  $\var(f)$を曲線とよぶ。
+\end{framed}
+
+\begin{framed}
+  演習3:
+  $f=gh$を斉次多項式、
+  $g=g_m + \dots +g_0$を$g_i$が全次数$i$であるような
+  斉次成分への分解で、$g_m \neq 0$とする。
+  $h = h_n + \dots + h_0$も同様とすう。
+  このとき、$f=g_m h_n$であることは命題4で示す。
+  このとき、$g=g_m$かつ$h=h_n$となることを示せ？
+\end{framed}
+\begin{myproof}
+  $m_0$を$g_{m_0}\neq 0$となる最小の$m_0$とする。
+  $n_0$も$h$について同様とする。
+  この定義により、$f=gh$の$gh$の全次数最小の項は$g_{m_0}h_{n_0}$となる。
+  $f$の全次数最小の項は$f=g_m h_n$より、$g_m h_n$となる。
+  よって、$g_{m_0}h_{n_0} = g_m h_n$となり、$m=m_0,\,n=n_0$となる。
+  よって、$g=g_m$かつ$h=h_n$となる。
+\end{myproof}
+
+\begin{framed}
+  演習6:
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    $f\in \C[x_1,\dots,x_n]$を0でない(\warn{非定数もつけないとだめだよね？})多項式とする。
+    このとき、$\var(f)$と$\C^n-\var(f)$はどちらも空集合でない。
+    \item
+    上を用いて、$q\notin C \cup D \cup \bigcup_{i<j} L_{ij}$となる点がある？
+    \item
+    $q\in \P^2(\C)$について、
+    $A\in GL(3,\C)$であって、$A(q) = (0,0,1)$となるものを見つけよ。
+    \item
+    $(0,0,1)$と$(u,v,w)$を結ぶ射影直線が、直線$z=0$と点$(u,v,0)$で交わることを示せ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (a)を示す。(定理の証明としては射影的なほうを使わなければいけないはずなのでなんで解いたのかよくわからない。)
+  $\var(f)= \emptyset \iff \gen{f} = k[x_1,\dots,x_n] \iff f\in \C$となる。
+  よって、$f\notin \C \iff \var(f) \neq \emptyset$となる。
+  次に、$\var(f) = \C^n$とする。すると、$f$は無数の根を持つことになる。
+  $k$は代数的閉体ゆえ無限体で、$f=0$となる。よって、$f\neq 0$ならば
+  $\var(f) \subsetneq \C^n$であり、$\C^n-\var(f) \neq \emptyset$である。
+
+  (b)を示す。
+
+  Pending...
+\end{myproof}
+
+\begin{framed}
+  命題4:
+  $f\in \C[x,y,z]$を0でない斉次多項式(しかも定数でない)とすると、
+  $f$の既約因子はまた斉次である。$f$の因数分解を
+  \begin{align}
+    f= f_1^{a_1}\dots f_s^{a_s}
+  \end{align}
+  とする。ここに$i\neq j$なら、$f_i$と$f_j$は互いに
+  定数倍でない既約因子である。このとき、
+  \begin{align}
+    \var(f) = \var(f_1) \cup \dots \cup \var(f_s)
+  \end{align}
+  は$\var(f)$の$\P^2$における既約成分への無駄のない分解であり、
+  \begin{align}
+    \ideal(\var(f))  = \sqrt{\gen{f}} = \gen{f_1,\dots,f_s}
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $f$が$g,h \in \C[x,y,z]$によって$f=gh$と分解し、
+    $f$が斉次ならば、$g,h$も斉次である？
+    \begin{enumerate}
+      \item $g_\bullet,m$: $g=g_m + \dots + g_0$と書く。$g_m\neq 0$としておく。添字は全次数とする。
+      \item $h_\bullet,n$: $h=h_n + \dots + h_0$と書く。$h_n \neq 0$としておく。添字は全次数とする。
+      \item
+      \begin{align}
+        f = gh
+        =
+        g_m h_n + (全次数がmn未満の項).
+      \end{align}
+      \item
+      上と、仮定の$f$が斉次であることから、$f=g_mh_n$となる。
+      \item
+      $m_0$:
+      0でない$g$の最低全次数の添字とする。
+      \item
+      $n_0$: 0でない$h$の最低全次数の添字とする。
+      \item
+      (e),(f)より、$gh$の最低全次数は$g_{m_0}h_{n_0}$である。
+      \item
+      仮定の$f=gh$と(d)の$f=g_m h_n$で、両辺の最低全次数を比較し、上より
+      $g_m h_n = g_{m_0}h_{n_0}$となる。
+      \item
+      上より、$m=m_0,\, n=n_0$となる。
+      \item
+      上より、$g=g_m,\, h=h_n$となる。
+    \end{enumerate}
+    $f$が$g,h \in \C[x,y,z]$によって$f=gh$と分解し、
+    $f$が斉次ならば、$g,h$も斉次である。
+    \item
+    \begin{align}
+      \var(f) = \var(f_1^{a_1}\dots f_s^{a_s})
+      =
+      \var(f_1^{a_1}) \cup \dots \cup \var(f_s^{a_s})
+      =
+      \var(f_1)\cup \dots \cup \var(f_s).
+    \end{align}
+    \item
+    上は無駄のない分解である。なぜなら、$i\neq j$について$\var(f_i) \subset \var(f_j)$
+    なら$\gen{f_j} \subset \gen{f_i}$となるが、これは$f_i | f_j$となり、これは既約因子への分解に矛盾する。
+    \item
+    $\var(f) \neq \emptyset$である？
+    \begin{enumerate}
+      \item $f$の先頭項係数を正規化しておく。$\gen{f}$は簡約グレブナ基底になっている。
+      \item 射影幾何の零点定理より、
+      $\var(f)= \emptyset$と「$G$を$\gen{f}$のグレブナ基底として、$\LT(g)$が$x$のべきであるような$g\in G$、
+      $y$のべきであるような$g\in G$、$z$のべきであるような$g\in G$
+      がすべて存在する」となる
+      \item (a)(b)より、$\var(f)\neq \emptyset$となる。
+    \end{enumerate}
+    $\var(f) \neq \emptyset$である。
+    \item
+    上と強形の零点定理より、$\ideal(\var(f)) = \sqrt{\gen{f}}$である。
+    \item
+    $\sqrt{\gen{f_1\dots f_s}} = \gen{f_1 \dots f_s}$である。
+    なぜなら、左辺から$[g(f_1\dots f_s)]^N$をとると、
+    $g^N(f_1 \dots f_s)^N \in \gen{f_1\dots f_s}$となるから。
+    \item
+    2と上より、
+    \begin{align}
+      \ideal(\var(f))
+      =
+      \ideal(\var(f_1)\cup \dots \cup \var(f_s))
+      =
+      \ideal(\var(\gen{f_1}\dots \gen{f_s}))
+      =
+      \ideal(\var(\gen{f_1\dots f_s}))
+      =
+      \sqrt{\gen{f_1\dots f_s}}
+      =
+      \gen{f_1\dots f_s}.
+    \end{align}
+    \item 5,7より、
+    \begin{align}
+      \ideal(\var(f)) = \sqrt{f} = \gen{f_1 \dots f_s}.
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  補題5:
+  $f,g \in \C[x,y,z$を斉次多項式で、
+  全次数がそれぞれ$m,n$のものとする。
+  $f(0,0,1)$と$g(0,0,1)$がゼロでなければ、
+  終結式$\Res(f,g,z)$は$x,y$に関して斉次$mn$次である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\exists a_\bullet,b_\bullet$:
+    \begin{align}
+      f&=a_0 z^m + \dots + a_m,\\
+      g&= b_0 z^n + \dots + b_n.
+    \end{align}
+    となる斉次多項式$a_\bullet,\, b_\bullet \in \C[x,y]$がある。
+    ここで、$f,g$は斉次なので、$a_i$は全次数$i$次、
+    $b_j$は全次数$j$次としてある。
+    \item
+    各$a_i$が全次数$i$次斉次であったことから、
+    \begin{align}
+      f(0,0,1)
+      =
+      a_0(0,0)1^m + \dots + a_m(0,0)
+      =
+      a_0.
+    \end{align}
+    となる。$a_0$が全次数0で、定数であることに注意。
+    \item
+    上と仮定$f(0,0,1) \neq 0$より、$a_0 \neq 0$である。
+    \item
+    2-3と同様の議論を$g,b_\bullet$にもして、$g(0,0,1) \neq 0$より、
+    $b_0 \neq 0$である。
+    \item $c_{ij}$: $c_{ij}$を$Syl(f,g,z)$の$ij$要素とする。
+    \item
+    シルベスター行列の定義により、ゼロでない$c_{ij}$は、
+    \begin{align}
+      c_{ij} =
+      \begin{cases}
+        a_{i-j} &; j\le n\\
+        b_{n+i-j} & ; j>n
+      \end{cases}.
+    \end{align}
+    となる。(ちなみにこれは、
+    \begin{align}
+      c_{i,1} =
+      \begin{cases}
+        a_{i-1} & ; 1\le i\le m+1 \\
+        0 & ; ほか
+      \end{cases},\quad
+      c_{i,j} = c_{(i-1),(j-1)} = \dots = c_{i-(j-1),j-1}
+    \end{align}
+    はあきらかなので、これを使うと詳しく調べられる。
+    )
+    \item
+    上より、$c_{ij}$はゼロでなければ、
+    \begin{align}
+      \deg c_{ij} =  \deg
+      \begin{cases}
+        i-j &; j \le n\\
+        n+i-j &; j>n
+      \end{cases}.
+    \end{align}
+    であり、1より斉次多項式である。
+    \item
+    行列式の定義より、
+    \begin{align}
+      \Res(f,g,z) = \sum_{\sigma \in S_{m+n}} \mathrm{sgn}(\sigma) \prod_{i=1}^{m+n}c_{i\sigma(i)}
+    \end{align}
+    である。(この各項の次数を数えたい。)
+    \item $\forall \sigma$: $\sigma \in S_{m+n}$とする。
+    \item
+    \begin{align}
+      \prod_{i=1}^{m+n} c_{i\sigma(i)} =
+      \prod_{\sigma(i)\le n}c_{i\sigma(i)}\prod_{\sigma(i)>n}c_{i\sigma(i)}.
+    \end{align}
+    \item
+    上と7より、この式の全次数は、
+    \begin{align}
+      \deg(\prod_{i=1}^{m+n} c_{i\sigma(i)})
+      &=
+      \sum_{\sigma(i)\le n}(i-\sigma(i)) + \sum_{\sigma(i)>n} (n+i-\sigma(i))\\
+      &=
+      \sum_{i=1}^{m+n}(i-\sigma(i)) + \sum_{\sigma(i)>n}n\\
+      &=
+      \sum_{\sigma(i)>n}n\\
+      &=
+      mn.
+    \end{align}
+    \item
+    9おわり:8の各項の全次数は$mn$である。
+    \item
+    上より、$\Res(f,g,z)$は次数$mn$の斉次多項式である。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定義:
+  曲線$C\subset \P^2$が斉次多項式$f$で$C=\var(f)$と書けているとし、
+  $f$の相異なる既約因子が$f_1,\dots,f_s$であるとき、
+  $f_1\dots f_s$を被約多項式といい、$f_1\dots f_s = 0$を$C$の被約多項式方程式という。
+\end{framed}
+
+\begin{framed}
+  補題6:
+  $h\in \C[x,y]$をゼロでない斉次多項式とする。
+  すると$h$は次の形に因数分解される。
+  \begin{align}
+    h= c(s_1 x - r_1 y)^{m_1} \dots (s_tx -r_t y)^{m_t}.
+  \end{align}
+  ここで$c\neq 0$は複素数であり、
+  $(r_1,s_1),\dots,(r_t,s_t)$は$\P^1$の相異なる点である。さらに
+  \begin{align}
+    \var(h) = \set{(r_1,s_1),\dots,(r_t,s_t)} \subset \P^1
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  非斉次化$h(x,1)\in \C[x]$なので、代数的閉体の性質より
+  \begin{align}
+    h(x,1) = c(x-a_1)^{m_1} \dots (x-a_t)^{m_t}
+  \end{align}
+  となる$a_\bullet\in \C$と$m_\bullet \in \N$と$c \in \C$が存在する。
+  ここで、$a_\bullet$は相異なる。
+  $e$を、$h$が$y^e$で割り切れ、それより高い羃では割り切れないような自然数とする。
+  命題2-7(iv)より、
+  \begin{align}
+    h = y^e h(x,1)^h
+  \end{align}
+  となるので、
+  \begin{align}
+    h = c y^e (x-a_1 y)^{m_1}\dots (x-a_t y)^{m_t}
+  \end{align}
+  となっている。よって、$e>0$ならば
+  \begin{align}
+    \var(h) = \set{(1:0),(a_1:1),\dots,(a_t:1)} \subset \P^1
+  \end{align}
+  であり、$e=0$ならば
+  \begin{align}
+    \var(h) = \set{(a_1:1),\dots,(a_t:1)} \subset \P^1
+  \end{align}
+  である。$a_\bullet$が相異なることより、これらも相異なる。
+\end{myproof}
+
+\begin{framed}
+  定理7:
+  $C$と$D$を$\P^2$の射影曲線であって、共通の既約成分を持たないものとする。
+  $C$と$D$の被約多項式方程式の次数をそれぞれ$m$および$n$とすれば、
+  $C\cap D$は有限集合であって、高々$mn$個の点しか持たない。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\implies$:
+    $C\cap D$が交点を$mn$個より多く持ったとする(背理法)。
+    \item $\exists p_\bullet$:
+    上より、交点が$mn+1$個選べるので、$p_1,\dots,p_{mn+1}$と番号付けられる。
+    \item $L_\bullet$:
+    $1\le i < j \le mn+1$について、$L_{ij}$を$p_i$と$p_j$を通る直線とする。
+    \item $f$: $f$を$C=\var(f)$となる被約多項式とする(命題4より斉次となる。)
+    \item $g$: $g$を$D=\var(g)$となる被約多項式とする(命題4より斉次となる。)。
+    \item $f$は仮定より次数$m$である。
+    \item $g$は仮定より次数$n$である。
+    \item $l_{ij}$:
+    $l_{ij}$を
+    \begin{align}
+      l_{ij} =
+      \begin{vmatrix}
+        \tatev{x \\ y \\ z} & p_{i} & p_j
+      \end{vmatrix} \in \C[x,y,z]
+    \end{align}
+    と定義する。ただし、$p_i,p_j$は何か斉次座標をとったものと考える。
+    \item $l_{ij}$は上の定義より、$p_i, p_j$を通る直線になっており、
+    3より
+    $\var(l_{ij}) = L_{ij}$となっている。
+    \item $\exists q$:
+    $q \notin C \cup D \cup \bigcup_{i<j} L_{ij}$となる$q\in \P^2$が存在する？
+    \begin{enumerate}
+      \item $\P^2 \setminus (C\cup D \cup \bigcup_{i<j}L_{ij}) \neq \emptyset$ であることを示せばよい。
+      これは、アフィン多様体では
+      \begin{align}
+      [\C^3 \setminus (\var_a(f)\cup \var_a(g)\cup \bigcup_{i<j} \var_a(l_{ij})) ]\cap [\C^3\setminus \zeroset] \neq \emptyset
+      \end{align}
+      を示せばよい。
+      \item
+      上の否定を仮定する。(背理法)
+      \begin{align}
+        \var_a(f) \cup \var_a(g) \cup \bigcup_{i<j}\var_a(l_{ij}) \cup \zeroset = \C^3
+      \end{align}
+      となっている。
+      \item
+      $\zeroset \subset \var(x)$なので、
+      上より、
+      \begin{align}
+        \C^3
+        &=
+        \var_a(f) \cup \var_a(g) \cup \bigcup_{i<j}\var_a(l_{ij}) \cup \zeroset \\
+        &\subset
+        \var_a(f) \cup \var_a(g) \cup \bigcup_{i<j}\var_a(l_{ij}) \cup \var_a(x)
+      \end{align}
+      となり、これは$\C^3$である。
+      \item
+      上は、
+      \begin{align}
+        \var_a(fg \prod_{i<j}l_{ij} x) = \C^3
+      \end{align}
+      を意味する。
+      \item
+      上はは$fg \prod_{i<j}l_{ij}x = 0$が$\C^3$全体で成立することを意味するので、
+      $k$が無限体であることから、$fg \prod_{i<j}l_{ij}x$が多項式として0になる。これは矛盾である。
+      \item
+      (b)おわり: (a)の式が示された。
+    \end{enumerate}
+    よって、$q \notin C\cup D \cup \bigcup_{i<j}L_{ij}$となる$q\in \P^2$が存在する。
+    \item $\exists A$:
+    $Aq = \tatev{0 \\ 0 \\ 1}$となる$A$が存在する。
+    なぜなら、$q\neq 0$なので、3次元回転と拡大を組み合わせればよい
+    \footnote{あるいは、$q$と、それと一次独立な$q',q''$をとって$(q,q',q'')$を作り、それを$(1,0,0)^t$にかけると$q$になる。$(q,q',q'')$は可逆なのでOK。}
+    。
+    \item
+    上より、$A$で変換することにより10の$q$を$\tatev{0 \\ 0\\ 1}$として一般性を失なわない。
+    \item
+    4($f$について),10($q$の条件),12($q$のとりなおし)より、
+    $f(0,0,1)\neq 0$となる。
+    \item
+    上と同様に、$g(0,0,1)\neq 0$となる。
+    \item
+    13,14と補題5より、$\Res(f,g,z)$は$x,y$に関する斉次$mn$次の多項式である。
+    \item
+    命題3-6-1の終結式の性質と、$f,g$が$z$について正の次数であることと、仮定の$f,g$が共通の既約成分を持たないことより、
+    $\Res(f,g,z) \neq 0$である。
+    \item
+    命題3-6-1より、$\Res(f,g,z)\in \gen{f,g}$である。
+    \item $u_\bullet,v_\bullet,w_\bullet$:
+    各$p_i$について、$p_i = (u_i,v_i,w_i)$と$u_i,v_i,w_i \in \C$を定める。
+    \item
+    2の定義より、$f,g$が上の各$p_i=(u_i,v_i,w_i)$を消し、さらに
+    17より、各$i$について$\Res(f,g,z)(u_i,v_i)  = 0$である。
+    \item
+    $q=(0,0,1)$と$p_i=(u_i,v_i,w_i)$を結ぶ挑戦は、$z=0$と
+    $(u_i,v_i,0)$で交わる。実際内分の式を考えればよい。
+    \item
+    10より、$(0,0,1)$は$p_i,p_j$をむすぶどの直線$L_{ij}$上にもない。
+    \item
+    上より、$(u_i,v_i,0)$は各$i$についてすべて異なる(射影平面上で異なる直線は1点で交わる。$(0,0,1)$は共有しているのだからもう共有点はない。)。
+    \item
+    上より、$\set{(x,y,0) \in \P^2} \simeq \P^1$の同一視によって、
+    相異なる$(u_i,v_i)$が得られる。
+    \item
+    19と上より、$\Res(f,g,z)$は$mn+1$個の相異なる点$(u_i,v_i)$で消える。
+    \item
+    15,16によれば$\Res(f,g,z)$は$mn$次の0でない多項式だが、これは
+    上に矛盾する。
+  \end{enumerate}
+
+\end{myproof}
+
+\begin{framed}
+  定義8:
+  $C$と$D$は$\P^2$の曲線で、共通の成分がなく、
+  被約方程式$f=0$および$g=0$でそれぞれ定義されているとする。
+  $\P^2$の座標を
+  \begin{align}
+    (0,0,1) \notin C\cup D \cup \bigcup_{p\neq q \in C\cap D}L_{pq}
+  \end{align}
+  をみたすように選ぶ\footnote{先と同じようにまず条件をみたす点をもとの座標でとって、それを$(0,0,1)$に写す可逆変換を考えればよい。}。 $p=(u,v,w) \in C\cap D$に対して、
+  交わりの重複度$I_p(C,D)$を、$\Res(f,g,z)$の因数分解における
+  因子$vx-uy$の指数と定義する。
+\end{framed}
+
+\begin{framed}
+  定理10(ベズーの定理):
+  $C$と$D$を$\P^2$における曲線で、共通の成分を持たないものとし、
+  $m$と$n$をそれぞれの被約定義多項式の次数とする。すると
+  定義8で定義された$p$における交わりの重複度$I_p(C,D)$に対して、
+  \begin{align}
+    \sum_{p\in C\cap D}I_p(C,D) = mn
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item  $f$:
+    $f=0$を$C$の被約方程式とする。
+    \item $g$: $g=0$を$D$の被約方程式とする。
+    \item 適当な座標変換をかけることにより、
+    \begin{align}
+      (0,0,1)\notin
+      C\cup D \cup \bigcup_{p\neq q \in C\cap D} L_{pq}
+    \end{align}
+    であると仮定してよい。
+    \item $u_\bullet,v_\bullet,w_\bullet$: 記号を定める。$p\in C\cap D$について、$u_p,v_p,w_p \in \C$を
+    $p=(u_p,v_p,w_p)$と定める。
+    \item $\exists c$:
+    \begin{align}
+      \Res(f,g,z) =
+      c \prod_{p\in C\cap D} (v_p x - u_p y)^{I_p(C,D)},\quad c\neq 0
+    \end{align}
+    が成立？
+    \begin{enumerate}
+      \item
+      各$p$について、重複度$I_p(C,D)$の定義より、
+      終結式$\Res(f,g,z)$を割り切る$v_p x - u_p y$の最大の羃は
+      $(v_p x - u_p y)^{I_p(C,D)}$である。
+      \item
+      上より、曲線の交点$(u_p,v_p,w_p)$から作った$(u_p,v_p)$はすべて終結式の根になっている。
+      \item
+      終結式のすべての根は曲線の交点から得られる？
+      終結式の根になってるのに曲線の交点になってないやつとかあったりしない？
+      \begin{enumerate}
+        \item $\forall u,v$: $(u,v) \in \P^1$が$\Res(f,g,z)(u,v) = 0$をみたすとする。
+        \item
+        $f$の$z$についての先頭項の係数($k[x,y]$の元になる)は0でない定数である？
+        \begin{enumerate}
+          \item $m$: $f$の全次数を$m$とする。
+          \item $a_\bullet$: $f=a_0 z^m + \dots + a_m$とする。$a_\bullet$は斉次。
+          \item $f$は斉次多項式なので、上の$a_0$は定数である。
+          \item
+          1と3より、
+          \begin{align}
+            a_0 = a_0(0,0)\cdot 1^m + \dots + a_m(0,0) = f(0,0,1)  \neq 0.
+          \end{align}
+        \end{enumerate}
+        よって、$f$の$z$についての先頭項係数は0でない定数である。
+        \item
+        上と同様に、$g$の$z$についての先頭項の係数は0でない定数である。
+        \item $\exists$:
+        iiとiiiを命題3-6-3を適用し、$w\in \C$が存在して、$f,g$が$(u,v,w)$で消える。
+        \footnote{
+        命題3-6-3は、「$f,g\in \C[x_1,\dots,x_n]$に対して、$a_0,b_0 \in \C[x_2,\dots,x_n]$を
+        $f,g$の$x_1$についての先頭項係数とする。もし$\Res(f,g,x_1) \in \C[x_2,\dots,x_n]$が
+        $(c_2,\dots,c_n) \in \C^{n-1}$において消えるとすれば次のいずれかが成立する。
+        (i)$a_0$または$b_0$が$(c_2,\dots,c_n) \in \C^{n-1}$で消える。
+        (ii)$c_1 \in \C$が存在して、$f$と$g$は$(c_1,\dots,c_n) \in \C^n$で消える。」だった。
+        証明は、(i)を否定しておいて終結式を計算する。
+        }
+        \item
+        上より、
+        $(u,v,w)\in C\cap D$となり、$(u,v)$は曲線の交点になっている。
+      \end{enumerate}
+      終結式のすべての根は曲線の交点から得られる。
+      \item $\exists c$: (b),(c)より、$\Res(f,g,z)$を割りきるものは各曲線の交点から
+      作った$(v_px-u_py)^{I_p(C,D)}$だけだと分かったので、ある定数$c\neq 0$が存在して、
+      \begin{align}
+        \Res(f,g,z) = c\prod_{p\in C\cap D} (v_p x - u_p y)^{I_p(C,D)}
+      \end{align}
+      となる。
+    \end{enumerate}
+    \item
+    5の両辺の次数を計算すると、3で$f,g$が$(0,0,1)$で消えないことから補題5より、
+    \begin{align}
+      mn &= \deg(\Res(f,g,z))\\
+      & = \deg(c \prod_{p\in C\cap D}(v_p x - u_p y)^{I_p(C,D)})\\
+      &=
+      \sum_{p\in C\cap D}\deg((v_px-u_py)^{I_p(C,D)})\\
+      &=
+      \sum_{p\in C\cap D} I_p(C,D).
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+いま、「$A$で座標変換」と言ったとき、曲線全体を動かして条件を満たすようにすることを考えている。
+つまり、「$A$が条件
+\begin{align}
+  (0,0,1)\notin C\cup D \cup \bigcup_{p\neq q \in C\cap D}L_{pq}
+\end{align}
+をみたす座標変換」ということは、「
+\begin{align}
+  (0,0,1) \notin A(C\cup D \cup \bigcup_{p\neq q \in C\cap D}L_{pq})
+\end{align}
+」ということである。
+\begin{align}
+  A(C) &=
+  A(\var(f)) \\
+  &=
+  A\set{p; f(p)=0}\\
+  &=
+  \set{Ap; f(p)=0}\\
+  &=
+  \set{q; f(A\inv q)=0}\\
+  &=
+  \set{q; [f\circ (A\inv)](q)=0}\\
+  &=
+  \var(f\circ (A\inv)).
+\end{align}
+となっていることには注意する。
+
+\begin{framed}
+  補題11:
+  定義8において、
+  \begin{align}
+    (0,0,1)\notin C\cup D \cup \bigcup_{p\neq q \in C\cap D}L_{pq}
+  \end{align}
+  をみたすどの座標変換行列を用いても、$p\in C\cap D$に
+  対して同じ交わりの重複度$I_p(C,D)$を定める。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $l_{pq}$: $L_{pq}$の方程式を$l_{pq}$とする。
+    \item $A$が座標変換の条件を満たすとは、
+    \begin{align}
+      A\inv(0,0,1) \notin C\cup D \cup \bigcup_{p\neq q \in C\cup D} L_{pq}
+    \end{align}
+    となることである。
+    \item
+    \begin{align}
+      h=f\cdot g\cdot \prod_{p\neq q \in C\cap D}l_{pq}
+    \end{align}
+    とする。
+    \item
+    1,2,3より、$A$が座標変換の条件を満たすとは、
+    \begin{align}
+      A\inv(0,0,1) \notin \var(h)
+    \end{align}
+    である。
+    \item
+    1,2,3より、$A$が座標変換の条件を満たすとは、
+    \begin{align}
+      h(A\inv(0,0,1))\neq 0
+    \end{align}
+    である。
+    \item $H$:
+    $H\colon M_{3\times 3}(\C) \to \C$を
+    \begin{align}
+      H(B) = \det(B) \cdot h(B(0,0,1))
+    \end{align}
+    とする。
+    \item
+    行列が可逆になることと、その行列が0でないことは同値なので、
+    6の記号を用いると、
+    \begin{align}
+      H(B) \neq 0
+      &\iff
+      \det(B)\neq 0 \quad かつ \quad h(B(0,0,1))\neq 0 \\
+      &\iff
+      Bは可逆 \quad かつ \quad h(B(0,0,q)) \neq 0.
+    \end{align}
+    \item
+    上より、$M_{3\times 3}(\C)-\var(H)$と条件を満たす座標変換とは
+    逆行列を取る操作で一対一である。
+    \item $p_\bullet$:
+    $C\cap D = \set{p_1,\dots,p_s}$とする。
+    \item $u_{\bullet},v_\bullet,w_\bullet$:
+    $B\in M_{3\times 3}(\C) - \var(H)$に対して、
+    $B\inv(p_i) = (u_{i,B},v_{i,B},w_{i,B})$とする。
+    \item $\forall B$: $B\in M_{3\times 3}(\C)- \var(H)$とする。
+    \item $A$: $A=B\inv$とする。
+    \item $\exists c_B, m_\bullet$:
+    定理10の議論のように、$B(C),B(D)$について終結式を
+    書く。このとき、
+    \begin{align}
+    A(C) = \var(f\circ B),\, A(D) = \var(g\circ B),\,
+    A(p_i) = (u_{i,B},v_{i,B},w_{i,B})
+    \end{align}
+    に注意すると、
+    \begin{align}
+      \Res(f\circ B,g\circ B,z)
+      =
+      c_B\prod_{i=1}^s (v_{i,B}x-u_{i,B}y)^{m_{i,B}}.
+    \end{align}
+    となる。10より$B(u_{i,B},v_{i,B},w_{i,B}) = p_i$
+    となっているので、$(u_{i,B},v_{i,B},w_{i,B})$は
+    曲線$A(C) \cap A(D)$の点たちになっていることに注意する。
+    \item
+    $m_{i,B}$がすべての$B\in M_{3\times 3}(\C)-\var(H)$
+    に対して同じ値をとる？
+    \begin{enumerate}
+      \item 斉次多項式$G(x,y)$と$H(x,y)$と$(u,v)\neq (0,0)$に対して
+      \begin{align}
+        G(x,y) = (vx-uy)^M H(x,y),\quad M\in \Zge
+      \end{align}
+      のとき、
+      \begin{align}
+        \frac{\pd^{i+j}G}{\pd x^i \pd y^j}(u,v)
+        =
+        \begin{cases}
+          0 &; 0\le i+ j < M\\
+          M! v^i (-u)^j H(u,v) &; i+j = M
+        \end{cases}
+      \end{align}
+      となる。計算する。
+      $G$にライプニッツルールを適用して微分していくうち、
+      $(vx-uy)$がかかった項は$(u,v)$を代入して消えてしまう。
+      $i+j < M$のときは$(vx-uy)$が残って消えて0になる。
+      $i+j=M$のときには、$vx-uy$のほうを微分しきった項だけ残り、
+      その項は$M! v^{i} (-u)^j H(x,y)$となる。
+
+      特に、$H(u,v) \neq 0$なら$(u,v)\neq (0,0)$なので、
+      $G$のある$M$階の偏微分係数が$(u,v)$では消えない。
+      ($u=0$になってしまったら$i=0$にして0乗を考え、$1$にしてしまう。)
+
+      \item
+      $M_{3\times 3}(\C)$の間の距離を、
+      $B=(b_{ij}),\, C=(c_{ij}) \in M_{3\times 3}(\C)$について
+      \begin{align}
+        d(B,C)
+        =
+        \sqrt{\sum_{i,j=1}^3 \myabs{b_{ij}-c_{ij}}^2}
+      \end{align}
+      と定義する。
+      \item
+      上の定義から明らかに、$F\colon M_{3\times 3}(\C) \to \C$
+      が、行列の9要素でできた多項式写像ならば、これは(b)で定義した距離のもとで
+      連続である。
+      \item
+      上より、多項式写像$F\colon M_{3\times 3}(\C) \to \C$と
+      $F(B_0) \neq 0$なる
+      $B_0 \in M_{3\times 3}(\C)$について、
+      $B \in M_{3\times 3}(\C)$を$B_0$に十分(上の距離で)近付けることで
+      $F(B) \neq 0$とできる。
+      \item
+      さらに、有理関数についても、定義されていれば同様のことが言える。
+      \item $\forall B_0,i$: $B_0 \in M_{3\times 3}(\C) - \var(H)$とする。7より、$B_0 \in GL(3,\C)$である。
+      \item $M$: $M=m_{i,B_0}$
+      \item $B \in M_{3\times 3}(\C)$が$B_0$に十分近いなら$m_{i,B} =  M$である。
+      \begin{enumerate}
+        \item $\exists M階の偏微分$: (a)より、$\Res(f\circ B_0, g\circ B_0,z)$の
+        $M$階の偏微分には$(u_{i,B_0},v_{i,B_0})$で消えていないものがある。
+        ($\Res(f\circ B_0, g\circ B_0,z)$は$(v_{i,B_0}x-u_{i,B_0}y)^{M}\cdot (ほか)$であるから、これに適用する。)
+        \item
+        13で
+        \begin{align}
+          (u_{i,B},v_{i,B},w_{i,B}) &=
+          B\inv \cdot p_i,\\
+          \Res(f\circ B, g\circ B,z)
+          &=
+          c_B \prod_{i=1}^s (v_{i,B}x-u_{i,B}y)^{m_{i,B}}.
+        \end{align}
+        \item
+        上より、$\Res(f\circ B, g\circ B, z)$の$M$階の偏微分に
+        $(u_{i,B},v_{i,B})$を代入したものは($p_i$の要素は定数とみなして)、
+        $B$の9要素の有理関数となる。分母は$B$の行列式しか出ず、
+        11より$B\in GL(3,\C)$なので$M_{3\times 3}(\C) - \var(H)$
+        全体で定義されている。
+        \item
+        上と(e)の有理関数の連続性、それにiより、
+        $B$が$B_0$に十分近ければ$\Res(f\circ B,g\circ B,z)$
+        のiで取った$M$階の偏微分は$(u_{i,B},v_{i,B})$でゼロでない。
+        \item
+        仮に$m_{i,B} > M$であるとする(背理法)。
+        \item
+        14より、$m_{i,B}$階未満の$\Res(f\circ B, g\circ B, z)$の偏微分は
+        $(u_{i,B},v_{i,B})$で消える。
+        \item
+        vと上より$M$階の$\Res(f\circ B, g\circ B, z)$の偏微分は
+        $(u_{i,B},v_{i,B})$で消えるが、これはivに矛盾する。
+        \item
+        vおわり: 上より、$m_{i,B}\le M = m_{i,B_0}$である。
+        \item
+        定理10のベズーの定理は座標を固定したまま証明できるので、
+        ある座標にだけ定義された「仮の」重複度のまま利用できる。そこで、
+        viiiの和を$i$にわたって取り、
+        \begin{align}
+          mn = \sum_{i=1}^s m_{i,B} \le \sum_{i=1}^s m_{i,B_0} = mn.
+        \end{align}
+        \item
+        上より、各$i$について$m_{i,B} = m_{i,B_0}$である。
+      \end{enumerate}
+      よって、$B$が$B_0$に十分近ければ各$i$について$m_{i,B} = m_{i,B_0}$である。
+    \end{enumerate}
+    \item
+    上より、$B\mapsto m_{i,B}$は局所定数である。
+    \item
+    $M_{3\times 3}(\C)-\var(H)$は弧状連結？
+    \begin{enumerate}
+      \item $f\in \C[x]$が0でないなら、$\C-\var(f)$は弧状連結である。これは、
+      $\var(f)$が有限集合であることから明か。
+      \item $f\in \C[x_1,\dots,x_n]$が0でないなら、
+      $\C^n - \var(f)$は弧状連結である。
+      $a,b\in \C^n$とし、それを結ぶ複素直線$t\mapsto ta + (1-t)b$を考える。
+      $t\mapsto f(ta+(1-t)b)$の像は$\C^n - \var(f)$の部分集合である。
+      $t\mapsto ta+(1-t)b$は$\C$内の1変数の多様体とみなせるので、
+      (a)より$\C^n - \var(f)$の$a$と$b$を結ぶpathが得られる。
+      \item 上を、$\C^9$でのことと考えて$M_{3\times 3}(\C) - \var(H)$
+      に適用すればOK。
+    \end{enumerate}
+    \item
+    15と16より、$B\mapsto m_{i,B}$は
+    弧状連結な集合上の局所定数関数なので、
+    定数関数である。
   \end{enumerate}
 \end{myproof}
