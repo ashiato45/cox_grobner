@@ -294,6 +294,7 @@ INPUT ./main.aux
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold7.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
