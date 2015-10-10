@@ -1,0 +1,1511 @@
+\label{sec:有限群の不変式論}
+
+\subsection{対称多項式}
+\label{sub:対称多項式}
+
+
+\begin{framed}
+  定理3(対称式の基本定理):
+  $k[x_1,\dots,x_n]$の任意の対称多項式は、
+  基本対称式$\sigma_1,\dots,\sigma_n$の多項式として一意に表すことができる。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $x_1>x_2>\dots>x_n$という順序を使う。
+    \item $\forall f$: $f\in k[x_1,\dots,x_n]$を$f\neq 0$とする。
+    \item
+    $a,\alpha$: $\LT(f) = ax^\alpha$
+    \item
+    $\alpha_\bullet$: $\alpha = (\alpha_1,\dots,\alpha_n)$
+    \item $\alpha_1\ge \alpha_2 \ge \dots \ge \alpha_n$?
+    \begin{enumerate}
+      \item
+      $\exists i$: $\alpha_i < \alpha_{i+1}$と仮定する。
+      \item
+      $\beta$: $\beta = (\dots,\alpha_{i+1},\alpha_i,\dots)$
+      \item
+      3より、$ax^\alpha$は$f$の項。
+      \item
+      $f$は対称式なので、$ax^\beta$も$f$の項。
+      \item
+      $\beta > \alpha$なので、上は3のLTであることに矛盾。
+      \item
+      $\alpha_1\ge \alpha_2 \ge \dots \ge \alpha_n$
+    \end{enumerate}
+    \item $h$: $h = \sigma_1^{\alpha_1-\alpha_2}\sigma_2^{\alpha_2-\alpha_3}\dots \sigma_{n-1}^{\alpha_{n-1}-\alpha_n}\sigma_n^{\alpha_n}$
+    とする。
+    \item
+    5より、
+    \begin{align}
+      \LT(h)
+      &=
+      \LT(\sigma_1^{\alpha_1-\alpha_2}\sigma_2^{\alpha_2-\alpha_3}\dots \sigma_{n-1}^{\alpha_{n-1}-\alpha_n}\sigma_n^{\alpha_n})\\
+      &=
+      \LT(\sigma_1)^{\alpha_1-\alpha_2}\LT(\sigma_2)^{\alpha_2-\alpha_3} \dots \LT(\sigma_n)^{\alpha_n}\\
+      &=
+      x_1^{\alpha_1-\alpha_2} (x_1x_2)^{\alpha_2-\alpha_3}\dots (x_1 \dots x_n)^{\alpha_n}\\
+      &=
+      x_1^{\alpha_1}\dots x^{\alpha_n}.
+    \end{align}
+    \item
+    上より、$\LT(f) = \LT(ah)$となる。
+    \item
+    $f-ah\neq 0$のときは、$f_1 = f-ah$とする。
+    \item $\exists t$:
+    5-9までの操作を繰替えすと、
+    \begin{align}
+      \multideg(f) > \multideg(f_1) > \multideg(f_2) > \dots
+    \end{align}
+    をみたす列が得られる。これは停止するので、
+    $f_{t+1} = 0$となる$t$がある。
+    \item
+    $f=ah + a_1 h_1 + \dots + a_t h_t$となる。存在は示された。
+    \item $g_1,g_2$:
+    $f=g_1(\sigma_1,\dots,\sigma_n) = g_2(\sigma_1,\dots,\sigma_n)$とする。
+    $g_1,g_2 \in k[y_1,\dots,y_n]$とする。$g_1=g_2$を示したい。
+    \item
+    $g$: $g=g_1-g_2$
+    \item
+    $g(\sigma_1,\dots,\sigma_n) = 0$
+    \item
+    $g=0$を示したい。$g\neq 0$と仮定する(背理法)。
+    \item
+    $a_\bullet$: $g=\sum_\beta a_\beta y^\beta$とする。
+    \item
+    $g_\bullet$: $g_\beta = a_\beta \sigma_1^{\beta_1} \dots \sigma_n^{\beta_n}$とする。
+    $g_\beta \in k[x_1,\dots,x_n]$になっている。
+    \item
+    $g(\sigma_1,\dots,\sigma_n)$は$g_\beta$たちの和である。
+    $g(\sigma_1,\dots,\sigma_n) = \sum_\beta a_\beta g_\beta$である。
+    \item
+    計算すると、
+    \begin{align}
+      \LT(g_\beta) = a_\beta x_1^{\beta_1+\dots+\beta_n} x_2^{\beta_2+\dots+\beta_n} \dots x_n^{\beta_n}
+    \end{align}
+    \item
+    \begin{align}
+      (\beta_1,\dots,\beta_n) \mapsto (\beta_1+\dots+\beta_n, \beta_2+\dots+\beta_n,\dots,\beta_n)
+    \end{align}
+    は単射である(尻尾から決めればいい。)。
+    \item
+    上と19より、$g_\beta$たちはそれぞれ異なる先頭項を持つ。
+    \item
+    $\LT(g_\beta)$が最高になるものを選べるが、上よりそのようなものは1つしかない。それを$\beta$にする。
+    \item
+    $\gamma\neq \beta$なら、$\LT(g_\beta)$は$g_\gamma$のすべての項よりおおきい。
+    \begin{align}
+      \LT(g_\beta) > \LT(g_\gamma) \ge (\forall g_\gamma の項)
+    \end{align}
+    \item
+    $g(\sigma_1,\dots,\sigma_n)$は$k[x_1,\dots,_n]$で零でない
+    \footnote{$g$が$k[y_1,\dots,y_n]$のなかで零であることを示したかった。そのこととは違う。}
+    。これは14に矛盾。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題4: 環$k[x_1,\dots,x_n,y_1,\dots,y_n]$において、
+  $x_1,\dots,x_n$のうち1つでも含む単項式は、$k[y_1,\dots,y_n]$
+  のすべての単項式より大きくなるような単項式順序を1つ固定する。
+  $G$をイデアル
+  \begin{align}
+    \gen{\sigma_1-y_1,\dots,\sigma_n-y_n}\subset k[x_1,\dots,x_n,y_1,\dots,y_n]
+  \end{align}
+  のグレブナ基底とする。このとき、次のことが成り立つ。
+  \begin{enumerate}[label=(\roman*)]
+    \item $f$が対称であることと、$g\in k[y_1,\dots,y_n]$は同値である。
+    \item $f$が対称ならば、$f=g(\sigma_1,\dots,\sigma_n)$は、
+    $f$の基本対称式$\sigma_1,\dots,\sigma_n$の多項式としての一意的な表示である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $g_\bullet$:
+    $G=\set{g_1,\dots,g_t}$とする。
+    \item
+    $f,A_\bullet,g$:
+    $f$を$G$で割る。
+    \begin{align}
+      f = A_1 g_1 + \dots + A_t g_t + g.
+    \end{align}
+    \item
+    $\Leftarrow$を示す。$g\in k[y_1,\dots,y_n]$とする。
+    \begin{enumerate}
+      \item 仮定の$f\in k[x_1,\dots,x_n]$、$y_\bullet$がないことより、$f(x_1,\dots,x_n,\sigma_1,\dots,\sigma_n) = f$である。
+      \item
+      $y_\bullet \Leftarrow \sigma_\bullet$という代入操作を行うと、
+      $\gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$の元はすべて0になる。
+      \item 上のことより$y_\bullet \Leftarrow \sigma_\bullet$によって
+      $g_1,\dots,g_t \in \gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$は0になる。
+      \item
+      2に$y_\bullet \Leftarrow \sigma_\bullet$すると、(a)-(c)より、
+      \begin{align}
+        f=g(\sigma_1,\dots,\sigma_n)
+      \end{align}
+      である。
+      \item $f$は対称である。
+    \end{enumerate}
+    \item $\Rightarrow$を示す。$f\in k[x_1,\dots,x_n]$が対称であるとする。
+    \begin{enumerate}
+      \item $g'$\footnote{本だと字がぶつかっていてやばい。}:
+      $f=g'(\sigma_1,\dots,\sigma_n)$となるような$g'\in k[y_1,\dots,y_n]$が存在する。
+      \item ($f$を$G$でわったあまりが$g'$?)
+      \item
+      $\alpha_1,\dots,\alpha_n \in \Zge$とすると、
+      $B_1,\dots,B_n \in k[x_1,\dots,x_n,y_1,\dots,y_n]$を用いて、
+      \begin{align}
+        \sigma_1^{\alpha_1}\dots \sigma_n^{\alpha_n}
+        &=
+        (y_1+(\sigma_1-y_1))^{\alpha_1} \dots (y_n + (\sigma_n-y_n))^{\alpha_n}\\
+        &=
+        y_1^{\alpha_1}\dots y_n^{\alpha_n} + B_1\cdot (\sigma_1-y_1)  + \dots + B_n\cdot (\sigma_n-y_n).
+      \end{align}
+      とかける。
+      \item
+      上より、$g'$の$y_\bullet$たちでできた単項式について上を適用し足し合わせて、
+      \begin{align}
+        g'(\sigma_1,\dots,\sigma_n) = g'(y_1,\dots,y_n) + C_1\cdot (\sigma_1-y_1) + \dots + C_n\cdot (\sigma_n-y_n).
+      \end{align}
+      となる$C_1,\dots,C_n \in k[x_1,\dots,x_n,y_1,\dots,y_n]$である。
+      \item
+      (a)と上より、
+      \begin{align}
+        f = C_1 \cdot (\sigma_1-y_1) + \dots + C_n\cdot (\sigma_n-y_n) + g'(y_1,\dots,y_n).
+      \end{align}
+      \item
+      ($g'$は$f$を$G$でわった余り？)
+      \item
+      $g'$のどの項も、$\LT(G)$の項でも割りきれない？
+      \begin{enumerate}
+        \item $g'$のある項が$\LT(G)$のある項で割り切れるとする。
+        \item $\exists i$: $\LT(g_i)$が$g'$を割り切るような$g_i \in G$がある。
+        \item $g'\in k[y_1,\dots,y_n]$より、$\LT(g_i)$は$y_1,\dots,y_n$だけを含む。
+        \item 上と、順序付の仮定\footnote{$x_\bullet$を含んだら$y_\bullet$だけの単項式より大きい}より
+        $g_i \in k[y_1,\dots,y_n]$となる。
+        \item
+        $g_i \in \gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$なので、
+        $g_i(\sigma_1,\dots,\sigma_n) = 0$となる。
+        \item
+        上より、$g_i$は$k[x_1,\dots,x_n]$として対称多項式である。
+        \item
+        上と定理3、それにvより、$g_i \in k[y_1,\dots,y_n]$は$k[y_1,\dots,y_n]$の元として0である。
+        \item
+        上は、$g_i$がグレブナ基底の一個であり、非零であることに矛盾する。
+
+      \end{enumerate}
+      $g'$のどの項も、$\LT(G)$のどの項を使っても割り切ることはできない。
+      \item
+      (e),(g)と、$G$がグレブナ基底であることより、$f$を$G$で割ったあまりは$g'$である。
+      \item
+        上より、$g=g' \in k[y_1,\dots,y_n]$となり、$g\in k[y_1,\dots,y_n]$である。
+
+    \end{enumerate}
+  \end{enumerate}
+  後半の(ii)は、$f=g(\sigma_1,\dots,\sigma_n)$となっていることは上
+  の考察から従う。それが一意であることは定理3から従う。
+\end{myproof}
+
+\begin{framed}
+  命題5: $k[x_1,\dots,x_n,y_1,\dots,y_n]$上の
+  $x_1>\dots>x_n>y_1>\dots y_n$で決まるlex順序を固定する。
+  このとき、$k=1,\dots,n$に対して、多項式
+  \begin{align}
+    g_k = h_k(x_k,\dots,x_n) + \sum_{i=1}^k (-1)^i h_{k-i}(x_k,\dots,x_n)y_i
+  \end{align}
+  は、イデアル$\gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$のグレブナ基底をなす。
+\end{framed}
+\begin{myproof}
+  演習問題10をとく。$h_k$は、次数$k$の単項式すべての和である。
+  $x^\alpha$は$k$次の単項式であり、$x^\alpha$にあらわれる変数の個数を$a$とする。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+
+      「$x^\alpha$が$h_{k-i}\sigma_i$のなかに現れるならば、
+      $i\le a$を示せ。」
+
+
+    $x^\alpha$も$h_{k-i}\sigma_i$のすべての項も次数$k$なので次数の心配はいらない。
+    仮に$i>a$とする。$\sigma_i$にはちょうど$i$個の変数があらわれるので、
+    $h_{k-i}\sigma_i$のすべての項には$i$個以上の変数があらわれ、
+    つまり$a$よりも真に大きい個数の変数があらわれる。このとき、
+    $x^\alpha$の変数の個数は$a$なのだから、$h_{k-i}\sigma_i$の項たちにあらわれることができない。
+    対偶が示された。
+    \item
+    \begin{framed}
+      $i\le a$ならば、$\sigma_i$のなかのちょうど$\tatev{a\\i}$個の項が、
+      $x^\alpha$にあらわれる変数だけを含んでいる。
+    \end{framed}
+    あきらか。
+    \item
+    \begin{framed}
+      $i\le a$ならば、$x^\alpha$は係数$\tatev{a\\i}$を持つ
+      $h_{k-i}\sigma_i$の項であることを示せ。
+    \end{framed}
+    $\sigma_i$のなかから$x^\alpha$に含まれている変数だけを持っているものを選び、
+    それに対して適当な$h_{k-i}$の項を選んでかければ(これは$h_{k-i}$の定義より可能である。)多重次数は$\alpha$に一致する。
+    また、$x^\alpha$に含まれていない変数を選んでものそのようなことはできない。よって、
+    $x^\alpha$の$h_{k-i}\sigma_i$での係数は、$\sigma_i$での$x^\alpha$
+    に含まれる係数だけを持つもの全体の個数と一致する。よって、それは上の問題より$\tatev{a\\i}$である。
+    \item
+    \begin{framed}
+      $\sum_{i=0}^k (-1)^i h_{k-i}\sigma_i$\footnote{たぶん誤植}における$x^\alpha$の係数は$\sum_{i=0}^\alpha (-1)^i \tatev{a \\ i}$
+      であることを結論せよ。それから2項定理を使って$x^\alpha$の係数が0であることを示せ。
+    \end{framed}
+    係数は上よりあきらか。係数も、これは$(1-1)^a$なので簡単。
+    \item
+    以上で、
+    \begin{align}
+      0=\sum_{i=0}^k (-1)^i h_{k-i}h_i(x_1,\dots,x_n) \sigma_i(x_1,\dots,x_n).
+    \end{align}
+  \end{enumerate}
+  次に、問題11をとく。$S\subset \set{1,\dots,k-1}$のとき、$x^S$
+  で変数の積をあらわす。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    「
+      \begin{align}
+        \sigma_i(x_1,\dots,x_n) =
+        \sum_{S\subset \set{1,\dots,k-1}} x^S \sigma_{i-\myabs{S}} (x_k,\dots,x_n)
+      \end{align}
+      ここで、$j<0$のとき$\sigma_j = 0$。
+      」
+    左と右の項を考えれば。
+    \item
+    \begin{framed}
+      \begin{align}
+        \sum_{i=0}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_i(x_1,\dots,x_n)
+        =
+        \sum_{S\subset \set{1,\dots,k-1}}x^S (\sum_{i=\myabs{S}}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_{i-\myabs{S}} (x_k,\dots,x_n)).
+      \end{align}
+    \end{framed}
+    (a)の式に$(-1)^i h_{k-i}$をかけて$\sum_{i=0}^k$をとる。$\sigma_{負の数}=0$に注意して、
+    \begin{align}
+      \sum_{i=0}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_i(x_1,\dots,x_n)
+      &=
+      \sum_{S\subset \set{1,\dots,k-1}}x^S (\sum_{i=0}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_{i-\myabs{S}} (x_k,\dots,x_n))\\
+      &=
+      \sum_{S\subset \set{1,\dots,k-1}}x^S (\sum_{i=\myabs{S}}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_{i-\myabs{S}} (x_k,\dots,x_n)).
+    \end{align}
+    \item
+    \begin{framed}
+      \begin{align}
+        \sum_{i=\myabs{S}}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_{i-\myabs{S}} (x_k,\dots,x_n)
+        =
+        0
+      \end{align}
+    \end{framed}
+    \begin{align}
+      \sum_{i=\myabs{S}}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_{i-\myabs{S}} (x_k,\dots,x_n)
+      &=
+      \sum_{j=0}^{k-\myabs{S}} (-1)^{j+\myabs{S}} h_{k-j-\myabs{S}}(x_k,\dots,x_n)\sigma_{j} (x_k,\dots,x_n)\\
+      &=
+      (-1)^{\myabs{S}}\sum_{j=0}^{k-\myabs{S}} (-1)^{j} h_{(k-\myabs{S})-j}(x_k,\dots,x_n)\sigma_{j} (x_k,\dots,x_n)\\
+      &\desceq{問題10}
+      0.
+    \end{align}
+  \end{enumerate}
+  次に演習12をとく。
+  \begin{align}
+    g_k = h_k(x_k,\dots,x_n) + \sum_{i=1}^k (-1)^i h_{k-i}(x_k,\dots,x_n)y_i
+  \end{align}
+  としてある。
+  \begin{align}
+    g_k = (-1)^k (y_k-\sigma_k) +
+    \sum_{i=1}^{k-1}(-1)^i h_{k-i}(x_k,\dots,x_n)(y_i-\sigma_i)
+  \end{align}
+  は既知。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    「
+      \begin{align}
+        \gen{\sigma_1-y_1,\dots,\sigma_n-y_n} \subset \gen{g_1,\dots,g_n}
+      \end{align}
+      」
+    $\sigma_1 - y_1= g_1$なので、$\sigma_1 - y_1 \in (右)$となる。
+    $(-1)^2\sigma_2 -y_2 = g_2 - g_1 \in (右)$となる。
+    以降おなじ。
+    \item
+    $\LT(g_k) = x_k^k$であること。定義の式からあきらか$y_i$を含まないほうしか見るものがない。
+    \item
+    $g_1,\dots,g_k$がグレブナ基底？
+    (b)より、$i\neq j$のとき、$\LT(g_i)$と$\LT(g_j)$
+    は互いに素になっている。よって、命題9-4より、
+    $S(g_i,g_j) \toG 0$になる。よって、命題9-3より、
+    $\set{g_1,\dots,g_n}$はグレブナ基底になっている。
+  \end{enumerate}
+  証明する。
+  \begin{enumerate}
+    \item 演習10と11より、
+    \begin{align}
+      0=h_k(x_k,\dots,x_n) + \sum_{i=1}^k (-1)^i h_{k-i}(x_k,\dots,x_n)\sigma_i.
+    \end{align}
+    \item
+    $g_1,\dots,g_n$は$\gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$の基底？
+    \begin{enumerate}
+      \item
+      $g_k$の定義
+      \begin{align}
+        g_k = h_k(x_k,\dots,x_n) + \sum_{i=1}^k (-1)^i h_{k-i}(x_k,\dots,x_n)y_i
+      \end{align}
+      から1の式を引いて、
+      \begin{align}
+        g_k = \sum_{i=1}^k (-1)^i h_{k-i}(x_k,\dots,x_n)(y_i-\sigma_i).
+      \end{align}
+      \item
+      よって、$\gen{g_1,\dots,g_n}\subset \gen{\sigma_1-y_1,\dots,\sigma_n-y_n}$
+      \item
+      (a)から、
+      \begin{align}
+        g_k = (-1)^k (y_k-\sigma_k) +
+        \sum_{i=1}^{k-1} (-1)^i h_{k-i}(x_k,\dots,x_n)(y_i-\sigma_i).
+      \end{align}
+      \item
+      上と演習12より、$\gen{\sigma_1-y_1,\dots,\sigma_n-y_n} \subset \gen{g_1,\dots,g_n}$。
+      \item
+      (b)(d)より、$\gen{\sigma_1-y_1,\dots,\sigma_n-y_n} = \gen{g_1,\dots,g_n}$となる。
+    \end{enumerate}
+    \item
+    演習問題12で$\LT(g_k)=x_k^k$を示して、
+    さらにグレブナ基底であることを示す。おわり。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題7:多項式$f\in k[x_1,\dots,x_n]$が対称であることと、
+  $f$のすべての斉次成分が対称であることは同値である。
+\end{framed}
+\begin{myproof}
+  $\Rightarrow$を示せばよい。$f$が対称であるとする。
+  \begin{enumerate}
+    \item
+    $\forall i_1,\dots,i_n$:
+    $x_{i_1},\dots,x_{i_n}$を$x_1,\dots,x_n$の置換とする。
+    \item
+    置換しても、次数はかわらない。
+    \item
+    $f(x_{i_1},\dots,x_{i_n}) = f(x_1,\dots,x_n)$
+    \item
+    上2つより、全次数が$k$の斉次も対称。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理8:
+  $k$が有理数体$\Q$を含む体ならば、$k[x_1,\dots,x_n]$の任意の対称多項式は
+  ベキ和$s_1,\dots,s_n$の多項式として表せる。
+\end{framed}
+\begin{myproof}
+  演習14をやる。ニュートン恒等式は
+  \begin{align}
+    s_k - \sigma_1 s_{k-1} + \dots + (-1)^{k-1}\sigma_{k-1}s_1 + (-1)^k k\sigma_k &= 0 \quad (1\le k \le n),\\
+    s_k - \sigma_1 s_{k-1} + \dots + (-1)^{n-1}\sigma_{n-1}s_{k-n+1}+(-1)^n \sigma_n s_{k-n}  &= 0 \quad  (k>n)
+  \end{align}
+  である。
+  \begin{enumerate}
+    \item
+    「$\sigma_0 = 1$と$i<0,i>n$のときに$\sigma_i=0$としておく。このとき、
+    \begin{align}
+      \Forall{k\ge 1} s_k-\sigma_1 s_{k-1} + \dots + (-1)^{k-1} \sigma_{k-1}s_1 + (-1)^k k\sigma_k = 0
+    \end{align}
+    と同値？」
+    $k\le n$と$k>n$とで分ける。
+    \item
+    「上の恒等式を変数の数$n$に関する帰納法で示せ。ただし、
+    $n$変数の$\sigma_i$を$\sigma_i^n$、$s_k$を$s_k^n$とする。」
+    $n=1$のとき:
+    $1\le k \le n$のとき、すなわち$k=1$のときを考える。
+    \begin{align}
+      \ub{s_k^1 - \sigma_1^1 s_{k-1}^1  \dots + (-1)^{k-1}\sigma_{k-1}^1 s_1^1}_{kコ} + (-1)^k k \sigma_k^1
+      =
+      s_1^1 + (-1)^1\cdot 1 \cdot \sigma_1^1
+      =
+      x_1 - x_1 = 0.
+    \end{align}
+    $k>n$のとき、すなわち$k>1$のときを考える。このときは、
+    $\sigma_0,\sigma_1$だけが非零になる。
+    \begin{align}
+      \ub{s_k^1 - \sigma_1^1 s_{k-1}^1  \dots + (-1)^{k-1}\sigma_{k-1}^1 s_1^1}_{kコ} + (-1)^k k \sigma_k^1
+      &=
+      s_1^1 + \sigma_1^1 s_0^1 + (-1)^1 \cdot 1\cdot \sigma_1\\
+      &=
+      x_1 + x_1\cdot 0 - x_1\\
+      & = 0.
+    \end{align}
+
+    $n-1$変数でうまく行っているとする。???
+
+
+  \end{enumerate}
+\end{myproof}
+
+
+\subsection{有限行列群と不変式環}
+\label{sub:有限行列群と不変式環}
+$\Q \subset k$とする。
+
+\begin{framed}
+  定義1: 体$k$の元を成分に持つ可逆な$n\times n$行列全体の集合を
+  $GL(n,k)$であらわす。
+\end{framed}
+
+\begin{framed}
+  定義2:
+  有限部分集合$G\subset GL(n,k)$が有限行列群であるとは、
+  空でなく、行列のかけ算で閉じていることをいう。
+  $G$の元の個数を、$G$の位数とよび、$\myabs{G}$であらわす。
+\end{framed}
+
+\begin{framed}
+  $G\subset GL(n,k)$を有限行列群とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item $I_n \in G$。
+    \item $A\in G$ならば、ある正の整数$m$があって、$A^m = I_n$となる。
+    \item $A\in G$ならば、$A\inv \in G$である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{itemize}
+    \item (ii):
+    \begin{enumerate}
+      \item $A\in G$とする。
+      \item $G$が積で閉じているので、$\set{A,A^2,A^3,\dots}\subset G$である。
+      \item $i,j$:
+      $G$は有限なので、$A^i = A^j$となる$i,j\in \N$がある。$i > j$とする。
+      \item
+      $m= i-j$とする。
+      \item  3より、
+      $A^m = A^{i-j} = A^i A^{-j} = E$となる。$m$が条件をみたしたことになる。
+    \end{enumerate}
+    \item (iii):
+    \begin{enumerate}
+      \item $I_n = A^{m-1}\cdot A$となる。$m$は上のもの。
+      \item $G$は積で閉じているので、$A^{m-1} \in G$となる。
+      \item $A^{-1} = A^{m-1} \in G$となる。
+    \end{enumerate}
+    \item (i):
+    $I_n = A^m \in G$となる。
+  \end{itemize}
+\end{myproof}
+
+\begin{framed}
+  定義7:
+  $G\subset GL(n,k)$を有限行列群とする。
+  多項式$f(\bbold x) \in k[x_1,\dots,x_n]$が、
+  すべての$A\in G$に対して、$f(\bbold x) = f(A\cdot \bbold x)$
+  をみたすとき、$G$で不変であるという。$G$で不変な多項式全体
+  の集合を$k[x_1,\dots,x_n]^G$であらわす。
+\end{framed}
+
+\begin{framed}
+  例8:
+  \begin{align}
+    k[x_1,\dots,x_n]^{S_n} =
+    \set{k[x_1,\dots,x_n]内のすべての対称多項式}
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題9:
+  $G\subset GL(n,k)$を有限行列群をする。このとき、
+  集合$k[x_1,\dots,x_n]^G$は和と積で閉じており、
+  すべての定数多項式を含む。
+\end{framed}
+\begin{myproof}
+  演習10。
+  \begin{itemize}
+    \item 和:$f(\bbold x),g(\bbold x)\in k[x_1,\dots,x_n]^G$とする。
+    \begin{align}
+      (f+g)(A\bbold x)
+      =
+      f(A\bbold x) + g(A\bbold x)
+      =
+      f(\bbold x) + g(\bbold x)
+      =
+      (f+g)(\bbold x).
+    \end{align}
+    \item 積:$f,g$は同様。
+    \begin{align}
+      (fg)(A\bbold x)
+      =
+      f(A\bbold x)g(A\bbold x)
+      =
+      f(\bbold x)g(\bbold x)
+      =
+      (fg)(\bbold x).
+    \end{align}
+    \item
+    定数を含む:$c\in k$とする。
+    \begin{align}
+      c(A\bbold x) = c = c(\bbold x).
+    \end{align}
+    $c\in k[x_1,\dots,x_n]^G$である。
+  \end{itemize}
+\end{myproof}
+
+\begin{framed}
+  命題10:
+  $G\subset GL(n,k)$を有限行列群とする。このとき、
+  多項式$f\in k[x_1,\dots,x_n]$が$G$で不変であることと、
+  その斉次成分がすべて$G$で不変であることとは同値である。
+\end{framed}
+\begin{myproof}
+  $\bbold x\mapsto A\bbold x$は次数を変えないので、
+  $A$によって単項式はその次数を変えない。
+  よって、$f(\bbold x)$の次数$N$のものは
+  $f(A\bbold x)$の次数$N$のものに移ることになる。
+
+  $F\colon \set{f(\bbold x)の項} \to \set{f(A\bbold x)の項}$
+  $f$が不変なので、$F$は可逆写像になっている。   $N \in \Zge$とする。
+  $F\seigen{\set{次数Nの項}}\colon \set{f(\bbold x)のN次の項} \to \set{f(A\bbold x)の項}$
+  だが、先の考察より$\bbold x\mapsto A\bbold x$は次数を変えないので、
+  $F\seigen{\set{次数Nの項}}\colon \set{f(\bbold x)のN次の項} \to \set{f(A\bbold x)のN次の項}$
+  になっている。$F$が単射だったので、$F\seigen{\set{次数Nの項}}$も単射になっている。
+  よって、$\#\set{f(\bbold x)のN次の項} \le \#\set{f(A\bbold x)のN次の項}$となる。
+  さらに、$F$が有限集合同士の可逆写像なので、
+  \begin{align}
+    \# \set{f(\bbold x)の項}
+    =
+    \# \set{f(A\bbold x)の項}
+    =
+    \sum_N \#\set{f(A\bbold x)のN次の項}
+    \ge
+    \sum_N \#\set{f(\bbold x)のN次の項}
+    =
+    \# \set{f(\bbold x)の項}
+  \end{align}
+  なので、各$N$について、$\#\set{f(\bbold x)のN次の項} = \#\set{f(A\bbold x)のN次の項}$
+  となり、$F\seigen{\set{次数Nの項}}$は同型になる。これは、
+  斉次成分が$G$で不変であることを意味する。
+\end{myproof}
+
+\begin{framed}
+  補題11:
+  $G\in GL(n,k)$を有限行列群とし、
+  $A_1,\dots,A_m \in G$が存在して、任意の
+  $A\in G$を次の形で表すことができる。
+  \begin{align}
+    A = B_1 B_2 \dots B_t.
+  \end{align}
+  ここで、各$i$に対して$B_i \in \set{A_1,\dots,A_m}$である。
+  (このとき$A_1,\dots,A_m$は群$G$を生成するという。)このとき、
+  $f\in k[x_1,\dots,x_n]$が$k[x_1,\dots,x_n]^G$の元であることと、
+  \begin{align}
+    f(\bbold x) = f(A_1 \bbold x) = \dots = f(A_m \bbold x)
+  \end{align}
+  が成り立つことは同値である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $f$が行列$B_1,\dots,B_t$すべての作用で不変であるとする。
+    このとき積$B_1\dots B_t$でも$f$は不変？
+    \begin{enumerate}
+      \item
+      $t=1$のときはあきらか。$t-1$のとき成立すると仮定する。$t$で示す。
+      \item
+      \begin{align}
+        f((B_1\dots B_t)\bbold x)
+        &=
+        f((B_1\dots B_{t-1})\cdot B_t \cdot \bbold x)\\
+        &=
+        f(B_t \cdot \bbold x) \quad (帰納法の仮定)\\
+        &=
+        f(\bbold x).
+      \end{align}
+    \end{enumerate}
+    \item
+    $\Leftarrow$を示す。$f$は$A_1,\dots,A_m$で不変であるとする。
+    \begin{enumerate}
+      \item
+      $\forall A$: $A\in G$とする。
+      \item
+      $\exists t,B_\bullet$: 仮定より、$A=B_1 \dots B_t$となる$B_\bullet \in \set{A_1,\dots,A_m}$が存在する。
+      \item
+      1より、$f$は$A$で不変である。
+    \end{enumerate}
+    \item
+    $\Rightarrow$はあきらか。
+  \end{enumerate}
+\end{myproof}
+
+
+\subsection{不変式環の生成元}
+\label{sub:不変式環の生成元}
+\begin{framed}
+  定義1:
+  $f_1,\dots,f_m \in k[x_1,\dots,x_n]$に対して、$f_1,\dots,f_m$の
+  $k$係数の多項式全体で表される元全体からなる$k[x_1,\dots,x_n]$の部分集合を
+  $k[f_1,\dots,f_m]$で表す。
+
+  $\gen{f_1,\dots,f_m}$とは違う。
+\end{framed}
+
+\begin{framed}
+  定義2:
+  有限行列群$G\subset GL(n,k)$に対し、次のように定義される写像
+  $R_G\colon k[x_1,\dots,x_n]\to k[x_1,\dots,x_n]$
+  を$G$のレイノルズ作用素という。すなわち、$f(\bbold x) \in k[x_1,\dots,x_n]$に対し、
+  \begin{align}
+    R_G(f)(\bbold x) = \frac{1}{\myabs{G}}\sum_{A\in G} f(A \bbold x).
+  \end{align}
+
+\end{framed}
+
+\begin{framed}
+  命題3:
+  有限行列群$G$のレイノルズ作用素$R_G$に対し、次が成り立つ。
+  \begin{enumerate}[label=(\roman*)]
+    \item $R_G$は$k$線型写像である。
+    \item $f\in k[x_1,\dots,x_n]$ならば$R_G(f)\in k[x_1,\dots,x_n]^G$。
+    \item $f\in k[x_1,\dots,x_n]^G$ならば$R_G(f) = f$。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{align}
+    R_G(af+bg)(\bbold x)
+    &=
+    \frac{1}{\myabs{G}}\sum_{A\in G}(af+bg)(A\bbold x)\\
+    &=
+    \frac{a}{\myabs{G}}\sum_{A\in G}(f)(A\bbold x)
+    +
+    \frac{b}{\myabs{G}}\sum_{A\in G}(g)(A\bbold x)
+    \\
+    &=
+    a R_G(f)(\bbold x) + b R_G(g)(\bbold x)\\
+    &=
+    (aR_G(f) + bR_G(f))(\bbold x).
+  \end{align}
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item
+    $\forall B$: $B\in G$
+    \item
+    \begin{align}
+      R_G(f)(B\bbold x)
+      &=
+      \frac{1}{\myabs{G}}\sum_{A\in G}f(A\cdot B\bbold x)\\
+      &=
+      \frac{1}{\myabs{G}}\sum_{A\in G}(AB\cdot \bbold x).
+    \end{align}
+    \item
+    $\exists A_\bullet$: $G=\set{A_1,\dots,A_{\myabs{G}}}$とする。重複のないようにしておく。
+    \item
+    $i\neq j$のとき、$A_i B \neq A_j B$になる。
+    \item
+    上より、$\set{A_1 B,\dots,A_{\myabs{G}}B}$はそれぞれ異なる$\myabs{G}$個の元である。
+    \item
+    また、$\set{A_1 B,\dots,A_{\myabs{G}}B}$は1の$B\in G$より、$\subset G$である。
+    \item
+    3,5,6より、
+    \begin{align}
+      G=\set{A_1,\dots,A_{\myabs{G}}}
+      =
+      \set{A_1 B,\dots,A_{\myabs{G}} B}
+      =
+      \set{AB; A\in G}.
+    \end{align}
+    \item
+    \begin{align}
+      \frac{1}{\myabs{G}}\sum_{A\in G}f(AB\cdot \bbold x)
+      \desceq{7}
+      \frac{1}{\myabs{G}}\sum_{A\in G}f(A\cdot \bbold x)
+      =
+      R_G(f)(\bbold x).
+    \end{align}
+    \item
+    1おわり:
+    \begin{align}
+      \Forall{B\in G} R_G(f)(B\cdot \bbold x) = R_G(f)(\bbold x).
+    \end{align}
+    \item
+    上より、$R_G(f) \in k[x_1,\dots,x_n]^G$となる。
+  \end{enumerate}
+
+  (iii)を示す。
+  $f\in k[x_1,\dots,x_n]^G$とする。$f$は不変式なので、
+  \begin{align}
+    R_G(f)(\bbold x)
+    =
+    \frac{1}{\myabs{G}}\sum_{A\in G}f(A\bbold x)
+    =
+    \frac{1}{\myabs{G}}\sum_{A\in G}f(\bbold x)
+    =
+    f(\bbold x).
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  定理5:
+  有限行列群$G\subset GL(n,k)$に対し、
+  \begin{align}
+    k[x_1,\dots,x_n]^G  = k[R_G(x^\beta); \myabs{\beta}\le \myabs{G}]
+  \end{align}
+  が成り立つ。
+  特に、$k[x_1,\dots,x_n]^G$は有限個の斉次不変式で生成される。
+\end{framed}
+\begin{myproof}
+  $\subset$を示す。
+  \begin{enumerate}
+    \item $\forall f$: $f=\sum_{\alpha} c_\alpha x^\alpha \in k[x_1,\dots,x_n]^G$とする。
+    \item
+    命題3より、
+    \begin{align}
+      f=R_G(f)
+      =
+      R_G(\sum_{\alpha}c_\alpha x^\alpha)
+      =
+      \sum_{\alpha}c_\alpha R_G(x^\alpha).
+    \end{align}
+    \item
+    1おわり:
+     すべての不変式は$R_G(x^\alpha)$の$k$上の線形結合である。
+    \item
+    すべての$\alpha$について、$R_G(x^\alpha)$が$\myabs{\beta} \le \myabs{G}$
+    をみたす$R_G(x^\beta)$に関する多項式？
+     \begin{enumerate}
+       \item $\forall k$:
+       $k\in \Zge$とする。
+       \item
+       $a_\bullet$:
+       \begin{align}
+         (x_1+\dots+x_n)^k = \sum_{\myabs{\alpha}=k}a_\alpha x^\alpha
+       \end{align}
+       \item
+       $a_\alpha$が正整数であることを示す。
+       演習4。$\alpha=(\alpha_1,\dots,\alpha_n)\in \Zge^n$とし、
+       $\myabs{\alpha} = k$とする。
+       \begin{align}
+         \tatev{k\\ \alpha} = \frac{k!}{\alpha_1! \dots \alpha_n!}.
+       \end{align}
+       \begin{enumerate}
+         \item
+         「$\tatev{k\\ \alpha}$は正整数？」2項係数が整数になることは既知とする\footnote{パスカルの三角形の漸化式で多分行ける。}。
+         $n=2$のときは成立している。$n$のとき成立していると仮定する。
+         \begin{align}
+           \tatev{k \\ (\alpha_1,\dots,\alpha_{n+1})}
+           &=
+           \frac{k!}{\alpha_1 \dots \alpha_{n+1}}\\
+           &=
+           \frac{(\alpha_1+\dots+\alpha_n)!}{\alpha_1!\dots\alpha_n!} \cdot \frac{k\cdot \dots \cdot (k-(\alpha_1+\dots+\alpha_n)+1)}{\alpha_{n+1}!}\\
+           &=
+           \tatev{\alpha_1+\dots+\alpha_n \\ (\alpha_1,\dots,\alpha_n)} \cdot \frac{(\alpha_{n+1}+(\alpha_n+\dots+\alpha_1))\cdot \dots \cdot (\alpha_{n+1}+1)}{\alpha_{n+1}!}\\
+           &=
+           \tatev{\alpha_1+\dots+\alpha_n \\ (\alpha_1,\dots,\alpha_n)} \cdot \frac{(\alpha_{n+1}+(\alpha_n+\dots+\alpha_1))!}{\alpha_{n+1}! (\alpha_n + \dots + \alpha_1)!}\\
+           &=
+           \tatev{\alpha_1+\dots+\alpha_n \\ (\alpha_1,\dots,\alpha_n)} \cdot \tatev{\alpha_{n+1} + \dots + \alpha_1 \\ (\alpha_n+\dots+\alpha_1, \alpha_{n+1})}.
+         \end{align}
+         \item
+         「
+         \begin{align}
+           (x_1+\dots+x_n)^k = \sum_{\myabs{\alpha}=k}\tatev{k\\\alpha}x^\alpha.
+         \end{align}」あきらか。
+       \end{enumerate}
+       \item
+       記号を整備する。
+       \begin{align}
+         (A\bbold x)^\alpha
+         =
+         (A_1\bbold x)^{\alpha_1} \cdot (A_n \bbold x)^{\alpha_n}
+       \end{align}
+       と$\square^{\alpha}\colon k^n \to k$を定める。
+       \item
+       \begin{align}
+         R_G(x^\alpha)
+         =
+         \frac{1}{\myabs{G}}\sum_{A\in G}(A\bbold x)^\alpha .
+       \end{align}
+       \item $u_1,\dots,u_n$:
+       不定元$u_1,\dots,u_n$を用意して、(b)に$x_1 \Leftarrow u_i A_i \bbold x$を代入すると、
+       \begin{align}
+         (u_1 A_1 \bbold x + \dots + u_n A_n \bbold x)^k = \sum_{\myabs{\alpha}=k}a_\alpha (A\bbold x)^\alpha u^\alpha.
+       \end{align}
+       \item $b_\bullet$:
+       上で$A\in G$にわたる和をとり$S_k$とする。
+       \begin{align}
+         S_k
+         &=
+         \sum_{A\in G}(u_1 A_1 \bbold x + \dots + u_n A_n \bbold x)^k\\
+         &=
+         \sum_{\myabs{\alpha}=k} a_\alpha (\sum_{A\in G}(A\bbold x)^\alpha)u^\alpha\\
+         &=
+         \sum_{\myabs{\alpha}=k}\ub{b_\alpha}_{\exists} R_G(x^\alpha)u^\alpha.
+       \end{align}
+       ここで、$b_\alpha = \myabs{G}a_\alpha$とした。
+       \item
+       $U_\bullet$: $A\in G$をインデックスとして、
+       \begin{align}
+         U_A = u_1 A_1 \bbold x + \dots + u_n A_n \bbold x
+       \end{align}
+       とする。
+       \item $S_k(\square)$:
+       $S_k = S_k(U_A: A\in G) = \sum_{A\in G} U_A^k$。
+       $S_k$は$U_1,\dots,U_A$の「$k$乗のベキ和」になっている。
+       \item
+       上と定理1-7-8\footnote{対称式はベキ和で表せる}より、
+       $\set{U_A; A\in G}$の対称式は$S_1,\dots,S_{\myabs{G}}$の
+       の多項式である。
+       \item $\exists F$:
+       $S_k$は$\set{U_A; A\in G}$の対称式なので、
+       上より
+       \begin{align}
+         S_k = F(S_1,\dots,S_{\myabs{G}})
+       \end{align}
+       となる$k$係数$n$変数多項式$F$が存在する。
+       \warn{なお、これは$k>\myabs{G}$でもよい！！1}
+       \item
+       上(k)に(g)を代入$S_k \Leftarrow \sum_{\myabs{\alpha}=k} b_\alpha R_G(x^\alpha)u^\alpha$する。
+        \begin{align}
+          \sum_{\myabs{\alpha}=k} b_\alpha R_G(x^\alpha)u^\alpha
+          =
+          F(\sum_{\myabs{\beta}=1}b_\beta R_G(x^\beta)u^\beta, \dots, \sum_{\myabs{\beta}=\myabs{G}}b_\beta R_G(x^\beta)u^\beta)
+        \end{align}
+      \item $\forall \alpha$: $\myabs{\alpha} = k$とする。
+      \item
+      (l)の両辺の多重次数$\alpha$の項を取り出して係数比較すると、
+      \begin{align}
+        b_\alpha R_G(x^\alpha) =
+        (\myabs{\beta}\le \myabs{G}となる \beta についての R_G(x^\beta) の多項式).
+      \end{align}
+      \item
+      (g)で$b_\alpha = \myabs{G}a_\alpha$と、4の$a_\alpha > 0$と体$k$の標数が0であることより、
+      $b_\alpha \neq 0$である。
+      \item (n)(o)より、
+      \begin{align}
+        R_G(x^\alpha) =
+        (\myabs{\beta}\le \myabs{G}となる \beta についての R_G(x^\beta) の多項式).
+      \end{align}
+
+
+     \end{enumerate}
+     よって、すべての$\alpha$について、$R_G(x^\alpha)$が$\myabs{\beta} \le \myabs{G}$
+     をみたす$R_G(x^\beta)$に関する多項式。
+  \end{enumerate}
+\end{myproof}
+
+よって、全次数が$\myabs{G}$以下である全ての単項式についてレイノルズ作用素を計算すれば
+$G$の不変式環の生成元全体を求めることができる。
+
+\begin{framed}
+  多項式$f_1,\dots,f_m \in k[x_1,\dots,x_n]$が与えらえれたとする。
+  ここで、$k[x_1,\dots,x_n,y_1,\dots,y_m]$の単項式順序を、
+  変数$x_1,\dots,x_n$のうち1つでも含む多項式は$k[y_1,\dots,y_m]$
+  のすべての単項式より大きくなるように定める。
+  イデアル$\gen{f_1-y_1,\dots,f_m-y_m} \subset k[x_1,\dots,x_n,y_1,\dots,y_m]$
+  のグレブナ基底を$G$とする。与えられた$f\in k[x_1,\dots,x_n]$に対し、
+  $g=\ovd{f}{G}$を$f$の$G$による割り算の余りとする。このとき次が成り立つ。
+  \begin{enumerate}[label=(\roman*)]
+    \item $f\in k[f_1,\dots,f_m]$と$g\in k[y_1,\dots,y_m]$は同値。
+    \item $f\in k[f_1,\dots,f_m]$ならば、$f=g(f_1,\dots,f_m)$となり、
+    これは$f$の$f_1,\dots,f_m$の多項式としての表示を与える。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $G$: $G=\set{g_1,\dots,g_t}$とし、重複、0はないものとする。
+    \item
+    $A_\bullet$:
+    $f$を$G$で割って、
+    \begin{align}
+      f = A_1 g_1 + \dots + A_t g_t + g.
+    \end{align}
+    $A_1,\dots,A_t \in k[x_1,\dots,x_n,y_1,\dots,y_m]$を得る。
+    \item
+    $\Leftarrow$を示す。$g\in k[y_1,\dots,y_m]$とする。
+    \begin{enumerate}
+      \item
+      2に$y_\bullet \Leftarrow f_\bullet$を代入する。
+      $g_\bullet \in \gen{f_1-y_1,\dots,f_m-y_m}$なので、
+      $g_\bullet(x_1,\dots,x_n,f_1,\dots,f_m) = 0$となり、
+      $f\in k[x_1,\dots,x_n]$なのんで代入するとそのまま$f$である。
+      \begin{align}
+        f = \tilde g(f_1,\dots,f_m).
+      \end{align}
+      \item
+      上より、$f\in k[f_1,\dots,f_m]$となる。
+    \end{enumerate}
+    \item
+    $\Rightarrow$を示す。$f\in k[f_1,\dots,f_m]$とする。
+    \begin{enumerate}
+      \item $\exists \tilde g$: $\tilde g\in k[y_1,\dots,y_m]$があって、$f=\tilde g(f_1,\dots,f_m)$とかける。
+      \item
+      \begin{align}
+        f = C_1\cdot (f_1-y_1) + \dots + C_m\cdot (f_m-y_m) + \tilde g(y_1,\dots,y_m).
+      \end{align}
+      \begin{enumerate}
+        \item
+        $k[f_1,\dots,f_m]$の$\alpha$次の単項式は、
+        \begin{align}
+          f_1^{\alpha_1} \dots f_m^{\alpha_m}
+          &=
+          (y_1 + (f_1 - y_1))^{\alpha_1}\dots (y_m + (f_m - y_m))^{\alpha_m}\\
+          &=
+          y_1^{\alpha_1}\dots y_m^{\alpha_m} + B_1\cdot (f_1-y_1) + \dots + B_m\cdot (f_m-y_m).
+        \end{align}
+        と、$B_1,\dots,B_m \in k[x_1,\dots,x_n,y_1,\dots,y_m]$を使ってかける。
+        \item
+        上を係数をかけて足せば、
+        \begin{align}
+          \tilde g(f_1,\dots,f_m)
+          =
+          C_1 \cdot (f_1-y_1)  + \dots + C_m \cdot (f_m-y_m) + \tilde g(y_1,\dots,y_m)
+        \end{align}
+        と、$C_1,\dots,C_m \in k[x_1,\dots,x_n,y_1,\dots,y_m]$を使ってかける。
+        \item
+          (a)と上より、
+          \begin{align}
+            f
+            =
+            C_1 \cdot (f_1-y_1)  + \dots + C_m \cdot (f_m-y_m) + \tilde g(y_1,\dots,y_m).
+          \end{align}
+      \end{enumerate}
+      \item
+      $G'$: $G'= G\cap k[y_1,\dots,y_m]$とする。さらに、$G'=\set{g_1,\dots,g_s}$としてよい。
+      \item
+      $B_1,\dots,B_s,g'$:
+      $\tilde g$を$G'$で割る。
+      \begin{align}
+        \tilde g= B_1 g_1 + \dots + B_s g_s + g'
+      \end{align}
+      となる$B_1,\dots,B_s , g' \in k[y_1,\dots,y_m]$が得られる。
+      \item $C_1',\dots,C_m'$:
+      (b),(d),$g_\bullet \in \gen{f_1-y_1,\dots,f_m-y_m}$より、
+      \begin{align}
+        f = C_1' \cdot (f_1-y_1) + \dots + C_m'\cdot (f_m-y_m) + g'(y_1,\dots,y_m)
+      \end{align}
+      となる$C_1',\dots,C_m' \in k[x_1,\dots,x_n,y_1,\dots,y_m]$が得られる。
+      \item
+      $g'$は$f$の割り算の余り？つまり、$g'$のどの項も$\LT(G)$の元で割り切れない？
+      \begin{enumerate}
+        \item $g'$のある項が$\LT(G)$のある元で割り切れると仮定する(背理法)。
+        \item $\exists i$: $\LT(g_i)$は$g'$のある項を割り切る、となるような$g_i \in G$が存在する。
+        \item
+        $g' \in k[y_1,\dots,y_m]$なので、$\LT(g_i)$は$y_1,\dots,y_m$のみを含む。
+        \item
+        上と、順序付より$g_i \in k[y_1,\dots,y_m]$となる。
+        \item
+        上と、$g_i \in G$より、$g_i \in G'$となる。($G'$は4-(c))。
+        \item
+        $g'$は$G'$による割り算の余りなので(d)、
+        $\LT(g_i)$は$g'$のどの項も割り切らない。
+        \item
+        上は、iに矛盾する。
+      \end{enumerate}
+      よって、$g'$は$f$の割り算の余り。$g=g'\in k[y_1,\dots,y_m]$となる。
+    \end{enumerate}
+  \end{enumerate}
+
+  (ii)を示す。$f\in k[f_1,\dots,f_m]$なら、上の証明の後半の
+  (4-e)と(4-f)より、
+  \begin{align}
+    f = C_1' \cdot (f_1-y_1) + \dots + C_m'\cdot (f_m-y_m) + g(y_1,\dots,y_m)
+  \end{align}
+  となっている。ここで、$y_\bullet \Leftarrow f_\bullet$とすることで、
+  \begin{align}
+    f = g(f_1,\dots,f_m).
+  \end{align}
+
+\end{myproof}
+
+\subsection{生成元の間の関係と軌道の幾何}
+\label{sub:生成元の間の関係と軌道の幾何}
+
+\begin{framed}
+  関係のイデアル:
+  $F=(f_1,\dots,f_m)$としたとき、
+  \begin{align}
+    I_F = \set{h\in k[y_1,\dots,y_m]; h(f_1,\dots,f_m) = 0_{k[x_1,\dots,x_n]}}
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題1:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であるとき、
+  \begin{enumerate}[label=(\roman*)]
+    \item $I_F$は$k[y_1,\dots,y_m]$の素イデアル。
+    \item $f\in k[x_1,\dots,x_n]^G$に対して、
+    $f=g(f_1,\dots,f_m)$を$f$の$f_1,\dots,f_m$による多項式表示の1つとする。
+    このとき、$f_1,\dots,_m$によるすべての多項式表示は、
+    \begin{align}
+      f=g(f_1,\dots,f_m) + h(f_1,\dots,f_m)
+    \end{align}
+    で与えられる。ここで、$h$は$I_F$をわたって動く。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item 素イデアルの定義どおりやる。
+    \item 2つあったとして、その差は$I_F$に入る。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題2:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$のとき
+  $I_F \subset k[y_1,\\dots,y_m]$を関係のイデアルとする。
+  このとき、$I_F$を法とした商環と不変式環の間には環同型
+  \begin{align}
+    k[y_1,\dots,y_m]/I_F \simeq k[x_1,\dots,x_n]^G
+  \end{align}
+  がある。
+\end{framed}
+\begin{myproof}
+  準同型定理。
+\end{myproof}
+
+\begin{framed}
+  命題3:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であるとし、イデアル
+  \begin{align}
+    J_F = \gen{f_1-y_1,\dots,f_m-y_m} \subset k[x_1,\dots,x_n,y_1,\dots,y_m]
+  \end{align}
+  を考える。
+  \begin{enumerate}[label=(\roman*)]
+    \item $I_F$は$J_F$の$n$次の消去イデアルである。
+    つまり、$I_F = J_F \cap k[y_1,\dots,y_m]$となる。
+    \item
+    $k[x_1,\dots,x_n,y_1,\dots,y_m]$の単項式順序を、
+    $x_1,\dots,x_n$の1つでも含む単項式は$k[y_1,\dots,y_m]$のすべての単項式よりも大きくなるように定め、
+    $G$を$J_F$のグレブナ基底とする。このとき、$G\cap k[y_1,\dots,y_m]$は$k[y_1,\dots,y_m]$乗に誘導された
+    単項式順序に関する$I_F$のグレブナ基底である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item
+    $p\in k[x_1,\dots,x_n,y_1,\dots,y_m]$について、
+    \begin{align}
+      p\in J_F \iff
+      k[x_1,\dots,x_n] において、 p(x_1,\dots,x_n,f_1,\dots,f_m) = 0
+    \end{align}？
+    \begin{enumerate}
+      \item $\Rightarrow$？
+      \begin{enumerate}
+        \item $y_i \Leftarrow f_i$の代入によってあきらか。
+      \end{enumerate}
+      \item $\Leftarrow$？$p(x_1,\dots,x_n,f_1,\dots,f_m) = 0$とする。
+      \begin{enumerate}
+        \item  $\exists B_\bullet$:
+        $p$の$y_\bullet$を$f_\bullet -(f_\bullet - y_\bullet)$に置き換えて展開し、
+        \begin{align}
+          p(x_1,\dots,x_n,y_1,\dots,y_m)
+          =
+          p(x_1,\dots,x_n,f_1,\dots,f_m) + B_1\cdot (f_1-y_1) + \dots + B_m\cdot (f_m-y_m)
+        \end{align}
+        となる$B_1,\dots,B_m \in k[x_1,\dots,x_n,y_1,\dots,y_m]$がある。
+        \item
+        (b)の仮定により、
+        \begin{align}
+          p(x_1,\dots,x_n,y_1,\dots,y_m) = B_1(f_1-y_1) + \dots + B_m(f_m-y_m)\in J_F.
+        \end{align}
+      \end{enumerate}
+    \end{enumerate}
+    これで、
+        $p\in k[x_1,\dots,x_n,y_1,\dots,y_m]$について、
+    \begin{align}
+      p\in J_F \iff
+      k[x_1,\dots,x_n] において、 p(x_1,\dots,x_n,f_1,\dots,f_m) = 0
+    \end{align}は示された。
+    \item
+    上から直ちに
+    \begin{align}
+      p\in J_F\cap k[y_1,\dots,y_m]
+      \iff
+      k[x_1,\dots,x_n] において p(f_1,\dots,f_m) = 0.
+    \end{align}
+  \end{enumerate}
+  (ii)は消去イデアルの議論より直ちに従う。
+\end{myproof}
+
+\begin{framed}
+  定義6:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$のとき、
+  $I_F \subset k[y_1,\dots,y_m]$を
+  $F=(f_1,\dots,f_m)$の関係のいデアルとする。
+  このとき、アフィン多様体$F_V$を次で定義する。
+  \begin{align}
+    V_F = \var(I_F) \subset k^m.
+  \end{align}
+\end{framed}
+
+\begin{framed}
+  命題7:
+  \begin{enumerate}[label=(\roman*)]
+    \item $V_F$はパラメタ付け
+    \begin{align}
+      y_1 &= f_1(x_1,\dots,x_n),\\
+      &\vdots \\
+      y_m &= f_m(x_1,\dots,x_n)
+    \end{align}
+    を含む$k^m$の最小多様体である。
+    \item
+    $I_F = \ideal(V_F)$である。したがって、
+    $I_F$は$V_F$上で消えるすべての多項式関数全体のなすイデアルである。
+    \item
+    $V_F$は既約多様体である。
+    \item
+    $k[V_F]$を$V_F$の座標環とする。
+    このとき、環同型
+    \begin{align}
+      k[V_F] \simeq k[x_1,\dots,x_n]^G
+    \end{align}
+    が存在する。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i)は、$J_F=\gen{f_1-y_1,\dots,f_m-y_m}$の$n$次消去イデアル
+  なので、多項式の陰関数表示化から従う。
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $\subset$を示す。
+    $I_F \subset \ideal(\var(I_F)) = \ideal(V_F)$となる。
+    \item $\supset$を示す。
+    \begin{enumerate}
+      \item
+      $\forall h$: $h\in \ideal(V_F)$とする。
+      \item
+      任意の$(a_1,\dots,a_n)\in k^n$について、(i)より
+      \begin{align}
+        (f_1(a_1,\dots,a_n),\dots,f_m(a_1,\dots,a_n))\in F(k^n) \subset V_F.
+      \end{align}
+      \item
+      (a)より、$h$は$V_F$を全部消すので、
+      \begin{align}
+        h(f_1(a_1,\dots,a_n),\dots,f_m(a_1,\dots,a_n))=0.
+      \end{align}
+      \item
+      上と、標数0の体で考えていることから、
+      \begin{align}
+        h(f_1,\dots,f_m) = 0_{k[x_1,\dots,x_n]}.
+      \end{align}
+      \item
+      $h\in I_F$
+      \item
+      (a)おわり。$\ideal(V_F) \subset I_F$。
+    \end{enumerate}
+  \end{enumerate}
+
+  (iii)を示す。(ii)の$I_F = \ideal(V_F)$と$I_F$が素イデアルであることから従う。
+
+  (iv)を示す。命題2の同型を使い、
+  \begin{align}
+    k[V_F] \simeq k[y_1,\dots,y_m]/I_F \simeq k[x_1,\dots,x_n]^G.
+  \end{align}
+
+\end{myproof}
+
+\begin{framed}
+  系8:
+  $k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m] = k[f'_1,\dots,f'_{m'}]$と仮定する。
+  $F=(f_1,\dots,f_m)$および$F'=(f_1',\dots,f_{m'}')$とするとき、
+  多様体$V_F \subset k^m$と$V_{F'}\subset k^{m'}$は同型である。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item 命題7より、
+    \begin{align}
+      k[V_F]\simeq k[x_1,\dots,x_n]^G \simeq k[V_{F'}].
+    \end{align}
+    \item
+    上の同型を与える同型写像は定数では恒等写像になる。
+    ($k[x_1,\dots,x_n]^G \simeq k[x_1,\dots,x_n]/I_F$だが、$I_F$は定義より0でない定数を含まない(本質的に1次以上)。したがって、$I_F$で割っても定数はそのままになる。)
+    \item
+    1,2と定理5-4-9より、$V_F$と$V_{F'}$は同型。
+  \end{enumerate}
+\end{myproof}
+
+以降$k$は代数的閉体とする。
+\begin{framed}
+  定義9:
+  有限行列群$G\subset GL(n,k)$と$\bbold a \in k^n$に対し、集合
+  \begin{align}
+    G\cdot \bbold a = \set{A\cdot \bbold a; A \in G}
+  \end{align}
+  を$\bbold a$の$G$軌道とよぶ。$k^n$の$G$軌道全体の集合を$k^n/G$で表し、
+  これを軌道空間という。
+\end{framed}
+
+あとで使うので先に示してしまう。
+\begin{framed}
+  定理11:
+  $G\subset GL(n,k)$を有限行列群とし、
+  $f\in k[x_1,\dots,x_n]$とする。
+  $N=\myabs{G}$とする。このとき次の条件を満たす不変式
+  $g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$が存在する。
+  \begin{align}
+    f^N + g_1 f^{N-1} + \dots + g_N = 0.
+  \end{align}
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\exists g_1,\dots,g_N$: 多項式の展開を考える。
+    \begin{align}
+      \prod_{A\in G} (X-f(A\cdot \bbold x))
+      =
+      X^N + g_1(\bbold x)X^{N-1} + \dots + g_N(\bbold x)
+    \end{align}
+    となる$g_1,\dots,g_N \in k[x_1,\dots,x_n]$が存在する。
+    \item
+    $g_1,\dots,g_N$は$G$不変？
+    \begin{enumerate}
+      \item $\forall B$: $B\in G$とする。
+      \item sumのインデックスを取り替えて、
+      \begin{align}
+        \prod_{A\in G}(X-f(AB\cdot \bbold x)) = \prod_{A\in G}(X-f(A\cdot \bbold x)).
+      \end{align}
+      \item (a)おわり:
+      \begin{align}
+        \Forall{B\in G}
+        X^N + g_1(B\cdot \bbold x)X^{N-1} + \dots + g_N(B\cdot \bbold x)
+        =
+        X^N + g_1(\bbold x) X^{N-1} + \dots + g_N(\bbold x).
+      \end{align}
+      \item
+      上で係数比較して、$g_1,\dots,g_N \in k[x_1\dots,x_n]^G$.
+    \end{enumerate}
+    よって、
+    $g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$となる。
+    \item
+    1の多項式で$X\leftarrow f$と代入する。
+    左辺の因子で$A = E$のとき、
+    \begin{align}
+      X - f(A\cdot \bbold x)
+      =
+      f - f(E\cdot \bbold x) = 0
+    \end{align}
+    となるので、左辺が0になって、
+    \begin{align}
+      X^N + g_1(\bbold x)X^{N-1} + \dots + g_N(\bbold x)  = 0.
+    \end{align}
+    \item
+    1で作った$g_\bullet$が条件を満たす。示された。
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  定理10:
+  $k$は代数的閉体とし、$G\subset GL(n,k)$を
+  有限行列群とする。
+  \begin{align}
+    k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]
+  \end{align}
+  であるとき、次がなりたつ。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $F=\bbold a = (f_1(\bbold a),\dots,f_m(\bbold a))$で定義される多項式写像
+    $F\colon k^n \to V_F$は全射である
+    \footnote{これの行き先が本当に$V_F$か気になったがあたりまえだった。
+    $((f_1(\bbold a),\dots,f_m(\bbold a))\in V_F) \iff (\Forall{h\in I_F}) h(f_1(\bbold a),\dots,h_m(\bbold a) = 0) \iff \Forall{h\in I_F}h(f_1,\dots,h_m)(\bbold a) = 0$
+    これは、$I_F$が$k[x_1,\dots,x_n]^G$を多項式代入して消える$k[y_1,\dots,y_m]$全体だったのでOK。}
+    。
+    幾何的には、これはパラメタ付け$y_i = f_i(x_1,\dots,x_n)$が
+    $V_F$の全体を覆うことを意味する。
+    \item
+    $G$軌道$G\cdot \bbold a \subset k^n$を$F(\bbold a)\in V_F$に写す写像は一対一対応
+    \begin{align}
+      k^n/G\simeq V_F
+    \end{align}
+    を誘導する。
+  \end{enumerate}
+\end{framed}
+
+\begin{myproof}
+  (i)を示す。
+  \begin{enumerate}
+    \item $J_F$: $J_F = \gen{f_1-y_1,\dots,f_m-y_m}$
+    \item
+    $I_F$: $I_F = J_F \cap k[y_1,\dots,y_m]$
+    \item $\forall (b_1,\dots,b_m)$:
+    $(b_1,\dots,b_m)\in V_F = \var(I_F)$
+    \item
+    2の$I_F$は消去イデアルなので、上の$(b_1,\dots,b_m)$は
+    \begin{align}
+      y_1 &= f_1(x_1,\dots,x_n) \\
+      &\vdots\\
+      y_m &= f_m(x_1,\dots,x_n)
+    \end{align}
+    の部分解。
+    \item $\exists (a_1,\dots,a_n)$:
+    3の$(b_1,\dots,b_m) \in \var(I_F)$は
+    $(a_1,\dots,a_n,b_1,\dots,b_m)\in \var(J_F)$に拡張できる？
+    \begin{enumerate}
+      \item
+      $N$: $N=\myabs{G}$
+      \item 次は成立？
+      \begin{align}
+        \Forall{i} \Exists{p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]} p_i = x_i^N + (x_1の次数が<N である項).
+      \end{align}
+      \begin{enumerate}
+        \item $\forall i$: $i=1,\dots,n$とする。
+        \item $\exists N, g_\bullet$:
+        補題11を$f=x_i$として適用すると、
+        \begin{align}
+          x_i^N + g_1 x_i^{N-1} + \dots + g_N = 0
+        \end{align}
+        となる$N = \myabs{G}$と、$g_1,\dots,g_N \in k[x_1,\dots,x_n]^G$を得る。
+        \item $\exists h_\bullet$:
+        仮定より、$k[x_1,\dots,x_n]^G = k[f_1,\dots,f_m]$であることと上より、
+        \begin{align}
+          \Forall{j = 1,\dots, N} \Exists{h_j: m変数多項式} g_j = h_j(f_1,\dots,f_m).
+        \end{align}
+        \item ☆$p_i$:
+        \begin{align}
+          p_i(x_i,y_1,\dots,y_m) = x_i^N + h_1(y_1,\dots,y_m)x_i^{N-1} + \dots + h_N(y_1,\dots,y_m).
+        \end{align}
+        とする。
+        \item
+        iiの$x_i^N + g_1 x_i^{N-1} + \dots + g_N = 0$と
+        iii の$g_j = h_j(f_1,\dots,f_m)$より、
+        $p_i$で$y_\bullet \leftarrow f_\bullet$と定義すると、
+        \begin{align}
+          p_i(x_i,f_1,\dots,f_m) = 0.
+        \end{align}
+        \item
+        上と、$J_F$の特徴付け
+        \footnote{命題7-4-3中にあった。$p\in J_F$と$p(x_1,\dots,x_n,f_1,\dots,f_m)=0$は等価である。
+        片方は$y_i \leftarrow f_i$であきらか。もう片方は$y_i = f_i-(f_i-y_i)$で単項式を展開して足し合わせる例のトリックでできる。}
+        より、$p_i \in J_F$となる。
+        \item
+        ivの定義より、$p_i \in k[x_i,\dots,x_n,y_1,\dots,y_m]$である。
+        \item
+        viとviiより、
+        \begin{align}
+          p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]
+        \end{align}
+        である。さらに、ivの定義より、$x_i$に関する先頭項係数が$1$であるという条件も満たされている。
+        よって、ivで作った$p_i$が条件をみたす。
+        \item
+        iおわり:
+        \begin{align}
+          \Forall{i}\Exists{p_i} p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m] \; かつ \; 「x_i についての先頭項係数が1」
+        \end{align}
+      \end{enumerate}
+      よって、
+      \begin{align}
+        \Forall{i} \Exists{p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]} p_i = x_i^N + (x_1の次数が<N である項).
+      \end{align}
+      となる。
+
+      \item
+      $(b_1,\dots,b_m)$が$(a_{i+1},\dots,a_n,b_1,\dots,b_m) \in \var(J_F\cap k[x_{i+1},\dots,x_n,y_1,\dots,y_m])$
+      まで拡張しているとして、もう1つ拡張する。
+      \begin{enumerate}
+        \item $\exists a_i$: 5の$p_i \in J_F \cap k[x_i,\dots,x_n,y_1,\dots,y_m]$
+        であることと、$p_i$の$x_i$に関する先頭項係数が1であることから、
+        上の部分解は$(a_i,\dots,a_n,b_1,\dots,b_m)$に拡張できる。
+      \end{enumerate}
+      \item $\exists a_1,\dots,a_n$: 上を繰替えすことで、
+      部分解は解$(a_1,\dots,a_n,b_1,\dots,a_m)$に拡張できる。
+    \end{enumerate}
+    \item 上より、$F(a_1,\dots,a_n) = (b_1,\dots,b_m)$
+    \item 上より、$F\colon k^n \to V_F$は全射。
+  \end{enumerate}
+
+  (ii)を示す。
+  \begin{enumerate}
+    \item $F$:
+    $F\colon k^n \to V_F$は(i)の通り、
+    \begin{align}
+      F(\bbold a) = (f_1(\bbold a),\dots,f_m(\bbold a))
+    \end{align}
+    としておく。
+    \item
+    $\tilde F$: $\tilde F\colon k^n/G \to V_F$を$F$から誘導された写像、すなわち
+    \begin{align}
+      \tilde F(G\cdot \bbold a) = F(\bbold a)
+    \end{align}
+    とする。(well-definedかはわからない。)
+    \item
+    $f_\bullet$は不変式と仮定してあるので、$F$は$G$軌道$G\cdot \bbold a$上同じ値をとる。
+    よって、$\tilde F$はwell-definedである。
+    \item
+    (i)より、$F$は全射なので、$\tilde F$も全射。
+    \item
+    $\tilde F$は単射？
+    \begin{enumerate}
+      \item $\forall \bbold a,\bbold b$: 軌道$G\cdot \bbold a$と$G\cdot \bbold b$が異なるとする。
+      \item
+      $\sim_G$は同値関係なので、$G\cdot \bbold a$と$G\cdot \bbold b$は異なる軌道である。
+      \item $\exists g$: $g\in k[x_1,\dots,x_n]^G$で、$g(\bbold a)\neq g(\bbold b)$なるものがある？
+      \begin{enumerate}
+        \item
+        $S$: $S=G\cdot \bbold b \cup G\cdot \bbold a - \set{\bbold a}$とする。
+        \item
+        上の定義より、$S$は有限個の点である。
+        \item
+        上より、$S$はアフィン多様体である。
+        \item
+        $\exists f$:
+        上より、$S$を定義するアフィン多様体$f$が存在する。
+        \item
+        $S$の定義iより、$\bbold a\notin S$である。
+        \item
+        上と、ivの$f$の定義より、$f(\bbold a)\neq 0$である。
+        \item
+        iの$S$の定義と上をまとめると、
+        \begin{align}
+          f(A\cdot \bbold b) &= 0 \\
+          f(A\cdot \bbold a) &=
+          \begin{cases}
+            0 & (A\cdot \bbold a) \neq \bbold a のとき\\
+            f(\bbold a) \neq 0 & (A\cdot \bbold a) = \bbold a のとき
+          \end{cases}.
+        \end{align}
+        \item
+        ☆$g$: $g=R_G(f)$とする。
+        \item
+        viiより、
+        \begin{align}
+          g(\bbold b)
+          =
+          R_G(f)(\bbold b)
+          =
+          \frac{1}{\myabs{G}}\sum_{B\in G}f(B\cdot \bbold b)
+          =
+          0.
+        \end{align}
+        \item
+        $M$:
+        $M$は$A\cdot \bbold a = \bbold a$となる$A\in G$の個数とする。
+        \item
+        viiより、
+        \begin{align}
+          g(\bbold a)
+          =
+          R_G(f)(\bbold a)
+          =
+          \frac{1}{\myabs{G}}\sum_{B\in G}f(B\cdot \bbold a)
+          =
+          \frac{M}{\myabs{G}}f(\bbold a) \neq 0.
+        \end{align}
+        \item
+        よって、$g(\bbold a)\neq g(\bbold b)$であり、viiiの$g\in k[x_1,\dots,x_n]^G$が条件をみたす。
+      \end{enumerate}
+      よって、$g(\bbold a)\neq g(\bbold b)$となる$g\in k[x_1,\dots,x_n]^G$が存在する。
+      \item
+      $\exists h$: $k[x_1,\dots,x_n]^G  = k[f_1,\dots,f_m]$なので、
+      \begin{align}
+        g=h(f_1,\dots,f_m)
+      \end{align}
+      となる$h \in k[y_1,\dots,y_m]$がある。
+      \item
+      (c)の$g$の条件と上より、
+      \begin{align}
+        h(f_1,\dots,f_m)(\bbold a) \neq h(f_1,\dots,f_m)(\bbold b).
+      \end{align}
+      \item $\exists i$:
+      上より、$f_i(\bbold a)\neq f_i(\bbold b)$となる$i$がある。
+      (全部$f_i(\bbold a)=f_i(\bbold b)$だとしたら、(e)にならない。)
+      \item
+      1,2と上より、$\tilde F(G\cdot \bbold a) \neq \tilde F(G\cdot \bbold b)$となる。
+      \item
+      よって、$\tilde F$は単射である。
+    \end{enumerate}
+    よって、$\tilde F$は単射である。
+    \item
+    以上3,4,5より、$\tilde F\colon k^n/G\to V_F$は同型。
+  \end{enumerate}
+\end{myproof}

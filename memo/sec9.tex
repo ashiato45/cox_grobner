@@ -1,0 +1,1224 @@
+
+\subsection{単項式イデアルが定義する多様体}
+\label{sub:単項式イデアルが定義する多様体}
+$\var(x^2y,x^3)$のうち広い(次元が広い)のを見つけるには、
+文字が少ないやつでこれらをすべて割れるやつを見つければよい。
+今回は、$x|x^2y,\, x|x^3$なので、
+$\gen{x^2y,x^3}\subset \gen{x}$で、
+$\var(x) \subset \var(x^2y,x^3)$となる。
+ということで、$x=0$という拘束一本で$(2-1)=1$次元の部分空間が作れたのでこれがベスト。
+
+$\var(y^2z^3,x^5z^4,x^2yz^2)$
+のうち広いのを見つけるには同様に、$z$1文字が文字数最小なので、
+$\gen{y^2z^3,x^5z^4,x^2yz^2} \subset \gen{z}$で、
+$\var(z) \subset \var(y^2z^3,x^5z^4,x^2yz^2)$となる。
+ということで、$z=0$という拘束一本で$(3-1)=2$次元の
+部分空間が作れたので、これがベスト。
+
+
+\begin{framed}
+  定義:
+  $k^n$において、変数$x_1,\dots,x_n$のうちいくつかを
+  ゼロとおいて定義される部分ベクトル空間を
+  座標部分空間とよぶ。
+\end{framed}
+例えば、$\var(x)$とか$\var(x,y)$とか。$\var(xy)$は違う(そもそもベクトル空間じゃない)。
+
+\begin{framed}
+  命題1:
+  $k[x_1,\dots,x_n]$の単項式イデアルによって定義される多様体は、
+  $k^n$の座標部分空間の有限個の和集合である。
+\end{framed}
+\pf  $\var(単項式,\dots,単項式)$が座標部分空間で書けることを言うわけだが、
+はじめの多様体の$,$区切りを1つの多項式の定義する多様体のintersectionに直し、
+1つの多項式の定義する多様体を座標部分空間のunionに直して
+分配法則を使えばあきらか。$\blacksquare$
+
+\begin{framed}
+  定義2:
+  $V$を$k^n$の有限個の線形部分空間の和集合であるような多様体とする。
+  すると$V$の次元は、部分空間の次元のうち最大のものと定義し、$\dim V$
+  と書く。
+\end{framed}
+
+\begin{framed}
+  定義:
+  \begin{align}
+    M_j = \set{k\in \set{1,\dots,n}; x_k は単項式m_j を割り切る}
+  \end{align}
+  (直観的には、単項式にあらわれる番号たち。$x_2^3x_3^4$に対しては
+  $\set{2,3}$のこと。)
+
+  \begin{align}
+    \cal M &=
+    \set{J\subset \set{1,\dots,n} ; J\cap M_j \neq \eptyset(1\le j \le t)}\\
+    &=
+    \set{J\subset \set{1,\dots,n}; M_{ほげ}のすべてとJとが交わっている。}
+  \end{align}
+  上は$\set{1,\dots,n}$を必ず含むので空でない。
+\end{framed}
+
+\begin{framed}
+  命題3:
+  上の記号のもとに、$I=\gen{m_1,\dots,m_t}$とすると、
+  $\dim(\var(I)) = n - \min(\abs{J}; J\in \cal M)$。
+\end{framed}
+\begin{myproof}
+  下から:
+  \begin{enumerate}
+    \item $J,r$:
+    $J=\set{i_1,\dots,i_r}$を$\cal M$の元で、
+    $\abs{J} = r$が$\cal M$の中で最小になっているものとする(空でないので可能)。
+    \item
+    定義より$\cal M$は積について閉じるので、このうちの最小のもの
+    $J$は$\cal M$のintersectionになっている。
+    \item
+    上より、$J \subset M_{ほげ}$がすべての$M_{ほげ}$について成り立つ。
+    \item
+    上より、$I = \gen{m_1,\dots,m_t} \subset \gen{x_{i_1},\dots,x_{i_r}}$
+    である。
+    \item $W$:
+    上より、$\var(x_{i_1},\dots,x_{i_r}) \subset \var(I)$である。
+    左辺の$W=\var(x_{i_1},\dots,x_{i_r})$
+    \item
+    $W$の次元は、上の定義より$n-r$である。
+    \item
+    次元の定義より、$\varI$の次元は$n-r$以上である。
+  \end{enumerate}
+  最小性:
+  \begin{enumerate}
+    \item $\var(I)$の次元が$n-r$より大きいとする。
+    \item $s$:
+     上より、$s<r$に対して座標部分空間
+     $W'=\var(x_{k_1},\dots,x_{k_s}) \subset \var(I)$
+     (文字数が真に小さい)
+    \item $m_{ほげ}$はすべて$W'$上で消えている。
+    \item $p$: $p = (k_{ほげ}番目は0、他は1)\in W'$とする。
+    上で特に$m_{ふが}$が$p$を消す。
+    \item
+    上より、$x_{k_{ほげ}} | m_{ふが}$となる。(そうじゃなきゃ消えない)
+    (あと最悪、$m_{ふが}$は単項式なのだから、$x^{ほげ}y^{ふが}\dots$とやって
+    消えるための指数の条件を計算してもよい。)
+    \item $J'$:
+    上より、$J'=\set{k_1,\dots,k_s} \in \cal M$である。
+    \item
+    上は、$\abs{J'} = s < r$となり最小性の仮定に反する。
+  \end{enumerate}
+\end{myproof}
+
+\subsection{単項式イデアルに含まれない単項式}
+\label{sub:単項式イデアルに含まれない単項式}
+例えば$k[x,y]$の単項式イデアルがあらわす図形は、
+$(0,0)$、$x$軸、$y$軸、$x$軸と$y$軸の和集合のいずれかになる。
+この状況を単項式の分布を$\Z_{\ge 0}^n$で考える。
+
+\begin{framed}
+  定義:
+  \begin{align}
+    C(I) = \set{\alpha \in \Zge^n; x^\alpha \notin I}.
+  \end{align}
+
+  $e_{i_1},\dots,e_{i_r}$によって決まる座標部分空間を次のように定義する。
+  \begin{align}
+    [e_{i_1},\dots,e_{i_r}] =
+    \set{a_1 e_{i_1} + \dots + a_r e_{i_r}; a_j \in \Z_{\ge 0} (1\le j \le r)}
+  \end{align}
+  $[e_{i_1},\dots,e_{i_r}]$を$r$次元座標部分空間という。
+
+  $\Z_{\ge 0}^n$における部分集合が座標部分空間
+  $[e_{i_1},\dots,e_{i_r}]$の平行移動であるとは、それが
+  \begin{align}
+    \alpha  + [e_{i_1},\dots,e_{i_r}],\quad
+    \alpha は [e_{i_1},\dots,e_{i_r}] に垂直である
+  \end{align}
+  ことである。言いかえるなら、
+  $\alpha = \sum_{i\notin \set{e_{i_1},\dots,e_{i_r}}} a_i e_i$とあらわされること
+  \footnote{$[e_1]$は$\Zge^2$でx軸だが、この平行移動というのは上への移動しかない。}。
+\end{framed}
+
+\begin{framed}
+  命題2: (単項式の多重指数に注目する)
+  真部分イデアル$I\subset k[x_1,\dots,x_n]$が単項式イデアルであるとする。
+  \begin{enumerate}[label=(\roman*)]
+    \item 座標部分空間$\var(x_i; i\notin \set{i_1,\dots,i_r})$
+    が$\var(I)$に含まれることと、
+    $[e_{i_1},\dots,e_{i_r}] \subset C(I)$であることは同値である。
+    \item
+    $\var(I)$の次元は、$C(I)$に含まれる極大な座標部分空間の次元に一致する。
+  \end{enumerate}
+\end{framed}
+例えば$\var(xy)$には$\var(x),\var(y)$がともに含まれるが、
+これらには$\var(x)$には${2}$のインデックスが対応し、
+これには$[e_2]$が対応するが、このとき$C(I)=[e_2]$が対応し、OK。
+
+\begin{myproof}
+(i$\Rightarrow$):
+\begin{enumerate}
+  \item $\alpha$: $\alpha \in [e_{i_1},\dots,e_{i_r}]$とする。
+  (Aim:$x^\alpha \notin I$？)
+  \item $x^\alpha \in I$と仮定する。
+  \begin{enumerate}
+    \item $p$: $p=(i_{ほげ}で1、ほかで0)$とする。
+    \item $x_{i_{ほげ}でないやつ}$は$p$を消すので、
+    $p\in \var(x_i; i\notin \set{i_1,\dots,i_r})$となる。
+    \item $x^\alpha \in I$でかつ$(x^\alpha)(p)=1 \neq 0$で、
+    $I$のなかに$p$を消さないものがあるので、$p\notin \var(I)$である。
+    \item (b),(c)は$\var(x_i;i\notin \set{i_1,\dots,i_r}) \subset
+    \var(I)$に矛盾する。
+  \end{enumerate}
+  \item 上より、$x^\alpha \notin I$であり、$\alpha \in C(I)$
+\end{enumerate}
+
+(i,変更)
+\begin{align}
+  \var(x_i; i\notin \set{i_1,\dots,i_r}) \subset \var(I)
+  &\desciff{零点定理}
+  \sqrt{I} \subset \sqrt{\gen{x_i; i\notin \set{i_1,\dots,i_r}}}\\
+  &\desciff{背理法で$\sqrt$が外せる}
+  \sqrt{I}\subset \gen{x_i; i\notin \set{i_1,\dots,i_r}}\\
+  &\iff
+  \Forall{f\in \sqrt{I}} f\in \gen{x_i; i\notin \set{i_1,\dots,i_r}}\\
+  &\desciff{$I$は単項式イデアルゆえ$\sqrt{I}$も}
+  \Forall{m\in \sqrt{I}(単項式)} m\in \gen{x_i; i\notin \set{i_1,\dots,i_r}}\\
+  &\desciff{背理法}
+  \Forall{m\in I(単項式)}  m\in \gen{x_i; i\notin \set{i_1,\dots,i_r}}\\
+  &\iff
+  \set{Iの単項式}\subset \set{x_{i_1},\dots,x_{i_r}以外の x_\bullet を含む単項式}\\
+  &\iff
+  \set{x_{i_1},\dots,x_{i_r}だけからなる単項式}\subset \set{Iに入らない単項式}\\
+  &\iff
+  [e_{i_1},\dots,e_{i_r}] \subset C(I).
+\end{align}
+
+(ii)
+$\dim \var(I)$の次元は、
+$\var(I)$に含まれる線形部分空間のうち、次数の最も高いものの次数だった。
+この次数を$r$とし、
+この線形部分空間を$\var(x_i; i\notin \set{i_1,\dots,i_r})$とする。
+(i)より、$[e_{i_1},\dots,e_{i_r}] \subset C(I)$であり、
+これより次数の高いものが$C(I)$に含まれることはない(仮にそうなら$\var(x_i;i\notin \set{i_1,\dots,i_r}))$
+に含まれる線形部分空間でもっと次数の高いものが取れる)。
+よって、$[e_{i_1},\dots,e_{i_r}]$は$C(I)$で極大な座標部分空間になっており、
+この次数は確かに$r$である。
+
+\end{myproof}
+
+\begin{framed}
+  定理3:
+  単項式イデアル$I\subset k[x_1,\dots,x_n]$で真部分イデアルになっているものに対して、
+  $I$に含まれない単項式の指数の集合を$C(I) \subset \Zge^n$とする。
+  このとき$C(I)$は、$\Zge^n$の座標部分空間を平行移動したものの
+  有限個の和集合として表わすことができる。
+\end{framed}
+(雑な証明:ディクソンの補題のアイデア。
+1変数のときは明らか。$n$変数のとき成立するときに
+$n+1$変数のことを考えればよい。最後の文字を$x_{n+1}$とし、
+$I$の生成元のうち$x_{n+1}^N$が生成元のなかにあらわれるもののうち
+最高次であるとする。$1,x_{n+1},\dots, x_{n+1}^{N-1}$の断面を考え、
+これらに対し帰納法の仮定を使えばいい。)
+\begin{myproof}
+  $n=1$のときはあきらか。$n-1$のときに正しいとする。
+  $n$について示す。
+
+  \begin{enumerate}
+    \item $j\ge 0$について、$I_j = \gen{m; m\cdot x_n^j \in I}$とする。
+    これは、$C(I_j)$は$x^\alpha x_n^j \notin I$となるような$\alpha \in \Zge^{n-1}$が$C(I)$の$\alpha(n) = j$のスライス
+    $(0,\dots,0,j) + [e_1,\dots,e_{n-1}]$
+    であることになる。
+    \item $j < j'$とする。
+    $I$はイデアルなので、$m\cdot x_n^j \in I$のとき、
+    $m\cdot x_n^{j'} \in I$である。よって、
+    $I_j \subset I_{j'}$である。
+    \item
+    多項式のイデアル昇鎖は安定するので、$j_0$番目で安定するとする。
+    すなわち、$j\ge j_0$なら$I_j = I_{j_0}$となる。
+    \item
+    \begin{align}
+      C(I) = (C(I_{j_0})\times \Zge) \cup \bigcup_{j=0}^{j_0-1}(C(I_j)\times \set{j}).
+    \end{align}
+    \begin{enumerate}
+      \item $\supset$を示す。
+      \begin{enumerate}
+        \item $j\ge 0$について、$C(I_j) \times \set{j} \subset C(I)$
+        は$C(I_j)$の定義$C(I_j) = \set{\alpha \in \Zge^{n-1}; x^\alpha x_n^j \notin I}$より直ちに従う。
+        ($C(I)= \set{(\alpha,j) \in \Zge^n; j \in \Zge, x^\alpha x_n^j \notin I}$であった！)
+        \item $C(I_{j_0})\times \Zge \subset C(I)$を示す。
+        \begin{enumerate}
+          \item          $j\ge j_0$のとき、
+                  $C(I_{j_0}) \times \set{j}\subset C(I)$が従い、
+          \item $j < j_0$のとき、($C(I_{ほげ})$は下のほうが広い！)
+          $I$はイデアルなので$x^\alpha x_n^{j_0}\notin I$なら
+          $x^\alpha x_n^j \notin I$であることから
+          $C(I_{j_0})\times \set{j} \subset C(I)$がわかる。
+        \end{enumerate}
+      \end{enumerate}
+      \item $\subset$を示す。
+      $(\alpha,\alpha_n) \in C(I)$とする。
+      \begin{enumerate}
+        \item $\alpha_n < j_0$のとき:
+        $x^\alpha x_n^{\alpha_n}\notin I$なので、
+        $x^\alpha \notin I_{\alpha_n}$となり、
+        $\alpha \in C(I_{\alpha_n})$である。よって、
+        $(\alpha,\alpha_n) \in C(I_{\alpha_n}) \times {\alpha_n}$となる。
+        \item $\alpha_n \ge j_0$のとき:
+        $j_0$の定義より、$I_{\alpha_n}  = I_{j_0}$である。よって、
+        上と同様に$x^\alpha \notin I_{a\lpha_n} = I_{j_0}$であり、
+        $\alpha \in C(I_{j_0})$となる。よって、
+        $(\alpha,\alpha_n) \in C(I_{j_0}) \times \Zge$である。
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  補題4:
+  $k[x_1,\dots,x_m]$における全次数が$s$以下の単項式の個数は、
+  2項係数$\tatev{m+s \\ s}$で与えられる。
+\end{framed}
+\begin{myproof}
+  次数が$s$以下なので、$s$個の$x_{なんとか}$を考え、
+  $s$個のしきりを入れて、しきりの左の部屋から$x_1,\dots,x_m$
+  を割り当て、最後の部屋を使わないことにする(次数$s$ではなく「以下」！)。
+  結局、$s$個の$x_{なんとか}$と$s$個のしきりを並べればいいので、
+  $\tatev{m+s \\ s}$通りである。
+\end{myproof}
+
+\begin{framed}
+  補題5:
+  $\alpha + [e_{i_1},\dots,e_{i_m}]$を座標部分空間
+  $[e_{i_1},\dots,e_{i_m}]\subset \Zge^n$の平行移動
+  とし、これまでと同様$\alpha = \sum_{i\notin \set{i_1,\dots,i_m}} a_i e_i$とする。
+  \begin{enumerate}
+    \item $\alpha + [e_{i_1},\dots,e_{i_m}]$に含まれる全次数が
+    $s$以下の点の個数は$s>\abs{\alpha}$とすると、
+    $\tatev{m+s-\abs{\alpha}\\ s-\abs{\alpha}}$で与えられる。
+    \item
+    $s>\abs{\alpha}$のとき、この点の個数は$s$の次数$m$の多項式関数で
+    与えられ、$s^m$の係数は$1/m!$である。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+概略
+\begin{enumerate}[label=(\roman*)]
+  \item シフト分を戻して原点からのやつと一対一をつける。次数は$\abs{\alpha}$だけ減る。
+  \item $s>\abs{\alpha}$で前提が上と同じことに注意。
+  combinationの式を書き下す。
+\end{enumerate}
+
+\pf
+\begin{enumerate}[label=(\roman*)]
+  \item
+  $\alpha + [e_{i_1},\dots,e_{i_m}]$に含まれる
+  全次数が$s$以下の点と
+  $[e_{i_1},\dots,e_{i_m}]$に含まれる全次数が
+  $s-\abs{\alpha}$以下の点との間に一対一がつく。
+  これは、$(+\alpha)$が可逆だから。よって、
+  補題4で$s$を$s-\abs{\alpha}$として適用して結論を得る。
+  \item
+  \begin{align}
+    \tatev{m+s-\abs{\alpha} \\ s-\abs{\alpha}}
+    =
+    \frac{(m+s-\abs{\alpha})\cdot \dots \cdot (s-\abs{\alpha}+1)}{m!}
+    =
+    \frac{s^m}{m!} + (sのm次未満).
+  \end{align}
+\end{enumerate}
+\end{myproof}
+
+
+\begin{framed}
+  演習8:
+  \begin{enumerate}[label=(\alph*)]
+    \item $A=\alpha + [e_{i_1},\dots, e_{i_m}]$とする。
+    ただし、$\alpha = \sum_{i\notin \set{i_1,\dots,i_m}}a_i e_i$とする。
+    $B=\beta + [e_{j_1},\dots,e_{j_r}]$も同様。
+    $A\neq B$かつ$A\cap B\neq \emptyset$ならば、
+    $[e_{i_1},\dots,e_{i_m}]\neq [e_{j_1},\dots, e_{j_r}]$
+    であることと、$A\cap B$は
+    $[e_{i_1},\dots,e_{i_m}] \cap [e_{j_1},\dots,e_{j_r}]$
+    の平行移動であることを示せ。
+    \item
+    $\dim A\cap B < \max(m,r)$となる。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i前半):
+  \begin{itemize}
+    \item
+    仮に$[e_{1_1},\dots,e_{i_m}]= [e_{j_1},\dots, e_{j_r}]$であるとする(背理法)。
+    $A\neq B$なので、$\alpha \neq \beta$とならなければならない。
+    \item 「異なる点を通る平行線は交わらない」みたいなやつ:
+    $x\in A\cap B$なる$x$があるとする(背理法)と、
+    \begin{align}
+    \alpha + a_{i_1}e_{i_1} + \dots + a_{i_m}e_{i_m} = x=
+    \beta + b_{j_1}e_{j_1} + \dots + b_{j_n}e_{j_n}
+    =
+    \beta + b_{i_1}' e_{i_1} + \dots + b_{i_m}'e_{i_n}
+    \end{align}
+    となる$a_\bullet,b_\bullet,b'_\bullet$が存在することになる。
+    移行すると、
+    \begin{align}
+        0\neq \alpha-\beta = (a_{i_1}-b'_{i_1})e_{i_1} + \dots + (a_{i_m}-b'_{i_m})e_{i_m}
+    \end{align}
+    となるが、$\allpha,\beta$は$e_{i_1},\dots,e_{i_m}$を使ってはいけなかったので、
+    このような式を実現する$a_\bullet,b'_\bullet$は存在しない。これは矛盾であり、
+    $A\cap B = \emptyset$である。これは、問題文の$A\cap B \neq \emptyset$
+    に矛盾する。
+    \item
+    よって、(i前半)は示された。
+  \end{itemize}
+
+  (i後半):
+  \begin{itemize}
+    \item $\gamma = \max(\alpha,\beta)$とする。ただし、最大は要素ごと。
+    \begin{align}
+      A\cap B = \gamma + [e_{i_1},\dots,e_{i_m}]\cap [e_{j_1},\dots,e_{j_r}]
+    \end{align}
+    であることを示す。
+    \item
+    $\subset$を示す。
+    $x\in A\cap B$とし、
+    \begin{align}
+      x=\alpha + [e_{i_1},\dots,e_{i_m}] = \beta + [e_{j_1},\dots,e_{j_r}]
+    \end{align}
+    とする。$x\in \gamma + [e_{i_1},\dots,e_{i_m}]\cap [e_{j_1},\dots,e_{j_r}]$
+    を示せばよい。$x$の$k$番目に注目する。$\alpha(k) \ge \beta(k)$として
+    一般性を失なわない。
+    \begin{itemize}
+      \item $k$が$\set{i_\bullet}$にも$\set{j_\bullet}$にもあるとき:
+      $\alpha(k)=\beta(k)=0$となっている。このとき、$x(k)$は
+      $\Zge$を走ることになる。これは右辺にも属する。
+      \item $k$が$\set{i_\bullet}$にあり、$\set{j_\bullet}$にないとき:
+      $\alpha(k)=0$となっているので、
+      仮定より$\beta(k) = 0$となっている。
+      また、$\gamma(k) = 0$となっている。
+      $k$が$\set{j_\bullet}$にないので、$x=\beta+[e_{j_1},\dots,e_{j_r}]$より、
+      $x(k)=0$しかありえない。よって、右辺に属する。
+      \item $k$が$\set{i_\bullet}$になく、$\set{j_\bullet}$にあるとき:
+      $\beta(k) = 0$とあっている。$\gamma(k) = \alpha(k)$となる。
+      $x(k)$は$\alpha(k)$しか取り得ず、一方
+      $x(k)$は$\Zge$を走る。よって、$x(k) = \alpha(k)$となる。
+      $\gamma(k) = \alpha(k)$なので、右辺に属する。
+      \item $k$が$\set{i_\bullet}$にも$\set{j_\bullet}$にもないとき:
+      $\gamma(k) = \alpha(k)$となっている。$x(k)$はこのとき走れないので、
+      $x(k) = \alpha(k)$であり、
+      一方$x(k)=\beta(k)$である。$\alpha(k) \neq \beta(k)$とすると、
+      条件をみたす$x(k)$がなくなり、同時に$x$がなくなる。
+      これは$A\cap B\neq \emptyset$に反する。よって、
+      $\alpha(k) = \beta(k)$とならなければならない。
+      このときは右辺に属する。
+    \end{itemize}
+    これで$\subset$は示された。
+    \item $\supset$はあきらか。
+  \end{itemize}
+
+(ii):
+$[e_{i_1},\dots,e_{i_m}] \neq [e_{j_1},\dots,e_{j_r}]$なので明らか。
+\end{myproof}
+
+\begin{framed}
+  定理6:
+  $I\subset k[x_1,\dots,x_n]$を単項式イデアル、
+  $\dim \var(I) = d$とする。すると十分大きな$s$に対して、
+  $I$に含まれていない全次数が$s$以下の単項式の個数は、
+  次数が$d$の$s$に関する多項式で与えられる。さらにこの多項式における
+  $s^d$の係数は正である。
+\end{framed}
+\begin{myproof}
+  概略
+  \begin{itemize}
+    \item $C(I)$の全次数$s$以下の点を$s$の多項式で
+    書くために$C(I)^s = T_1^s \cup \dots \cup T_t^s$
+    に包除原理を適用する。
+    \item 結論を言うために、次数$d$の項を与える$\sum_i \abs{T_i^s}$
+    が支配的であることを言う。
+    \item そのために、$T_{ほげ}$の2つ以上の交わりが空であるか、
+    次数が真に小さく、包除原理の式ではゴミになることを言う。
+    これは上の演習8でやった。
+    \item 証明ではないが、この多項式は個数をあらわしているので、
+    $s$が十分大きければこの多項式は整数値をとる。
+  \end{itemize}
+
+  TODO
+\end{myproof}
+
+\begin{framed}
+  演習11,12:十分大きな$s$に対して整数値をとるような
+  次数が$d$の多項式は、次の多項式$\tatev{s \\ 0},\dots,\tatev{s\\d}$
+  の整数係数の線形結合として一意的に表わされる。
+\end{framed}
+\begin{myproof}
+  $0! \tatev{s \\ 0},\dots, d! \tatev{s \\ d}$は全部、
+  0次から$d$次までの
+  整数係数のモニックである。
+  あとは次数の高い順に足し引きして作ればよい。
+\end{myproof}
+
+
+\begin{framed}
+  命題7:
+  $I \subset k[x_1,\dots,x_n]$を単項式イデアルで、
+  $\dim \var(i) = d$とする。
+  すると十分大きな$s$に対して、$C(I)$に含まれる
+  全次数が$s$以下の点の個数は、次数が$d$の$s$の多項式
+  $\sum_{i=0}^d a_i \tatev{s \\ d-i}$で表わすことができる。
+  ここに$0\le i\le d$に対して$a_i \in \Z$であり、
+  さらに$a_0 > 0$である。
+\end{framed}
+\begin{myproof}
+  定理6で、多項式が$s\gg 1$に対して整数値をとることと
+  演習11,12から従う。
+\end{myproof}
+
+\begin{framed}
+  定義:
+  射影線形部分空間の和集合の次元を、その部分集合たちの次元のうち最大のものとして定義する。
+\end{framed}
+
+\begin{framed}
+  命題8:
+  $I\subset k[x_1,\dots,x_n]$を単項式イデアルとして、
+  $\var_p(I)$を$I$によって定義される$\P^{n-1}(k)$の射影多様体とする。
+  もし$\dim \var_p(I) = d-1$なら、十分大なる
+  任意の$s$に対して、$I$に含まれない、全次数がちょうど$s$に等しい
+  単項式の個数は、次数が$d-1$の$s$の多項式
+  $\sum_{i=0}^{d-1} b_i \tatev{s \\ d-1 - i}$で与えられる。
+  ここに$0\le i \le d-1$に対して$b_i \in \Z$であり、さらに
+  $b_0 > 0$である。
+\end{framed}
+\begin{myproof}
+  概略
+  \begin{itemize}
+    \item $p(s)$を$s$次以下の$I$に含まれない単項式の個数とする。
+    \item ちょうど$s$次に等しい単項式なので、$p(s) - p(s-1)$を考える。
+    % \item 上は演習15により次数$d-1$であることがわかる。これを解く。
+    % \begin{itemize}
+    %   \item $C(I)$を、座標部分空間に
+    %   \begin{align}
+    %     C(I) = T \cup (U_1 \cup \dots U_s) \cup (V_1\cup \dots V_t)
+    %   \end{align}
+    %   と分解する。ただし、$T$は$d$次であり、
+    %   $U_i$は$d-1$次でかつ$T$に出てくる方向のみを含むものであり、
+    %   $V_i$はその他の座標部分空間である。定理3の証明を見ると、
+    %   $d$次の座標部分空間は1つになるように分解できる。
+    %   このようにしておくと、これらからintersectionを取って
+    %   $d-1$次が出てくるには、$T$と$U_i$から選ぶしかない(選べば$d-1$次になるとは当然限らない。)。
+    %   \item
+    %   上の分解から有限個を選んでintersectionを取り、$d-1$次
+    %   の座標部分空間ができる状況を考える。
+    %   $1\le i \le s$として、$T,U_1,\dots,U_s$から
+    %   $i$個を$T$を含まないように選ぶと、
+    %   いくらか$d-1$次座標部分空間がいくらかできるが(0個かもしれない)、
+    %   この個数を$N_i$とする。
+    %   \item
+    %   次に、$i+1$個を$T$を含むように
+    %   $s+1$個選ぶと、1個固定されてしまっているので$s$個
+    %   選ぶことになるが、$U_i$には$T$に出てくる方向しか出ないので、
+    %   intersectionを取ってできるものは先の「$i$個を$T$を含まないように選ぶ」
+    %   ときのものと同じになり、結局このように
+    %   選ぶと$d-1$次座標部分空間は$N_i$個できる。
+    %   \item
+    %   また、$T$を含むように1個選んで$d-1$次座標部分空間を作ることは
+    %   明らかにでない。
+    %   \item
+    %   また、$T$を含まないように$s+1$個選んで$d-1$次座標部分空間
+    %   を作ることはでいない。なぜなら、そもそも$T$を含まない
+    %   時点で$U_1,\dots,U_s$から選ぶしかないが、これらが$s$個しかないから。
+    %   \item
+    %   包除原理の、
+    %   \begin{align}
+    %     p(s) = \abs{C(I)^s} =
+    %     \sum_i \abs{(分解たち)^s}
+    %     -
+    %     \sum_{i<j} \abs{(分解たちの2個の\cap)^s}
+    %     +
+    %     \sum_{i<j<k} \abs{(分解たちの3個の\cap)^s}
+    %   \end{align}
+    %   の$d-1$次項に注目する。
+    %   $i$個選んだときと$i+1$個選んだときで正負が反転しているので、
+    %   先の「$T$を含まない～含む～」が同数出ることから、
+    %   $d-1$次以下の座標部分空間から$d-1$次項が出ることがないことがわかる。
+    %   \item
+    %   よって、$d-1$次項は$d$次座標部分空間$T$からしか出ず、
+    %   これは$\tatev{m+s \\ m}=\frac{(m+s)\dots (s+1)}{m!}$
+    %   の$d-1$次項を取り出すと、この係数は
+    %   \begin{align}
+    %     \frac{1}{m!}\sum_{i=1}^m m(m-1) \dots \banme{i}{ナシ} \dots 1
+    %     =
+    %     \sum_{i=1}^m \frac{1}{i}.
+    %   \end{align}
+    %   であることがわかる。よって、$p(s)$の
+    %   $d-1$次項は$(\sum_{i=1}^m \frac{1}{i})s^{d-1}$である。
+    %   \item
+    %   $p(s-1)$についても、その$d-1$次項が
+    %   $T$からしか出ないのは変わらない。
+    %   $\tatev{m+(s-1) \\ m} = \frac{((m-1)+s) \dots (s+1)}{(m-1)!} $
+    %   の$d-1$次項を取り出すと、この係数は$\sum_{i=1}^{m-1} \frac{1}{i}$となる。
+    %   \item
+    %   以上のことより、$p(s)-p(s-1)$の$d-1$次項は、
+    %   $1/m$となる。
+    %   \item ウソ！$T$と$U_i$に交わりがないとき、一方に表れて
+    %   打ち消しが起こらない！
+    \item
+      \begin{itemize}
+        \item 定理6より、$p(s)= as^d + bs^{d-1} + (d-1次未満)$となる。
+        ただし、$a>0$である。
+        \item
+        \begin{align}
+          p(s) - p(s-1)
+          &=
+          (as^d + bs^{d-1} + (d-1次未満))
+          -
+          (a(s-1)^d + b(s-1)^{d-1} + (d-1次未満))\\
+          &=
+          as^d + bs^{d-1} -a(s-1)^d - b(s-1)^{d-1} +(d-1次未満)\\
+          &=
+          as^d + bs^{d-1} -a(s^d - ds^{d-1}) - bs^{d-1} + (d-1次未満)\\
+          &=
+          ads^{d-1} + (d-1 次未満)
+        \end{align}
+        なのでOK。
+      \end{itemize}
+
+    \end{itemize}
+  \end{itemize}
+
+  TODO
+\end{myproof}
+
+\subsection{ヒルベルト関数と多様体の次元}
+\label{sub:ヒルベルト関数と多様体の次元}
+
+\begin{framed}
+  命題1:
+  $W$を有限次元ベクトル空間$V$の部分空間とする。
+  すると$W$と$V/W$はまた有限次元であって、
+  $\dim V = \dim W + \dim V/W$が成り立つ。
+\end{framed}
+\begin{myproof}
+  線形代数でやった。略。
+\end{myproof}
+
+\begin{framed}
+  定義:
+  \begin{itemize}
+    \item   $k[x_1,\dots,x_n]_{\le s}$を、
+      $k[x_1,\dots,x_n]$における全次数が$s$以下の多項式の
+      全体とする。これは、有限次元$k$ベクトル空間になっており、
+      この次数は$\tatev{n+s \\ s}$次である。
+    \item
+    $I\subset k[x_1,\dots,x_n]$が与えられたとき、
+    $I$に属する全次数が$s$以下の多項式の集合を
+    $I_{\le s} = I\cap k[x_1,\dots,x_n]_{\le s}$と書く。
+    $I_{\le s}$は$k[x_1,\dots, x_n]_{\le s}$の部分空間である。
+    (\pf $I_{\le s}$はこれらの生成元に単項式をかけたやつ全体を
+    基底としてベクトル空間になるから、ベクトル空間のintersectionになっている。)
+  \end{itemize}
+
+
+\end{framed}
+
+\begin{framed}
+  定義2:
+  $I$を$k[x_1,,\dots,x_n]$のイデアルとする。
+  $I$のアフィン・ヒルベルト関数とは、非負整数$s$の関数
+  \begin{align}
+    \aHF_I(s) &=
+    \dim k[x_1,\dots,x_n]_{\le s}/I_{\le s}\\
+    &=
+    \dim k[x_1,\dots,x_n]_{\le s} - \dim I_{\le s}
+  \end{align}
+  のことである。(2番目の等式は商空間の次元の性質命題1。)
+\end{framed}
+
+\begin{framed}
+  命題3:
+  $I$を$k[x_1,\dots,x_n]$の単項式イデアルであって、
+  かつ真部分イデアルとする。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    任意の$s\ge 0$に対して、$\aHF_I(s)$は$I$に含まれない全次数
+    が$s$以下の単項式の個数を表す。
+    \item
+    十分大きな任意の$s$に対して、
+    $I$のアフィン・ヒルベルト関数は多項式関数
+    \begin{align}
+      \aHF_I(s) = \sum_{i=0}^d b_i \tatev{s \\ d-i}
+    \end{align}
+    で与えられる。ここに$b_i \in \Z$であって、$b_0$は正である。
+    \item
+    (ii)で与えられた多項式の次数は、
+    $\var(I)$に含まれる座標部分空間の次元の最大値に一致する。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i):
+  \begin{align}
+    \aHF_I(s)
+    &=
+    \dim k[x_1,\dots,x_n]_{\le s}- \dim I_{\le s}\\
+    &\desceq{$I$は単項式イデアル}
+    \#\set{x^\alpha; \abs{\alpha}\le s} - \#\set{x^\alpha; \abs{\alpha}\le s,\, x^\alpha \in I}\\
+    &=
+    \#\set{x^\alpha ; \abs{\alpha}\le s, \, x^{\alpha}\notin I}\\
+    &=
+    \abs{C(I)^s}.
+  \end{align}
+
+  (ii): $d=\dim \var(I)$とする。
+  \begin{align}
+    \aHF_I(s)
+    \desceq{(i)}
+    (Iに含まれない全次数がs以下の単項式の個数)
+    \desceq{命題2-7}
+    \sum_{i=0}^d b_i^\exists \tatev{s \\ d- i}.
+  \end{align}
+  しかも定理より、$b_i \in \Z$であり、$b_0 >0$である。
+  (iii):
+  上より$\aHF_I(s)$の次数は$d$だが、$d=\var(I)$であり、
+  $\var(I)$の定義は$\var(I)$に含まれる座標部分空間の次元の最大値だった。
+\end{myproof}
+
+\begin{framed}
+  命題4:
+  $I\subset k[x_1,\dots,x_n]$をイデアル、
+  $>$を$k[x_1,\dots,x_n]$上の次数つき順序とする。
+  すると単項式イデアル$\gen{\LT(I)}$は$I$と同じアフィン・ヒルベルト関数を持つ。
+\end{framed}
+\begin{itemize}
+  \item $\gen{\LT(I)}$と$I$の何が等しいの？→$\gen{\LT(I)}_s$と
+  $I_s$とは次元が等しい。
+\end{itemize}
+\begin{myproof}
+  \begin{enumerate}
+    \item $s$を十分大きく、というのは$\var(I)$より大きくとる。
+    \item $\set{\LM(f); f\in I_{\le s}} = \set{\LM(f_1),\dots, \LM(f_m)}$
+    とする。ただし、右辺に重複はなく、$\LM(f_1) > \dots > \LM(f_m)$となっている。
+    \item $f_1,\dots, f_m$が$I_{\le s}$の$k$ベクトル空間としての基底？
+    (要するに張らなかったら入らなかったところの最小次数が取れるけど
+    さらに落ちれてやばい)
+    \begin{enumerate}
+      \item 線形独立はあきらかなので、張ることを示す。
+      もしも張らないとすると、
+      $I_{\le s} - k\gen{f_1,\dots,f_m}$が空でないので、
+      ここから多重次数が最も小さいものを選んで$f$とする。
+      \item
+      $f\in I_{\le s} $なので、$\LM(f)$は$\LM(f_1),\dots,\LM(f_m)$
+      のどれかである。ここで、$\LM(f) = \LM(f_i)$とする。
+      \item
+      $f,f_i \in I_{\le s}$なので$f-f_i \in I_{\le s}$となる。
+      これは多重次数が$f$よりも小さい。
+      \item
+      $f-f_i \in k\gen{f_1,\dots,f_m}$だと仮にすると、
+      $f\in k\gen{f_1,\dots,f_m}$とならなればならないから、これは
+      (a:$f$の取り方)に反する。よって、$f-f_i \in k\gen{f_1,\dots,f_m}$となる。
+      \item
+      (c:$f-f_i$は$f$より次数が小さい)と、
+      (a:$f$は$I_{\le s} - k\gen{f_1,\dots,f_m}$のなかで最小次数)
+      と、(d:$f-f_i \in k\gen{f_1,\dots,f_m}$)より、
+      これは矛盾。
+    \end{enumerate}
+    \item
+    $\gen{\LT(I)}_{\le s}$はベクトル空間として
+    $\LM(f_1),\dots,\LM(f_m)$を基底として持つ。
+    \begin{enumerate}
+      \item 線形独立なので、張ることを示す。$x^\alpha \in \gen{\LT(I)}_{\le s}$について、
+      $x^\alpha$を$\LM(f_1),\dots,\LM(f_s)$で書ければいい。
+      $x^\alpha \in \gen{\LT(I)}$なので、
+      $\LM(f) = x^\alpha$なる$f\in I$がある。
+      \warn{次数つき順序が入っているので}、
+      $\LM(f) \in k[x_1,\dots,x_n]_{\le s}$から
+      $f\in k[x_1,\dots,x_n]_{\le s}}$となる。
+      よって、$f\in I\cap k[x_1,\dots,x_n]_{\le s} = I_{\le s}$
+      となる。よって、$x^\alpha = \LM(f) \in \LT(I_{le s})$
+      これは(2)よりある$i$について$\LM(f_i)$と等しい。
+    \end{enumerate}
+    \item
+    $I_{\le s}$は$f_1,\dots,f_m$を基底として持つので、上とあわせて
+    $\dim \gen{\LT(I)}_{\le s} = \dim I_{\le s}$である。
+  \end{enumerate}
+  \item
+  \begin{align}
+    \aHF_I(s)
+    &=
+    \dim d[x_1,\dots,x_n]_{\le s} - \dim I_{\le s}\\
+    &=
+    \dim d[x_1,\dots,x_n]_{\le s} - \dim \gen{\LT(I)}_{\le s}\\
+    &=
+    \aHF_{\gen{\LT(I)}}(s).
+  \end{align}
+\end{myproof}
+
+命題3によって、単項式イデアルではアフィン・ヒルベルト関数が多項式になること、
+命題4によって、任意のイデアルについてそのアフィン・ヒルベルト関数が
+そのイデアルからできた単項式イデアルのものと等しいことが分かったので、
+あわせると任意のイデアルに対し、そのアフィン・ヒルベルト関数が
+多項式になることがわかった。
+\begin{framed}
+  定義5:
+  十分大きな整数$s$に対して、$\aHF_I(s)$と
+  一致するような多項式を、$I$のアフィン・ヒルベルト多項式とよび、
+  $\aHP_I(s)$と書く。
+\end{framed}
+
+
+$s$はある程度大きければ$\HF_I(s)$となるが、
+これが多項式となる最小の$s$に名前をつける。
+\begin{framed}
+  定義:
+  $\aHP_I(s) = \aHF_I(s)$となる最小の整数$s_0$を
+  $I$の正則指数という。
+\end{framed}
+
+\begin{framed}
+  命題6:
+  $I\subset k[x_1,\dots,x_n]$をイデアルとする。
+  すると$I$と$\sqrt{I}$のアフィン・ヒルベルト多項式の次数は一致する。
+\end{framed}
+\begin{myproof}
+  概略:
+  \begin{enumerate}
+    \item 単項式イデアルについては、
+    アフィン・ヒルベルト多項式の次数は
+    その多様体に含まれる座標部分空間の次数のうち最大のもので、
+    多様体が$\var(I) = \var(\sqrt{I})$になっているので
+    等しい。
+    \item
+    先に一般のイデアルの次数の計算はそのLTをとったイデアルを考えればよいことを見た。
+    よって、$\gen{\LT(I)}$の次数を使って、
+    $\gen{\LT(\sqrt{I})}$の次数を考えればよい。
+    今、
+    \begin{align}
+      \gen{\LT(I)} \subset \gen{\LT(\sqrt{I})} \subset \sqrt{\gen{\LT(I)}}
+    \end{align}
+    となっている。
+    \begin{enumerate}
+      \item はじめの包含は$I\subset \sqrt{I}$→$\LT(I) \subset \LT(\sqrt{I})$
+      →$\gen{\LT(I)} \subset \gen{\LT(\sqrt{I})}$から従う。
+      \item
+      2番目を考える。
+      左辺の生成元がすべて右辺に入ることを言えばよい。
+      $LT(f) \in \LT(\sqrt{I})$とする。
+      $f\in \sqrt{I}$となり、$f^n \in I$となる。
+      よって、$\LT(f)^n = \LT(f^n) \in \LT(I) \subset \gen{\LT(I)}$となり、
+      $\LT(f) \in \sqrt{\gen{\LT(I)}}$となる。
+    \end{enumerate}
+    \item
+    一般に、$I_1 \subset I_2$のとき、$
+    \deg \aHP_{I_2} \le \deg \aHP_{I_1}$が成立する。
+    \begin{enumerate}
+      \item 仮定より、$\gen{\LT(I_1)} \subset \gen{\LT(I_2)}$となる。
+      \item $C$は単項式イデアルに含まれない単項式たちだったので、
+      $C(\gen{\LT(I_2)}) \subset C(\gen{\LT(I_1)})$となる。
+      \item
+      アフィン・ヒルベルト関数は上を「$s$次まで」で制限したものだったので、
+      $\aHP_{\gen{\LT(I_2)}}(s) \le \aHP_{\gen{\LT(I_1)}}(s)$となっている。
+      よって、命題4より
+      $\aHP_{I_2}(s) \le \aHP_{I_1}(s)$となっている。
+      \item
+      仮に$\deg \aHP_{I_2} > \deg \aHP_{I_1}$であったとする。
+      $s\to \infty$とすることを考えると、十分大きい$s$で
+      $\aHP_{\LT(I_2)}(s) > \aHP_{\LT(I_1)}(s)$となるが、これは上のiii
+      に矛盾する。よって、$\deg \aHP_{I_2} \le \deg \aHP_{I_1}$である。
+    \end{enumerate}
+    \item
+    (3:次元をとると反転する)を(2)の包含に使うと、
+    \begin{align}
+      \deg \aHP_{\sqrt{\gen{\LT(I)}}}
+      \le
+      \deg \aHP_{\gen{\LT(\sqrt{I})}}
+      \le
+      \deg \aHP_{\gen{\LT(I)}}
+    \end{align}
+    となる。
+    左辺と右辺が(1:単項式イデアルの場合)により等しいので、
+    $\deg \aHP_{\gen{\LT(I)}}
+    =
+    \deg \aHP_{\gen{\LT(\sqrt{I})}}$となる。
+    \item
+    命題4の「単項式イデアルで次元を考えても同じ」より、
+    $\deg \aHP_{I} = \deg \aHP_{\sqrt{I}}$である。
+  \end{enumerate}
+\end{myproof}
+
+
+
+\begin{framed}
+  定義7:
+  アフィン多様体$V\subset k^n$の次元を、
+  対応するイデアル$I=\ideal(V) \subset k[x_1,\dots,x_n]$の
+  アフィン・ヒルベルト多項式の次数として定義し、記号で
+  $\dim V$と表す。
+\end{framed}
+
+\begin{framed}
+  定理8(次元定理):
+  イデアル$I\subset k[x_1,\dots,x_n]$によって
+  定義されたアフィン多様体$V=\var(I)$を考える。
+  (C1)$k$が代数的閉体ならば、
+  \begin{align}
+    \dim V = \deg \aHP_I
+  \end{align}
+  が成り立つ。(C2)さらに、$k[x_1,\dots,x_n]$上の
+  次数つき順序$>$に対して、
+  \begin{align}
+    \dim V = \deg \aHP_{\gen{\LT(I)}}
+    =
+    \var(\gen{\LT(I)}) の座標部分空間の次元の最大値
+  \end{align}
+  となる。
+  (C3)最後に、$I=\ideal(V)$ならば、上の2つの統合は任意の体で
+  成立する。
+\end{framed}
+\begin{myproof}
+  (C1):
+  \begin{align}
+    \dim V = \deg \aHP_{\var(I)}
+    \desceq{零点}
+    \deg \aHP_{\sqrt{I}}
+    \desceq{定理6}
+    \deg \aHP_{I}.
+  \end{align}
+
+  (C2):
+  \begin{align}
+    \dim V
+    \desceq{C1}
+    \deg \aHP_I
+    \desceq{命題4,次数つき}
+    \deg \aHP_{\gen{\LT(I)}}
+    \desceq{命題3}
+    \var(\gen{\LT(I)}) の座標部分空間の次元の最大値.
+  \end{align}
+
+  (C3):
+  \begin{align}
+    \dim V = \deg \aHP_{\ideal(V)}
+    \desceq{仮定}
+    \deg\aHP_{I}
+    \desceq{命題4,次数つき}
+    \deg \aHP_{\gen{\LT(I)}}
+    \desceq{命題3}
+    \var(\gen{\LT(I)}) の座標部分空間の次元の最大値.
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  定義:
+  \begin{itemize}
+    \item $k[x_0,\dots,x_n]_s$を全次数$s$であるような斉次多項式であるとする。
+    これは$\tatev{n+s \\ s}$次元$k$ベクトル空間になる。(\pf $s$個を
+    $n+1$種類に分けるので、$s$個の玉と$(n+1)-1$個のしきりを並べる。)
+    \item
+    斉次イデアル$I\subset k[x_0,\dots,x_n]$について、
+    全次数が$s$であるような$I$の斉次多項式の集合を
+    $I_s = I\cap k[x_0,\dots,x_n]_s$とする。$I_s$は
+    $k[x_0,\dots,x_n]_s$の部分ベクトル空間になっている。
+    \item $I$のヒルベルト関数を$\HF_I(s)=\dim k[x_0,\dots,x_n]_s/I_s$と
+    定義する。
+  \end{itemize}
+\end{framed}
+
+\begin{framed}
+  命題3':
+  $I$を$k[x_0,\dots,x_n]$の斉次単項式イデアルであって、かつ
+  真部分イデアルとする。
+  \begin{enumerate}[label=(\roman*)]
+    \item 任意の$s\ge 0$に対して、
+    $\HF_I(s)$は$I$に含まれない全次数が$s$の単項式の
+    個数を表す。
+    \item
+    十分大きな任意の$s$に対して、$I$のヒルベルト関数は
+    多項式関数
+    \begin{align}
+      \HF_I(s) = \sum_{i=0}^d b_i \tatev{s \\ d-i}
+    \end{align}
+    で与えられる。ここに、$d=\dim \var(I)$であり、
+    $b_i \in \Z$であり、$b_0>0$である。
+    \item
+    (ii)で与えられた多項式の次数は、
+    $\var(I)$に含まれる座標部分空間の次元の最大値に一致する。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i):
+  命題3(i)と同様。
+
+  (ii):
+  \begin{align}
+    \HF_I(s)
+    \desceq{(i)}
+    (Iに含まれない全次数がsの単項式の個数)
+    \desceq{命題2-8}
+    \sum_{i=0}^d b_i^\exists \tatev{s \\ d-i}.
+  \end{align}
+  しかも定理より、$b_i \in \Z$であり、$b_0 > 0$である。
+
+  (iii):
+  命題3と同様。
+\end{myproof}
+
+\begin{framed}
+  命題9:
+  $I\subset k[x_0,\dots,x_n]$を斉次イデアル、
+  $>$を$k[x_0,\dots,x_n]$上の単項式順序とする。
+  すると単項式イデアル$\gen{\LT(I)}$は
+  $I$と同じヒルベルト関数を持つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item   $s$を十分大きくとる。
+    \item
+    $\set{\LM(f);f\in I_{s}} = \set{\LM(f_1),\dots,\LM(f_m)}$とする。
+    ただし、右辺に重複はなく、$\LM(f_1) > \dots > \LM(f_m)$となっている。
+    \item
+    $f_1,\dots,f_m$は$I_{s}$の$k$ベクトル空間としての
+    基底になることは命題4と同じ。
+    \item
+    $\gen{\LT(I)}_{s}$はベクトル空間として
+    $\LM(f_1),\dots,\LM(f_m)$を基底として持つ。
+    命題4はこれを次数つき順序に依存していたので、
+    代わりにこれを斉次性を使ってやる。
+    \begin{enumerate}
+      \item $x^\alpha \in \gen{\LT(I)}_{s}$とする。
+      $x^\alpha \in \gen{\LT(I)}$なので、
+      $\LM(f) = x^\alpha$で、$f \in I$となる$f$がある。
+      $I$が斉次イデアルであるから、$\LM(f) \in I$となり、
+      $\LM(f) = x^\alpha \in k[x_0,\dots,x_n]_s$となる。
+      よって、$\LM(f) \in I_s$なので、
+      2の左辺の条件をみたし、$\LM(f) = \LM(\LM(f)) \in (2の左辺)$となる。
+      よって、$\LM(f)$がある$i$が存在して$\LM(f_i)$と等しくなる。
+    \end{enumerate}
+    \item あとは同様。
+  \end{enumerate}
+\end{myproof}
+
+命題9から、斉次イデアル$I$は$\gen{\LT(I)}$と同じヒルベルト関数を持ち、
+命題3'から$\gen{\LT(I)}$は十分大きな$s$で
+ヒルベルト関数が多項式になることを言ったので、次の定義ができる。
+\begin{framed}
+  $\HP_I(s)$を十分大きい$s$で$\HF_I(s)$のあらわす多項式とする。
+\end{framed}
+
+
+\begin{framed}
+  定義10:
+  射影多様体$V\subset \P^n(k)$の次元を、
+  対応する斉次イデアル$I=\ideal(V)$のヒルベルト多項式の次数として
+  定義し、$\dim V$で表す。
+\end{framed}
+
+\begin{framed}
+  定理11(次元定理):
+  $I\subset k[x_0,\dots,x_n]$を斉次イデアルとし、
+  $V=\var(I) \subset \P^n(k)$を射影多様体とする。
+  $V$が空ではなく、$k$が代数的閉体ならば、
+  $\dim V = \deg \HP_I$が成り立つ。
+
+  さらに、$k[x_0,\dots,x_n]$の任意おん単項式順序に対して、
+  \begin{align}
+    \dim V = \deg \HP_{\gen{\LT(I)}}
+    =
+    \var(\gen{\LT(I)})の射影的座標部分空間の次元の最大値
+  \end{align}
+  である。最後に、$I=\ideal (V)$なら、上式の2つの統合は任意の体
+  $k$上で成立。
+\end{framed}
+\begin{myproof}
+  命題6と同様。$V$が空でないことを仮定しているので、
+  強零点定理が使えることに注意。
+\end{myproof}
+
+\begin{framed}
+  定理12:
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $I\subset k[x_0,\dots,x_n]$を斉次イデアルとする。
+    すると$s\ge 1$に対して
+    \begin{align}
+      \HF_I(s) = \aHF_I(s) - \aHF_I(s-1)
+    \end{align}
+    が成り立つ。ヒルベルト多項式に対しても同様の関係が成り立つ。
+    したがって、もし(追加:空でない)$V\subset \P^n(k)$が射影多様体で
+    $C_V \subset k^{n+1}$がアフィン錐なら
+    \begin{align}
+      \dim C_V = \dim V + 1
+    \end{align}
+    が成り立つ。
+    \item
+    $I\subset k[x_1,\dots,x_n]$をイデアルとし、
+    $I^h \subset k[x_0,\dots,x_n]$を
+    その$x_0$に関する斉次化とする。すると$s\ge 0$に対して、
+    \begin{align}
+      \aHF_I(s) = \HF_{I^h}(s)
+    \end{align}
+    が成り立つ。ヒルベルト多項式の間にも同様の関係が
+    成り立つ。したがって、$V\subset k^n$が
+    アフィン多様体で、$\ol V\subset \P^n(k)$をその射影完備化
+    \footnote{$\ol V = \var(\ideal_a(V)^h)$のことだった。}
+    とすると、$\dim V = \dim \ol V$が成り立つ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (iヒルベルト関数について):
+  \begin{align}
+    \HF_I(s)
+    &\desceq{命題9}
+    \HF_{\LT(I)}(s)\\
+    &=
+    \# \set{\LT(I)に含まれない次数sぴったりの単項式}\\
+    &=
+    \# \set{\LT(I)に含まれない次数s以下の単項式}
+    -
+    \# \set{\LT(I)に含まれない次数(s-1) 以下の単項式}\\
+    &=
+    \aHF_{\LT(I)}(s) - \aHF_{\LT(I)}(s-1)\\
+    &\desceq{命題4}
+    \aHF_{I}(s) - \aHF_{I}(s-1).
+  \end{align}
+
+  (iヒルベルト多項式について):
+  ヒルベルト多項式がヒルベルト関数で定義されていたので、上から従う。
+
+  (iの後半):
+  \begin{enumerate}
+    \item $\ideal_p(V) = \ideal_a(C_V)$である？
+    (ただし、$C_V = \var_a(\ideal_p(V))$)
+    \begin{enumerate}
+      \item
+      先にアフィン錐の性質を確認する。
+      $[p]\in \var_p(I)\iff
+      p\in \var_a(\ideal_p(\var_p(I)))\setminus \set{0}$を示す。
+      (多様体を書くときはイデアルまで書くと安心できる！)
+      \begin{enumerate}
+        \item $\Rightarrow$:
+        $[p] \in \var_p(I)$なので、$\ideal_p(\var_p(I))$は
+        $[p]$を消す。よって特に、その斉次座標の1つである
+        $p$を消す。よって、$p\in \var_a(\ideal_p(\var_p(I)))$である。
+        また、$[p]$は斉次座標だったので、$p\neq 0$であり、
+        $p\in \var_a(\ideal_p(\var_p(I)))$となる。
+        \item $\Leftarrow$:
+        $\ideal_p(\var_p(I))$は$p$を消す。
+        $p\neq 0$なので、$[p]$を考えることができ、
+        このイデアルが斉次イデアルであることを考えると、
+        $\ideal_p(\var_p(I))$は$[p]$を消す。
+        よって、$[p]\in \var_p(\ideal_p(\var_p(I)))$となる。
+        $\ideal_p$は左可逆だったので(無限体でさえあればいい！)
+        $[p]\in \var_p(I)$である
+      \end{enumerate}
+      \item
+      本題を示す。
+      \begin{align}
+        f\in \ideal_p(\var_p(I))
+        &\iff
+        \Forall{[p]\in \var_p(I)} f([p]) = 0\\
+        &\desciff{アフィン錐}
+        \Forall{p\in \var_a(\ideal_p(\var_p(I)))-\set{0}} f([p]) = 0\\
+        &\desciff{斉次イデアル}
+        \Forall{p\in \var_a(\ideal_p(\var_p(I)))} f(p) = 0\\
+        &\iff
+        f\in \ideal_a(\var_a(\ideal_p(\var_p(I))))
+      \end{align}
+      これで示された。
+    \end{enumerate}
+    \item
+    1より、
+    \begin{align}
+      \dim V = \dim \HP_{\ideal_p(V)},\quad
+      \dim C_V = \dim \aHP_{\ideal_a(C_V)} = \dim \aHP_{\ideal_p(V)}
+    \end{align}
+    となる。
+    \item
+    \begin{align}
+      \dim V
+      &=
+      \dim \HP_{\ideal_p(V)}(s)\\
+      &\desceq{(i)}
+      \dim(\aHP_{\ideal_p(V)}(s) - \aHP_{\ideal_p(V)}(s-1))\\
+      &\desceq{命題2-8の証明。次数が落ちる。}
+      \dim \aHP_{\ideal_p(V)}(s) - 1\\
+      &\desceq{(i)}
+      \dim C_V - 1.
+    \end{align}
+  \end{enumerate}
+
+  (ii:斉次化の次数):
+  \begin{enumerate}
+    \item ベクトル空間として、
+    $k[x_1,\dots,x_n]_{\le s} \simeq k[x_0,\dots,x_n]_s$
+    である？
+    \begin{enumerate}
+      \item ベクトル空間として、
+      \begin{align}
+        \phi\colon k[x_1,\dots,x_n]_{\le s} \to k[x_0,\dots,x_n]_s,&\quad
+        \phi(f) = x_0^s f(x_1/x_0,\dots,x_n/x_0)\\
+        \psi\colon k[x_0,\dots,x_n]_{s} \to k[x_1,\dots,x_n]_{\le s},&\quad
+        \psi(F) = F(1,x_1,\dots,x_n)
+      \end{align}
+      とする。これは線形で可逆。
+    \end{enumerate}
+    \item
+    $I_{\le s} \simeq I_s^h$である？
+    \begin{enumerate}
+      \item $f\in I_{\le s}$、すなわち、
+      $f \in I$の次数が$d\le s$のとき、
+      $\phi(f) = x_0^{s-d}f^h$で、
+      $\phi(f)$が$f^h$の倍数なので、$\phi(f) \in I^h$である。
+      また、$f^h$は$d$次で$x_0^{s-d}$は当然$s-d$次なので、
+      $\phi(f)$は$s$次であり、$\phi(f) \in k[x_0,\dots,x_n]_{s}$でもある。
+      よって、$\phi(f) \in I_s^h$となる。よって、
+      $\phi(I_{\le s}) \subset I_s^h$となる。
+      \item $\psi(I_s^h) \subset I_{\le s}$は、
+      斉次化の非斉次化はもとに戻ることから従う。
+      \item
+      あとは次元を計算する。
+      \begin{align}
+        \aHP_I(s)
+        &=
+        \dim k[x_1,\dots,x_n]_{\le s} - \dim I_{\le s}\\
+        &\desceq{上の同型2つ}
+        \dim k[x_0,\dots,x_n]_{s} - \dim I_s^h\\
+        &=
+        \HP_{I^h}(s).
+      \end{align}
+    \end{enumerate}
+  \end{enumerate}
+
+  (ii:射影完備化の次数)
+  \begin{enumerate}
+    \item アフィン多様体$W$について、
+    $\ideal_p(\ol W) = \ideal_a(W)^h$を示す。
+    \begin{enumerate}
+      \item
+      $\ideal_p(\ol W) = \ideal_p(\var_p(\ideal_a(W)^h))$
+      なので、$\supset$はあきらか。$\subset$を示す。
+      \item
+      $F\in \ideal_p(\ol W)$とする。$F$は$\ol W$を消すので、
+      $f$を$F$の非斉次化とすると、$f$は$W$を消す。
+      \item
+      上より、$f \in \ideal_a(W)$である。
+      \item
+      上より、$f^h \in \ideal_a(W)^h$である。
+      \item
+      非斉次化の斉次化を考えると、$F=x_0^n f^h$となる$n\in \N$があるので、
+      $F\in \ideal_a(W)^h$となる。
+      \item
+      $F$は任意だったので、$\ideal_p(\ol W) \subset \ideal_a(W)^h$である。
+      \item
+      以上で(a)の等号は示された。
+    \end{enumerate}
+    \item 次元を計算する。
+    \begin{align}
+      \dim V
+      &=
+      \deg \aHP_{\ideal_a(V)}\\
+      &\desceq{ii:斉次化の次数}
+      \deg \HP_{\ideal_a(V)^h}\\
+      &\desceq{1}
+      \deg \HP_{\ideal_p(\ol V)}\\
+      &=
+      \dim \ol V
+    \end{align}
+  \end{enumerate}
+
+\end{myproof}

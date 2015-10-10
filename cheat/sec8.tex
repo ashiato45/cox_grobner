@@ -1,0 +1,265 @@
+\label{sec:射影代数幾何}
+
+
+\subsection{射影平面}
+\label{sub:射影平面}
+\subsection{射影空間と射影多様体}
+\label{sub:射影空間と射影多様体}
+\subsection{射影化された代数-幾何対応}
+\label{sub:射影化された代数-幾何対応}
+\subsubsection{定理2:斉次イデアルの特徴付け}
+\label{subs:定理2:斉次イデアルの特徴付け}
+イデアルについて、以下同値。
+\begin{enumerate}[label=(\roman*)]
+  \item $I$は$k[x_0,\dots,x_n]$の斉次イデアル
+  \item 斉次多項式$f_\bullet$を用いて$I=\gen{f_1,\dots,f_s}$
+  \item 任意の多項式順序について、$I$の簡約グレブナ基底は斉次多項式からなる。
+\end{enumerate}
+
+\pf 斉次多項式で生成される$\implies$斉次イデアル:
+イデアルから$f$をとって、
+\begin{align}
+  \sum_{d} \ub{g_d}_{d次}
+  =
+  f
+  =
+  \sum_i c_i f_i
+\end{align}
+と2通りに分解して、右側の$c_i$も分解して比べる。
+
+\pf 斉次イデアル$\implies$斉次多項式で生成される:
+イデアル$I$をヒルベルトの基底定理で
+$I=\ge{F_1,\dots,f_t}$と書いて、
+各$F_i$を分解すると、それらで生成されるイデアルが$I$と一致する。
+
+\pf 斉次多項式で生成される$\implies$ 簡約グレブナ基底は斉次多項式からなる:
+斉次多項式で生成されるので、
+これにブッフベルガーをかますと、斉次多項式からなる
+グレブナ基底は得られる。
+割り算アルゴリズムを考えると、簡約化で余りを取るステップでも
+斉次であることが保たれる。
+
+\subsubsection{命題3:イデアルで生成される射影多様体}
+\label{subs:命題3:イデアルで生成される射影多様体}
+$\var(I) = \var(f_1,\dots,f_s)$
+
+\pf
+\begin{align}
+  \var(\gen{f_1,\dots,f_s}) =
+  \set{どの\gen{f_1,\dots,f_s}でも消える点}
+  =
+  \set{どのf_1,\dots,f_sでも消える点}
+  =
+  \var(f_1,\dots,f_s).
+\end{align}
+
+\subsubsection{命題4: 射影多様体からイデアル}
+\label{subs:命題4: 射影多様体からイデアル}
+\begin{align}
+  \ideal(V) = \set{Vを消す関数}
+\end{align}
+とすると、$k$を無限体とすると$\ideal(V)$は斉次イデアルとなり、
+$\ideal \colon \set{射影多様体} \to \set{斉次イデアル}$
+が定義される。
+
+\pf:
+斉次を示す。$\ideal(V)$から元をとって$f$としておく。
+\begin{align}
+  f(\lambda a_0,\dots,\lambda a_n)
+  =
+  \sum_i \lambda^i f_i(a_0,\dots,a_n)
+\end{align}
+を$\lambda$についての方程式と見ると、無限体なので
+各$f_i(a_0,\dots,a_n)=0$になって、各斉次成分$f_i$も$\ideal(V)$に属す。
+
+
+\subsubsection{定理5: イデアルをとることの単射性}
+\label{subs:定理5: イデアルをとることの単射性}
+$k$を無限体とすると、$\ideal,\var$は逆転する。
+また、$\var(\ideal(V))=V$となる。
+
+\begin{itemize}
+  \item $\ideal$の逆転:
+  たくさんの点を消すには条件が少ないほうがいいので
+  イデアルは小さいほうがいい。
+  \item $\var$の逆転:
+  少しの関数だと沢山の点が消えるので逆転する。
+  \item
+  $\var(\ideal(V))\subset V$:
+  \begin{align}
+    \var(\ideal(V))
+    =
+    \var(\ideal(\var(I)))
+     \subset
+    \var(I)
+    =
+    V.
+  \end{align}
+  \item
+  $\var(\ideal(V))\supset V$:
+  $I$が消す点は、「$I$が消す点」を消す関数が消す点？
+\end{itemize}
+
+\subsubsection{命題7: 斉次イデアルのラジカルは斉次イデアル}
+\label{subs:命題7: 斉次イデアルのラジカルは斉次イデアル}
+$\sqrt{I}$から元$f$を選んで、
+$f=f_{max} + f'$と書いたら、$f^n$の先頭項も$f_{max}^n$
+となる。あとはこれを引いて同じ操作を繰替えす。
+
+\subsubsection{定理8: 射影幾何における弱系の零点定理}
+\label{subs:定理8: 射影幾何における弱系の零点定理}
+$k$を代数的兵隊として$I$を斉次イデアルとする。
+
+\pf
+$C_V=\var_a(I)$を、$I$で定義されるアフィン多様体とする。
+(射影多様体のユークリッド空間での実現)
+
+すべての$x_i$について、$x_i^{何か}$が$I$のグレブナ基底に入っている
+$\implies$ $\var(I)$は空:
+\pf
+グレブナ基底の条件を定理6-3-6に使えば、
+$C_V$が有限集合になる(lexなら簡単。)。$\var(I)$に何か点があったとすると、
+その定数倍すべてが$\var(I)$に属することになり、有限性に反する。
+
+すべての$x_i$について、$x_i^{何か}$が$I$に入っている$\implies$
+すべての$x_i$について、$x_i^{何か}$が$I$のグレブナ基底に入っている:
+\pf $x_i^m \in I$とする。
+\begin{align}
+  x_i^m = \LT(x_i^m) \in \LT(I)\subset
+  \gen{LT(I)} = \gen{\LT(G)}.
+\end{align}
+
+ある$r\ge 1$について$\gen{x_0,\dots,x_n}^r \subset I$ $\implies$
+すべての$x_i^{何か} \in I$:
+\pf
+あきらか。
+
+$\var(I)$が空 $\implies$ ある$r\ge 1$について$\gen{x_0,\dots,x_n}^r \subset I$:
+\pf
+\begin{align}
+  \gen{x_0,\dots,x_n}
+  =
+  \ideal_a(0)
+  \descsubset{空だから}
+  \ideal_a(C_V)
+  \desceq{零点定理}
+  \sqrt{I}.
+\end{align}
+
+\subsubsection{定理9: 射影幾何における強系の零点定理}
+\label{subs:定理9: 射影幾何における強系の零点定理}
+\begin{align}
+  \sqrt{I}
+  \desceq{零点定理}
+  \ideal_a(\var_a(I))
+  \desceq{簡単}
+  \ideal(V)
+  =
+  \ideal(\var(I)).
+\end{align}
+
+\subsubsection{定理10: 射影多様体の$\ideal $と$\var$}
+\label{subs:定理10: 射影多様体の$\ideal $と$\var$}
+
+\subsection{アフィン多様体の射影完備化}
+\label{sub:アフィン多様体の射影完備化}
+\subsubsection{定義1: イデアルの斉次化}
+\label{subs:定義1: イデアルの斉次化}
+$I$を$x_1$から$x_n$に対して、この斉次化を
+$I^h = \gen{f^h; f\in I}$とする(こっちは$x_0$があるかも)。
+
+\subsubsection{命題2: 斉次化は斉次イデアル}
+\label{subs:命題2: 斉次化は斉次イデアル}
+$g\in \gen{f^h; f\in I}$とする。
+\begin{align}
+  g
+  =
+  \sum_{i=1}^N F_i f_i^h
+  =
+  \sum_{i=1}^N \sum_j F_{ij} \ub{f_{ij}^h}_{i次のやつのj番目}
+  =
+  \sum_{i=1}^N \sum_j \ub{(\sum_l F_{ijl})}_{F_{ij} の斉次分解} f_{ij}^h
+  =
+  \sum_d \sum_{i+l=d}\sum_j \ub{F_{ijl}}_{i次} \ub{f_{ij}^h}_{l次}
+\end{align}
+
+\subsubsection{定理4: グレブナ基底の斉次化}
+\label{subs:定理4: グレブナ基底の斉次化}
+$I$をイデアルとして、$G$を次数つき順序についてのグレブナ基底とすると、
+$G^h$は$I^h$の基底。
+
+\pf
+\begin{itemize}
+  \item $x_1,\dots,x_n$を所与の順序を優先し、次に$x_0$で評価する
+  単項式順序$>_h$を考える。この順序で$G^h$がグレブナ基底である
+  ことを言えば十分。
+  \item 条件として、$G^h \subset I^h$と$\gen{\LT(I^h)} \subset \gen{\LT(G^h)}$
+  があるが、後者を示せばよい。
+  \item
+  $F \in I^h$として、
+  \begin{align}
+    \LM_{>_h}(F) =
+    \LM_{>_h}(\ub{x_0^e}_{Fに吐かせたe全部} \ub{f^h}_{非斉次化の斉次化})
+    =
+    x_0^e \LM_{>_h}(f^h)
+    =
+    x_0^e \LM_>(\ub{f}_{\in I})
+    \divided
+    \LM_>(\ub{g_i}_{\in G})
+    =
+    \LM_{>_h}(g_i^h).
+  \end{align}
+  よりこれは従う。
+\end{itemize}
+
+\subsubsection{定義6}
+\label{subs:定義6}
+アフィン多様体$W$について、$W$の射影完備化とは、
+$\ol W = \var(\ideal_a (W)^h)$のこと。
+
+\subsubsection{命題7}
+\label{subs:命題7}
+$W$をアフィン多様体とし、$\ol W$を射影完備化とする。
+
+(i)$\ol W \cap U_0 = \ol W \cap k^n =  W$。
+\pf $G$を$\ideal_a(W)$のグレブナ基底とする。
+\begin{align}
+  \ol W \cap U_0
+  &=
+  \var(\ideal_a(W)^h) \cap U_0\\
+  &=
+  \var(g^h; g\in G)\cap U_0\\
+  &=
+  \var(g^h; g\in G)\cap \var_a(x_0=1)\\
+  &=
+  \var_a(g^h(1,x_1,\dots,x_n); g\in G)\\
+  &\desceq{斉次化して非斉次化している}
+  \var_a(g; g\in G)\\
+  &\desceq{定義}
+  \var_a(\ideal_a(W))\\
+  &=
+  W.
+\end{align}
+
+(ii)$\ol W$は$W$を含む最小の射影多様体。
+\pf
+$W$を含む射影多様体広いやつ$V$を考える。
+広いやつ$V$を構成する関数たちは$V$を消すので、もとのやつ$W$も消し、
+もとのやつ$W$はアフィンだったので広いやつ$V$を構成する関数たちの
+非斉次化ももとのやつ$W$を消す。よって、
+広いやつ$V$を構成する関数たちの非斉次化の斉次化は$\ol W$を消す。
+関数はその非斉次化の斉次化の倍数なので、
+広いやつ$V$を構成する関数たちは$\ol W$を消す。
+よって、広いやつ$V$は$\ol W$を常に包むので、
+$\ol W$が$W$を含むやつのうち最小。
+
+\subsection{射影的消去理論}
+\label{sub:射影的消去理論}
+
+\subsection{2次超曲面の幾何}
+\label{sub:2次超曲面の幾何}
+\subsubsection{命題1: 射影同値}
+\label{subs:命題1: 射影同値}
+～は簡単に示せる: $f_i$が$d$次だとしてなんとかする。
+
+平方完成の応用:本当に平方完成でよさそう

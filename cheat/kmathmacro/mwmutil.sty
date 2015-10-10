@@ -1,0 +1,172 @@
+% -*- coding: euc-jp -*-
+
+%%% mwmu -- utilities for mwmath
+
+%\def\mwm@exr#1#2{%
+%  \expandafter#1\expandafter{#2}%
+%}
+%\def\mwm@enr#1#2{%
+%  #1{#2}%
+%}
+%\def\mwm@exxr#1#2#3{%
+%  \def\mwm@er@aux##1{\mwm@exr{#1}{#2}{##1}}%
+%  \mwm@exr\mwm@er@aux{#3}%
+%}
+%\def\mwm@exnr#1#2#3{%
+%  \mwm@exr{#1}{#2}{#3}%
+%}
+%\def\mwm@enxr#1#2#3{%
+%  \def\mwm@er@aux##1{#1{#2}{##1}}%
+%  \mwm@exr\mwm@er@aux{#3}%
+%}
+%\def\mwm@ennr#1#2#3{%
+%  #1{#2}{#3}%
+%}
+%\def\mwm@exxxr#1#2#3#4{%
+%  \def\mwm@er@aux##1{\mwm@exxr{#1}{#2}{#3}{##1}}%
+%  \mwm@exr\mwm@er@aux{#4}%
+%}
+%\def\mwm@exxnr#1#2#3#4{%
+%  \mwm@exxr{#1}{#2}{#3}{#4}%
+%}
+%\def\mwm@exnxr#1#2#3#4{%
+%  \def\mwm@er@aux##1{\mwm@exnr{#1}{#2}{#3}{##1}}%
+%  \mwm@exr\mwm@er@aux{#4}%
+%}
+%\def\mwm@exnnr#1#2#3#4{%
+%  \mwm@exnr{#1}{#2}{#3}{#4}%
+%}
+%\def\mwm@enxxr#1#2#3#4{%
+%  \def\mwm@er@aux##1{\mwm@enxr{#1}{#2}{#3}{##1}}%
+%  \mwm@exr\mwm@er@aux{#4}%
+%}
+%\def\mwm@enxnr#1#2#3#4{%
+%  \mwm@enxr{#1}{#2}{#3}{#4}%
+%}
+%\def\mwm@ennxr#1#2#3#4{%
+%  \def\mwm@er@aux##1{#1{#2}{#3}{##1}}%
+%  \mwm@exr\mwm@er@aux{#4}%
+%}
+%\def\mwm@ennnr#1#2#3#4{%
+%  #1{#2}{#3}{#4}%
+%}
+
+\def\mwm@exr#1#2{%
+  \expandafter#1\expandafter{#2}%
+}
+\let\mwm@enr\relax
+
+\def\mwm@exxr#1#2#3{%
+  \def\mwm@er@aux##1{\mwm@exr#1{#2}{##1}}%
+  \mwm@exr\mwm@er@aux{#3}%
+}
+\let\mwm@exnr\mwm@exr
+\def\mwm@enxr#1#2#3{%
+  \def\mwm@er@aux##1{#1{#2}{##1}}%
+  \mwm@exr\mwm@er@aux{#3}%
+}
+\let\mwm@ennr\relax
+
+\def\mwm@exxxr#1#2#3#4{%
+  \def\mwm@er@aux##1{\mwm@exxr#1{#2}{#3}{##1}}%
+  \mwm@exr\mwm@er@aux{#4}%
+}
+\let\mwm@exxnr\mwm@exxr
+\def\mwm@exnxr#1#2#3#4{%
+  \def\mwm@er@aux##1{\mwm@exnr#1{#2}{#3}{##1}}%
+  \mwm@exr\mwm@er@aux{#4}%
+}
+\let\mwm@exnnr\mwm@exr
+\def\mwm@enxxr#1#2#3#4{%
+  \def\mwm@er@aux##1{\mwm@enxr#1{#2}{#3}{##1}}%
+  \mwm@exr\mwm@er@aux{#4}%
+}
+\let\mwm@enxnr\mwm@enxr
+\def\mwm@ennxr#1#2#3#4{%
+  \def\mwm@er@aux##1{#1{#2}{#3}{##1}}%
+  \mwm@exr\mwm@er@aux{#4}%
+}
+\let\mwm@ennnr\relax
+
+\def\mwm@exxxxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@exxxr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@exxxnr\mwm@exxxr
+\def\mwm@exxnxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@exxnr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@exxnnr\mwm@exxr
+\def\mwm@exnxxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@exnxr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@exnxnr\mwm@exnxr
+\def\mwm@exnnxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@exnnr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@exnnnr\mwm@exr
+\def\mwm@enxxxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@enxxr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@enxxnr\mwm@enxxr
+\def\mwm@enxnxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@enxnr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@enxnnr\mwm@enxr
+\def\mwm@ennxxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{\mwm@ennxr#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@ennxnr\mwm@ennxr
+\def\mwm@ennnxr#1#2#3#4#5{%
+  \def\mwm@er@aux##1{#1{#2}{#3}{#4}{##1}}%
+  \mwm@exr\mwm@er@aux{#5}%
+}
+\let\mwm@ennnnr\relax
+
+
+
+
+
+
+\def\mwm@in@group@with@nonlocal#1#2#3{% :: cs -> cs -> block -> nothing
+  \begingroup
+  #3%
+  \global\let\mwm@in@group@with@nonlocal@@a#1%
+  \endgroup
+  \let#2\mwm@in@group@with@nonlocal@@a
+}
+\def\mwm@in@group@with@nonlocal@two#1#2#3#4#5{% :: cs -> cs -> cs -> cs -> block -> nothing
+  \begingroup
+  #5%
+  \global\let\mwm@in@group@with@nonlocal@@a#1%
+  \global\let\mwm@in@group@with@nonlocal@@b#3%
+  \endgroup
+  \let#2\mwm@in@group@with@nonlocal@@a
+  \let#4\mwm@in@group@with@nonlocal@@b
+}
+\def\mwm@in@group@with@nonlocal@three#1#2#3#4#5#6#7{% :: cs -> cs -> cs -> cs -> cs -> cs -> block -> nothing
+  \begingroup
+  #7%
+  \global\let\mwm@in@group@with@nonlocal@@a#1%
+  \global\let\mwm@in@group@with@nonlocal@@b#3%
+  \global\let\mwm@in@group@with@nonlocal@@c#5%
+  \endgroup
+  \let#2\mwm@in@group@with@nonlocal@@a
+  \let#4\mwm@in@group@with@nonlocal@@b
+  \let#6\mwm@in@group@with@nonlocal@@c
+}
+    \def\mwm@in@group@with@nonlocal@@a{}
+    \def\mwm@in@group@with@nonlocal@@b{}
+    \def\mwm@in@group@with@nonlocal@@c{}
+
+\def\mwm@endgroup@with@nonlocal#1#2{% :: cs -> cs -> nothing
+  \global\let\mwm@in@group@with@nonlocal@@a#1%
+  \endgroup
+  \let#2\mwm@in@group@with@nonlocal@@a
+}

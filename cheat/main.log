@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  10 OCT 2015 22:56
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  14 SEP 2015 09:15
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -108,7 +108,7 @@ luatexbase-attr: luatexbase.attributes["luaotfload@cursbase"] = 6
 luatexbase-attr: luatexbase.attributes["luaotfload@curscurs"] = 7
 luatexbase-attr: luatexbase.attributes["luaotfload@cursdone"] = 8
 luatexbase-attr: luatexbase.attributes["luaotfload@state"] = 9
-luaotfload | main : fontloader loaded in 0.027 seconds
+luaotfload | main : fontloader loaded in 0.026 seconds
 luatexbase-mcb: inserting 'luaotfload.node_processor'
 at position 1 in 'pre_linebreak_filter'
 luatexbase-mcb: inserting 'luaotfload.node_processor'
@@ -885,7 +885,96 @@ Package: multicol 2014/04/23 v1.8e multicolumn formatting (FMi)
 \colbreak@box=\box330
 \mc@col@check@num=\count389
 )
-(./ashiato45lua.sty) (./main.aux)
+(./ashiato45lua.sty) (./main.aux
+! Missing \endcsname inserted.
+<to be read again> 
+\protect 
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 33.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 9.24866pt on input line 33.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 6.47406pt on input line 33.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 4.62433pt on input line 33.
+LaTeX Font Info:    Try loading font information for U+bbold on input line 33.
+(c:/texlive/2014/texmf-dist/tex/latex/bbold/ubbold.fd)
+LaTeX Font Info:    Try loading font information for U+msa on input line 33.
+
+(c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 33.
+
+(c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+! Extra \endcsname.
+<recently read> \endcsname 
+           
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+I'm ignoring this, since I wasn't doing a \csname.
+
+! Missing \endcsname inserted.
+<to be read again> 
+\protect 
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+! Extra }, or forgotten $.
+\@newl@bel ...ined}}\global \@namedef {#1@#2}{#3}}
+                                                  
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+)
+! Missing $ inserted.
+<inserted text> 
+$
+l.27 \begin{document}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+}
+l.27 \begin{document}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
@@ -900,8 +989,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
- (I search kanjifont definition file)
-ABD: EverySelectfont initializing macros
+(I search kanjifont definition file) ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 27.
 
 (c:/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -943,309 +1031,74 @@ Package grfext Info: Graphics extension search list:
 (c:/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 
-))
+)) [1
+
+{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 15.98167pt on input line 28.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 11.09839pt on input line 28.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 5.5492pt on input line 28.
-LaTeX Font Info:    Try loading font information for U+bbold on input line 28.
-
-(c:/texlive/2014/texmf-dist/tex/latex/bbold/ubbold.fd)
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
-
-(c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
-
-(c:/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 13.31805pt on input line 33.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 13.31805pt on input line 33.
- (./sec9.tex
+ (./sec8.tex
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09839pt on input line 2.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 6.47406pt on input line 4.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 4.62433pt on input line 4.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 32.
+(Font)              scaled to size 11.09839pt on input line 4.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
 
 (c:/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
- [1
-
-{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-! Undefined control sequence.
-<argument> ...et \set {1,\dots ,n} ; J\cap M_j \neq \eptyset 
-                                                  (1\le j \le t)
-l.57   \end{align}
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...et \set {1,\dots ,n} ; J\cap M_j \neq \eptyset 
-                                                  (1\le j \le t)
-l.57   \end{align}
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<recently read> \varI 
-      
-l.86     次元の定義より、$\varI
-                                     $の次元は$n-r$以上である。󿿿
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[2
-Missing character: There is no の (U+306E) in font cmr10!
-Missing character: There is no 次 (U+6B21) in font cmr10!
-Missing character: There is no 元 (U+5143) in font cmr10!
-Missing character: There is no は (U+306F) in font cmr10!
-Missing character: There is no 以 (U+4EE5) in font cmr10!
-Missing character: There is no 上 (U+4E0A) in font cmr10!
-Missing character: There is no で (U+3067) in font cmr10!
-Missing character: There is no あ (U+3042) in font cmr10!
-Missing character: There is no る (U+308B) in font cmr10!
-Missing character: There is no 。 (U+3002) in font cmr10!
-]
-! Missing { inserted.
-<to be read again> 
-$
-l.191 \end{align}
-               
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-If you're confused by all this, try typing `I}' now.
-
-! Missing } inserted.
-<inserted text> 
-}
-l.191 \end{align}
-               
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing { inserted.
-<to be read again> 
-$
-l.191 \end{align}
-               
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-If you're confused by all this, try typing `I}' now.
-
-! Missing } inserted.
-<inserted text> 
-}
-l.191 \end{align}
-               
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-[3]
-! Undefined control sequence.
-<argument> a\lpha 
-       _n
-l.265 ...��と同様に$x^\alpha \notin I_{a\lpha_n}
-                                                   = I_{j_0}$であり、󿿿
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[4]
-! Undefined control sequence.
-<recently read> \allpha 
-        
-l.363     となるが、$\allpha
-                               ,\beta$は$e_{i_1},\dots,e_{i_m}$を使って...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[5] [6]
-! Undefined control sequence.
-\enit@enditemize  -\enit@after 
-                               \endlist \ifx \enit@series \relax \else \ifnu...
-l.584   \end{itemize}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\enit@enditemize ...x \else \ifnum \enit@resuming 
-                                                  =\@ne \enit@setresumekeys ...
-l.584   \end{itemize}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing number, treated as zero.
-<to be read again> 
-=
-l.584   \end{itemize}
-                   
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Undefined control sequence.
-\enit@setresumekeys ...xpandafter {\enit@savekeys 
-                                                  }\xdef \enit@afterlist {#2...
-l.584   \end{itemize}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\enit@enditemize ...ist \fi \ifnum \enit@resuming 
-                                                  =\thr@@ \enit@setresumekey...
-l.584   \end{itemize}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing number, treated as zero.
-<to be read again> 
-=
-l.584   \end{itemize}
-                   
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Undefined control sequence.
-\enit@setresumekeys ...xpandafter {\enit@savekeys 
-                                                  }\xdef \enit@afterlist {#2...
-l.584   \end{itemize}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{myproof} on input line 489 ended by \end{itemize}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.584   \end{itemize}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{document} ended by \end{myproof}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.587 \end{myproof}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-          
-l.587 \end{myproof}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[7] [8]
-! Extra }, or forgotten $.
-l.731       $f\in k[x_1,\dots,x_n]_{\le s}}
-                                         $となる。󿿿
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-[9] [10] [11] [12] [13])
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
+ [2] [3] [4])
 \tf@thm=\write3
- [14] (./main.aux))
+ [5]
+(./main.aux
+! Missing \endcsname inserted.
+<to be read again> 
+\protect 
+l.33 ...�の$\textbf  I$と$\textbf  V$}{{8.3.8}{4}}
+                                                  
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+)
 
 Here is how much of LuaTeX's memory you used:
- 11791 strings out of 494694
- 125002,266212 words of node,token memory allocated
- 5100 words of node memory still in use:
-   10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 831 glue_
+ 11787 strings out of 494694
+ 100000,266212 words of node,token memory allocated
+ 4687 words of node memory still in use:
+   10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 829 glue_
 spec, 28 attribute_list, 1 write nodes
-   avail lists: 2:43419,3:648,4:1836,5:231,6:1440,7:134,9:815,10:23
- 14972 multiletter control sequences out of 65536+600000
- 80 fonts using 37903711 bytes
- 58i,17n,44p,459b,596s stack positions out of 5000i,500n,10000p,200000b,100000s
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><<c:/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (14 pages, 259846 bytes).
+   avail lists: 2:34856,3:238,4:1625,5:234,6:1159,7:165,9:628,10:23
+ 14969 multiletter control sequences out of 65536+600000
+ 79 fonts using 35379931 bytes
+ 58i,17n,44p,459b,314s stack positions out of 5000i,500n,10000p,200000b,100000s
+<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
+fb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c:/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><<c:/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><<c:/texlive/2014/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb>
+Output written on main.pdf (5 pages, 152011 bytes).
 
-PDF statistics: 162 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+PDF statistics: 121 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

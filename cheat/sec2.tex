@@ -1,0 +1,3908 @@
+\subsection{はじめに}
+いままでは1変数の多項式を研究してきたか，ここからは多変数を研究することになる．
+多項式のイデアルに関して，次の問題を話題とする．
+\begin{itemize}
+ \item イデアルの記述：イデアル$I\subset k[x_1,\dots,x_n]$があったとき，
+$I=\gen{f_1,\dots,f_n}$となる$f_1,\dots,f_n \in k[x_1,\dots,x_n]$は存在するか？それを求める手段はあるか？
+ \item イデアルの所属：$f,f_1,\dots,f_s \in k[x_1,\dots,x_n]$があったとき，$f\in \gen{f_1,\dots,f_s}$の真偽を判定するアルゴリズムはあるか？
+ \item 多様体の点の決定，あるいは求解：$f_1,\dots,f_s \in k[x]$について，
+$f_1(x_1,\dots,x_n)=f_2(x_1,\dots,x_n)=\dots =f_s(x_1,\dots,x_n)=0$の解は何か？
+言い換えるなら，$\var(f_1,\dots,f_s)$は何か？
+ \item 陰関数表示：$x_1 = f_1(t_1,\dots,t_s),\dots,x_n=f_n(t_1,\dots,t_s)$とパラメタ表示された図形について，それを包むアフィン多様体はあるか？それは何か？\footnote{「アフィン多様体かその部分集合である」とあるが，それはあたりまえで，常に$k^n$の部分集合である．→うそでした．アフィン空間をアフィン多様体と呼ぶかどうかがよくわからない．}？
+\end{itemize}
+
+多項式のうち特殊なものを考えたとき，これらに対する解答の一部は得られている．
+
+まず，1変数多項式の場合は「イデアルの記述」と「イデアルの所属」は解決している．「イデアルの記述」は$k[x]$がPIDであることから常に可能で，しかも1つの生成元で実現する．しかし，具体的なアルゴリズムは分からない．
+「イデアルの所属」も可能で，所属するかどうかを調べたい有限生成イデアルを，GCDを考えることにより単項生成にし，所属を調べたい多項式をそのGCDで割った余りを調べることにより可能である．余りがなければGCDの倍元なので，イデアルに所属し，余りがあれば所属しない．
+
+また，多変数でも1次式だと分かっていれば，「多様体の点の決定」と「陰関数表示」は線形代数を使うことにより可能である．
+\begin{itemize}
+ \item 「多様体の点の決定，あるいは求解」：1次連立方程式を解けばよいが，これは掃き出し法により常に可能である．解がなかったり，パラメタ付けが得られたりする．
+ \item 「陰関数表示」：パラメタが1次式のときに，これがアフィン多様体であることが示せ，さらに陰関数表示を求められる．若干工夫がいる．$k^n$で考える．
+\begin{align}
+ x_1 &=  a_{11} t_1 + \dots + a_{1N}t_N + c_1\\
+ & \vdots\\
+ x_n & = a_{n1} t_1 + \dots + a_{nN}t_N + c_N
+\end{align}
+を考える．このパラメタ表示であらわされる点全体を$V\subset k^n$とする．これは，$k^n$のアフィン線形空間(原点がずれててもいい)になっている．パラメタ表示なので，$x_\bullet$のどれかについて条件はないみたいなのは直接的にはない(結果的にあるかもしれない)．$(x_1,\dots,x_n)\in V$となるための条件を調べよう．
+
+全て左辺に以降して，
+\begin{align}
+\begin{pmatrix}
+ a_{11} & \cdots & a_{1N} & -1 & \dots & 0 & c_1\\
+ \vdots& & & & & & \vdots\\
+ a_{n1} & \cdots & a_{nN} & 0 & \dots & -1 & c_N
+\end{pmatrix}
+\tatev{t_1 \\ \vdots \\ t_N \\ x_1 \\ \vdots \\ x_n \\ 1}
+ =
+\bbold{0}.
+\end{align}
+この係数行列を狭義階段行列まで変形して，$(b_{i,j})_{n,(N+n+1)}$としておく．すると，ピボットが$n$個以下得られる．
+そのピボットの個数を$M(\le N)$とする．
+そのピボットのうち，$1$から$N$列目にあるもの，すなわち$t_1,\dots,t_N$
+に対応するものを，左にあるものから順に$t_{f(1)},\dots, t_{f(M)}$       とする．
+
+この準備のもとで，
+\begin{align}
+& (x_1,\dots, x_n) \in V\\
+\iff &
+\Exists{t_1,\dots,t_N}
+\begin{pmatrix}
+ a_{11} & \cdots & a_{1N} & -1 & \dots & 0 & c_1\\
+ \vdots& & & & & & \vdots\\
+ a_{n1} & \cdots & a_{nN} & 0 & \dots & -1 & c_N
+\end{pmatrix}
+\tatev{t_1 \\ \vdots \\ t_N \\ x_1 \\ \vdots \\ x_n \\ 1}
+ =
+\bbold{0}\\
+\iff &
+\Exists{t_1,\dots,t_N} (b_{i,j})_{n,(N+n+1)}
+ \tatev{t_1 \\ \vdots \\ t_N \\ x_1 \\ \vdots \\ x_n \\ 1}
+ =
+\bbold{0}\\
+\iff &
+\Exists{t_1,\dots,t_N}
+\begin{cases}
+ b_{11}t_1 + \dots + b_{1N}t_N + b_{1,(N+1)} x_1 + \dots + b_{1,(N+n)} x_n + b_{1,(N+n+1)} &= 0 \\
+&\vdots\\
+ b_{n1}t_1 + \dots + b_{nN}t_N + b_{n,(N+1)} x_1 + \dots + b_{n,(N+n)} x_n + b_{n,(N+n+1)} &= 0
+\end{cases}\\
+\iff &
+\Exists{t_1,\dots,t_N} \\
+&\begin{cases}
+ b_{1,f(1)} t_{f(1)} + \dots + b_{1,f(M)+1}t_{f(M)+1} + \dots + b_{1,N}t_N + b_{1,(N+1)} x_1 + \dots + b_{1,(N+n)} x_n + b_{1,(N+n+1)} &= 0 \\
+ b_{2,f(2)} t_{f(2)} + \dots + b_{2,f(M)+1}t_{f(M)+1} + \dots + b_{2,N}t_N + b_{2,(N+1)} x_1 + \dots + b_{2,(N+n)} x_n + b_{2,(N+n+1)} &= 0 \\
+\vdots&\vdots \\
+ b_{M,f(M)} t_{f(M)} +  b_{M,f(M)+1}t_{f(M)+1} + \dots + b_{M,N}t_N + b_{M,(N+1)} x_1 + \dots + b_{M,(N+n)} x_n + b_{M,(N+n+1)} &= 0 \\
+b_{(M+1),f(M)+1}t_{f(M)+1} + \dots + b_{(M+1),N}t_N + b_{(M+1),(N+1)}x_1 + \dots + b_{(M+1),(N+n)}x_n + b_{(M+1),(N+n+1)} &= 0\\
+&\vdots \\
+b_{n,f(M)+1}t_{f(M)+1} + \dots + b_{n,N}t_N + b_{n,(N+1)}x_1 + \dots + b_{n,(N+n)}x_n + b_{n,(N+n+1)} &= 0
+\end{cases}\\
+\iff  &
+\Exists{t_{f(1)},\dots,t_{f(M)},t_{f(M)+1},\dots,t_{N}}\\
+&\begin{cases}
+ b_{1,f(1)} t_{f(1)} + \dots + b_{1,f(M)+1}t_{f(M)+1} + \dots + b_{1,N}t_N + b_{1,(N+1)} x_1 + \dots + b_{1,(N+n)} x_n + b_{1,(N+n+1)} &= 0 \\
+ b_{2,f(2)} t_{f(2)} + \dots + b_{2,f(M)+1}t_{f(M)+1} + \dots + b_{2,N}t_N + b_{2,(N+1)} x_1 + \dots + b_{2,(N+n)} x_n + b_{2,(N+n+1)} &= 0 \\
+\vdots&\vdots \\
+ b_{M,f(M)} t_{f(M)} +  b_{M,f(M)+1}t_{f(M)+1} + \dots + b_{M,N}t_N + b_{M,(N+1)} x_1 + \dots + b_{M,(N+n)} x_n + b_{M,(N+n+1)} &= 0 \\
+b_{(M+1),f(M)+1}t_{f(M)+1} + \dots + b_{(M+1),N}t_N + b_{(M+1),(N+1)}x_1 + \dots + b_{(M+1),(N+n)}x_n + b_{(M+1),(N+n+1)} &= 0\\
+&\vdots \\
+b_{n,f(M)+1}t_{f(M)+1} + \dots + b_{n,N}t_N + b_{n,(N+1)}x_1 + \dots + b_{n,(N+n)}x_n + b_{n,(N+n+1)} &= 0
+\end{cases}\\
+& \fbox{$t_1$から$t_{f(M)}$までのうち，ピボットになってないものを抜いた．}\\
+ &\fbox{$\Rightarrow$は，ピボットになっていないものを，その左のピボットに押し付ければ可能．$\Leftarrow$はあきらか．} \\
+\iff &
+\Exists{t_{f(1)},\dots,t_{f(M)}}\\
+&\begin{cases}
+ b_{1,f(1)} t_{f(1)}  + b_{1,(N+1)} x_1 + \dots + b_{1,(N+n)} x_n + b_{1,(N+n+1)} &= 0 \\
+ b_{2,f(2)} t_{f(2)}  + b_{2,(N+1)} x_1 + \dots + b_{2,(N+n)} x_n + b_{2,(N+n+1)} &= 0 \\
+\vdots&\vdots \\
+ b_{M,f(M)} t_{f(M)} +   b_{M,(N+1)} x_1 + \dots + b_{M,(N+n)} x_n + b_{M,(N+n+1)} &= 0 \\
+ b_{(M+1),(N+1)}x_1 + \dots + b_{(M+1),(N+n)}x_n + b_{(M+1),(N+n+1)} &= 0\\
+&\vdots \\
+b_{n,(N+1)}x_1 + \dots + b_{n,(N+n)}x_n + b_{n,(N+n+1)} &= 0
+\end{cases}\\
+ & \fbox{ピボットだけを残した．$\Rightarrow$は，消したものをピボットの$t_\bullet$に押し付けて，消すものに0を入れれば可能．$\Leftarrow$はあきらか．}
+\end{align}
+これで，存在を中に入れられ，$t_\bullet$が残っている分は，$t_1,\dots,t_N$のうち1個しか残っていないから$x_1,\dots,x_n$にあわせて決めればいいし，$t_\bullet$が残っていない分は存在はもう関係ないので単に$x_\bullet$同士の関係である．この残った関係が，陰関数表示に他ならない．
+\end{itemize}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $(x^2-3x+2) \div (x-2) = (x-1) \ldots 0 $．よって，$(x^2-3x+2) \in \gen{x-2}$．
+ \item $(x^5-4x+1) \div (x^3-x^2+x) = (x^2+x) \ldots (-x^2-4x+1)$．よって，$(x^5-4x+1) \notin \gen{x^3-x^2+x}$．
+ \item $(x^4-6x^2+12x-8) \div (2x^3-10x^2+16x-4)/2= x+5 \ldots 11x^2-24x+12$．
+$\frac{11}{2}(2x^3-10x^2+16x-4) - (11x^2-24x+12)x = -31x^2 + 76x - 44$．
+$(-31x^2+76x-44) + 3(11x^2-24x+12) = 2(x^2+2x-4)$．$(11x^2-24x+12)-11(x^2+2x-4)=(-2)(23x-16)$．…飽きた．{\tt code/calcgcd.hs}で計算．$\GCD(x^4-6x^2+12x-8,2x^3-10x^2+16x-4)=1$．よって，$x^2-4x+4 \in \gen{1} = I$．
+ \item {\tt code/calcgcd.hs}で計算．$\GCD(x^9-1,x^5+x^3-x^2-1)=x^3-1$．
+よって，$x^3-1 \in \gen{x^3-1}  = I$．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\begin{align}
+ \begin{pmatrix}
+  2 & -3 & -1 & 9\\
+  1 &-1 &0 & 1\\
+  3& 7& -2& 17
+ \end{pmatrix}
+&\to
+ \begin{pmatrix}
+  1 &-1 &0 & 1\\
+  2 & -3 & -1 & 9\\
+  3& 7& -2& 17
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  1 &-1 &0 & 1\\
+  0 & -1 & -1 & 7\\
+  0& 10& -2& 14
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  1 &-1 &0 & 1\\
+  0 & -1 & -1 & 7\\
+  0& 0& -12& 84
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  1 &-1 &0 & 1\\
+  0 & -1 & -1 & 7\\
+  0& 0& 1& -7
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  1 &-1 &0 & 1\\
+  0 & -1 & 0 & 0\\
+  0& 0& 1& -7
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  1 &0 &0 & 1\\
+  0 & 1 & 0 & 0\\
+  0& 0& 1& -7
+ \end{pmatrix}\\
+\end{align}
+よって，このアフィン多様体は1点で，$\set{(1,0,-7)}$．
+ \item
+\begin{align}
+ \begin{pmatrix}
+  1 & 1 & -1 & -1 & 0\\
+  1& -1& 1& 0& 0
+ \end{pmatrix}
+&\to
+ \begin{pmatrix}
+  1 & 1 & -1 & -1 & 0\\
+  0& -2& 2& 1& 0
+ \end{pmatrix}\\
+&\to
+ \begin{pmatrix}
+  1 & 1 & -1 & -1 & 0\\
+  0& 1& -1& -1/2& 0
+ \end{pmatrix}\\
+&\to
+ \begin{pmatrix}
+  1 & 0 & 0 & -1/2 & 0\\
+  0& 1& -1& -1/2& 0
+ \end{pmatrix}
+\end{align}
+よって，パラメタ付け
+\begin{align}
+ x_1 = -\frac{1}{2}x_4,\quad x_2 = x_3 + \frac{1}{2}x_4.
+\end{align}
+ \item $y=x^3,\quad z=x^5$．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+ 左から，$t,x_1,x_2,x_3,定数$の順で並べる．
+\begin{align}
+ \begin{pmatrix}
+  1 & -1 & 0 & 0 & -5\\
+  2&0 &-1 &0 & 1\\
+  -1& 0& 0& -1& 6
+ \end{pmatrix}
+&\to
+ \begin{pmatrix}
+  1 & -1 & 0 & 0 & -5\\
+  0&2 &-1 &0 & 11\\
+  0& -1& 0& -1& 1
+ \end{pmatrix}
+\end{align}
+ここから$t$を含まないものを取り出せばよいから(さっき示した．)
+\begin{align}
+ 2x_1 -x_2 = 11,\quad -x_1 - x_3 = 1.
+\end{align}
+
+ \item
+左から，$t,u,x_1,x_2,x_3,x_4,定数$．
+\begin{align}
+ \begin{pmatrix}
+  2 & -5 & -1 & 0 & 0 & 0 & 0\\
+  1& 2&0 &-1 &0 &0 &0 \\
+  -1& 1& 0& 0& 1& 0& 0\\
+  1& 3& 0& 0& 0& -1& 0
+ \end{pmatrix}
+&\to
+ \begin{pmatrix}
+  -1& 1& 0& 0& 1& 0& 0\\
+  2 & -5 & -1 & 0 & 0 & 0 & 0\\
+  1& 2&0 &-1 &0 &0 &0 \\
+  1& 3& 0& 0& 0& -1& 0
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  -1& 1& 0& 0& 1& 0& 0\\
+  0 & -3 & -1 & 0 & 2 & 0 & 0\\
+  0& 3&0 &-1 &1 &0 &0 \\
+  0& 4& 0& 0& 1& -1& 0
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  -1& 1& 0& 0& 1& 0& 0\\
+  0 & -3 & -1 & 0 & 2 & 0 & 0\\
+  0& 3&0 &-1 &1 &0 &0 \\
+  0& 1& -1& 0& 3& -1& 0
+ \end{pmatrix}\\
+ &\to
+ \begin{pmatrix}
+  -1& 0& 1& 0& -2& 1& 0\\
+  0 & 0 & -4 & 0 & 11 & -3 & 0\\
+  0& 0&3 &-1 &-8 &3 &0 \\
+  0& 1& -1& 0& 3& -1& 0
+ \end{pmatrix}\\
+\end{align}
+よって，$t,s$を含まないところを取り出して，
+\begin{align}
+ -4x_1 + 11x_3 -3x_4 = 0,\quad 3x_1 -x_2 -8x_3 + 3x_4 = 0.
+\end{align}
+ \item $y=x^4,\,z=x^7$．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略．
+ \item 仮に$\gen{x_1,\dots}=\gen{f_1,\dots,f_s}$となる$f_1,\dots,f_s \in k[x_1,\dots]$が存在したとする(背理法)．
+\begin{itemize}
+ \item $f_1,\dots,f_s$のうちで，定数項を含むものがあるとき：
+それを$f_1$として一般性を失なわない．$f_1 \notin \gen{x_1,\dots}$である．矛盾．
+ \item $f_1,\dots,f_s$が全て1次以上であるとき：
+$f_1,\dots,f_s$に含まれる変数ではない新たな変数$x_N$を考えると，これは左辺に属するが，右辺に属さない(必ず$x_N$を含むなら，必ずそれは2次以上になってしまう．)
+\end{itemize}
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 個数は，$\sum_{i=0}^m (m-i+1) = (m+1)^2 - \sum_{i=0}^m i = (m+1)^2 - \frac{m(m+1)}{2} = (m+1)(m+1 - \frac{m}{2}) = \frac{(m+1)(m+2)}{2}$．
+ \item $k$で線形従属であることを示さないと意味がないのでは？
+線形従属は，$u+v \le m$をみたすものたち，つまり，
+\begin{align}
+ \set{[f(t)]^u [g(t)]^v | u + v \le m}
+\end{align}
+が$k$上1次従属であることを示す．この項たちは(a)より$\frac{(m+1)(m+2)}{2}$個である．また，この項たちの$k[t]$としての次数は
+\begin{align}
+ \deg [f(t)]^u[g(t)]^v = u\deg f(t) + v\deg g(t) \le n(u+v) \le nm.
+\end{align}
+よって，$m$を十分大きくすると，項の個数が$m^2$オーダーで増えていくので，
+$nm$次以下多項式のなす$k$-線形空間が$n+m+1$次であることから，1次従属となる．
+ \item 線形従属なので，$[f(t)]^u [g(t)]^v$の，すべては0でない1次結合で0が作れる．その式の$f(t)$を$x$に，$g(t)$を$y$に置換すると，$x,y$の多項式を$k$係数で結合して0となったもの，つまり陰関数表示が得られる．パラメタ付けされた曲線はこの陰関数表示の曲線上にある．
+ \item 同様の議論をする．$x^u y^v z^w$の単項式で，$u+v+w \le m$となるものの個数は，
+\begin{align}
+ \sum_{u=0}^m \sum_{v=0}^{m-u} \sum_{w=0}^{m-u-v}
+&=
+ \sum_{u=0}^m \sum_{v=0}^{m-u} (m-u-v+1)\\
+ & =
+ \sum_{u=0}^m ((m-u+1)^2- \sum_{v=0}^{m-u} v)\\
+ & =
+ \sum_{u=0}^m ((m-u+1)^2- (m-u+1))\\
+ & =
+ \sum_{u=0}^m (u^2 - 2(m+1)u + (m+1)^2 + u - (m+1))\\
+ & =
+\frac{m(m+1)(2m+1)}{6} + (-2m-1)\frac{m(m+1)}{2} + m(m+1)^2\\
+ & =
+\frac{m(m+1)(m+2)}{3}.
+\end{align}
+これが，
+\begin{align}
+ \set{[f(t,\tau)]^u [g(t,\tau)]^v [h(t,\tau)]^w | u+v+w \le m}
+\end{align}
+たちの個数であるが，一方これらの次数は，$f,g,h$の次数が$n$以下だとすると，
+\begin{align}
+ \deg ([f(t,\tau)]^u [g(t,\tau)]^v [h(t,\tau)]^w) = u\deg f + v\deg g + w\deg h \le (u+v+w)n \le mn.
+\end{align}
+よって，次数の増え方は1次だが，多項式の個数の増え方は3次なので，上の多項式たちは十分大きい$m$で1次従属になる．よって，それらの多項式で，まともな線形結合をして0になる式を作れるので，$f,g,h$を$x,y,z$に置換することにより，アフィン多様体が得られる．
+\end{enumerate}
+\end{enumerate}
+
+\subsection{多変数多項式の順序付け}
+1変数多項式の割り算のとき，これがうまく行くことは単項式の次数による順序付けが以下の性質を持っていることに依存していた．
+\begin{itemize}
+ \item 線形順序：すべての単項式$x^n,x^m$について，$x^n > x^m$か$x^n = x^m$か$x^n < x^m$かが成立する．これのおかげで，多項式について最高次というものを考えることができ，次数を落とすという操作が意味を持った．
+ \item 順序をかけ算で保つ：$x^n>x^m$について，$x^{n+l}>x^{m+l}$であった．
+これのおかげで，割る多項式を最高次を割られる多項式に合わせるために何倍かするとき，より低い次数の単項式が突然高い次数を持って次数が下がらないという事態にならなかった．
+ \item 最小がある(整列順序)：$x^{n_1} > x^{n_2} > \dots$という列は無限には続かない．これのおかげで，途中経過で無限に低い次数が出続けて多項式の割り算が停止しないということがなかった．
+\end{itemize}
+
+あるいは1次多変数のときも，変数に順序をつけていた．これについても「線形順序」「順序に下限がある」は満たしていた(「順序をかけ算で保つ」は使わなかった．1次の特有の性質．)
+
+多項式はいままで$x^\alpha y^\beta \dots z^\gamma$とあらわしてきたが，$n$次の単項式は指数に注目して，$\Zge^n$と同型がつくので，以降こちらで考える．
+$\alpha,\beta \in \Zge^n$について，単項式のかけ算は$\alpha + \beta$となるし，全次数は$\myabs{\alpha}$となる．
+
+これに倣って，$k[x_1,\dots,x_n]$の単項式，あるいは$\Zge^n$の順序$>$とは，次の性質を持つものであるとする．
+\begin{itemize}
+ \item 線形順序：$f,g\in \Zge^n$について，$f > g$か$f=g$か$f < g$である．
+ \item 順序をかけ算で保つ：$\alpha > \beta \implies \alpha + \gamma > \beta + \gamma$．
+ \item 最小がある(整列順序)：$\Zge^n$の任意の非空部分集合には，$>$についての最小元が存在する．
+\end{itemize}
+
+整列順序についての特徴付けを見る．これは，アルゴリズムの停止を証明するときに便利である：集合$X$上の順序$>$が整列順序であることと，$X$の元の無限列$\alpha_1 >  \alpha_2 > \dots$が存在しないことは同値である．
+\begin{myproof}
+対偶を示す．
+ \begin{itemize}
+  \item 整列順序でない$\implies$ 無限列がある：
+仮定より，$X$の空でない集合で，最小元がないもの$A\subset X$が存在する．
+$A$は空でないので，$x_1 \in A$となる$x_1$が存在する．
+$x_1$は$A$の最小元ではないので，$x_1 > x_2$となる$x_2 \in A$が存在する．これをくりかえして，無限列$x_1 > x_2 > x_3 > \dots$を得る．
+  \item 無限列がある$\implies$ 整列順序でない：
+仮定より，$X$の無限列$x_1 > x_2 > \dots$が存在する．$X$の部分集合として，$\set{x_1,\dots}$を考える．任意の$x_i \in \set{x_1,\dots}$について，$x_i > x_{i+1}$なので，最小元が存在しない．
+ \end{itemize}
+\end{myproof}
+
+あとで，「線形順序」「順序をかけ算で保つ」の下で，「整列順序」は任意の$\alpha \in \Zge^n$について$\alpha \ge 0$であることと等価であることを見る．
+
+例えば，$\Zge$上の通常の順序は多項式の順序である．証明は自然数の性質による．
+
+まず簡単な$\Zge^n$の単項式順序として，lex\footnote{lexicographic order．辞書順．}順序$>_{lex}$を見る．これは，
+\begin{align}
+(\alpha_1,\dots,\alpha_n) > (\beta_1,\dots,\beta_n)
+\iff
+(\alpha_1 - \beta_1,\dots,\alpha_n - \beta_n)の0でない最も左の元が正．
+\end{align}
+とする．これは，左端から比べていって，同じならば次へ，異なるならばその要素の大小で勝敗を決するとも読める．つまり，$(\alpha_1,\dots,\alpha_n)$と$(\beta_1,\dots,\beta_n)$との大小は，
+\begin{itemize}
+ \item $\alpha_1>\beta_1$のとき：$\alpha > \beta$
+ \item $\alpha_1 < \beta_1$のとき：$\alpha < \beta$
+ \item $\alpha_1 = \beta_1$のとき：$(\alpha_2,\dots,\alpha_n)$と$(\beta_2,\dots,\beta_n)$との大小
+\end{itemize}
+ということになる．最悪$\Zge$での比較になるので，そこで決着がつく．
+
+先に，整列順序について便利な補題を示しておく(教科書にはない．)：「整列順序の非増加列は安定する」：$>$を$X$上の整列順序とする．$X$上の列$x_1\ge x_2 \ge \dots$について，$N$が存在して，$x_N = x_{N+1} = \dots$となる．
+\begin{myproof}
+ 仮に$x_n > x_{n+1}$となる$n$が無数に存在すると，そこをつなげて狭義減少列が作れてしまうが，これは整列順序であることに矛盾する．よって，$x_n > x_{n+1}$となる$n$は有限個しかない．その$n$のうち最大のものを$N-1$とすると，$x_N = x_{N+1} = \dots$である．
+\end{myproof}
+
+lex順序$>_{lex}$が確かに単項式の順序であることを示す．
+\begin{myproof}
+ \begin{itemize}
+  \item 線形順序であること：$\alpha = (\alpha_1,\dots,\alpha_n)$，$\beta = (\beta_1,\dots,\beta_n)$とする．$\alpha > \beta$でも$\alpha = \beta$でもないとする．
+$\alpha > \beta$ではないので，$(\alpha_1-\beta_1,\dots,\alpha_n-\beta_n)$のすべての元が正でなく，0か負である．よって，$\beta-\alpha = (\beta_1-\alpha_1,\dots,\beta_n-\alpha_n)$のすべての元は0か正である．すべての元が0だとすると，$\alpha = \beta$となり仮定に反するので，少なくとも1つの元が正であり，$\beta < \alpha$である．
+  \item 順序を保つこと：$\alpha-\beta = (\alpha+\gamma)-(\beta+\gamma)$から従う．
+  \item 整列順序であること：
+仮に$\Zge^n$の無限列$x\ovparen{0}>x\ovparen{1}>\dots$が存在したとしよう．
+$n$の帰納法で示す(背理法)．
+\begin{itemize}
+ \item $n=1$のとき？：これは$\Z\ge 0$の無限狭義減少列の存在を示しているが，自然数の性質より矛盾．
+ \item $n$のとき成立$\implies$ $n+1$のとき？：
+% 仮に$N \mapsto x_1\ovparen{N}$が永遠に狭義減少を続けるならば，すなわち，
+% \begin{align}
+%  \Exists{M}\Forall{N>M} x_1\ovparen{N} > x_1\ovparen{N+1}
+% \end{align}
+% ならば，減少列$x_1\ovparen{M}>x_1\ovparen{M+1}>\dots$を考えると，「$n=1$のとき」に矛盾する．よって，
+% \begin{align}
+%  \Forall{M}\Exists{N>M} x_1\ovparen{N} \le x_1\ovparen{N+1}
+% \end{align}
+% だが，仮に$<$となってしまうと，$x\ovparen{0}>x\ovparen{1}>\dots$に反するので，
+% \begin{align}
+%  \Forall{M} \Exists{N>M} x_1\ovparen{N} = x_1\ovparen{N+1}
+% \end{align}
+% である．$x_1\ovparen{N}>x_1\ovparen{N+1}$となる$N$が無数にあるとすると，
+% このことに反するので，$x_1\ovparen{N}>x_1\ovparen{N+1}$となる$N$は有限個しかない．このうち最大のものを$N_{\max}$とすると，
+% \begin{align}
+%  x_1\ovparen{N_\max} = x_1\ovparen{N_\max + 1} = \dots
+% \end{align}
+% がわかる．さらに，$x\ovparen{N_{\max}}>x\ovparen{N_\max}>\dots$なので，
+% $\pi\colon \Zge^n \to \Zge^{n-1}$を，数ベクトルの頭1つを切り落す射影とすると，
+% \begin{align}
+% \pi x\ovparen{N_\max}>\pi x\ovparen{N_\max +1}>\dots
+% \end{align}
+% となる．これは，「$n$のとき」に成立している矛盾から，矛盾．
+$x_1\ovparen{m}<x_1\ovparen{m+1}$となる$m$が存在すると，そこで$x\ovparen{m}<x\ovparen{m+1}$となり，矛盾するので，常に$x_1\ovparen{m}\ge x_1\ovparen{m+1}$であり，$m\mapsto x_1\ovparen{m}$は単調非増加列である．これは整列順序である$\Zge$の単調非増加列なので，ある$N$以降安定し，
+\begin{align}
+ x_1\ovparen{N} = x_1\ovparen{N+1} = \dots
+\end{align}
+となる．しかし，$x\ovparen{N}>x\ovparen{N+1}>\dots$なので，$\pi\colon \Zge^{n+1} \to \Zge^{n}$を数ベクトルの頭1つを切り落す射影とすると，
+\begin{align}
+ \pi x\ovparen{N} > \pi x\ovparen{N+1} > \dots
+\end{align}
+となる．これは，「$n$のとき成立」から出る矛盾より，矛盾．
+\end{itemize}
+よって，帰納的に，すべての$n$で矛盾が得られる．
+ \end{itemize}
+\end{myproof}
+
+lex順序は，変数の順序のつけかたに依存して変わる．2変数なら$x>y$ということにするか$y>x$ということにするかの2種類があり，$n$変数なら$n!$種類ある．
+
+次に，grlex\footnote{graded lexicographic}順序を見る．$\alpha,\beta \in \Zge^n$について，$\alpha >_{grlex} \beta$とは，
+\begin{itemize}
+ \item $\myabs{\alpha}>\myabs{\beta}$なら，$\alpha >_{grlex}\beta$である．
+ \item ($\myabs{\alpha}=\myabs{\beta}$であり，)$\alpha >_{lex} \beta$なら，$\alpha > \beta$である．
+\end{itemize}
+となる順序である．
+
+これも，単項式順序になってることを見る．
+\begin{myproof}
+ \begin{itemize}
+  \item 線形順序であること：$\alpha$と$\beta$を全次数と$>_{lex}$で比べた9通りについて全て定まることから従う．
+% $\alpha  >_{grlex} \beta$でも$\alpha = \beta$でもないとする．$\Zge$は線形順序なので，$\myabs{\alpha}$と$\myabs{\beta}$には大小が定まる．
+% \begin{itemize}
+%  \item $\myabs{\alpha} > \myabs{\beta}$のとき：
+% $\alpha >_{grlex} \beta$なので，そのようなことはない．
+%  \item $\myabs{\alpha} = \myabs{\beta}$のとき：
+% $\alpha = \beta$ではなく，$>_{lex}$は線形順序なので，$\alpha >_{lex} \beta$か$\alpha <_{lex} \beta$かだが，前者は$\alpha>_{grlex} \beta$でないことに反するので，$\alpha <_{lex} \beta$である．よって，$\alpha <_{grlex} \beta$である．
+%  \item $\myabs{\alpha} < \myabs{\beta}$のとき：定義より直ちに$\alpha <_{grlex} \beta$である．
+% \end{itemize}
+% いずれにせよ$\alpha <_{grlex} \beta$となる．
+  \item かけ算で保つこと：$\alpha >_{grlex} \beta$とする．
+\begin{itemize}
+ \item $\myabs{\alpha}> \myabs{\beta}$のとき：
+$\myabs{\alpha + \gamma} = \myabs{\alpha} + \myabs{\gamma} > \myabs{\beta}+\myabs{\gamma} = \myabs{\beta+\gamma}$．
+ \item $\myabs{\alpha} = \myabs{\beta}$のとき：
+$\myabs{\alpha + \gamma} = \myabs{\alpha} +\myabs{\gamma} = \myabs{\beta}+\myabs{\gamma} = \myabs{\beta + \gamma}$である．さらに，
+$\alpha >_{lex} \beta$となるので，$>_{lex}$の性質により，$\alpha + \gamma >_{lex} \beta + \gamma$となる．
+\end{itemize}
+  \item 整列順序であること：
+$>_{grlex}$に関する狭義減少列$x_1 > x_2 > \dots$があったとする．
+仮に$\myabs{x_n} < \myabs{x_{n+1}}$となる$n$があったとすると，$x_n <_{grlex} x_{n+1}$となるので，常に$\myabs{x_n} \ge \myabs{x_{n+1}}$である．よって，$\myabs{x_1} \ge \myabs{x_2} \ge \dots$であり，これは$\Zge$の単調非増加列なので，補題よりある$N$以降$\myabs{x_{N}}=\myabs{x_{N+1}}=\dots$となる．
+しかし，$x_N >_{grlex} x_{N+1} >_{grlex} \dots$なので，$x_{N} >_{lex} x_{N+1} >_{lex} \dots$となり，lex順序に関する狭義減少列が得られた．これは矛盾である．
+ \end{itemize}
+\end{myproof}
+
+次に，grevlex\footnote{graded reverse lexicographic}順序を見る．
+$\alpha,\beta \in \Zge^n$について，$\alpha >_{grevlex}\beta$とは，
+\begin{itemize}
+ \item $\myabs{\alpha} > \myabs{\beta}$なら，$\alpha >_{grevlex} \beta$である．
+ \item ($\myabs{\alpha}=\myabs{\beta}$であり，)
+$(\alpha_1-\beta_1,\dots,\alpha_n-\beta_n)$の一番右の0でない要素が負であることである．
+\end{itemize}
+つまり，まず次数で比較して大きいほうが大きい．次数が同じなら，右から順番に見ていって「小さいほうが」大きい．
+一見，「grlex順序の変数を付け替えて逆にすればgrevlex順序になるのでは？」と思うが，不可能である．$x_1 >_{grevlex} \dots >_{grevlex} x_n$と同じになる$>_{grlex}$を構成しようとしてみる．が，少なくとも$x_1 >_{grlex} \dots >_{grlex} x_n$にならなければならない．$x^2yz^2 >_{grlex} xy^3z$．一方，$x^2yz^2 <_{grevlex} xy^3z$となる．2変数だとgrlexとgrevlexの両者は一致してしまう．
+
+grevlex順序が単項式の順序であることを示そう．最後の比較は，多項式の方向を逆にしたlex順序の反転である．この順序を$>_{lex'}$としておく．$>_{lex'}$は単項式順序になっている\warn{←なっていない!!!}(あとでこれはrinvlex順序とよぶ．)．つまり，$\alpha >_{lex'} \beta$とは，$\alpha-\beta$の一番右側の0でない元が負であることである．
+\begin{myproof}
+ \begin{itemize}
+  \item 線形順序であること：$\alpha > \beta$でなく$\alpha < \beta$でもないとする．
+$\alpha > \beta$ではないので，
+\begin{align}
+& \neg((\myabs{\alpha} > \myabs{\beta}) \lor (\myabs{\alpha}\le \myabs{\beta} \rightarrow \alpha >_{lex'} \beta))\\
+ \iff&
+ \neg((\myabs{\alpha} > \myabs{\beta}) \lor (\myabs{\alpha}> \myabs{\beta} \lor \alpha >_{lex'} \beta))\\
+\iff &
+ (\myabs{\alpha} \le \myabs{\beta}) \land (\myabs{\alpha}\le \myabs{\beta} \land \alpha \le_{lex'} \beta)\\
+ \iff&
+(\myabs{\alpha} \le \myabs{\beta}) \land (\alpha \le_{lex'} \beta)
+\end{align}
+また，$\alpha < \beta$ではないので，同様に
+\begin{align}
+ (\myabs{\alpha}\ge \myabs{\beta}) \land (\alpha \ge_{lex'} \beta).
+\end{align}
+よって，$\alpha = \beta$である．
+  \item かけ算で保たれること：あきらか．
+  \item 整列順序であること：減少列$\alpha_1 >_{grevlex} \alpha_2 >_{grevlex} \dots$が存在するとする．ある$n$で$\myabs{\alpha_n} < \myabs{\alpha_{n+1}}$であるとすると，$\alpha_n < \alpha_{n+1}$となってしまい矛盾なので，常に$\myabs{\alpha_n} \ge \myabs{\alpha_{n+1}}$となる．これは，$\Zge$の非増加列である．
+よって，ある$N$以降で，$\myabs{\alpha_N} = \myabs{\alpha_{N+1}} = \dots $となる．$\alpha_N >_{grevlex} \alpha_{N+1}>_{grevlex} \dots$となっているので，$\alpha_N >_{lex'} \alpha_{N+1} >_{lex'}\dots$となる．\warn{$\myabs{\alpha_N} = \myabs{\alpha_{N+1}}=\dots$なので，これら$\alpha_N,\alpha_{N+1},\dots$の全次数は一致していなければならず，したがってこのような元は有限個しか存在しない．しかし，$\alpha_N >_{lex'} \alpha_{N+1}>_{lex'}\dots$は，$\alpha_N,\alpha_{N+1},\dots$が全て異なることを要求している．これは，全次数が一定な$\Zge^n$の元が無限個存在することを意味するので，矛盾である．}
+ \end{itemize}
+\end{myproof}
+
+これで単項式について順序が入ったので，1変数多項式の「先頭項」などが拡張できる．
+$f= \sum_{\alpha \in \Zge^n} a_\alpha x^\alpha$について，
+\begin{itemize}
+ \item $f$の多重指数(multidegree)とは，(次数の拡張)$a_\alpha \neq 0$なる$\alpha \in \Zge^n$のうち，$\alpha$が，今採用している順序について最高のものの$\alpha$のことである．これを$\multidegree(f)$と書く．
+\begin{align}
+ \multidegree(f) = \max \set{\alpha | \alpha \in \Zge^n \land a_\alpha \neq 0}
+\end{align}
+である．
+ \item $f$の先頭係数(leading coefficient)とは，多重指数を持つ項の係数のことで，つまり$a_{\multidegree(f)}$のことである．$\LC(f)$と書く．
+ \item $f$の先頭単項式(leading monomial)とは，多重指数を持つ項の単項式のことで，つまり$x^{\multidegree(f)}$のことである．$\LM(f)$と書く．
+ \item $f$の先頭項(leading term)とは，多重指数を持つ項のことで，$\LT(f)$と書く．$\LT(f)=\LC(f)\cdot \LM(f)$．
+\end{itemize}
+
+multidegreeについて，以下の性質が成り立つ．証明は演習．
+\begin{itemize}
+ \item $\multidegree(fg) = \multidegree(f) + \multidegree(g)$．
+ \item $f+ g\neq 0$なら，$\multidegree(f + g) \le \max(\multidegree(f),\multidegree(g))$．
+さらに，$\multidegree(f)\neq \multidegree(g)$ならば，等号が成立する．
+\end{itemize}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $f(x,y,z)=2x+3y+z+x^2-z^2+x^3$について．
+\begin{itemize}
+ \item lex順序：$f(x,y,z) = x^3 + x^2 + 2x + 3y -z^2 + z$．$\LM(f)=x^3$．$\LT(f)=x^3$．$\multidegree(f)=(3,0,0)$．
+ \item grlex順序：$f(x,y,z) = x^3 +x^2 -z^2 + 2x + 3y +z$．$\LM(f)=x^3$．$\LT(f)=x^3$．$\multideg(f)=(3,0,0)$．
+ \item grevlex順序：$f(x,y,z)=x^3 + x^2 -z^2 + 2x + 3y + z$．$\LM(f)=x^3$．$\LT(f)=x^3$．$\multidegree(f)=(3,0,0)$．
+\end{itemize}
+ \item $f(x,y,z)=2x^2y^8 - 3x^5yz^4 + xyz^3 -xy^4$について．
+\begin{itemize}
+ \item lex順序：$f(x,y,z)=-3x^5yz^4 + 2x^2 y^8 -xy^4 + xyz^3$．
+$\LM(f)=x^5yz^4$．$\LT(f)=-3x^5yz^4$．$\multideg(f)=(5,1,4)$．
+ \item grlex順序：$f(x,y,z)=-3x^5yz^4 + 2x^2y^8 -xy^4 + xyz^3$．
+$\LM(f)=x^5yz^4$．$\LT(f)=-3x^5yz^4$．$\multideg(f)=(5,1,4)$．
+ \item grevlex順序：$f(x,y,z)= 2x^2y^8 -3x^5yz^4 -xy^4 + xyz^3$．
+$\LM(f)=x^2y^8$．$\LT(f)=2x^2y^8$．$\multideg(f)=(2,8,0)$．
+\end{itemize}
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item grlex．
+ \item grevlex．
+ \item lex．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $f(x,y,z)=2x+3y+z+x^2-z^2+x^3$について．
+\begin{itemize}
+ \item lex順序：$f(x,y,z)=-z^2 + z + 3y + x^3 + x^2 +2x$．$\LM(f)=z^2$．$\LT(f)=-z^2$．$\multideg(f)=(2,0,0)$．
+ \item grlex順序：$f(x,y,z)=x^3 -z^2 +x^2 + z + 3y + 2x$．$\LM(f)=x^3$．$\LT(f)=x^3$．$\multideg(f)=(0,0,3)$．
+ \item grevlex順序：$f(x,y,z)=x^3 -z^2 + x^2 + 2x + 3y + z$．$\LM(f)=x^3$．$\LT(f)=x^3$．$\multideg(f)=(0,0,3)$．
+\end{itemize}
+ \item $f(x,y,z)=2x^2y^8-3x^5yz^4+xyz^3-xy^4$について．
+\begin{itemize}
+ \item lex順序：$f(x,y,z)=-3x^5yz^4 +xyz^3 +2x^2y^8 -xy^4$．$\LM(f)=x^5yz^4$．
+$\LT(f)=-3x^5yz^4$．$\multideg(f)=(4,1,5)$．
+ \item grlex順序：$f(x,y,z)=-3x^5yz^4 + 2x^2 y^8 +xyz^3 -xy^4$．$\LM(f)=x^5yz^4$．$\LT(f)=-3x^5yz^4$．$\multideg(f)=(4,1,5)$．
+ \item grevlex順序：$2x^2y^8 - 3x^5yz^4 -xy^4 + xyz^3$．$\LM(f)=x^2y^8$．$\LT(f)=2x^2y^8$．$\multideg(f)=(0,8,2)$．
+\end{itemize}
+\end{enumerate}
+ \item やった．
+ \item やった．
+ \item $x_1 >_{lex} \dots >_{lex} x_n$のとき，$x_n >_{invlex} \dots >_{invlex} x_1$．略．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 仮に$\alpha < 0$となる$\alpha \in \Zge^n$が存在したとしよう(背理法)．
+$0 > \alpha$である．
+このとき，「かけ算で保つ」より，両辺に$\alpha$を足して(多項式としてはかけて)，$\alpha > 2\alpha$である．これを続けると，$0>\alpha > 2\alpha > 3\alpha > \dots$という狭義減少列が得られる．これは，$>$が単項式順序であり，「整列集合である」ことに反する．
+ \item $x^\alpha | x^\beta$とする．$x^\beta = x^\gamma x^\alpha$となる$\gamma \in \Zge^n$が存在する．よって，$\beta = \gamma + \alpha$である．$\gamma \ge 0$が(a)から従う．単項式順序の「かけ算で保つ」より，両辺に$\alpha$を足して$\alpha + \gamma \ge \alpha$を得る．よって，$\beta = \gamma + \alpha \ge \alpha$．
+ \item 「最小」とは，その元が集合に属し，しかも下限になっていること，つまり任意の集合に属する元は，その下限の元以上になることであった．$\alpha \in \alpha + \Zge^n$はあきらかなので，任意の$\beta \in \alpha + \Zge^n$について，$\beta \ge \alpha$を示せばよい．$\beta \in \alpha + \Zge^n$なので，$\gamma \in \Zge^n$で，$\beta = \alpha + \gamma$となるものが存在する．(b)より，$\beta \ge \alpha$である．
+\end{enumerate}
+ \item 先頭項の大きいものから順に，上から下へ並んでいる．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\begin{itemize}
+ \item
+$\Rightarrow$：$\alpha >_{grevlex}\beta$でかつ，$\myabs{\alpha} > \myabs{\beta}$でないとする．$\myabs{\alpha} < \myabs{\beta}$だとすると，$\alpha <_{grevlex} \beta$となり矛盾するので，$\alpha = \beta$である．あとは$\alpha >_{rinvlex} \beta$を調べればよい．今，$\myabs{\alpha}=\myabs{\beta}$なので，$\alpha-\beta$の一番右の0でない元が負である．よって，$\beta-\alpha$の一番右の0でない元が正であり，$\beta-\alpha >_{invlex} 0$である．よって，$\beta >_{invlex} \alpha$である．
+よって，$\beta <_{rinvlex} \alpha$である．
+ \item $\Leftarrow$：$\myabs{\alpha} > \myabs{\beta}$のときはあきらかに$\alpha >_{grevlex} \beta$である．あとは，「$\myabs{\alpha}=\myabs{\beta}$で，しかも$\alpha >_{rinvlex} \beta$」のときを調べればよい．$\myabs{\alpha}=\myabs{\beta}$なので，$\alpha-\beta$の一番右の0でない元が負であることを言えばよい．$\alpha>_{rinvlex}\beta$なので，$\alpha <_{invrex}\beta$である．よって，$\beta-\alpha$の一番右側の0でない元が正である．よって，$\alpha - \beta$の一番右側の0でない元は負である．
+\end{itemize}
+ \item 単項式順序でない．$>_{rinvlex}$を$x$と書く．$x>x^2>x^3>\dots$という無限列が得られる．(問題5の証明が間違ってた!)
+\end{enumerate}
+ \item 必ずしも正しくない．lex順序だと，
+\begin{align}
+ (2,0) > \dots > (1,3) > (1,2) > (1,1) > (1,0) > (0,0)
+\end{align}
+となり，$(2,0)$と$(0,0)$との間には$(1,0),(1,1),(1,2),\dots$が無数に存在する．
+
+一方，grlex順序ではそのようなことは起こらない．
+$\alpha > \gamma > \beta$となる$\gamma$を考えると，$\myabs{\alpha} \ge \myabs{\gamma} \ge \myabs{\beta}$となり(たくさんやったので略)，$\gamma$の全次数は有限個しかありえない．ある全次数を持つ$\Zge^n$の元はまた有限個しか存在しないので，$\gamma$は有限個しかありえない．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $f = \sum_{\alpha} a_\alpha x^\alpha$とする．$m = x^\beta$とする．
+$mf = \sum_{\alpha} a_\alpha x^{\alpha + \beta}$となる．よって，
+\begin{align}
+ \multideg(mf)
+&=
+\max\set{\alpha + \beta | a_\alpha \neq 0}\\
+ & =
+\max\set{\alpha | a_\alpha \neq 0} + \beta\\
+ & =
+\multideg(f) + \beta.
+\end{align}
+よって，
+\begin{align}
+ \LT(mf)
+&= a_{\multideg(mf)-\beta} x^{\multideg(mf)}\\
+ & =
+a_{\multideg(f)} x^{\multideg(f)+\beta}\\
+ & =
+m a_{\multideg(f)}x^{\multideg(f)}\\
+ & =
+m \LT(f).
+\end{align}
+
+ \item
+$f=\sum_\alpha a_\alpha x^\alpha$，$g=\sum_\beta b_\beta x^\beta$とする．
+ $fg=\sum_\alpha \sum_\beta a_\alpha b_\beta x^{\alpha +\beta}$．
+\begin{align}
+ \multideg(fg)
+&=
+\max\set{\alpha + \beta  | a_\alpha b_\beta \neq 0}\\
+ & =
+\max\set{\alpha + \beta  | a_\alpha \neq 0 \land b_\beta \neq 0}\\
+ & \desceq{\warn{かけ算で保つ}}
+\max\set{\alpha + \max\set{\beta | b_\beta \neq 0} | a_\alpha \neq 0}\\
+ & =
+\max\set{\alpha + \multideg(g) | a_\alpha \neq 0}\\
+ & =
+\max\set{\alpha | a_\alpha \neq 0}+ \multideg(g) \\
+ & =
+\multideg(f) + \multideg(g).
+\end{align}
+\begin{align}
+ \LC(fg)
+&=
+\sum_{\alpha + \beta = \multideg(fg)} a_{\alpha}b_\beta\\
+ & =
+\sum_{\alpha + \beta = \multideg(f)+\multideg(g)} a_{\alpha}b_\beta\\
+ & =
+a_{\multideg(f)} b_{\multideg(g)}\\
+ & =
+\LC(f) \LC(g).
+\end{align}
+よって，
+\begin{align}
+ \LT(fg)
+&=
+\LC(fg)\LM(fg)\\
+ & =
+\LC(f)\LC(g) x^{\multideg(fg)}\\
+ & =
+\LC(f)\LC(g) x^{\multideg(f)+\multideg(g)}\\
+ & =
+\LC(f)\LC(g)\LM(f)\LM(g)\\
+ & =
+\LT(f)\LT(g).
+\end{align}
+
+ \item $f_1 = x,\, f_2 = -x,\, g_1 = y,\, g_2 = y$とする．
+このとき，$\sum_{i=1}^2 f_i g_i = xy - xy = 0$となる．よって，
+このとき，$\LM(\sum_{i=1}^2 f_i g_i)$が定義されない？
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\begin{enumerate}[label=(\roman*)]
+ \item (11-b)でやった．
+ \item $f=\sum_\alpha a_\alpha x^\alpha$，$g=\sum_\alpha b_\alpha x^\alpha$とする．
+$\multideg(f) \ge \multideg(g)$として一般性を失なわない．
+\warn{このとき，$b_\alpha =0 \implies a_\alpha = 0$である．←嘘!!}
+$\multideg(f)\ge \multideg(f+g)$を示せばよい．まず，
+\begin{align}
+ \Forall{N > 0} a_{\multideg(f) + N} + b_{\multideg(f) + N} = 0
+\label{200537_5Mar15}
+\end{align}
+を示す．仮に$a_{\multideg(f)+N}+b_{\multideg(f)+N} \neq 0$となる$N>0$
+       が存在したとする(背理法)．
+$\multideg$の性質より，$a_{\multideg(f)+N}=0$である．よって，
+$b_{\multideg(f)+N}\neq 0$である．これは，$\multideg(g) > \multideg(f)$を意味するが，矛盾である．よって，(\ref{200537_5Mar15})は成立する．
+これはつまり，
+\begin{align}
+ \alpha > \multideg(f) \implies a_\alpha + b_\alpha = 0
+\end{align}
+だが，対偶をとって，
+\begin{align}
+ a_\alpha + b_\alpha \neq 0 \implies \alpha \le \multideg(f).
+\end{align}
+よって，$\multideg(f+g) = \max\set{\alpha | a_\alpha + b_\alpha \neq 0} \le \multideg(f)$．
+
+さらに，$\multideg(f)>\multideg(g)$を仮定する．$a_{\multideg(f)}+b_{\multideg(f)}\neq 0$を示す．これが示されれば，
+\begin{align}
+ \multideg(f) \le \max\set{\alpha | a_\alpha + b_\alpha \neq 0} = \multideg(f+g)
+\end{align}
+となり，等号が示されるからである．仮に$a_{\multideg(f)}+b_{\multideg(g)}=0$となるとする．$a_{\multideg(f)}\neq 0$なので，$b_{\multideg(f)}\neq 0$である．
+これは，$\multideg(f) > \multideg(g)$に反する．よって，
+$a_{\multideg(f)}+b_{\multideg(f)} \neq 0$である．
+\end{enumerate}
+ \item
+\begin{itemize}
+ \item 等しくなる：lex順序を使う．$f=x^2$，$g=xy$とする．$\multideg(f+g)=(2,0)$である．一方，$\multideg(f)=(2,0)$，$\multideg(g)=(1,1)$であり，$\max(\multideg(f),\multideg(g))=(2,0)$であり，等しくなる．
+ \item 等しくならない：lex順序を使う．$f=x^2 + 1$，$g=-x^2$とする．$\multideg(f+g)=\multideg(1)=(0,0)$である．一方，$\multideg(f)=(2,0)$，$\multideg(g)=(2,0)$であり，$\max(\multideg(f),\multideg(g))=(2,0)$であり，等しくならない．
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+
+\subsection{$k[x_1,\dots,x_n]$の割り算アルゴリズム}
+多変数の割り算アルゴリズムでは，ある多項式を複数の多項式で割るということを考える．ここで，$f$を$F=(f_1,\dots,f_s)$(これは多項式の組)で割るとは，
+\begin{itemize}
+ \item
+\begin{align}
+ f = a_1 f_1 + \dots + a_s f_s + r
+\end{align}
+ \item
+$r$のすべての単項式は$\LT(f_1),\dots,\LT(f_s)$のどれでもわりきれない
+ \item $a_i f_i \neq 0 \implies \multideg(a_i f_i) \le \multideg(f)$
+\end{itemize}
+$a_1,\dots,a_n,r \in k[x_1,\dots,x_n]$を求めることとする．このようなものを求める手続があることを示そう．a
+\begin{myproof}
+ \begin{algorithm}[H]
+\caption{$k[x_1,\dots,x_n]$の割り算}
+  \begin{algorithmic}[1]
+   \STATE{$stock \defeq f$}
+   \STATE{$a_1,\dots,a_s \defeq 0$}
+   \STATE{$r \defeq 0$}
+   \WHILE{$stock \neq 0$}
+   \STATE{$divisionoccured \defeq \false$}
+   \STATE{$i \defeq 1$}
+   \STATE{/* まず割るだけ割ってみる */}
+   \WHILE{$divisionoccured = \false$ かつ $i \le s$}
+   \IF{$\LT(f_i) \warn{|} \LT(stock)$}
+   \STATE{$\displaystyle a_i \Leftarrow a_i + \frac{\LT(stock)}{\LT(f_i)}$}
+   \STATE{$\displaystyle stock \Leftarrow stock - \frac{\LT(stock)}{\LT(f_i)}f_i$}
+   \STATE{$divisionoccured \Leftarrow \true$}
+   \ENDIF{}
+   \STATE{$i \Leftarrow i + 1$}
+   \ENDWHILE{}
+   \STATE{/* 割れなければ余りを出す */}
+   \IF{$divisionoccured = \false$}
+   \STATE{$r \Leftarrow r + \LT(stock)$}
+   \STATE{$stock \Leftarrow stock - \LT(stock)$}
+   \ENDIF{}
+   \ENDWHILE{}
+  \end{algorithmic}
+ \end{algorithm}
+以下のことを示せばよい．
+ \begin{itemize}
+  \item 和の関係が保たれる：
+L.3の時点とL.21の時点で常に
+\begin{align}
+ f = a_1 f_1 + \dots + a_s f_s + stock + r
+\end{align}
+が保たれることを示そう．L.3ではあきらか．
+L.4の時点で，
+\begin{align}
+ f = a_{1b} f_1 + \dots + a_{sb} f_s + stock_b + r_b
+\end{align}
+であるとし，L.21の時点では，$a_{1a},\dots,a_{sa},stock_{a},r_a$
+となったとする．
+\begin{itemize}
+ \item $\LT(f_1),\dots,\LT(f_s)$のうちで，$\LT(stock_b)$を割り切るものがあるとき：そのようなもののうち最小のものを$f_i$とする．
+このとき，$j\neq i$について，
+\begin{align}
+ a_{ja} =
+\begin{cases}
+ a_{jb} & j\neq i\\
+ a_{ib} + \frac{\LT(stock_b)}{\LT(f_i)} &  j= i
+\end{cases}
+\end{align}
+となり，
+\begin{align}
+ stock_a = stock_b - \frac{\LT(stock_b)}{\LT(f_i)}f_i
+\end{align}
+となり，
+\begin{align}
+ r_a = r_b
+\end{align}
+となる．たしかに，
+\begin{align}
+ a_{1a}f_1 + \dots + a_{sa}f_s + stock_a + r_a
+&=
+\sum_{j=1}^s a_{jb}  f_j + \frac{\LT(stock_b)}{\LT(f_i)}f_i + stock_b - \frac{\LT(stock_b)}{\LT(f_i)}f_i + r_b\\
+ & =
+a_{1b}f_1 + \dots + a_{sb}f_s + stock_b + r_b.
+\end{align}
+ \item $\LT(f_1),\dots,\LT(f_s)$のうちで，$\LT(stock_b)$を割り切るものがないとき：L9-L.13は実行されず，L.17-L.20だけが実行される．
+このとき，
+\begin{align}
+ a_{ja} &= a_{jb}\\
+ stock_a & = stock_b - \LT(stock_b)\\
+ r_a & = r_b + \LT(stock_b)
+\end{align}
+となる．そして，
+\begin{align}
+ a_{1a} f_{1a} + \dots + a_{sa} f_{sa} + stock_a + r_a
+&=
+a_{1b} f_{1b} + \dots + a_{sb} f_{sb} + stock_b - \LT(stock_b) + r_b + \LT(stock_b)\\
+ & =
+a_{1b}f_{1b} + \dots + a_{sb} f_{sb} + stock_b + r_b.
+\end{align}
+どちらにせよ，
+$a_1 f_1 + \dots + a_s f_s + stock + r$は実行中保たれることになる．
+\end{itemize}
+  \item アルゴリズムの停止：
+まず，L.8からL.15のループは，高々$s$回で停止する．そこで，L.4からL.21のループが有限回で停止することを示す．もしも$\LT(f_1),\dots,\LT(f_s)$のうち，$\LT(stock)$を割り切るものがあるならば，L.11で$stock$の全次数が真に減少する．\warn{詳しく考えると、$\LC(\frac{\LT(stock)}{\LT(f_i)}f_i)=\LC(stock)$であり、$\deg(\frac{\LT(stock)}{\LT(f_i)}f_i)=\deg(stock)$となるので、先頭項が消えるからである。}もしもそうでなく，$\LT(f_1),\dots,\LT(f_s)$はどれも$\LT(stock)$を割りきらないならば，
+L.19で$stock$の全次数が真に減少する．よって，L.5からL.20の間で全次数は真に減少する．もしもL.4-L.21のループが永遠に止まらないとすると，変化していく$stock$で列を作ることで，$\Zge^n$の単調減少列が得られる．これは，$>$が単項式順序であり，整列順序であることに矛盾する．よって，L.4-L.21のループは停止し，アルゴリズムは停止する．
+  \item $r$が所定の条件を満たす：
+$r$が，L.4とL.20の時点で，「$r$のどの項も$\LT(f_1),\dots,\LT(f_s)$のどれでも割り切れない」という条件を満たしつつけることを示せば十分である．
+L.4の時点では$r=0$であり，自明．L.4-L.20で，変化する前の変数は$\bullet_b$，変化したあとの変数を$\bullet_a$とする．帰納法で，$r_b$は条件をみたすとし，$r_a$も条件をみたすことを示せばよい．もしも$\LT(f_{1b}),\dots,\LT(f_{sb})$のうち，$\LT(stock_b)$を割きるものがあれば，$divisionoccured = \true$となり，L.18は実行されない．よって，$r_a = r_b$であり，条件をみたす．そこおで，$\LT(f_{1b}),\dots,\LT(f_{sb})$のうち，$\LT(stock_b)$を割りきるものがないとする．すると，L.18より，
+\begin{align}
+ r_a = r_b + \LT(stock_b)
+\end{align}
+となるが，$r_b$は仮定より条件をみたすし，$\LT(stock_b)$は割りきることに関する仮定より条件をみたす．よって，$r_a$は条件をみたす．
+
+よって，常に$r$のすべての項は$\LT(f_1),\dots,\LT(f_s)$で割りきれないという条件を満たす．
+  \item $a_1,\dots,a_s$が所定の条件を満たす：
+同様に，L.4とL.21で条件を満たしつづけることを示す．L.4では，$\multideg(a_i)=\multideg(0)$が定義されないので，条件をみたす．そこで，ループL.4-L.21での推移を追う．$\LT(f_i)$が$\LT(stock_b)$を割りきらないとき，$a_i$を更新するL.10が実行されず，他に$a_i$が更新される機会はないので，$a_{ia}=a_{ib}$である．$a_{ib}$は条件をみたすので，$a_{ia}$も条件をみたす．そこで，$\LT(f_i)$が$\LT(stock_b)$を割りきるとする．
+\begin{itemize}
+ \item
+$a_{ib}=0$のときは，$a_{ia}=\frac{\LT(stock_b)}{\LT(f_i)}$となる．
+払って，$a_{ia}\LT(f_i) = \LT(stock_b)$となる．
+よって，$\multideg(a_{ia} f_i)=\multideg(stock_b)$となる．
+$stock$の初期値が$f$で，先にみたように$stock$の$\multideg$は単調に減少するので，
+$\multideg(stock_b) \le \multideg(f)$である．よって，$\multideg(a_{ia}f_i) \le \multideg(f)$となる．
+ \item $a_{ib}\neq 0$のときは，$\multideg(a_{ib}f_i)\le \multideg(f)$が満たされている．さらに，L.10により，
+\begin{align}
+ a_{ia} = a_{ib} + \frac{\LT(stock_b)}{\LT(f_i)}
+\end{align}
+である．払って，$\LT(f_i)a_{ia} = a_{ib}\LT(f_i) + \LT(stock_b)$である．
+よって，
+\begin{align}
+ \multideg(a_{ia} f_i)
+&\le \max(\multideg(a_{ib}f_i),\LT(stock_b))
+\end{align}
+先と同様に，$\multideg(stock_b)\le \multideg(f)$である．これと，$\multideg(a_{ib}f_i)\le \multideg(f)$をまとめて，
+\begin{align}
+ \multideg(a_{ia}f_i) \le \multideg(f)
+\end{align}
+を得る．
+\end{itemize}
+ \end{itemize}
+\end{myproof}
+
+計算例を示す．
+
+
+\easypicture{div1.png}
+
+$xy^2+1$を$xy+1$と$y+1$で割った．
+\begin{align}
+ xy^2 +1 = y\cdot (xy+1) + 1\cdot (y+1) + 2.
+\end{align}
+
+\easypicture{div2.png}
+
+$x^2y+xy^2 + y^2$を$xy-1$と$y^2-1$で割った．
+\begin{align}
+ x^2y + xy^2 + y^2 = (x+y)\cdot (xy-1) + 1\cdot (y^2-1) + 0.
+\end{align}
+
+\easypicture{div3.png}
+
+$x-2y+xy^2 + y^2$を$y^1-1$と$xy-1$で割った．
+
+このように，同じ割り算でも，割る式の順序によって商や余りが異なることがある．このために，イデアルの所属問題の解法で「あまりが0ならばよい」という手法は安直には使えない．
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\easypicture{div3_1a.png}
+ \item
+\easypicture{div3_1b.png}
+\end{enumerate}
+ \item 何の順序で？
+ \item {\tt code/ex_2_3_3.hs}で計算．出力は以下．
+\begin{description}\item[1a,grlex]\begin{enumerate}
+\item Start: calculates $x^{7}y^{2}+x^{3}y^{2}+(-1)y+1\div $\begin{itemize}
+\item $xy^{2}+(-1)x$,
+\item $(-1)y^{3}+x$,
+\end{itemize} .
+
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{7}+x^{3}y^{2}+(-1)y+1$ .
+\item Remainder: $x^{7}$ moved to remainder.
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{3}+(-1)y+1$ .
+\item Remainder: $x^{3}$ moved to remainder.
+\item Remainder: $(-1)y$ moved to remainder.
+\item Remainder: $1$ moved to remainder.
+\item Completed: quotients are \begin{itemize}
+\item $x^{6}+x^{2}$,
+\item $0$,
+\end{itemize} .
+remainder is $x^{7}+x^{3}+(-1)y+1$.  $\blacksquare$
+\end{enumerate}
+\item[1a,lex]\begin{enumerate}
+\item Start: calculates $x^{7}y^{2}+x^{3}y^{2}+(-1)y+1\div $\begin{itemize}
+\item $xy^{2}+(-1)x$,
+\item $x+(-1)y^{3}$,
+\end{itemize} .
+
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{7}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{6}y^{3}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{6}y+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{5}y^{4}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{5}y^{2}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{5}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{4}y^{3}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{4}y+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{3}y^{4}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $2x^{3}y^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $2x^{3}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $2x^{2}y^{3}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $2x^{2}y+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $2xy^{4}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $2xy^{2}+(-1)y+1$ .
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $2x+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $2y^{3}+(-1)y+1$ .
+\item Remainder: $2y^{3}$ moved to remainder.
+\item Remainder: $(-1)y$ moved to remainder.
+\item Remainder: $1$ moved to remainder.
+\item Completed: quotients are \begin{itemize}
+\item $x^{6}+x^{5}y+x^{4}y^{2}+x^{4}+x^{3}y+x^{2}y^{2}+2x^{2}+2xy+2y^{2}+2$,
+\item $x^{6}+x^{5}y+x^{4}+x^{3}y+2x^{2}+2xy+2$,
+\end{itemize} .
+remainder is $2y^{3}+(-1)y+1$.  $\blacksquare$
+\end{enumerate}
+\item[1b,grlex]\begin{enumerate}
+\item Start: calculates $x^{7}y^{2}+x^{3}y^{2}+(-1)y+1\div $\begin{itemize}
+\item $(-1)y^{3}+x$,
+\item $xy^{2}+(-1)x$,
+\end{itemize} .
+
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{7}+x^{3}y^{2}+(-1)y+1$ .
+\item Remainder: $x^{7}$ moved to remainder.
+\item Division: $xy^{2}+(-1)x$ divides stock. stock is $x^{3}+(-1)y+1$ .
+\item Remainder: $x^{3}$ moved to remainder.
+\item Remainder: $(-1)y$ moved to remainder.
+\item Remainder: $1$ moved to remainder.
+\item Completed: quotients are \begin{itemize}
+\item $0$,
+\item $x^{6}+x^{2}$,
+\end{itemize} .
+remainder is $x^{7}+x^{3}+(-1)y+1$.  $\blacksquare$
+\end{enumerate}
+\item[1b,lex]\begin{enumerate}
+\item Start: calculates $x^{7}y^{2}+x^{3}y^{2}+(-1)y+1\div $\begin{itemize}
+\item $x+(-1)y^{3}$,
+\item $xy^{2}+(-1)x$,
+\end{itemize} .
+
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{6}y^{5}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{5}y^{8}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{4}y^{11}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{3}y^{14}+x^{3}y^{2}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{3}y^{2}+x^{2}y^{17}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{2}y^{17}+x^{2}y^{5}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $x^{2}y^{5}+xy^{20}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $xy^{20}+xy^{8}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $xy^{8}+y^{23}+(-1)y+1$ .
+\item Division: $x+(-1)y^{3}$ divides stock. stock is $y^{23}+y^{11}+(-1)y+1$ .
+\item Remainder: $y^{23}$ moved to remainder.
+\item Remainder: $y^{11}$ moved to remainder.
+\item Remainder: $(-1)y$ moved to remainder.
+\item Remainder: $1$ moved to remainder.
+\item Completed: quotients are \begin{itemize}
+\item $x^{6}y^{2}+x^{5}y^{5}+x^{4}y^{8}+x^{3}y^{11}+x^{2}y^{14}+x^{2}y^{2}+xy^{17}+xy^{5}+y^{20}+y^{8}$,
+\item $0$,
+\end{itemize} .
+remainder is $y^{23}+y^{11}+(-1)y+1$.  $\blacksquare$
+\end{enumerate}
+\end{description}
+ \item やった．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item {\tt ex_2_3_5.hs}で計算．
+\begin{align}
+ r_1 &= x^3-x^2z + x-z,\\
+ r_2 & = x^3-x^2z.
+\end{align}
+である．はじめに$x^3$を余りに出すところまではあっているが，残りの$-x^2y-x^2z+x$はどちらでも割れるので，は割る順序が変わってくる．
+ \item $r=r_1-r_2=x-z$である．$r=(-x)\cdot f_2 + 1\cdot f_1 $．
+ \item 割り算の定義により，$r_1,r_2$の項はどれも$f_1,f_2$のどちらでも割れないことが保証されている．よって，それらの項を足した$r$も，$f_1,f_2$のどちらでも割れず，$r\div (f_1,f_2)$のあまりは$r$そのものである．
+ \item
+\begin{align}
+ y\cdot f_1 - (xy+1)\cdot f_2 = 1-yz.
+\end{align}
+これは$f_1,f_2$のどちらでも割れず，あきらかに$(f_1,f_2)$で割ったあまりは0でない．
+ \item 与えない．上は(d)は，その構成より$\gen{f_1,f_2}$の元だが，$(f_1,f_2)$，あるいは$(f_2,f_1)$で割った余りは0でない．
+\end{enumerate}
+ \item
+\begin{align}
+g= 3x(2xy^2-x) - 2y(3x^2y-y-1) =
+-3x^2 -2y^2 -2y
+\end{align}
+であり，これは$f_1,f_2$で割ることができないので，余りは0でない．
+ \item
+\begin{align}
+ y^2\cdot f_1 - xy\cdot f_2
+&=
+(x^4y^4-y^2z) - (x^4y^4-xy)
+=
+xy - y^2 z
+=
+-y^2z + xy\\
+ xy\cdot f_2 - x^2\cdot f_3 ,
+& =
+(x^4y^4-xy ) - (x^4y^4 - 2x^2z)
+=
+2x^2z - xy.
+\end{align}
+次数より，もう割れないことは分かる．
+
+ \item
+$\LT(g)$が$\LT(f_1),\dots,\LT(f_s)$のどれでも割りきれないとき，割り算のあまりは0にならないことが保証される．
+
+しかし，その$g$がイデアルに所属することもあるので，余りが0かどうかでイデアルの所属を判定することはできない．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $y \ge_{lex} z \ge_{lex} x$というlex順序で$f$を割ることにより余りが$x$の1次以下の式となる．
+ \item $x=t,y=t^2,z=t^3$であった．$z^2-x^4y=(t^3)^2 - t^4 t^2 = 0$．
+ \item
+\easypicture{div3_2_9.png}
+\begin{align}
+ (-x^4)(y-x^2) + (z+x^3)(z-x^3) = -yx^4+z^2 = z^2-x^4y.
+\end{align}
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $\set{(t,t^m,t^n)}=\var(y-x^m, z-x^n).$
+ \item $f \in \R^3[x,y,z]$を$\var(y-x^m,z-x^n)$を消す多項式とする．
+$f$を$y-x^m,z-x^n$で，$y>_{lex} z >_{lex} x$というlex順序で割ることにより，
+\begin{align}
+ f = h_1 \cdot (y-x^m) + h_2 \cdot (z-x^n) + h_3
+\end{align}
+となる$h_1,h_2 \in \R^3[x,y,z]$と$h_3 \in \R^3[x]$が存在することがわかる．
+$f$は$\var(y^x-m,z-x^n) = \set{(t,t^m,t^n)}$を消さなければならないので，任意の$t$について
+\begin{align}
+0 =  f(t,t^m,t^n) = h_3(t).
+\end{align}
+となる．$t$は任意であり，無限体上の議論なので，$h_3$は多項式として0である．よって，
+\begin{align}
+ f = h_1 \cdot (y-x^m) + h_2 \cdot (z-x^n)
+\end{align}
+であり，$f\in \gen{y-x^m,z-x^n}$となる．よって，$\var(y-x^m,z-x^n) \subset \gen{y-x^m,z-x^n}$．
+逆はあきらか．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\begin{itemize}
+ \item $\beta \in \Delta_i$とする．$\beta \in \Delta_i \subset \alpha(1) + \Zge^n$となる．
+よって，$\beta-\alpha(i) \in \Zge^n$となり，$x^{\alpha(i)}|x^\beta$である．
+
+次に，$j<i$とする．$x^{\alpha(j)}|x^{\beta}$とする．$\beta-\alpha(j)\in \Zge^n$となる．よって，
+$\beta \in \alpha(j) + \Zge^n$となる．よって，対偶を考え，$\beta \in \Delta_i$から
+$\beta \notin \alpha(j)+\Zge^n$となり，$x^{\alpha(j)}$は$x^\beta$を割り切らない．
+ \item $x^{\alpha(i)}$は$x^\beta$を割り切り，かつ$j<i$について$x^{\alpha(j)}$は$x^\beta$ど割り切らないとする．
+$x^{\alpha(i)}$は$x^\beta$を割り切るので，$\beta \in \alpha(i) + \Zge^n$である．
+また，$x^{\alpha(j)}$は$x^\beta$を割り切らないので，$\beta \notin \alpha(j)+\Zge^n$となる．以上をまとめて，
+$\beta \in (\alpha(i)+\Zge^n)\setminus (\alpha(j)+\Zge^n)\subset \Delta_i$である．($i=1$のときは，何も引かないと解釈する．)
+\end{itemize}
+ \item 対偶を示す．何か$i$があって，$x^{\alpha(i)}$が$x^\gamma$をわりきるとする．
+このとき，$\gamma \in \alpha(i) + \Zge^n$となり，$\gamma \in \alpha(i) + \Zge^n$である．
+定義より，
+\begin{align}
+ \Delta_1 &= \alpha(1) + \Zge^n\\
+ \Delta_1 \cup \Delta_2 &= \Delta_1 \cup  (\alpha(2)+\Zge^n)\setminus\Delta_1  = (\alpha(1)+\Zge^n) \cup (\alpha(2)+\Zge^n)\\
+ & \vdots\\
+ \Delta_1 \cup \dots \cup \Delta_n & = (\alpha(1)+\Zge^n)\cup \dots \cup (\alpha(n) + \Zge^n)
+\end{align}
+である．よって，$\gamma \in \Delta_1 \cup \dots \cup \Delta_n$となる．
+よって，$\gamma \notin \overline \Delta$となる．
+ \item アルゴリズムより，$a_i$の項を$cx^\beta$とする．ある$stock$があって，$x^\beta=\frac{\LT(stock)}{\LT(f_i)}$となる．
+アルゴリズムより，この$stock$は，$\LT(f_i)$が$\LT(stock)$を割りきり，$\LT(f_1),\dots,\LT(f_{i-1})$が$\LT(stock)$を割りきらないことが保証されている．
+よって，$\beta = \multideg(stock) - \alpha(i) = \multideg(stock)-\multideg(f_i) \in \Zge^n$である．よって，
+$\beta+\alpha(i)\in \alpha(i)+ \Zge^n$である．
+
+次に，$j<i$とする．$\beta+\alpha(i)\in \alpha(j)+\Zge^n$と仮定する．
+このとき，$\beta=\multideg(stock)-\alpha(i)$なので，$\multideg(stock) \in \alpha(j)+\Zge^n$である．よって，
+$\alpha(j)$が$\LT(stock)$を割り切る．これはすなわち，$\LT(f_j)=x^{\alpha(j)} | \LT(stock)$となるが，これは$stock$の条件に矛盾する．よって，$\beta + \alpha(i) \notin \alpha(j)+\Zge^n$である．
+
+以上のことより，$\beta+\alpha(i) \in \Delta_i$となる．
+
+$r$のすべての項$cx^\gamma$は，アルゴリズムより$\LT(f_1),\dots,\LT(f_s)$のすべてで割り切れないことが保証されているから，$\gamma \in \overline \Delta$である．
+ \item
+存在はアルゴリズムの存在が示している．一意性を示せばよい．$a_1 f_1 + \dots + a_s f_s +r = 0$のときに，$a_1=a_2=\dots=a_s = r=0$を示せばよい．
+仮に$a_i\neq 0$であるとし，$x^\beta$を$a_i$のなかの単項式とする．
+仮に$a_1=a_2=\dots=a_s=r=0$ではないとする．このとき，$a_1f_1 + \dots + a_s f_s +r$の最高次の単項式は，$\LM(a_1)\LM(f_1),\dots,\LM(a_s)\LM(f_s),\LM(r)$のいずれかになる．この最高次の単項式を$x^\beta$としておく．よって，この$a_1f_1 + \dots + a_s f_s + r=0$という仮定を満足するためには，$x^\beta$の係数が0にならねばならず，よって，$\LM(a_1)\LM(f_1),\dots,\LM(a_s)\LM(f_s),\LM(r)$の$k$係数1次結合が0にならなければならない．しかし，$\LM(a_1)\LM(f_1) \in \Delta_1,\dots,\LM(a_s)\LM(f_s)\in \Delta_s,\LM(r)\in \overline\Delta$となっており，(c)からこれらの集合が互いに素であることがわかっているから，$\LM(a_1)\LM(f_1),\dots, \LM(a_s)\LM(f_s),\LM(r)$はそれぞれ異なる単項式であることがわかり，1次結合を0にするには，係数すべてを0にするしかない．$\LC(f_1),\dots,\LC(f_s)$はどれも0ではないので，
+$\LC(a_1),\dots,\LC(a_s),\LC(r)$のすべてが0とならなければならない．これは，
+$a_1,\dots,a_s,r_0=0$を意味するが，背理法の仮定に矛盾する．
+\end{enumerate}
+ \item $g_1,g_2$に対する割り算の適用結果をそれぞれ
+\begin{align}
+ g_1 &= a_1 f_1 + \dots + a_s f_s + r\\
+ g_2 & = b_1 f_1 + \dots + b_s f_s + r'
+\end{align}
+とする．このとき，
+\begin{align}
+ c_1 g_1 + c_2 g_2 = (c_1 a_1 + c_2 b_1)f_1 + \dots + (c_1 a_s + c_2 b_s)f_s + (c_1 r+c_2 r')
+\end{align}
+も，「$(g_1,g_2)$で割り算した結果」の条件を満たしている．すなわち，
+$c_1 a_i+c_2 b_i \in \Delta_i$であり，$c_1 r+c_2 r\in \overline \Delta$となっている．一意性より，実際に$c_1 r+ c_2 r'$が余りとなる．
+\end{enumerate}
+
+\subsection{単項式イデアルとディクソンの補題}
+イデアルのうち，(係数1の)単項式だけを基底aとして持つものを単項式イデアルという．
+
+$I=\gen{x^{\alpha} | \alpha \in A}$が単項式イデアルのとき，
+$x^\beta \in I \iff \Exists{\alpha \in A} x^{\alpha}|x^\beta$．
+\begin{myproof}
+ \begin{itemize}
+  \item $\Rightarrow$：$x^\beta = \sum_{i=1}^s h_i x^{\alpha(i)}$となる$h_i \in k[x_1,\dots,x_s]$と$\alpha(i)\in \Zge^n$が存在する．右辺は，「単項式はすべて，なんらかの$x^{\alpha(i)}$で割り切れる」という性質を持つので，これと等しい右辺も同様の性質を持ち，$x^\beta$もなんらかの$x^{\alpha(i)}$で割り切れる．
+  \item $\Leftarrow$：自明．
+ \end{itemize}
+\end{myproof}
+
+$x^\alpha | x^\beta$は，$\beta \in \alpha + \Zge^n$と等価なので，
+単項式イデアルへある単項式が所属するかどうかは，その単項式イデアルの基底
+$\alpha$について，$\alpha + \Zge^n$に属するかということを逐一調べ，
+1つでも属する基底があれば属する，ないならば属さないという正確な判定条件が得られる．これを$\Zge^n$で図示すると，$\alpha$から$\infty$の向きに無限の長方形が作られているように見える．基底が複数個あるなら，これらの和集合として見える．
+
+次は等価である．$I$は単項式イデアルとする．
+\begin{enumerate}[label=(\arabic*)]
+ \item $f\in I$．
+ \item $f$の各項は$I$に属する．
+ \item $f$は$I$の単項式\footnote{基底ではない!}の$k$係数1次結合である．
+\end{enumerate}
+\begin{myproof}
+ (3)$\implies$(2)$\implies$(1)は自明．(1)を仮定する．$f\in I$とすると．
+\begin{align}
+ f= h_1 x^{\alpha(1)} + \dots + h_s x^{\alpha(s)}
+\end{align}
+となる$I$の基底$\alpha(1),\dots,\alpha(s)$と，$k[x_1,\dots,x_n]$の元
+$h_1,\dots,h_s$が存在する．右辺の$h_ix^{\alpha(i)}$は展開するとすべて
+$x^{\alpha(i)}$の倍多項式であり、かつ単項式なので、(3)が満たされる。
+真面目に書くと、$f=\sum_{i=1}^s h_i x^{\alpha(i)}$となっている。
+各$h_\bullet$について、$h_i = \sum_{j=1}^{N(i)} c_{ij}x^{\beta(i,j)}$となる
+$N(i),c_{i\bullet},\beta(i,\bullet)$が存在する。すると、
+$f=\sum_{i=1}^s \sum_{j=1}^{N(i)}c_{ij} x^{\beta(i,j)+\alpha(i)}$となる。
+これで(3)がみたされていることがわかった。
+\end{myproof}
+
+単項式イデアル$I,I'$があり，$\set{Iの単項式}=\set{I'の単項式}$が成立していたとする．このとき，
+\begin{align}
+ f\in I \desciff{上の(2)} \set{fのすべての単項式} \subset I
+\desciff{単項式の一致} \set{fのすべての項} \subset I'
+\desciff{上の(2)}
+f\in I'.
+\end{align}
+となる．よって，$I=I'$となる．つまり，単項式イデアルは，そこに含まれる単項式で定まり，それのみで定まる．
+\footnote{単なるイデアルでは，単項式が同じなのに異なるということがあるか？
+$k[x]$上で，$\gen{1}$と$\gen{x}$は含まれる単項式は同じだが，$\gen{1}$のほうが真に広い．\warn{←1も単項式だし何を言っているのかよくわからない。}}
+
+ディクソンの補題を示す．$k[x_1,\dots,x_n]$で考える．単項式イデアル$I=\gen{x^{\alpha}|\alpha \in A}$について，$\alpha(1),\dots,\alpha(s)\in A$が存在して，$I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$となる．
+\begin{myproof}
+$n=1$のとき，単項式順序の性質より，$\set{x^\alpha | \alpha \in A}$には最小の元がある．この最小元を$x^{\alpha'}$とする．今は1変数多項式で考えているので，
+$I=\gen{x^{\alpha'}}$となる．
+
+以降，$n>1$とする．$n-1$以下で成立していると仮定し，$n$での成立を示す．
+多項式は$k[x_1,\dots,x_n]$で考えるが，$x_n$のことを$y$ともよぶことにする．
+\begin{align}
+ J &= \gen{x^\alpha | x^\alpha y^\beta \in I} \subset k[x_1,\dots,x_{n-1}]
+\end{align}
+とする．すなわち，$I$の単項式の$k[x_1,\dots,x_{n-1}]$への射影のなすイデアルである．
+$J$は$k[x_1,\dots,x_{n-1}]$．なので，帰納法の仮定より，
+$J=\gen{x^{\alpha(1)},\dots,x^{\alpha(j)}}$となる$\alpha(1),\dots,\alpha(j) \in \Zge^{n-1}$が存在する．$J$の定義により，$i=1,\dots,j$について，
+\begin{align}
+ x^{\alpha(i)}y^{\beta(i)} \in I
+\end{align}
+となる$\beta(i)\in \Zge$が存在する．このような$\beta(i)$のうち最小のものを，
+$\gamma(i)$とよぶことにする．そして，
+\begin{align}
+ \gamma = \max(\gamma(1),\dots,\gamma(j))
+\end{align}
+とする．このように定義しておくと，
+$y^\gamma$以上を$J$の元にかけることで，$I$に属することを保証できるからである．
+イデアルの図で言うところの、一番上の長方形が表現できたことになる。
+$x^{\alpha(\bullet)}y^\gamma$たちは一番上の長方形を表現するのに足る「角」の情報を持っている(あとで示すが)。
+
+$0\le \delta < \gamma$とする．
+\begin{align}
+ J_{\delta} = \gen{x^\alpha | x^\alpha y^\delta \in I} \subset k[x_1,\dots,x_{n-1}]
+\end{align}
+とする．つまり，$y$の次数が$\delta$であるような$I$の単項式の$k[x_1,\dots,x_{n-1}]$への射影をなすイデアルである．
+これは$k[x_1,\dots,x_{n-1}]$のイデアルなので，帰納法の仮定より，
+\begin{align}
+ J_\delta = \gen{x^{\alpha(\delta;1)},\dots,x^{\alpha(\delta;j_\delta)}}
+\end{align}
+となる$\alpha(\delta;1),\dots,\alpha(\delta;j_\delta) \in \Zge^{n-1}$が存在する．
+これで、高さ$\delta$での必要な「角」の情報が得られたことになる。
+
+これらを集めて，
+\begin{align}
+ I &= \langle x^{\alpha(1)}y^\gamma ,\dots, x^{\alpha(j)}y^\gamma \\
+ &\quad x^{\alpha(\gamma-1;1)},\dots, x^{\alpha(\gamma-1;j_{\gamma-1})} \\
+ &\quad \vdots\\
+ & \quad x^{\alpha(0;1)} ,\dots, x^{\alpha(0;j_{0})} \rangle
+\end{align}
+となっていることを示そう。$\supset$は自明なので、$\subset$を考える。
+$I$の単項式が右辺に属することを言えば十分であり、つまり$I$の単項式が
+右辺の基底のどれかで割り切れることを言えば十分である。$x^{\xi}y^\eta\in I$
+とし、$x^\xi y^\eta$が右辺の基底のどれかで割り切れることを示す。
+\begin{itemize}
+  \item $\eta \ge \gamma$のとき:
+  $J$の定義より、$x^\xi \in J$である。$J$に対する考察より、
+  $x^{\alpha(i)}|x^\xi$となる$i=1,\dots,j$が存在する。
+  さらに、$x^{\alpha(i)}y^\gamma \in I$となるように$\gamma$を定義したのだった。
+  $\eta \ge \gamma$なので、$y^\gamma | y^\eta$である。よって、
+  $x^{\alpha(i)}y^\gamma | x^\xi y^\eta$である。$x^{\alpha(i)}y^\gamma$は基底の1つであった。
+  \item $\eta < \gamma$のとき:
+  $J_\eta$の定義より、$x^\xi \in J_\eta$である。$J_\eta$に対する考察より、
+  $x^{\alpha(\gamma,i)} | x^\xi $となる$i=1,\dots, j_\gamma$が存在する。
+  よって、$x^{\alpha(\gamma,i)}y^\eta | x^\xi y^\eta$となる。$x^{\alpha(\gamma,i)}$は基底の1つであった。
+  \end{itemize}
+よって，$I$を，$I$の元の有限生成単項式イデアルとして書くことができた．これで帰納法を終わる．
+
+次に，$I$の単項式の有限生成である$I$を，$A$を多重指数に持つ単項式の有限生成に書き直そう．
+\begin{align}
+ I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}
+\end{align}
+と，$\beta(1),\dots,\beta(s)\in \Zge^n$が存在して書けることは上の段落で示した．
+$x^{\beta(\bullet)} \in I = \gen{x^\alpha | \alpha \in A}$となっているので、
+この節のはじめの「単項式が単項式イデアルに属するとき」の性質より、
+$x^{\beta(\bullet)}$は$x^\alpha$のいずれかで割り切れ、
+\begin{align}
+ I=\gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}
+\end{align}
+となる$\alpha(\bullet) A$と、$\gamma(\bullet )\in \Zge^n$とが存在する．(この時点ではまだ「$A$の」指数で書けているかは分からない。$x^{\gamma(\bullet)}$がかかっている。)$\alpha(1)< \alpha(2)< \dots$として一般性を失なわない(何の順序でも良い．)．また，$I$はどの「1つの基底を取り除くと$I$でなくなる」という仮定を置いてよい．なぜなら，もしも取り除いても影響がない基底があるならば，$I=\gen{x^{\beta(1)},\dots,x^{\beta(s)}}$と書いた時点でそのようなものを取り除いても良いからである．$x^{\alpha(1)}\in I$なので，$x^{\alpha(1)}\in \gen{x^{\alpha(1)+\gamma(1)},\dots,x^{\alpha(s)+\gamma(s)}}$．単項式イデアルの性質により，何らかの
+$i$について，$\alpha(1) \in \alpha(i)+\gamma(i) + \Zge^n$となる．
+ つまり，何らかの$\delta(i)\in \Zge^n$が存在して，
+$\alpha(1)=\alpha(i)+\gamma(i)+\delta(i)$となる．$i\ge 2$ならば
+$\alpha(i)>\alpha(1)=\alpha(i)+\gamma(i)+\delta(i)$となり，単項式順序の性質より矛盾が導かれる．よって，$i=1$となるしかない．
+ このとき，$\alpha(1)=\alpha(1)+\gamma(1)+\delta(1)$となり，
+$\gamma(1)=\delta(1)=0$となるしかない．よって，$\gamma(1)=0$がわかった．
+$I=\gen{x^{\alpha(1)},x^{\alpha(2)+\delta(2)},\dots,x^{\alpha(s)}+\gamma(s)}$である．$x^{\alpha(2)}\in I$なので，$x^{\alpha(2)}\in \gen{x^{\alpha(1)},x^{\alpha(2)+\gamma(2)},\dots,x^{\alpha(s)+\gamma(s)}}$となる．
+よって，何らかの$i$について，$\alpha(2)\in \alpha(i) + \gamma(i)+\Zge^n$となる．
+よって，$\alpha(2)=\alpha(i)+\gamma(i)+\delta(i)$となる$\delta(i)\in \Zge^n$が存在する．$i=1$ならば，$\alpha(2)=\alpha(1)+\gamma(1)+\delta(1)=\alpha(1)+\delta(1)$となる．これは，$x^{\alpha(1)}|x^{\alpha(2)}|x^{\alpha(2)+\gamma(2)}$を意味し，$x^{\alpha(2)+\gamma(2)}$を取り除いても$x^{\alpha(1)}$の倍数として表現できるために$I$でありつづけるということになり，「1つの基底を取り除くと$I$でなくなる」の仮定に反する．よって，$i\neq 1$であり，$i\ge 2$である．$i\ge 3$であったときには，先と同様に$\alpha(i)>\alpha(2)>\alpha(i)+\gamma(i)+\delta(i)$という矛盾が生じる．よって，$i=2$であり，$\gamma(2)=\delta(2)=0$である．以降同様に繰替えし，$\gamma(1)=\gamma(2)=\dots = \gamma(s)$を得て，
+\begin{align}
+ I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}
+\end{align}
+を得る．
+\end{myproof}
+
+このディクソンの補題の応用について述べる．
+まず，単項式イデアルについては，イデアルの所属問題を完全に解くことができる．すなわち：$I \subset k[x_1,\dots,x_n]$を単項式イデアルとし，$f\in k[x_1,\dots,x_n]$を一般の多項式とすると，ディクソンの補題により$I=\gen{x^{\alpha(1)},\dots, x^{\alpha(s)}}$と書くと，
+\begin{align}
+ f\in I \iff f を (x^{\alpha(1)},\dots,x^{\alpha(s)})で割ったあまりは0.
+\end{align}
+\begin{myproof}
+\begin{align}
+ f\in I
+&\iff
+f\in \gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}\\
+ & \desciff{補題}
+f は x^{\alpha(1)},\dots,x^{\alpha(s)} のk[x_1,\dots,x_n]係数1次結合で書ける\\
+ & \iff
+f を (x^{\alpha(1)},\dots,x^{\alpha(s)})で割ったあまりは0.
+\end{align}
+\end{myproof}
+
+また，ディクソンの補題を使って単項式順序であることを確認するのを楽にすることができる．すなわち：$\Zge^n$の順序$>$が「全順序である」「かけ算で保つ」を満たすとする．このとき，
+\begin{align}
+ > は整列順序 \iff \Forall{\alpha \in \Zge^n} \alpha \ge 0.
+\end{align}
+\begin{myproof}
+ \begin{itemize}
+  \item $\Rightarrow$：$\Zge^n$の部分集合として$\Zge^n$そのものをとる．$>$は整列順序なので，$\Zge^n$に$>$の最小元が存在する．それを$\alpha$とよぶ．
+仮に$\alpha < 0$であるとする(背理法)．「かけ算を保つ」より，
+$2\alpha < \alpha$となり，$\alpha$より真に小さい元が存在することになるが，これは矛盾である．よって，$\alpha \ge 0$である．任意の$\beta \in \Zge^n$について，
+$\beta \ge \alpha \ge 0$なので，示された．
+  \item $\Leftarrow$：
+$\emptyset \neq A \subset \Zge^n$とする．
+$A$に最小元があることを示そう．$A$で生成される単項式イデアル$I$を考える．
+ディクソンの補題により，$I=\gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$
+となる$\alpha(1),\dots,\alpha(s)\in A$が存在する．
+$>$は「全順序である」から，一般性を失なわず，$\alpha(1)<\dots<\alpha(s)$としてよい．$\beta \in A$とする．$x^{\beta} \in I = \gen{x^{\alpha(1)},\dots,x^{\alpha(s)}}$なので，単項式イデアルの性質より，$x^\beta$は$x^{\alpha(1)},\dots,x^{\alpha(s)}$のうちで割り切られる．それを$x^{\alpha(j)}$とする．
+よって，$\beta = \alpha(j) + \gamma$となる$\gamma \in \Zge^n$が存在する．
+仮定より，$\gamma\ge 0$であり，「かけ算で保つ」より，
+$\alpha(j)+\gamma \ge \alpha(j)$である．よって，
+\begin{align}
+ \beta = \alpha(j) + \gamma \ge \alpha(j) >{仮定} \alpha(1)
+\end{align}
+である．よって，$\alpha(1)$が$A$の最小元である．
+ \end{itemize}
+\end{myproof}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+$I$を，「$f\in I$ならば$f$の各単項式も$\in I$となる」を満たすイデアルとする．
+$I'$を，$I$の単項式すべてが生成するイデアルとする．$I'$は単項式イデアルである．
+$I=I'$を示そう．$I' \subset I$は自明．$f\in I$とする．
+\begin{align}
+ f = h_1 x^{\alpha(1)} + \dots + h_s x^{\alpha(s)}
+\end{align}
+となる$h_1,\dots,h_s \in k[x_1,\dots,x_n]$と$\alpha(1),\dots,\alpha(s)\in \Zge^n$が存在する．$I$に関する条件より，$x^{\alpha(1)},\dots,x^{\alpha(s)} \in I$であり，$I'$の構成より$x^{\alpha(1)},\dots,x^{\alpha(s)}\in I'$である．
+よって，これらの$k[x_1,\dots,x_s]$係数1次結合である$f$も$f\in I'$となる．
+$I\subset I'$である．
+ \item
+やった．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\easypicture{ex_2_4_3.png}
+ \item
+$x >_{lex} y$を採用するなら，$x$の1次項があるので，余りは$y$の式になる．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+まず$I$の$k[x]$への射影$J$を求めると，これは$J=\gen{x^3}$．
+$x^3y^b \in I$となる最小の$b$は$b=6$であり，これ以外に
+$J$の生成元がないので，高さ6のスライスを考える．
+\begin{align}
+ J_0 &= \gen{x^6},\\
+ J_1 & = \gen{x^6},\\
+ J_2& = \gen{x^6},\\
+ J_3 & = \gen{x^6},\\
+ J_4 & = \gen{x^5},\\
+ J_5& =\gen{x^5}.\\
+\end{align}
+よって，
+\begin{align}
+ I=\gen{x^3y^6, x^5y^5, x^5y^4, x^6y^3, x^6 y^2, x^6 y, x^6}.
+\end{align}
+ \item 取り除けて，
+\begin{align}
+ I=\gen{x^3y^6, x^5y^4, x^6}.
+\end{align}
+このうちのどれを除いても真に縮んで，角のものが入らなくなってしまう．
+\end{enumerate}
+
+ \item
+$S$の最小元を$\alpha$とし，$\alpha \notin A$であるとする．
+$x^\alpha \in I$ではあるので，単項式イデアルの性質より，
+$\alpha \in \beta + \Zge^n$となる$\beta \in A$が存在する．
+$\alpha$は$A$の最小元だったので，$\alpha < \beta$である．
+よって，$\gamma \in \Zge^n$が存在して，
+$\alpha = \beta + \gamma$となる．
+$\alpha < \beta$に代入して，$\beta+\gamma < \beta$である．
+すると，$\beta > \beta + \gamma > \beta + 2\gamma > \beta + 3\gamma + \dots$という無限減少列が得られる．これは，$>$が単項式順序であることに矛盾する．
+ \item
+これが切っ掛けで証明を直した．上のディクソンを参照．「無駄がない」を使った．
+
+
+ \item
+「有限個の$a_1,\dots,a_s \in A$が存在して〜」は0個も許すのかよくわからなくなったが，「$A$の部分集合で，要素数が有限なものが存在して〜」と解釈すればOKということにする．
+
+\begin{align}
+ ディクソンの補題
+&\iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \gen{x^\alpha | \alpha \in A} = \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+&\iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \gen{x^\alpha | \alpha \in A} \subset \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} x^{\alpha} \in \gen{x^{\alpha_1},\dots,x^{\alpha_s}}\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} \Exists{i=1,\dots,s} \alpha \in \alpha_i + \Zge^n\\
+ & \iff
+\Forall{A\subset \Zge^n} \Exists{\alpha_1,\dots,\alpha_s \in A} \Forall{\alpha \in A} \Exists{i=1,\dots,s} \Exists{\gamma \in \Zge^n}\alpha = \alpha_i + \gamma.
+\end{align}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+
+ \begin{algorithm}[H]
+\begin{algorithmic}[1]
+  \STATE{$basis \defeq (\alpha(1),\dots,\alpha(s))$}
+  \STATE{$divided \defeq \true$}
+  \WHILE{$divided = \true$}
+  \STATE{$divided \defeq \false$}
+  \STATE{$i\defeq 1$}
+  \WHILE{$i \le \# basis$ かつ $divided = \false$}
+  \STATE{$j\defeq 1$}
+  \WHILE{$j \le \# basis$ かつ $divided = \false$}
+  \IF{$i \neq j$ かつ $x^{basis[i]}| x^{basis[j]}$}
+  \STATE{$basis$から$j$番目を除去する．}
+  \STATE{$divided \Leftarrow \true$}
+  \ENDIF{}
+  \ENDWHILE{}
+  \STATE{$j \Leftarrow j+1$}
+  \ENDWHILE{}
+  \STATE{$i \Leftarrow i+1$}
+  \ENDWHILE{}
+\end{algorithmic}
+ \end{algorithm}
+というアルゴリズムにより得られる．
+ \item
+ディクソンの補題と上のアルゴリズムより，$I$の極小基底
+$\alpha_1,\dots,\alpha_s$が得られる．
+$I$の極小基底$S$を考える．$I=\gen{x^{\beta}|\beta \in S},\, S=\set{\beta_1,\dots,\beta_t}$となっている． $\alpha_1,\dots,\alpha_s \in S$となることを示そう．
+仮に，$\alpha_i \notin S$であったとする．しかし，$x^{\alpha_i}\in I=\gen{\beta_1,\dots,\beta_t}$でなくてはならない．よって，単項式イデアルの性質より何か$j=1,\dots,t$が存在して，$\alpha_i \in \beta_j + \Zge^n$とならなければならない．
+よって，$\alpha_i = \beta_j + \gamma$となる$\gamma \in \Zge^n$が存在する．さらに，$\beta_j \in I$なので，何か$k=1,\dots,s$が存在して，$\beta_j \in \alpha_k + \Zge^n$とならなければならない．よって，$\beta_j = \alpha_k + \delta$となる$\delta \in \Zge^n$となる$\delta$が存在する．よって，
+\begin{align}
+ \alpha_i = \beta_j + \gamma = (\alpha_l + \delta) + \gamma = \alpha_l + (\gamma + \delta)
+\end{align}
+となり，$\alpha_i \in \alpha_l + \Zge^n$となる．これは，$\set{\alpha_1,\dots,\alpha_s}$が極小基底であることに反する．よって，$\set{\alpha_1,\dots,\alpha_s}\subset \set{\beta_1,\dots,\beta_t}$となる．$I$極小基底であるためには，少なくとも$\alpha_1,\dots,\alpha_s$を含んでいることが必要で，さらにそれで$I$を生成するので，極小基底は$\alpha_1,\dots,\alpha_s$のみで，一意性が示された．
+\end{enumerate}
+ \item やった．
+ \item
+$x^\alpha y^\beta$の多重指数を$(\alpha;\beta)$と書くことにする．
+\begin{itemize}
+ \item 全順序であること：
+$(\alpha;\beta) >_{mixed} (\gamma;\delta)$でも$(\alpha;\beta)<_{mixed}(\gamma;\delta)$でもないと仮定する．$(\alpha;\beta) >_{mixed} (\gamma;\delta)$ではないので，
+\begin{align}
+& \neg ((\alpha >_{lex} \beta) \lor ((\alpha = \beta) \land (\gamma >_{grlex} \delta)))\\
+ \iff&
+(\alpha \le_{lex} \beta) \land ((\alpha \neq \beta) \lor (\gamma \le_{grlex}\delta)).
+\end{align}
+同様に，$(\alpha;\beta)<_{mixed}(\gamma;\delta)$なので，$(\alpha \ge_{lex}\beta)\land ((\alpha\neq \beta)\lor (\gamma \ge_{grlex} \delta))$．
+$\alpha \ge_{lex} \beta$かつ$\alpha \le_{lex}\beta$なので，$\alpha = \beta$．
+さらに，$((\alpha\neq \beta)\lor (\gamma \ge_{grlex}\delta))$より，
+$\gamma \ge_{grlex}\delta$．同様に，$\gamma \le_{grlex}\delta$．よって，$\gamma=\delta$．
+ \item かけ算で保つ：
+$(\alpha;\beta)>(\gamma;\delta)$を仮定する．
+\begin{align}
+ (\alpha >_{lex} \gamma) \lor ((\alpha = \gamma )\land (\beta >_{grlex} \delta)).
+\end{align}
+まず，$\alpha >_{lex}\gamma$が成立しているときを考える．このときは，
+$\alpha + \epsilon >_{lex} \gamma + \epsilon$が成立する．よって，
+$(\alpha+\epsilon ; \beta + \zeta) >_{mixed} (\gamma+\epsilon, \delta+\zeta)$．
+
+次に，$(\alpha = \beta) \land (\gamma >_{grlex} \delta)$が成立しているときを考える．このときは，$\alpha + \epsilon = \beta + \epsilon$が成立する．また，
+$\gamma + \zeta >_{grlex} \delta+\zeta$も成り立つ．よって，
+$(\alpha + \epsilon = \beta + \epsilon) \land(\gamma + \zeta > \delta + \zeta)$も成り立つ．
+
+以上のことより，$(\alpha;\beta) + (\epsilon;\zeta) >_{mixed} (\gamma,\delta) + (\epsilon;\zeta)$が成立する．
+ \item 整列順序であること：補題より，$(\alpha;\beta) \ge_{mixed} (0;0)$を示せば十分である．
+$(\alpha,\beta)=(0;0)$のときはあきらかに成立する．
+よって，$(\alpha,\beta)\neq (0;0)$と仮定してよい．$(\alpha;\beta) >_{mixed} (0;0)$を示せばよい．
+$\alpha >_{lex} 0$のときは成立するので，以降$\alpha \le_{lex} 0$とする．
+これは，単項式順序の性質より$\alpha = 0$を意味する．このとき，$(\alpha = 0) \land (\beta >_{grlex} 0) $を示せばよい．$\alpha = 0$は今成立している．$\beta >_{grlex} 0$はgrlexが単項式順序なので成立する．よって，成立する．
+\end{itemize}
+ \item
+ \begin{enumerate}[label=(\alph*)]
+   \item まず、全順序であることを示す。$\alpha >_{\bbold u} \beta$でも$\alpha <_{\bbold u} \beta$でもないとする。
+   $\alpha >_{\bbold u} \beta$ではないので、$\bbold u\cdot \alpha > \bbold u \cdot \beta$ではなく、$\bbold u\cdot \alpha \le \bbold u\cdot \beta$である。$\alpha <_{\bbold u}\beta$でないことから同様に、$\bbold u\cdot \alpha \ge \bbold u\cdot \beta$である。よって、
+   $\bbold u\cdot \alpha = \bbold u\cdot \beta$であり、$\bbold u\cdot (\alpha -\beta) = 0$である。$\bbold u$の成分が線形独立なので、$\alpha  = \beta$である。
+
+   次に、かけ算で順序を保つことを示す。$\alpha >_{\bbold u} \beta$とする。
+   $\bbold u\cdot \alpha > \bbold u\cdot \beta$となる。自明に、
+   $\bbold u \cdot \gamma = \bbold u\cdot \gamma$が成立する。不等式の両辺にこれを加えても不等式が保たれ、$\bbold u\cdot (\alpha + \gamma ) > \bbold u\cdot (\beta +\gamma)$となる。
+   よって、$\alpha + \gamma >_{\bbold u} \beta + \gamma$となる。
+
+   最後に、整列順序であることを系を用いて示す。任意の$\alpha \in \Zge^n$について、
+   $\alpha \ge_{\bbold u} 0$であることを示せばよい。$\bbold u$の各成分は正であり、
+   $\alpha$の各成分は非負なので、$\bbold u\cdot \alpha \ge 0$である。よって、
+   $\alpha \ge_{\bbold u} 0$となる。
+
+   \item $1,\sqrt{2}$が$\Q$上線形独立であることを示せばよい。$\sqrt{2} = \frac{a}{b}\cdot 1$と、既約な有理数を用いてあらわされたと仮定する。$2b^2 = a^2$となる。よって、$a^2$が$2$の倍数である。$2$が素数なので、$2|a\cdot a$であることから、$2|a$であり、$a$は$2$の倍数である。
+   よって、$a^2$は$4$の倍数である。よって、$2|b^2$である。$2$は素数なので、
+   $2|b$となる。これは、$a,b$がともに$2$の倍数であることを意味するが、既約という仮定に反する。
+
+   \item $1,\sqrt{2}$が独立なことは示したので、$\sqrt{3}$がこの2つのなす部分空間に属していないことを示せばよい。$\sqrt{3} = \frac{a}{b} + \frac{c}{d}\sqrt{2}$となったとする。$a/b,c/d$は既約としておく。$bd\sqrt{3} = ad + cb\sqrt{2}$である。
+   二乗して、$3 b^2d^2 = a^2d^2 + 2\sqrt{2}abcd + 2b^2c^2$となる。ここから、
+   \begin{align}
+     \sqrt{2} = \frac{3b^2d^2 - a^2d^2 - 2b^2c^2}{2abcd}
+   \end{align}
+   がわかるが、これは$\sqrt{2} \in \Q$を意味し、(b)に矛盾する。
+ \end{enumerate}
+ \item
+ 多分誤植。「$\bbold u\cdot \alpha >_\sigma \bbold u\cdot \beta$」→「$\bbold u\cdot \alpha > \bbold u\cdot \beta$」だよね。
+ \begin{enumerate}[label=(\alph*)]
+   \item 略。
+   \item $\bbold u = (1,\dots, 1)$とすれば、$\bbold u\cdot \alpha = \myabs{\alpha}$となる。
+   \item 問題文が不正確？$n=1$のときには切り分けが不必要な場合がある。このとき、
+   $\bbold u \neq 0$であるとする。今、$\bbold u \in \Zge$である。
+   $\bbold u\cdot \alpha = \bbold u\cdot \beta$とする。$\bbold u\cdot (\alpha-\beta) = 0$である。$\bbold u \neq 0$で、$n=1$ゆえ定数なので、割って$\alpha -\beta = 0$を得る。よって、$\alpha = \beta$が導かれてしまう。
+
+   そういうわけで、$n\ge 2$という仮定をつけたして問題を解く。$\bbold u\cdot \xi=0$となる$\xi \in \Q^n\setminus\zeroset$を考える。$\bbold u = 0$のときはなんでもよい。
+   $\bbold u \neq 0$とする。$\bbold u = (u_1,\dots, u_n)$とする。$u_1 > 0$として一般性を失なわない。
+   \begin{align}
+     \bbold u\cdot \xi = \sum_{i=1}^n u_i \xi_i = 0
+   \end{align}
+   である。よって、
+   \begin{align}
+     \xi_1 = \frac{-1}{u_1}\sum_{i=2}^n u_i \xi_i.
+   \end{align}
+   そこで、$\xi_2=\xi_3=\dots = \xi_n = 1$とすると、$\xi_1 < 0$となる。
+   これで、$\xi$が条件をみたす。
+   このとき、$\xi$の分母を払っても$\bbold u\cdot \xi = 0$であり続け、
+   $\xi \in \Z^n$である。
+   さらに、$\beta = (-\xi_1,0,\dots,0),\alpha = (0,\xi_2,\dots,\xi_n)$
+   とすると、$\alpha,\beta \in \Zge^n$となり、
+   \begin{align}
+     \bbold u\cdot (\alpha - \beta) = \bbold u\cdot \xi = 0.
+   \end{align}
+   しかし、あきらかに$\alpha \neq \beta$である。
+   \item
+   \begin{align}
+     \bbold u \cdot \alpha
+     &=
+     \sum_{k=1}^n u_k \alpha_k\\
+     &=
+     \sum_{k=1}^i u_k \alpha_k\\
+     &=
+     \sum_{k=1}^i \alpha_k\\
+     &>
+     0\\
+     &=
+     \sum_{k=1}^n u_k \beta_k\\
+     &=
+     \bbold u\cdot \beta.
+   \end{align}
+
+ \end{enumerate}
+\end{enumerate}
+
+\subsection{ヒルベルトの基底定理とグレブナ基底}
+\label{sub:ヒルベルトの基底定理とグレブナ基底}
+これまで単項式イデアルを考えてきたが、一般の多項式のイデアルについて考えていく。
+
+0でないイデアル$I\subset k[x_1,\dots,x_n]$について、以下を定義する。
+\begin{itemize}
+  \item  $\LT(I) = \set{\LT(f) ; f\in I}$ とする。これはただの$k[x_1,\dots,x_n]$の集合である。
+  \item  $\gen{\LT(I)}$ を$\LT(I)$で生成されたイデアルとする。こちらはイデアルである。まとめて書くと、
+  \begin{align}
+    \gen{\LT(I)} = \gen{\LT(f) ; f\in I}
+  \end{align}
+  であり、$I$の$\LT$全体で生成されるイデアルとも呼べる。
+\end{itemize}
+
+$I$が有限生成であって、$I=\gen{f_1,\dots,f_s}$のときには、
+\begin{align}
+  \gen{\LT(I)} = \gen{\LT(\gen{f_1,\dots,f_s})}
+\end{align}
+であって、$f_1,\dots,f_s$に、「イデアルをとる→$\LT$をとる→イデアルをとる」という
+ある意味二度イデアルをとる操作をしているが、もっと簡単に
+「$\LT$をとる→イデアルをとる」とした$\gen{\LT(f_1),\dots,\LT(f_s)}$との関係はどうなっているのだろうか。まずこの操作の順序から、前者のほうがあきらかに広い。すなわち、
+\begin{align}
+  \gen{\LT(f_1),\dots,\LT(f_s)} \subset \gen{\LT(\gen{f_1,\dots,f_s})}.
+\end{align}
+正確に見るなら、$\LT(f_i) \in \LT(\gen{f_1,\dots,f_s})$となることから、
+\begin{align}
+  \set{\LT(f_1),\dots,\LT(f_s)} \subset \LT(\gen{f_1,\dots,f_s})
+\end{align}
+となり、両側でイデアルを取ることにより従う。逆が成り立つか、この両者が等しくなるかというと、常にはそうならない。右辺の$\gen{\LT(\gen{f_1,\dots,f_s})}$のほうが、
+最後に$f_1,\dots,f_s$の先頭項LTを消してしまうというような小手技が使えるというのがなんとなくの理由になる。例をあげると、$f_1 = y, f_2 = xy+1$というのが等号不成立となる。
+まず、「イデアルをとる→LTをとる→イデアルをとる」を考えてみると、
+\begin{align}
+  f_2 - x\cdot f_1 = (xy+1) - xy = 1
+\end{align}
+となり、$1\in \gen{f_1, f_2}$となるので、$\gen{f_1,f_2} = \gen{1}$となり、
+$\LT(\gen{f_1,f_2}) = \LT(\gen{1}) = \gen{1}$となり、よって
+$\gen{\LT(\gen{f_1,f_2})} = \gen{1}$となる。一方、「LTをとる→イデアルをとる」のほうは、
+$\LT(\set{f_1,f_2}) = \set{y,xy}$となり、$\gen{\LT(\set{f_1,f_2})} = \gen{y,xy} = \gen{y}$となる。これは$\gen{1}$より真に狭い。
+この例を作るには、イデアルでのたしひきのときにはかならず係数をかけなければならないのだろうかと考えてみたら、もうちょっと簡単になった。$f_1 = x+1,f_2 = x$とする。
+このとき、「イデアルをとる→LTをとる→イデアルをとる」のほうは、
+\begin{align}
+  \gen{\LT(\gen{f_1,f_2})} = \gen{\LT(\gen{x+1,x})}
+  =
+  \gen{\LT(\gen{1})}
+  =
+  \gen{\gen{1}}
+  =
+  \gen{1}.
+\end{align}
+一方、「LTをとる→イデアルをとる」は、
+\begin{align}
+  \gen{\LT(\set{f_1,f_2})}
+  =
+  \gen{\LT(\set{x+1,x})}
+  =
+  \gen{\set{x}}
+  =
+  \gen{x}.
+\end{align}
+よって、「イデアルをとる→LTをとる→イデアルとる」のほうが真に広くなった。
+先頭項を打ち消せる分前者のほうが広いということがよくわかる。
+
+一般のイデアル$I\subset k[x_1,\dots,x_s]$について、あたりまえだが以下のことが言える。
+定数倍が大丈夫だということの確認である。
+\begin{enumerate}
+  \item $\gen{\LT(I)}$は単項式イデアルである。
+  \item さらに、単項式イデアル$\gen{\LT(I)}$の生成元について、
+  $f_1,\dots,f_s \in I$として$\LT(f_1),\dots,\LT(f_s)$がとれる。
+\end{enumerate}
+\begin{myproof}
+  \begin{enumerate}
+    \item イデアルはその元の定数倍をすべて含んでいることに注意すれば、
+    \begin{align}
+      \gen{\LT(I)} = \gen{\LT(f) ; f\in I} = \gen{\LM(f);f\in I}
+    \end{align}
+    であり、確かに単項式イデアルである。
+    \item 上で、$\gen{\LT(I)} = \gen{\LM(f);f\in I}$を示した。
+    $\gen{\LM(f);f\in I}$はディクソンの補題より、$f_1,\dots,f_s \in I$があって、
+    \begin{align}
+      \gen{\LM(f);f\in I} = \gen{\LM(f_1),\dots,\LM(f_s)}
+    \end{align}
+    となる。また定数倍がどうでもいいことに注意すれば、
+    \begin{align}
+      \gen{\LM(f_1),\dots,\LM(f_s)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+    \end{align}
+    となる。よって、
+    \begin{align}
+      \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}.
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+これでイデアルと先頭項との関係がよくわかり、イデアルと割り算との相性が良くなった。これで、任意の多項式イデアルについて、その生成元から有限個を選んで生成元とできる「ヒルベルトの基底定理」が証明できる。
+\begin{myproof}
+  $I\subset k[x_1,\dots,x_n]$をイデアルとする。$I=\zeroset$のときはあきらかなので、$I\neq \zeroset$とする。すると、$\LT(I)$を考えることができ、さらに$\gen{\LT(I)}$を考えることができる。これに先の定理を適用し、
+  \begin{align}
+    \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+  \end{align}
+  となる$f_1,\dots,f_s \in k[x_1,\dots,x_s]$が選べる。
+  このとき、実は$I = \gen{f_1,\dots,f_s}$となることを示そう。
+  $\supset$はあきらかなので、$I\subset \gen{f_1,\dots,f_s}$を示す。$f \in I$とする。$f$を$(f_1,\dots,f_s)$で割り、
+  \begin{align}
+    f = \sum_{i=1}^s f_i h_i + r
+  \end{align}
+  となる$f_1,\dots,f_s,r \in k[x_1,\dots,x_m]$が存在する。
+  さらに、$r$は余りなので、$r$のどの項も$\LT(f_1),\dots,\LT(f_s)$のどれでも割り切れない。$f\in I$であり、$f_\bullet \in I$なので、
+  $r\in I$である。仮に、$r\neq 0$であるとする。
+  このとき$\LT(r)$を考えることができ、(ここがポイント！)$\LT(r) \in \LT(I)$となり、$\gen{\LT(I)}$は有限生成となるようにしておいたので、
+  \begin{align}
+    \LT(r) \in \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+  \end{align}
+  となる。よって、$\LT(r)$は$\LT(f_1),\dots,\LT(f_s)$のいずれかの倍数とならなければならないが、これは$r$が余りであることに反する。よって、$r=0$である。よって、
+  \begin{align}
+    f= \sum_{i=1}^s f_i h_i
+  \end{align}
+  となる。よって、$f\in \gen{f_1,\dots,f_s}$となる。
+  $f$は$I$の任意の元だったので、$I\subset \gen{f_1,\dots,f_s}$となる。よって、
+  \begin{align}
+    I = \gen{f_1,\dots,f_s}
+  \end{align}
+  である。
+\end{myproof}
+
+この途中で、$I=\gen{f_1,\dots,f_s}$が$\gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}$となっていた。このようなイデアルの性質に名前をつける:イデアル$I\subset k[x_1,\dots,x_n]$について、その有限部分集合$\set{f_1,\dots,f_s} \subset I$が$I$のGroebner基底であるとは、
+\begin{align}
+  \gen{\LT(I)} = \gen{\LT(f_1),\dots,\LT(f_s)}
+\end{align}
+となることである。ここでは$I=\gen{f_1,\dots,f_s}$となっているかどうかは何も言っていないが、先の証明のなかで、$f\in I$について$(f_1,\dots,f_s)$で割った余りを考察することのより、$f\in \gen{f_1,\dots,f_s}$となることを示していたのでOKである。
+さらに、さきほどのヒルベルトの基底定理で作ったイデアルは$\gen{\LT(I)}=\gen{\LT(f_1),\dots,\LT(f_s)}$を満たしているので、
+ヒルベルトの基底定理はもっと強めて、「任意のイデアルにはGroebner基底がある」と言える。これのくだけた言い換えとして、「$I$のどの先頭項も$\LT(f_1),\dots,\LT(f_s)$のどれかで割り切れる」とうのがある。両方とも単項式イデアルなので、その特殊性が使えることに注意する。
+
+先程見たように、$x+1,x$は$\gen{x+1,x}$のgrlex順序での(なんでもいいが)Groebner基底ではない。
+$\gen{\LT(x+1),\LT(x)} = \gen{x}$であり、$\gen{\LT(\gen{x+1,x})} = \gen{1}$であったからだ。
+
+次の例は、$\gen{x+z,y-z}$である($z$が仲間外れ)。これのlex順序でのGroebner基底として、$x+z,y-z$が取れることを示す。Groebner基底の言い換えより、
+$\gen{x+z,y-z}$のどの先頭項も$\LT(x+z) = x$あるいは$\LT(y-z)=y$で割り切れることを示せば必要十分である。仮に$f\in \gen{x+z,y-z}\setminus \zeroset$で、$x$でも$y$でも$\LT(f)$が割り切れないようなものがあるとする。このとき、$\LT(f) \in k[z]$である。今はlex順序を採用しているので、$f\in k[z]$でもあることがわかる。
+ところで、$f\in \gen{x+z,y-z}$であったから、$\set{(-t,t,t)}$上で$f$は消えなければならない。よって、$\R$上で$f$が消えなければならないが、今は無限体で考えているので、これは$f$が多項式として0であることを意味する(無数に根を持つ)。これは矛盾である。よって、$\gen{x+z,y-z}\setminus\zeroset$のどの先頭項もすべて$x,y$で割り切れ、
+$x+z,y-z$は$\gen{x+z,y-z}$のGroebner基底である。
+
+$\gen{x+z,y-z}$のGroebner基底を考えるには、実は
+\begin{align}
+  \begin{pmatrix}
+    1 & 0 & 1 \\
+    0 & 1 & -1
+  \end{pmatrix}
+\end{align}
+の階段行列を考えればよい。
+このことを一般的に示す。
+\begin{myproof}
+  $A=(a_{ij})_{ij} \in M(\R,m,n)$とし、$I\subset k[x_1,\dots,x_n]$を
+  $I = \gen{\sum_{j=1}^n a_{ij} x_j ; 1 \le i \le m}$とする。
+  $A$の狭義階段行列を$A'$としたとき、この各行からなる多項式たち
+  $\set{\sum_{j=1}^n a'_{ij}x_j ; 1\le i \le \rank A}$が$I$のあるlex順序についてのGroebner基底であることを示す。
+
+  体$\R$で考えているから、$A$を狭義階段行列$A'$に変形することができる。
+  $x_{F(1)},\dots,x_{F(\rank A)}$がこの狭義階段行列に変形したことで得られたピボットであるとする。そして、$x_{F(1)}>_{lex}x_{F(2)}>_{lex}\dots >x_{F(\rank A)}>_{lex}\dots(残り)$というlex順序を採用する。
+  変形の過程で基本変形をするが、変形しても各行のなすイデアルは変化しないことは確かめられる。よって、
+  \begin{align}
+    I
+    =
+    \gen{\sum_{j=1}^n a_{ij}' x_j ; 1\le i \le \rank A}
+    =
+    \gen{\sum_{j=F(i)}^{F(i+1)-1} a_{ij}' x_j ; 1 \le i \le \rank A}
+  \end{align}
+  がわかる(ただし、$F(\rank A + 1) = n+1$とした)。この元の先頭項すべてが
+  \begin{align}
+    \set{\LT(\sum_{j=1}^n a_{ij}' x_j) ; 1\le i \le \rank A}
+    =
+    \set{\LT(\sum_{j=F(i)}^{F(i+1)-1} a_{ij}' x_j) ; 1\le i \le \rank A}
+    =
+    \set{x_{F(i)}; 1 \le i \le \rank A}
+  \end{align}
+  のどれかで割り切れることを示せばよい。
+  しかし、lex順序をの入れ方から、これはあきらか。
+\end{myproof}
+
+ヒルベルトの基底定理を応用する。多項式環の昇鎖条件を考える。
+$k[x_1,\dots,x_n]$のイデアルの昇鎖列
+\begin{align}
+  I_1 \subset I_2 \dots
+\end{align}
+を考える。このとき、ある$N$があって、$I_N = I_{N+1}=\dots$となる。
+\begin{myproof}
+  $I=\bigcup_{i} I_i$を考える。これがイデアルであることを示す。
+  \begin{itemize}
+    \item 和について閉じる:$f,g\in I$とする。$f\in I$なので、$a\in \N$が存在して、
+    $f \in I_a$となり、同様に$b\in \N$について$g\in I_b$となる。
+    $a\le b$として一般性を失なわない。このとき、昇鎖であることから、
+    $f,g\in I_b$となる。よって、$f+g \in I_b$であり、$f+g \in I$である。
+    \item 定数倍で閉じる:$f$を上と同様とする。$cf \in I_a \subset I$である。
+  \end{itemize}
+  よって、$I$はイデアルである。
+
+  $I\subset k[x_1,\dots,x_n]$はイデアルなので、ヒルベルトの基底定理より、
+  \begin{align}
+    I = \gen{f_1,\dots,f_s}
+  \end{align}
+  となる。$f_1,\dots,f_s \in I$なので、$f_i \in I_{F(i)}$となる$F(i)$が存在する。そのうち最大のものを$N$とすると、昇鎖であることより、$f_1,\dots,f_s \in I_{N}$である。よって、$I\subset I_N$であり、$I = I_N$である。昇鎖であることより、
+  $I=I_N = I_{N+1}=\dots$である。
+\end{myproof}
+
+この、昇鎖があるところで一定する条件を昇鎖条件(Ascending Chain Condition, ACC)という。したがって、$k[x_1,\dots,x_n]$のイデアルはACCを満足する。
+
+いままで、アフィン多様体は有限個の多項式で作るものだったが、
+イデアルで作ることを考える。イデアル$I$について、アフィン多様体と同じ記号を使って$\var(I)$を、
+\begin{align}
+  \var(I) = \set{(\xi_1,\dots,\xi_n); \Forall{f\in k[x_1,\dots,x_n]} f(\xi_1,\dots,\xi_n) = 0}
+\end{align}
+と定義する。実は$\var(I)$はアフィン多様体で、さらに$\var(f_1,\dots,f_s) = \var(\gen{f_1,\dots,f_s})$となる。
+\begin{myproof}
+ヒルベルトの基底定理より、$I\subset k[x_1,\dots,x_n]$について、
+$I=\gen{f_1,\dots,f_s}$となる。よって、$\var(f_1,\dots,f_s) = \var(\gen{f_1,\dots,f_s})$を示せば十分である。
+\begin{itemize}
+  \item $\subset$:$x\in \var(f_1,\dots,f_s)$とする。
+  $f_\bullet(x) = 0$となる。$(\xi_1,\dots,\xi_)\in \var(\gen{f_1,\dots,f_s})$かどうかを調べたいので、任意に$g\in \gen{f_1,\dots,f_s}$とする。
+  \begin{align}
+    g = \sum_{i=1}^s f_i h_i
+  \end{align}
+  となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。すると、
+  \begin{align}
+    g(\xi_1,\dots,\xi_s) = \sum_{i=1}^s (f_i \cdot h_i)(\xi_1,\dots,\xi_s) = 0.
+  \end{align}
+  よって、$f\in \var(\gen{f_1,\dots,f_s})$である。
+  \item $\supset$:$(\xi_1,\dots,\xi_n) \in \var(\gen{f_1,\dots,f_s})$とする。
+  $\var(\gen{f_1,\dots,f_s})$の定義より、
+  $f_\bullet(\xi_1,\dots,\xi_n) = 0$となる。
+\end{itemize}
+\end{myproof}
+よって、先に示したように、アフィン多様体は、それの作る多項式のなすイデアルによってのみ定まる。
+
+\begin{enumerate}[label=(問題\arabic*)]
+  \item
+\begin{align}
+  \gen{\LT(g_1),\LT(g_2),\LT(g_3)} = \gen{xy^2,xy,x} = \gen{x}.
+\end{align}
+一方、
+\begin{align}
+  g_1 - yg_2 +zg_3
+  &=
+  (xy^2-xz+y) - y(xy-z^2) +z(x-yz^4)\\
+  &=
+  y+yz^2 -yz^5.
+\end{align}
+これはあきらかに$\gen{x}$に属さない。
+  \item
+  \begin{description}
+    \item[問題5について] $f_1=x^2y-z,f_2=xy-1$である。
+    (d)より、$1-yz \in \gen{f_1,f_2}$であり、
+    $yz = \LM(1-yz) \in \gen{\LT(\gen{f_1,f_2})}$となる。一方、
+    $\gen{\LT(f_1),\LT(f_2)} = \gen{x^2y,xy}$であり、$yz$を含まない。よって、
+    「イデアルをとる→LTをとる→イデアルをとる」のほうが真に広い。
+    \item[問題6について] $f_1=2xy^2-x,f_2=3x^2y-y-1$である。
+    $-3x^2-2y^2-2y \in \gen{f_1,f_2}$であり、
+    $x^2 \in \gen{\LT(\gen{f_1,f_2})}$である。一方、
+    $\gen{\LT(f_1),\LT(f_2)} = \gen{xy^2,x^2y}$なので、$x^2$を含まない。よって、
+    真に広い。
+    \item[問題7について] $f_1=x^4y^2-z,f_2=x^3y^3-1,f_3=x^2y^4-2z$である。
+    $2x^2z-xy \in \gen{f_1,f_2,f_3}$であり、$x^2z \in \gen{\LT(\gen{f_1,f_2,f_3})}$である。一方、
+    $\gen{\LT(f_1),\LT(f_2),\LT(f_3)} = \gen{x^4y^2,x^3y^3,x^2y^4}$であり、
+    $x^2z$を含まない。よって、真に広い。
+  \end{description}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  $\gen{\LT(f_1),\dots,\LT(f_s)}$は$\gen{\LT(\gen{f_1,\dots,f_s})}$より真に小さいので、$\LT(f)\in \gen{\LT(\gen{f_1,\dots,f_s})}\setminus\gen{\LT(f_1),\dots,\LT(f_s)}$となる$f \in k[x_1,\dots,x_n]$が存在する。$\LT(f)$が何か$\LT(f_\bullet)$
+  で割り切れてしまうと、$\LT(f) \in \gen{\LT(f_1),\dots,\LT(f_s)}$になってしまうので、$\LT(f)$はどの$\LT(f_\bullet)$でも割り切れない。
+  $f$の項のうち、$\LT(f_\bullet)$のどれかで割りきれるものがあったとする。
+  その次数を$\alpha$とする。すると、$\alpha \le \multideg(f)$であり、かつ
+  $\alpha = \multideg(f_\bullet) + \alpha'$となる$\alpha' \in \Zge^n$が存在する。
+よって、$\multideg(f)-\multideg(f_\bullet)\in \Zge^n$であり、
+\begin{align}
+  \multideg(f) = (\multideg(f)-\multideg(f_\bullet)) + \multideg(f_\bullet)
+\end{align}
+となり、$\LT(f)$は$\LT(f_\bullet)$で割りきれるが、これは矛盾である。よって、
+$f$のどの項も$f_bullet$のどれでも割り切れず、$f$を$(f_1,\dots,f_s)$で割ったあまりは$f$そのものである。よって、存在する。
+\item
+「イデアルをとる→LTをとる→イデアルをとる」と「LTをとる→イデアルをとる」が一致しない場合は、
+$(f_1,\dots,f_s)$で割って余りが0とならなかったとしても、
+イデアルに属するようなものが存在する。
+\item ？
+\end{enumerate}
+\item 定数倍を含むのであきらか
+\item
+\begin{align}
+  &\set{g_1,\dots,g_t} は I のグレブナ基底 \\
+  \iff &
+  \gen{\LT(\gen{g_1,\dots,g_t})} = \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \gen{\LT(\gen{g_1,\dots,g_t})} \subset \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \Forall{\LT(g) \in \LT(\gen{g_1,\dots,g_t})} \LT(g) \in \gen{\LT(g_1),\dots,\LT(g_t)}\\
+  \iff &
+  \Forall{\LT(g) \in \LT(\gen{g_1,\dots,g_t})} \LT(g) は \LT(g_1),\dots,\LT(g_t)のいずれかで割り切れる
+\end{align}
+\item 割り算アルゴリズムのなかで語ることになるが、つまり$stock_b \in I$として、
+$stock_a \in I$が成立することを言えばよい。
+初期では$stock_b = f$なのだから、$stock_b \in I$が成立する。
+$\LT(stock_b) \in \LT(I) = \gen{\LT(g_1),\dots,\LT(g_t)}$が成り立つ。
+よって、$\LT(stock_b)$は何か$\LT(g_\bullet)$で割り切れる。
+$g_\bullet$を$g_1$としても一般性は失なわない。
+\begin{align}
+  stock_a = stock_b - \frac{\LT(stock_b)}{\LT(g_1)}g_1
+\end{align}
+$g_1 \in I$であり、$\frac{\LT(stock_b)}{\LT(g_1)} \in k[x_1,\dots,x_n]$であり、
+$stock_b \in i$なので、$stock_a \in I$である。あとは書いてあるとおり。
+\item
+\begin{align}
+  \gen{\LT(x^4y^2-z^5),\LT(x^3y^3-1),\LT(x^2y^4-2z)}
+  =
+  \gen{x^4y^2,x^3y^3,x^2y^4}.
+\end{align}
+一方、
+\begin{align}
+  y\cdot(x^4y^2-z^5) - x\cdot(x^3y^3-1) = -yz^5+x
+\end{align}
+となり、このLMは$yz^5$なので、これは「LTをとる→イデアルをとる」に入らず、
+「イデアルをとる→LTをとる→イデアルをとる」は真に広い。よって、Groebner基底ではない。
+\item Groebner基底であることを示す。
+\begin{align}
+  \gen{\LT(x-z^2),\LT(y-z^3)} = \gen{x,y}
+\end{align}
+である。$\gen{\LT(\gen{x-z^2,y-z^3})}\subset \gen{x,y}$であることを示せばよい。
+$f\in \LT(\gen{x-z^2,y-z^3})$とする。$f\in \gen{x,y}$を示す。
+$f=h_1\cdot (x-z^2) + h_2 \cdot (y-z^3)$となる$h_1,h_2 \in k[x_1,\dots,x_n]$
+が存在する。
+仮に$f\notin \gen{x,y}$であるとする。このときは、$f\in k[z]$とならなければならない。$f=h_1\cdot(x-z^2) + h_2\cdot (y-z^3)$なので、これは$(t^2,t^3,t)$
+上で消え、$f\in k[z]$だったが、$z=t$全体で消える。よって、無限体上では$f$は多項式として0にならなればならない。
+\item やった
+\item 生成元をこの主イデアルに対応するものとすればそうだ？
+$I$の有限部分集合を$f,g_1,\dots,g_s$とする。
+$h\in I = \gen{f}$とし、$\LT(h)$が$\LT(f),\LT(g_1),\dots,\LT(g_s)$のどれかで割きれればよい。$h \in \gen{f}$なので、$h = f h'$となり、$\LT(h) = \LT(f)\LT(h')$となる。よって、$\LT(f)$で割り切れる。
+\item $f$に定数項がないときには$f\in \gen{x_1,\dots,x_n}$となって矛盾である。
+よって、$f$には定数項があり、$f$を$(x_1,\dots,x_n)$で割った余り$r$は
+定数になる。この$r \in I$となり、$I = \gen{r} = \gen{1} = k[x_1,\dots,x_n]$となる。
+\item 一般のほうを示す。
+\begin{itemize}
+  \item 有限生成$\Rightarrow$ 昇鎖条件:
+  先と同様。昇鎖$I_1 \subset I_2 \subset \dots$を考える。
+  $I=\bigcup_{i} I_i$は先と同様にイデアルとなる。仮定より\footnote{「すべての」イデアルが有限生成と言っている。}
+  $I=\gen{f_1,\dots,f_s}$となる。$f_1,\dots,f_s$の入っている$f_\bullet$の番号のうち最大のものを$N$とすると、$I_N = I$となる。よって、$I_{N} = I_{N+1}=\dots$である。
+  \item 昇鎖条件 $\Rightarrow$ 有限生成:
+  $R$が有限生成でないとする。$G_0 = \emptyset$とし、$I_0 = \gen{G_0} = \zeroset$とする。
+  $G_{n+1}$を、$G$に$R\setminus I_n$の元どれかを付け加えたものとし、
+  $I_{n+1} = \gen{G_{n+1}}$とする。$R\setminus I_n$は、$R$が有限生成でなく、$I_n$が有限生成であることから空でなく、常に元が選択できる。この構成より、$(I_n)_n$は真の昇鎖となる。これは昇鎖条件に反する。
+\end{itemize}
+\item 仮にこの降鎖が安定しなかったとすると、1章4節の演習問題の「$V \subsetneq W \iff I(V) \supsetneq I(W)$」より、安定しない昇鎖$I(V_1) \subset I(V_2) \subset\ \dots$が得られるが、これは$k[x_1,\dots,x_n]$の昇鎖条件に反する。
+\item 昇鎖$I_n = \gen{f_1,\dots,f_n}$を考える。昇鎖条件よりこの昇鎖は安定し、
+ある$N$について$I_N = I_{N+1} = \dots$となる。
+$m \le N$については$f_m \in I_N$だし、$m> N$については$f_m \in I_m = I_N$であるから、$I$を生成するのに使った元全てが$I_N$に属している。よって、$I_N = I$である。
+\item $V_i = \var(f_1,\dots,f_i)$とすると、$(V_i)_i$は降鎖となる。
+(13)より、この降鎖は安定し、ある$N$以降$V_N = V_{N+1} = \dots$となる。
+$V_N = \var(f_1,f_2,\dots)$となることを示す。$\supset$は自明なので、
+$\subset$を示す。$x\in V_N$とする。$x \in \var(f_1,\dots)$を示せばよく、
+任意の$M$について$f_M(x)=0$を示せばよい。$M\le N$については、
+$x\in V_N \subset V_M$より$f_M(x)=0$である。$M > N$については、
+$x \in V_N = V_{N+1} = \dots = V_M$なので、$f_M(x)=0$である。
+\item
+$V$は多様体なので、$V=\var(f_1,\dots,f_s)$なる$f_1,\dots,f_s \in k[x_1,\dots,x_n]$がある。
+\begin{itemize}
+  \item $\subset$:$x\in \var(\ideal(V)) = \var(\ideal(\var(f_1,\dots,f_s)))$とする。$x$は任意の$\ideal(\var(f_1,\dots,f_s))$に属する多項式で消える。
+  $i=1,\dots,s$とする。$f_i \in \var(f_1,\dots,f_s)$なので、
+  $f_i \in \ideal(\var(f_1,\dots,f_s))$である。よって、$f_i(x)=0$である。
+  $i$は任意だったので、$x$は$f_1,\dots,f_s$の全てで消える。よって、
+  $x\in \var(f_1,\dots,f_s)$となる。よって、$\var(\ideal(V)) \subset V$である。
+  \item $\supset$:$x\in \var(f_1,\dots,f_s)$とする。
+  $g\in \ideal(\var(f_1,\dots,f_s))$とする。$\var(f_1,\dots,f_s)$の点全てを消す多項式$g_1,\dots,g_t$と$h_1,\dots,h_t \in k[x_1,\dots,x_n]$が存在して、
+  \begin{align}
+    g = \sum_{i=1}^t h_i g_i
+  \end{align}
+  となる。$x\in \var(f_1,\dots,f_s)$となので、$g_1,\dots,g_t$がこれを消し、
+  \begin{align}
+    g(x) = \sum_{i=1}^t (h_i g_i)(t) = 0
+  \end{align}
+  となり、$g$は$x$を消す。$g$は$\ideal(\var(f_1,\dots,f_s))$の任意の多項式だったので、$x\in \var(\ideal(\var(f_1,\dots,f_s)))$となる。よって、
+  $V\subset \var(\ideal(V))$となる。
+  \end{itemize}
+  (先に示したのは、$\ideal(\var(f_1,\dots,f_s)) = \gen{f_1,\dots,f_s}$
+  は一般には成立しないということである。今回示したのは$\var(\ideal(\var(f_1,\dots,f_s)))=\var(f_1,\dots,f_s)$である。イデアルが多様体を定めるという感じが出ている。)
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item $I=\gen{x^2-y,y+x^2-4} = \gen{x^2-y,2y-4}=\gen{x^2-y,x^2-2}$.
+    \item
+    \begin{align}
+      \var(I)
+      \desceq{イデアルが多様体を決める}
+      \var(x^2-y,x^2-2)
+      =
+      \set{(x,y) ; x^2=y, x^2=2}
+      =
+      \set{(\pm\sqrt{2},2)}.
+    \end{align}
+  \end{enumerate}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  \begin{align}
+    \var(f,g)
+    &=
+    \var(f,g_1 g_2)\\
+    &=
+    \set{p ; f(p)=0 \land ((g_1 g_2)(p) = 0)}\\
+    &=
+    \set{p ; f(p) = 0 \land g_1(p)g_2(p) = 0}\\
+    &=
+    \set{p ; f(p) = 0 \land ((g_1(p) = 0) \lor (g_2(p)=0))}\\
+    &=
+    \set{p ; ((f(p)=0) \land (g_1(p)=0))\lor ((f(p)=0) \land (g_2(p)=0))}\\
+    &=
+    \set{p ; (f(p)=0) \land (g_1(p)=0)} \cup \set{p ; (f(p)=0) \land (g_2(p)=0)} \\
+    &=
+    \var(f,g_1)\cup \var(f,g_2).
+  \end{align}
+  \item
+  \begin{align}
+    \var(y-x^2,xz-y^2)
+    &=
+     \var(\gen{y-x^2,xz-y^2})\\
+     &=
+     \var(\gen{y-x^2,xz-x^4})\\
+     &=
+     \var(y-x^2,xz-x^4).
+  \end{align}
+\item
+  (b)より、
+  \begin{align}
+    \var(y-x^2,xz-y^2)
+    &=
+    \var(y-x^2,xz-^4)\\
+    &=
+    \var(y-x^2,x(z-x^3))\\
+    &=
+    \var(y-x^2,x) \cup \var(y-x^2,z-x^3).
+  \end{align}
+\end{enumerate}
+
+\end{enumerate}
+
+\subsection{グレブナ基底の性質}
+\label{sub:グレブナ基底の性質}
+これまではヒルベルトの基底定理の応用を見ていて、
+Groebner基底はおまけだったが、Groebner基底の性質を見ていく。
+まず、Groebner基底で割り算をすると、その余りが順序によらない。
+すなわち:$I\subset k[x_1,\dots,x_n]$をイデアルとする。
+$g_1,\dots,g_s$が$I$のGroebner基底であるとする。このとき、
+$f\in k[x_1,\dots,x_n]$について、$f=\tilde f + r$となる
+$\tilde f,r \in k[x_1,\dots,x_n]$で、
+\begin{itemize}
+  \item $r$のどの項も$\LT(g_1),\dots,\LT(g_s)$で割り切れない
+  \item $\tilde f \in I$となる
+\end{itemize}
+となるものが一意的に存在する。特に、$f$は$g_1,\dots,g_s$をどの順序で並べて割っても余りが同じになる。
+\begin{myproof}
+  \begin{itemize}
+    \item 存在:$f$を$(g_1,\dots,g_s)$で割れば得られる。
+    \item 一意性: $f=\tilde f_1 + r_1 = \tilde f_2 + r_2$と2つ得られたとする。
+    $\tilde f_1 - \tilde f_2 = r_2 - r_1$なので、$r_2 - r_1 \in I$となる。
+    仮に$r_2 - r_1 \neq 0$であるとすると、$\LT(r_2-r_1)$を考えることができる。
+    Groebner基底の性質より、
+    \begin{align}
+      \LT(r_2-r_1) \in \LT(I) \subset \gen{\LT(I)}
+      =
+       \gen{\LT(g_1,\dots,g_s)}.
+    \end{align}
+    よって、$\LT(r_2-r_1)$は$\LT(g_1),\dots,\LT(g_s)$のどれかで割り切れるが、
+    これは$\LT(r_2)$か$\LT(r_1)$のどちらかが$\LT(g_1),\dots,\LT(g_s)$
+    のどれかで割り切れることになる。これは、$r_1,r_2$に課した条件に反する。
+    よって、$r_2 =r_1$となる。
+  \end{itemize}
+\end{myproof}
+
+順序によらないので、$r$を$f$の$\set{g_1,\dots,g_s}$での正規形とよぶ。
+
+Groebner基底がわかっていれば、イデアルへの所属問題が解ける。
+すなわち:$I\subset k[x_1,\dots,x_n]$をイデアルとし、$g_1,\dots,g_s$を
+このGroebner基底とする。このとき、
+\begin{align}
+  f \in I \iff f は (g_1,\dots,g_s) で割り切れる .
+\end{align}
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:$f=f+0$なので、$f$のGroebner基底$\set{g_1,\dots,g_s}$
+    での割り算の余りの一意性より、割り切れる。
+    \item $\Leftarrow$:$f$は$g_1,\dots,g_s$の$k[x_1,\dots,x_n]$の線形結合になる。
+  \end{itemize}
+\end{myproof}
+
+余りは便利なので、記号を与える。$f$を$F=(f_1,\dots,f_s)$で割った余りを
+\begin{align}
+  \overline f^{F}
+\end{align}
+と書く。$F$がGroebner基底の列なら、その順序によらないことになる。
+
+ある$I$の元の組$\set{f_1,\dots,f_s}$のGroebner基底でない、というのは
+$\gen{\LT(\gen{f_1,\dots,f_s})}$の元であって$\gen{\LT(f_1),\dots,\LT(f_s)}$の元でないものがあるからであり、つまり$f_1,\dots,f_s$の線形結合で
+その先頭項が$\LT(f_\bullet)$の倍数にならないものが作れてしまうからである。
+もっと考えると、その線形結合でどの先頭項も消えないならば、
+線形結合全体の先頭項も$f_\bullet$の先頭項でありつづけることになってしまう。
+ということで、Groebner基底でなくなってしまうためには、
+線形結合で先頭項が消えてしまうことが必要である。
+そこで、先頭項が消えるという状況を考えてみる。
+2つの多項式について、先頭項の消し方で次のようなものを定義する。
+
+$f,g\in k[x_1,\dots,x_n]$を0でない多項式とする。
+$\LM(f)$と$\LM(g)$の最小公倍式(LCM)を、
+\begin{align}
+  \LCM(\LM(f),\LM(g)) = x^{\multideg(f) \vee \multideg(g)}
+\end{align}
+とする。そして、$f$と$g$のS多項式を、
+\begin{align}
+  S(f,g) = \frac{x^{\LCM(\LM(f),\LM(g))}}{\LT(f)}f - \frac{x^{\LCM(\LM(f),\LM(g))}}{\LT(g)}g
+\end{align}
+とする。これでどちらの項の先頭項も次数が一致し、しかもモニックになっているので、
+先頭項が消えることになる。
+
+すべての先頭項が同じ次数の多項式について、その$k$係数線形結合
+の次数が落ちるのなら、その$k$係数線形結合がS多項式の$k$係数線形結合で
+書ける。すなわち:
+$f_1,\dots,f_s \in k[x_1,\dots,x_n]$とし、$\multideg(f_\bullet ) = \delta$
+と、全て等しいとする。さらに、
+$c_\bullet \in k[x_1,\dots,x_n]$を係数とした線形結合$\sum_{i=1}^s c_i f_i$が、
+$\multideg(\sum_{i=1}^s c_i f_i) < \delta$となるなら(次数が落ちるなら)、
+$\sum_{i=1}^s c_i f_i$は$S(f_a,f_b)\quad (1 \le a,b \le s)$
+の$k$係数線形結合となる。さらにこのとき、各$S(f_a,f_b)$は、
+$\multideg(S(f_a,f_b))<\delta$となる。
+\begin{myproof}
+  線形結合$\sum_{i=1}^s c_i f_i$の次数が落ちているので、
+  \begin{align}
+    \sum_{i=1}^s c_i \LC(f_i) = 0
+  \end{align}
+  となる。次数の話をしたいのでモニックにしておきたい。
+  $\LC(f_\bullet)p_\bullet = f_\bullet$と、$p_\bullet$を定義する。
+  \begin{align}
+    \sum_{i=1}^s c_i f_i
+    &=
+    \sum_{i=1}^s c_i \LC(f_i)p_i\\
+    &=
+    c_1 \LC(f_1) p_1 + \sum_{i=2}^s c_i f_i \\
+    &=
+    c_1 \LC(f_1) (p_1 - p_2 + p_2) + \sum_{i=2}^s c_i f_i \\
+    &=
+    c_1 \LC(f_1) (p_1 - p_2)
+    + (c_1 \LC(f_1) + c_2 \LC(f_2))p_2
+    + \sum_{i=3}^s c_i f_i\\
+    &=\dots\\
+    &=
+    \sum_{i=1}^{s-1} (\sum_{j=1}^i c_j \LC(f_j))(p_i - p_{i+1})
+    + \sum_{j=1}^s c_j \LC(f_j)p_s.
+  \end{align}
+  先の次数が落ちている条件より、
+  \begin{align}
+    \sum_{i=1}^s c_i f_i
+    &=
+    \sum_{i=1}^{s-1}(\sum_{j=1}^i c_j \LC(f_j))(p_i - p_{i+1})\\
+    &=
+    \sum_{i=1}^{s-1}(\sum_{j=1}^i c_j \LC(f_j))S(p_i,p_{i+1}).
+  \end{align}
+ここで、各$S(p_i,p_{i+1})$は実態は$p_i-p_{i+1}$だったのだから、次数が落ちて
+$\multideg{S(p_i,p_{i+1})}<\delta$となる。
+\end{myproof}
+
+これを使って、あるイデアルの基底がGroebner基底であるかどうかの判定条件を、
+S-多項式をつかって作ることができる:「$I\subset k[x_1,\dots,x_n]$をイデアルとする。
+$G=\set{g_1,\dots,g_s}$は$I$の基底であるとする。このとき、以下は同値である。
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$は$I$のGroebner基底である。
+  \item $G$で作るどのS-多項式$S(g_i,g_j)\, (i\neq j)$も、$G$の任意の順序で割り切れる。
+  \item $G$で作るどのS-多項式$S(g_i,g_j)\, (i\neq j)$も、何か$G$の適切な順序が存在して、その順序つきの$G$で割り切れる。
+\end{enumerate}
+\begin{myproof}
+  \begin{itemize}
+    \item (2)$\implies$ (3):自明。
+    \item (1)$\implies$ (2):
+    $S(g_i,g_j)$は$G$の$k[x_1,\dots,x_n]$線形結合であり、$G$がGroebner基底であるから、
+    割り切れる。
+    \item (3)$\implies$ (1):
+    Groebner基底であることを示すには、
+    $\gen{\LT\gen{G}}\subset \gen{\LT(G)}$であることを示せばよく、
+    生成元の所属を示すために、$\LT(I) = \LT{\gen{G}} \subset \gen{\LT(G)}$であることを示せばよい。$f\in I$として、$\LT(f)\in \gen{\LT(G)}$を示せばよい。
+    これを示す。
+
+    少し記法を定める。
+    \begin{itemize}
+      \item $\multideg$だと長いので、$\deg$と書くことにする。
+      \item $\delta(h_\bullet)$で、
+      $\max\set{\deg(h_ig_i) ; i=1,\dots,s}$をあらわすことにする。
+      同じ値に対しても表示によって変わってしまうので、本当は
+      $(h_1,\dots,h_s)$に対する関数とするのが正当だろうがこのように略記する。
+      \item $\LCM(\LM(f),\LM(g))$を、$\LCM(f,g)$と略記する。
+      これは、入ってきたものに自動的に$\LM$をあてるようにすればいいだけなので、
+      旧来の記法とも矛盾せず、曖昧さはない。
+    \end{itemize}
+
+    $f\in I=\gen{G}$なので、
+    $f = \sum_{i=1}^s h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。
+    和で次数が落ちる可能性があるので、$f=\sum_{i=1}^s h_i g_i$より、
+    $\deg(f)\le \delta(\sum_{i=1}^s h_i g_i)$となっている。
+    いま、$\deg(f) < \delta(\sum_{i=1}^s h_i g_i)$であるとする。
+    このとき、
+    \begin{align}
+      \delta(\sum_{i=1}^s h_i' g_i) < \delta(\sum_{i=1}^s h_i g_i),\quad
+      f = \sum_{i=1}^s h_i' g_i
+    \end{align}
+    となる$h_\bullet'$が存在することを示そう。
+    まずは次数を気にせず$h_\bullet'$を構成する。
+    \begin{align}
+      & \sum_{i=1}^s h_i g_i \\
+      =&
+      \sum_{\deg(h_ig_i)= \delta(\sum h_i g_i)} \LT(h_i)g_i
+      +
+      \sum_{\deg(h_i g_i)=\delta(\sum h_i g_i)} (h_i - \LT(h_i))g_i
+      +
+      \sum_{\deg(h_ig_i) < \delta(\sum h_i g_i)} h_i g_i
+    \end{align}
+    と書ける。
+    この第1項について、「同次のものを足して次数が落ちて」いるので、定理が使えて、
+    \begin{align}
+      \sum_{\deg(h_ig_i)=\delta(\sum h_i g_i)} \LT(h_i)g_i
+       =
+       \sum_{j,k} c_{j,k}S(\LT(h_j)g_j, \LT(h_k)g_k)
+    \end{align}
+    となる$c_\bullet \in k$が存在する。Sの中身の特殊性を使って計算してみると、
+    \begin{align}
+      S(\LT(h_j)g_j, \LT(h_k)g_k)
+      &=
+      \frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} S(g_j,g_k)
+    \end{align}
+    である。仮定より、$G$の適切な順序での割り算を適用して
+    \begin{align}
+      S(g_j,g_k) = \sum_{i=1}^s a_{ijk}g_i
+    \end{align}
+    となる$a_{ijk}\in k[x_1,\dots,x_n]$が存在する。
+    まとめると、
+    \begin{align}
+      \sum_{i=1}^s h_i g_i
+      =
+      \ub{\sum_{j,k}\sum_{i=1}^s c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} a_{ijk}g_i}_{\MARU{1}}
+      +
+      \ub{\sum_{\deg(h_i g_i)=\delta(\sum h_i g_i)} (h_i - \LT(h_i))g_i}_{\MARU{2}}
+      +
+      \ub{\sum_{\deg(h_ig_i) < \delta(\sum h_i g_i)} h_i g_i}_{\MARU{3}}
+    \end{align}
+    となる。この右辺は、$f=\sum_{i=1}^s h_i g_i$の$g_\bullet$での線形結合の表現になっているので、これにあわせて$h'_\bullet$を定めればよい。これが次数の条件を満たすことを示す。$\MARU{2},\MARU{3}$については、$\sum$の条件よりあきらかなので、
+    $\MARU{1}$の中身が全て、「次数が$\delta(\sum h_i g_i)$未満」を満たせば十分である。
+    $i,j,k$を固定して考える。
+    \begin{align}
+      &\deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} a_{ijk}g_i)\\
+      \le&
+      \deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} \sum_{i=1}^s a_{ijk}g_i)\\
+      & \fbox{割り算の性質。(商)\times (割る式)の次数は(割られる式)の次数を越えない。アルゴリズム参照。}\\
+      =&
+      \deg(c_{jk}\frac{\LCM(\LT(h_j)g_j, \LT(h_k)g_k)}{\LCM(g_j,g_k)} S(g_j,g_k))\\
+      &\fbox{S多項式を割っていたのだった。}\\
+      =&
+      \deg(c_{jk}S(\LT(h_j)g_j, \LT(h_k)g_k))\\
+      <&
+      \deg(\delta(\sum_{i=1}^s h_i g_i))\\
+      &
+      \fbox{「同次のものを足して次数が落ちて」の主張。}
+    \end{align}
+    よって、条件を満たす$h'_\bullet$が構成できた。この操作は、
+    $\deg(f)<\delta(\sum_{i=1}^s h_i g_i)$が満たされる限り繰替えせるので、
+    有限回繰替えすことにより、$\deg(f)=\delta(\sum_{i=1}^s h_i g_i)$をみたす
+    $h_\bullet$が求まる。つまり、$\deg(f) = \deg(h_i g_i)$となる
+    $i=1,\dots,s$が存在する。よって、$\LM(f)=\LM(h_ig_i)=\LM(h_i)\LM(g_i)$であり、
+    $\LT(f)$は$\LT(g_i)$で割り切れる。よって、
+    $\LT(f) \in \gen{\LT{G}}$である。
+  \end{itemize}
+\end{myproof}
+つまり、ある多項式の組がイデアルのGroebner基底であるかどうかを見るには、
+その多項式の組からすべてのS多項式を作って、それを好きな順序の多項式の組で
+割って、すべて余りが0であることを見れば必要十分である。
+
+例として、3次ねじれ曲線のイデアル$I=\gen{y-x^2,z-x^3}$
+のGroebner基底として、$\set{y-x^2,z-x^3}$が取れることを示そう。
+ただし、$y>z>x$のlex順序とする。
+これは、$S(y-x^2,z-x^3)$が$(y-x^2,z-x^3)$で割り切れればよい。
+\begin{align}
+  S(y-x^2,z-x^3) = yx^3-zx^2
+\end{align}
+である。これを割ってみると、
+\begin{align}
+  yx^3-zx^2 = x^3(y-x^2) + (-x^2)(z-x^3)
+\end{align}
+となり、割り切れたので、Groebner基底であることがわかった。
+
+\begin{enumerate}[label=(問題 \arabic*)]
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item $I$のGroebner基底$G$を作ることができるので、
+    それで$f$を割ればよい。
+    \item $f=g+r=g'+r'$と与えられたとする。先のGrobner基底を考えると、
+    この$g+r=g'+r'$はすでに$G$で$I$の元と正規形とに分けた形になっているので、
+    Groebner基底の性質より、$r=r'$となる。
+    \item[(b')] $f=g+r=g'+r'$と与えられたとする。$(g-g')+(r-r') = 0$である。
+    $r-r'$は$r,r'$の性質より、$\LT(I)$のどれでも割り切れないので、
+    この$0$の表示はすでに$I$とその余りとで分けた形になっている。よって、
+    $r-r',g-g'$となる。
+    \item[(備考)] \warn{これで、割り算のあまりが$I$の基底、あるいはその順序によらずに$I$だけで決まることがわかった。そういうわけで、採用する順序を変えてもその余りは変化せず、Groebner基底かどうかを調べるには何か1つ基底を選んで調べればよい。他の順序を使ったらあまりが出てしまったということはない。}
+  \end{enumerate}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \easypicture{1428152186061.png}
+    $-z^2$が余り。商は$(y,-z)$である。
+    \item
+    \easypicture{1428152296875.png}
+    $-z^2$が余りで先と一致する。しかし、商は$(x,z)$となり、さっきとは全然違う。
+  \end{enumerate}
+  \item
+  基底といったら、有限生成なイデアルに対しての有限個の生成元たちのことであったから、
+  $G$は有限集合である。確認した。$G=\set{g_1,\dots,g_s}$とする。
+  $S(g_i,g_j)$を考える。ただし、$i\neq j$である。$S(g_i,g_j)\in \gen{G} = I$なので、
+  仮定より$\overline{S(g_i,g_j)}^G = 0$である。$i,j$は任意であった。よって、ブッフベルガーのSペア判定条件より、$G$はGroebner基底である。
+  \item
+  $G$での割り算と$G'$での割り算と$I$での割り算が一致することを問題1で見た。
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item 先頭を$x^2yz^2$にあわせる。
+    \begin{align}
+      S(f,g)
+      =
+      \frac{yz}{4}f - xg
+      =
+      (x^2yz^2 - \frac{7}{4}y^3z) - (x^2yz^2 + 3x^2z^4)
+      =
+      -3x^2z^4 - \frac{7}{4}y^3z.
+    \end{align}
+    \item 先頭を$x^4yz^2$にあわせる。
+    \begin{align}
+      S(f,g)
+      =
+      z^2f - \frac{x^3y}{3}g
+      =
+      (x^4yz^2 - z^4) - (x^4yz^2 + \frac{x^3y^2}{3})
+      =
+      \frac{-1}{3}x^3y^2 -z^4.
+    \end{align}
+    \item 先頭を$x^7y^2z$にあわせる。
+    \begin{align}
+      f- \frac{1}{2}g =
+      (x^7y^2z+2ixyz) - (x^7y^2z + 2)
+      =
+      2ixyz - 2.
+    \end{align}
+    \item 先頭を$xyz^2$にあわせる。
+    \begin{align}
+      (z^2)f - (xy)g
+      =
+      (xyz^2+z^5) - (xyz^2-3xyz)
+      =
+      3xyz + z^5.
+    \end{align}
+  \end{enumerate}
+  \item
+  異なる。$x>y$ならば$S(x+y,x)=y$だが、$y>x$ならば$S(y+x,x)= x^2$である。
+  \item
+  \begin{align}
+    \deg(S(f,g))
+    &=
+    \deg(\frac{\LCM(f,g)}{\LT(f)}(\LT(f)+(f-\LT(f))) - \frac{\LCM(f,g)}{\LT(g)}(\LT(g)+(g-\LT(g))))\\
+    &=
+    \deg(\frac{\LCM(f,g)}{\LT(f)}(f-\LT(f)) - \frac{\LCM(f,g)}{\LT(g)}(g-\LT(g)))\\
+    &=
+    \max\set{\deg(\frac{\LCM(f,g)}{\LT(f)}(f-\LT(f))), \deg(\frac{\LCM(f,g)}{\LT(g)}(g-\LT(g)))}\\
+    &=
+    \max\set{\deg(\LCM(f,g))-\deg(\LT(f))+\deg(f-\LT(f)),
+    \deg(\LCM(f,g))-\deg(\LT(g))+\deg(g-\LT(g))}\\
+    &=
+    \deg(\LCM(f,g)) + \max\set{\deg(f-\LT(f))-\deg(\LT(f)), \deg(g-\LT(g))-\deg(\LT(g))}\\
+    &<
+    \deg(\LCM(f,g)).
+  \end{align}
+  \item
+  $S(-x^2+y,-x^3+z) = xy-z$である。これを$(-x^2+y,-x^3+z)$で割ったあまりは
+  $xy-z$そのものであり、0でないのでSペア判定法よりGroebner基底でない。
+  \item   {\tt code/ex_2_3_6.hs}で計算。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+      Groebner基底でない。
+      Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $x^{2}+(-1)y$\item $x^{3}+(-1)z$\end{itemize} .
+      \begin{enumerate}
+      \item $S(x^{2}+(-1)y, x^{3}+(-1)z) = (-1)xy+z$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xy+z\div $\begin{itemize}
+      \item $x^{2}+(-1)y$,
+      \item $x^{3}+(-1)z$,
+      \end{itemize} .
+
+      \item Remainder: $(-1)xy$ moved to remainder.
+      \item Remainder: $z$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \end{itemize} .
+      remainder is $(-1)xy+z$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+    \item
+      Groebner基底である。
+      Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $(-1)y+x^{2}$\item $(-1)z+x^{3}$\end{itemize} .
+      \begin{enumerate}
+      \item $S((-1)y+x^{2}, (-1)z+x^{3}) = (-1)x^{2}z+x^{3}y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)x^{2}z+x^{3}y\div $\begin{itemize}
+      \item $(-1)y+x^{2}$,
+      \item $(-1)z+x^{3}$,
+      \end{itemize} .
+
+      \item Division: $(-1)z+x^{3}$ divides stock. stock is $x^{3}y+(-1)x^{5}$ .
+      \item Division: $(-1)y+x^{2}$ divides stock. stock is $0$ .
+      \item Completed: quotients are \begin{itemize}
+      \item $(-1)x^{3}$,
+      \item $x^{2}$,
+      \end{itemize} .
+      remainder is $0$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+    \item
+    Groebner基底でない。
+    Checking if following bases are Groebner basis.
+      Divisors and bases are
+      \begin{itemize}
+      \item $xy^{2}+(-1)xz+y$\item $xy+(-1)z^{2}$\item $x+(-1)yz^{4}$\end{itemize} .
+      \begin{enumerate}
+      \item $S(xy^{2}+(-1)xz+y, xy+(-1)z^{2}) = (-1)xz+yz^{2}+y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xz+yz^{2}+y\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Division: $x+(-1)yz^{4}$ divides stock. stock is $(-1)yz^{5}+yz^{2}+y$ .
+      \item Remainder: $(-1)yz^{5}$ moved to remainder.
+      \item Remainder: $yz^{2}$ moved to remainder.
+      \item Remainder: $y$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $(-1)z$,
+      \end{itemize} .
+      remainder is $(-1)yz^{5}+yz^{2}+y$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\item $S(xy^{2}+(-1)xz+y, x+(-1)yz^{4}) = (-1)xz+y^{3}z^{4}+y$.  Calculation is \begin{enumerate}
+      \item Start: calculates $(-1)xz+y^{3}z^{4}+y\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Division: $x+(-1)yz^{4}$ divides stock. stock is $y^{3}z^{4}+(-1)yz^{5}+y$ .
+      \item Remainder: $y^{3}z^{4}$ moved to remainder.
+      \item Remainder: $(-1)yz^{5}$ moved to remainder.
+      \item Remainder: $y$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $(-1)z$,
+      \end{itemize} .
+      remainder is $y^{3}z^{4}+(-1)yz^{5}+y$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\item $S(xy+(-1)z^{2}, x+(-1)yz^{4}) = y^{2}z^{4}+(-1)z^{2}$.  Calculation is \begin{enumerate}
+      \item Start: calculates $y^{2}z^{4}+(-1)z^{2}\div $\begin{itemize}
+      \item $xy^{2}+(-1)xz+y$,
+      \item $xy+(-1)z^{2}$,
+      \item $x+(-1)yz^{4}$,
+      \end{itemize} .
+
+      \item Remainder: $y^{2}z^{4}$ moved to remainder.
+      \item Remainder: $(-1)z^{2}$ moved to remainder.
+      \item Completed: quotients are \begin{itemize}
+      \item $0$,
+      \item $0$,
+      \item $0$,
+      \end{itemize} .
+      remainder is $y^{2}z^{4}+(-1)z^{2}$.  $\blacksquare$
+      \end{enumerate}
+      .  $\blacksquare{}$\end{enumerate}
+  \end{enumerate}
+  \item
+  この状況では、$\LT(f)=\LM(f),\, \LT(g)=\LM(g)$ということになる。
+  あと、$\GCD(\LM(f),\LM(g))=\GCD(f,g)=f\wedge g$とかき、
+  $\LCM(\LM(f),\LM(g))=\LCM(f,g) = f\vee g$とかくことにする。
+  一般に$\max(a,b)+\min(a,b)=a+b$が成立することを考えると、
+  $(f\wedge g) + (f \vee g) = \LM(f) + \LM(g)$となる。
+  さらに、互いに素なので、$f\vee g = 1$である。
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{align}
+      S(f,g)
+      &=
+      \frac{f\vee g}{\LT(f)}f - \frac{f\vee g}{\LT(g)}g\\
+      &=
+      \frac{f\vee g}{\LM(f)}f - \frac{f\vee g}{\LM(g)}g\\
+      &=
+      \frac{\LM(f)\LM(g)/(f\wedge g)}{\LM(f)}f - \frac{\LM(f)\LM(g)/(f\wedge g)}{\LM(g)}g\\
+      &=
+      \LM(g)f-\LM(f)g\\
+      &=
+      \LM(g)((f-\LT(f))+\LT(f)) - \LM(f)((g-\LT(g))+\LT(g))\\
+      &=
+      \LM(g)((f-\LM(f))+\LM(f)) - \LM(f)((g-\LM(g))+\LM(g))\\
+      &=
+      \LM(g)(f-\LM(f)) - \LM(f)(g-\LM(g))\\
+      &=
+      \LM(g)f - \LM(f)g
+    \end{align}
+    あとは余計なのを足せばできる。
+    \item
+    先の展開より、$S(f,g)$のすべての項が$\LM(g)$か$\LM(f)$かの倍元になる。
+  \end{enumerate}
+  \item
+  \begin{align}
+    x^\gamma S(f,g)
+    &=
+    \frac{(x^\alpha f)\vee (x^\beta g)}{f \vee g}S(f,g)\\
+    &=
+    \frac{(x^\alpha f)\vee (x^\beta g)}{f \vee g} (\frac{f\vee g}{\LT(f)}f - \frac{f\vee g}{\LT(g)}g)\\
+    &=
+    \frac{(x^\alpha f)\vee(x^\beta g)}{\LT(f)}f - \frac{(x^\alpha f)\vee (x^\beta g)}{\LT(g)}g\\
+    &=
+    S(x^\alpha f, x^\beta g).
+  \end{align}
+  \item
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    $\overline f^G = \overline g^G \implies f-g\in I$:
+    問題1のように、$I$で割り算して$f=\tilde f + \overline f^G$と
+    $g=\tilde g + \overline g^G$と書く。
+    $f-g = (\tilde f - \tilde g ) + (\overline f^G - \overline g^G)$である。
+    \begin{itemize}
+      \item
+      上の表示は$f-g$を$I$で割った形になっており、$\overline f^G =\overline g^G$より、
+      $\overline{f-g}^G = 0$である。
+      \item $f-g\in I \implies \overline f^G = \overline g^G$:
+      $f-g\in I$なので、$I$でわった余りは0であり、$\overline f^G - \overline g^G = 0$となる。よって、$\overline f^G = \overline g^G$である。
+    \end{itemize}
+    \item $f=\tilde f + \ovd{f}{G},\, g=\tilde g + \ovd{g}{G}$としておく。
+    すると、$f+g = (\tilde f + \tilde g) + (\ovd{f}{G} + \ovd{g}{G})$となり、
+    これはすでに$G$でわった形なので、$\ovd{f+g}{G} = \ovd{f}{G} + \ovd{g}{G}$である。
+    \item
+    $f,g$を上と同じに書く。
+    \begin{align}
+      fg = (\tilde f \tilde g + \tilde f \ovd{g}{G} + \tilde g \ovd{f}{G}) + \ovd{f}G\ovd{g}G
+    \end{align}
+    となる。
+    $\ovd{f}G\ovd{g}G$を$I$で割って、$\ovd{f}G\ovd{g}G = \tilde h + \ovd{\ovd{f}G\ovd{g}G}G$を得る。代入し、
+    \begin{align}
+      fg = (\tilde f \tilde g + \tilde f \ovd{g}{G} + \tilde g \ovd{f}{G} + \tilde h) + \ovd{\ovd{f}G\ovd{g}G}G
+    \end{align}
+    を得る。これは$I$で割った形なので、
+    \begin{align}
+      \ovd{fg}G = \ovd{\ovd{f}G \ovd{g}G}G.
+    \end{align}
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{ブッフベルガーのアルゴリズム}
+\label{sub:ブッフベルガーのアルゴリズム}
+これまで、任意の$k[x_1,\dots,x_n]$のイデアルにGroebner基底が存在することは示したが、
+その構成まではわからなかった。そこで、イデアル$I=\gen{g_1,\dots,g_s}$に対して
+のGroebner基底を求める方法を考えてみる。
+先の章より、Sペア判定法から、どの$g_i,g_j$についても、$S(g_i,g_j) \in I$となっていることが必要十分だった。そこで、イデアル$I$の生成元$g_1,\dots,g_s$に
+$S(g_i,g_j)$をすべてつけ足したらどうかという気分になる。
+それもGroebner基底にならなければ、その生成元についてまたSペアを増やす。
+実はこれを繰り返すと有限回でGroebner基底になり、これはアルゴリズムになる。
+
+「$\gen{f_1,\dots,f_s} \subset I$のGroebner基底を構成するアルゴリズムが存在する。」
+\begin{myproof}
+  以下のアルゴリズムで構成できることを示す。
+\begin{algorithm}[H]
+  \caption{Groebner基底のアルゴリズム}
+  \begin{algorithmic}[1]
+    \STATE{$G \defeq \set{f_1,\dots,f_s}$}
+    \REPEAT{}
+    \STATE{$G' \defeq G$}
+    \STATE{$G \Leftarrow G\cup \set{\ovd{S(g_1,g_2)}{G'}
+    ; g_1\neq g_2 \in G' \, かつ \, \ovd{S(g_1,g_2)}{G'} \neq 0}$}
+    \UNTIL{$G = G'$}
+  \end{algorithmic}
+\end{algorithm}
+これについて、以下を示す必要がある。
+\begin{itemize}
+  \item 正しい答えが得られること:
+  このアルゴリズムが停止したとき、
+  \begin{align}
+    \set{\ovd{S(g_1,g_2)}{G'} ; g_1 \neq g_2 \in G'} \subset G'
+  \end{align}
+  となっている。つまり、任意の$g_1\neq g_2 \in G'$について、
+  $\ovd{S(g_1,g_2)}{G'}\in G'$となっている。
+  $\ovd{S(g_1,g_2)}{G'}$は$G'$でわった余りなので、これが$G'$の元であるということは、
+  $\ovd{S(g_1,g_2)}{G'} = 0$である。よって、停止したとき確かに$G'=G$は
+  $\gen{G'}=\gen{G}$のGroebner基底になっている。
+
+  さらに、$\gen{G} = I$であることを示さなければならない。はじめはあきらかに$I$の基底になっているので、ループの途中で$I$をはみ出さなければよいが、L.4で加えているのは
+  $\ovd{S(g_1,g_2)}{G'}$である。$S(g_1,g_2) \in \gen{G'} = \gen{G} = I$であり、
+  それを$I$の部分集合である$G'$で割っているのだから、$\ovd{S(g_1,g_2)}{G'}\in I$となり、基底として無駄なものを足していることになるので、ずっと$G\subset I$でありつづける。$G$は$I$の生成元である$f_1,\dots,f_s$を含んでいるのだから$G\supset I$であり、
+  常に$G=I$である。
+  \item 停止すること:
+  仮に、このアルゴリズムが停止しなかったとし、順次得られる$G$を$G_\bullet$とする。
+  停止条件より、真の{\textit 部分集合の}昇鎖
+  \begin{align}
+    G = G_0 \subsetneq G_1 \subsetneq G_2 \subsetneq \dots
+  \end{align}
+  が得られる。部分集合の昇鎖であって、イデアルの昇鎖ではないのでこれそのものは問題ではない。さらに、アルゴリズムのL.5の終了条件より、停止するのはL.4で追加した(つもりになっていたもの)が前の$G$に含まれていたときに限るので、$G_i \subsetneq G_{i+1}$について、
+  $g_1\neq g_2 \in G_i$で、$\ovd{S(g_1,g_2)}{G_i} \in G_{i+1}\setminus G_i$となるものが存在する。 あまりの定義により、$\ovd{S(g_1,g_2)}{G_i}$のどの項も
+  、$\LT(G_i)$のどの項でも割りきることができない。したがって特に、
+  $\LT(\ovd{S(g_1,g_2)}G_i)$のどの項も、$\LT(G_i)$のどの項でも割り切ることができず、当然$\ovd{S(g_1,g_2)}{g_i} \in G_{i+1}$なので、
+  \begin{align}
+    \gen{\LT(G_i)} \subsetneq \gen{\LT(G_{i+1})}
+  \end{align}
+  となる。つまり、先の$G_\bullet$の昇鎖から、
+  \begin{align}
+    \gen{\LT(G) } = \gen{\LT(G_0) } \subsetneq \gen{\LT(G_1)} \subsetneq
+    \gen{\LT(G_2)} \subsetneq \dots
+  \end{align}
+  という、$k[x_1,\dots,x_n]$の真の昇鎖が得られる。しかしこれは、
+  $k[x_1,\dots,x_n]$がネーター環であり、ACCを満たすことに矛盾する。よって、
+  アルゴリズムは停止する。
+\end{itemize}
+\end{myproof}
+
+上のアルゴリズムでは$\set{\ovd{S(g_1,g_2)}{G'} ; g_1\neq g_2 \in G'}$と書いてしまったが、これは有限の手続で作れることがあきらかなのでこのように書いた。
+
+しかし、これではやたらと無駄な基底が加わってしまっている。
+そこで、余計なものを除去することを考える。
+「$G$がイデアル$I$のGroebner基底であり、$p\in G$が、
+$\LT(p) \in \gen{\LT(G\setminus \set{p})}$をみたすとする。このとき、
+$G\setminus\set{p}$は$I$のGroebner基底である。」
+\begin{myproof}
+ 仮定より、$\gen{\LT(G\setminus \set{p})} = \gen{\LT(G)}$となっている。
+ さらに、$G$は$I$のGroebner基底なので、$\gen{\LT(G)} = \gen{\LT(I)}$である。よって、
+ $\gen{\LT(G\setminus \set{p})} = \gen{\LT(I)}$となる。
+\end{myproof}
+これで、「$G\setminus \set{p}$は$I$の基底になっているのか？」と不安になったが、
+それがGroebner基底のあとの定義でやった。復習する。つまり、$G$が$\gen{\LT(G)} = \gen{\LT(I)}$をみたせば、$\gen{G} = I$となるのである。$\gen{G}\subset I$はあきらかなので、逆をしめす。$f\in I$とする。このとき、$\LT(f) \in \gen{\LT(I)} = \gen{\LT(G)}$となる。単項式イデアルの性質より、$f$の先頭項が$G$のどれかの先頭項で割り切れることになるので、$f$は$G$のどれかで「一回分」割り算がでて、暫定的な余りがでる。この余りは
+、$f\in I$であることと$G\subset I$ であることから、やはり$I$に入る。
+するとこの余りの先頭項が$\LT(I)$に入るので、これにあわせてまた$G$を選んで、と、計算がおわるまで暫定的な余りが$I$に入り続け、割り切れることになる。
+復習おわり。
+
+この命題を使ってGroebner基底を削り続けて、削りきれなくなったところがある意味標準形であると考えられるので、次のように定義する。「$G$がイデアル$I$の極小Groebner基底であるとは、
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$からどれを外してもGroebner基底でなくなる: $p \in G \implies \LT(p) \notin \gen{\LT(G\setminus \set{p})}$である。
+  \item $G$のどれもがモニックである
+\end{enumerate}
+である」と定める。Groebner基底をモニックにするのは$\LC$で割るだけである。
+実際に計算するには、1つ基底をとって、その$\LT$がほかの$\LT$で書けるか、単項式イデアルであることに注目するとほかの$\LT$で割り切れるかを見て、割りきれたらそれを取り除くという操作を基底の個数分繰替えせばよい。極小という名の通り、極小Groebner基底は無数に存在する。たとえば$\gen{x+z,y+z} = \gen{x+2z,y+z} = \gen{x+3z,y+z}=\dots$はどれも極小Groebner基底である。\warn{←極小Groebner基底には間違いないが、どれもイデアルが違っている！}
+
+しかし、極小Groebner基底のうち、さらに強い簡約Groebner基底を「
+$G$がイデアル$I$の簡約Groebner基底であるとは、
+\begin{enumerate}[label=(\arabic*)]
+  \item $G$からどれを外してもGroebner基底でなくなる: $p \in G \implies $ $p$のどの項も$\gen{\LT(G\setminus \set{p})}$に入らない。(先頭項だけではなく、すべての項になった！)
+  \item $G$のどれもがモニックである。
+\end{enumerate}
+
+\begin{myproof}
+  $G=\set{f_1,\dots,f_s}$を$I$の極小Groebner基底とする。ここから簡約Groebner基底を作ることを考える。
+  \begin{algorithm}[H]
+    \caption{簡約Groebner基底を作る}
+    \begin{algorithmic}[1]
+      \STATE{$i=0$}
+      \STATE{$G=[f_1,\dots,f_s]$}
+      \FOR{$i=1,\dots,s$}
+      \STATE{$G[i] \Leftarrow \ovd{f_i}{G\setminus \set{f_i}}$}
+      \ENDFOR{}
+    \end{algorithmic}
+  \end{algorithm}
+  L.3に入ったとき$i$であるとし、
+このときの$G$を$G_b$とする。L.5に次に到達したとき、$G$を$G_a$とする。
+$G_b$は1～$i-1$番目は$G$について簡約されているとしてよい。停止は自明。
+
+まず、どの時点でも$\LT(G)$が一定であることを示す。$\LT(G_b) = \LT(G_a)$を示す。
+$G_b$と$G_a$は$i$番目だけ異なるので、$\LT(G_b[i]) = \LT(G_a[i])$を示せばよい。
+L.4より、$\LT(G_b[i]) = \LT(f_i)$であり、$\LT(G_a[i]) = \LT(\ovd{f_i}{G_b\setminus\set{f_i}})$なので、$\LT(f_i) = \LT(\ovd{f_i}{G_b\setminus \set{f_i}})$を示せばよい。$G_b$は(帰納法の仮定より)極小Groebner基底になっているので、
+$\LT(f_i) \notin \gen{\LT(G_b\setminus\set{f_i})}$となっている。
+したがって、$\LT(f_i)$は$\LT(G_b\setminus\set{f_i})$のいずれでも割り切れない。
+ここで割り算のアルゴリズムを思い出すと、初手で割り算が発生せず、割られる式の先頭項が余りに移動するので、$\ovd{f_i}{G_b\setminus\set{f_i}}$の$\LT$は$\LT(f_i)$になる\footnote{余りが$f_i$になるわけではない。初手では割り算がおこらないかもしれないが、2手め以降ならわからない。}。よって、$\LT(f_i) = \LT(\ovd{f_i}{G_b\setminus\set{f_i}})$となる。よって、$\LT(G_b) = \LT(G_a)$である。
+
+次に、どの時点でも$G$がGroebner基底であることを示す。L.2の時点では仮定よりGroebnerなので、ループ中を考える。$G_b$は帰納法の仮定よりGrobnerである。
+\begin{align}
+  \gen{\LT(G_a)} = \gen{\LT(G_b)} \desceq{$G_b$はGroebner} \gen{\LT(\gen{G_b})}
+  =
+  \gen{\LT(\gen{G_a})}
+\end{align}
+なので、$G_a$もGroebner基底である。
+
+次に、どの時点でも$G$が極小Groebner基底であることを示す。
+極小Groebner基底であることの定義は、「どの基底$f_i$についても、$\LT(f_i) \notin \gen{G\setminus\set{\LT(f_i)}}$となる」ことである。しかし、先に
+「どの時点でも$\LT(G)$が一定である」ことを示したので、即座に従う。
+
+次に、L.2,L.5時点で$G[1],\dots,G[i]$は$G$について簡約されていることを示す。
+「$f$が$G$について簡約されている」とは、「$f$のどの項も$\LT(G-\set{f})$で割り切れない」言い換えるなら、「$\Forall{x^\alpha \colon fの項} x^\alpha \notin \gen{\LT(G-\set{f})}$」となることであった。L.2の時点では$i=0$なので自明である。
+L.5を考える。帰納法の仮定より、$G_b[1],\dots,G_b[i-1]$は$G$について簡約されている。
+先に、「どの時点でも$\LT(G)$は一定」であることを示したので、
+$G_a[1],\dots,G_a[i-1]$も$G$について簡約されている。あとは、$G_a[i] = \ovd{f_i}{G-\set{f_i}}$が$G$について簡約されていることを示せばよい。
+しかし、割り算の余りの定義より、$\ovd{f_i}{G-\set{f_i}}$のすべての項は
+$G-\set{f_i}$で一度も割ることができない。
+
+L.5の時点で「$G[1],\dots,G[i]$は$G$について簡約されている」ことを示したので、
+アルゴリズムが停止したとき、すなわち$i=n$となったときは$G[1],\dots,G[n]$は$G$について簡約されている。よって、$G$は簡約Groebner基底である。前半は示せた。
+
+後半の、簡約Groebner基底の一意性を示す。$G,G'$がイデアル$I$の簡約Groebner基底であるとする。
+
+まず、$\LT(G) = \LT(G')$であることを示す。
+$G=\set{g_1,\dots,g_s}$とし、$G'=\set{g_1',\dots,g_t'}$とする。
+$G,G'$がGroebner基底なので、$\gen{\LT(g_1),\dots,\LT(g_s)} = \gen{\LT(g_1'),\dots,\LT(g_t')}$である。$i=1,\dots,s$とする。
+$\LT(g_i) \in \gen{\LT(g_1',\dots,\LT(g_t'))}$であり、単項式イデアルの性質より、
+$F(i) \in \set{1,\dots,t}$が存在して、$\LT(g_{F(i)}')|\LT(g_i)$となる。さらに
+同様の考察を$\LT(g'_{F(i)})$にして、$G(i)\in \set{1,\dots,s}$が存在して、
+$\LT(g_{G(i)})|\LT(g_{F(i)}')$となることがわかる。まとめると、
+$\LT(g_{G(i)})|\LT(g_{F(i)}')|\LT(g_{i})$となる。仮に$G(i)\neq i$であるとすると、
+$\LT(g_{G(i)})|\LT(g_i)$となり、これは$G$が極小であることに反する。よって、
+$G(i)=i$である。すると、$\LT(g_i)|\LT(g'_{F(i)})|\LT(g_i)$となるので、
+$\LT(g'_{F(i)})  = \LT(g_i)$である。$i\neq j$なら$G$の極小性から
+$\LT(g_i) \neq \LT( g_j)$であり、よって$\LT(g'_{F(i)})\neq \LT(g'_{F(j)})$
+であり、極小性より再び$F(i) \neq F(j)$となる。よって、$F$は単射であり、
+$\# G \le \# G'$となる。同様の考察をすると$\# G' \le \# G$となり、
+$s = \# G = \# G' = t$となる。$F$が同じ大きさの有限集合間の単射なので、
+これは全射でもあり、$F$が$G$と$G'$との間に全単射をつけ、$\LT(g_i) = \LT(g'_{F(i)})$とする。これで、$\LT(G) = \LT(G')$が示された。
+
+次に、$G=G'$を示す。対称性から、$g\in G$として$g\in G'$が示せればよい。
+さきに示したことより、$\LT(G) = \LT(G')$なので、$\LT(g) = \LT(g')$となる$g' \in G'$が存在する。
+もしも$g=g'$であれば$g  = g' \in G'$となるので証明がおわる。$g=g'$を示す。
+$G,G'$は$I$のGroebner基底なので、$I=\gen{G}=\gen{G'}$であり、
+$\ub{g}_{\in G}-\ub{g'}_{\in G'} \in I$なので、$\ovd{g-g'}{G} = \ovd{g-g'}{I} = 0$となる\footnote{イデアルでの割り算は先の演習でやった。}。
+
+一方、実は$\ovd{g-g'}{G}=g-g'$となる。まず、$G$は簡約Groebner基底なので、
+$g$の各項は$G-\set{g}$のいずれでも一度も割れず、
+$\ovd{g-\LT(g)}{G-\set{g}} = g-\LT(g)$である。さらに、$g-\LT(g)$の各項が
+$g$で一度も割れないのも明らかなので、$\ovd{g-\LT(g)}{\set{g}} = g-\LT(g)$でもあり、
+$\ovd{g-\LT(g)}{I} \ovd{g-\LT(g)}{G} = g-\LT(g)$となる。
+同様の考察を$g'$にもして、$\ovd{g'-\LT(g')}{I} = g'-\LT(g')$となる。先の演習問題から、
+あまりはたしひきできるので、
+\begin{align}
+  \ovd{g-g'}{I}
+  &\desceq{$\LT(g)=\LT(g')$}
+  \ovd{(g-\LT(g))-(g'-\LT(g'))}{I}\\
+  &=
+  \ovd{g-\LT(g)}{I} - \ovd{g'-\LT(g')}{I}\\
+  &=
+  (g-\LT(g)) - (g'-\LT(g'))\\
+  &\desceq{$\LT(g)=\LT(g')$}
+  g-g'
+\end{align}
+となる。
+
+以上で、$\ovd{g-g'}{I}=0$と$\ovd{g-g'}{I}=g-g'$とを示したので、$g-g'=0$となり、$g=g'$である。
+よって、$g\in G'$であり、$G\subset G'$となる。同様に$G'\subset G$も成立し、$G=G'$である。
+\end{myproof}
+
+これで、多項式のイデアルから、それを特徴づける一意なデータが引き出せることがわかった。
+つまり、ある2つの有限生成なイデアル$I,J$があれば、その簡約Groebner基底を計算し、あっていれば$I=J$だし、あっていなければ$I\neq J$である。
+
+\begin{enumerate}[label=(問題\arabic*)]
+  \item 略
+  \item {\tt code/ex_2_3_7.hs}で計算。
+  \begin{enumerate}[label=(\alph*)]
+    \item lexだと以下の通り。
+    \insertcalc{ex2372alex.tex}
+    grLexだと、
+    \insertcalc{ex2372agrlex.tex}
+    となる。
+    \item lexだと以下の通り。
+    \insertcalc{ex2372blex.tex}
+    grlexだと以下の通り。
+    \insertcalc{ex2372bgrlex.tex}
+    よって、多様体は$\var(I) = 0$となる。
+    \item
+    lexだと以下のとおり。
+    \insertcalc{ex2372clex.tex}
+    grlexだと以下のとおり。
+    \insertcalc{ex2372cgrlex.tex}
+  \end{enumerate}
+  \item 2でやった。
+  \item 途中までは一緒。アルゴリズムが停止しなかったとする(背理法)。すると、終了条件から狭義単調増加な$G$の列
+  \begin{align}
+    G = G_0 \subsetneq G_1 \subsetneq G_2 \subsetneq \dots
+  \end{align}
+  が存在する。L.4で、余りが0にならなかったときを追加していることから、
+  $G_{i+1}$で$G_{i}$から追加された元の$\LT$は、$G_{i}$のどの$\LT$でも割り切ることができない。よって、
+  \begin{align}
+    \gen{\LT(G)} = \gen{\LT(G_0)} \subsetneq \gen{\LT(G_1)} \subsetneq \gen{\LT(G_2)} \subsetneq \dots
+  \end{align}
+  となっている。\warn{ここからがちがう！}
+  $A=\bigcup_{i=0}^\infty \LT(G_i)$を考える。これは$\Zge^n$の部分集合なので、
+  演習問題2-4-7の、ディクソンの補題の変種より、$\alpha_1,\dots,\alpha_N \in A$が存在して、
+  \begin{align}
+    \Forall{\alpha \in A}\Exists{i=1,\dots,N}\Exists{\gamma \in \Zge^n} \alpha = \alpha_i + \gamma
+    \label{ディクソンの補題の変種}
+  \end{align}
+  となる。各$i$とそれに付随する$\alpha_i$について、
+  「$x^{\alpha_i} \notin \gen{\LT(G_{M(i)-1})}$かつ$x^{\alpha_i} \in \gen{\LT(G_{M(i)})}$」となる$G(i)$が存在するので、そのようなものを選んでおく。ただし、$\LT(G_{-1})=\emptyset$としておく。$M=\max{M(1),\dots,M(N)}$とする。$x^\beta \in \gen{\LT(G_{M+1})}\setminus \gen{\LT(G_M)}$とする(真の上昇列であることから空でなく、元が選べる)。
+  ディクソンの補題の変種からの帰結(\ref{ディクソンの補題の変種})より、
+  \begin{align}
+    \beta = \alpha_i + \gamma
+  \end{align}
+  となる$i,\alpha_i,\gamma$が存在する。
+  これは、$x^{\alpha_i} | x^\beta$を意味するが、$x^{\alpha_i}\in \gen{\LT(G_{M(i)})}$だったので、$x^\beta \in \gen{\LT(G_{M(i)})}$となる。しかし、
+  $x^\beta \notin \gen{\LT(G_M)}$と$\beta$を選んであり、さらに
+  $\gen{\LT(G_{M(i)})}\subset \gen{\LT(G_M)}$なので、$x^\beta \notin \gen{\LT(G_{M(i)})}$となる。これは矛盾である。
+  \item
+\end{enumerate}
+TODO: 残りをとく
+
+\subsection{グレブナ基底の最初の応用}
+\label{sub:グレブナ基底の最初の応用}
+グレブナ基底を計算し、それで割り算して余りを見ることでイデアルの所属問題は完全に解くことができる。
+
+次回予告。lex順序を使って簡約Groebner基底を計算することで
+変数の消去がうまくおこって、多様体の記述(あるいは連立方程式を解くこと)の問題、
+陰関数表示の問題はうまく解けそうなことを例を使ってみた。
+
+\subsection{(選択)ブッフベルガーのアルゴリズムの改良}
+\label{sub:(選択)ブッフベルガーのアルゴリズムの改良}
+ブッフベルガーのアルゴリズムの高速化を考える。基本的に、割り算の計算コストが高いので、
+割り算をしなくてすむときにしないようにすることで高速化する。
+
+まず、「余りが0である」ことを一般化して、次のものをいれる。「
+$G=\set{g_1,\dots,g_s} \subset k[x_1,\dots,x_n]$と$f\in k[x_1,\dots,x_n]$
+について、『$f \toG 0$』『$f$は$G$を法として0に簡約される』とは、
+$a_ig_i \neq 0 \implies \deg(a_i g_i) \le \deg(f)$となる$a_\bullet \in k[x_1,\dots,x_n]$が存在し、
+\begin{align}
+  f = \sum_{i=1}^s a_i f_i
+\end{align}
+となる」ことである。
+
+あたりまえだが、$f$を$(g_1,\dots,g_s)$で割り算して0のとき、すなわち$\ovd{f}{G}=0$には$f\toG 0$となる。まえの割り算の順序の議論より、割り算して0にならなかったからといって
+$f\toG 0$とならないとは言えない。
+
+グレブナ基底とS多項式の余りとの関係を見たが、これをグレブナ基底とS多項式の0への簡約を見る。「$\set{g_1,\dots,g_s}$がグレブナ基底である$\iff$ $i\neq j$について、$S(g_i,g_j) \toG 0$」
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:
+    先の「グレブナ基底とS多項式の余りとの関係」より、
+    $\ovd{S(g_i,g_j)}{G}=0$となり、あきらかに$S(g_i,g_j) \toG 0$である。
+    \item $\Leftarrow$:
+    復習することになる。
+    $f\in \gen{G}$とする。このとき、$\LT(f)\in \gen{\LT(G)}$となることを示せばよい。
+    $f\in \gen{G}$であるから$f=\sum_{i=1}^s h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。和のほうが次数が下がるかもしれないので、
+    $\deg(f)\le \deg(h_\bullet g_\bullet)$となる。
+    打ち消しの雰囲気を見るために、
+    $m\colon \set{1,\dots,s} \to \Zge^n$を$m(i) = \deg(h_i g_i)$と定義する。
+    そして、$m'\colon (g_\bullet の線形結合の表現) \to \Zge^n$を、
+    \begin{align}
+      m'(\sum_{i=1}^s a_i g_i) = \max\set{\deg(a_ig_i) ; i=1,\dots,s}
+    \end{align}
+    と定義する。ただし、$\deg(0)=-\infty$としておき、$-\infty$は$\Zge^n$のどれよりも小さいということにする。
+    そして、$\delta = m'(\sum_{i=1}^s h_i g_i)$とする。ここで、$\deg$
+    と和の関係(和を取ったら次数が落ちうる)より、$\delta \ge \deg(f)$である。
+    $f=\sum_{i=1}^s h_i g_i$という$f$の表現のうち、
+    $h_\bullet$を走らせて$m'$が最小となるようなものがあるはずなので、
+    $h_\bullet$をそのように選びなおしておく。
+
+    $\delta \ge \deg(f)$であったが、仮に$\delta > \deg(f)$であるとする(背理法)。
+    \begin{align}
+      f =
+      \sum_{m(i)=\delta} \LT(h_i) g_i
+      +
+      \sum_{m(i)=\delta}(h_i - \LT(h_i)) g_i
+      +
+      \sum_{m(i)<\delta} h_i g_i
+    \end{align}
+    $\delta > \deg(f)$だったので、$\sum_{m(i)=\delta}h_i g_i$の
+    先頭項が落ちなければならない。
+
+    これから$\sum_{m(i)=\delta}h_i g_i$を別の表現にして、
+    $m'(f)<\delta$となってしまう(矛盾)$f$の表現を作ることを目指す。
+    「同次のものを足して次数が落ちた」ので、$S$多項式の和で書ける。さらに計算して、
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i) g_i
+      &=
+      \sum_{j,k=1}^s S(\LT(h_j)g_j, \LT(h_k)g_k)\\
+      &=
+      \sum_{j,k=1}^s
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(h_j)\LT(g_j)}\LT(h_j)g_j
+      -
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(h_k)\LT(g_k)}\LT(h_k)g_k\\
+      &=
+      \sum_{j,k=1}^s
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(g_j)}g_j
+      -
+      \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{\LT(g_k)}\LT(h_k)g_k\\
+      &=
+      \sum_{j,k=1}^s
+      (\LT(h_j)g_j)\vee (\LT(h_k)g_k) \cdot
+      \frac{1}{g_j \vee g_k}S(g_j,g_k)
+    \end{align}
+    となる。各$j,k$について、今回の仮定$S(g_j,g_k)\toG 0$より、
+    \begin{align}
+      S(g_j,g_k)
+      =
+      \sum_{i=1}^s a_{ijk}g_i,\quad
+      \deg(S(g_j,g_k))\ge \deg(a_{\bullet jk}g_\bullet)
+    \end{align}
+    となる$a_{\bullet} \in k[x_1,\dots,x_n]$が存在する。
+    よって、
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i
+      =
+      \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee(\LT(h_k)g_k)}{g_j\vee g_k}a_{ijk} g_i.
+    \end{align}
+    となる。これで$f$の新たな表現
+    \begin{align}
+      f =
+      \sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i
+      +
+      \sum_{m(i)=\delta} (h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta}h_i g_i
+    \end{align}
+    が得られた。これの$m'$を計算する。まず第1の総和を計算する。
+    \begin{align}
+      m'(新しい表現の第1の総和)
+      &=
+      m'(\sum_{m(i)=\delta} \sum_{i,j,k=1}^s \frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i)\\
+      &\fbox{足し算をしたほうが小さくなる}\\
+      &=
+      \max_{i,j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} a_{ijk}g_i)\\
+      &\fbox{足し算したほうが小さくなる}\\
+      &=
+      \max_{j,k}\deg(\frac{(\LT(h_j)g_j)\vee (\LT(h_k)g_k)}{g_j\vee g_k} S(g_j,g_k))\\
+      &\fbox{S多項式の計算}\\
+      &=
+      \max_{j,k}\deg(S(\LT(h_j)g_j, \LT(h_k)g_k)\\
+      &\fbox{同次を足したら次数が真に落ちてS多項式で書ける}\\
+      &<
+      \deg(\sum_{m(i)=\delta} \LT(h_i)g_i)\\
+      &=
+      \delta.
+    \end{align}
+    第2の総和、第3の総和はそもそも$m'$は$\delta$未満なので、結局
+    \begin{align}
+      m'(新しい表現) < \delta
+    \end{align}
+    となる。
+    $\delta = m'(\sum_{i=1}^s h_i g_i)$で、$h_\bullet$は$m'$が最小になるように選んでおいたので、$m'(新しい表現)<\delta$に矛盾する。よって、$m'(新しい表現) = \delta$となる。
+
+    ということで、$f=\sum_{i=1}^s h_i g_i$を$m'$が最小になるように表示すると、
+    \begin{align}
+      \deg(f)
+      \desceq{さっきの}
+      \delta
+      =
+      m'(\sum_{i=1}^s h_i g_i)
+      \desceq{$m'$の定義}
+      \max_{i} \deg(h_i g_i)
+    \end{align}
+    この最大を与える$i$を$I$とよぶことにする。このとき、$\LT(g_i)|\LT(f)$となる。
+    よって、$\LT(f) \in \gen{\LT(G)}$となり、
+    $\LT(\gen{G}) \subset \gen{\LT(G)}$となり、よって、
+    $\gen{\LT(\gen{G})} \subset \gen{\LT(G)}$となる。よって、$G$はグレブナ基底である。
+  \end{itemize}
+\end{myproof}
+
+% 割り算することなく$S(f,g) \toG 0$かどうかを判定する方法の1つを見る。
+% 「$\LM(f)$と$\LM(g)$が互いに素ならば、$S(f,g) \toG 0$である。」
+% \begin{myproof}
+%   \begin{align}
+%     S(f,g)
+%     &\desceq{互いに素}
+%     \LT(g)f - \LT(f)g\\
+%     &=
+%     \LT(g)(\LT(f) + (f-\LT(f))) - \LT(f)(\LT(g) + (g-\LT(g)))\\
+%     &=
+%     \LT(g)(f-\LT(f)) - \LT(f)(g-\LT(g)).
+%   \end{align}
+%   よって、
+%   \begin{align}
+%     \deg(S(f,g)) \le \max(\LT(g)(f-\LT(f)), \LT(f)(g-\LT(g)))
+%   \end{align}
+%   となっている。実際には等号が成立していることを見る。仮に$<$だとする。
+%   このとき、先頭項の打ち消しが起こらなくてはならないから、
+%   $\LT(g)\LT(f-\LT(f)) = \LT(f)\LT(g-\LT(g))$となっている。
+%   $\LT(g)$と$\LT(f)$は互いに素なので、
+%   $\LT(g)|\LT(g-\LT(g))$とならなければならないが、これは矛盾である。よって、
+%   \begin{align}
+%     \deg(S(f,g)) = \max(\LT(g)(f-\LT(f)),\LT(f)(g-\LT(g)))
+%   \end{align}
+%   となっている。これで、$S(f,g)$が$f,g$の線形結合で書けた上に、
+%   次数の条件が満たされ、$S(f,g)\toG 0$となる。
+% \end{myproof}
+
+% 次に、$S$多項式の一般化を考える。
+% $F=\set{f_1,\dots,f_s}$とする。「$F$の先頭項のシチギー」あるいは
+% 「$\LT(f_1),\dots,\LT(f_s)$のシチギー」とは、
+% \begin{align}
+%   (h_1,\dots,h_s)\tatev{\LT(f_1) \\ \vdots \\ \LT(f_s)} = 0
+% \end{align}
+% を満たす多項式の組$(h_1,\dots,h_s) \in (k[x_1,\dots,x_n])^s$のことである。そして、
+% $S(F) \subset (k[x_1,\dots,x_n])^s$を$F$の先頭項のシチギー全体のなす集合とする。
+% これは$k[x_1,\dots,x_n]$の一次方程式の自明でない解集合と考えるとよいかもしれない。
+%
+% シチギーとS多項式との関係を見る。$F=\set{f_1,\dots,f_s}$について、
+% \begin{align}
+%   S_{ij} = \frac{f_i\vee f_j}{\LT(f_i)} \bbold e_i
+%    -
+%     \frac{f_i \vee f_j}{\LT(f_j)} \bbold e_j
+% \end{align}
+% と$S_{ij} \in S(F)$を定義する。そうしておくと、
+% \begin{align}
+%   S(f_i,f_j) = S_{ij}\tatev{0 \\ \vdots \\ f_i \\ \vdots \\ f_j \\ \vdots \\ 0}
+%   =
+%   S_{ij}(f_i \bbold e_i^T + f_j \bbold e_j^T)
+% \end{align}
+% となっている。
+%
+% 分解の基本になる特殊なシチギーを定義する。あるシチギー$S\in S(F)$が
+% 多重次数$\alpha$次斉次であるとは、
+% \begin{itemize}
+%   \item $S=(c_1 x^{\alpha(1)},\dots,c_s x^{\alpha(s)})$
+%   \item $c_i \neq 0 \implies \alpha(i) + \deg(f_i) = \alpha$
+% \end{itemize}
+% であることである。雑に言うと、単項式だけでできたシチギー$S$で、
+% どの第$i$項も$f_i$の次数を足すと$\alpha$になるようなものである。
+% 一般のシチギーはそもそも単項式ですらない。
+%
+% $S(F)$のすべての元(シチギー)は$S(F)$の斉次な元の和に一意的に分解できる。
+% \begin{myproof}
+%   $S\in S(F)$とする。これを分解する。単位ベクトルで
+%   $S= \sum_{i=1}^s f_i \bbold e_i$と書ける。
+%   $f_i = \sum_{j=1}^{N(i)} c_{ij}x^{\alpha(i,j)}$となる
+%   $N(i)=0,1,\dots$と$c_{ij}\in k$と$\alpha(i,j) \in \Zge^n$が一意的に存在する。
+%   それで、
+%   \begin{align}
+%     S = \sum_{i=1}^s \bbold e_i \sum_{j=1}^{N(i)} c_{ij} x^{\alpha(i,j)}
+%   \end{align}
+%   となる。
+%
+%   一意性は、「$i$番目$\alpha$次の係数」というのが一意に定まってしまうので明らか。
+% \end{myproof}
+
+% $F=(f_1,\dots,f_s)$として、先の$S_{ij}$でシチギー全体$S(F)$
+% を生成することができる。「
+% $F=(f_1,\dots,f_s)$とする。すべてのシチギー$S\in S(F)$には
+% \begin{align}
+%   S = \sum_{i<j} u_{ij}S_{ij}
+% \end{align}
+% となる$u_{ij}\in k[x_1,\dot,x_n]$が存在する。
+% $S_{ij} = \frac{f_i \vee f_j}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_j}{\LT(f_j)}\bbold e_j$であった。」
+% \begin{myproof}
+%   まず$S$が$\alpha$次斉次であるとする。
+%   シチギーの定義を考えると、$S$のうち非0な要素が2つ以上なければならない。
+%   それらが$i$番目と$j$番目($i<j$)であるとし、$S[i]=c_i x^{\alpha(i)},\, S[j] = c_j x^{\alpha(j)}$とする。$S$は$F$のシチギーなので、$SF=0$
+%   である。ここで、$S' \in (k[x_1,\dots,x_n])^s$を、$i$番目を0にするように
+%   \begin{align}
+%     S' &=  S - \ub{S_{ij}\frac{\LT(f_i)}{f_i\vee f_j}}_{係数1}S[i]\\
+%     &=
+%     S - S_{ij}\frac{\LT(f_i)}{f_i\vee f_j} c_i x^{\alpha(i)}\\
+%   \end{align}
+%   と定義する。どちらもシチギーであって、$SF=0$と$S_{ij}F=0$がなりたつので、
+%   線形性より$S'F=0$となる。よって、$S'$もシチギーである。このシチギーにも同様の操作を繰り返して、0にたっする。このとき、$S$は$S_{ij}\quad (i<j)$の線形結合でかける。
+%
+%   あとは斉次を$S_{ij}$で書いたものを足せばよい。
+% \end{myproof}
+
+ただし、$F$に対して$S_{ij}$すべてが必要とは限らないので、余分なものを取り除く方法を考える。
+
+これで、グレブナ基底の判定条件を$\toG 0$を使って拡張する。
+「イデアル$I$の基底$G=(g_1,\dots,g_t)$がグレブナ基底である
+$\iff$
+\begin{align}
+  \Exists{S_1,\dots,S_m はS(G)の斉次な基底}
+  \Forall{i=1,\dots,m}
+  S_i G \toG 0.
+\end{align}
+」
+\begin{myproof}
+  \begin{itemize}
+    \item $\Rightarrow$:$S(G)$の斉次な基底として$S_{ij}$全体をとっておく。
+    すると、$S_{ij}G\toG 0$を確かめればよいが、これは$\ovd{S(g_i,g_j)}{G}=0$
+    を示せばよく、これは先のS多項式とグレブナ基底の関係である。
+    \item $\Leftarrow$:
+    $f\in I$とする。$\LT(f)\in \gen{\LT(G)}$を示せばグレブナ基底であることが示せる。
+    $f\in I = \gen{G}$なので、$f = \sum_{i=1}^t h_i g_i$となる$h_\bullet \in k[x_1,\dots,x_n]$が存在する。$m\colon \set{1,\dots,t} \to \Zge^n$を
+    $m(i) = \deg(h_i g_i)$とする。
+    そして、$m'\colon (g_\bullet の線形結合の表現) \to \Zge^n$を
+    \begin{align}
+      m'(\sum_{i=1}^t a_i g_i) = \max_{i=1,\dots,t} \deg(a_ig_i)
+    \end{align}
+    と定義する。そして、$\delta = m'(\sum_{i=1}^t h_i g_i)$とする。
+    $\delta$が最小になるように$h_\bullet$選んでおくことができるので、
+    そうしておく。
+    $f=\sum_{i=1}^t h_i g_i$だったので、$\deg(f)\le \delta$である。
+    ここで、仮に$\deg(f)<\delta$だったとして矛盾を導こう。
+
+    \begin{align}
+      f = \sum_{m(i)=\delta} \LT(h_i)g_i
+      +
+      \sum_{m(i)=\delta} (h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta} h_i g_i
+    \end{align}
+    と書ける。$\deg(f)<\delta$と仮定したので、第1の総和の$\sum_{m(i)=\delta}\LT(h_i)g_i$の$m'$は$\delta$未満でなければならない。
+    このためには、この和のなかで先頭項の打ち消しが起こらなければならないので、
+    $\sum_{m(i)=\delta}\LT(h_i)\LT(g_i)=0$とならなければならない。
+    よって、
+    \begin{align}
+      S = \sum_{m(i)=\delta} \LT(h_i)\bbold e_i
+    \end{align}
+    とすると、これは$S(G)$に属するシチギーとなる。
+    これは0でないところは単項式になっているので、$\delta$次斉次のシチギーになっていることがわかる。仮定より、斉次な基底$S_1,\dots,S_m$が存在するので、
+    \begin{align}
+      S = \sum_{j=1}^m u_i S_i
+    \end{align}
+    となる$u_i \in k[x_1,\dots,x_n]$が存在する。$S$が$\delta$次斉次であり、
+    $S_j$らも斉次なので、係数を比較することにより$u_j S_j$が\footnote{「$S_j$が」ではない。}$\delta$次斉次でないなら、
+    $u_j = 0$である\footnote{それならはじめから書かなきゃいいじゃないかという気がするが、基底が来るのが$f$が来るより先なので仕方無い。}。
+    よって、$S=\sum_{u_j \neq 0} u_j S_j$である。$u_j S_j$は$G$の$\delta$次斉次なシチギーなので、
+    \begin{align}
+      \deg((u_j S_j)G) < \delta
+    \end{align}
+    と、真に次数が落ちる。
+    さらに、次数の条件の準備をする。仮定より、$S_j G \toG 0$なので、
+    \begin{align}
+      S_j G = \sum_{i=1}^t a_{ij} g_i
+    \end{align}
+    なる$a_{ij}\in k[x_1,\dots,x_n]$が存在し、さらに次数の条件
+    \begin{align}
+      \deg(a_{ij}g_i) \le \deg(S_j G)
+    \end{align}
+    がかかる。
+
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i
+      =
+      SG
+      =
+      (\sum_{j=1}^m u_j S_j)G
+      =
+      \sum_{u_j\neq 0}u_j \sum_{i=1}^t a_{ij}g_i
+    \end{align}
+    なので、新たな$f$の表現
+    \begin{align}
+      f= \sum_{u_j \neq 0}u_j \sum_{i=1}^t a_{ij}g_i
+      +
+      \sum_{m(i)=\delta}(h_i - \LT(h_i))g_i
+      +
+      \sum_{m(i)<\delta}h_i g_i
+    \end{align}
+    が得られる。これの$m'$を計算する。まず第1の総和について計算する。
+    \begin{align}
+      m'(新しい表現の第1の総和)
+      &=
+      m'( \sum_{u_j \neq 0}u_j \sum_{i=1}^t a_{ij}g_i)\\
+      &=
+      \max_{i,j}m(u_j a_{ij}g_i)\\
+      &\fbox{$m'$の定義}\\
+      &\le
+      \max_{i,j}m(u_j S_j G)\\
+      &\fbox{次数の条件}\\
+      &<
+      \delta\\
+      &\fbox{$u_j S_j$は$\delta$次斉次のシチギー}.\\
+    \end{align}
+第2、第3の総和についてはそもそも$m'$は$\delta$未満である。
+
+よって、
+$m'(新しい表現) < \delta$がわかった。これは、はじめに表現を最小に取っておいたことに矛盾する。よって、$\deg(f)=\delta=\max_{i}\deg(h_ig_i)$である。最大を与える$i$を
+$I$とすると、$\deg(f)=\deg(h_I g_I)$となり、$\LT(g_I)|\LT(f)$となる。よって、
+$\LT(f)\in \gen{\LT(G)}$となり、$\LT(I) \subset \gen{\LT(G)}$となる。
+よって、$\gen{\LT(I)} \subset \gen{\LT(G)}$となり、$G$はグレブナ基底である。
+  \end{itemize}
+\end{myproof}
+
+シチジーの基底から余計なものを取り除く条件を考える。シチジーの基底は
+ペアのシチジーで張れることがさっきわかったので、そのときを考えてみる。
+「$G=(g_1,\dots,g_s)$とする。
+$\cal S \subset \set{S_{ij}; 1\le i < j \le n}$とし、
+$\cal S$が$S(G)$を張るとする。さらに、相異なる$i,j,k$について、
+\begin{itemize}
+  \item $\LT(f_k)| (f_i \vee f_j)$
+  \item $S_{ik},\, S_{jk} \in \cal S$
+\end{itemize}
+となっているとする。このとき、$\cal S - \set{S_{ij}}$も$S(G)$の基底になっている。」
+\begin{myproof}
+  $S_{ij}$が$S_{ik}$と$S_{jk}$で書ければよい。$i < j < k$としておく。
+  \begin{align}
+    S_{ij}
+    &=
+    \frac{f_i \vee f_j}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_j}{\LT(f_j)}\bbold e_j\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}\cdot \frac{f_i \vee f_k}{\LT(f_i)}\bbold e_i
+    -
+    \frac{f_i \vee f_j}{f_j \vee f_k}\cdot \frac{f_j \vee f_k}{\LT(f_j)}\bbold e_j\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}(\frac{f_i\vee f_k}{\LT(f_i)}\bbold e_i - \frac{f_i \vee f_k}{\LT(f_k)}\bbold e_k + \frac{f_i \vee f_k}{\LT(f_k)}\bbold e_k)
+    -
+    \frac{f_i \vee f_j}{f_j \vee f_k}(\frac{f_j \ve f_k}{\LT(f_j)}\bbold e_j -
+    \frac{f_j \vee f_k}{\LT(f_k)}\bbold e_k + \frac{f_j \vee f_k}{\LT(f_k)}\bbold e_k)\\
+    &=
+    \frac{f_i \vee f_j}{f_i \vee f_k}S_{ik} - \frac{f_i \vee f_j}{f_j \vee f_k}S_{jk}.
+  \end{align}
+\end{myproof}
+
+% アルゴリズム。$[a,b] = (\min(a,b),\max(a,b))$としておく。
+% \begin{myproof}
+%   \begin{itemize}
+%     \item どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+%     $G$に含まれること:
+%     初期ではあきらか。$G$は増えるだけなことに注意。そのため、$B$が減少することは問題にならない。
+%     $B$が増えるときも、増やした$G$にあわせている。
+%     \item どの段階でも$B$が次の性質を持つことを示す:
+%     \begin{align}
+%       \begin{cases}
+%         1 \le i < j \le t \\
+%         かつ \\
+%         (i,j) \notin B
+%       \end{cases}
+%       \implies
+%       \begin{cases}
+%         S(f_i,f_j) \toG 0 \\
+%         または \\
+%         \Criterion(f_i,f_j,B)
+%       \end{cases}
+%     \end{align}
+%     いままで同様、メインループ前の変数は$b$を、後は$a$をつける。
+%     初期では$(i,j)\in B$がどの$i,j$についてもみたされ、前件が否定されるので自明に成立する。$B_b$が条件
+%     \begin{align}
+%       \begin{cases}
+%         1 \le i_b < j_b \le t_b \\
+%         かつ \\
+%         (i_b,j_b) \notin B_b
+%       \end{cases}
+%       \implies
+%       \begin{cases}
+%         S(f_{i_b},f_{j_b}) \rightarrow_{G_b} 0 \\
+%         または \\
+%         \Criterion(f_{i_b},f_{j_b},B_b)
+%       \end{cases}
+%     \end{align}
+%     を満たしているとし、さらに
+%     \begin{align}
+%       1\le i_a < j_a \le t_a \quad かつ \quad (i_a,j_a)\notin B_a
+%     \end{align}
+%     が満たされているとして、
+%     \begin{align}
+%       S(f_{i_a},f_{j_a}) \rightarrow_{G_a} 0 \quad または
+%       \quad
+%       \Criterion(f_{i_a},f_{j_a},B_a)
+%     \end{align}
+%     を示そう。
+%     \begin{enumerate}[label=(\alph*)]
+%       \item $(i_a,j_a) \in B_b$のとき:
+%       $(i_a,j_a)\notin B_a$でかつ$(i_a,j_a)\in B_b$となっている。
+%       これは、$B$のプログラム中の遷移を見ると、プログラム中で$(i,j)$
+%       として$(i_a,j_a)$がえらばれている。
+%       この$(i_a,j_a)$を追跡する。
+%       \begin{enumerate}[label=(\Alph*)]
+%         \item \MARU{1}でYesのとき:
+%         \begin{align}
+%           B_a &= B_b - \set{(i_a,j_a)}\\
+%           t_a &= t_b \\
+%           G_a &= G_b
+%         \end{align}
+%         である。
+%          このときは$\LT(f_{i_a})$と$\LT(f_{j_a})$が互いに素である。
+%
+%          このとき、「どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+%          $G$に含まれる」と$(i_a,j_a)\in B_b$より、$f_{i_a},f_{j_a} \in G_b = G_a$である。よって、先の命題により
+%          $S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+%         \item \MARU{2}でYesのとき:
+%         \begin{align}
+%           B_a &= B_b - \set{(i_a,j_a)}\\
+%           t_a &= t_b \\
+%           G_a &= G_b
+%         \end{align}
+%         である。
+%
+%         自明に$\Criterion(f_{i_a},f_{j_a},B_a)$が成立する。
+%         \item \MARU{3}でYesのとき:
+%         \begin{align}
+%           B_a &= B_b - \set{(i_a,j_a)}\\
+%           t_a &= t_b \\
+%           G_a &= G_b
+%         \end{align}
+%         である。このとき、「どの段階でも$B$に含まれるペアについて、それに対応する$f_\bullet$が
+%         $G$に含まれる」と$(i_a,j_a)\in B_b$より、$f_{i_a},f_{j_a} \in G_b = G_a$である。よって、
+%         \begin{align}
+%           \ovd{S(f_{i_a},f_{j_a})}{G_a} = \ovd{S(f_{i_a},f_{j_a})}{G_b}= S= 0
+%         \end{align}
+%         となる。よって、$S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+%         \item \MARU{3}でNoのとき:
+%         \begin{align}
+%           t_a &= t_b + 1 \\
+%           f_{t_a} &= S = \ovd{S(f_{i_a},f_{j_a})}{G_b}\\
+%           G_a &= G_b + [f_{t_a}]\\
+%           B_a &= B_b \cup \set{(i,t_{a}) ; 1\le i \le t_b} - \set{(i_a,j_a)}\\
+%         \end{align}
+%         となっている。このとき、$q_\bullet$を商として、
+%         \begin{align}
+%           S(f_{i_a},f_{j_a}) = \sum_{I=1}^{t_b} q_I f_I + \ovd{S(f_{i_a},f_{j_a})}{G_b}
+%         \end{align}
+%         となっている。さらにすすめると、
+%         \begin{align}
+%           S(f_{i_a},f_{j_a}) = \sum_{I=1}^{t_b} q_I f_I + f_{t_a}
+%         \end{align}
+%         となっており、$S(f_{i_a},f_{j_a})$を$G_a$で割ったあまりが0になることがわかる。よって、$S(f_{i_a},f_{j_a}) \to_{G_a} 0$である。
+%       \end{enumerate}
+%       \item $(i_a,j_a) \notin B_b$のとき:
+%       $(i_a,j_a)\notin B_a$でかつ$(i_a,j_a)\notin B_b$となっている。
+%       何か$i<j$なる$(i,j)\in B_b$がアルゴリズム中で選択されて、
+%       \begin{align}
+%         B_a = B_b - \set{(i,j)}
+%       \end{align}
+%       となっている。$(i,j)\in B_b$でかつ$(i_a,j_a)\notin B_b$なので、
+%       $(i,j)\neq (i_a,j_a)$となっている。$(i,j)$のアルゴリズム中での振舞によって場合分けする。
+%       \begin{enumerate}[label=(\Alph*)]
+%         \item \MARU{1}がYesのとき:
+%         \begin{align}
+%           B_a &= B_b - \set{(i,j)}\\
+%           t_a &= t_b \\
+%           G_a &= G_b
+%         \end{align}
+%         となる。$1\le i_a < j_a \le t_a = t_b$となり、かつ$(i_a,j_a) \notin B_b$なので、$B_b$の条件が満たされ、
+%         \begin{align}
+%           S(f_{i_a},f_{j_a}) \to_{G_b} 0 \quad
+%           または \quad
+%           \Criterion(f_{i_a},f_{j_a},B_b)
+%         \end{align}
+%         $S(f_{i_a},f_{j_a}) \to_{G_b} 0$がみたされるなら$G_b = G_a$より
+%         $S(f_{i_a},f_{j_a}) \to_{G_a} 0$となり、示される。
+%
+%         $\Criterion(f_{i_a},f_{j_a},B_b)$のときを考える。
+%         このとき、
+%         \begin{itemize}
+%           \item $[i_a,k] \notin B_b$
+%           \item $[j_a,k] \notin B_b$
+%           \item $\LT(f_k)|(f_{i_a}\vee f_{j_a})$
+%         \end{itemize}
+%         のすべてをみたす$k \in \set{1,\dots,t_b}-\set{i_a,j_a}$が存在する。
+%         $B_a = B_b -\set{(i_a,j_a)}$なので、
+%         $B_a \subset B_b$なので、$B_b^c \subset B_a^c$である。
+%         $[i_a,k] \in B_b^c \subset B_a^c$となり、$[i_a,k]\notin B_a$となる。
+%         同様に$[j_a,k] \notin B_a$となる。また、$t_a = t_b$なので、
+%         $k\in \set{1,\dots,t_a}-\set{i_a,j_a}$である。まとめると、$k$が
+%         \begin{itemize}
+%           \item $[i_a,k]\notin B_a$
+%           \item $[j_a,k]\notin B_a$
+%           \item $\LT(f_k)|(f_{i_a} \vee f_{j_a})$
+%           \item $k\in \set{1,\dots, t_a}-\set{i_a,j_a}$
+%         \end{itemize}
+%         をみたす。よって、$\Criterion(f_{i_a},f_{j_a},B_a)$が満足される。
+%         \item \MARU{2}がYesのとき:
+%         \begin{align}
+%           B_a &= B_b - \set{(i,j)}\\
+%           t_a &= t_b \\
+%           G_a &= G_b
+%         \end{align}
+%         なので、「$\MARU{1}$がYesのとき」と同様に通る。
+%         \item \MARU{3}がYesのとき:
+%         やはり同様。
+%         \item \MARU{3}がNoのとき:
+%         このとき、
+%         \begin{align}
+%           S &= \ovd{S(f_{i},f_{j})}{G_b}\\
+%           t_a &= t_b + 1\\
+%           f_{t_a} &= S = \ovd{S(f_{i},f_{j})}{G_b}\\
+%           G_a &= G_b + [f_{t_a}]\\
+%           B_a &= (B_b \cup \set{(I,t_a); 1\le I \le t_b})-\set{(i,j)}
+%         \end{align}
+%         となっている。
+%         \begin{enumerate}[label=(\roman*)]
+%           \item $j_a = t_a$のとき:
+%           2番目の要素を見ると、あきらかに$(i_a,j_a) = (i_a,t_a) \in B_b \cup \set{(I,t_a); 1 \le I \le t_b}$である。また、$(i_a,j_a) = (i_a,t_a) \neq (i,j)$であることを先に言ったので、
+%           \begin{align}
+%             (i_a,j_a) \in (B_b \cup \set{(I,t_a); 1 \le I \le t_b}) - \set{(i,j)}
+%             =
+%             B_a
+%           \end{align}
+%           である。一方、(b)に入ったときの仮定により、$(i_a,j_a)\notin B_a$である。
+%           これは矛盾であるから、この(a-D-i)という状況は起こらない。
+%           \item $j_a < t_a$のとき:
+%             このとき、$B_b$の条件を満たすので、
+%             \begin{align}
+%               S(f_{i_a},f_{j_b})\to_{G_b} 0 \quad
+%               または \quad
+%               \Criterion(f_{i_a},f_{j_a},B_b)
+%             \end{align}
+%             となる。$S(f_{i_a},f_{j_a})\to_{G_b} 0$を満たすときには、
+%             $G_a$は$G_b$より広いので$S(f_{i_a},f_{j_a})\to_{G_a}0$となり、示される。
+%
+%             $\Criterion(f_{i_a},f_{j_a},B_b)$が満たされるときは、
+%             \begin{itemize}
+%               \item $[i_a,k]\notin B_b$
+%               \item $[j_a,k]\notin B_b$
+%               \item $\LT(f_k)|(f_{i_a}\vee f_{j_a})$
+%             \end{itemize}
+%             のすべてをみたす$k\in \set{1,\dots,t_b}-\set{i_a,j_a}$が存在する。
+%             仮に$[i_a,k]\in B_a$とする。$i_a$も$k$も$\set{1,\dots,t_b}$の元なので、
+%             $\set{(I,t_a); 1\le I \le t_b}$には属さない。よって、$B_b$に属する。よって、$[i_a,k]\notin B_a$がわかった。同様に、
+%             $[j_a,k]\notin B_a$もわかる。引き続き
+%             $\LT(f_k)|(f_{i_a}\vee f_{j_a})$もみたされるので、
+%             $\Criterion(f_{i_a}f_{j_a},B_a)$も満たされる。
+%         \end{enumerate}
+%       \end{enumerate}
+%     \end{enumerate}
+%     \item $B=\emptyset \implies Gはグレブナ基底$:
+%     $t$を$G$の長さとする。
+%     \begin{align}
+%       \cal I =
+%       \set{(i,j); 1\le i < j \le t,\quad \Criterion(f_i,f_j,B)は(i,j)が選択されたときfalse.}
+%     \end{align}
+%     とする。このとき、あとで証明する主張がなりたつ:
+%     「$\cal S = \set{S_{ij}; (i,j)\in \cal I}$は『$S_{ij}G = S(f_i,f_j)\toG 0$がすべての$S_{ij}\in \cal S$について成立する』という性質を持つ$S(G)$の基底である。」
+%
+%     $\cal S$を考えると、これは$S_{ij}$だけでできた基底なので斉次基底であり、さらに
+%     「$S_{ij}G \toG 0$がすべての$S_{ij}\in \cal S$について成立する」という性質を持つので、先のグレブナ基底の$\toG 0$での判定の定理を利用し、$G$がグレブナ基底であることがわかる。
+%
+%     $B=\emptyset$はなんだったのかという気がするが、それはこの「主張」を示すのに使う。
+%     \item 「主張」の証明:$B\neq \emptyset$とする。
+%     「どの段階でも$B$が次の性質を持つことを示す」と$B\neq \emptyset$より、前件が自明に満足されるので、
+%     \begin{align}
+%       1 \le i < j \le t
+%       \implies
+%       \begin{cases}
+%         S(f_i,f_j)\toG 0 \\
+%         または \\
+%         \Criterion(f_i,f_j,B)
+%       \end{cases}
+%     \end{align}
+%     となる。$\cal I$の定義より、$(i,j)$について、
+%     $\Criterion(f_i,f_j,B)=false$がその$B$において成立するので、「または」の一方が潰され、$S(f_i,f_j)\toG 0$が成立する。
+%
+%     あとは、$\cal S$が$S(G)$の基底になることを示す。
+%     $list$を、$B$から$(i,j)$のペアを外したときのものを順に入れたものにする。
+%     次に、その$list$を逆順に並べ替える。このはじめの時点では、
+%     $S_{ij}$をすべて含んでいるので、$S(G)$を張る。
+%     この$list$を先頭から走って、$\Criterion(f_i,f_j,B_{(i,j)が選択されたとき})$が$true$なら除去するという作業をくりかえす。取り除くとき、
+%     $\Criterion(f_i,f_j,B_{(i,j)が選択されたとき})$が$true$なので、
+%     「何か$k\notin \set{i,j}$が存在して、これに対して
+%     \begin{itemize}
+%       \item $[i,k]\notin B$
+%       \item $[j,k] \notin B$
+%       \item $\LT(f_k)|(f_i \vee f_j)$
+%       」となっている。この時点で$[i,k]\notin B$で$[j,k]\notin B$なので、
+%       $list$が逆順になっていることから、$[i,k],[j,k]\in list$となっている。
+%       そして、$\LT(f_k)|(f_i \vee f_j)$となっているので、
+%       「シチジーの基底から余計なものを取り除く条件」より、
+%       除去したあとでも$S(G)$を張る。この操作を$list$を最後まで走ると、
+%       $\cal I$となる。よって、$\cal I$が所与の性質を持つ。
+%     \end{itemize}
+%   \item アルゴリズムの停止:
+%   停止しなかったとしよう。このとき、$B$は毎回減少するので、
+%   停止しないためには永遠に$B$の追加が行なわれなければならず、これに伴なって$G$は
+%   余りで増やされていく。余りの定義より、$\gen{\LT(G)}$は真に増加し続けることになるが、これは多項式環がACCを満たすことに矛盾する。
+%
+%   \end{itemize}
+% \end{myproof}
+
+% \begin{handcopy}
+%   アルゴリズムの基本的なアイディアは、$B$に考慮すべきペア$(i,j)$を記録しておくことである。
+%   さらに、我々は命題4も命題10も適用できないS多項式$S(g_i,g_j)$に対してだけ余りを計算すれっばよい。
+%
+%   このアルゴリズムが有効に機能することを証明するために、まず、アルゴリズムのすべての段階において、$B $が次の性質を持つことを観察する。すなわち、もし
+%   $1\le i<j\le t$かつ$(i,j)\notin B$であるならば、
+%   \begin{align}
+%     S(f_i,f_j)\toG 0 あるいは \Criterion(f_i,f_j,B)が成り立つ
+%   \end{align}
+%   初期状態ではこれはただしい。なぜなら$B$はすべての可能なペアを持った集合として始まるからである。我々は、$B$のある中間の状態に対して(8)が成り立っているならば、
+%   $B$の状態が変化して(それを例えば$B'$とする)も
+%   引き続いて(8)が成り立っていることを示す必要がある。
+%
+%   これを証明するために、$(i,j)\notin B'$としよう。もし$(i,j)\in B$ならば、
+%   アルゴリズムを調べると$B'=B-\set{(i,j)}$となることがわかる。
+%   さて、$B$から$(i,j)$を取り除く前のステップを見よう。もし、
+%   $\LCM(\LT(f_i),\LT(f_j))=\LT(f_i)\LT(f_j)$であるならば、
+%   命題4により$S(f_i,f_j)\toG 0$で(8)は成り立つ。また、
+%   $\Criterion(f_i,f_j,B)$が真であるならば(8)は明らかに成り立つ。そこで、どちらも真でなかったと仮定しよう。この場合は、アルゴリズムは余り$S=\ovd{S(f_i,f_j)}{G}$を計算する。もし、$S=0$ならば、補題2より$S(f_i,f_j)\toG 0$という期待していた結果が出る。
+%   再度に、もし$S\neq 0$であるならば、$G$を$G'=G\cup \set{S}$まで拡張する。
+%   すると$S(f_i,f_j)\to_{G'}0$となるが、これが正しいことの検証は読者にまかせる。
+%
+%   しかしまだ$(i,j)\notin B$の場合を調べることがん怒っている。ここで(8)は$B$に対しては成立する。これから(8)が$B'$に対しても成立することが導かれるが、この証明は読者の演習問題として残す。
+%
+%   次に、$B=\emptyset$であるときも、$G$がグレブナ基底であることを示す必要がある。これを証明するために、$t$を$G$の長さとし、次の性質を見たすペア$(i,j) (1\le i<j\le t)$全体の集合$\cal I$を考える: 判定条件$\Criterion(f_i,f_j,B)$はペア$(i,j)$がアルゴリズムの中で選択されたとき偽である。このとき次の主張が成り立つ:$\cal S=\set{S_{ij}:(i,j)\in \cal I}$は、$S_{ij}G = S(f_i,f_j)\toG 0$がすべての
+%   $S_{ij}\in \cal S$に対して成り立つという性質を持つ、$S(G)$の来手いである。この主張と定理9によって、$G$がグレブナ基底であることが証明される。
+%
+%   主張を証明するために、(8)が$1\le i < j\le t$であるすべてのペア$(i,j)$に対して成り立つことが、$B=\emptyset$から導かれることに注意する。これより、すべての$(i,j)\in \cal I$に対して$S(f_i,f_j)\toG 0$であることが従う。残ったのは、$\cal S$が$S(G)$の基底になることを証明することである。これを証明するために、まず、アルゴリズムにおいて、いつそれが$B$から取り除かれたかに従って、ペア$(i,j)$を順序付けることができることに注意しよう(この順序付けの詳細については演習問題10を参照)。さて、最後に取り除かれたものから出発して、順序を逆にしてペアの順序集合をたどる。そして、アルゴリズムのその時点で$\Criterion(f_i,f_j,B)$が真となるペア$(i,j)$を取り除いていく。すべてのペアを通過して、取り除くべきものは取り除いたあとの集合に残ったペアがちょうど$\cal I$
+%   の元になる。このアルゴリズム実行する各段階において、まだ取り除かれていないペア
+%   $(i,j)$に対応するシチギーは$S(G)$の基底を作ることを示す。
+%   $S_{ij}$全体は$S(G)$の基底となり、初期状態はすべての$S_{ij}$から始めているので、この主張はアルゴリズムの初期状態では正しい。さらに、ある時点でペア$(i,j)$を取り除いたとすれば、$\Criterion(f_i,f_j,B)$の定義から、$k$が存在して$\LT(f_k)$は
+%   LCM条件を満たし、$[i,k],[j,k]\notin B$であることが導かれる。こうして、
+%   $[i,k]$と$[j,k]$は早いうちに$B$から取り除かれ、したがって、$S_{ik}$と$S_{jk}$は今計算している集合にまだのこっている。なぜならペアの集合を逆の順序でたどっているからである。命題10より、$S_{ij}$を消した後でも残った元が基底となっていることが従う。
+%
+%   最後に、アルゴリズムが停止することを証明する必要がある。もとのアルゴリズムの証明と同様に(sec 7の定理2)、$G$はいうでもイデアルの基底である。元を付け加えて$G$を拡張するたびに、単項式イデアル$(\gen{\LT(G)})$は真に大きくなる。昇鎖条件ACC
+%   により、いずれかの時点で$G$はそれ以上おおきくならない。したがって、
+%   最終的に$B$には元は加えられなくなる。アルゴリズムのWHILE...DOループを通過するたびに
+%   $B$の元が1つ取り除かれるので、最終的には$B=\emptyset$とならなければならず、ここでアルゴリズムは停止する。
+%   \end{handcopy}
+%
+
+命題4について。
+「有限集合$G\subset k[x_1,\dots,x_n]$を考える。$f,g\in G$が
+\begin{align}
+  \LCM(\LM(f),\LM(g)) = \LM(f)\cdot \LM(g)
+\end{align}
+を満たしているとする。これは、$f$と$g$の先頭単項式が互いに素であることを意味している。
+このとき$S(f,g)\toG 0$である。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item 簡単のために、$\LC(f)=\LC(g)=1$とする。
+    \item Define $p$ as $f = \LM(f) + p$.
+    \item Define $q$ as $g = \LM(g) + q$.
+    \item
+    \begin{align}
+      S(f,g) &=
+      \LM(g) f - \LM(f)g\\
+      &=
+      (g-q)f - (f-p)g\\
+      &=
+      pg-qf.
+    \end{align}
+    \item Set a subgoal:
+    \begin{align}
+      \multideg(S(f,g)) = \max(\multideg(pg),\multideg(qf)) ?
+    \end{align}
+    \item Because of (4) and "multidegree of a sum $\le$ multidegree of terms"
+    \begin{align}
+      \deg(S(f,g)) \le \max(\deg(pg), \deg(qf)).
+    \end{align}
+    \item Make assumption: (6) satisfies $<$.
+    \item Because (4) and (6), (4)'s LT vanishes, and $\LT(pg) = \LT(qf)$.
+    And $\LT(p)\LT(g) = \LT(q) \LT(f)$.
+    \item Because of (8), $\LT(f)$ divides $\LT(g)\LT(p)$.  Assumption $\LT(f)\perp \LT(g)$ implies $\LT(f)$ divides $\LT(p)$.
+    \item Definition (2) means $\deg(\LT(p)) < \deg(\LT(f))$, but this contradicts (9).
+    \item Contradiction (10) negates assumption (7), and we get
+    \begin{align}
+      \deg(S(f,g)) = \max(\deg(pg), \deg(qf)).
+    \end{align}
+    This completes subgoal (5).
+    \item We get a representation (4) $S(f,g)= pg-qf$, and (11) satisfies "contraction by G to 0"'s degree condition $\deg(S(f,g)) \ge \deg(pg), \deg(qf)$.  $S(f,g) \toG 0$.
+  \end{enumerate}
+\end{myproof}
+
+補題7: 「$S(F)$のすべての元は、$S(F)$の斉次な元の和に一意に分解できる。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Let $S=(h_1,\dots,h_s) \in S(F)$.  (This means $SF=0$.)
+    \item Fix $\alpha \in \Zge^n$.
+    \item Fix $i$.
+    \item Fix $h_{i\alpha}$ a term of $h_i$, and $\deg(h_{i\alpha}f_i) = \alpha$.
+    \item $h_{i\alpha}\LT(f_i)$ is the term of $\sum_{i=1}^s h_i \LT(f_i) = 0$ whose degree is $\alpha$.
+    \item Free $i$ fixed in (3).
+    \item Take terms whose degrees are $\alpha$ of $\sum_{i=1}^s h_i \LT(f_i)=0$, and we get $\sum_{i=1}^s h_{i\alpha}\LT(f_i) = 0$.
+    \item Free $\alpha$ fixed in (2).  $\alpha$ runs over $\Zge^n$, so $h_i = \sum_{\alpha \in \Zge^n} h_{i\alpha}$.
+    $S= (\sum_{\alpha \in \Zge^n} h_{i\alpha})_{i} = \sum_{\alpha\in \Zge^n} (h_{i\alpha})_i$.  For each $i$, $(h_{i\alpha})$ are syzygys whose multidegree are $\alpha$.
+  \end{enumerate}
+\end{myproof}
+
+命題8:$F=(f_1,\dots,f_s)$を考える。すべてのシチギー$S\in S(F)$は
+\begin{align}
+  S=\sum_{i<j} u_{ij}S_{ij}
+\end{align}
+とかける。ここで、$u_{ij} \in k[x_1,\dots,x_n]$で、シチギー$S_{ij}$は
+\begin{align}
+  S_{ij} = \frac{x^{\gamma}}{\LT(f)}\bbold e_i - \frac{x^\gamma}{\LT(g)}\bbold e_j
+  ,\quad
+  x^\gamma = \LCM(\LT(f),\LT(g))
+\end{align}
+である。
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+      \item Fix $S\in S(F)$.
+      \item Assume $S$ has degree of $\alpha$.  This also means $S \neq 0$.
+      \item Because $S$ is a syzygy, so $S$ has at least 2 non-zero components.  Let their indexes are $i < j$, and let $S[i] = c_i x^{\alpha(i)},\, S[j] = c_j x^{\alpha(j)}$ where $c_i, c_j \in k,\, \alpha(i), \alpha(j) \in \Zge^n$.
+      Without loss of generarity, we can assume that $\alpha(i) \ge \alpha(j)$.
+      \item Because of (2), $\alpha(i) + \deg(f_i) = \alpha$ and $\alpha(j) + \deg(f_j) = \alpha$.
+      \item Because of (4),
+      \begin{align}
+          \alpha - \gamma
+          =
+          \alpha - \max(\alpha(i),\alpha(j))
+          =
+          \alpha - \alpha(j)
+          =
+          \multideg(f_j)
+          \ge
+          0.
+      \end{align}
+      So, $x^{\alpha-\gamma}$ is polynomial (not fractional function).  Using this fact, calculate $S' = S-c_i \LC(f_i)x^{\alpha - \gamma}S_{ij}$.  Its $i$-th component is
+      \begin{align}
+        S'[i]
+        &=
+        S[i] - (c_i \LC(f_i)x^{\alpha-\gamma}S_{ij})[i]\\
+        &=
+        c_i x^{\alpha(i)} - c_i \LC(f_i)x^{\alpha-\gamma} \frac{x^{\gamma}}{\LT(f_i)}\\
+        &=
+        0.
+      \end{align}
+      \item The $i$-th component of $S'$ is zero, and zeros in $S$ are also zero in $S'$, so zeros of $S'$ is less than $S$.
+      \item The fact that syzygy $S(F)$ is $k[x_1,\dots,x_n]$ module implies that $S'$ is also syzygy, because $S, S_{ij}$ are syzygy of $\LT(F)$.
+      \item (6)(7) implies that $S'$ is a syzygy, and has less zeros than $S$.
+      Procedure from (3) to here is repeated until $S$ become $0$.
+      This means that $S$ is written as $k[x_1,\dots,x_n]$-coefficient linear combination of $(S_{ij})_{ij}$.  This completes the proof.
+  \end{enumerate}
+\end{myproof}
+
+定理9:「イデアル$I$の基底$G=(g_1,\dots,g_t)$がグレブナ基底であることと、
+シチギー全体の集合$S(G)$において、その1つの斉次基底のすべての元
+$S=(h_1,\dots,h_t)$に対して
+\begin{align}
+  SG = \sum_{i=1}^t h_i g_i \toG 0
+\end{align}
+となることは同値である。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Fix $f\in S(G)$.  $f$ can be represented as $f = \sum_{i=1}^t h_i g_i$ using $h_i \in k[x_1,\dots,x_n]$.
+    \item Define $m(i) = \deg(h_i g_i)$.
+    \item Define $\delta = \max(m(i); i=1,\dots,t)$.
+    \item Retake $h_1,\dots,h_t$ in (1) $\delta$ to be smallest.
+    \item (1) and definition (3) implies $\deg(f) \le \delta$.
+    \item Assume that $\deg(f) < \delta$.
+    \item (6) implies that the cancellation of leading terms in $\sum_{m(i)=\delta} \LT(h_i)g_i$ occurs.
+    \item (7) implies $\sum_{m(i)=\delta} \LT(h_i)\LT(g_i) = 0$.
+    \item Define $S=\sum_{m(i)=\delta} \LT(h_i)\bbold e_i$.
+    \item Because of (8), $S \in S(G)$.
+    \item Because of definition (2), when $m(i)=\delta$, the multidegree of $S$ is $\delta$.
+    \item By assumption, there exists homogeneous syzygy basis $S_1,\dots,S_m \in S(G)$, and $S_j G \toG 0$ holds for all $j$.
+    \item Because of (12), $S$ is written as $S=u_1 S_1 + \dots + u_m S_m$ using $u_1,\dots, u_m \in k[x_1,\dots,x_n]$.
+    \item Because $S$ is homogeneous syzygy of multidegree $\delta$,
+    for all $i$ $u_i$ is zero or monomial of degree $\delta - \multideg(S_j)$.
+    \item In the situation (14), for all $i$, $u_j = 0$ or $u_j S_j$ is homogeneous syzygy of degree $\delta$.
+    \item Define $\gamma_j = \multidegree(S_j) = \delta - \multidegree(u_j)$.
+    \item Define $u_j = c_j x^{\delta-\gamma_j}$ for all $j$ such that $u_j \neq 0$.  Because of (16), $x^{\delta-\gamma_j}$ is exactly monomial.
+    \item Because (13), (15) and (17) holds,
+    \begin{align}
+      S = \sum_{u_j \neq 0} c_j x^{\delta-\gamma_j}S_j.
+    \end{align}
+    \item From (18),
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i) g_i = SG = \sum_j c_j x^{\delta-\gamma_j} S_j G.
+    \end{align}
+    \item Because of (12), forall $i,j$, there exists $a_{1j},\dots,a_{tj} \in k[x_1,\dots,x_n]$ such that $S_j G = \sum_{i=1}^t a_{ij} g_i$, and
+    \begin{align}
+      \deg(a_{ij} g_i) \le \deg(S_j G)
+    \end{align}
+    holds.
+    \item Forall $j$, $S_j$ is a syzygy, so $\deg(S_j G) < \delta$.
+    \item
+    \begin{align}
+      \max_{ij}\deg(a_{ij}g_i)
+      &\descle{(20)}
+      \max_{j} \deg(S_j G)\\
+      & \desclt{(21)}
+      \delta.
+    \end{align}
+    \item
+    \begin{align}
+      \sum_{m(i)=\delta}\LT(h_i)g_i \desceq{(19)} \sum_j c_j x^{\delta-\gamma_j}S_j G
+      \desceq{(20)}
+      \sum_j c_j x^{\delta^\gamma_j} \sum_{i=1}^t a_{ij}g_i.
+    \end{align}
+    So (23) and this equation means we get a new representation of $f$ of new $delta$ which is smaller than $\delta$ defined in (3).
+    \item This contradicts to (4), so $\delta = \deg(f)$.
+    \item This means $\LT(f)$ equals to some $h_i g_i$, so $\LT(g_i)|\LT(f)$.
+    \item This means $\LT(f) \in \gen{\LT(G)}$, so $G$ is Groebner basis.  This completes the proof.
+  \end{enumerate}
+\end{myproof}
+
+命題10: 「$G=(g_1,\dots,g_t)$を考える。部分集合$\cal S\subset \set{S_{ij}: 1\le i < j \le t}$が$S(G)$の基底になっていると仮定する。さらに、異なった$g_i,g_j,g_k \in G$が条件
+『$\LT(g_k)$は$\LCM(\LT(g_i),\LT(g_j))$を割り切る』を満たしているとするこのとき、もし$S_{ik},S_{jk} \in \cal S$ならば$\cal S-\set{S_{ij}}$もまた$S(G)$の基底である
+(注意:もし$i>j$ならば$S_{ij}=S_{ji}$とおく)。」
+\begin{myproof}
+  \begin{enumerate}[label=(\arabic*)]
+    \item Fix $g_i,g_j,g_k \in G$.
+    \item Without loss of generarity, assume $i < j < k$.
+    \item Define $\gamma_{ij}$ as
+    \begin{align}
+      x^{\gamma_{ij}} = \LCM(\LM(g_i),\LM(g_j)).
+    \end{align}
+    Define $\gamma_{ik},\gamma_{jk}$ similary.
+    \item
+    \begin{align}
+      S_{ij}
+      &=
+      \frac{x^{\gamma_{ij}}}{\LT(g_i)}\bbold e_i - \frac{x^{\gamma_{ij}}}{\LT(g_j)}\bbold e_j\\
+      &=
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{ik}}}\frac{x^{\gamma_{ik}}}{\LT(g_i)}\bbold e_i
+      -
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{jk}}}\frac{x^{\gamma_{jk}}}{\LT(g_j)}\bbold e_j\\
+      &=
+      \frac{x^{\gamma_{ij}}}{x^{\gamma_{ik}}}S_{ik} - \frac{x^{\gamma_{ij}}}{x^{\gamma_{jk}}}S_{jk}.
+    \end{align}
+    In this calculation, $x^{\gamma_{ij}}/x^{\gamma_{ik}}$ is polynomial because assmption $\LT(g_k)|x^{\gamma_{ij}}$.  $x^{\gamma_{ij}}/x^{\gamma_{jk}}$ is also polynomial.
+  \end{enumerate}
+\end{myproof}
+
+定理11: $I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成できる。～アルゴリズム～
+ここで、$\Criterion(f_i,f_j,B)$は次の条件が満たされるとき真である:
+「$k\notin \set{i,j}$が存在して、これに対して$[i,k]$と$[j,k]$は$B$に属さず、
+さらに$\LT(f_k)$は$\LCM(\LT(f_i),\LT(f_j))$を割り切る。
+
+アレンジ版を書いてみる。
+\begin{myproof}
+  \begin{algorithm}[H]
+    \begin{algorithmic}[1]
+      \STATE{$B\defeq \set{(i,j); 1 \le i < j \le s}$}
+      \STATE{ $G\defeq F$ }
+      \STATE{ $TRASH\defeq []$}
+      \STATE{ $BASIS \defeq []$}
+      \WHILE{ $B\neq \emptset$}
+        \STATE{Choose $(i,j)\in B$}
+        \IF{$Criterion(i,j,TRASH,BASIS) = true$}
+          \STATE{Move $(i,j)$ from $B$ to $TRASH$}
+        \ELSE{}
+          \IF{$f_i$と$f_j$が互いに素でない}
+            \STATE{$S \Leftarrow \ovd{S(f_i,f_j)}{G}$}
+            \IF{$S\neq 0$}
+              \STATE{Add $S$ to $G$}
+              \STATE{Add $(1,t+1),\dots,(t,t+1)$ to $B$ where $t+1$ is the last of $G$.}
+            \ENDIF{}
+          \ENDIF{}
+          \STATE{Move $(i,j)$ from $B$ to $BASIS$}
+        \ENDIF{}
+      \ENDWHILE{}
+    \end{algorithmic}
+  \end{algorithm}
+  $\Criterion(i,j,TRASH,BASIS,G)$は、$g_k \in G$なる$k$が存在して、
+  \begin{itemize}
+    \item $k$は$i$でも$j$でもない。
+    \item $[i,k] \in TRASH \cup BASIS$
+    \item $[j,k] \in TRASH \cup BASIS$
+    \item $\LT(g_k)| \LCM(\LT(g_i),\LT(g_j))$
+  \end{itemize}
+  を満たすこととする。
+  \begin{itemize}
+    \item $\set{(i,j); 1\le i < j \le t}= B\sqcup BASIC \sqcup TRASH$:あきらか。
+    \item $BASIS \cup B$は$S(G)$の基底である:
+    上のbulletより、$TRASH$は$BASIS \cup B$でかけることを言えばよい。
+    \begin{itemize}
+      \item L.17が実行されるとき:$BASIS\cup B$も$TRASH$も不変である。
+      $G$も変化しないならばあきらかなので、
+      L.13,14が実行されるときだけを考えればよい。
+      このとき、$G$に追加されたのは$\ovd{S(f_i,f_j)}{G}$であり、
+      \begin{align}
+        G_a = G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}
+      \end{align}
+      である。さらに、
+      \begin{align}
+        B_a = B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        (BASIS_b \cup \set{(i,j)}) \cup ((B_b\cup \set{(1,t+1),\dots,(t,t+1)})-\set{(i,j)})\\
+        &=
+        BASIS_b \cup B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      よって、$BASIS_b \cup B_b$は帰納法の仮定で$S(G_b)$の基底になっているから、
+      $BASIS_a \cup B_a$は$S(G_a)$の基底である。
+
+      \item L.8が実行されるとき:
+      \begin{align}
+        (i,j) & \in B_b\\
+        B_a &= B_b - \set{(i,j)}\\
+        TRASH_a  &= TRASH_a \cup \set{(i,j)}\\
+        BASIS_a &= BASIS_b\\
+        G_a &= G_b
+      \end{align}
+      $BASIS_b \cup B_b$が$S(G)$の基底で、L.7より$f_i,f_j \in B_b$のどちらとも異なる
+      $f_k \in G_b$が存在して、
+      $f_i,f_j,f_k$は相異なり、$[i,k],[j,k] \in TRASH_b \cup BASIS_b$となり、
+      さらに$\LT(f_k)|\LCM(\LT(f_i),\LT(f_j))$となるので、
+      命題10より、$(BASIS_b \cup B_b)-\set{(i,j)}$もまた$S(G_b)$の基底である。
+      \begin{align}
+        BASIS_a \cup B_a
+        &=
+        BASIS_b \cup (B_b - \set{(i,j)})\\
+        &=
+        (BASIS_b \cup B_b) - \set{(i,j)}
+      \end{align}
+      なので、$BASIS_a \cup B_a$も$S(G_b)$の基底であり、$G_a = G_b$なので、
+      $S(G_a)$の基底である。
+    \end{itemize}
+    \item $(i,j)\in BASIS$について、$S(f_i,f_j)\toG 0$となる:
+    $G$は増加し続けるので、$(i,j)\in BASIS_b$について$S(f_i,f_j)\to_{G_b} 0$ならば、
+    $S(f_i,f_j) \to_{G_a} 0 $である。$BASIS$が変化しない場合はこれより明らかなので、
+    L.17が実行されるときだけを考えればよい。
+    \begin{align}
+      B_a &= B_b - \set{(i,j)}\\
+      BASIS_a &= BASIS_b \cup \set{(i,j)}
+    \end{align}
+    である。新たに加わった$(i,j)$について、$S(f_i,f_j)\to_{G_a} 0$を示せばよい。
+    \begin{itemize}
+      \item L.10の条件が満たされないとき:
+      $f_i,f_j \in G_b = G_a$であり、$f_i,f_j$が互いに素なので、
+      定理より$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件は満たされるがL.12の条件を満たさないとき:
+      $\ovd{S(f_i,f_j)}{G_a}= \ovd{S(f_i,f_j)}{G_b}=0$なので、
+      割り算アルゴリズムより$S(f_i,f_j) \to_{G_a} 0$である。
+      \item L.10の条件が満たされ、L.12の条件も満たされるとき:
+      \begin{align}
+        G_a &= G_b \cup \set{\ovd{S(f_i,f_j)}{G_b}}\\
+        B_a &= B_b \cup \set{(1,t+1),\dots,(t,t+1)}
+      \end{align}
+      $G_b$での割り算を考え、
+      \begin{align}
+        S(f_i,f_j) &= \sum_{I=1}^t a_I f_I + \ovd{S(f_i,f_j)}{G_b}
+      \end{align}
+      である。しかしこれは$G_a$では既に割り切った形になっているので、
+      $\ovd{S(f_i,f_j)}{G_a} = 0$であり、割り算アルゴリズムいより
+      $S(f_i,f_j) \to_{G_a} 0$である。
+    \end{itemize}
+    \item 停止すること:
+    停止しなかったとすると、L.17で$B$を減らし続けていることから、
+    L.14が無数に実行されなければならないことがわかる。これは、
+    L.13より$G$および$G$のイデアルが無限に増大し続けることを意味するが、
+    これは多項式環のACCに反する。
+    \item 正しい答えが得られること:
+    停止時点で$BASIS = BASIS\cup B$が$S(G)$の基底であり、さらに
+    $(i,j) \in BASIS \implies S(f_i,f_j)_\toG 0$なので、
+    「ある斉次基底について、それらすべて$G$との積がすべて$G$を法として0に簡約されるならグレブナ基底」より(斉次基底として$BASIS$、$G$として$G$をとる。)、$G$はグレブナ基底である。
+  \end{itemize}
+
+\end{myproof}
+
+
+もう1回。
+$I=\gen{f_1,\dots,f_s}$を多項式イデアルとする。
+$I$のグレブナ基底は、次のアルゴリズムによって有限回のステップで構成することができる。
+入力:$F=(f_1,\dots,f_s)$。出力:$G$、これは$I=\gen{f_1,\dots,f_s}$のグレブナ基底。
+\begin{algorithm}[H]
+  \begin{algorithmic}[1]
+    \STATE{$B\defeq \set{(i,j); 1\le i < j \le s}$}
+    \STATE{$G\defeq F$}
+    \STATE{$t\defeq s$}
+    \WHILE{$B\neq \emptyset$}
+    \STATE{Select $(i,j)\in B$}
+    \IF{$\LCM(\LT(f_i),\LT(f_j))\neq \LT(f_i)\LT(f_j)$ かつ
+    $\Criterion(f_i,f_j,B) = false$}
+    \STATE{$S\defeq \ovd{S(f_i,f_j)}{G}$}
+    \IF{$S\neq 0$}
+    \STATE{$t\defeq t+1$}
+    \STATE{$f_t \defeq S$}
+    \STATE{$G\defeq G\cup \set{f_t}$}
+    \STATE{$B\defeq B\cup \set{(a,t); 1\le a \le t-1}$}
+    \ENDIF{}
+    \STATE{$B\defeq B-\set{(i,j)}$}
+    \ENDIF{}
+    \ENDWHILE{}
+  \end{algorithmic}
+\end{algorithm}
+\begin{align}
+  [i,j]=
+  \begin{cases}
+    (i,j) & i \le j\\
+    (j,i) & j \le i
+  \end{cases}.
+\end{align}
+としておく。
+ここで、$\Criterion(f_i,f_j,B)$は次の条件がみたされるとき真である:
+\begin{align}
+  \Exists{k: 1\le k \le t,\, kはiでもjでもない}
+  \begin{cases}
+    [i,k] \in \set{(a,b); 1 \le a < b \le t}-B\\
+    [j,k] \in \set{(a,b); 1 \le a < b \le t}-B\\
+    \LT(f_k)|\LCM(\LT(f_i),\LT(f_j))
+  \end{cases}.
+\end{align}
+
+\begin{myproof}
+  \begin{itemize}
+    \item アルゴリズムの各段階で、$B$は次の性質を持つ:
+    \begin{align}
+      (i,j) \in \set{(a,b); 1\le a < b \le t}-B
+      \implies
+      S(f_i,f_j)\toG 0 \quad
+      または
+      \quad
+      \Criterion(f_i,f_j,B).
+    \end{align}
+    初期では$B$が全体なので、自明に「性質」は成立する。
+
+    途中でも大丈夫なことを示す。$(I,J)\in \set{(a,b); 1\le a < b \le t_a}-B_a$とする。$(I,J)\in B_b$と$(I,J)\notin B_b$のときで場合分けする。
+    \begin{enumerate}[label=(場合\arabic*)]
+      \item $(I,J)\in B_b$のとき:
+      $(I,J)\in B_b$でかつ$(I,J)\notin B_a$なので、アルゴリズムを調べると
+      L.5で選択された$(i,j)$は$(I,J)$である。
+      次の場合分けをする。
+      \begin{enumerate}[label=(場合\roman*)]
+        \item $\LCM(\LT(f_I),\LT(f_J))=\LT(f_I)\LT(f_J)$のとき:
+        $G_b = G_a$なので$f_I,f_J \in G_a$であり、
+        先の定理より、$S(f_i,f_j)\toG 0$である。
+        \item 上をみたさず、$\Criterion(f_I,f_J,B_b)$のとき:
+        $B_a = B_b -\set{(i,j)}$であり、$t_a = t_b$である。
+        $B$の補集合は広がるだけなので、あきらかに$\Criterion(f_I,f_J,B_a)$が満たされる。
+
+        正確に言うと、$t=t_b=t_a$として、
+        $\Criterion(f_I,f_J,B_b)$なので、$1\le K \le t$で$k$は$I$でも$J$でもなく、
+        \begin{align}
+          [I,K] \in \set{(a,b); 1\le a < b \le t}-B_b\\
+          [J,K] \in \set{(a,b); 1\le a < b \le t}-B_b\\
+          \LT(f_K)|\LCM(\LT(f_I),\LT(f_J))
+        \end{align}
+        となる$K$がある。
+        $B_a \subset B_b$なので、
+        \begin{align}
+          [I,J] \in (\set{(a,b); 1\le a < b \le t}-B_b) \subset
+          (\set{(a,b); 1\le a < b \le t}-B_a)\\
+          [K,J] \in (\set{(a,b); 1\le a < b \le t}-B_b) \subset
+          (\set{(a,b); 1\le a < b \le t}-B_a)\\
+        \end{align}
+        であり、$K$がそのまま使えて、$\Criterion(f_I,f_J,B_a)$が成立する。
+        \item 上をみたさず、$S=0$のとき:
+        $G_b = G_a$でかつ、$\ovd{S(f_I,f_J)}{G_b} = 0$がわかったので、
+        $\ovd{S(f_I,f_J)}{G_a}=0$であり、
+        割り算アルゴリズムより$S(f_I,f_J) \to_{G_a} 0$である。
+        \item 上をみたさず、$S\neq 0$のとき:
+        $t_a = t_b + 1$である。
+        $G_a = G_b \cup \set{f_{t_a}}$である。
+        $S(f_I,f_J)$を$G_b$で割り、
+        \begin{align}
+          S(f_I,f_J) = h_1 f_1 + \dots + h_{t_b} f_{t_b} + \ovd{S(f_I,f_J)}{G_b}
+        \end{align}
+        と、商$(h_1,\dots,h_{t_b})$と余り$\ovd{S(f_I,f_J)}{G_b}$が得られたとする。
+        $S(f_I,f_J)$を$G_a$で割ると、商$(h_1,\dots,h_{t_b},1)$で割り切れる。
+        よって、$\ovd{S(f_I,f_J)}{G_a} = 0$であり、
+        $\ovd{S(f_I,f_J)}{G_a} \to_{G_a}0$である。
+      \end{enumerate}
+      \item $(I,J)\notin B_b$のとき:
+      \begin{align}
+        (I,J) \in \set{(a,b); 1\le a < b \le t_b}-B_b
+      \end{align}
+      である。よって、「性質」より、
+      \begin{align}
+        S(f_{I},f_{J})\to_{G_b} 0 \quad
+        または
+        \quad
+        \Criterion(f_I,f_J,B_b)
+      \end{align}
+      が満たされる。
+      \begin{enumerate}[label=(場合\roman*)]
+        \item $S(f_I,f_J)\to_{G_b}0$のとき:
+        $G$は増えるかそのままなので、$G_b \subset G_a$であり、
+        $S(f_I,f_J)\to_{G_a}0$となる。
+        \item 上がみたされず、$\Criterion(f_I,f_J,B_b)$のとき:
+        L.5で$(i,j)\in B_b$が選ばれたとする。L.12が実行されるときには、$t_a = t_b + 1$であり、
+        \begin{align}
+          \set{(a,b); 1\le a < b\le t_a}-B_a
+          &=
+          \set{(a,b);1\le a < b \le t_a}
+          -
+          ((B_b \cup \set{(a,t_a); 1\le a \le t_b})-\set{(i,j)})\\
+          &=
+          \set{(a,b); 1\le a < b \le t_b}-(B_b - \set{(i,j)})\\
+          &=
+          (\set{(a,b); 1\le a < b \le t_b}-B_b)\cup \set{(i,j)}
+        \end{align}
+        となる。
+
+        $B$の補集合が膨らむだけなので、$\Criterion(f_I,f_J,B_a)$も満たされる。
+      \end{enumerate}
+    \end{enumerate}
+    よって、どの場合でも
+    \begin{align}
+      S(f_I,f_J)\to_{G_a}0 \quad または \quad \Criterion(f_I,f_J,B_a)
+    \end{align}
+    がみたされる。
+    \item $B=\emptyset$となったとき(アルゴリズムが停止したとき)$G$はグレブナ基底である:
+    \begin{align}
+      \cal I &= \set{(i,j); 1\le i < j \le t,\quad \Criterion(f_i,f_j,B)は選択されたときにfalseである。}\\
+      \cal S &= \set{S_{ij}; (i,j)\in \cal I}
+    \end{align}
+    と定義する。そして、$\cal S$が「$S_{ij}G = S(f_i,f_j) \to_G 0$がすべての
+    $S_{ij} \in \cal S$に対して成立する」という性質を持つ$S(G)$の基底であることを示す。
+
+    先に「アルゴリズムの各段階で、$B$は『性質』を持つ」ことを示していたので、
+    \begin{align}
+      (i,j)\in \set{(a,b); 1\le a < b \le t} \implies
+      (S(f_i,f_j) \to_G 0\quad
+      または
+      \quad
+      \Criterion(f_i,f_j,\emptyset))
+    \end{align}
+    が成立する。よって、任意の$S_{ij}\in \cal S$について、$S_{ij}$
+    上の証明中で、ひとたび$\Criterion(f_i,f_j,B)$がfalseになったなら、
+    以降ずっとfalseになることがわかっている(「$B$の補集合は膨らむだけ」)ので、すべての$(i,j)\in \cal I$について
+    $S(f_i,f_j)\to_{G}0$となる。
+
+    あとは、$\cal S$が$S(G)$の基底になることを示せばよい。
+    $B$から取り除かれた順に添字のペアを並べ、その逆順のリストを考える。
+    この時点で、リストは$\set{(a,b); 1\le a < b\le t}$全てを含んでいるので、
+    ここから$S_{ij}$たちを作ると
+    $S(G)$の基底になっている。
+    このリストを先頭から走り、$(i,j)$のその時点での$B$について、
+    $\Criterion(f_i,f_j,B)$がtrueであるとき、その$(i,j)$をリストから取り除くという操作を最後までやる。
+    リストを逆順にしてあるので、$\Criterion(f_i,f_j,B)$が真であることから得られる$k$について、$[i,k],[j,k]$がリストのその先に存在し、先の定理より除去しても
+    リストは$S(G)$の基底を作り続ける。
+    そして、リストの取り除きかたより、操作が終了したときにはリストに残っているものは$\cal I$と一致する。よって、$\cal I$は$S(G)$の基底となる。
+
+    よって、、$\cal S$は$S_{ij}G = S(f_i,f_j) \to_G 0$がすべての
+    $S_{ij} \in \cal S$に対して成立する」という性質を持つ$S(G)$の基底である。
+    よって、「$G$の斉次基底で、そのすべての基底$S$について$SG \to_G 0$となる」もの
+    である$\cal S$がみつかったので、$G$はグレブナ基底である。
+    $G$には$f_1,\dots,f_s$たちのあまりしか追加していないので、
+    $G$は$\gen{f_1,\dots,f_s}$のグレブナ基底になっている。
+
+  \item 停止すること:
+  もしも停止しなかったとすると、L.14で毎回$B$が減少することから
+  L.12が無数回実行されなければならず、それに伴なってL.11が無数に実行されなければならないが、これは$\gen{\LT(G)}$の無限上昇列を生んでしまい、多項式環がネーター環であることに違反する。
+  \end{itemize}
+\end{myproof}

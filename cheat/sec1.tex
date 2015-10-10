@@ -1,0 +1,1668 @@
+\subsection{多項式とアフィン空間}
+
+多項式環を定義した．
+
+$n$次アフィン空間を$k^n$で定義した．
+$k^1$をアフィン直線，$k^2$をアフィン平面とよぶ．
+
+多項式が作る関数$k^n \to k$について，「この多項式は0か？」と，
+「この関数のとる値はつねに0か？」という問が湧いてくるが，
+この2つの問題は等価ではない．実際，$\F_2$上の多項式$x(x-1)$は，
+0多項式ではないが関数としては0である．有限体だとこういうことがおこるが，
+無限体であれば多項式として0であることと関数として0であることは等価である：
+\begin{myproposition}
+ $k$を無限体とする．$f\in k[x_1,\dots,x_n]$が$f=0$であることと，
+ $f$から導かれた関数$f \colon k^n \to k$が$f = 0$であることとは
+同値である．
+\end{myproposition}
+\begin{myproof}
+ 多項式として0ならば，関数として0であることは自明である．
+関数として0であることから多項式として0であることを導く．
+$f\in k[x_1,\dots,x_n]$を多項式とする．
+\begin{itemize}
+ \item $n=1$のとき：$f\in k[x]$であり，$\tilde f\colon k\to k$である．
+$f$は$n$次式であるとする．もしも$f$が1次以上であれば，$f$は高々$n$個の根しか持たない．一方，$\tilde f$が0であることと，$k$が無限体であることから，$f$は無限個の根を持つことになる．よって，$f$は1次未満，すなわち定数であり，$f=0$である．
+ \item $n\ge 2$のとき：
+$a_1,\dots,a_{n-1}\in k^{n-1}$とする．
+$x_n$について整理して，$N$を$x_n$についての最高次の次数とする．
+\begin{align}
+ f = \sum_{i=1}^N g_i(x_1,\dots,x_{n-1})x^i
+\end{align}
+と書く．$f$の$x_1,\dots,x_{n-1}$に$a_1,\dots,a_{n-1}$を代入し，多項式
+\begin{align}
+ \tilde f = \sum_{i=1}^N g_i(a_1,\dots,a_{n-1})x^i
+\end{align}
+を得る．$\tilde f$は1変数の多項式であるから，「$n=1$のとき」より，
+\begin{align}
+ \Forall{i \in \set{1,\dots,N}} g_i(a_1,\dots,a_{n-1})  = 0.
+\end{align}
+$a_1,\dots,a_{n-1}$は任意だったので，各$g_i \in k[x_1,\dots,x_{n-1}]$は
+関数として0である．帰納法により，$n-1$のとき成立しているとしてよいから，
+$g_i$は多項式として0である．よって，$f$は多項式として0である．
+\end{itemize}
+\end{myproof}
+
+系として，無限体上で多項式$f,g$が多項式として$f=g$であることと関数として$f=g$であることが等価であることが得られる．
+
+$\C$は代数閉体であること，すなわち
+$\C$の1次以上の多項式は根を1つ持つことが知られている．
+
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item 加法の単位元は$0$，乗法の単位元が$1$であることは総当たりで確かめられる．また，
+\begin{align}
+ -0 = 0,\quad -1 = 1,\, 1\inv = 1
+\end{align}
+が成り立つことも確かめられる．
+ \item
+\begin{enumerate}
+ \item
+\begin{align}
+g(0,0) = 0,\quad g(0,1)=g(1,0) = 0,\quad g(1,1) = 1 + 1 = 0.
+\end{align}
+命題5は無限体上の多変数多項式について，それが多変数多項式として$0$であることと関数として$0$であることとが同値であるという主張であったが，$\bbold F_2$は無限体でないので矛盾しない．
+ \item $x(y+z)$．
+ \item $x_1(1-x_1)x_2\dots x_n$．$x_1$がどちらでも消えてしまう．
+\end{enumerate}
+ \item
+\begin{enumerate}
+ \item
+$[a]\in \bbold F_p-\zeroset$の逆元を求める手続を示そう．$an \equiv 1\mod p$となる$n$を見つけれられればよい．これは，$an + pm = 1$を満たす$n,m$を見つけることだが，$a$は$p$の倍数ではないので，$p$が素数であることから$a$と$p$とは互いに素である．よって，ユークリッドの互除法により，$n$と$m$とを見つけることができる．$[a]\inv = [n]$となる．したがって，「理由」は$a$と$p$とが互いに素であることである．
+ \item $\gen{a}$は$\bbold F_p-\zeroset$の部分群になるが，ラグランジュの定理により$\bbold F_p-\zeroset$の部分群は$\set{1}$か$\bbold F_p-\zeroset$かである．$\gen{a}=\set{1}$のとき，すなわち$[a]=1$のときは明らかに成り立つ．$[a]\neq [1]$のとき，すなわち$\gen{a}=\bbold F_p-\zeroset$のときは
+$1,a,a^2,\dots,a^{p-2}$の$p-1$個が全て異なり，$\bbold F_p-\zeroset$の元の何らかの順列になっている．したがって，$a^{p-1}=a^n$となる$0\le n \le p-2$となる$n$があるが，このとき$1=a^{p-1-n}$となる．$1\le p-n \le p-1$となるが，$1,a,a^2,\dots,a^{p-2}$
+の全てが相異なるのだから，$p-1-n=p-1$，すなわち$n=0$となるしかない．したがって，$a^{p-1}=1$である．
+ \item $a=0$のときは自明．$a\neq 0$のときは(b)より$a^{p-1}=1$を得て，$a^p=a$を得る．
+ \item $a^p-a$．(c)より従う．
+\end{enumerate}
+ \item 加法についての$F$の$1_F$の生成する部分群を考えると，$0_F,1_F,2\times 1_F,\dots,(p-1)\times 1_F$が全て相異なることが(b)と同様にして分かる．$\varphi\colon F\to \bbold F_p$を，$\varphi(n\times 1_F)=n\times 1_{\bbold F_p}$と定めると，これは全単射になっている．準同型になっていることが，整数係数に注意すれば示せる．
+よって，$F\simeq \bbold F_p$であり，(3-d)から結論が従う．
+ \item 略
+ \item
+\begin{enumerate}[label=(\arabic*)]
+ \item 先の命題と同様．無限個の根を持つことになってしまうことがポイント．
+ \item これも同様．$\Z$が整域なので，$M+1$個という多すぎる根を持ってしまう．
+\end{enumerate}
+\end{enumerate}
+
+\subsection{アフィン多様体}
+$k$を体とし，$f_1,\dots,f_s \in k[x_1,\dots,x_n]$とする．
+これらの多項式が定めるアフィン多様体$\var(f_1,\dots,f_s)$を
+\begin{align}
+ \var(f_1,\dots,f_s) =
+\set{(x_1,\dots,x_n)\in k^n | \Forall{i\in \set{1,\dots,s}} f_i(x_1,\dots,x_n)=0}
+\end{align}
+と定める．
+
+アフィン多様体はいろんなところから作られる．ラグランジュの未定乗数法は，
+$f\colon \R^d \to \R$の$g\colon \R^d$，$g=0$となる制約上での
+極値を求める技法だった．極値は，$\nabla f = \lambda \nabla g$をみたすことになる．これに$g=0$をつけくわえれば解ける．
+
+アフィン多様体の結びと交わりが，式の組み合わせで書ける：
+\begin{mylemma}
+\begin{align}
+ A &= \var(f_1,\dots,f_a)\\
+ B& = \var(g_1,\dots,g_b)
+\end{align}
+とする．このとき，
+\begin{align}
+ A\cap B
+&=
+\var(\ub{f_1,\dots,f_a,g_1,\dots,g_b}_{a+b個})\\
+ A\cup B
+& =
+\var(\ub{f_1g_1,\dots, f_1g_b,\dots, f_ag_1,\dots, f_ag_b}_{ab個}).
+\end{align}
+\end{mylemma}
+\begin{myproof}
+ \begin{itemize}
+  \item 交わりについて：あきらか．
+  \item 結びについて：
+\begin{itemize}
+ \item $\subset$：
+$x\in A\cup B$とする．$x\in A$であるとして一般性を失わない．
+このとき，
+\begin{align}
+ \Forall{i\in \set{1,\dots,a}} f_i(x) = 0.
+\end{align}
+よって，全ての$f_\bullet g_\bullet$も0になる．
+$x\in \var(f_1g_1,\dots, f_ag_b)$である．
+ \item $\supset$：
+$x\notin A\cup B$とする．$x\notin A$かつ$x\notin B$なので，
+ある$i \in \set{1,\dots,a}$が存在して$f_i(x)\neq 0$となっており，さらに
+ある$j\in \set{1,\dots,b}$が存在して$g_j(x)\neq 0$となっている．
+このとき，$f_ig_j(x)\neq 0$であるから，$x\notin \var(f_1g_1,\dots,f_ag_b)$
+となる．
+\end{itemize}
+ \end{itemize}
+\end{myproof}
+
+このアフィン多様体について，次の疑問がわいてくる．
+\begin{description}
+ \item[存在] いつ$\var(f_1,\dots,f_n)\neq \emptyset$となるのか？
+言い換えるなら，$f_1,\dots,f_n = 0$はいつ解を持つのか？
+ \item[有限性] いつ$\var(f_1,\dots,f_n)$は有限集合になるのか？
+言いかえるなら，$f_1,\dots,f_n=0$の解はいつ有限個になるのか？それは何か？
+ \item[次元] $\var(f_1,\dots,f_n)=0$の次元は何か？
+\end{description}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $\var(x^2+4y^2-2x+16y+1)$の形？
+$(x-1)^2 + 4(y+2)^2 = -1 + 1 + 16 = 4^2$．よって，$(1,-2)$中心の半径4の円．
+ \item $\var(x^2-y^2)$の形？$\var(x^2-y^2)=\var((x+y)(x-y))=\var(x+y)\cup \var(x-y)$．よって，バツ印．
+ \item $\var(2x+y-1,3x-y+2)$の形？$\var(2x+y-1,3x-y+2)=\var(2x+y-1)\cap \var(3x-y+2)$．
+\end{enumerate}
+ \item $\var(y^2-x(x-1)(x^2))$の形？
+$y^2 = x(x-1)(x-2)$を考える．右辺のグラフを考えると，$[0,1]$と$\openright{2,\infty}$で非負なので，ここでのみ$y$が存在する．よって，$[0,1]$で丸っぽいのがあって，
+$2$より右側で$(2,0)$を頂点とした放物線みたいになる．
+ \item $\var(x^2+y^2-4,xy-1)$の形？
+$x^2-4+\frac{1}{x^2}=0$の解は$\pm\sqrt{2\pm\sqrt{3}}$の4つ．対称性を考えて，
+\begin{align}
+ \pm(\sqrt{2+\sqrt{3}},\sqrt{2-\sqrt{3}}),\,
+\pm(\sqrt{2-\sqrt{3}},\sqrt{2+\sqrt{3}})
+\end{align}
+の4つ．
+ \item
+$\var(xz^2-xy)=\var(x(z^2-y))=\var(x)\cup \var(z^2-y)$．
+$\var(x^4-zx,x^3-yx)=\var(x^4-zx)\cap \var(x^3-yx)=\var(x(x^3-z))\cap \var(x(x^2-y))=(\var(x)\cup \var(x^3-z))\cap (\var(x)\cup \var(x^2-y)) = \var(x)\cap (\var(x^3-z)\cup \var(x^2-y))=\var(x)\cap \var(y)\cap \var(z)$．
+$\var(x^2+y^2+z^2-1,x^2+y^2+(z-1)^2-1)=\var(x^2+y^2+z^2-1,x^2+y^2+(z-1)^2-1,z-\frac{1}{2})=\var(x^2+y^2-\frac{3}{4},z-\frac{1}{2})=\var(x^2+y^2-\frac{3}{4})\cap \var(z-\frac{1}{2})$．
+ \item $\var((x-2)(x^2-y),y(x^2-y),(z+1)(x^2-y))=\var(x^2-y)\cup \var(x-2,y,z+1)$．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $\set{(a_1,\dots,a_n)}=\var(x_1-a_1,\dots,x_n-a_n)$．
+ \item アフィン多様体2個の交わりはアフィン多様体なので，繰替えす．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+ $\set{r=\sin(2\theta)}\subset \var((x^2+y^2)^3-4x^2y^2)$？
+\begin{align}
+ x&=r\cos\theta = \sin(2\theta)\cos\theta\\
+ y& =r\sin\theta = \sin(2\theta)\sin\theta.
+\end{align}
+\begin{align}
+ (x^2+y^2)^3-4x^2y^2
+&=
+r^6 - 4(r^2\cos^2\theta)(r^2\sin^2\theta)\\
+ & =
+r^4(r^2-4\cos^2\theta \sin^2\theta)\\
+ & =
+r^4(r^2-\sin^2(2\theta))\\
+ & =
+r^4(\sin^2(2\theta)-\sin^2(2\theta))\\
+ & =0.
+\end{align}
+
+ \item $\set{r=\sin(2\theta)}\supset \var((x^2+y^2)^3-4x^2y^2)$？
+$(x,y)\in \var((x^2+y^2)^3-4x^2y^2)$とする．
+$x=r\cos \theta,\, y=r\sin\theta$となる$r,\theta$が存在するので，それを選ぶ．
+多項式に代入すると，
+\begin{align}
+ ((r\cos\theta)^2 + (r\sin\theta)^2)^3 - 4(r\cos\theta)^2(r\sin\theta)^2
+&=
+r^6-4r^4\cos^2\theta \sin^2\theta\\
+ & =
+r^4(r^2-(\sin 2\theta)^2)\\
+ & =0
+\end{align}
+とならなければならない．よって，$r=\pm \sin 2\theta$である．
+$r=\sin2\theta$ならば$(x,y)\in \set{r=\sin 2\theta}$である．
+       $r=-\sin2\theta$ならば，$r=\sin(-2\theta)$である．
+\end{enumerate}
+
+ \item $\R^2\setminus\set{(1,1)}$はアフィン多様体でない？
+これがアフィン多様体だとし，$f_1,\dots,f_n \in k[x,y]$が存在して
+$\var(f_1,\dots,f_n)=\R^2\setminus\set{(1,1)}$とする．
+$i\in \set{1,\dots,n}$とし，$g_i(t)=f_i(t,t) \in k[t]$とする．
+$g_i$は無数の根を持つので，$g_i$は関数として0であり，
+$\R$は無限体なので，$g_i =0$しかありえない．よって，$g_i(1,1)=0$である．
+これが全ての$i$について言えるので，$f_1,\dots,f_n$はどれも$(1,1)$で消える．
+これは矛盾．
+ \item 上半平面はアフィン多様体でない？略
+ \item $\Z^n \subset \C^n$はアフィン多様体でない？略
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $x^n+y^n=1$の定めるアフィン多様体$\subset \Q^2$を考える．
+$n$が奇数なら自明解が2つ，偶数なら4つ？
+\begin{itemize}
+ \item $n$が奇数：
+まず$y=0$とする．$x^n=1$となる．$x=1$しかない．$x=0$についても同様で，
+\begin{align}
+ (x,y) = (1,0),\,(0,1).
+\end{align}
+ \item $n$が偶数：まず$y=0$とする．$x^n=1$となる．$x=\pm 1$しかない．$x=0$についても同様で，$(x,y)=(\pm 1,0),\, (0,\pm 1)$．
+\end{itemize}
+ \item $F_n=\var(x^n+y^n-1)$が$n\ge 3$について自明でない解を持つことと，フェルマーの最終定理が誤りであることが等価であることを示せ？
+\begin{align}
+& \Exists{x,y \in \Q\setminus\zeroset} x^n+y^n = 1\\
+\iff &
+\Exists{\frac{x}{z},\frac{y}{w} \in \Q\setminus\zeroset,既約} (\frac{x}{z})^n + (\frac{y}{w})^n = 1\\
+\iff &
+\Exists{\frac{x}{z},\frac{y}{w} \in \Q\setminus\zeroset,既約} (xw)^n + (yz)^n = (zw)^n\\
+\end{align}
+とやり，フェルマーのほうの右側を割って1にする．
+\end{enumerate}
+ \item $f(x,y)=x^2-y^2$を$g(x)=x^2+y^2-1=0$上で最大・最小化することを考える．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略
+ \item 角度3つで3変数っぽい．
+ \item 長さ3のアームの先端の位置を$(x_1,y_1)$，長さ2のアームは$(x_2,y_2)$，長さ1のアームは$(x_3,y_3)$とする．このとき，
+\begin{align}
+ x_1^2 + y_1^2 &= 3^2\\
+ (x_1-x_2)^2 + (y_1-y_2)^2 & = 2^2\\
+ (x_2-x_3)^2 + (y_2-y_3)^2 & = 1^2.
+\end{align}
+ \item 6変数を3式で拘束したので合ってそう．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $p_1=(x_1,y_1),\dots,p_3=(x_3,y_3)$とする．
+三角不等式により，$\myabs{p_2}=\myabs{(p_2-p_1)+p_1}\le \myabs{p_2-p_1}+\myabs{p_1}= 2 + 3 = 5$．$\myabs{p_3}=\myabs{(p_3-p_2)+p_2}\le \myabs{p_3-p_2}+\myabs{p_2} = 1 + 5 = 6$．
+ \item 略．$1$をうまく回して手の軌道を異なった半径になるようにできる．
+ \item $2$から$6$までは先の通り実現できる．$0$から$2$までは，
+長さ2の腕を適当に固定して，その先端が原点から1になるようにする．これは，
+長さ2の腕を完全に折り畳んで，長さ3の腕と重なるようにすることで実現できる．ここを中心に長さ1を回すことにより実現される．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略．
+ \item $\Z\subset \Q$は，$\Z = \bigcup_{i \in \Z} \var(x-i)$であるが，これはアフィン多様体でない．無限個の根の議論．
+ \item $V = \R$は$\R$でのアフィン多様体であり，$W=\zeroset$もまたアフィン多様体だが，$V\setminus W$はアフィン多様体ではない．これは議論した．
+ \item $V\subset k^n$，$W\subset k^m$がアフィン多様体であるとき，
+$V\times W \subset k^{n+m}$がアフィン多様体？
+$V=\var(f_1,\dots,f_v)$，$W=\var(g_1,\dots,g_w)$とする．
+$((x,y)\in V\times W) \iff (x\in V \land y\in W) \iff (f_1(x)=\dots = f_v(x) = g_1(y)=\dots = g_w(y)=0)$．よって，$f_1,\dots,f_v$を$k^{n+m}$に埋め込んだものを
+$\tilde f_1,\dots, \tilde f_v$とし，$g_1,\dots, f_w$を$k^{n+m}$に埋め込んだものを$\tilde g_1,\dots, \tilde g_w$とすると，$V\times W = \var(\tilde f_1,\dots,\tilde f_v,\tilde g_1,\dots, \tilde g_w)$．
+\end{enumerate}
+\end{enumerate}
+
+\subsection{アフィン多様体のパラメータ付け}
+アフィン多様体を方程式系とみなしたとき，その解が有限個のこともあれば無限個のこともある．この無限個の解を表示する方法として，パラメータ付けを学ぶ．例えば，1次式でできたアフィン多様体が無数個の解を持つとき，その方程式系を掃き出すことにより自由変数を用いて一般的に解をあらわすことができる．このようなものを考える．
+
+$f$が$x_1,\dots,x_n$の$k$上の有理関数であるとは，$f$が$k[x_1,\dots,x_n]$の商で表されることである．有理関数の相当は分母を払うことにより確かめられる．
+
+有理関数の組$r_1,\dots,r_n \in k(t_1,\dots,t_T)$がアフィン多様体$\var(f_1,\dots,f_m)$の有理パラメータ表示であるとは，
+\begin{align}
+\set{(x_1,\dots,x_n) | \Forall{i\in \set{i,\dots,n}} \Exists{t_1,\dots,t_T \in k} x_i = r_i(t_1,\dots,t_T)} \subset \var(f_1,\dots,f_m)
+\end{align}
+となり，かつ$\var(f_1,\dots,f_n)$が左辺を包むもののうち「最小」であることである．等しくなくてもいいことに注意．有理関数ではなく多項式であるときには多項式表示とよぶ．
+また，$\var(f_1,\dots,f_m)$について，$f_1=f_2=\dots=f_m=0$という方程式系はアフィン多様体の陰関数表示とよぶ．
+
+ここで，
+\begin{itemize}
+ \item 有理パラメータ表示から陰関数表示は得られるか？
+ \item 陰関数表示から有理パラメータ表示は得られるか？
+\end{itemize}
+という問題が湧いてくる．一般に，陰関数表示から有理パラメータ表示を得ることはできず，それができるときには単有理的であるという．有理パラメータ表示から陰関数表示を得ることは常に可能で，それは消去理論で扱う．
+
+有理パラメータ表示から陰関数表示を計算してみる．
+ある図形が，
+\begin{align}
+ x=1+t,\quad y=1+t^2
+\end{align}
+で与えられているとする．
+このとき，
+\begin{align}
+ y=1+(x-1)^2 = x^2 -2x +2
+\end{align}
+となり，先の図形はアフィン多様体であって，$\var(x^2-2x+2-y)$であることがわかった．
+
+また，$\var(x^2+y^2-1)$のパラメータ表示を考えてみる．
+$(-1,0)$を通る傾き$t$の直線$y=t(x+1)$を考える．
+この$x^2+y^2=1$との共有点を考える．
+$ x^2 + t^2(x+1)^2 = 1$が得られ，$(1+t^2)x^2 + 2t^2 x + (t^2-1)= 0$，すなわち
+\begin{align}
+ x= \frac{-t^2 \pm \sqrt{t^4 - (1+t^2)(t^2-1)}}{1+t^2}
+=
+\frac{-t^2 \pm 1}{1+t^2}
+=
+-1,\,\frac{1-t^2}{1+t^2}.
+\end{align}
+$x=\frac{1-t^2}{1+t^2}$のとき，
+\begin{align}
+ y=t(\frac{1-t^2}{1+t^2}+1)=
+t\frac{2}{1+t^2}=
+\frac{2t}{1+t^2}.
+\end{align}
+こうして，有理パラメータ表示
+\begin{align}
+ x=\frac{1-t^2}{1+t^2},\quad y=\frac{2t}{1+t^2}
+\end{align}
+が得られた．この表示は，$x=-1$を取り得ないことには注意が要る．ぴったり一致しなくても有理パラメータ表示とよぶことは先に注意した．
+
+アフィン多様体$\var(y-x^2,z-x^3)$を考える．これをパラメータ表示すると，
+\begin{align}
+ x = t,\quad y=t^2,\quad z=t^3
+\end{align}
+となる．これを3次ねじれ曲線とよぶ．この接線を求める．
+各々微分して，
+\begin{align}
+ x' = 1,\quad y'= 2t,\quad z' = 3t^2
+\end{align}
+となり，$(t_0,t_0^2,t_0^3)$での接線として，
+\begin{align}
+ \tatev{x \\ y \\ z} = s\tatev{1 \\ 2t \\ 3t^2} + \tatev{t_0 \\ t_0^2 \\ t_0^3}
+\end{align}
+が得られる．これを$t,s$に関するパラメータで見ると曲面をあらわしており，これをねじれ3次曲線の接平面とよぶ．
+これの陰関数表示はあとで求める．
+
+ベジェ曲線について考える．
+制御点$(x_0,y_0),\dots,(x_3,y_3) \in \R^2$を考え，パラメータ表示
+\begin{align}
+ x(t) &= x_0(1-t)^3 + 3x_1 (1-t)^2 t + 3x_2 (1-t)t^2 + x_3 t^3,\\
+ y(t)& = y_0(1-t)^3 + 3y_1 (1-t)^2 t + 3y_2 (1-t)t^2 + y_3 t^3.
+\end{align}
+を考える．この始点は$(x_0,y_0)$であり，終点は$(x_3,y_3)$となっている．
+また，微分を考えると，
+\begin{align}
+ x'(t) &= 3x_0 (1-t)^2 (-1) + 3x_1 (2(1-t)(-1)t + (1-t)^2) + 3x_2((-1)t^2 + (1-t)2t) + x_3\cdot 3t^2,\\
+ y'(t)& =
+3y_0(1-t)^2(-1) + 3y_1(2(1-t)(-1)t + (1-t)^2) + 3y_2((-1)t^2 + (1-t)2t) + y_3\cdot 3t^2.
+\end{align}
+よって，
+\begin{align}
+ x'(0) &= -3x_0 + 3x_1 = 3(x_1-x_0),\\
+ y'(0)& = -3y_0 + 3y_1 = 3(y_1-y_0),\\
+ x'(1) & = -3x_2 + 3x_3 = 3(x_3-x_2),\\
+ y'(1)& = -3y_2 + 3y_3 = 3(y_3-y_2).
+\end{align}
+よって，はじまりは$(x_1,y_1)$に向かい，おわりは$(x_2,y_2)$から向かうことがわかる．
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+\begin{align}
+ x + 2 y -2 z + w &= -1\\
+ x+y+z-w& =2
+\end{align}
+をパラメータ付けせよ．
+\begin{align}
+\begin{pmatrix}
+ 1 & 2 & -2 & 1 & -1\\
+ 1&1 &1 &-1 & 2
+\end{pmatrix}
+&\to
+\begin{pmatrix}
+ 1 & 2 & -2 & 1 & -1\\
+ 0&-1 &3 &-2 & 3
+\end{pmatrix} \\
+&\to
+\begin{pmatrix}
+ 1 & 0 & 4 & -3 & 5\\
+ 0&-1 &3 &-2 & 3
+\end{pmatrix} \\
+ &\to
+\begin{pmatrix}
+ 1 & 0 & 4 & -3 & 5\\
+ 0&1 &-3 &2 & -3
+\end{pmatrix} .
+\end{align}
+よって，
+\begin{align}
+ x &= -4z + 3w + 5\\
+ y& = 3z -2w + 3.
+\end{align}
+ \item
+$y=2x^2-1$の$[-1,1]$がパラメタ付けされている．すなわち，
+\begin{align}
+ \set{(x,y)| y=2x^2-1,\, -1 \le x \le 1}
+=
+\set{(x,y) | x=\cos t,\, y = \cos 2t}.
+\end{align}
+\begin{itemize}
+ \item $\subset$：
+$(x,y)\in (左辺)$とする．$y=2x^2-1$，$-1\le x \le 1$．
+このとき，$\cos t = x$となる$t$が存在する．
+このとき，$y=2x^2-1=2\cos^2 t - 1 = \cos 2t$である．よって，
+$(x,y)\in (右辺)$である．
+ \item $\supset$：
+$(x,y)\in (右辺)$とする．$x=\cos t$，$y=\cos 2t$となる$t\in \R$が存在する．
+あきらかに$-1\le x = \cos t \le 1$であり，
+\begin{align}
+ y = \cos 2t  = 2\cos^2 t-1 = 2x^2 -1
+\end{align}
+である．よって，$(x,y)\in (左辺)$である．
+\end{itemize}
+ \item
+\begin{align}
+ \var(y-f(x)) = \set{(x,y) | y-f(x)=0} = \set{(x,y)| y=f(x)}.
+\end{align}
+よって，パラメタ付けは$y=f(x)$である．
+ \item パラメタ表示$x=\frac{t}{1+t},\, y=1-\frac{1}{t^2}$とする．
+\begin{enumerate}[label=(\alph*)]
+ \item 陰関数表示？解いて，$x^2y-2x+1=0$．
+ \item パラメタ表示は，上の陰関数の定めるアフィン多様体のうち，$\set{(1,1)}$を除く点を全て走る？
+\begin{align}
+ \set{(x,y)| x^2y-2x+1=0}\setminus\set{(1,1)}
+= \set{(x,y) | x=\frac{t}{1+t},\, y = 1-\frac{1}{t^2}}
+\end{align}
+を示せばよい．
+\begin{itemize}
+ \item $\subset$：
+$(x,y)\in (左辺)$      とする．$x^2y-2x+1=0$であり，$(x,y)=(1,1)$ではない．
+$x=0$とするとこの式に矛盾するので，$y=\frac{2x-1}{x^2}$となる．
+% $x$を走らせると，$y$のとる範囲は$\openleft{-\infty,1}$となるが，
+% $y\neq 1$なので，$y\in (-\infty,1)$である．一方，$t\mapsto 1-\frac{1}{t^2}$の値域は$(-\infty,1)$なので，$1-\frac{1}{t^2}=y$となる$t$が存在して，これは解くことにより$t=\frac{-1}{\sqrt{1-y}}$とできる(あえて負のほうを選んだ!)．このとき，
+% \begin{align}
+%  (t\mapsto \frac{t}{1+t})(\frac{-1}{\sqrt{1-y}})
+% &=
+% \frac{-1/\sqrt{1-y}}{1-1/\sqrt{1-y}}\\
+%  & =
+% \frac{1}{1-\sqrt{1-y}}\\
+%  & =
+% (1-\sqrt{1-\frac{2x-1}{x^2}})^{-1}\\
+%  & =
+% (1-\sqrt{\frac{x^2-2x+1}{x^2}})^{-1}\\
+%  & =
+% (1-\frac{x-1}{x})^{-1}
+% \end{align}
+$t=\frac{x}{1-x}$とする．これは，$x\neq 1$より可能である．
+このとき，
+\begin{align}
+ (t\mapsto 1-\frac{1}{t^2})(\frac{x}{1-x})
+&=
+1-\frac{(1-x)^2}{x^2}\\
+ & =
+\frac{2x-1}{x^2}\\
+ & =
+y.
+\end{align}
+よって，パラメータが構成できた．$(x,y)\in (右辺)$である．
+ \item $\supset$：あきらか．
+\end{itemize}
+\end{enumerate}
+ \item $x^2-y^2=1$について．
+\begin{enumerate}[label=(\alph*)]
+ \item $x=\cosh t,\, y=\sinh t$は$x^2-y^2=1$上？そのうちのどこ？
+\begin{align}
+ \set{(x,y)| x=\cosh t,\, y=\sinh t} = \set{(x,y) | x^2-y^2=1,\, x>0}
+\end{align}
+を示す．
+\begin{itemize}
+ \item $\subset$：あきらか．
+ \item $\supset$：
+$(x,y)\in (右辺)$とする．$x^2-y^2=1$であり，$x>0$である．
+\begin{align}
+ \sinh t = y
+\end{align}
+を解いてみる．$e^t=y\pm \sqrt{y^2+1}$だが，$e^t>0$なので$e^t=y+\sqrt{y^2+1}$になって，$t=\log(y+\sqrt{y^2+1})$が得られる．これを$\cosh$に入れてみると実際$\cosh t = x$となり，$(x,y)$に対応するパラメタが得られたので，$(x,y)\in (左辺)$．
+\end{itemize}
+ \item $x^2-y^2=1$に，直線の式を入れて様子を見る．直線なので，$x$に対して$y$が一意に定まるので，$x$の解の数だけ数えれば共有点の個数が得られる．
+\begin{itemize}
+ \item $y=ax+b$のとき：
+判別式として，$D=(2ab)^2-4(1-a^2)(-1-b^2)$が得られる．よって，
+$a^2-b^2 < 1$のとき2個，$a^2-b^2=1$のとき1個，$a^2-b^2 > 1$のとき0個．
+ \item $x=c$のとき：$y$の個数を数える．$c^2>1$のとき2個，$c^2=1$のとき1個，$c^2<1$のとき0個となる．
+\end{itemize}
+ \item $y=a(x+1)$を$(-1,0)$を通る傾き$a$の直線とする．これと双曲線との共有点を考えると，
+\begin{align}
+ (x,y) = (\frac{-1-a^2}{1-a^2},\, \frac{-2a^3}{1-a^2}).
+\end{align}
+ \item $a=\pm 1$では定義されず，これは漸近線と平行である．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略．
+ \item 始点を北極とする．終点を$(u,v)$とする．
+\begin{align}
+ (1-t)\tatev{0 \\ 0 \\ 1} + t \tatev{u \\ v \\ 0} = \tatev{tu \\ tv \\ 1-t}.
+\end{align}
+ \item 代入する．
+\begin{align}
+ (tu)^2 + (tv)^2 + (1-t)^2 = 1
+\end{align}
+を解く．$t^2(u^2+v^2+1)-2t=0$．よって，$t=\frac{2}{u^2+v^2+1}$．
+よって，球面の平面の点$(u,v)$でのパラメータ付けは
+\begin{align}
+ (x,y,z) = (\frac{2u}{u^2+v^2+1},\, \frac{2v}{u^2+v^2+1},\, \frac{u^2+v^2-1}{u^2+v^2+1}).
+\end{align}
+\end{enumerate}
+ \item パラメータとして，$(p_1,\dots,p_{n-1})$を考える．いま，$(0,\dots,0,1)$を北極とよぶことにする．北極を始点とし，$(p_1,\dots,p_{n-1},0)$を終点とする線分を$t$をパラメータとしてあらわすと，
+\begin{align}
+ (1-t)\tatev{0 \\ \vdots \\ 0 \\ 1} + t\tatev{p_1 \\ \vdots \\ p_{n-1}\\ 0} =
+\tatev{tp_1 \\ \vdots \\ tp_{n-1} \\ 1-t}.
+\end{align}
+これが球面と交わるときを考え，
+\begin{align}
+ (tp_1)^2 + \dots + (tp_{n-1})^2 + (1-t)^2  = 1.
+\end{align}
+$t^2(p_1^2 + \dots + p_{n-1}^2 + 1) -2t = 0$．よって，
+\begin{align}
+ t = \frac{2}{p_1^2 + \dots + p_{n-1}^2 + 1}.
+\end{align}
+よって，$(p_1,\dots,p_{n-1})$に対応する(パラメータとする)球面の点は
+\begin{align}
+ (x_1,\dots,x_n) =
+(\frac{2p_1}{p_1^2+\dots+p_{n-1}^2 + 1},\dots, \frac{2p_{n-1}}{p_1^2+\dots+p_{n-1}^2 + 1},\, \frac{p_1^2+\dots+p_{n-1}^2 - 1}{p_1^2+\dots+p_{n-1}^2 + 1}).
+\end{align}
+ \item $y^2=cx^2-x^3$，$c>0$を考える．
+\begin{enumerate}[label=(\alph*)]
+ \item 略．
+ \item $y=mx,\, m^2 \neq c$とする．共有点を考えると，$m^2x^2 = cx^2 - x^3$より，
+$x=c-m^2$となる．ただ1点である．原点での接線2本を引くとそんな気がする．
+ \item 略．
+ \item $y=tx$と曲線との共有点は$(c-t^2,t(c-t^2))$となる．これで$t^2\neq c$という条件の下でパラメータ付けが得られている．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $y^2(a-x)=x^2(a+x)$．雑なほうだと$x=-a$という線があらわれてしまう．すごい．どうしてこんなことになったんだ．
+ \item $y=mx$との共有点を考える．$x=a\frac{m^2-1}{m^2+1}$，$y=am\frac{m^2-1}{m^2+1}$が得られる．
+\end{enumerate}
+ \item $y^2(a+x)=(a-x)^3$を考える．($(a,0),\,(0,\pm a)$に点を持ち，$x=-a$を漸近線とすることはすぐわかる．
+\begin{enumerate}[label=(\alph*)]
+ \item $y=m(x-a)$を考える．($-a$を根にしたらうまく行かなかった．)
+$x=a\frac{1-m^2}{1+m^2},\, y=am\frac{1-m^2}{1+m^2}$．
+
+ \item このような構成の点全体のなす集合は，計算すると
+$\set{(x,y) | y=\frac{-\sqrt{a^2-x^2}}{a+x}(x-a),\, -a < x \le a}$．
+\begin{align}
+ \set{(x,y) | y=\frac{-\sqrt{a^2-x^2}}{a+x}(x-a),\, -a < x \le a}
+=
+\set{(x,y) | y^2(a+x)=(a-x)^3 ,\, y\ge 0}
+\end{align}
+を示せばよい．
+\begin{itemize}
+ \item $\subset$：$(x,y)\in (左辺)$とする．
+\begin{align}
+ y^2(a+x)
+&=
+(\frac{-\sqrt{a^2-x^2}}{a+x}(x-a))^2(a+x)\\
+ & =
+\frac{(a^2-x^2)(x-a)^2}{(a+x)^2}(a+x)\\
+ & \desceq{$0 < x+a$}
+(a-x)(x-a)^2\\
+ & =
+(a-x)^3.
+\end{align}
+よって，$(x,y)\in (右辺)$．
+ \item $\supset$：$(x,y)\in (右辺)$とする．$y\ge 0$である．
+$y^2(a+x)=(a-x)^3$を考える．
+\begin{itemize}
+ \item $x=-a$のとき：
+$(左辺)=0$，$(右辺)=(2a)^3=8a^3>0$．これは矛盾．
+ \item $x<-a$のとき：$x+a<0$となるので，
+$(左辺)\le 0$となる．また，$x<-a$なので，$-x>a$であり，$a-x>2a>0$なので，$(a-x)^3 > 0$である．これは矛盾．
+ \item $a<x$のとき：$0<2a<x+a$なので，左辺は$\ge 0$であり，右辺は$a-x<0$なので$<0$であり，矛盾．
+\end{itemize}
+よって，$-a < x \le a$である．このもとで，式を$y$について解いて，
+\begin{align}
+ y&=\sqrt{\frac{(a-x)^3}{(a+x)}} \\
+ & \desceq{$x\le a$}
+(a-x)\sqrt{\frac{a-x}{a+x}}\\
+ & =
+(a-x)\frac{\sqrt{a^2-x^2}}{a+x}\\
+ & =
+\frac{-\sqrt{a^2-x^2}}{a+x}(x-a).
+\end{align}
+\end{itemize}
+ \item $a$のシッソイドと$y=\frac{1}{2}(x+a)$との共有点を考える．
+シッソイドは$y^2(a+x)=(a-x)^3$に入れて，$y^2(2y)=(a-x)^3$．
+シッソイドは$-a<x\le a$でのみ定義されているので，$0< \frac{1}{2}(x+a)$であり，
+$0<y$である．よって，$2=(\frac{a-x}{y})^3$．
+\end{enumerate}
+ \item $x^2-y^2z^2+z^3=0$のパラメータ付け
+\begin{align}
+ x &= t(u^2-t^2)\\
+ y& = u\\
+ z& = u^2-t^2
+\end{align}
+を求めたい．
+$y=u$とfixする．このとき，$x^2=u^2z^2 -z^3$が得られる．先の問をもう一度やる．$x=tz$を考え，$t^2z^2=u^2z^2-z^3$で，$z=u^2-t^2$．$x=t(u^2-t^2)$である．
+\footnote{$z$について$z^3-u^2z^2+x^2$がモニックなのがよい．}
+ \item $\var(y-x^2,z-x^4)$を考える．
+\begin{enumerate}[label=(\alph*)]
+ \item 略
+ \item $x=t,\, y=t^2,\, z=t^4$．
+ \item $x'=1,\, y'=2t,\, z'=4t^3$．よって，求める曲面は，
+\begin{align}
+ \tatev{x\\ y\\ z} = \tatev{1 \\ 2t \\ 4t^3}s + \tatev{t \\ t^2 \\ t^4}
+=
+\tatev{s + t \\ 2ts + t^2 \\ 4t^3 s + t^4}.
+\end{align}
+\end{enumerate}
+ \item
+\begin{align}
+ x & = 1 + u-v,\\
+ y& = u+2v,\\
+ z& = -1-u+v
+\end{align}
+の陰関数表示を求める．
+\begin{align}
+ \tatev{x \\ y \\ z} =
+\tatev{1 \\ 0 \\ -1}
++
+\tatev{1 \\ 1 \\ -1}u
++
+\tatev{-1 \\ 2 \\ 1}v
+\end{align}
+となっている．
+\begin{align}
+ \tatev{1 \\ 1 \\ -1}\times \tatev{-1 \\ 2 \\ 1} =
+\tatev{1 + 2 \\ 1 - 1 \\ 1 + 2} =
+\tatev{3 \\ 0 \\ 3} =
+3 \tatev{1 \\ 0 \\ 1}.
+\end{align}
+はじめの式に$(1,0,1)^t$を内積して，
+\begin{align}
+ x+z = 1 - 1 = 0.
+\end{align}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item あきらか．
+ \item $n=2$のときは示した(というかあきらか)．
+$n$で成立したとし，$n+1$での成立を示す．
+\begin{align}
+ \sum_{i=1}^n t_i \tatev{x_i \\ y_i}
+&=
+(\sum_{i=1}^{n-1}t_i \tatev{x_i \\ y _i}) + t_n \tatev{x_n \\ y_n}\\
+ &=
+(\sum_{j=1}^{n-1}t_j)(\sum_{i=1}^{n-1}\frac{t_i}{\sum_{j=1}^{n-1}t_i} \tatev{x_i \\ y _i}) + t_n \tatev{x_n \\ y_n}\\
+\end{align}
+だが，$(\sum_{i=1}^{n-1}\frac{t_i}{\sum_{j=1}^{n-1}t_i} \tatev{x_i \\ y _i})$は帰納法の仮定により$S$に属し，$\sum_{j=1}^{n-1}t_j + t_n = 1$なので，$n=2$の場合を適用して全体が$S$に属す．
+\end{enumerate}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item あきらか．
+\begin{align}
+ \tatev{x \\ y}=
+(1-t)^3 \tatev{x_0 \\ y_0}
++
+3(1-t)^2t \tatev{x_1 \\ y_1}
++
+3(1-t) t^2 \tatev{x_2 \\ y_2}
++
+t^3 \tatev{x_3 \\ y _3}.
+\end{align}
+ \item 係数の和は，
+\begin{align}
+(1-t)^3 + 3(1-t)^2 t + 3(1-t)t^2 + t^3
+=
+\sum_{i=0}^3 \combination{3}{i} (1-t)^i t^{3-i}
+=
+(1-t + t)^3
+=
+1.
+\end{align}
+よって，制御多角形が凸ならば，ベジェ曲線はその制御多角形に包まれる．
+\end{enumerate}
+ \item $0\le t \le 1$をパラメータとし，
+パラメータ表示
+\begin{align}
+ x &= \frac{(1-t)^2 x_1 + 2wt(1-t)x_2 + t^2 x_3}{(1-t)^2 + 2wt(1-t) + t^2},\\
+ y& =
+\frac{(1-t)^2 y_1 + 2wt(1-t)y_2 + t^2 y_3}{(1-t)^2 + 2wt(1-t) + t^2}
+\end{align}
+を考える．
+\begin{enumerate}[label=(\alph*)]
+ \item $w\ge 0$なら分母は消えない？
+\begin{align}
+ (分母)&=
+t^2(1-2w+1) + t(-2+2w) + 1 = 2(1-w)t^2 + 2(w-1)t + 1.
+\end{align}
+\begin{align}
+ (判別式)/4 =
+(w-1)^2 - 2(1-w)
+=
+w^2-1.
+\end{align}
+よって，$w<1$のときには分母は消えない．以降，$w \ge 1$とする．
+\begin{align}
+ (分母)\seigen{t=0} &= 1\\
+ (分母)\seigen{t=1}& =1.
+\end{align}
+また，$1-w\ge 0$で，グラフは上に凸なので，やはり$[0,1]$で根を持たない．
+ \item
+\begin{align}
+ x(0) &= x_1\\
+ y(0)& = y_1\\
+ x(1)& = x_3\\
+ y(1)& = y_3.
+\end{align}
+よって，$(x_1,y_1)$は曲線の始点に，$(x_3,y_3)$は終点になっている．
+ \item
+\begin{align}
+ f(t) &= (1-t)^2 + 2wt(1-t) + t^2,\\
+ g(t)& = (1-t)^2 x_1 + 2wt(1-t)x_2 + t^2 x_3,\\
+ h(t)& = (1-t)^2 y_1 + 2wt(1-t)y_2 + t^2 y_3
+\end{align}
+としておく．
+\begin{align}
+ f'(t) &= 2(1-t)(-1) + 2w((1-t)+t(-1)) + 2t \\
+ & =
+4t -2 +2w(1-2t)\\
+ & =
+2(2t-1+w(1-2t)),\\
+ g'(t)& =
+2(1-t)(-1)x_1 + 2w((1-t)+t(-1))x_2 + 2t x_3\\
+ & =
+2(t-1)x_1 + 2w(1-2t)x_2 + 2tx_3,\\
+ h'(t)&  = 2(t-1)y_1 + 2w(1-2t)y_2 + 2ty_3.
+\end{align}
+よって，
+\begin{align}
+ x'(t) &= (\frac{g}{f})'(t) = \frac{g'f - gf'}{f^2}(t),\\
+ y'(t)& = (\frac{h}{f})'(t) = \frac{h'f - hf'}{f^2}(t).
+\end{align}
+よって，
+\begin{align}
+ x'(0) &= \frac{(-2x_1 + 2wx_2)\cdot 1 - x_1\cdot 2(-1+w)}{1}\\
+&=
+2w(x_2-x_1),\\
+ y'(0)& =2w(y_2-y_1),\\
+ x'(1)& =\frac{(-2wx_2+2x_3)\cdot 1 - x_3\cdot 2(1-w)}{1}\\
+ & =
+2w(x_3-x_2),\\
+ y'(1)& = 2w(y_3-y_2).
+\end{align}
+たしかに，始点では$(x_1,y_1)$から$(x_2,y_2)$に進みはじめ，
+終点では$(x_2,y_2)$から$(x_3,y_3)$に向かっている．
+ \item 係数の総和は確かに1であり，三角形は常に凸なので，曲線は制御多角形，すなわち$(x_1,y_1),\, (x_2,y_2),\, (x_3,y_3)$のなす三角形に包まれる．
+ \item
+\begin{align}
+ \tatev{x(1/2) \\ y(1/2)} =
+\frac{1}{1+w}\cdot \frac{\tatev{x_1 \\ y_1} + \tatev{x_3 \\ y_3}}{2}
++
+\frac{w}{1+w}\tatev{x_2 \\ y_2}
+\end{align}
+？すなわち，曲線の真ん中の点は，始点と終点の中点と制御三角形の残りの頂点とを$1:w$で分けた点？$x$だけ考えれば十分．
+\begin{align}
+ x(1/2)
+&=
+\frac{\frac{x_1}{4} + \frac{w}{2}x_2 + \frac{x_3}{4}}{\frac{1}{2}+\frac{w}{2}}\\
+ & =
+\frac{x_1 + 2wx_2 + x_3}{2(1+w)}\\
+ & =
+\frac{1}{1+w}(\frac{x_1}{2} + \frac{x_3}{2}) + \frac{w}{1+w}x_2.
+\end{align}
+後半はあきらか．
+ \item 上式と述べたことよりあきらか．
+\end{enumerate}
+ \item 始点と終点での速度を考え，
+\begin{align}
+ (x_1,y_1) = (1,0),\quad (x_2,y_2) = (1,1),\quad (x_3,y_3)= (0,1)
+\end{align}
+とすればよいことがわかる．また，真ん中の点で
+\begin{align}
+ w:1  = (1-\frac{1}{\sqrt{2}}):(\sqrt{2}-1)
+\end{align}
+すなわち，
+\begin{align}
+ w= \frac{1-\frac{1}{\sqrt{2}}}{\sqrt{2}-1}
+=\frac{1}{\sqrt{2}}
+\end{align}
+とならなければならない．このとき，
+\begin{align}
+ x(t)&=
+\frac{(1-t)^2\cdot 1 + 2\frac{1}{\sqrt{2}}\cdot t(1-t)\cdot 1 + t^2 \cdot 0}{(1-t)^2 + 2\frac{1}{\sqrt{2}}t(1-t)+t^2}\\
+ & =
+\frac{(1-t)^2 + \sqrt{2}t(1-t)}{(1-t)^2 + \sqrt{2}t(1-t)+t^2},\\
+ y(t)& =
+\frac{(1-t)^2 \cdot 0 + 2\frac{1}{\sqrt{2}}\cdot t(1-t)\cdot 1 + t^2 \cdot 1}{(1-t)^2 + 2\frac{1}{\sqrt{2}}t(1-t)+t^2}\\
+ & =
+\frac{\sqrt{2}t(1-t)+t^2}{(1-t)^2 + \sqrt{2}t(1-t) + t^2}.
+\end{align}
+パラメタ付けされた曲線が円上にあることは計算で得られる．
+逆に，円弧がパラメタ付けされた曲線上にあることは，任意の$x$について対応する$t$があることは分かり，そこから$y$が$t$であらわせて，それがパラメタと一致する(略)．
+\end{enumerate}
+
+\subsection{イデアル}
+多変数多項式環の部分集合で，(1)0を含み，(2)和について閉じ，(3)$k[x_1,\dots,x_n]$倍について閉じるものをイデアルという．$f_1,\dots,f_m \in k[x_1,\dots,x_n]$について，
+\begin{align}
+ \gen{f_1,\dots,f_m} = \set{\sum_{i=1}^m c_i f_i | c_i \in k[x_1,\dots,x_n]}
+\end{align}
+を，$f_1,\dots,f_m$で生成されたイデアルとよぶ．というのは，これがイデアルになるからである．0の所属は全ての係数を0にすれば示される．和について閉じることは，係数の和を考えれば従い，$k[x_1,\dots,x_n]$倍について閉じることも同様に係数を見ればわかる．
+この生成されたイデアルの元は，連立方程式$f_1=\dots = f_m = 0$が成り立っているとき，その元も0となることに注意する．したがって，連立方程式から文字の消去などを足し引きかけ算をして行ったとき，その元はもとの連立方程式の式から生成されたイデアルに所属することになる．
+
+イデアル$I \subset k[x_1,\dots,x_n]$について，$I=\gen{f_1,\dots,f_n}$となる$f_1,\dots, f_n \in k[x_1,\dots,x_n]$が存在するとき，$I$を有限生成であるという．
+あとで，任意の多項式環が有限生成であることを見る．またこのとき，$f_1,\dots,f_n$を$I$の基底であるという．
+
+同じアフィン多様体でも表示はいろいろありうるが，アフィン多様体はそれを定義する連立方程式のイデアルによってのみ決定することがわかる：
+$f_1,\dots,f_a,g_1,\dots,g_b \in k[x_1,\dots,x_n]$とし，
+$\gen{f_1,\dots,f_a}=\gen{g_1,\dots,g_b}$であるとする．このとき，
+$\var(f_1,\dots,f_a)=\var(g_1,\dots,g_b)$となる．
+\begin{myproof}
+$\var(f_1,\dots,f_a)\subset \var(g_1,\dots,g_b)$ を示せば十分．
+$x\in\var(f_1,\dots,f_a)$とする．$x$は$f_1,\dots,f_a$のどれでも消える．
+$\gen{f_1,\dots,f_a}=\gen{g_1,\dots,g_b}$なので，$x$は$g_1,\dots,g_b$は
+どれも$f_1,\dots,f_a$の線形結合で書かれ，よってどの$g_1,\dots,g_b$でも消える．
+よって，$x\in \var(g_1,\dots,g_b)$であり，$\var(f_1,\dots,f_a)\subset \var(g_1,\dots,g_b)$である．
+\end{myproof}
+
+アフィン多様体は，多項式の組がすべて消える点の集合として定義されたが，ではアフィン多様体上で消える多項式は定義につかった多項式だけなのだろうか？それらを全てもとめることはできるか？例えば，ねじれ3次曲線$\var(y-x^2,z-x^3)$は，$x^2=y$を$x^3$に差し込んで，$z-xy$という，ねじれ3次曲線上消える多項式を作ることができる．考えるために，アフィン多様体について，その上で消える多項式全体を考える．すなわち：アフィン多様体$V\subset k^n$について，
+\begin{align}
+ \ideal(V) = \set{f\in k[x_1,\dots,x_n] ; f は V 上消える}
+\end{align}
+とする．これはイデアルになるので，アフィン多様体$V$のイデアルとよぶ．イデアルとなることを示す．
+\begin{myproof}
+ $V\subset k^n$をアフィン多様体とする．
+$f,g\in \ideal(V)$とし，$c\in k[x_1,\dots,x_n]$とする．
+また，$\bbold a =(a_1,\dots,a_n)\in V$とする．$f(\bbold a)=g(\bbold a)=0$である．
+\begin{itemize}
+ \item 0の所属：多項式0は$\bbold a$を消すので，$0\in \ideal(V)$．
+ \item 和について閉じる：$(f+g)(\bbold a)=f(\bbold a)+g(\bbold a)=0$．よって，$f+g \in \ideal(V)$．
+ \item スカラー倍について閉じる：$(cf)(\bbold a)=c(\bbold a)f(\bbold a)=c(\bbold a)\cdot 0 = 0$．よって，$cf\in \ideal(V)$．
+\end{itemize}
+\end{myproof}
+
+多様体のイデアルの例として，$\ideal(\set{(0,0)})\subset k[x,y]$を考える．つまり，$(0,0)$で消える2変数多項式全体の生成するイデアルである．これについて，$\ideal(\set{(0,0)})=\gen{x,y}$を示そう．
+\begin{myproof}
+\begin{itemize}
+ \item $\supset$：あきらか．
+ \item $\subset$：
+$f\in \ideal(\set{(0,0)})$とする．
+$f\in k[x,y]$なので，
+\begin{align}
+ f = \sum_{i=0}^N \sum_{j=0}^M c_{i,j}x^i y^j
+\end{align}
+と書く．$f(0,0)=c_{0,0}=0$となる．よって，
+\begin{align}
+ f= \sum_{i=1}^N c_{i,0}x^i + \sum_{j=1}^M c_{0,j}y^j + \sum_{i=1}^N \sum_{j=1}^M c_{i,j}x^i y^j
+\end{align}
+となり，$f\in \gen{x,y}$である．
+\end{itemize}
+\end{myproof}
+
+次に，$\ideal(k^n)$を考える．$\ideal(k^n)=\zeroset$を示す．
+\begin{myproof}
+ \begin{itemize}
+  \item $\supset$：あきらか．
+  \item $\subset$：$k^n$全域で消える多項式は無限個の根を持ち，それは多項式0にならざるをえない．
+ \end{itemize}
+\end{myproof}
+
+$V=\var(y-x^2,z-x^3)$とし，$\ideal(V)=\gen{y-x^2,z-x^3}$を示す．
+\begin{myproof}
+ \begin{itemize}
+  \item $\supset$：あきらか．
+  \item $\subset$：一般の単項式$x^\alpha y^\beta z^\gamma$について，
+\begin{align}
+ x^\alpha y^\beta z^\gamma
+&=
+x^\alpha ((y - x^2) + x^2)^\beta  ((z-x^3)+x^3)^\gamma\\
+\end{align}
+であるが，これを展開すれば$x^\alpha y^\beta z^\gamma \in (k[x])\gen{y-x^2,z-x^3}$がわかる(記法は察せ)．多項式は単項式の線形結合なので，任意の$k[x,y,z]$の元について，これは$(k[x])\gen{y-x^2,z-x^3}$に属する．
+
+$f\in \ideal (V)$とする．
+先のことより，
+\begin{align}
+ f(x,y,z) = (y-x^2)f_1(x) + (z-x^3)f_2(x) + f_3(x)
+\end{align}
+となる$f_1,f_2,f_3\in k[x]$が存在する．$V$は$t\mapsto (t,t^2,t^3)$というパラメタ付けがあるので，$f\in \ideal(V)$より，$t\in k$について，$f(t,t^2,t^3)=0$が成立しなければならない．このとき，
+\begin{align}
+ f(t,t^2,t^3) = f_3(t) = 0.
+\end{align}
+$t\in k$は任意だったので，$f_3$は無数の根を持つことになり，$f_3=0$である．よって，
+\begin{align}
+ f(x,y,z) = (y-x^2)f_1(x) + (z-x^3)f_2(x)
+\end{align}
+であり，$f\in (k[x])\gen{y-x^2,z-x^3} \subset \gen{y-x^2,z-x^3}$．
+ \end{itemize}
+\end{myproof}
+この例は2つの意味を持つ．まず，$f_3$が恒等的に消えるかどうかと，$f\in \gen{y-x^2,z-x^3}$となるかが等価であることが証明から分かり，$f$が$\gen{y-x^2,z-x^3}$に属するための条件が与えられたことである．これはパラメタ付けに依存した方法だが，一般的な方法を今後扱う．次に，$\ideal(\var(y-x^2,z-x^3))=\gen{y-x^2,z-x^3}$となっており，イデアルから多様体を作り，また元のイデアルに戻っていることである．これは一般的には成立しない：
+$f_1,\dots,f_s \in k[x_1,\dots,x_n]$
+$\gen{f_1,\dots,f_s}\subsetneq \ideal(\var(f_1,\dots,f_s))$．
+\begin{myproof}
+ \begin{itemize}
+  \item 包含：
+$f\in \gen{f_1,\dots,f_s}$とする．
+$f=c_1 f_1 + \dots c_s f_s$となる$c_1,\dots,c_s \in k[x_1,\dots,x_n]$が存在する．$f\in \ideal(\var(f_1,\dots,f_s))$とは，$f$が$\var(f_1,\dots,f_s)$上すべてで消えることを意味する．$x\in \var(f_1,\dots,f_s)$とすると，$x$は$f_1,\dots,f_s$のすべてで消えるので，$f$でも消える．$x$は任意だったので，$f$は$\var(f_1,\dots,f_s)$の任意の点で消える．よって，$f\in \ideal(\var(f_1,\dots,f_s))$となる．
+  \item 不一致：
+$\ideal(\var(x^2,y^2))$が$\gen{x^2,y^2}$より真に広いことを示す．
+$\var(x^2,y^2)$は$x^2=0,\,y^2=0$の定めるアフィン多様体だが，これは$(x,y)=(0,0)$なので，$\ideal(\var(x^2,y^2))=\ideal(\gen{(0,0)})=\gen{x,y}$．
+$x\in \gen{x,y}$だが，$x\notin \gen{x^2,y^2}$である．
+ \end{itemize}
+\end{myproof}
+
+イデアルは多様体を定めていたが，多様体のイデアルも多様体を定める．
+すなわち：アフィン多様体$V,W$について，
+$\ideal(V)=\ideal(W) \iff V=W$．
+\begin{myproof}
+ $\ideal(V)\subset \ideal(W)\iff V\supset W$を示せば，対称性より十分である．
+\begin{itemize}
+ \item $\ideal(V)\subset \ideal(W)\implies V\supset W$：
+$x\in W$とする．$x$は$W$を定める多項式で消える．$f_1,\dots,f_s$を$V$を定める多項式とする．$f_1,\dots,f_s$が$x$を消すだろうか？$\ideal(V)$は$V$を消す多項式全体であり，$f_1,\dots,f_s$は$V$を消すから，$f_1,\dots,f_s \in \ideal(V)$であり，仮定より$f_1,\dots,f_s \in \ideal(W)$である．したがって，$f_1,\dots,f_s$は$W$を消す．$x\in W$だったので，$f_1,\dots,f_s$は$x$を消す．よって，$W\subset V$．
+ \item $V\supset W \implies \ideal(V)\subset \ideal(W)$：
+$f\in \ideal(V)$とする．$f$は$V$上の点を消す．$V\supset W$なので，$f$は$W$を消す．よって，$f\in \ideal(W)$である．
+\end{itemize}
+\end{myproof}
+
+イデアルについて次の問をあげる．
+\begin{itemize}
+ \item イデアルの記述：任意のイデアルは有限生成で，$I$をイデアルとすれば$I=\gen{f_1,\dots,f_s}$なる$f_1,\dots,f_s$があるか？
+ \item イデアルの所属：$\gen{f_1,\dots,f_s}$について，$f\in \gen{f_1,\dots,f_s}$かどうかを判定するアルゴリズムは？先にねじれ3次曲線については，そのパラメタ付けの特殊性を利用して，$f(t,t^2,t^3)$が消えるかどうかで判定できるのであった．これが一般化できるか？
+ \item イデアルと多様体のイデアルの関係はどんなだろうか？(イデアル)$\subset$(多様体のイデアル)はすでに言ったが，逆はどんなときなのだろうか？
+\end{itemize}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item $x^2+y^2=1$と$xy=1$を考える．
+\begin{enumerate}[label=(\alph*)]
+ \item $x^4+x^2y^2=x^2$に$xy=1$を入れて，$x^4+1=x^2$となり，$x^4-x^2+1=0$を得る．
+\begin{align}
+ x^4-x^2+1
+=
+x^2(x^2+y^2-1) - (xy+1)(xy-1) \in \gen{x^2+y^2-1,xy-1}.
+\end{align}
+\end{enumerate}
+ \item $f_1,\dots,f_s \in I \iff \gen{f_1,\dots,f_s}\in I$？
+\begin{itemize}
+ \item $\supset$：自明．
+ \item $\subset$：$c_1 f_1 + \dots + c_s f_s \in k[x_1,\dots,x_n]$とする．
+$I$はスカラー倍で閉じるので，$f_1\in I$なので$c_1 f_1 \in I$である．同様に$c_2 f_2,\dots,c_s f_s \in I$である．$I$は和で閉じるので，$c_1 f_1 + \dots + c_s f_s \in I$．
+\end{itemize}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $\gen{x+y,x-y} = \gen{x,y}$？
+\begin{itemize}
+ \item $\subset$：自明．
+ \item $\supset$：先の問いより，$x,y\in \gen{x+y,x-y}$を言えば十分．$x = \frac{x+y}{2} + \frac{x-y}{2}  \in \gen{x+y,x-y}$．$y=\frac{x+y}{2}-\frac{x-y}{2} \in \gen{x+y,x-y}$．
+\end{itemize}
+ \item $\gen{x+xy,y+xy,x^2,y^2}=\gen{x,y}$？
+\begin{itemize}
+ \item $\subset$：自明．
+ \item $\supset$：$x,y \in \gen{x+xy,y+xy,x^2,y^2}$？$I=\gen{x+xy,y+xy,x^2,y^2}$とする．
+$x-y =(x+xy)-(y+xy) \in I$となる．$x^2 - xy = x(x-y)\in I$となる．
+$xy = (-1)(x^2-xy) + x^2 \in I$となる．$x = (x+xy)-xy \in I$．
+$y = (y+xy)-xy \in I$．
+\end{itemize}
+ \item $\gen{2x^2+3y^2-11,x^2-y^2-3}=\gen{x^2-4,y^2-1}$？
+\begin{itemize}
+ \item $\subset$：基底の所属を言えば十分．$2x^2+3y^2-11 = 2(x^2-4) + 3(y^2-1) \in \gen{x^2-4,y^2-1}$．
+$x^2-y^2-3 = (x^2-4) - (y^2-1) \in \gen{x^2-4,y^2-1}$．
+ \item $\supset$：基底の所属を言えば十分．$x^2-4 = \frac{1}{5}(2x^2+3y^2-11) + \frac{3}{5}(x^2-y^2-3) \in \gen{2x^2+3y^2-11,x^2-y^2-3}$．
+$y^2-1 = \frac{1}{5}(2x^2+3y^2-11) - \frac{2}{5}(x^2-y^2-3) \in \gen{2x^2+3y^2-11,x^2-y^2-3}$．
+\end{itemize}
+標数0でいいんだっけ？
+\end{enumerate}
+ \item さっきやった．
+ \item $\var(x+xy,y+xy,x^2,y^2)=\var(x,y)$？アフィン多様体はそれに対応するイデアルによって定まるが，先の問いより$\gen{x+xy,y+xy,x^2,y^2}=\gen{x,y}$であった．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 仮に$\gen{x}$が$k$-ベクトル空間が仮に有限次元であるとする．すると，次数が最高のものより大きい多項式を考えれば，それが基底の$k$係数線形結合で書けないので矛盾である．
+ \item イデアルは$k[x,y]$係数なので，
+\begin{align}
+ 0 = (\ub{y}_{係数})\ub{x}_{基底} - (\ub{x}_{係数})\ub{y}_{基底}.
+\end{align}
+ \item 上と同様に，$f_jf_i-f_if_j = 0$．
+ \item
+\begin{align}
+ x^2 + xy + y^2 = (x+y)\cdot x + y\cdot y = x\cdot x + (x+y)\cdot y.
+\end{align}
+ \item $\set{x}$は，この真部分集合は空になるので，極小基底である．
+$\set{x+x^2,x^2}$は，この真部分集合は$\set{x+x^2},\, \set{x^2}$である．
+$\gen{x+x^2}$の元は0でなければすべて$2$次以上なので，$x$は属さず，$k[x]$の基底にならない．$\gen{x^2}$の元も同様．
+
+線形代数の場合も，基底から1個外したらもとのものは書けなくなってしまう．
+\end{enumerate}
+ \item $\ideal(\var(x^n,y^m))=\ideal(\zeroset)=\gen{x,y}$．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $\ideal(V)$は根基イデアル？$f^n \in \ideal(V)$とし，$n$をこのようなもののうち最小のものとする．$n=1$を示せばよい．$n>1$とする．  $V=\var(\gen{f_1,\dots,f_s})$とする．$\gen{f_1,\dots,f_s}\subset \ideal(V)$．$f^n$は$f_1,\dots,f_s$で消える点すべてを消す．$n$は最小としたので，$f^{n-1}$には$f_1,\dots,f_s$で消える点のうち，消えないものがある．これを$x\in k^N$とする．$f^{n-1}(x)\neq 0$である．
+\begin{align}
+ 0 = f^n(x) = \ub{f^{n-1}(x)}_{\neq 0}f(x).
+\end{align}
+よって，$f(x)=0$である．これは$x$と$n$の性質に矛盾する．
+ \item $\gen{x^2,y^2}$は根基イデアルでない？
+$x^2 \in \gen{x^2,y^2}$だが$x\notin \gen{x^2,y^2}$である．
+\end{enumerate}
+ \item $V=\var(y-x^2,z-x^3)$とする．$\ideal(V)=\gen{y-x^2,z-x^3}$はすでに示した．
+\begin{enumerate}[label=(\alph*)]
+ \item $y^2-xz \in \ideal(V)$？$y^2-xz$を関数と見て，$V$を消すことを示せばよい．
+パラメタ付けより，$V=\gen{(t,t^2,t^3)|t\in \R}$である．$(y^2-xz)(t,t^2,t^3)=(t^2)^2 - t\cdot t^3 = 0$なので，$y^2-xz$を関数と見たとき，これは$V$を全て消す．
+ \item 結合であらわせ？
+\begin{align}
+ y^2-xz =  (y+x^2)(y-x^2) - x(z-x^3) \in \gen{y-x^2,z-x^3}.
+\end{align}
+\end{enumerate}
+ \item $\gen{x-y}=\ideal(\var(x-y))$？$\subset$は一般に成立する．
+$\supset$を示す．$f\in \ideal(\var(x-y))\subset k[x,y]$とする．
+$k[x,y]$の単項式は$k[x,y](x-y) + k[x]$の形に書き直せるので，
+$k[x,y]$も$k[x,y](x-y)+k[x]$の形にでき，
+\begin{align}
+ f(x,y) = g_1(x,y)(x-y) + g_2(x),\quad g_1\in k[x,y],\, g_2\in k[x]
+\end{align}
+とあらわせる．$\var(x-y)=\set{(t,t)|t\in k}$とパラメタ付けされるので，
+$f(t,t)=0$が恒等的に成立しなければならない．よって，
+\begin{align}
+ f(t,t) = g_2(t) = 0.
+\end{align}
+$g_2$は無限体$k$上で無数の根を持つことになるので，$g_2$は多項式として0である．
+よって，$f(x,y)=g_1(x,y)(x-y)$であり，$f\in \gen{x-y}$である．
+よって，$\ideal(\var(x-y))\subset \gen{x-y}$である．
+ \item $(t,t^3,t^4)$を考える．
+\begin{enumerate}[label=(\alph*)]
+ \item $V$はアフィン多様体？$V=\set{(t,t^3,t^4)}  = \var(\gen{y-x^3,z-x^4})$である．
+ \item $f\in \ideal(\var(y-x^3,z-x^4))\subset k[x,y,z]$とする．
+単項式は展開して，$k[x,y,z](y-x^3) + k[x,y,z](z-x^4) + k[x]$に属する．$k[x,y,z]$も同様なので，
+\begin{align}
+ f = g_1(y-x^3) + g_2(z-x^4) + g_3
+\end{align}
+となる$g_1,g_2 \in k[x,y,z],\, g_3 \in k[x]$である．
+$f$は$\var(\gen{y-x^3,z-x^4})=\set{(t,t^3,t^4)}$を消すので，
+$f(t,t^3,t^4)=0$が恒等的に成り立たなければならず，
+\begin{align}
+ f(t,t^3,t^4) = g_3(t) = 0
+\end{align}
+となる．$g_3$は無限体$k$上で無限個の根を持つので，$g_3$は多項式として0である．
+よって，$f = g_1(y-x^3)+ g_3(z-x^4)$であり，$f\in \gen{y-x^3,z-x^4}$である．
+$\gen{y-x^3,z-x^4}\subset \ideal(\var(y-x^3,z-x^4))$は一般に成立するので，
+\begin{align}
+ \gen{y-x^3,z-x^4} = \ideal(\var(y-x^3,z-x^4)) = \ideal(V).
+\end{align}
+\end{enumerate}
+ \item $(t^2,t^3,t^4)$を考える．これで定まる点の集合を$V$とする．
+\begin{enumerate}[label=(\alph*)]
+ \item $\var(x^3-y^2,y^4-z^3)$を考える．$(x,y,z)\in \var(x^3-y^2,y^4-z^3)$とする．$x^3=y^2,\, y^4=z^3$となる．$t=y^{1/3}$とすれば(これは一意に定まる)，$x=t^2,\,y=t^3,\, z=t^4$となり，パラメタ付けがなっている．逆はあきらかなので，
+$V = \var(x^3-y^2,y^4-z^3)$である．
+ \item[(a')] $\var(z-x^2,y^2-x^3)=V$である．$t$は同様に定めればよい．
+ \item $f\in \ideal(V) \subset k[x,y,z]$とする．
+単項式$x^\alpha y^{2\beta} z^\gamma(\beta \ge 1)$については，
+\begin{align}
+ x^\alpha y^{2\beta}z^\gamma = x^\alpha ((y^2-x^3)+x^3)^\beta ((z-x^2)+x^2)^\gamma \in k[x,y,z](y^2-x^3) + k[x,y,z](z-x^2).
+\end{align}
+単項式$x^\alpha y^{2\beta + 1}z^\gamma (\beta \ge 1)$については$y$を1個のけて同様に，$k[x,y,z](y^2-x^3) + k[x,y,z](z-x^2)$となる．
+よって，
+\begin{align}
+ f(x,y,z) = k[x,y,z](y^2-x^3) + k[x,y,z](z-x^2) + k[x,z]y + k[x,z]
+\end{align}
+となる．さらに$k[x,z]$のうち$z$が含まれているものは$z=(z-x^2)+x^2$として，
+\begin{align}
+ f(x,y,z) = k[x,y,z](y^2-x^3) + k[x,y,z](z-x^2) + k[x]y + k[x]
+\end{align}
+とできる．
+よって，
+\begin{align}
+ f = g_1(y^2-x^3) + g_2(z-x^2) + h_1 y + h_2
+\end{align}
+となる$g_1,g_2\in k[x,y,z]$，$h_1,h_2 \in k[x]$が存在する．パラメタ表示により，$f(t^2,t^3,t^4)=0$なので，
+\begin{align}
+0 = f(t^2,t^3,t^4) = h_1(t^2) t^3 + h_2(t^2).
+\end{align}
+よって，$k[t]$として$h_1(t^2)t^3 + h_2(t^2)=0$である．
+$f$に今度は$((-t)^2,(-t)^3,(-t)^4)=(t^2,-t^3,t^4)$を代入すると，
+\begin{align}
+ 0=f(t^2,-t^3,t^4) = -h_1(t^2)t^3 + h_2(t^2).
+\end{align}
+よって，$k[t]$として$-h_1(t^2)t^3 + h_2(t^2)=0$である．$k[t]$として
+\begin{align}
+ h_1(t^2)t^3 + h_2(t^2) &= 0\\
+ -h_1(t^2)t^3 + h_2(t^2)& =0.
+\end{align}
+よって，$h_2(t^2)=0$であり，$h_2 = 0$である．さらに$h_1(t^2)t^3=0$が従い，$h_1=0$である．よって，
+\begin{align}
+ f = g_1(y^2-x^3) + g_2(z-x^2).
+\end{align}
+よって，$f\in \gen{y^2-x^3,z-x^2}$である．よって，$\ideal(V)\subset \gen{y^2-x^3,z-x^2}$である．逆は示してあるので，$\ideal(V)=\gen{y^2-x^3,z-x^2}$である．
+\end{enumerate}
+ \item $I$は$\F_2$を消す多項式全体のなすイデアルとする．
+\begin{enumerate}[label=(\alph*)]
+ \item 基底$x^2-x,y^2-y$の所属を言えばよい．
+\begin{align}
+ (x^2-x)(1,1) = 0,\quad (x^2-x)(1,0) = 0,\quad (x^2-x)(0,1) = 0,\quad (x^2-x)(-,0) = 0.
+\end{align}
+$y^2-y$についても同様．よって，$x^2-x,\,y^2-y \in I$．
+ \item 略．
+ \item $(x,y)$に4通り入れる．略．
+ \item $f\in I$とする．(b)より
+\begin{align}
+ f(x,y) = A(x^2-x) + B(y^2-y) + axy + bx + cy + d
+\end{align}
+となる$A,B,a,b,c,d\in \F_2$と書ける．$f(0,0)=f(1,0)=f(0,1)=f(0,0)=0$が$f\in I$から従うので，(c)より$a=b=c=d=0$である．よって，
+\begin{align}
+ f(x,y) = A(x^2-x) + B(y^2-y)
+\end{align}
+である．よって，$f\in \gen{x^2-x,y^2-y}$であり，$I\subset \gen{x^2-x,y^2-y}$．
+よって，$I=\gen{x^2-x,y^2-y}$．
+ \item $x^2y+y^2x = x^2y + y^2x + 0\cdot xy = x^2y+y^2x + 2\cdot xy = y(x^2+x) + x(y^2+y)$．
+\end{enumerate}
+ \item 略．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略．
+ \item $f\in \ideal(X)$とする．$(x,y)\neq (1,1) \in \R^2$なら$f(x,y)=0$となる．
+$f(t,t)=0$が成り立つが，これは無数の根を持つことになり，$f$は0である．よって，
+$\ideal(X)=\set{0}$．
+ \item 略．
+\end{enumerate}
+\end{enumerate}
+
+\subsection{1変数多項式}
+多項式の割り算について研究する．
+
+0でない1変数多項式$f\in k[x]$について，その先頭項$\LT f$は，その最高次の項である．
+$f,g\in k[x]$について，$\deg \LT(f) \le \deg \LT(g) \iff \LT(f) | \LT(g)$である．証明はかんたん．
+
+1変数多項式の割り算を考える．
+\begin{align}
+ \Forall{f \in k[x]}\Forall{g \in k[x]\setminus\zeroset}\Exists{! p,q \in k[x]}
+f=gp + q かつ (q = 0 または \deg q < \deg g)
+\end{align}
+が成り立つ．また，このような$p,q$を求めるアルゴリズムが存在する．
+
+ \begin{myproof}
+\begin{algorithm}[H]
+\caption{1変数多項式の割り算}
+ \begin{algorithmic}[1]
+  \STATE{$q \defeq 0$}
+  \STATE{$r \defeq f$}
+  \WHILE{$\deg r \ge \deg g$}
+  \STATE{$\displaystyle a \defeq \frac{\LT r}{\LT g}$}
+  \STATE{$q \Leftarrow q + a$}
+  \STATE{$r \Leftarrow r - ag$}
+  \ENDWHILE
+ \end{algorithmic}
+\end{algorithm}
+($0$の次数を$-\infty$としておけばこれで通る．)
+まず，これが正しく動作すること，すなわち，この手続が停止することと，望む結果が得られることを示す．
+\begin{itemize}
+ \item 手続が停止すること：
+L.3からL.7で，更新される前の$q,r$をそのまま$q,r$，更新されたあとの$q,r$を$q',r'$とする．L.5より$q'=q+a$，6行目より$r'=r-ag$となる．$a$の定義より，$r$の先頭項は消えるので，$\deg r' < \deg r$である．よって，L.3からL.7のループを高々$\deg f + 1$回繰り返せば次数は$\deg f + 1$だけ減り，3行目の条件から抜け出すことになる．
+ \item 望む結果が得られること：
+L.2，L.7の時点で常に$f=gq+r$の関係があることを示す．L.2の時点では自明．
+L.3からL.7の更新前後の$q,r$を上と同様にする．
+\begin{align}
+ q' &= q+a\\
+ r'& = r-ag
+\end{align}
+となる．
+\begin{align}
+ f = gq+r = g(q'-a) + (r'+ag) = gq' + r'
+\end{align}
+となり，確かに成り立つ．L.3からL.7のループから抜けたときには$\deg r < \deg g$となっているから，このとき$q,r$は$f=gq+r$をみたし，かつ$\deg r < \deg g$となっている．これが望む結果であった．
+\end{itemize}
+最後に$q,r$の一意性を示す．仮に$f=gq' + r',\, \deg r' < \deg g$となる$q',r'$がもう1組あったとする．$gq + r = f = gq' + r'$となり，$g(q-q') + (r-r') = 0$となる．$g(q-q') = r'-r$である．$\deg(r'-r) \le \max(\deg r', \deg r) < \deg g$であるから，$\deg g(q-q') < \deg g$である．$g\neq 0$であったから，$q = q'$となるしかない．よってさらに$r=r'$である．一意性が示された．
+ \end{myproof}
+
+これを使って，多項式の根が有限個であることが示せる：
+体$k$上の0でない多項式$f\in k[x]$について，$f$は高々$\deg f$個の根を持つ．
+\begin{myproof}
+ \begin{itemize}
+  \item $\deg f = 0$のとき：
+$f\neq 0$なので，根は0個であり，正しい．
+  \item $\deg f > 0$のとき：$(\deg f) -1$次の多項式については成立すると仮定し，$f$で成立することを示す(背理法)．
+
+$f$が根を持たないときにはあきらかに成立するので，以降$f$は根を持つとする．その根を$a \in k$とする．$f(a)=0$となる．$f$を$x-a$で割り，
+\begin{align}
+ f = (x-a)q +r ,\quad \deg r < \deg q
+\end{align}
+となる$q,r\in k[x]$を得る．1次式$x-a$で割ったので，$\deg r < 1$であり，
+多項式$r$は0を含め定数である．
+$0=f(a)=(a-a)q(a) + r(a) = r(a)$である．よって，$r$は多項式として0である．
+よって，$f=(x-a)q$である．
+今，$x-a$がモニックなので$\deg f = \deg (x-a) + \deg q$であり，$\deg q = \deg f - \deg (x-a) = (\deg f) - 1$．帰納法の仮定より，$q$の根は高々$(\deg f)-1$個である．$b\neq a$が$f$の根であるなら，$b$は$q$の根であることを示す．
+$0=f(b)=(b-a)q(b)$であり，$b-a\neq 0$なので$q(b)=0$である．まとめると，$f$の根は$a$であるか，高々$(\deg f)-1$個しかない$q$の根であるから，$f$の根は高々$\deg f$個である．
+ \end{itemize}
+
+\end{myproof}
+
+これを使って$k[x]$のイデアルの構造を定めることができる：
+イデアル$I\subset k[x]$について，$f\in k[x]$が存在して，$I = \gen{f}$となる．
+さらに，このような$f$は非0な定数倍を除いて一意に定まる．
+\begin{myproof}
+ $I=\zeroset$のときには$I=\gen{0}$とすればよい．以降，$I\neq \zeroset$とする．
+$I$のうち，0でない次数が最小の多項式を$f$とする．$I = \gen{f}$を示す．$\gen{f} \subset I$は自明なので，$I\subset \gen{f}$を示す．
+$g\in I$とする．$g$を$f$で割り，
+\begin{align}
+ g = fq + r,\quad \deg r < \deg f
+\end{align}
+という$q,r\in k[x]$を得る．$f,g\in I$なので$r = g-fq \in I$である．
+$r\in I$であり，$\deg r < \deg f$であり，$f$は$I$のなかで0でない最小の次数の多項式なので，$r = 0$である．よって，$g=fq \in I$である．
+よって，$I\subset \gen{f}$である．
+
+一意性を示す．$\gen{f}=\gen{g}$とする．$f\in \gen{g}$なので，$f=gh$となる$h\in k[x]$が存在する．
+$\deg f = \deg gh \ge \deg g$となる．対称性より，$\deg g \le \deg f$ともなり，$\deg f = \deg g$となる．よって，$\deg h = 0$となり，$h$は0でない定数である．
+\end{myproof}
+
+整域のすべてのイデアルが単項で生成されるならば，その整域は単項イデアル整域
+(PID)という．この定理により，$k[x]$はPIDである．
+
+$\gen{f,g}$を単項イデアルであらわす方法を考える．
+そのために，最大公約数$\GCD$を定義する．
+$h$が$f,g$の最大公約数であるとは，
+\begin{itemize}
+ \item $h|f$かつ$h|g$．
+ \item $h$は上のようなもののうち最大である．すなわち，$h'|f かつ h'|g \implies h'|h$．
+\end{itemize}
+となることである．一意ではないが，$h=\GCD(f,g)$とかく．
+
+$\GCD$はある意味で一意で，次のことを示せる．
+\begin{enumerate}[label=(\arabic*)]
+ \item $\GCD(f,g)$は定数倍を除いて一意である．
+ \item $\gen{\GCD(f,g)}=\gen{f,g}$．
+ \item $\GCD(f,g)$は存在する．
+ \item $\GCD(f,g)$を求めるアルゴリズムが存在する．
+\end{enumerate}
+\begin{myproof}
+ \begin{enumerate}[label=(\arabic*)]
+  \item
+$h$も$\tilde h$も$GCD(f,g)$の条件をみたすとする．
+$h,\tilde h$より，$\tilde h | h$と$h | \tilde h$をみたす．よって，$\tilde h$は$h$の非0の定数倍である．
+  \item
+上の定理より，$k[x]$はPIDなので，$\gen{f,g}=\gen{h}$となる$h\neq 0$が存在する．$h$がGCDの条件をみたすことを示す．
+\begin{itemize}
+ \item わりきる：$f\in \gen{h}$なので，$f=h\tilde f$となる$\tilde f$が存在し，$h|f$である．同様に，$h|g$である．
+ \item 最大：$h'|f$，$h'|g$とする．
+$f = h' h_1$，$g=h' h_2$となる$h_1,h_2 \in k[x]$が存在する．
+$\gen{f,g}=\gen{h}$より，$h=h_3 f + h_4 g$となる$h_3,h_4 \in k[x]$が存在する．
+\begin{align}
+ h=h_3 f + h_4 g = h_3(h' h_1) + h_4(h' h_2) = h'(h_3 h_1 + h_4 h_2)
+\end{align}
+となる．よって，$h'|h$となる．\warn{とりあえず$h$を何かであらわすところから始めなければならない．}
+\end{itemize}
+  \item (2)が存在証明になっている．もとをたどれば，$k[x]$がPIDであることによる．
+  \item
+\begin{algorithm}[H]
+\caption{多項式についてのEuclidの互除法}
+$f,g \in k[x]$とし，$\GCD(f,g)$を求める．$\deg f \ge \deg g$として一般性を失わない．
+ \begin{algorithmic}[1]
+  \STATE{$p \defeq f$}
+  \STATE{$q \defeq g$}
+  \WHILE{$q \neq 0$}
+  \STATE{$(p,q) \Leftarrow (q,p \bmod q)$ }
+  \ENDWHILE
+ \end{algorithmic}
+\end{algorithm}
+まず，このアルゴリズムが停止することを示す．L.3からL.5の繰り返しで，
+更新される前の$p,q$をそのまま$p,q$，後を$p',q'$とすると，$\deg q' < \deg q$
+であり，$q$の次数は単調に減少することがわかる．よって，高々$\deg g + 1$回
+繰替えせば，L.3の終了条件$q = 0$が満たされ，アルゴリズムは停止する．
+
+$p,q,p',q'$を上と同様とする．$q'$の定義より，$p=q\tilde q + q'$となる$\tilde q\in k[x]$が存在する．これは$p$を$q$で割ったときの商であり，割り算のアルゴリズムにより一意に定まる．このとき，
+\begin{align}
+ \gen{p,q} = \gen{q\tilde q + q', q} = \gen{q', q} = \gen{q', p'}
+\label{163222_28Feb15}
+\end{align}
+となる．
+
+このアルゴリズムで，$(p,q)$は$n$回変化したとし，その各々を$(p_i,q_i)$とする．
+$(p_0,q_0)=(f,g)$であり，$q_n = 0$である．すると，上のことより
+\begin{align}
+ \gen{f,g} = \gen{p_0,q_0} = \gen{p_1,q_1} = \dots = \gen{p_{n-1},q_{n-1}} = \gen{p_n, q_n} = \gen{p_n, 0} = \gen{p_n}.
+\end{align}
+これで，$\gen{f,g}$が，アルゴリズムで求まった$p_n$の単項イデアルであらわせた．
+上の定理により，$\GCD(f,g)=p_n$である．
+ \end{enumerate}
+\end{myproof}
+
+いままでは2つの多項式についてのみ$\GCD$を考えてきたが，一般に$n(\ge 2)$個に対して考えることができる．$g$が$f_1,\dots,f_n$の最大公約元，$\GCD$であるとは，
+\begin{itemize}
+ \item わりきる：$g$は$f_1,\dots,f_n$のすべてを割り切る．
+ \item 最大である：$g$は「わりきる」をみたすうちで最大である．すなわち，$g'$が$f_1,\dots,f_n$のすべてを割り切るとき，$g'$は$g$も割り切ってしまう．
+\end{itemize}
+
+これについて，同様に次がなりたつ．
+\begin{enumerate}[label=(\arabic*)]
+ \item $\GCD(f_1,\dots,f_n)$は定数倍を除いて一意的である．
+ \item $\gen{f_1,\dots,f_n}=\gen{\GCD(f_1,\dots,f_n)}$．
+ \item $\GCD(f_1,\dots,f_n)$は存在する．
+ \item $\gen{f_1,\dots,f_n}=\gen{f_1,\GCD(f_2,\dots,f_n)}$．
+ \item $\GCD(f_1,\dots,f_n)$を求めるアルゴリズムが存在する．
+\end{enumerate}
+\begin{myproof}
+ \begin{enumerate}[label=(\arabic*)]
+  \item $g,g'$が$\GCD(f_1,\dots,f_n)$であるとする．$g$は「わりきる」の性質を持つが，これと$g'$の「最大である」の性質より$g| g'$となる．同様に$g' | g$となり，$g$は$g'$の定数倍である．
+  \item $k[x]$はPIDなので，$\gen{f_1,\dots,f_n}=\gen{g}$となる$g\in k[x]$が存在する．この$g$が$\GCD(f_1,\dots,f_n)$であることを示す．2つの性質を持つことを示せばよい．
+\begin{itemize}
+ \item わりきる：$f_1 \in \gen{g}$なので，$f_1$は$g$の倍元であり，$g|f_1$である．同様に$g$は$f_1,\dots,f_n$をわりきる．
+ \item 最大である：$\tilde g$が「わりきる」の性質を持つとする．$\tilde g \tilde f_1= f_1 ,\dots, \tilde g \tilde f_n= f_n $となる$\tilde f_1,\dots,\tilde f_n \in k[x]$が存在する．また，$g\in \gen{f_1,\dots,f_n}$なので，
+\begin{align}
+ g = f_1 f_1' + \dots + f_n f_n'
+\end{align}
+となる$f_1',\dots,f_n' \in k[x]$が存在する．よって，
+\begin{align}
+ g &= f_1 f_1' + \dots + f_n f_n'\\
+ & =
+\tilde g \tilde f_1 f_1' + \dots + \tilde g \tilde f_n f_n'\\
+ & =
+\tilde g(\tilde f_1 f_1' + \dots + \tilde f_n f_n').
+\end{align}
+よって，$\tilde g$は$g$をわりきる．
+\end{itemize}
+  \item (2)で，PIDから導かれる$\gen{f_1,\dots,f_n}$の単項の生成元の存在から従う．
+  \item
+\begin{align}
+ \gen{f_1,\dots,f_n} &=
+k[x]f_1 + \gen{f_2,\dots,f_n}\\
+ & \desceq{(2)}
+k[x]f_1 + \gen{\GCD(f_2,\dots,f_n)}\\
+ & =
+\gen{f_1, \GCD(f_2,\dots,f_n)}.
+\end{align}
+  \item
+$n\ge 2$と仮定し，$f_1,\dots,f_n$の最大公約元を求める．
+\begin{algorithm}[H]
+\caption{一般個数のGCDの計算}
+ \begin{algorithmic}[1]
+  \STATE{$i\defeq 2$}
+  \STATE{$g\defeq f_1$}
+  \WHILE{$i \le n$}
+  \STATE{$g \Leftarrow \GCD(g, f_i)$}
+  \STATE{$i \Leftarrow i+1$}
+  \ENDWHILE{}
+ \end{algorithmic}
+\end{algorithm}
+アルゴリズムの停止はあきらか．
+
+L.3からL.6の繰り返しで更新される前の$g$を$g_0$，更新されたあとを$g_1$とする．
+$g_1 = \GCD(g_0,f_i)$となる．このとき，$\gen{g_0, f_i} = \gen{g_1}$となる．
+
+$m$回更新された$g$を$g_n$とよぶ．$g_0 = f_1$であり，ループはちょうど$n-1$回実行されるので，これらは$g_0$から$g_{n-1}$まであることがわかる．
+\begin{align}
+ \gen{f_1,f_2,\dots,f_{n-1},f_n}
+&=
+\gen{g_0,f_2,\dots,f_{n-1},f_n}\\
+ & =
+\gen{g_1,f_3,\dots,f_{n-1},f_n}\\
+ & =
+\gen{g_2,f_4,\dots,f_{n-1},f_n}\\
+ & =
+\gen{g_{n-2},f_n}\\
+ & =
+\gen{g_{n-1}}.
+\end{align}
+先の証明より，この単項イデアルの生成元$g_{n-1}$が$\GCD(f_1,\dots,f_n)$であった．
+ \end{enumerate}
+\end{myproof}
+
+これによって，多項式のイデアルを単項イデアルとして具体的にあらわす方法があきらかになった．これを使って，イデアルの所属問題，すなわち「$f_1,\dots,f_n \in k[x]$と$f\in k[x]$について，$f \in \gen{f_1,\dots,f_n}$か？」を解く手続が得られる．
+つまり，$f \bmod \GCD(f_1,\dots,f_n)=0$かどうかが所属するかどうかである．
+\begin{myproof}
+\begin{align}
+ f\in \gen{f_1,\dots,f_n}
+&\iff
+f \in \gen{\GCD(f_1,\dots,f_n)}\\
+ & \iff
+f は \GCD(f_1,\dots,f_n) の倍元\\
+ & \iff
+f \bmod \GCD(f_1,\dots,f_n) = 0.
+\end{align}
+\end{myproof}
+
+\begin{enumerate}[label=(問題\arabic*)]
+ \item
+$f$が1次式のときは自明である．以降，$n$次式のときに成立すると仮定し，
+$n+1$次式で成立することを示す．$\C$は代数閉体なので
+$f$にはすくなくとも1つ根がある．それを$a\in \C$とする．
+$f$を$x-a$で割り，$f=p(x-a)+ q$を得る．ここで，$\deg q < 1$であり，
+$q$は定数である．$0=f(a)=p(a-a)+q(a)=q(a)$なので，$q$は多項式として0であり，
+$f=p(x-a)$である．$\deg p + \deg(x-a) = \deg f$であり，$\deg p = \deg f - \deg (x-a)= (n+1)-1 = n$である．よって，帰納法の仮定より$p=c(x-a_1)\dots(x-a_n)$
+となる$c,a_1,\dots,a_n\in \C$が存在する．よって，$f=c(x-a_1)\dots(x-a_n)(x-a)$
+である．
+ \item
+\begin{align}
+ A =
+\begin{pmatrix}
+ 1 & a_1 & \cdots & a_1^{n-1}\\
+ 1&a_2 &\cdots & a_2^{n-1}\\
+ \vdots& & & \vdots\\
+ 1&a_{n} &\cdots & a_n^{n-1}
+\end{pmatrix}\in M(k,n)
+\end{align}
+とする．$\det A = 0$だとする(背理法)．
+このとき，$A$の列たちは1次従属になるので，
+\begin{align}
+ c_0 \tatev{ 1\\ \vdots \\ 1} + c_1\tatev{a_1 \\ \vdots \\ a_n} + \dots + c_{n-1}\tatev{a_1^{n-1} \\ \vdots \\ a_n^{n-1}} = 0
+\end{align}
+なる，すべては0でない$c_1,\dots,c_{n-1}\in k$が存在する．よって，多項式$f$を
+\begin{align}
+ f(x) = c_0 + c_1 x + \dots + c_{n-1}x^{n-1}
+\end{align}
+と定めると，これは相異なる$n$個の解$a_1,\dots,a_n$を持つ．
+\begin{itemize}
+ \item $c_1=\dots=c_{n-1}=0$のとき：このときは$c_0\neq 0$のはずだが，$c_0 = 0$が1次従属性より従うので矛盾．
+ \item $c_1,\dots,c_{n-1}$のうち1つ以上が1のとき：$\deg f \le n-1$である．
+よって，$f$は高々$n-1$個の解を持つが，これは解$a_1,\dots,a_n$を持つことに矛盾する．
+\end{itemize}
+いずれにせよ矛盾である．
+ \item $f,g\in k[x,y]$について，$x=fg$のとき，$f$か$g$かは定数になることを示す．
+仮に$f,g$が両方とも定数でないとすると，$\deg f, \deg g \ge 1$となる．
+$k$は体で，特に整域なので，$\deg (fg)  = \deg f + \deg g \ge 2$となる．一方，$\deg x = 1$なので，これは矛盾である．
+
+$\gen{x,y}=\gen{h}$となる$h\in k[x,y]$が存在すると仮定する．
+$x\in \gen{h}$なので，$x=h\tilde h$となる$\tilde h\in k[x,y]$となる．
+先に示したことにより，$h$か$\tilde h$かは定数である．
+\begin{itemize}
+ \item $h$が定数のとき：
+$h\in \gen{x,y}$となるが，$\deg h \le 0$であり，$\gen{x,y}$
+の元はどれも$\deg$       が1以上なので，矛盾である．
+ \item $\tilde h$が定数のとき：$h=x/\tilde h$となる．よって，$\gen{h}=\gen{x}$となり，$\gen{x,y}=\gen{x}$となる．$y\in \gen{x}$となので，$y=x\tilde h'$となる
+$\tilde h' \in k[x,y]$が存在する．先に示したことより，$x$か$\tilde h'$かは定数になるが，$x$は定数ではないので$\tilde h'$が定数である．よって，$y$は$x$の定数倍となるが，これは矛盾である．
+\end{itemize}
+
+ \item $h$は$f,g$のGCDなので，$\gen{f,g}=\gen{h}$である．$h\in \gen{f,g}$なので，$A,B\in k[x]$が存在して，$Af+Bg = h$である．
+ \item なんか(\ref{163222_28Feb15})で使ってしまったが示す．
+$\gen{f-qg,g}=\gen{f,g}$？
+\begin{itemize}
+ \item $\subset$：$f-qg = f + (-q)g \in \gen{f,g}$．$g \in \gen{f,gg}$．
+ \item $\supset$：$f = 1\cdot (f-qg) + q\cdot g \in \gen{f-qg,g}$．
+$g \in \gen{f-qg,g}$．
+\end{itemize}
+ \item やった．
+ \item やった．
+ \item {\tt code/calcgcd.hs}で計算．
+\begin{enumerate}[label=(\alph*)]
+ \item $x^2 + x + 1$．
+ \item $x-1$．
+\end{enumerate}
+ \item {\tt code/calcgcd.hs}で計算．
+       $\GCD(x^3+x^2-4x-4,x^3-x^2-4x+4,x^3-2x^2-x+2)=x-2$．
+$\gen{x^3+x^2-4x-4,x^3-x^2-4x+4,x^3-2x^2-x+2}=\gen{x-2}$である．$x^2-4 = (x+2)(x-2)\in \gen{x-2}= \gen{x^3+x^2-4x-4,x^3-x^2-4x+4,x^3-2x^2-x+2}$．
+ \item 2つの多項式のGCDのアルゴリズムの$p_0,\dots,p_n$，$q_0,\dots,q_n$を得る．
+$p_i = q_i \tilde q_i + q_{i+1}\,(i=0,\dots,n-1)$，$p_{i+1}=q_i,\,(i=0,\dots,n-1)$，$q_n=0$，$p_0 = f$，$q_0=g$は成立している．ここにあげた式より，$p_0=f$，$p_1 = g$，$p_i = p_{i+1}\tilde q_i + p_{i+2}\,(p=0,\dots,n-2)$となる．さらに，$p_{n+1}=0$としておくことで，これらの式は拡張できる．そこで，
+\begin{align}
+\tatev{p_{i+2} \\ p_{i+1}} =
+\begin{pmatrix}
+ -\tilde q_i & 1\\
+ 1 & 0
+\end{pmatrix}
+\tatev{p_{i+1} \\ p_i} \quad (i=0,\dots,n-1)
+\end{align}
+となる．よって，
+\begin{align}
+ \tatev{0 \\ p_n} &= \tatev{p_{n+1} \\ p_n}\\
+ &=
+\gcdm{-\tilde q_{n-1}}\tatev{p_n \\ p_{n-1}}\\
+&=
+\gcdm{-\tilde q_{n-1}}\gcdm{-\tilde q_{n-2}}\tatev{p_{n-1} \\ p_{n-2}}\\
+&=
+\dots\\
+&=
+\gcdm{-\tilde q_{n-1}}\gcdm{-\tilde q_{n-2}}\dots\gcdm{-\tilde q_0}\tatev{p_{1} \\ p_{0}}\\
+&=
+\gcdm{-\tilde q_{n-1}}\gcdm{-\tilde q_{n-2}}\dots\gcdm{-\tilde q_0}\tatev{g \\ f}\\
+\end{align}
+よって，次のアルゴリズムが得られる．
+\begin{algorithm}[H]
+\caption{GCDの線形結合での表示を得るアルゴリズム}
+ \begin{algorithmic}[1]
+  \STATE{$p_0 \defeq f$}
+  \STATE{$q_0 \defeq g$}
+  \STATE{$M_0 = E$}
+  \STATE{$i\defeq 1$}
+  \WHILE{$i \le n$}
+  \STATE{$(p_i,q_i,\tilde q_{i-1})\defeq (q_i,p_i \bmod q_i, p_i \div q_i)$}
+  \STATE{$M_i \defeq \gcdm{-\tilde q_{i-1}}M_{i-1}$}
+  \STATE{$i \Leftarrow i + 1$}
+  \ENDWHILE{}
+  \STATE{$(f の係数) \defeq M_n の(2,2)成分$}
+  \STATE{$(g の係数) \defeq M_n の(2,1)成分$}
+ \end{algorithmic}
+\end{algorithm}
+とすればよい．$p \div q$は，本文で言うところの$\mathrm{quotient}(p,q)$．
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item $f\neq 0$とする．$\var(f)=\emptyset \iff fは定数$？
+\begin{itemize}
+ \item $\Rightarrow$：$\var(f)=\emptyset$なので，$f(x)=0$をみたす$x$は存在しない，すなわち，$f$は根を持たない．仮に$\deg f \ge 1$ならば，\warn{$\C$上の多項式なので}根を持ってしまい，$\deg f \le 0$である．$f$は0でないので，$f$は0でない定数である．
+ \item $\Leftarrow$：$f$は定数でかつ0でないので，$\deg f = 0$である．よって，$f$は定数である．
+\end{itemize}
+ \item $\var(f_1,\dots,f_n)=\emptyset \iff \GCD(f_1,\dots,f_n)=1$？
+アフィン多様体はイデアルから定まるので，$\gen{f_1,\dots,f_n}=\gen{\GCD(f_1,\dots,f_n)}$より，$\var(f_1,\dots,f_n)=\var(\GCD(f_1,\dots,f_n))$である．
+また，$\GCD(f_1,\dots,f_n)=1$は，GCDは定数倍の(そしてそれのみの)定数倍を持っていることから，$\GCD(f_1,\dots,f_n)$が定数ということである．
+よって，
+\begin{align}
+ \var(f_1,\dots,f_n) = \emptyset
+&\iff
+\var(\GCD(f_1,\dots,f_n)) = \emptyset\\
+ & \desciff{(a)}
+ \GCD(f_1,\dots,f_n)は定数\\
+ & \desciff{GCDの不定性}
+\GCD(f_1,\dots,f_n)= 1.
+\end{align}
+ \item $\GCD(f_1,\dots,f_n)$を計算して，1(あるいは定数)ならば多様体は空だし，そうでなければ多様体には点がある．
+\end{enumerate}
+ \item $\ideal(\var(f_1,\dots,f_n))$と$\gen{f_1,\dots,f_n}$との関係を調べる．
+今，体は$\C$で考える．したがって，任意の$f\in \C[x]$について，
+\begin{align}
+ f = c(x-a_1)^{r_1}\dots (x-a_s)^{r_s}
+\end{align}
+と分解される．これは，$\C$が代数閉体であることから従う．
+これに対し，
+\begin{align}
+ f_{red} = c(x-a_1)\dots (x-a_s)
+\end{align}
+と，冪を取り除いたものを被約部分(reduced part)，あるいは無平方部分(square-free part)とよぶ．
+\begin{enumerate}[label=(\alph*)]
+ \item $\var(f)=\set{a_1,\dots,a_n}$？
+\begin{align}
+ \var(f) = \set{x\in \C | f(x)=0} = \set{a_1,\dots,a_n}.
+\end{align}
+ \item $\ideal(\var(f))=\gen{f_{\red}}$？
+\begin{align}
+ f \in \ideal(\var(f))
+&\iff
+f は\var(f) 全てを消す．\\
+ & \iff
+f は \set{a_1,\dots,a_n} すべてを消す．\\
+ & \iff
+f_{red} | f\\
+ & \iff
+f\in \gen{f_{red}}.
+\end{align}
+\end{enumerate}
+ \item
+\begin{align}
+ f = \sum_{i=0}^n a_i x^i,\quad g=\sum_{j=0}^m b_j x^j
+\end{align}
+としておく．
+\begin{itemize}
+ \item $(af)' = af'$？
+\begin{align}
+ (af)'
+&=
+(a\sum_{i=0}^n a_i x^i)'\\
+ & =
+(\sum_{i=0}^n aa_i x^i)'\\
+ & =
+\sum_{i=1}^n iaa_i x^{i-1}\\
+ & =
+a\sum_{i=1}^n ia_i x^{i-1}\\
+ & =
+af'.
+\end{align}
+ \item $(f+g)'=f'+g'$？
+\begin{align}
+ (f+g)' &=
+(\sum_{i=0}^n a_i x^i +\sum_{j=0}^m b_j x^j)'\\
+ & =
+(\sum_{k=0}^{n+m} (a_k + b_k)x^k)'\\
+ & =
+\sum_{k=1}^{n+m} k(a_k+b_k)x^{k-1}\\
+ & =
+\sum_{k=1}^n ka_k x^{k-1} + \sum_{k=1}^m kb_k x^{k-1}\\
+ & =
+f' + g'.
+\end{align}
+ \item $(fg)' = f'g + fg'$？
+\begin{align}
+ (fg)'
+&=
+*(*(\sum_{i=0}^n a_i x^i)*(\sum_{j=0}^m b_j x^j))'\\
+ & =
+*(\sum_{i=0}^n \sum_{j=0}^m a_i b_j x^{i+j})'\\
+ & =
+\sum_{i=0}^n \sum_{j=0}^m a_i b_j (i+j)x^{i+j-1}\\
+ & =
+(\sum_{i=0}^n \sum_{j=0}^m a_i b_j i x^{i+j-1}) + (\sum_{i=0}^n \sum_{j=0}^m a_i b_j j x^{i+j-1})\\
+ & =
+(\sum_{i=0}^n ia_i x^{i-1})(\sum_{j=0}^m b_j x^j)
+  +
+(\sum_{i=0}^n a_i x^i)(\sum_{j=0}^m jb_j x^{j-1})\\
+ & =
+f' g + fg'.
+\end{align}
+\end{itemize}
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item
+\begin{align}
+ ((x-a)^r h)' &= r(x-a)^{r-1}h + (x-a)^r h'\\
+ & =
+(x-a)^{r-1}(rh + (x-a)h').
+\end{align}
+ここで，$(rh+(x-a)h')(a)=0$となったとする．このとき，$rh(a)=0$であり，$h(a)=0$なので，矛盾である．よって，$rh+(x-a)h'$は$a$を消さず，これを$h_1$とすればよい．
+ \item
+$i=1,\dots,l$とし，根$a_i$を考える．$f$を$(x-a_i)^{r_i}$と$c(x-a_1)^{r_1}\dots \nashi{(x-a_i)^{r_i}} \dots (x-a_l)^{r_l}$との積とみなすと，後者は$a_i$を消さないので，(a)より$f$の微分は$f' = (x-a_i)^{r_i-1}h_i$と書け，$h_i$は$a_i$を消さない．$i$は任意だったので，
+\begin{align}
+ f' &= (x-a_1)^{r_1-1}h_1\\
+ &\vdots \\
+ f'& = (x-a_l)^{r_l-1}h_l.
+\end{align}
+$(x-a_1),\dots,(x-a_l)$はどの2つも互いに素なので，$f'=(x-a_1)^{r_1-1}\dots (x-a_l)^{r_l-1}H$と書ける．
+各$i$について，
+\begin{align}
+ (x-a_1)^{r_1-1}\dots (x-a_l)^{r_l-1} H  = (x-a_i)^{r_i-1}h_i
+\end{align}
+となり，
+\begin{align}
+ (x-a_1)^{r_1-1}\dots \nashi{(x-a_i)^{r_i-1}} \dots (x-a_l)^{r_l-1}H  =  h_i
+\end{align}
+となる．右辺は$a_i$を消さないので左辺も$a_i$を消さず，よって$H$は$a_i$を消さない．$i$は任意であったから，
+$H$は$a_1,\dots,a_l$を消さない．
+
+ \item \warn{GCDを調べたいときはイデアルを調べよう!}
+一般に，多項式$f,g,h$について，$\gen{fg,fh}=\gen{f} \iff \gen{g,h} = \gen{1}$が成立する．
+
+$h=(x-a_1)^{r_1-1}\dots (x-a_l)^{r_l-1}$とする．$\gen{(x-a_1)\dots (x-a_l),H}=\gen{1}$が示せれば，上のことより，
+$\gen{f,f'}=\gen{h}$であり，$\GCD(f,f')=h$が示せる．$\gen{(x-a_1)\dots (x-a_l),H}=\gen{1}$を示そう．
+これには，$\GCD((x-a_1)\dots (x-a_l),H)=1$を示せばよい．$g$が$(x-a_1)\dots(x-a_l)$と$H$とを割り切るとする．
+\begin{align}
+ (x-a_1)\dots (x-a_l) = gg_1,\quad H = gg_2
+\end{align}
+となる$g_1,g_2$が存在する．$g$がもしも$(x-a_1)$から$(x-a_l)$のうち1つでも因子を含んでいるならば，
+$g$は$a_1$から$a_l$のどれかを消すことになり，$H$も$a_1$から$a_l$のどれかを消すことになるので，これは
+$H$の性質に反する．よって，$g$は$(x-a_1)$から$(x-a_l)$のどれも因子として持たない．よって，$g$は定数である．
+まとめると，$g$が$(x-a_1)\dots(x-a_l)$と$H$を割り切るならば，$g$は定数となる．よって，$\GCD((x-a_1)\dots (x-a_l),H)=1$である．
+\end{enumerate}
+
+ \item
+\begin{enumerate}[label=(\alph*)]
+ \item 略．GCDはモニックということにしておく．
+ \item  GCDは{\tt code/calcgcd.hs}で計算．
+\begin{align}
+ f&= x^{11} - x^{10} +2x^8 -4x^7 +3x^5 -3x^4+x^3 +3x^2 -x-1,\\
+ f'& = 11x^{10} - 10x^9 + 16x^7 - 28x^6 + 15x^4 -12x^3 + 3x^2 + 6x -1,\\
+ \GCD(f,f')& = x^6 -x^5 +x^3 -2x^2 + 1,\\
+ f/\GCD(f,f')& = x^5 + x^2 -x -1.
+\end{align}
+よって，
+\begin{align}
+ f_{red} = x^5 + x^2 -x -1.
+\end{align}
+\end{enumerate}
+ \item アフィン多様体はイデアルで定まるので$\var(f_1,\dots,f_s)=\var(\GCD(f_1,\dots,f_s))$であり，$\ideal(\var(f_1,\dots,f_s))=\ideal(\var(\GCD(f_1,\dots,f_s)))$である．$\ideal(\var(\GCD(f_1,\dots,f_s)))=\gen{\GCD(f_1,\dots,f_s)_{red}}$であるから，基底は$\GCD(f_1,\dots,f_s)_{red}$である．
+ \item {\tt code/calcgcd.hs}と{\tt code/squarefree.hs}で計算．
+\begin{align}
+ f &= x^5-2x^4+2x^2-x,\\
+ g& = x^5-x^4-2x^3+2x^2+x-1
+\end{align}
+とする．
+\begin{align}
+ \GCD(f,g) = x^4 -2x^3 + 2x -1.
+\end{align}
+よって，
+\begin{align}
+ \GCD(f,g)_{red} = x^2 - 1.
+\end{align}
+よって，基底は$x^2-1$である．
+\end{enumerate}

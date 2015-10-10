@@ -1,0 +1,2733 @@
+% -*- coding: euc-jp -*-
+
+
+\RequirePackage{amsmath,amssymb}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% utility macros                                                 %%%
+
+\def\let@bynames#1#2{%
+  \expandafter\let\csname #1\expandafter\endcsname\csname #2\endcsname
+}
+\def\glet@bynames#1#2{%
+  \expandafter\global\expandafter\let\csname #1\expandafter\endcsname\csname #2\endcsname
+}
+
+%% abbrevdef
+\def\generatemacros@abbrevdef#1#2#3{%
+  \@namedef{@genmacros@abbrevdef@#1}##1{%
+    \edef\@genmacros@abbrevdef@@tmp{#3}
+    \def\@genmacros@abbrevdef@aux####1####2{%
+      \@namedef{#1####2}{####1}
+    }
+    \expandafter\@genmacros@abbrevdef@aux\expandafter{\@genmacros@abbrevdef@@tmp}{##1}
+  }
+  \@namedef{addabbrev@#1}##1{%
+    \let@bynames{@defabbr}{@genmacros@abbrevdef@#1}
+    \@for#2:=##1\do{%
+      \expandafter\@defabbr\expandafter{#2}
+    }
+  }
+}
+% USASE:
+%   for example, to define \fooA, \fooB, \fooC, one can write like following.
+%     \generatemacros@abbrevdef{foo}{\@tmpa}{\noexpand\mathbb{\@tmpa}}
+%     \addabbrev@foo{A,B,C}
+
+
+%% superscript
+\def\defmacro@superscript#1#2{%
+  \@namedef{#1}{^{#2}}
+  \@namedef{#1of}{%
+    \@ifnextchar*
+      {\@nameuse{@defmacro@ssstar@#1}}
+      {\@nameuse{@defmacro@ss@#1}}
+  }
+  \@namedef{@defmacro@ss@#1}##1{{##1}^{#2}}
+  \@namedef{@defmacro@ssstar@#1}*##1{{\left(##1\right)}^{#2}}
+}
+% USAGE:
+%   write
+%     \defmacro@superscript{vdual}{\vee}
+%   then it generates macro \vdual, \vdualof and \vdualof* .
+%     A \vdual   =>  A^{\vee}
+%     \vdualof A   =>  {A}^{\vee}
+%     \vdualof*A   =>  {\left(A\right)}^{\vee}
+
+
+%% superscript
+\def\defmacro@script#1#2{
+  \@namedef{#1}{#2}
+  \@namedef{#1of}{
+    \@ifnextchar*
+      {\@nameuse{@defmacro@ssstar@#1}}
+      {\@nameuse{@defmacro@ss@#1}}
+  }
+  \@namedef{@defmacro@ss@#1}##1{{##1}^{#2}}
+  \@namedef{@defmacro@ssstar@#1}*##1{{\left(##1\right)}#2}
+}
+
+
+%% DeclareMathOperator
+\def\generatemacros@declaremathoperator#1{%
+ \@for\iter:=#1\do{%
+    \expandafter\genmacros@dmo@aux\iter,\@empty\@nil
+  }
+}
+\def\genmacros@dmo@aux#1,#2\@nil{%
+  \ifx#2\@empty
+    \expandafter\DeclareMathOperator\csname #1\endcsname{#1}
+  \else
+    \genmacros@dmo@two#1,#2\@empty
+  \fi
+}
+\def\genmacros@dmo@two#1,#2,\@empty{%
+  \expandafter\DeclareMathOperator\csname #1\endcsname{#2}
+}
+
+
+%% prefix star and bracket
+
+% \def\defmacro@prefix@starandbracket#1#2#3#4{%
+% %  \let\name#1
+%   \let\callmacro#2
+%   \let\stardefault#3
+%   \let\bracketdefault#4
+%  \expandafter\let\expandafter\@star\csname dmpsb@#1@star\endcsname
+%  \expandafter\let\expandafter\@nostar\csname dmpsb@#1@nostar\endcsname
+%  \expandafter\let\expandafter\@star@aux\csname dmpsb@#1@star@aux\endcsname
+
+%   \expandafter\def\csname #1\endcsname{\@ifstar{\@star}{\@nostar}}
+%   \expandafter\def\@nostar{\@ifnextchar[{\callmacro}{\callmacro[\bracketdefault]}}
+%   \expandafter\def\@star{\@ifnextchar[{\@star@aux}{\@star@aux[\bracketdefault] }}
+%   \expandafter\def\@star@aux[##1]{ \callmacro[##1]\stardefault }
+% }
+
+\def\defmacro@prefix@starandbracket#1#2#3#4{%
+%  \let\name#1
+%  \let\callmacro#2
+%  \let\stardefault#3
+%  \let\bracketdefault#4
+  \@namedef{#1}{%
+    \@ifstar
+      {\@nameuse{dmpsb@#1@star}}
+      {\@nameuse{dmpsb@#1@nostar}}}
+  \@namedef{dmpsb@#1@nostar}{%
+    \@ifnextchar[
+      {#2}
+      {#2[#4] }
+  }
+  \@namedef{dmpsb@#1@star}{%
+    \@ifnextchar[
+      {\@nameuse{dmpsb@#1@star@aux}}
+      {\@nameuse{dmpsb@#1@star@aux}[#4] }
+  }
+  \@namedef{dmpsb@#1@star@aux}[##1]{%
+    #2[##1] #3%
+  }
+}
+
+
+
+%%% command with scripts
+\def\mwm@define@command@with@scripts#1#2{% :: name -> cont -> nothing, define <name>
+% Define a macro <name>. This macro <name> can treat a superscript and a subscirpt.
+% The order of these scripts are not restricted. This macro eats scripts,
+% and then call continuation <cont>, with control sequences <name>@@supscript
+% and <name>@@subscript defined. Since the macro <name> contains a \begingroup,
+% <cont> has to contain a \endgroup .
+% Caution: due to the implementation, <name>^a_b^c are treated as <name>_b^c .
+  \@namedef{#1}{%
+    \begingroup
+    \def\mwm@dcws@cs{#1}%
+    \let\mwm@dcws@cont#2
+    \@namedef{\mwm@dcws@cs @@supscript}{}%
+    \@namedef{\mwm@dcws@cs @@subscript}{}%
+    \mwm@dcws@next@hat
+  }
+}
+    \def\mwm@dcws@next@hat{%
+      \@ifnextchar^ \mwm@dcws@byte@hat \mwm@dcws@next@underbar
+    }
+        \def\mwm@dcws@byte@hat^#1{%
+          \@namedef{\mwm@dcws@cs @@supscript}{#1}%
+          \mwm@dcws@next@underbar
+        }%
+    \def\mwm@dcws@next@underbar{%
+      \@ifnextchar_ \mwm@dcws@byte@underbar \mwm@dcws@next@hat@or@goto@cont
+    }
+        \def\mwm@dcws@byte@underbar_#1{%
+          \@namedef{\mwm@dcws@cs @@subscript}{#1}%
+          \mwm@dcws@next@hat@or@goto@cont
+        }%
+    \def\mwm@dcws@next@hat@or@goto@cont{%
+      \@ifnextchar^ \mwm@dcws@byte@hat \mwm@dcws@cont
+    }
+
+
+
+%%% lscirpt
+\def\mwm@define@lscript#1#2#3#4{%
+% :: cs -> sup-format -> sub-format -> arg-format -> nothing, define cs
+  \@namedef{lscript@#1@fontsetting}{%
+    \mathtoolsset{%
+      prescript-sup-format=#2,
+      prescript-sub-format=#3,
+      prescript-arg-format=#4,
+    }%
+  }%
+  \@namedef{#1}{%
+    \begingroup
+    \let@bynames{lscript@fontsetting}{lscript@#1@fontsetting}%
+    \lscript
+  }
+}
+    \mwm@define@command@with@scripts{lscript}{\lscript@main}
+    \def\lscript@main#1{%
+      \lscript@fontsetting
+      \prescript{\lscript@@supscript}{\lscript@@subscript}{#1}%
+      \endgroup\endgroup% one of them corresponds to \begingroup in \mwm@define@command@with@scripts
+    }%
+
+
+
+\def\mwm@define@math@operator#1#2{% :: name -> cs -> nothing, define <name>
+% Define a macro name. When it is called with no star, it call <cs>.
+% With star, it call <cs> with \smashoperator[r] in mathtools.sty .
+  \@namedef{#1}{%
+    \begingroup
+    \let\mwm@dmop@cs#2
+    \@ifnextchar* \mwm@dmop@star {\mwm@dmop@cs\endgroup}
+  }
+}
+    \def\mwm@dmop@star*{\mwm@dmop}
+    \mwm@define@command@with@scripts{mwm@dmop}{\mwm@dmop@smash}
+    \def\mwm@dmop@smash{%
+      \smashoperator[r]{\mwm@dmop@cs^{\mwm@dmop@@supscript}_{\mwm@dmop@@subscript}}%
+      \endgroup\endgroup
+    }
+
+
+
+%%% gcp
+\begingroup
+  \def\@tempa#1{\global\let\mwm@sptoken=#1#1} \@tempa{ }
+%\def\:{\global\let\mwm@sptoken= }\: %
+  \global\let\mwm@bgtoken={
+%\def\mwm@gcp@init{%
+%  \def\:#1\@nil{\global\let\mwm@bgtoken=\mwm@gcp@token}
+%  \futurelet\mwm@gcp@token\:{}\@nil
+%}
+%\mwm@gcp@init
+\endgroup
+
+%%% get corresponing parenthesis
+%%  set read formula to \mwm@gcp@@result
+\def\mwm@getcorrparen#1{%
+  \mwm@gcp@begin#1%
+}
+    \newcount\mwm@gcp@@count
+    \def\mwm@gcp@const@@popen{(}
+    \def\mwm@gcp@const@@pclose{)}
+    \def\mwm@gcp@const@@cbopen{\{}
+    \def\mwm@gcp@const@@cbclose{\}}
+    \def\mwm@gcp@const@@sbopen{[}
+    \def\mwm@gcp@const@@sbclose{]}
+    \def\mwm@gcp@const@@abopen{\langle}
+    \def\mwm@gcp@const@@abclose{\rangle}
+
+    \def\mwm@gcp@begin#1{%
+      \begingroup
+      \let\mwm@gcp@return#1
+      \mwm@gcp@@count = 0
+      \def\mwm@gcp@@res{}%
+      \mwm@gcp@loop
+    }
+    \def\mwm@gcp@loop{%
+      \futurelet\mwm@gcp@token\mwm@gcp@loop@a
+    }
+        \def\mwm@gcp@loop@a{%
+          \ifx\mwm@gcp@token\mwm@sptoken
+            \expandafter\mwm@gcp@loop@b
+          \else
+            \expandafter\mwm@gcp@loop@c
+          \fi
+        }
+        \expandafter\def\expandafter\mwm@gcp@loop@b\space{%
+          \toks0\expandafter{\mwm@gcp@@res}%
+%          \toks1{ }%
+%          \edef\mwm@gcp@@res{\the\toks0 \the\toks1}%
+          \edef\mwm@gcp@@res{\the\toks0 \space}%
+          \mwm@gcp@token\mwm@gcp@loop
+        }
+        \def\mwm@gcp@loop@c#1{%
+          \def\mwm@tempa{#1}%
+          \ifx\mwm@tempa\mwm@gcp@const@@popen
+            \advance \mwm@gcp@@count by 1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@pclose
+            \advance \mwm@gcp@@count by -1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@cbopen
+            \advance \mwm@gcp@@count by 1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@cbclose
+            \advance \mwm@gcp@@count by -1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@sbopen
+            \advance \mwm@gcp@@count by 1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@sbclose
+            \advance \mwm@gcp@@count by -1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@abopen
+            \advance \mwm@gcp@@count by 1
+          \else\ifx\mwm@tempa\mwm@gcp@const@@abclose
+            \advance \mwm@gcp@@count by -1
+          \fi\fi\fi\fi\fi\fi\fi\fi
+          \toks0\expandafter{\mwm@gcp@@res}%
+          \ifx\mwm@gcp@token\mwm@bgtoken
+            \toks1{{#1}}%
+          \else
+            \toks1{#1}%
+          \fi
+          \edef\mwm@gcp@@res{\the\toks0 \the\toks1}%
+          \ifnum\mwm@gcp@@count>0
+            \expandafter\mwm@gcp@loop
+          \else
+            \expandafter\mwm@gcp@end
+          \fi
+        }
+    \def\mwm@gcp@end{%
+      \toks0\expandafter{\mwm@gcp@@res}
+      \global\edef\mwm@gcp@@result{\the\toks0}
+      \global\let\mwm@gcp@@paren@type\mwm@tempa
+      \global\let\mwm@gcp@return\mwm@gcp@return
+      \ifx\mwm@gcp@@paren@type\mwm@gcp@const@@pclose
+        \global\let\mwm@next\mwm@gcp@call@return@p
+      \else\ifx\mwm@gcp@@paren@type\mwm@gcp@const@@cbclose
+        \global\let\mwm@next\mwm@gcp@call@return@cb
+      \else\ifx\mwm@gcp@@paren@type\mwm@gcp@const@@sbclose
+        \global\let\mwm@next\mwm@gcp@call@return@sb
+      \else\ifx\mwm@gcp@@paren@type\mwm@gcp@const@@abclose
+        \global\let\mwm@next\mwm@gcp@call@return@ab
+      \else
+        \global\let\mwm@next\mwm@gcp@call@return@relax
+      \fi\fi\fi\fi
+      \endgroup
+      \expandafter\mwm@next\mwm@gcp@@result\@nil
+    }
+    \def\mwm@gcp@call@return@relax#1\@nil{%
+      \mwm@gcp@return\relax\relax#1\@nil
+    }
+    \def\mwm@gcp@call@return@p(#1)\@nil{%
+      \mwm@gcp@return()#1\@nil
+    }
+    \def\mwm@gcp@call@return@cb\{#1\}\@nil{%
+      \mwm@gcp@return\{\}#1\@nil
+    }
+    \def\mwm@gcp@call@return@sb[#1]\@nil{%
+      \mwm@gcp@return[]#1\@nil
+    }
+    \def\mwm@gcp@call@return@ab\langle#1\rangle\@nil{%
+      \mwm@gcp@return\langle\rangle #1\@nil
+    }
+\def\mwm@gcp@more#1#2\@nil{%
+  \begingroup
+  \let\mwm@gcp@more@return#1
+  \def\mwm@gcp@more@@res{}%
+  \mwm@gcp@more@loop#2\@nil
+}
+    \def\mwm@gcp@more@loop{%
+      \futurelet\mwm@token\mwm@gcp@more@loop@a
+    }
+        \def\mwm@gcp@more@loop@a{%
+          \ifx\mwm@token\@undefined
+            \let\@next\mwm@gcp@more@loop@notfound
+          \else\ifx\mwm@token\mwm@sptoken
+            \let\@next\mwm@gcp@more@loop@b
+          \else\ifx\mwm@token(
+            \let\@next\mwm@gcp@more@loop@found
+          \else\ifx\mwm@token\{
+            \let\@next\mwm@gcp@more@loop@found
+          \else\ifx\mwm@token[
+            \let\@next\mwm@gcp@more@loop@found
+          \else\ifx\mwm@token\langle
+            \let\@next\mwm@gcp@more@loop@found
+          \else
+            \let\@next\mwm@gcp@more@loop@c
+          \fi\fi\fi\fi\fi\fi
+          \@next
+        }
+        \expandafter\def\expandafter\mwm@gcp@more@loop@b\space{%
+          \toks0\expandafter{\mwm@gcp@more@@res}%
+          \edef\mwm@gcp@more@@res{\the\toks0 \space}%
+          \mwm@gcp@more@loop
+        }
+        \def\mwm@gcp@more@loop@c#1{%
+          \toks0\expandafter{\mwm@gcp@more@@res}%
+          \ifx\mwm@token\mwm@bgtoken
+            \toks1{{#1}}%
+          \else
+            \toks1{#1}%
+          \fi
+          \edef\mwm@gcp@more@@res{\the\toks0 \the\toks1}%
+          \mwm@gcp@more@loop
+        }
+        \def\mwm@gcp@more@loop@notfound\@nil{%
+          \mwm@gcp@more@@res
+          \endgroup
+        }
+        \def\mwm@gcp@more@loop@found#1\@nil{%
+          \mwm@gcp@more@@res
+          \mwm@getcorrparen\mwm@gcp@more@return#1
+          \endgroup
+        }
+\def\define@gcp@command#1#2{%
+  \@namedef{#1}{%
+    \expandafter\mwm@getcorrparen\csname #1@recieve\endcsname
+  }
+  \@namedef{#1@recieve}##1##2##3\@nil{#2}
+}
+
+%%% END OF utility macros                                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% commalist push and pop                                         %%%
+
+\def\pushtocommalist#1#2{%
+  \edef#2{{#1},#2}
+}
+\def\popfromcommalist#1{%
+  \expandafter\popfromcommalist@aux#1\@nil#1
+}
+\def\popfromcommalist@aux#1,#2\@nil#3{%
+  \def#3{#2}
+  #1
+}
+\def\popfromcommalist@silently#1{%
+  \expandafter\popfromcommalist@silently@aux#1\@nil#1
+}
+\def\popfromcommalist@silently@aux#1,#2\@nil#3{%
+  \def#3{#2}
+}
+\def\let@popfromcommalist#1#2{%
+  \expandafter\let@popfromcommalist@aux#2,\@nil#1
+  \popfromcommalist@silently#2
+}
+\def\let@popfromcommalist@aux#1,#2\@nil#3{%
+  \def#3{#1}
+}
+
+%%% END OF commalist push and pop                                  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% paren                                                          %%%
+
+\def\paren{%
+  \@ifstar \paren@single \paren@rec
+}
+    \def\paren@single{%
+      \mwm@getcorrparen\paren@single@recieve
+    }
+    \def\paren@single@recieve#1#2#3\@nil{%
+      \left#1#3\right#2%
+    }
+    \def\paren@rec{%
+      \mwm@getcorrparen\paren@rec@recieve
+    }
+    \def\paren@rec@recieve#1#2#3\@nil{%
+      \left#1\mwm@gcp@more\paren@rec@recieve#3\@nil\right#2%
+    }
+
+%%% END OF paren                                                   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% greedy subscript                                               %%%
+
+%% initialize values
+\def\@greedyss@list@separator{{}}
+\def\@greedyss@separator{{}}
+
+
+\def\greedysubscript{%
+  \@ifnextchar[
+    {\greedysubscript@aux}
+    {\greedysubscript@aux[,]}
+}
+\def\greedysubscript@aux[#1]#2{%
+  \pushtocommalist\@greedyss@separator\@greedyss@list@separator
+  \def\@greedyss@separator{#1}
+  #2_\bgroup \futurelet\@greedyss@token\greedyss@first
+}
+\def\greedyss@first{%
+  \ifx_\@greedyss@token
+    \let\next\greedyss@first@takeone
+  \else
+    \let\next\greedyss@end
+  \fi \next
+}
+\def\greedyss@loop{%
+  \ifx_\@greedyss@token
+    \let\next\greedyss@takeone
+  \else
+    \let\next\greedyss@end
+  \fi \next
+}
+\def\greedyss@first@takeone#1#2{%
+  #2 \futurelet\@greedyss@token\greedyss@loop
+}
+\def\greedyss@takeone#1#2{%
+  \@greedyss@separator #2 \futurelet\@greedyss@token\greedyss@loop
+}
+\def\greedyss@end{
+  \egroup
+  \let@popfromcommalist\@greedyss@separator\@greedyss@list@separator
+}
+
+%%% END OF greedy subscript                                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% spacing                                                        %%%
+
+\def\putQ#1{\qquad#1\qquad}
+\def\putq#1{\quad#1\quad}
+\def\puts#1{\ #1\ }
+\def\putt#1{~#1~}
+\def\putS#1{\;#1\;}
+\def\puta#1{\>#1\>}
+\def\putC#1{\:#1\:}
+\def\putc#1{\,#1\,}
+\def\pute#1{\!#1\!}
+
+\def\putQq#1{\qquad#1\quad}
+\def\putsq#1{\ #1\quad}
+\def\puttq#1{~#1\quad}
+\def\putSq#1{\;#1\quad}
+\def\putaq#1{\>#1\quad}
+\def\putCq#1{\:#1\quad}
+\def\putcq#1{\,#1\quad}
+\def\puteq#1{\!#1\quad}
+
+\def\putQs#1{\qquad#1\ }
+\def\putqs#1{\quad#1\ }
+\def\putts#1{~#1\ }
+\def\putSs#1{\;#1\ }
+\def\putas#1{\>#1\ }
+\def\putCs#1{\:#1\ }
+\def\putcs#1{\,#1\ }
+\def\putes#1{\!#1\ }
+
+\def\putcomma#1{\;\!#1\ }
+\def\putcommaq#1{\;\!#1\quad}
+
+\def\comma{\putcomma,}
+\def\period{\putcomma.}
+\def\commaq{\putcommaq,}
+\def\periodq{\putcommaq.}
+\def\commaQ{\putcommaq,\quad}
+\def\periodQ{\putcommaq.\quad}
+\let\commaP\period
+\let\commaqP\periodq
+
+\def\commaS{\putes,}
+\def\periodS{\putes.}
+\def\commaqS{\puteq,}
+\def\periodqS{\puteq.}
+\def\commaQS{\puteq,\quad}
+\def\periodQS{\puteq.\quad}
+\let\commaSP\periodS
+\let\commaqSP\periodqS
+
+\def\rawie{\text{i.e.}}
+\def\rawresp{\text{resp.}}
+\def\rawsuchthat{\text{s.t.}}
+
+\def\ie{~~\rawie\>\>}
+\def\ies{\puts\rawie}
+\def\ieq{\putq\rawie}
+\def\resp{\resps}
+\def\resps{\putcs\rawresp}
+\def\respq{\putcq\rawresp}
+\def\suchthat{~~\rawsuchthat\>\>}
+\def\suchthats{\puts\rawsuchthat}
+\def\suchthatq{\putq\rawsuchthat}
+
+
+%%% END OF spacing                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% fundamentals                                                   %%%
+
+%% \defeq, \defiff
+\RequirePackage{colonequals}
+\let\defeq\colonequals
+\def\defiff{\stackrel{\mathrm{def}}{\iff}}
+
+%%% \ofrac (original frac, dfrac, tfrac)
+%\let\orig@dfrac\dfrac
+%\let\orig@tfrac\tfrac
+%
+%\def\ofrac{%
+%  \@ifnextchar[ \ofrac@opt \frac
+%}
+%    \def\ofrac@opt[#1]{%
+%      \def\@tempa{#1}%
+%      \ifx d#1
+%        \let\@next\orig@dfrac
+%      \else\ifx t#1
+%        \let\@next\orig@tfrac
+%      \else
+%        \let\@next\frac
+%      \fi\fi
+%      \@next
+%    }
+
+%% \ffrac, \difrac, \pdfrac
+\def\ffrac#1/#2;{\frac{#1}{#2}}
+\def\pdfrac{\difrac*}
+\def\difrac{%
+  \begingroup
+  \def\difrac@@index{}%
+  \def\difrac@@char{d}%
+  \@ifstar \difrac@a \difrac@b
+}
+    \def\difrac@a{%
+      \let\difrac@@char\partial
+      \difrac@b
+    }
+    \def\difrac@b{%
+      \@ifnextchar^ \difrac@byte@hat \difrac@c
+    }
+        \def\difrac@byte@hat^#1{%
+          \def\difrac@@index{#1}%
+          \difrac@c
+        }
+    \def\difrac@c#1/#2;{%
+      \def\difrac@@func{#1}%
+      \difrac@split#2||\@nil
+      \difrac@main
+    }
+        \def\difrac@split#1|#2|#3\@nil{%
+          \def\difrac@@var{#1}%
+          \def\difrac@@at{#2}%
+        }
+        \def\difrac@split#1|#2|#3\@nil{%
+          \def\difrac@@var{#1}%
+          \def\difrac@@at{#2}%
+          \ifx\difrac@@at\@empty \else
+            \difrac@split@eq#2=\@nil
+          \fi
+        }
+            \def\difrac@split@eq#1=#2\@nil{%
+              \def\@tempa{#2}%
+              \ifx\@tempa\@empty
+                \def\difrac@@at{\difrac@@var=#1}%
+              \fi
+            }
+    \def\difrac@main{%
+      \ifx\difrac@@at\@empty
+        \difrac@main@aux
+      \else
+        \left.\difrac@main@aux\right|_{\difrac@@at}%
+      \fi
+      \endgroup
+    }
+        \def\difrac@main@aux{%
+          \ifx\difrac@@index\@empty
+            \frac{\difrac@@char\difrac@@func}{\difrac@@char\difrac@@var}%
+          \else
+            \frac{\difrac@@char^{\difrac@@index}\!\difrac@@func}
+                 {\difrac@@char\difrac@@var^{\difrac@@index}}%
+          \fi
+        }
+
+%%% END of fundamentals                                            %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% set theory                                                     %%%
+
+
+\RequirePackage{varwidth}
+
+
+\def\exceptset#1{\setminus\set{#1}}
+
+
+%% macro \set
+\def\set@@default@space@bracket{3mu}%
+\def\set@@default@space@vert{6mu}%
+
+\def\set@@enlarge@true{true}%
+\def\set@@enlarge@false{false}%
+
+\def\set{%
+  \begingroup
+  \let\set@@enlarge\set@@enlarge@true
+  \let\set@left\left
+  \let\set@right\right
+  \let\set@@space@bracket\set@@default@space@bracket
+  \let\set@@space@vert\set@@default@space@vert
+  \def\set@@arg{}%
+  %
+  \@ifnextchar[ \set@bracket \set@star
+}
+    \def\set@bracket{%
+      \@ifnextchar[ \set@bite@bracket \set@star
+    }
+        \def\set@bite@bracket[#1]{%
+          \def\@tempa{#1}
+          \ifx\@tempa\@empty
+            \set@bite@bracket@aux0,\@nil
+          \else
+            \set@bite@bracket@aux#1,\@nil
+          \fi
+          \set@star
+        }
+            \def\set@bite@bracket@aux#1,#2\@nil{%
+              \def\@tempa{#2}
+              \ifx\@tempa\@empty
+                \def\set@@space@bracket{#1mu}%
+                \def\set@@space@vert{#1mu}%
+              \else
+                \set@bite@bracket@aux@two#1,#2\@nil
+              \fi
+            }
+                \def\set@bite@bracket@aux@two#1,#2,\@nil{%
+                  \def\set@@space@bracket{#1mu}%
+                  \def\set@@space@vert{#2mu}%
+                }
+    \def\set@star{%
+      \@ifstar \set@starbracket \set@bite@arg
+    }
+        \def\set@starbracket{%
+          \@ifnextchar[ \set@bite@starbracket {\set@bite@starbracket[]}%
+        }
+            \def\set@bite@starbracket[#1]{%
+              \def\@tempa{#1}
+              \ifx\@tempa\@empty
+                \let\set@left\relax
+                \let\set@right\relax
+                \let\set@@enlarge\set@@enlarge@false
+              \else
+                \let@bynames{set@left}{#1l}%
+                \let@bynames{set@right}{#1r}%
+              \fi
+              \set@bite@arg
+            }
+    \def\set@bite@arg#1{%
+      \def\set@@arg{#1}%
+      \set@main
+    }
+    \def\set@main{%
+      \let\set@next\set@novert
+      \expandafter\set@test@singlevert\set@@arg|\@nil
+      \expandafter\set@test@doublevert\set@@arg||\@nil
+      \expandafter\set@test@triplevert\set@@arg|||\@nil
+      \expandafter\set@next\set@@arg\@nil
+      \endgroup
+      \@ifnextchar\comma {\commaS\@gobble}
+        {\@ifnextchar\period  {\periodS\@gobble}
+        {\@ifnextchar\commaq  {\commaqS\@gobble}
+        {\@ifnextchar\periodq {\periodqS\@gobble}
+        {\@ifnextchar\commaQ  {\commaQS\@gobble}
+        {\@ifnextchar\periodQ {\periodQS\@gobble}
+        {\@ifnextchar\commaP  {\commaSP\@gobble}
+        {\@ifnextchar\commaqP {\commaqSP\@gobble} {}}}}}}}}%
+    }
+        \def\set@test@singlevert#1|#2\@nil{%
+          \def\@tempa{#2}%
+          \ifx\@tempa\@empty
+          \else
+            \let\set@next\set@singlevert
+          \fi
+        }
+        \def\set@test@doublevert#1||#2\@nil{%
+          \def\@tempa{#2}%
+          \ifx\@tempa\@empty
+          \else
+            \let\set@next\set@doublevert
+            \set@test@moredoublevert#2||\@nil
+          \fi
+        }
+        \def\set@test@moredoublevert#1||#2\@nil{%
+          \def\@tempa{#2}%
+          \ifx\@tempa\@empty
+          \else
+            \let\set@next\set@ddoublevert
+          \fi
+        }
+        \def\set@test@triplevert#1|||#2\@nil{%
+          \def\@tempa{#2}%
+          \ifx\@tempa\@empty
+          \else
+            \let\set@next\set@triplevert
+          \fi
+        }
+    \def\set@novert#1\@nil{%
+      \def\set@@space@bracket{0mu}%
+      \def\set@@space@vert{0mu}%
+      \set@aux{}{#1}\relax\relax\relax
+    }
+    \def\set@singlevert#1|#2\@nil{%
+      \set@aux{#1}{#2}\relax\relax\relax
+    }
+    \def\set@doublevert#1||#2\@nil{%
+      \set@aux{#1}{#2}\text\set@kern@text\set@kern@text
+    }
+        \def\set@kern@text{%
+          \setbox0 = \hbox{\phantom{ }}%
+          \kern-\wd0\relax
+        }
+    \def\set@ddoublevert#1||#2\@nil{%
+      \set@aux{#1}{#2}\set@mltext@vert\relax\relax
+    }
+        \def\set@mltext@vert#1{%
+          \begin{varwidth}{\textwidth}
+            \set@mltext@vert@loop#1||\@nil
+          \end{varwidth}
+        }
+            \def\set@mltext@vert@loop#1 #2||#3\@nil{%
+              \def\@tempa{#1}%
+              \ifx\@tempa\set@const@@l
+                \let\@tempb\set@mltext@vert@left
+              \else\ifx\@tempa\set@const@@c
+                \let\@tempb\set@mltext@vert@center
+              \else\ifx\@tempa\set@const@@r
+                \let\@tempb\set@mltext@vert@right
+              \else
+                \let\@tempb\set@mltext@vert@id
+              \fi\fi\fi
+              \def\@tempa{#3}%
+              \ifx\@tempa\@empty
+                \let\set@mltext@vert@next\@gobble
+                \@tempb{#2}%
+              \else
+                \let\set@mltext@vert@next\set@mltext@vert@loop
+                \@tempb{#2}\\%
+              \fi
+              \set@mltext@vert@next#3\@nil
+            }
+                \def\set@const@@l{l}
+                \def\set@const@@c{c}
+                \def\set@const@@r{r}
+                \def\set@mltext@vert@id#1{#1}
+                \def\set@mltext@vert@left#1{#1 \hfill}
+                \def\set@mltext@vert@center#1{\hfil #1 \hfil}
+                \def\set@mltext@vert@right#1{\hfill #1}
+    \def\set@triplevert#1|||#2\@nil{%
+      \set@aux{#1}{#2}\set@multilinetext\relax\relax
+    }
+        \def\set@multilinetext#1{%
+          \begin{varwidth}{\textwidth}
+            #1
+          \end{varwidth}
+        }
+    \def\set@aux#1#2#3#4#5{%
+      \def\@tempa{#1}
+      \ifx\@tempa\@empty
+        \set@left\{\mskip\set@@space@bracket
+          #4#3{#2}#5%
+        \mskip\set@@space@bracket\set@right\}%
+      \else
+        \set@left\{\mskip\set@@space@bracket
+          #1%
+          \mskip\set@@space@vert\set@midvert\mskip\set@@space@vert
+          #4#3{#2}#5%
+        \mskip\set@@space@bracket\set@right\}%
+      \fi
+    }
+        \def\set@midvert{%
+          \ifx\set@@enlarge\set@@enlarge@false
+            |%
+          \else\ifx\set@left\left
+            \mwm@mid@vertical
+          \else
+            \set@left|\set@right.
+          \fi\fi
+        }
+            % from braket.sty
+            \begingroup
+              \edef\@tempa{\meaning\middle}
+              \edef\@tempb{\string\middle}
+              \ifx\@tempa\@tempb
+                \gdef\mwm@mid@vertical{\middle|}
+                \gdef\mwm@mid@dblvertical{\middle\SavedDoubleVert}
+              \else
+                \gdef\mwm@mid@vertical{\vrule}
+                \gdef\mwm@mid@dblvertical{\vrule\mskip2.5mu\vrule}
+              \fi
+            \endgroup
+
+
+%% \minofset, ...
+{
+  \def\aux#1\@nil{%
+    \global\@namedef{#1ofset}{\@ifnextchar_{\@nameuse{#1ofset@underbar}}{\@nameuse{#1ofset@nounderbar}}}
+    \global\@namedef{#1ofset@underbar}_##1##2{%
+      \@nameuse{#1}_{##1}\set{##2}%
+    }
+    \global\@namedef{#1ofset@nounderbar}##1{%
+      \@nameuse{#1}\set{##1}%
+    }
+  }
+  \def\lis{min,max,inf,sup,gcd,lcm}
+  \@for\iter:=\lis\do{%
+    \expandafter\aux\iter\@nil
+  }
+}
+
+
+%% macro \comp, \composition
+\def\comp{%
+  \setbox0=\hbox{\@smallcirc}
+  \raisebox{0.2ex}{\hbox to 2\wd0{\hss\@smallcirc\hss}}
+}
+\def\@smallcirc{\scalebox{0.75}{$\circ$}}
+
+\def\compositeof#1{%
+  {\replace@commawithcomp#1\@end}
+}
+\def\replace@commawithcomp#1{%
+  \ifx#1\@end \let\next=\relax
+  \else
+    \ifx#1,\comp
+    \else#1
+    \fi
+    \let\next=\replace@commawithcomp
+  \fi
+  \next
+}
+
+% \def\compositeof#1{%
+%   \expandafter\compositeof@aux#1,\@empty
+% }
+% \def\compositeof@aux#1,#2{%
+%   #1
+%   \@for\iter:=#2\do{%
+%       \ifx\iter\@empty
+%       \else
+%         \comp\iter
+%       \fi
+%   }
+% }
+
+
+\def\permof_#1_#2{{}_{#1}\mathrm{P}_{#2}}
+\def\combof_#1_#2{{}_{#1}\mathrm{C}_{#2}}
+
+
+
+%% math operators
+\generatemacros@declaremathoperator{%
+  id,{proj,pr},lcm%
+}
+
+%% aliases
+\let\psubset\subsetneq
+\let\psupset\supsetneq
+\let\cross\times
+\let\intersection\cap
+\let\intsect\intersection
+\let\union\cup
+\let\Intersection\bigcap
+\let\Intsect\Intersection
+\let\Union\bigcup
+\let\dunion\coprod
+\let\dUnion\coprod
+\let\emptyarg\cdot
+\let\indlim\varinjlim
+\let\projlim\varprojlim
+
+%%% END OF set theory                                              %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% macro \map                                                     %%%
+
+% one can't use this in math mode
+% %% copied from etoolbox.sty
+% \newcommand{\ifblank}[1]{% from url.sty
+%   \etb@ifblank@i#1&&\@secondoftwo\@firstoftwo:}
+% \long\def\etb@ifblank@i#1#2&#3#4#5:{#4}
+%
+% \newcommand{\notblank}[1]{%
+%   \etb@ifblank@i#1&&\@firstoftwo\@secondoftwo:}
+
+%% from etoolbox.sty
+\def\mwm@ifblank#1{% from url.sty
+  \mwm@ifblank@aux#1\@mwm@ifblank@dummy\@mwm@ifblank@dummy\@secondoftwo\@firstoftwo\@mwm@ifblank@end}
+\long\def\mwm@ifblank@aux#1#2\@mwm@ifblank@dummy#3#4#5\@mwm@ifblank@end{#4}
+
+
+\def\mwm@ifblank@expand#1#2#3{%
+  \edef\@mwm@ifblank@expand@tempa{#1}
+  \expandafter\mwm@ifblank\expandafter{\@mwm@ifblank@expand@tempa}{#2}{#3}
+}
+
+
+\def\mwm@car#1{\expandafter\mwm@car@aux#1\@nil}
+    \def\mwm@car@aux#1,#2\@nil{#1}
+\def\mwm@cdr#1{\expandafter\mwm@cdr@aux#1\@nil}
+    \def\mwm@cdr@aux#1,#2\@nil{#2}
+
+\def\mwm@list@drophead#1{%
+  \expandafter\mwm@list@drophead@aux#1\@nil
+  \edef#1{\the\toks0}
+}
+    \def\mwm@list@drophead@aux#1,#2\@nil{%
+      \toks0{#2}
+    }
+
+
+%% \read@mmt#1
+%% Read a sequence like  X to[inj]^f Y to[surj]_g Z ; . A semicolon or \\ indicate the sequence ends
+%% there. First argment #1 is a continuation, that will called when this macro ends.
+%% This macro returns values by defining global macros
+%% \read@mmt@@@objects, \read@mmt@@@arrows \read@mmt@@@count .
+%% \read@mmt@@@objects and \read@mmt@@@arrows are comma separated lists that contain
+%% the objects and arrows that this macro read respectively. The input
+%%  \read@mmt#1 X to[inj]^f Y to[surj]_g Z ;
+%% gives
+%%  \read@mmt@@@objects={{X },{Y },{Z },} and \read@mmt@@@arrows={[inj]^{f}_{},[surj]^{}_{g},}
+%% as the result. Last of each one is always empty. \read@mmt@@@count is a counter that contains
+%% the number of arrows read; it is equal to that of objects - 1.
+
+\def\read@mmt#1{%
+  \read@mmt@begin#1%
+}
+    \newcount\read@mmt@@count
+    \newcount\read@mmt@@@count
+    \newif\if@read@mmt@lastread@t@
+
+    \def\read@mmt@begin#1{%
+      \begingroup
+      \let\read@mmt@cont#1\relax
+      \read@mmt@@count = 0
+      \let\read@mmt@@flag@to\read@mmt@@flag@to@false
+      \def\read@mmt@@res@partial{}%
+      \def\read@mmt@@res@objects{}%
+      \def\read@mmt@@res@arrow{}%
+      \def\read@mmt@@res@arrows{}%
+      \read@mmt@loop
+    }
+    \def\read@mmt@update@res{%
+      \read@mmt@update@objects
+      \toks0\expandafter{\read@mmt@@res@arrows}%
+      \toks1\expandafter{\read@mmt@@res@arrow}%
+      \edef\read@mmt@@res@arrows{\the\toks0 {\the\toks1},}%
+      \def\read@mmt@@res@arrow{}%
+    }
+        \def\read@mmt@update@objects{%
+          \toks0\expandafter{\read@mmt@@res@objects}%
+          \toks1\expandafter{\read@mmt@@res@partial}%
+          \edef\read@mmt@@res@objects{\the\toks0 {\the\toks1},}%
+          \def\read@mmt@@res@partial{}%
+        }
+    \def\read@mmt@loop{%
+      \futurelet\read@mmt@token\read@mmt@loop@a
+    }
+        \def\read@mmt@loop@a{%
+          \if@read@mmt@lastread@t@
+            \ifx\read@mmt@token o% found "to"
+              \@read@mmt@lastread@t@false
+              \let\mwm@next\read@mmt@loop@read@to
+            \else
+              \@read@mmt@lastread@t@false
+              \let\mwm@next\read@mmt@loop@e
+            \fi
+          \else
+            \ifx\read@mmt@token\mwm@sptoken
+              \let\mwm@next\read@mmt@loop@b
+            \else\ifx\read@mmt@token t% found "t", check it followed by "o"
+              \@read@mmt@lastread@t@true
+              \let\mwm@next\read@mmt@loop@d
+            \else\ifx\read@mmt@token ;% found delimiter ";"
+              \let\mwm@next\read@mmt@end
+            \else\ifx\read@mmt@token \\% found delimiter "\\"
+              \let\mwm@next\read@mmt@end
+            \else
+              \let\mwm@next\read@mmt@loop@c
+            \fi\fi\fi\fi
+          \fi
+          \mwm@next
+        }
+        \expandafter\def\expandafter\read@mmt@loop@b\space{%
+          \toks0\expandafter{\read@mmt@@res@partial}%
+          \toks1{ }%
+          \edef\read@mmt@@res@partial{\the\toks0 \the\toks1}%
+          \read@mmt@loop
+        }
+        \def\read@mmt@loop@c#1{%
+          \toks0\expandafter{\read@mmt@@res@partial}%
+          \ifx\read@mmt@token\mwm@bgtoken
+            \toks1{{#1}}%
+          \else
+            \toks1{#1}%
+          \fi
+          \edef\read@mmt@@res@partial{\the\toks0 \the\toks1}%
+          \read@mmt@loop
+        }
+        \def\read@mmt@loop@d#1{%
+          \read@mmt@loop
+        }
+        \def\read@mmt@loop@e{%
+          \toks0\expandafter{\read@mmt@@res@partial}%
+          \toks1{t}%
+          \edef\read@mmt@@res@partial{\the\toks0 \the\toks1}%
+          \read@mmt@loop
+        }
+        \def\read@mmt@loop@read@to o{%
+          \read@arrow@spec\read@mmt@loop@read@to@aux
+        }
+            \def\read@mmt@loop@read@to@aux{%
+              \set@arrow@spec\read@mmt@@res@arrow
+              \read@mmt@update@res
+              \advance \read@mmt@@count by 1
+              \read@mmt@loop
+            }
+        \def\read@mmt@loop@e{%
+          \toks0\expandafter{\read@mmt@@res@partial}%
+          \toks1{t}%
+          \edef\read@mmt@@res@partial{\the\toks0 \the\toks1}%
+          \read@mmt@loop
+        }
+    \def\read@mmt@end#1{%
+      \read@mmt@update@objects
+      \global\let\read@mmt@@@objects\read@mmt@@res@objects
+      \global\let\read@mmt@@@arrows\read@mmt@@res@arrows
+      \global\read@mmt@@@count = \read@mmt@@count
+      \gdef\read@mmt@@@last@read{#1}%
+      \global\let\mwm@next\read@mmt@cont
+      \endgroup
+      \mwm@next
+    }
+
+%% \read@mmt@prime#1
+%% examples:
+%%   \read@mmt@prime#1 from X to Y ... => \read@mmt#1 X to Y ...
+%%   \read@mmt@prime#1 f from X to Y ... => \read@mmt#1 X to Y ... and \mwm@mmt@@@maplabel={f }
+%%   \read@mmt@prime#1[isom]^F_G \alpha from X to Y ...
+%%      => \read@mmt#1 X to[isom]^F_G Y ... and \mwm@mmt@@@maplabel={\alpha }
+
+\def\read@mmt@prime#1{%
+  \begingroup
+  \let\call@mwm@mmt@cont#1\relax
+  \read@arrow@spec\read@mmt@prime@from
+}
+    \def\mwm@mmt@@empty@arrow@spec{[]^{}_{}}
+    \def\mwm@mmt@@@maplabel{}%
+
+    %% maplabel
+    \def\read@mmt@prime@from #1from{%
+      \mwm@ifblank{#1}
+        {\gdef\mwm@mmt@@@maplabel{}}
+        {\gdef\mwm@mmt@@@maplabel{#1}}%
+      \read@mmt@prime@to
+    }
+    \def\read@mmt@prime@to#1to{%
+      \set@arrow@spec\@tempa
+      \ifx\@tempa\mwm@mmt@@empty@arrow@spec
+        \toks1{}%
+      \else
+        \toks1\expandafter{\@tempa}%
+      \fi
+      \toks0{#1}%
+      \global\edef\mwm@tempa{\the\toks0 to\the\toks1}
+      \global\let\mwm@next\call@mwm@mmt@cont
+      \endgroup
+      \expandafter\read@mmt\expandafter\mwm@next\mwm@tempa
+    }
+
+
+\def\mwm@xxto{%
+  \read@arrow@spec\mwm@xxto@aux
+}
+    \def\mwm@xxto@aux{%
+      \toks0\expandafter{\read@arrow@spec@@@arrowtype}%
+      \toks1\expandafter{\read@arrow@spec@@@upperlabel}%
+      \toks2\expandafter{\read@arrow@spec@@@lowerlabel}%
+      \edef\@tempa{{\the\toks0}{\the\toks1}{\the\toks2}}%
+      \expandafter\xxrightarrow\@tempa
+    }
+\def\mwm@xxmapsto{%
+  \read@arrow@spec\mapsto
+}
+
+
+\def\set@arrow@spec#1{%
+  \toks0\expandafter{\read@arrow@spec@@@arrowtype}%
+  \toks1\expandafter{\read@arrow@spec@@@upperlabel}%
+  \toks2\expandafter{\read@arrow@spec@@@lowerlabel}%
+  \edef#1{[\the\toks0]^{\the\toks1}_{\the\toks2}}%
+}
+\def\read@arrow@spec#1{%
+  \begingroup
+  \let\read@arrow@spec@cont#1
+  \def\read@arrow@spec@@arrowtype{}%
+  \def\read@arrow@spec@@upperlabel{}%
+  \def\read@arrow@spec@@lowerlabel{}%
+  \read@arrow@spec@bracket
+}
+    \def\read@arrow@spec@bracket{%
+      \@ifnextchar[ \read@arrow@spec@byte@bracket \read@arrow@spec@hatunderbar
+    }
+        \def\read@arrow@spec@byte@bracket[#1]{%
+          \def\read@arrow@spec@@arrowtype{#1}%
+          \read@arrow@spec@hatunderbar
+        }
+    %% hat and underbar
+    \def\read@arrow@spec@hatunderbar{%
+      \@ifnextchar^
+        \read@arrow@spec@byte@hat
+        {\@ifnextchar_
+          \read@arrow@spec@byte@underbar
+          {\read@arrow@spec@end}}%
+    }
+        \def\read@arrow@spec@byte@hat^#1{%
+          \def\read@arrow@spec@@upperlabel{#1}%
+          \read@arrow@spec@hatunderbar
+        }
+        \def\read@arrow@spec@byte@underbar_#1{%
+          \def\read@arrow@spec@@lowerlabel{#1}%
+          \read@arrow@spec@hatunderbar
+        }
+    \def\read@arrow@spec@end{%
+      \global\let\read@arrow@spec@@@arrowtype\read@arrow@spec@@arrowtype
+      \global\let\read@arrow@spec@@@upperlabel\read@arrow@spec@@upperlabel
+      \global\let\read@arrow@spec@@@lowerlabel\read@arrow@spec@@lowerlabel
+      \global\let\mwm@next\read@arrow@spec@cont
+      \endgroup
+      \mwm@next
+    }
+
+
+\newcount\mwm@mmt@@count
+\def\mwm@mmt@max@array@size{cccccccccccccccccccccccccccccccccccccccc} % 40 c
+
+\def\print@mmt#1#2#3#4{%
+  \begingroup
+  \let\print@mmt@to@cmd#1\relax
+  \let\print@mmt@spacing#2\relax
+  \let\print@mmt@cont#4\relax
+  \let\mwm@map@@objects\read@mmt@@@objects
+  \let\mwm@map@@arrows\read@mmt@@@arrows
+  \mwm@mmt@@count = \read@mmt@@@count
+  \ifx#3\relax
+    \expandafter\print@mmt@loop
+  \else
+    \expandafter\print@mmt@array
+  \fi
+}
+    \def\print@mmt@loop{%
+      \ifnum\mwm@mmt@@count>0
+        \mwm@car\mwm@map@@objects
+        \print@mmt@spacing
+        \expandafter\print@mmt@loop@aux\mwm@map@@arrows\@nil
+        \print@mmt@spacing
+        \mwm@list@drophead\mwm@map@@objects
+        \mwm@list@drophead\mwm@map@@arrows
+        \advance \mwm@mmt@@count by -1
+        \let\mwm@next\print@mmt@loop
+      \else
+        \mwm@car\mwm@map@@objects
+        \let\mwm@next\print@mmt@end
+      \fi
+      \mwm@next
+    }
+        \def\print@mmt@loop@aux#1,#2\@nil{%
+          \print@mmt@to@cmd#1%
+        }
+    \def\print@mmt@end{%
+      \global\let\mwm@next\print@mmt@cont
+      \endgroup
+      \mwm@next
+    }
+    \def\print@mmt@array{%
+      \print@mmt@array@a
+    }
+        \def\print@mmt@array@a{%
+          \expandafter\print@mmt@array@b\mwm@map@@objects\@nil
+        }
+        \def\print@mmt@array@b#1,#2\@nil{%
+          \def\mwm@tempa{\displaystyle #1}
+          \expandafter\print@mmt@array@loop\mwm@map@@arrows\@nil#2\@nil
+        }
+        %   \print@mmt@array@loop arrs\@nil objs\@nil
+        \def\print@mmt@array@loop#1,#2\@nil#3,#4\@nil{%
+          \toks0\expandafter{\mwm@tempa}
+          \toks1\expandafter{\print@mmt@to@cmd#1}
+          \toks2{\displaystyle #3}
+          \edef\mwm@tempa{\the\toks0 & \the\toks1 & \the\toks2}%
+          \def\@tempb{#2}%
+          \ifx\@tempb\@empty% = #4 is empty
+            \let\mwm@next\print@mmt@array@end
+          \else
+            \let\mwm@next\print@mmt@array@loop
+          \fi
+          \mwm@next#2\@nil#4\@nil
+        }
+        \def\print@mmt@array@end\@nil\@nil{%
+          \global\let\print@mmt@array@@@line\mwm@tempa
+          \global\let\mwm@next\print@mmt@cont
+          \endgroup
+          \mwm@next
+        }
+
+\def\map{\read@mmt@prime\mwm@map}
+    \def\mwm@map{%
+      \ifx\mwm@mmt@@@maplabel\@empty
+      \else
+        \mwm@mmt@@@maplabel\colon
+      \fi
+      \print@mmt\mwm@xxto\ \relax\relax
+    }
+\def\mmt{\read@mmt@prime\mwm@mmt}
+    \def\mwm@mmt{%
+      \ifx\mwm@mmt@@@maplabel\@empty
+      \else
+        \mwm@mmt@@@maplabel\colon
+      \fi
+      \print@mmt\mwm@xxto\ \relax\mwm@mmt@b
+    }
+    \def\mwm@mmt@b{%
+      \space;\space
+      \read@mmt\mwm@mmt@c
+    }
+    \def\mwm@mmt@c{%
+      \print@mmt\mwm@xxmapsto\relax\relax\relax
+    }
+\def\dinmmt{%
+  \begingroup
+  \@dmmt@line@in@true
+  \read@mmt@prime\mwm@dmmt
+}
+\def\dmmt{%
+  \begingroup
+  \@dmmt@line@in@false
+  \read@mmt@prime\mwm@dmmt
+}
+    \newif\if@dmmt@line@in@
+
+    \def\mwm@dmmt{%
+      \let\mwm@mmt@@maplabel\mwm@mmt@@@maplabel
+      \print@mmt\mwm@xxto\relax{array}\mwm@dmmt@b
+    }
+    \def\mwm@dmmt@b{%
+      \let\mwm@mmt@line@a\print@mmt@array@@@line
+      \read@mmt\mwm@dmmt@c
+    }
+    \def\mwm@dmmt@c{%
+      \print@mmt\mwm@xxmapsto\relax{array}\mwm@dmmt@end
+    }
+    \def\mwm@dmmt@end{%
+      \let\mwm@mmt@line@b\print@mmt@array@@@line
+      \if@dmmt@line@in@
+        \mwm@mmt@make@line@in\read@mmt@@@count
+        \ifx\mwm@mmt@@maplabel\@empty
+          \def\mwm@mmt@line@c{\mwm@mmt@line@a \\}%
+          \def\mwm@mmt@line@d{\mwm@mmt@line@in \\}%
+          \def\mwm@mmt@line@e{\mwm@mmt@line@b}%
+        \else
+          \def\mwm@mmt@line@c{\mwm@mmt@@maplabel \colon \mwm@mmt@line@a \\}%
+          \def\mwm@mmt@line@d{\phantom{\mwm@mmt@@maplabel \colon} \mwm@mmt@line@in \\}%
+          \def\mwm@mmt@line@e{\phantom{\mwm@mmt@@maplabel \colon} \mwm@mmt@line@b}%
+        \fi
+      \else
+        \ifx\mwm@mmt@@maplabel\@empty
+          \def\mwm@mmt@line@c{\mwm@mmt@line@a \\}%
+          \def\mwm@mmt@line@d{}%
+          \def\mwm@mmt@line@e{\mwm@mmt@line@b}%
+        \else
+          \def\mwm@mmt@line@c{\mwm@mmt@@maplabel \colon \mwm@mmt@line@a \\}%
+          \def\mwm@mmt@line@d{}%
+          \def\mwm@mmt@line@e{\phantom{\mwm@mmt@@maplabel \colon} \mwm@mmt@line@b}%
+        \fi
+      \fi
+      \begin{array}\mwm@mmt@max@array@size
+        \mwm@mmt@line@c
+        \mwm@mmt@line@d
+        \mwm@mmt@line@e
+      \end{array}
+      \endgroup
+    }
+        \def\mwm@mmt@make@line@in#1{%
+          \mwm@mmt@@count = #1\relax
+          \def\mwm@mmt@line@in{\mmt@rotated@in}%
+          \loop
+            \toks0\expandafter{\mwm@mmt@line@in}
+            \toks1\expandafter{\mmt@rotated@in}
+            \edef\mwm@mmt@line@in{\the\toks0 & & \the\toks1 }
+            \advance \mwm@mmt@@count by -1
+          \ifnum\mwm@mmt@@count>0 \repeat
+        }
+\let\mapmapsto\mmt
+\let\dmapmapsto\dmmt
+\let\dinmapmapsto\dinmmt
+
+%\RequirePackage{graphicx}
+\def\mmt@rotated@in{\rotatebox{90}{$\in$}}
+
+
+\def\eseq{\read@mmt\mwm@eseq}
+    \def\mwm@eseq{%
+      \print@mmt\mwm@xxto\ \relax\relax
+    }
+\let\exactsequence\eseq
+\let\mapseq\eseq
+
+%%% END OF macro \map                                              %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% \xxrightarrow                                                  %%%
+
+\RequirePackage{mathtools}
+
+\def\xxrightarrow#1#2#3{{%
+  \edef\xxarrow@@arg{#1}%
+  \def\xxarrow@@lowerlabel{#3}%
+  \ifx\xxarrow@@lowerlabel\@empty
+    \def\xxarrow@@labels{{#2}}%
+  \else
+    \def\xxarrow@@labels{[#3]{#2}}%
+  \fi
+%
+  \ifx\xxarrow@@arg\@empty
+    \expandafter\xrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@r
+    \expandafter\xrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@hookr
+    \expandafter\xhookrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@eq
+    =%
+  \else\ifx\xxarrow@@arg\xxarrow@@inj
+    \expandafter\xhookrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@surj
+    \expandafter\xtwoheadrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@isom
+    \expandafter\xisomorphicrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@eqisom
+    \isom
+  \else\ifx\xxarrow@@arg\xxarrow@@natt
+    \expandafter\xnattrightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@nonetoone
+    \expandafter\xonetoonerightarrow\xxarrow@@labels
+  \else\ifx\xxarrow@@arg\xxarrow@@onetoone
+    \expandafter\xonetoonerightarrow\xxarrow@@labels
+  \else
+    #1%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}}
+    \def\xxarrow@@r{->}%
+    \def\xxarrow@@hookr{(->}%
+    \def\xxarrow@@eq{=}%
+    \def\xxarrow@@inj{inj}%
+    \def\xxarrow@@surj{surj}%
+    \def\xxarrow@@isom{isom}%
+    \def\xxarrow@@eqisom{=isom}%
+    \def\xxarrow@@natt{natt}%
+    \def\xxarrow@@nonetoone{1:1}%
+    \def\xxarrow@@onetoone{onetoone}%
+
+\providecommand*\xtwoheadrightarrow[2][]{%
+  \ext@arrow 0359\twoheadrightarrow@fill{#1}{#2}}
+\def\twoheadrightarrow@fill{%
+  \arrowfill@\relbar\relbar\twoheadrightarrow
+}
+
+\def\xisomorphicrightarrow{%
+  \@ifnextchar[
+    {\xisomorphicrightarrow@aux}
+    {\xisomorphicrightarrow@aux[]}%
+}
+\def\xisomorphicrightarrow@aux[#1]#2{%
+%  \xrightarrow[#1]{\xisomorphicrightarrow@undertilde{#2}}
+  \xrightarrow[#1]{\Undertilde{#2}}
+}
+\def\xisomorphicrightarrow@undertilde#1{%
+    \setbox0=\hbox {$#1$}%
+%    \setbox1=\hbox {$\widetilde {\phantom {\copy0}}$}%
+    \setbox1=\hbox {$\widetilde {\phantom {\copy0}}$}%
+%    \dp1 = 0pt
+%    \ht1 = 0pt
+    \setbox2=\vbox {\offinterlineskip\box0\kern 1pt \box1}%
+    \box2
+}
+
+
+%% from undtilde.sty
+% und[er]tilde.sty
+% From: lgy@phys.washington.edu (Laurence Yaffe)
+%\def\Undertilde{\let\@undertildesymbol\widetilde\@undertilde}
+\def\Undertilde{\let\@undertildesymbol\widetilde\@undertilde}
+\def\undertilde{\let\@undertildesymbol\tilde\@undertilde}
+
+\def\@undertilde#1%
+    {%
+    \setbox0=\hbox {$#1$}%
+%    \setbox1=\hbox {$\tilde {\phantom {\copy0}}$}% <-- original
+    \setbox1=\hbox {$\@undertildesymbol {\phantom {\copy0}}$}%
+    \setbox2=\vtop {\offinterlineskip\box0\kern 1pt \box1}%
+    \dp2 = 2.8 pt \box2%
+    }%
+
+\def\xonetoonerightarrow{%
+  \@ifnextchar[
+    {\xonetoonerightarrow@aux}
+    {\xonetoonerightarrow@aux[]}%
+}
+\def\xonetoonerightarrow@aux[#1]#2{%
+  \xrightarrow[#1]{\text{1:1}}%
+}
+
+\def\xnattrightarrow{%
+  \@ifnextchar[
+    {\xnattrightarrow@aux}
+    {\xnattrightarrow@aux[]}
+}
+\def\xnattrightarrow@aux[#1]#2{%
+  \xrightarrow[#1]{\natt@dot{#2}}
+}
+
+\def\natt@dot#1{\mwm@stackover{#1}{\cdot}{}}
+
+\def\mwm@stackover#1#2#3{{%
+  \def\arg@dim{#3}
+  \setbox1=\hbox{$#1$}%
+  \setbox2=\hbox{$#2$}%
+  \ifdim\wd1>\wd2
+    \def\@tempdima{\wd1}%
+  \else
+    \def\@tempdima{\wd2}%
+  \fi
+%
+  \setbox1=\hbox to \@tempdima{\hfill$#1$\hfill}%
+  \setbox2=\hbox to \@tempdima{\hfill$#2$\hfill}%
+  \setbox3=\vtop {\offinterlineskip\box1\kern 1pt \box2}%
+  \ifx\arg@dim\@empty
+  \else \dp3 = \arg@dim
+  \fi
+  \box3%
+}}
+
+\def\mwm@undertilde#1{%
+  \setbox0=\hbox{\hfill$#1$\hfill}%
+  \setbox1=\hbox to \wd0{\hfill$\@undertildesymbol{\phantom{\copy0}}$\hfill}%
+  \setbox2=\vtop {\offinterlineskip\box0\kern 1pt \box1}%
+%  \dp2 = 0 pt
+%  \dp2 = \ht1
+  \ht2 = \ht1
+  \box2
+%  \raisebox{-\ht0+0pt}{\box2}%
+}
+
+%%% END OF macro \xxrightarrow                                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% category theory                                                %%%
+
+%% font
+\let\category\mathscr
+
+%% oposite category
+\def\opcat#1{{{#1}^{\rm op}}}
+
+%%%%%FIXME
+\def\categoryof#1{%
+  \def\name{#1}%
+  \def\scheme{scheme}%
+  \def\Sschepppme{S-scheme}%
+  \ifx\name\scheme
+    \mathfrak{Sch}%
+  \fi
+  \ifx\name\Sscheme
+    \mathfrak{Sch}/S%
+  \fi
+}
+
+%%%%%FIXME
+\def\schemeover#1{%
+  \mathfrak{Sch} / #1
+}
+
+\def\catScheme{%
+  \@ifnextchar/
+    {\catScheme@slash}
+    {\catScheme@noslash}
+}
+\def\catScheme@slash/#1{%
+  (\textrm{Sch} / #1)
+}
+\def\catScheme@noslash{%
+  (\textrm{Sch})
+}
+
+\def\catSets{(\textrm{Sets})}
+
+
+\generatemacros@declaremathoperator{%
+  {Object,Ob},{Arrow,Arr},dom,{codom,cod}%
+}
+
+
+
+%%% END OF category theory                                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% algebra                                                        %%%
+
+%% math operators
+\let\Im\undefined
+\generatemacros@declaremathoperator{%
+  rank,sign,%
+  ad,Ad,%
+  {Mat,M},GL,SL,PGL,PSL,Sp,GSp,{LieO,O},SO,{LieU,U},SU,Spin,%
+  Stab,%
+  diag,%
+  %ker,
+  Ker,coker,Coker,im,Im,Sym,%
+  % algebraic geometry
+  Spec,Spf,Proj,{schHilb,Hilb},{schQuot,Quot},Pic,Div,Prym,%
+  Kod,%
+  % rigid geometry
+  Spa,%
+  %
+  Br,%
+  {rmHom, Hom},End,Aut,Inn,Out,Isom,%
+  {ch,char},Frac,Ann,ann,rad,supp,Supp,val,%
+  Ext,Tor,%
+  Ind,Res,{cInd,c-Ind},%
+  {mheight, ht},disc,%
+  codim%
+}
+\def\Endz{\End^0}
+\def\Picz{\Pic^0}
+\def\shHom{\mathfont@sheaf{H}om}
+\def\shAut{\mathfont@sheaf{A}ut}
+\def\shPic{\mathfont@sheaf{P}ic}
+\def\shPicz{\mathfont@sheaf{P}ic^0}
+
+%% left script \lscr, \lact (wrapper of \prescript in mathtools.sty)
+\mwm@define@lscript{lscr}{}{}{}
+\let\leftact\lscr
+\let\lact\lscr
+%% transpose
+\def\transpose{\leftact^t}
+\let\transp\transpose
+%% multiplicative group
+\def\gm{\@ifstar{\gm@star}{\gm@nostar}}
+\def\gm@star#1{{\left(#1\right)}^{\times}}
+\def\gm@nostar#1{{#1}^{\times}}
+%% inverse
+\defmacro@superscript{inv}{-1}
+\defmacro@superscript{abelianized}{\mathrm{ab}}
+
+%% duals
+\def\dual@aux#1#2{%
+  \settowidth\@tempdima{$#2$}
+  \@tempdimb=#1\@tempdima
+  \hspace\@tempdimb#2
+}
+\def\dual@vee{\dual@aux{-0.2}\vee}
+\def\dual@headvee{\dual@aux{-0.1}\vee}
+\def\dual@wedge{\dual@aux{-0.2}\wedge}
+\def\dual@headwedge{\dual@aux{-0.1}\wedge}
+
+\defmacro@superscript{adual}{*}
+\defmacro@superscript{aadual}{**}
+\defmacro@superscript{aaadual}{***}
+\defmacro@superscript{vdual}{\dual@headvee}
+\defmacro@superscript{vvdual}{\dual@headvee\dual@vee}
+\defmacro@superscript{vvvdual}{\dual@headvee\dual@vee\dual@vee}
+\defmacro@superscript{wdual}{\dual@headwedge}
+\defmacro@superscript{wwdual}{\dual@headwedge\dual@wedge}
+\defmacro@superscript{wwwdual}{\dual@headwedge\dual@wedge\dual@wedge}
+
+\let\dual\adual
+\let\ddual\aadual
+\let\dddual\aaadual
+\let\dualof\adualof
+\let\ddualof\aadualof
+\let\dddualof\aaadualof
+\let\hdual\wdual
+\let\hhdual\wwdual
+\let\hhhdual\wwwdual
+\let\hdualof\wdualof
+\let\hhdualof\wwdualof
+\let\hhhdualof\wwwdualof
+
+
+%% generators of group
+\def\putangle{%
+  \@ifnextchar*{\putangle@auxast}{\putangle@aux}
+}
+\def\putangle@aux#1{\left\langle#1\right\rangle}
+\def\putangle@auxast#1#2{\langle#2\rangle}
+\let\gensubgroup\putangle
+
+%% ring of formal power series
+\def\formalpowerseries#1[[#2]]{%
+%  #1\hspace{0.1em}[\![#2]\!]
+  #1[\![#2]\!]
+}
+\def\formalLaurentseries#1((#2)){%
+%  #1\hspace{0.1em}(\!(#2)\!)
+  #1(\!(#2)\!)
+}
+\let\fpsr\formalpowerseries
+\let\fpsf\formalLaurentseries
+
+%% series
+\def\series@nostar[#1 <= #2 <= #3]#4#5{%
+  \sum_{#2 = #1}^{#3} #4_{#2} #5^{#2}
+}
+\def\series@star[#1 <= #2<= #3]#4#5{%
+\def\@tempa{#5}
+  \ifx\@tempa\@empty{%
+    \sum_{#2 = #1}^{#3} #4 #5
+  }\else{%
+    \sum_{#2 = #1}^{#3} #4 #5^{#2}
+  }\fi
+}
+\def\series{\@ifstar{\series@star}{\series@nostar}}
+
+
+%% aliases
+\def\cdSum@{\mathop{\widehat\bigoplus}}
+\def\cdSum@@{\DOTSB \cdSum@ \slimits@}
+\def\cTensor@{\mathop{\widehat\bigotimes}}
+\def\cTensor@@{\DOTSB \cTensor@ \slimits@}
+
+\mwm@define@math@operator{Sum}{\sum}
+\mwm@define@math@operator{Prod}{\prod}
+\mwm@define@math@operator{coProd}{\coprod}
+\mwm@define@math@operator{dSum}{\bigoplus}
+\mwm@define@math@operator{Tensor}{\bigotimes}
+\mwm@define@math@operator{cdSum}{\cdSum@@}
+\mwm@define@math@operator{cTensor}{\cTensor@@}
+\mwm@define@math@operator{eProd}{\bigwedge}
+
+%\let\directsum\oplus
+\let\dsum\oplus
+\let\tensor\otimes
+\def\ctensor{\widehat\tensor}
+
+% consider to use \sideset
+%\let\rSum{\Sum^\prime}
+%\let\rProd{\Prod'}
+%\let\rcoProd{\coProd'}
+%\let\rdSum{\dSum'}
+%\let\rtensor{\tensor'}
+%\let\rTensor{\Tensor'}
+
+\let\closure\overline
+\let\subgroup\le
+\let\nsubgroup\lhd
+\let\nsupgroup\rhd
+\let\isom\cong
+
+
+
+%% Hom
+\mwm@define@command@with@scripts{Hom}{\Hom@main}
+\def\Hom@main{%
+  \ifx\Hom@@subscript\Hom@@cont
+    \def\Hom@@subscript{\text{cont}}%
+  \else\ifx\Hom@@subscript\Hom@@AV
+    \def\Hom@@subscript{\mathrm{AV}}%
+  \fi\fi
+  \rmHom^{\Hom@@supscript}\sb{\Hom@@subscript}%
+  \endgroup
+}
+    \def\Hom@@cont{cont}%
+    \def\Hom@@AV{AV}%
+
+
+%% (co)homology
+\mwm@define@command@with@scripts{H}{\H@main}
+\def\H@main{%
+  \ifx\H@@subscript\H@@sing
+    \def\H@@subscript{\mathrm{sing}}%
+  \else\ifx\H@@subscript\H@@Gal
+    \def\H@@subscript{\mathrm{Gal}}%
+  \else\ifx\H@@subscript\H@@et
+    \def\H@@subscript{\mathrm{\acute{e}t}}%
+  \fi\fi\fi
+ H^{\H@@supscript}\sb{\H@@subscript}%
+ \endgroup
+}
+    \def\H@@sing{sing}%
+    \def\H@@Gal{Gal}%
+    \def\H@@et{et}%
+
+%%% END OF algebra                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% field theory, Galois theory                                    %%%
+
+\generatemacros@declaremathoperator{%
+  tr,Tr,{trace,Tr},{norm,N},%
+  {rmGal,Gal},Frob,%
+  ord%
+}
+
+\let\algcl\overline
+\def\sepcl#1{{#1^{\text{sep}}}}
+
+\def\aGal{G} % for backward compatibility (obsolute)
+%%% Galois group
+% \Gal(L/K)  =>  \rmGal(L/K)
+% \Gal(K)    =>  G_K
+\def\Gal(#1){%
+  \mwm@is@abs@Gal#1/\@nil
+  \if@mwm
+    G_{#1}%
+  \else
+    \rmGal(#1)%
+  \fi
+}
+    \def\mwm@is@abs@Gal#1/#2\@nil{%
+      \def\@tempa{#2}%
+      \ifx\@tempa\@empty \@mwmtrue \else \@mwmfalse \fi
+    }
+
+
+% the natural numbers, die ganzen Zahlen,
+% field of rational numbers, real numbers, complex numbers,
+\generatemacros@abbrevdef{}{\@tmpa}{\noexpand\mathbb{\@tmpa}}
+\generatemacros@abbrevdef{}{\@tmpa}{\noexpand\mathbb{\@tmpa}}
+\addabbrev@{N,Z,Q,R,C,F,A,P}
+
+\def\Qbar{{\algcl\Q}}
+\def\Fbar{{\algcl\F}}
+\def\Kbar{{\algcl K}}
+\def\Ksep{{\sepcl K}}
+\def\Lbar{{\algcl L}}
+\def\Lsep{{\sepcl L}}
+\def\kbar{{\algcl K}}
+\def\ksep{{\sepcl K}}
+
+
+
+%% p-adic integers, p-adic numbers, p-ic numbers
+\def\overline@adicfield#1{%
+  \hspace{-0.1em}\overline{\hspace{0.1em}#1\hspace{0.2em}}\hspace{-0.2em}
+}
+{
+  \def\lis{%
+    {p,p},%
+    {q,q},%
+    {l,\ell}%
+%    {v,v},%
+%    {la,\lambda}%
+  }
+  \def\aux#1,#2\@nil{%
+    \global\@namedef{Z#1}{\Z_{#2}}
+    \global\@namedef{Z#1p}{\Z_{#2'}}
+    \global\@namedef{Q#1}{\Q_{#2}}
+    \global\@namedef{Q#1bar}{\overline@adicfield{\Q}_{#2}}
+    \global\@namedef{Q#1p}{\Q_{#2'}}
+    \global\@namedef{Q#1pbar}{\overline@adicfield{\Q}_{#2'}}
+    \global\@namedef{F#1}{{\F_{#2}}}
+    \global\@namedef{F#1bar}{\overline@adicfield{\F}_{#2}}
+    \global\@namedef{F#1p}{\F_{#2'}}
+    \global\@namedef{F#1pbar}{\overline@adicfield{\F}_{#2'}}
+  }
+  \@for\iter:=\lis\do{%
+    \expandafter\aux\iter\@nil
+  }
+}
+
+\def\Zover#1{\Z / #1\Z}
+\def\Zgezero{\Z_{\ge 0}}
+\def\Zgzero{\Z_{> 0}}
+\def\Zgeone{\Z_{\ge 1}}
+\def\Zgone{\Z_{> 1}}
+\let\Zpos\Zgzero
+\let\Znonneg\Zgezero
+\def\Zhat{{\widehat\Z}}
+
+\def\Rgezero{\R_{\ge 0}}
+\def\Rgzero{\R_{> 0}}
+\def\Rgeone{\R_{\ge 1}}
+\def\Rgone{\R_{> 1}}
+\let\Rpos\Rgzero
+\let\Rnonneg\Rgezero
+
+
+%%% END OF field theory, Galois theory                             %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% algebraic geometry, arithmetic geometry                        %%%
+
+%% algebraic group Gm, Ga
+{
+  \def\lis{%
+    {Gm,{\mathbb{G}}_m},%
+    {Ga,{\mathbb{G}}_a},%
+    {Gmu,{\mu}},%
+    {Galpha,{\alpha}}%
+  }
+  \def\aux#1,#2\@nil{%
+    \expandafter\gdef\csname #1\endcsname{\greedysubscript #2}
+    \glet@bynames{sh#1}{#1}
+  }
+  \@for\iter:=\lis\do{%
+    \expandafter\aux\iter\@nil
+  }
+  \def\lis{%
+    {p,p},%
+    {q,q},%
+    {l,\ell},%
+    {n,n},%
+    {m,m}%
+  }
+  \def\aux#1,#2\@nil{%
+    \global\@namedef{Gmu#1}{\Gmu_{#2}}
+    \global\@namedef{Gmu#1p}{\Gmu_{#2'}}
+    \global\@namedef{Galpha#1}{\Galpha_{#2}}
+    \global\@namedef{Galpha#1p}{\Galpha_{#2'}}
+    \glet@bynames{shGmu#1}{Gmu#1}
+    \glet@bynames{shGmu#1p}{Gmu#1p}
+    \glet@bynames{shGalpha#1}{Galpha#1}
+    \glet@bynames{shGalpha#1p}{Galpha#1p}
+  }
+  \@for\iter:=\lis\do{%
+    \expandafter\aux\iter\@nil
+  }
+}
+
+\def\shDiff{\Omega}
+
+
+%% tripod
+\def\tripod{\@ifnextchar_ \tripod@underbar \tripod@nounderbar}
+\def\tripod@underbar_#1{%
+  \P^1_{#1}\exceptset{0,1,\infty}
+}
+\def\tripod@nounderbar{%
+  \P^1\exceptset{0,1,\infty}
+}
+
+%% fundamental groups
+\def\pione{\pi_1}
+\def\pionegeom(#1){\pione(\overline{#1})}
+\let\pigeom\pionegeom
+\def\pionetopcompl(#1){\pionetop(#1)^{\wedge}}
+\def\pionetopgeomcompl(#1){\pionetopgeom(#1)^{\wedge}}
+{%
+  \def\lis{alg,et,tame,top}%
+  \def\aux#1\@nil{%
+    \global\@namedef{pione#1}{\pione^{\mathrm{#1}}}%
+    \global\@namedef{pione#1geom}(##1){\pione^{\mathrm{#1}}(\overline{##1})}%
+    \glet@bynames{pi#1}{pione#1}
+    \glet@bynames{pi#1geom}{pione#1geom}
+  }%
+  \@for\iter:=\lis\do{%
+    \expandafter\aux\iter\@nil
+  }
+}
+\let\pitopc\pionetopcompl
+\let\pitopgc\pionetopgeomcompl
+
+%% Tate module
+\def\Tl{T_\ell}
+\def\Tp{T_p}
+\def\Vl{V_\ell}
+\def\Vp{V_p}
+
+\def\reprho{\greedysubscript{\rho}}
+\def\reprhobar{\greedysubscript{\overline\rho}}
+
+
+
+
+%%% rigid geometry
+
+\define@gcp@command{adicsp}{%
+  #1#3#2^{\mathrm{ad}}%
+}
+\define@gcp@command{adgenfib}{%
+  #1#3#2^{\mathrm{ad}}_\eta
+}
+\let\agfib\adgenfib
+
+
+
+%%%%FIXME  pushout, pullback, ...
+
+
+%%%%FIXME
+\def\etalesite#1{#1_\text{et}}
+\def\etalesite#1{{#1_\textrm{\'et}}}
+\def\Zariskisite#1{{#1_\textrm{Zar}}}
+
+
+
+\def\red{_{\mathrm{red}}}
+\def\redidcomp{_{\mathrm{red}}^0}
+
+\def\scriptet{{\mathrm{\acute{e}t}}}
+
+\def\idcomp#1{#1^0}
+\def\etpart#1{#1^\scriptet}
+\def\tors{_{\mathrm{tors}}}
+
+
+%%% END OF algebraic geometry, arithmetic geometry                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% math symbols
+
+
+\DeclareMathOperator*{\Residue}{Res}
+
+\def\Realpart{\textrm{Re}\,}
+\def\Imagpart{\textrm{Im}\,}
+\def\pii{\pi i}
+
+
+
+\def\abs|#1|{\left\lvert#1\right\rvert}
+\def\vnorm|#1|{\left\lVert#1\right\rVert}
+
+%% FIXME
+\let\linsys\abs
+
+
+\let\boundary\partial
+
+
+
+
+\RequirePackage{centernot}
+%% divisibility relation
+%\def\divides{|}
+%\def\ndivides{\!\! \not \divides \,}
+\let\divides\mid
+% \let\ndivides\nmid
+\def\ndivides{\centernot\divides}
+
+
+%% Landau symbol
+\def\bigo{O}
+\def\smallo{o}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\def\newword#1{\textbf{#1}}
+\let\frk\mathfrak
+\let\radicalideal\sqrt
+\let\sheaf\mathscr
+
+\def\pushout#1{{#1}_{*}}
+\def\dimg#1{{#1}_{*}}
+\def\pullback#1{{#1}^{*}}
+\def\dirimg#1#2{#1_*(#2)}
+\def\rinvimg#1#2{#1^{-1}(#2)}
+\def\invimg#1#2{#1^{*}(#2)}
+\def\assocmap#1{{}^a\!#1}
+\def\restrict#1to#2;{#1|_{#2}}
+\let\res\restrict
+\def\bsch#1#2{#1_{(#2)}}
+
+
+%%% END OF math symbols
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\RequirePackage[normalem]{ulem}
+\def\Rd{%
+  \@ifnextchar^{\mathrm{R}}{\uuline{\mathrm{R}}}
+}
+\def\Rdp{%
+  {\Rd}^+
+}
+\def\Ld{%
+  \mathrm{L}
+}
+\def\onetmp{1}
+\def\Rdone{%
+  \Rd_{\mathrm{I}}
+}
+\def\Rdtwo{%
+  \Rd_{\mathrm{II}}
+}
+
+\def\Hone{%
+  H_{\mathrm{I}}
+}
+\def\Htwo{%
+  H_{\mathrm{II}}
+}
+
+\def\Bone{%
+  B_{\mathrm{I}}
+}
+\def\Btwo{%
+  B_{\mathrm{II}}
+}
+
+\def\cpxHom{%
+  \@ifnextchar^{\uline{\Hom}}{\cpx{\uline{\Hom}}}
+}
+
+\def\lhExt{%
+  \uline\Ext
+}
+
+
+
+\def\HDI#1#2#3{%
+  R^{#1} {#2}_{\ast} #3
+}
+\def\HDIz#1#2#3{%
+  R^{#1} {#2}_{!} #3
+}
+
+
+%%% complex
+
+\def\definecpx#1{%
+  \expandafter\def\csname cpx#1\endcsname{\@ifnextchar^{\cpx@hat #1}{\cpx #1}}
+}
+
+\def\cpx{\@ifnextchar[{\cpx@first}{\cpx@b}}
+\def\cpx@b#1{#1^{\bullet}}
+\def\cpx@first[#1]#2{%
+  \ifx#1.{%
+    \cpx@last{\bullet}{#2}
+  }\else{%
+    \ifx#1-{%
+      \cpx@last{-\bullet}{#2}
+    }\else{%
+      \cpx@last{#1}{#2}
+    }\fi
+  }\fi
+}
+\def\cpx@last#1#2{%
+  #2^{#1}
+}
+\def\cpx@hat#1^#2{\cpx[#2]#1}
+
+\def\dcpx{\@ifnextchar[{\dcpx@first}{\dcpx@bb}}
+\def\dcpx@bb#1{#1^{\bullet\bullet}}
+\def\dcpx@first[#1 #2]#3{%
+  \ifx#1.{%
+    \dcpx@second{\bullet}{#2}{#3}
+  }\else{%
+    \ifx#1-{%
+      \dcpx@second{-\bullet}{#2}{#3}
+    }\else{%
+      \dcpx@second{#1}{#2}{#3}
+    }\fi
+  }\fi
+}
+\def\dcpx@second#1#2#3{%
+  \ifx#2.{%
+    \dcpx@last{#1}{\bullet}{#3}
+  }\else{%
+    \ifx#2-{%
+      \dcpx@last{#1}{-\bullet}{#3}
+    }\else{%
+      \dcpx@last{#1}{#2}{#3}
+    }\fi
+  }\fi
+}
+\def\dcpx@last#1#2#3{%
+  #3^{#1 #2}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% tempolary
+
+
+
+%%%% it is obsolute!
+%
+%
+%%%% from http://note.golden-lucky.net/2006/05/latextex-cf.html
+%%\newcommand{\replacechar}[3]{{\wordbyword{#2}{#3}#1\end }}
+%%\newcommand{\cutoff}[2]{{\relax}}
+%%\def\wordbyword#1#2#3{\ifx#3\end \let\next=\cutoff
+%%  \else\ifx#3#1#2%
+%%  \else#3%
+%%  \fi \let\next=\wordbyword\fi \next{#1}{#2}}
+%
+%
+%%% from http://hisashim.livejournal.com/276024.html
+%\def\replace@commawithbackslash#1{\ifx#1\end \let\next=\relax \else\ifx#1,\\\else#1\fi \let\next=\replace@commawithbackslash\fi \next}
+%
+%\def\myvector #1 ;{%
+%  \begin{pmatrix}
+%    \replace@commawithbackslash#1\end
+%  \end{pmatrix}
+%}
+%\def\myfatvector #1 ;{%
+%  \left(\begin{array}{c}
+%    \replace@commawithbackslash#1\end
+%  \end{array}\right)
+%}
+%
+%
+
+
+
+
+
+
+%% eazy vector
+
+\def\makevector #1 ;{%
+  \begin{pmatrix}
+    \makevector@aux #1,{};
+  \end{pmatrix}
+}
+\def\makefatvector #1 ;{%
+  \left(\begin{array}{c}
+    \makevector@aux #1,{};
+  \end{array}\right)
+}
+
+%\def\makevector@aux#1,#2;{%
+%  \def\@tempa{#1}%
+%  \@for\iter:=#2\do{%
+%    \protected@edef\@tempa{%
+%      \@tempa
+%      \ifx\iter\empty  \relax
+%      \else  \protect\\\iter
+%      \fi
+%    }%
+%  }%
+%  \@tempa
+%}
+\def\makevector@aux#1,#2;{%
+  \def\@tempa{#1}%
+  \@for\iter:=#2\do{%
+    \protected@edef\@tempa{%
+      \@tempa\protect\\\iter
+    }%
+  }%
+  \@tempa
+}
+
+
+
+
+% see TeX Q & A 24450
+%     http://oku.edu.mie-u.ac.jp/~okumura/texfaq/qa/24450.html
+\DeclareRobustCommand*\CFrac[2]{%
+   \mathinner{\mathchoice
+      {\@CFrac\textstyle\textfont{4}{#1}{#2}}%
+      {\@CFrac\scriptstyle\textfont{}{#1}{#2}}%
+      {\@CFrac\scriptscriptstyle\scriptfont{}{#1}{#2}}%
+      {\@CFrac\scriptscriptstyle\scriptscriptfont{}{#1}{#2}}}}
+\def\@CFrac#1#2#3#4#5{%
+   {\dimen\tw@\fontdimen8#23\relax \dimen\tw@#3\dimen\tw@
+    \setbox\z@\hbox{\m@th$#1\;{#4}\;\mathstrut$}%
+    \@tempdima\dp\z@ \advance\@tempdima\dimen\tw@
+    \setbox\tw@\hbox{\m@th$#1\;{#5}\;\mathstrut$}%
+    \@tempdimb\ht\tw@ \advance\@tempdimb\dimen\tw@
+    \dimen@ \ifdim\wd\z@>\wd\tw@ \wd\z@ \else \wd\tw@ \fi
+    \setbox\z@\hbox to\dimen@{%
+       \hss\unhbox\z@\hss
+       \vrule \vrule\@width\z@\@depth\@tempdima}%
+    \setbox\tw@\hbox to\dimen@{%
+       \vrule\@width\z@\@height\@tempdimb \vrule
+       \hss\unhbox\tw@\hss}%
+    \dimen\tw@\fontdimen22#22\relax
+    \advance\dimen\tw@\ht\z@ \advance\dimen\tw@\dp\z@
+    \advance\dimen\tw@ .2\p@
+    \setbox\z@\vbox{\box\z@ \hrule \box\tw@}%
+    \advance\dimen\tw@-\ht\z@
+    \raise\dimen\tw@\box\z@}}
+
+%%% END OF tempolary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+%%% greedysubscript version 1
+
+% \def\greedysubscript{%
+%   \@ifnextchar[
+%     {\greedysubscript@aux}
+%     {\greedysubscript@aux[,]}
+% }
+% \def\greedysubscript@aux[#1]#2{%
+%   \def\greedyss@separator{#1}
+%   #2_\bgroup \futurelet\@greedyss@token\greedyss@first
+% }
+% \def\greedyss@first{%
+%   \ifx_\@greedyss@token
+%     \let\next\greedyss@first@takeone
+%   \else
+%     \let\next\greedyss@end
+%   \fi \next
+% }
+% \def\greedyss@loop{%
+%   \ifx_\@greedyss@token
+%     \let\next\greedyss@takeone
+%   \else
+%     \let\next\greedyss@end
+%   \fi \next
+% }
+% \def\greedyss@first@takeone#1#2{%
+%   #2 \futurelet\@greedyss@token\greedyss@loop
+% }
+% \def\greedyss@takeone#1#2{%
+%   \greedyss@separator #2 \futurelet\@greedyss@token\greedyss@loop
+% }
+% \def\greedyss@end{
+%   \egroup
+% }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\def\lnil{()}
+\def\@lnil{\lnil}
+\def\iflnull#1{\ifx#1\lnil}
+
+\def\lcons#1#2{(#1 . #2)}
+\def\lxcons#1#2{(#2 . #1)}
+\def\lcar#1{\expandafter\lcar@aux#1\@nil}
+\def\lcar@aux(#1 . (#2))\@nil{#1}
+\def\lcdr#1{\expandafter\lcdr@aux#1\@nil}
+\def\lcdr@aux(#1 . (#2))\@nil{(#2)}
+\def\lrevlist#1{%
+  \let\res\@lnil
+  \@for\iter:=#1\do{
+    \edef\res{\lcons{\iter}{\res}}
+  }
+  \res
+}
+
+
+
+
+
+
+
+
+
+
+
+
+% \def\lreverse#1{%
+% \def\@tempa{#1}
+% \show#1
+%   \let\res\@lnil
+%   let\first{\lcar\res}
+% \show\first
+%   \iflnull\first nil \else not nil \fi
+% }
+\def\lreverse#1{%
+  \expandafter\lreverse@aux#1\@nil
+}
+\def\lreverse@aux(#1 . (#2)\@nil{%
+  \let\@tempa{(#2}
+  \iflnull@tempa nil \else not nil \fi
+}
+
+
+\def\commareverse#1{%
+  \def\res{}
+  \@for\iter:=#1\do{%
+    \edef\res{\iter,\res}
+  }
+  \expandafter\commareverse@droplastcomma\res\@nil
+}
+\def\commareverse@droplastcomma#1,\@nil{#1}
+
+%\commareverse{a,b,c}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\def\makematrix#1;{%
+  \begin{pmatrix}
+    \makematrix@splitcomma#1,\@nil\@@
+  \end{pmatrix}
+}
+\def\makematrix@newline{\\}
+\def\makematrix@splitcomma#1,#2\@@{%
+  \def\makematrix@sc@arg@second{#2}
+  \ifx\makematrix@sc@arg@second\@nnil
+    \def\makematrix@sc@res{\makematrix@splitspace#1 \@nil\@@}
+  \else
+    \def\makematrix@sc@res{%
+      \makematrix@splitspace#1 \@nil\@@
+      \makematrix@newline
+      \makematrix@splitcomma#2\@@
+    }
+  \fi
+  \makematrix@sc@res
+}
+\def\makematrix@splitspace#1 #2\@@{%
+  \def\@tempa{#1}
+  \ifx\@tempa\@empty
+    \makematrix@splitspace#2\@@
+  \else
+    #1 \makematrix@splitspace@loop#2 \@nil\@@
+  \fi
+}
+\def\makematrix@splitspace@loop#1 #2\@@{%
+  \def\makematrix@ss@arg@first{#1}
+  \def\makematrix@ss@arg@second{#2}
+  \def\makematrix@ss@res{}
+
+  \ifx     \makematrix@ss@arg@first\@nnil
+  \else\ifx\makematrix@ss@arg@first\@empty
+    \def\makematrix@ss@res{\makematrix@splitspace@loop#2\@@}
+  \else
+    \def\makematrix@ss@res{& #1 \makematrix@splitspace@loop#2\@@}
+  \fi\fi
+  \makematrix@ss@res
+}
+
+
+
+% \def\matdiag{%
+%   \@ifstar
+%     {}
+% }
+
+
+
+
+
+%\RequirePackage{rsfs}
+\def\setofavA{\mathcal{A}}
+
+
+
+
+
+
+
+
+
+
+%% fixme
+\def\fixme@@type{quit}
+\def\fixme{%
+  \@ifnextchar[ \fixme@bracket \fixme@nobracket
+}
+\def\fixme@nobracket{%
+  \let\fixme@@arg\empty
+  \fixme@main
+}
+\def\fixme@bracket[#1]{%
+  \def\fixme@@arg{#1}%
+  \fixme@main
+}
+\def\fixme@main{{%
+  \def\fixme@@quiet{quiet}%
+  \def\fixme@@text{text}%
+  \def\fixme@@footnote{footnote}%
+%
+  \ifx\fixme@@type\fixme@@quiet
+  \else\ifx\fixme@@type\fixme@@text
+    \mbox{$\blacksquare\blacksquare$}\text{FIXME}%
+    \ifx\fixme@@arg\@empty
+    \else
+      \text{[\fixme@@arg]}%
+    \fi
+    \mbox{$\blacksquare\blacksquare$}
+  \else\ifx\fixme@@type\fixme@@footnote
+    \mbox{$\blacksquare$}\footnote{\tiny FIXME: \fixme@@arg}
+  \fi\fi\fi
+}}
+
+
+
+
+
+
+
+
+
+
+\def\uhpH{\mathfrak{H}}
+
+\def\textq#1{\quad\text{#1}\quad}
+\def\textqn#1{\quad\text{#1}}
+\def\textnq#1{\text{#1}\quad}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% TODO: cleanup these things
+\newcount\mwm@@counter
+\newif\if@mwm
+
+\def\mwm@is@true#1{#1}
+\let\mwm@true\@mwmtrue
+\let\mwm@false\@mwmfalse
+
+
+\RequirePackage{mwmutil}
+\RequirePackage{mwmlist}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% diagmatrix                                                                                   %%%
+\def\diagmatrix{% [ufill,lfill] CSL ;
+% Diagonal matrix whose diagonal elements are CSL, upper triangle filled with ufill,
+% lower with lfill. In CSL, the strings "..." and "\dots" following spaces have special meaning.
+% Matrix elements of rows and columns <dots> exist are replaced with appropriate dots
+% as the element see how many <dots> in the diagonal. For example, if an element sees
+% <dots> vertically and no <dots> horizontally, it is replaced with \cdots .
+  \begingroup
+%  \def\mwm@dm@@upper@filling{}%
+%  \def\mwm@dm@@lower@filling{}%
+  \@ifnextchar[ \mwm@dm@bite@bracket {\mwm@dm@bite@bracket[,]}%
+}
+    \def\mwm@dm@bite@bracket[#1]{%
+      \mwm@dm@bite@bracket@aux#1,\@nil
+      \mwm@dm@main
+    }
+        \def\mwm@dm@bite@bracket@aux#1,#2\@nil{%
+          \def\@tempa{#2}%
+          \ifx\@tempa\@empty
+            \def\mwm@dm@@upper@filling{#1}%
+            \def\mwm@dm@@lower@filling{#1}%
+          \else
+            \mwm@dm@bite@bracket@aux@two#1,#2\@nil
+          \fi
+        }
+            \def\mwm@dm@bite@bracket@aux@two#1,#2,\@nil{%
+              \def\mwm@dm@@upper@filling{#1}%
+              \def\mwm@dm@@lower@filling{#2}%
+            }
+    \def\mwm@dm@main#1;{%
+      \let\mwm@dm@@ddots\ddots
+      \ifx\mwm@dm@@upper@filling\@empty
+        \let\mwm@dm@@right@cdots\relax
+        \let\mwm@dm@@right@vdots\relax
+      \else
+        \let\mwm@dm@@right@cdots\cdots
+        \let\mwm@dm@@right@vdots\vdots
+      \fi
+      \ifx\mwm@dm@@lower@filling\@empty
+        \let\mwm@dm@@left@cdots\relax
+        \let\mwm@dm@@left@vdots\relax
+      \else
+        \let\mwm@dm@@left@cdots\cdots
+        \let\mwm@dm@@left@vdots\vdots
+      \fi
+      \mwml@set@list@from@csl\mwm@dm@@diagonals{#1}%
+      \mwm@dm@make@mask% make a mask, contained in \mwm@dm@@mask
+      \mwml@set@length\mwm@dm@@size\mwm@dm@@diagonals
+      % note that the below is incompatible with index of row of matrix
+      \mwml@set@iota\mwm@dm@@iota\mwm@dm@@size{0}{1}%
+      \mwml@set@make@list\mwm@dm@@right@line\mwm@dm@@size\mwm@dm@@upper@filling
+      \mwml@set@make@list\mwm@dm@@left@line\mwm@dm@@size\mwm@dm@@lower@filling
+      \mwml@set@make@list\mwm@dm@@left@dots@line\mwm@dm@@size{\mwm@dm@@left@vdots}%
+      \mwml@set@make@list\mwm@dm@@right@dots@line\mwm@dm@@size{\mwm@dm@@right@vdots}%
+      % A variable \mwm@dm@@row is used to return value by \mwm@dm@make@row .
+      \mwml@set@map@three\mwm@dm@@row\mwm@dm@make@row\mwm@dm@@diagonals\mwm@dm@@iota\mwm@dm@@mask
+      % But now it contains the matrix we wanted.
+      \mwml@output@matrix@with@pmatrix\mwm@dm@@row
+      \endgroup
+    }
+        \def\mwm@dm@make@mask{%
+          \mwml@set@map\@tempa\mwm@dm@make@mask@aux\mwm@dm@@diagonals
+          \let\mwm@dm@@mask\@tempa
+        }
+            \def\mwm@dm@make@mask@aux#1{%
+              \mwm@dm@is@dots{#1}%
+              \if@mwm \def\@tempa{\mwm@true}\else \def\@tempa{\mwm@false}\fi
+            }
+                \def\mwm@dm@is@dots#1{%
+                  \@mwmfalse
+                  \mwm@dm@is@dots@a#1...\@nil
+                  \mwm@dm@is@dots@b#1\dots\@nil
+                }
+                    \def\mwm@dm@is@dots@a#1...#2\@nil{%
+                      \def\@tempa{#2}%
+                      \ifx\@tempa\@empty \else \@mwmtrue \fi
+                    }
+                    \def\mwm@dm@is@dots@b#1\dots#2\@nil{%
+                      \def\@tempa{#2}%
+                      \ifx\@tempa\@empty \else \@mwmtrue \fi
+                    }
+        \def\mwm@dm@make@row#1#2#3{% elem -> index -> boolian -> nothing, row in \mwm@dm@@row
+          % \mwm@dm@@row will be `(,@\mwm@dm@@left@row ,\@tempb ,@\mwm@dm@@right@row)
+          \mwml@set@take@nth@drop\mwm@dm@@left@mask\@tempa\mwm@dm@@right@mask\mwm@dm@@mask{#2}%
+          \mwm@is@true{#3}\if@mwm% if #1 is dots
+            \mwml@set@map@two\@tempa\mwm@dm@mask@empty@aux\mwm@dm@@left@dots@line\mwm@dm@@left@mask
+            \let\mwm@dm@@left@row\@tempa
+            \mwml@set@map@two\@tempa\mwm@dm@mask@empty@aux\mwm@dm@@right@dots@line\mwm@dm@@right@mask
+            \let\mwm@dm@@right@row\@tempa
+            \def\@tempb{\mwm@dm@@ddots}%
+          \else%                   if #1 is not dots
+            \mwml@set@map@two\@tempa\mwm@dm@mask@left@aux\mwm@dm@@left@line\mwm@dm@@left@mask
+            \let\mwm@dm@@left@row\@tempa
+            \mwml@set@map@two\@tempa\mwm@dm@mask@right@aux\mwm@dm@@right@line\mwm@dm@@right@mask
+            \let\mwm@dm@@right@row\@tempa
+            \def\@tempb{#1}%
+          \fi
+          \mwm@exnr\mwml@push\@tempb\mwm@dm@@right@row
+          \mwml@set@append\mwm@dm@@row\mwm@dm@@left@row\mwm@dm@@right@row
+        }
+            \def\mwm@dm@mask@left@aux#1#2{%
+              \mwm@is@true{#2}\if@mwm
+                \def\@tempa{\mwm@dm@@left@cdots}%
+              \else
+                \def\@tempa{#1}%
+              \fi
+            }
+            \def\mwm@dm@mask@right@aux#1#2{%
+              \mwm@is@true{#2}\if@mwm
+                \def\@tempa{\mwm@dm@@right@cdots}%
+              \else
+                \def\@tempa{#1}%
+              \fi
+            }
+            \def\mwm@dm@mask@empty@aux#1#2{%
+              \mwm@is@true{#2}\if@mwm
+                \def\@tempa{}%
+              \else
+                \def\@tempa{#1}%
+              \fi
+            }
+%%% END of diagmatrix                                                                            %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

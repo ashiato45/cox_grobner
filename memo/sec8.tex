@@ -2700,7 +2700,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
 \end{framed}
 
 \begin{framed}
-  演習3:
+  演習3(命題4の内部でやるので使わない):
   $f=gh$を斉次多項式、
   $g=g_m + \dots +g_0$を$g_i$が全次数$i$であるような
   斉次成分への分解で、$g_m \neq 0$とする。
@@ -2718,7 +2718,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
 \end{myproof}
 
 \begin{framed}
-  演習6:
+  演習6(使ってない):
   \begin{enumerate}[label=(\alph*)]
     \item
     $f\in \C[x_1,\dots,x_n]$を0でない(\warn{非定数もつけないとだめだよね？})多項式とする。
@@ -2761,7 +2761,8 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
   \begin{align}
     \ideal(\var(f))  = \sqrt{\gen{f}} = \gen{f_1,\dots,f_s}
   \end{align}
-  が成り立つ。
+  が成り立つ。(前半で、分解すると斉次であることを言っておいたので
+  $\var(f_\bullet)$が考えられる。)
 \end{framed}
 \begin{myproof}
   \begin{enumerate}
@@ -2813,16 +2814,26 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
       \item 射影幾何の零点定理より、
       $\var(f)= \emptyset$と「$G$を$\gen{f}$のグレブナ基底として、$\LT(g)$が$x$のべきであるような$g\in G$、
       $y$のべきであるような$g\in G$、$z$のべきであるような$g\in G$
-      がすべて存在する」となる
-      \item (a)(b)より、$\var(f)\neq \emptyset$となる。
+      がすべて存在する」(グレブナ基底に$x^{ほげ},y^{ふが},z^{ぴよ}$が全部ある)となる
+      \item (a)(b)より
+      \footnote{$\gen{x,y,z}$みたいなグレブナ基底にするには$\set{f}$では数が足りない。}
+      、$\var(f)\neq \emptyset$となる。
     \end{enumerate}
     $\var(f) \neq \emptyset$である。
     \item
-    上と強形の零点定理より、$\ideal(\var(f)) = \sqrt{\gen{f}}$である。
+    \sout{上と強形の零点定理より、$\ideal(\var(f)) = \sqrt{\gen{f}}$である。}
     \item
     $\sqrt{\gen{f_1\dots f_s}} = \gen{f_1 \dots f_s}$である。
-    なぜなら、左辺から$[g(f_1\dots f_s)]^N$をとると、
+    なぜなら、\sout{左辺から$[g(f_1\dots f_s)]^N$をとると、
     $g^N(f_1 \dots f_s)^N \in \gen{f_1\dots f_s}$となるから。
+    $F\in \sqrt{\gen{f_1 \dots f_s}}$とすると、
+    $F^n \in \gen{f_1\dots f_s}$となり、
+    $F^n = gf_1\dots f_s$となっているが、
+    $F\notin \gen{f_1\dots f_s}$とすると、
+    $F$にはいずれかの$f_i$が表われないことになり、
+    $F^n$にも$f_i$があらわれなくなってしまう。これは、
+    $F^n = gf_1 \dots f_s$に反する。よって、$F\in \gen{f_1\dots f_s}$である。}
+    命題4-2-9。主イデアルの根基の性質。
     \item
     2と上より、
     \begin{align}
@@ -2833,15 +2844,12 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
       \ideal(\var(\gen{f_1}\dots \gen{f_s}))
       =
       \ideal(\var(\gen{f_1\dots f_s}))
-      =
+      \desceq{零点定理}
       \sqrt{\gen{f_1\dots f_s}}
-      =
+      \desceq{6}
       \gen{f_1\dots f_s}.
     \end{align}
-    \item 5,7より、
-    \begin{align}
-      \ideal(\var(f)) = \sqrt{f} = \gen{f_1 \dots f_s}.
-    \end{align}
+    \item \sout{5,7より、$\ideal(\var(f)) = \sqrt{f} = \gen{f_1 \dots f_s}.$}
   \end{enumerate}
 \end{myproof}
 
@@ -2851,6 +2859,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
   全次数がそれぞれ$m,n$のものとする。
   $f(0,0,1)$と$g(0,0,1)$がゼロでなければ、
   終結式$\Res(f,g,z)$は$x,y$に関して斉次$mn$次である。
+  (訂正:さらに「$\Res(f,g,z)$が0でなければ」という仮定がいる。)
 \end{framed}
 \begin{myproof}
   \begin{enumerate}
@@ -2861,7 +2870,8 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     \end{align}
     となる斉次多項式$a_\bullet,\, b_\bullet \in \C[x,y]$がある。
     ここで、$f,g$は斉次なので、$a_i$は全次数$i$次、
-    $b_j$は全次数$j$次としてある。
+    $b_j$は全次数$j$次としてある。(ただし、$a_m,b_n$は
+    まだ0であって次数がないという可能性が排除できない。)
     \item
     各$a_i$が全次数$i$次斉次であったことから、
     \begin{align}
@@ -2899,7 +2909,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     はあきらかなので、これを使うと詳しく調べられる。
     )
     \item
-    上より、$c_{ij}$はゼロでなければ、
+    上と3,4より、$c_{ij}$はゼロでなければ、
     \begin{align}
       \deg c_{ij} =  \deg
       \begin{cases}
@@ -2915,6 +2925,9 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     \end{align}
     である。(この各項の次数を数えたい。)
     \item $\forall \sigma$: $\sigma \in S_{m+n}$とする。
+    (訂正:さらに、$\sigma$はその置換を辿っていった積が
+    0でないという仮定をおく。このような$\sigma$は
+    $\Res(f,g,z)\neq 0$から存在する。)
     \item
     \begin{align}
       \prod_{i=1}^{m+n} c_{i\sigma(i)} =
@@ -3024,7 +3037,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
       \item $\P^2 \setminus (C\cup D \cup \bigcup_{i<j}L_{ij}) \neq \emptyset$ であることを示せばよい。
       これは、アフィン多様体では
       \begin{align}
-      [\C^3 \setminus (\var_a(f)\cup \var_a(g)\cup \bigcup_{i<j} \var_a(l_{ij})) ]\cap [\C^3\setminus \zeroset] \neq \emptyset
+      [\C^3 \setminus (\var_a(f)\cup \var_a(g)\cup \bigcup_{i<j} \var_a(l_{ij})) ]\cap \ub{[\C^3\setminus \zeroset]}_{射影多様体との差！} \neq \emptyset
       \end{align}
       を示せばよい。
       \item
@@ -3059,11 +3072,14 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     よって、$q \notin C\cup D \cup \bigcup_{i<j}L_{ij}$となる$q\in \P^2$が存在する。
     \item $\exists A$:
     $Aq = \tatev{0 \\ 0 \\ 1}$となる$A$が存在する。
-    なぜなら、$q\neq 0$なので、3次元回転と拡大を組み合わせればよい
+    なぜなら、$q\neq 0$なので
+    \footnote{10で、$q\in \P^2$となったのだから$q\neq 0$とはなる。}
+    、3次元回転と拡大を組み合わせればよい
     \footnote{あるいは、$q$と、それと一次独立な$q',q''$をとって$(q,q',q'')$を作り、それを$(1,0,0)^t$にかけると$q$になる。$(q,q',q'')$は可逆なのでOK。}
     。
     \item
     上より、$A$で変換することにより10の$q$を$\tatev{0 \\ 0\\ 1}$として一般性を失なわない。
+    (仮定の被約も保たれる。)
     \item
     4($f$について),10($q$の条件),12($q$のとりなおし)より、
     $f(0,0,1)\neq 0$となる。
@@ -3076,13 +3092,15 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     $\Res(f,g,z) \neq 0$である。
     \item
     命題3-6-1より、$\Res(f,g,z)\in \gen{f,g}$である。
+    ($Af+Bg=\Res(f,g,z)$という$A,B$をクラメルの公式で見つけるのだった。)
     \item $u_\bullet,v_\bullet,w_\bullet$:
     各$p_i$について、$p_i = (u_i,v_i,w_i)$と$u_i,v_i,w_i \in \C$を定める。
     \item
     2の定義より、$f,g$が上の各$p_i=(u_i,v_i,w_i)$を消し、さらに
     17より、各$i$について$\Res(f,g,z)(u_i,v_i)  = 0$である。
+    (これで$z$が無視できることになり、点の射影をとる準備ができた！)
     \item
-    $q=(0,0,1)$と$p_i=(u_i,v_i,w_i)$を結ぶ挑戦は、$z=0$と
+    $q=(0,0,1)$と$p_i=(u_i,v_i,w_i)$を結ぶ直線は、$z=0$と
     $(u_i,v_i,0)$で交わる。実際内分の式を考えればよい。
     \item
     10より、$(0,0,1)$は$p_i,p_j$をむすぶどの直線$L_{ij}$上にもない。
@@ -3097,6 +3115,9 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     15,16によれば$\Res(f,g,z)$は$mn$次の0でない多項式だが、これは
     上に矛盾する。
   \end{enumerate}
+  要するに:$\Res(f,g,z)$を考えるとき、$\Res(f,g,z) \in \gen{f,g}$なので
+  $z=0$の超平面で考えていいが、そうすると曲線の交点の個数分この
+  超平面で消えて、$\Res(f,g,z)$の次数が曲線の個数になる。
 
 \end{myproof}
 
@@ -3110,7 +3131,8 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
   \end{align}
   をみたすように選ぶ\footnote{先と同じようにまず条件をみたす点をもとの座標でとって、それを$(0,0,1)$に写す可逆変換を考えればよい。}。 $p=(u,v,w) \in C\cap D$に対して、
   交わりの重複度$I_p(C,D)$を、$\Res(f,g,z)$の因数分解における
-  因子$vx-uy$の指数と定義する。
+  因子$vx-uy$の指数と定義する。(これは定理6の因数分解の可能性と
+  定理7の交点が$\Res$で分かることから従う。)
 \end{framed}
 
 \begin{framed}
@@ -3133,7 +3155,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
       (0,0,1)\notin
       C\cup D \cup \bigcup_{p\neq q \in C\cap D} L_{pq}
     \end{align}
-    であると仮定してよい。
+    であると仮定してよい。(これで被約性も次数も変わらない。)
     \item $u_\bullet,v_\bullet,w_\bullet$: 記号を定める。$p\in C\cap D$について、$u_p,v_p,w_p \in \C$を
     $p=(u_p,v_p,w_p)$と定める。
     \item $\exists c$:
@@ -3149,9 +3171,11 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
       $(v_p x - u_p y)^{I_p(C,D)}$である。
       \item
       上より、曲線の交点$(u_p,v_p,w_p)$から作った$(u_p,v_p)$はすべて終結式の根になっている。
+      ($\Res(f,g,z)$が因数分解できることは補題6だし大丈夫)
       \item
       終結式のすべての根は曲線の交点から得られる？
-      終結式の根になってるのに曲線の交点になってないやつとかあったりしない？
+      \sout{終結式の根になってるのに曲線の交点になってないやつとかあったりしない？}
+      (訂正:これは定義8に組込まれている。)
       \begin{enumerate}
         \item $\forall u,v$: $(u,v) \in \P^1$が$\Res(f,g,z)(u,v) = 0$をみたすとする。
         \item
@@ -3163,14 +3187,14 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
           \item
           1と3より、
           \begin{align}
-            a_0 = a_0(0,0)\cdot 1^m + \dots + a_m(0,0) = f(0,0,1)  \neq 0.
+            a_0 = a_0(0,0)\cdot 1^m + \dots + \ub{a_m(0,0)}_{斉次多項式なので0} = f(0,0,1)  \neq 0.
           \end{align}
         \end{enumerate}
         よって、$f$の$z$についての先頭項係数は0でない定数である。
         \item
         上と同様に、$g$の$z$についての先頭項の係数は0でない定数である。
         \item $\exists$:
-        iiとiiiを命題3-6-3を適用し、$w\in \C$が存在して、$f,g$が$(u,v,w)$で消える。
+        iとiiとiiiを命題3-6-3を適用し、$w\in \C$が存在して、$f,g$が$(u,v,w)$で消える。
         \footnote{
         命題3-6-3は、「$f,g\in \C[x_1,\dots,x_n]$に対して、$a_0,b_0 \in \C[x_2,\dots,x_n]$を
         $f,g$の$x_1$についての先頭項係数とする。もし$\Res(f,g,x_1) \in \C[x_2,\dots,x_n]$が
@@ -3310,7 +3334,10 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     $m_{i,B}$がすべての$B\in M_{3\times 3}(\C)-\var(H)$
     に対して同じ値をとる？
     \begin{enumerate}
-      \item 斉次多項式$G(x,y)$と$H(x,y)$と$(u,v)\neq (0,0)$に対して
+      \item 斉次多項式$G(x,y)$と$H(x,y)$と$(u,v)\neq (0,0)$
+      ($(u,v)=(0,0)$のときは、$(u,v,w)=(0,0,1)$になっているが、
+      ここに曲線はないので大丈夫。)
+      に対して
       \begin{align}
         G(x,y) = (vx-uy)^M H(x,y),\quad M\in \Zge
       \end{align}
@@ -3410,12 +3437,46 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     \begin{enumerate}
       \item $f\in \C[x]$が0でないなら、$\C-\var(f)$は弧状連結である。これは、
       $\var(f)$が有限集合であることから明か。
-      \item $f\in \C[x_1,\dots,x_n]$が0でないなら、
+      \item[(b没)] $f\in \C[x_1,\dots,x_n]$が0でないなら、
       $\C^n - \var(f)$は弧状連結である。
-      $a,b\in \C^n$とし、それを結ぶ複素直線$t\mapsto ta + (1-t)b$を考える。
-      $t\mapsto f(ta+(1-t)b)$の像は$\C^n - \var(f)$の部分集合である。
-      $t\mapsto ta+(1-t)b$は$\C$内の1変数の多様体とみなせるので、
-      (a)より$\C^n - \var(f)$の$a$と$b$を結ぶpathが得られる。
+      $a,b\in \C^n-\var(f)$とし、それを結ぶ複素直線$t\mapsto f(ta + (1-t)b)$を考える。
+      \sout{$t\mapsto f(ta+(1-t)b)$の像は$\C^n - \var(f)$の部分集合である。}
+      \sout{$t\mapsto ta+(1-t)b$は$\C$内の1変数の多様体とみなせるので、}
+      \sout{(a)より$\C^n - \var(f)$の$a$と$b$を結ぶpathが得られる。}
+      上は、$t$の多項式として0でない。よって、上の$t$についての多項式に
+      (a)が適用できて、$\C-\var(t\mapsto f(ta+(1-t)b)$
+      で$t=0$と$t=1$を結ぶpathが求まることになる。
+      そのようなpathを$\varphi(t)$とする。$\varphi(0) = 0$
+      であり、$\varphi(1)=1$であり、$\varphi([0,1]) \subset \C-\var(t\mapsto f(ta+(1-t)b))$
+      である。つまり、$\varphi([0,1])$の像は
+      $\C$の曲線であり、この上で$t\mapsto f(ta+(1-t)b)$は0にならない。
+      そこで、合成して$\tau \mapsto \varphi(\tau)a + (1-\tau)b$
+      という多項式を考える。$\tau = 0$で$b$となり、
+      $\tau = 1$で$a$となる。
+
+      \sout{各座標についてpathを作る？}
+
+      $t\mapsto f(\varphi(t)a + (1-\varphi(t))b)$を考える。
+      \item
+      「$f\in \C[x_1,\dots,x_n]$が0でないなら、
+      $\C^n - \var(f)$は弧状連結である」を示す。
+      $a,b \in\C^n - \var(f)$とし、それを結ぶ複素直線
+      $t\mapsto f(ta + (1-t)b)$を考える。
+      上は$t$の多項式として0でないので、(a)を適用して、
+      $\C-\var(t\mapsto f(ta+(1-t)b))$に含まれる、
+      $t=0$と$t=1$を結ぶpathが求まることになる。
+      そのpathを$\varphi\colon [0,1]\to \C-\var(t\mapsto f(ta+(1-t)b))$
+      とする。path$\varphi$が$\C-\var(t\mapsto f(ta+(1-t)b))$に
+      含まれるので、$t\in [0,1]$について、
+      $(t\mapsto f(ta+(1-t)b))(\varphi(t)) \neq 0$であり、
+      $f(\varphi(t)a + (1-\varphi(t))b) \neq 0$であり、
+      $t\mapsto f(\varphi(t)a + (1-\varphi(t)b))$
+      は$[0,1]$上のどこでも非0である。よって、
+      $\C^n$上のpath$t\mapsto \varphi(t) a + (1-\varphi(t))$を考えると、
+      これは$[0,1]$上のどこでも$f$を0にしない。よって、
+      pathは$\C^n-\var(f)$に含まれる。pathが求まり、弧状連結である。
+
+
       \item 上を、$\C^9$でのことと考えて$M_{3\times 3}(\C) - \var(H)$
       に適用すればOK。
     \end{enumerate}
@@ -3444,8 +3505,8 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     ベズーの定理と4,5より、$C_1 \cap C_2$は
     重複度を含めて9個の点からなる。
     \item
-    $C_1 \cap C_2 = \set{p_1,\dots,p_6}$である。
-    なぜなら、
+    \sout{$C_1 \cap C_2 = \set{p_1,\dots,p_6}$である。
+    なぜなら、}
     \begin{align}
       C_1 \cap C_2
       =
@@ -3476,9 +3537,9 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     $\set{p_1,\dots,p_6} = C_1 \cap C$となる。よって、$p$は$p_1,\dots,p_6$のいずれかになるが、
     これは矛盾である。よって、$g_1(p) \neq 0$である。同様に、$g_2(p) \neq 0$となる。
     \item $g$:
-    $g=g_2(p)g_1 - g_1(p)g_2$とする。これは13より3次になる。(斉次なので先頭項だけ消えるということもない。)
+    $g=g_2(p)g_1 - g_1(p)g_2$とする。これは13より3次か0になる。(3次斉次なので先頭項だけ消えるということもない。)
     \item
-    上より、$g$は$p,p_1,\dots,p_6$で消える。
+    7より、$g$は$p,p_1,\dots,p_6$で消える。
     \item
     $g_1$と$g_2$は1次独立である。なぜなら、1次従属だとすると$C_1 = \var(g_1) = \var(g_2) = C_2$となってしまうから。
     \item
@@ -3494,7 +3555,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     $g$か$f$かが被約でないか、あるいは$\var(g)$と$C$とが共通の既約成分を持つことになる。
     \item
     $f$は被約にしておいたので、上より
-    $g$が被約でないか、あるいは$g$と$f$とが共通の成分を持つことになる。
+    $g$が被約でないか、あるいは$\var(g)$と$C$とが共通の成分を持つことになる。
     \item
     $\var(g)$と$C$は共通の既約成分を持つ？
     \begin{enumerate}
@@ -3513,7 +3574,7 @@ $A\in GL(n+1,k)$は$A\colon \P^n \to \P^n$を引き起こす。
     \item
     $C$は既約なので、上より$C=\var(f)$が$\var(g)$の既約成分である。
     \item $\exists l$:
-    上より、$g=f\cdot l$となる全次数1の斉次多項式$l$がある。
+    上より、$g=f\cdot l$となる全次数1以上の斉次多項式$l$がある。
     \item
     4,10,5,11より、$g_1$は$L_1,L_3,L_5$を消し、
     $g_2$は$L_2,L_4,L_6$を消すので、16より$g$は
