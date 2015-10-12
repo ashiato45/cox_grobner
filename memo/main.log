@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  10 OCT 2015 22:56
+This is LuaTeX, Version beta-0.79.1 (TeX Live 2014/W32TeX) (rev 4971)  (format=lualatex 2014.9.18)  13 OCT 2015 00:44
  restricted \write18 enabled.
 **main.tex
 (./main.tex
@@ -1212,40 +1212,91 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-[9] [10] [11] [12] [13])
+[9] [10] [11] [12] [13] [14] [15]
+! Undefined control sequence.
+l.1301         線型写像$\pi\colon k[x_0,\doits
+                                                ,x_n]_s/I_s \to k[x_0,\dots,...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[16] [17]
+! Undefined control sequence.
+<recently read> \su 
+    
+l.1530       $\su
+               _\mm_j a_j x_i^j$は$V$を消すので、$V$の第󿿿
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \mm 
+    
+l.1530       $\su_\mm
+                   _j a_j x_i^j$は$V$を消すので、$V$の第󿿿
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Double subscript.
+<recently read> \mathsub 
+         
+l.1530       $\su_\mm_j
+                      a_j x_i^j$は$V$を消すので、$V$の第󿿿
+I treat `x_1_2' essentially like `x_1{}_2'.
+
+[18] [19] [20] [21]
+LaTeX Font Info:    Font shape `JY3/mc/bx/n' in size <5> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 1912.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 4.62433pt on input line 1912.
+)
 \tf@thm=\write3
- [14] (./main.aux))
+ [22] (./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 11791 strings out of 494694
- 125002,266212 words of node,token memory allocated
- 5100 words of node memory still in use:
+ 11799 strings out of 494694
+ 156254,266212 words of node,token memory allocated
+ 5303 words of node memory still in use:
    10 hlist, 2 vlist, 4 rule, 3 glue, 29 kern, 1 glyph, 450 attribute, 831 glue_
 spec, 28 attribute_list, 1 write nodes
-   avail lists: 2:43419,3:648,4:1836,5:231,6:1440,7:134,9:815,10:23
- 14972 multiletter control sequences out of 65536+600000
- 80 fonts using 37903711 bytes
- 58i,17n,44p,459b,596s stack positions out of 5000i,500n,10000p,200000b,100000s
+   avail lists: 1:1,2:46269,3:851,4:1969,5:286,6:1569,7:134,9:815,10:23
+ 14978 multiletter control sequences out of 65536+600000
+ 82 fonts using 40469371 bytes
+ 58i,17n,44p,459b,598s stack positions out of 5000i,500n,10000p,200000b,100000s
 <<c:/texlive/2014/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><<c:/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><<c:/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><<c:/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (14 pages, 259846 bytes).
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><<c:/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmbx7.pfb><<c:/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmbx8.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cmextra/cmex7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
+<<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<c:/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><<c:/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<c:/texlive/2014/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr12.pfb><<c:/texlive/2014/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr17.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<c
+:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><<c:/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><<c:/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<c:/texlive/2014/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy5.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/symbols/msam10.pfb><<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/symbols/msbm10.pfb>
+Output written on main.pdf (22 pages, 345603 bytes).
 
-PDF statistics: 162 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+PDF statistics: 216 PDF objects out of 1000 (max. 8388607)
+ 157 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

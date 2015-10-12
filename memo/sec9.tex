@@ -805,7 +805,7 @@ $s$はある程度大きければ$\HF_I(s)$となるが、
     \end{enumerate}
     \item
     一般に、$I_1 \subset I_2$のとき、$
-    \deg \aHP_{I_2} \le \deg \aHP_{I_1}$が成立する。
+    \deg \aHP_{I_2} \le \deg \aHP_{I_1}$が成立する。(演習3-8)
     \begin{enumerate}
       \item 仮定より、$\gen{\LT(I_1)} \subset \gen{\LT(I_2)}$となる。
       \item $C$は単項式イデアルに含まれない単項式たちだったので、
@@ -1221,4 +1221,715 @@ $s$はある程度大きければ$\HF_I(s)$となるが、
     \end{align}
   \end{enumerate}
 
+\end{myproof}
+
+\subsection{次元の初等的な性質}
+\label{sub:次元の初等的な性質}
+\begin{framed}
+  命題1:
+  $V_1$と$V_2$を任意の体上の射影多様体、
+  あるいはアフィン多様体とする。このとき
+  $V_1 \subset V_2$ならば、$\dim V_1 \le \dim V_2$である。
+\end{framed}
+\begin{myproof}
+  \begin{align}
+    \dim V_1
+    &\desceq{定理12(i)}
+    \dim C_{V_1} - 1\\
+    &=
+    \deg \aHP_{\ideal(C_{V_1})} - 1\\
+    &\descle{演習3-8}
+    \deg \aHP_{\ideal(C_{V_2})} - 1\\
+    &\fbox{仮定より$C_{V_1}\subset C_{V_2}$であり、イデアル包含で逆転し、次元で逆転する。}\\
+    &=
+    \dim C_{V_2} - 1\\
+    &\desceq{定理12(i)}
+    \dim V_2.
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  命題2:
+  $k$を代数的閉体とし、$f\in k[x_0,\dots,x_n]$を定数でない
+  斉次多項式とする。すると$\P^n(k)$において、
+  $f$いよって定義される射影多様体の次元は
+  $\dim \var(f) = n-1$で与えられる。
+\end{framed}
+\begin{myproof}
+  \begin{align}
+    \dim \var(f)
+    &=
+    \dim \var(\gen{f})\\
+    &=
+    (\var(\gen{\LT(f)})の射影的座標部分空間の次元の最大値)\\
+    &=
+    (\var(\gen{\LT(f)})の射影的座標部分空間の次元の最大値)\\
+    &\desceq{$f$は定数でない}
+    n-1.
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  定理3:
+  $k$を代数的閉体であって、$I$を$k[x_0,\dots,x_n]$の
+  斉次イデアルとする。$f$が定数ではない斉次多項式なら、
+  \begin{align}
+    \dim \var(I) \ge \dim \var(I+\gen{f}) \ge \dim \var(I) -1
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $\dim \var(I)\ge \dim \var(I+\gen{f})$について:
+      演習3-8のイデアルの包含と次元の関係
+      を思いだしておく。(これは命題3-6に埋めこまれている。)
+      \begin{align}
+        \dim \var(I)
+        &=
+        \deg \HP_I\\
+        &\descge{演習3-8と$I\subset I+\gen{f}$}
+        \deg \HP_{I+\gen{f}}\\
+        &=
+        \dim \var(I+\gen{f}).
+      \end{align}
+    \item $\dim \var(I+\gen{f})\ge \dim \var(I) - 1$について:
+    \begin{enumerate}
+      \item $r$: $f$は定数でないので、全次数$r>0$を持つとする。
+      \item 全次数$s\ge r$を考える。
+      \begin{enumerate}
+        \item
+        線型写像$\pi\colon k[x_0,\doits,x_n]_s/I_s \to k[x_0,\dots,x_n]_s/(I+\gen{f})_s$を
+        標準的全射と定義する。
+        \item
+        $\alpha_f\colon k[x_0,\dots,x_n]_{s-r}/I_{s-r}
+        \to k[x_0,\dots,x_n]_s/I_s$を$[f]$倍として定義する。
+        まず、$k[x_0,\dots,x_n]_{s-r}$は$f$倍で全次数
+        が$r$増えるので、確かに$k[x_0,\dots,x_n]_s$に入る。
+        また、$I_{s-r}$の元は$f$倍すると全次数が$r$ふえて$s$となり、
+        さらに$I$がイデアルなので相変らず$I$に属し、$I_{s}$に属する。
+        よって、ちゃんと割り算はOKで、well-definedになる。
+        \item
+        $\alpha_f(k[x_0,\dots,x_n]_{s-r}/I_{s-r}) =
+        \ker \pi$を示す？
+        \begin{enumerate}
+          \item $\subset$を示す？
+          \begin{itemize}
+            \item $h\in k[x_0,\dots,x_n]_{s-r}$とする。
+            \item $fh \in (I+\gen{f})_s$である。(左辺の代表元を取った)
+            \item よって、$\pi(fg+ I_s) = 0$である。
+          \end{itemize}
+          \item $\supset$を示す？
+          \begin{itemize}
+            \item $g\in \ker \pi \subset k[x_0,\dots,x_n]_s$とする。
+            \item $\pi(g) = 0$なので、$g + (I+\gen{f})_s = 0 + (I+\gen{f})_s$である。
+            \item $g',h$: 上より、$g\in I+\gen{f}$なので、
+            $g = g' + fh$となる$g'\in I$と$h\in k[x_0,\dots,x_n]$が存在する。
+            \item $g_\bullet',h_\bullet'$:
+            上の$g',h$を斉次成分に分解し、
+            $g= \sum_i g_i' + f \sum_i h_i$を得る。
+            これらはそれぞれ$i$次を持つか0である。
+            \item 2番目より
+            $g\in k[x_0,\dots,x_n]_s$の元なので、
+            $g$は0か全次数$s$である。
+            \item 上2つと$f,g$が斉次多項式であることから、
+            全次数を比較して$g=g_s' + fh_{s-r}$となる。
+            \item $g_s' \in g' + I_s$なので、
+            上より$g+I_s = fh_{s-r} + I_s = \alpha_f(h_{s-r}+I_{s-r})$となる。
+            \item
+            上より、$\ker \pi \subset \Image \alpha_f$となる。
+          \end{itemize}
+        \end{enumerate}
+        \item
+        同型定理より、
+        \begin{align}
+          \dim k[x_0,\dots,x_n]_s/(I+\gen{f})_s
+          &=
+          \dim k[x_0,\dots,x_n]_s/I_s - \dim \ker \pi\\
+          &=
+          \dim k[x_0,\dots,x_n]_s/I_s - \dim \Image \alpha_f.
+        \end{align}
+        \item
+        写像は次元を落とすことしかしないので、
+        \begin{align}
+          \dim \Image \alpha_f
+          =
+          \dim \alpha_f(k[x_0,\dots,x_n]_{s-r}/I_{s-r})
+          \le
+          \dim k[x_0,\dots,x_n]_{s-r}/I_{s-r}.
+        \end{align}
+        であり、等号は$\alpha_f$が単射のときのみ成立。
+        \item
+        ivとvより、
+        \begin{align}
+          \dim k[x_0,\dots,x_n]_s/(I+\gen{f})_s
+          \ge
+          \dim k[x_0,\dots,x_n]_s/I_s - \dim k[x_0,\dots,x_n]_{s-r}/I_{s-r}.
+        \end{align}
+      \end{enumerate}
+      以上で、$s\ge r$についてviのような式が成立することを示せた。
+      \item
+      上をヒルベルト関数の定義で書き換えると、
+      \begin{align}
+        \HF_{I+\gen{f}}(s)\ge
+        \HF_{I}(s) - \HF_{I}(s-r)
+      \end{align}
+      となる。
+      \item
+      上より、$s\gg 1$のとき、
+      \begin{align}
+        \HP_{I+\gen{f}}(s)
+        \ge
+        \HP_I(s) - \HP_I(s-r)
+      \end{align}
+      となる。
+      \item
+      $d$:
+      右辺の次数は先頭項が消え、$\HP_I(s)$の次数を$d$とすると、
+      $d-1$次項が$rd$になるので、右辺の次数は$d-1$となる。
+      \item
+      オーダーを考え、$s$を無限に飛ばすことで
+      $\deg \HP_{I+\gen{f}}(s) \ge d-1$を得る。
+      \item
+      定理3-11(射影多様体の次元定理)
+      より、$\dim \var(I+\gen{f}) \ge \dim \var(I)-1$を得る。
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+つまり、次数は1つ落ちるか落ちないか。
+
+\begin{framed}
+  系4:
+  $k$を代数的閉体、$I\subset k[x_0,\dots,x_n]$を斉次イデアルとする。
+  $f$を定数でない斉次多項式で、商環
+  $k[x_0,\dots,x_n]/I$における類が零因子でないゆおなものとする。
+  すると、
+  \begin{align}
+    \dim \var(I+\gen{f}) = \dim \var(I) - 1
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  \begin{enumerate}
+    \item $f+I \in k[x_0,\dots,x_n]/I$が零因子でなければ、
+    $\alpha_f$が単射になることを示す？
+    \begin{enumerate}
+      \item $f+I$が零因子でないとする。単射であることを示すには、
+      0でないものが0でないものに飛ぶことを示せばよい。
+      \item
+      $h + I_{s-r} \in k[x_0,\dots,x_n]_{s-r}/I_{s-r}$
+      は0でないとする。
+      \item
+      $h\notin I_{s-r}$かつ$I_{s-r} = I\cap k[x_0,\dots,x_n]_{s-r}$
+      かつ$h \in k[x_0,\dots,x_n]_{s-r}$なので、$
+      h\notin I$である。
+      \item
+      上より、$h + I \neq 0 + I$となる。
+      \item
+      $f+I$は零因子でないと(a)でしておいたので、
+      $(f+I)(h+I) \neq 0 + I$であり、$fh\notin I$である。
+      \item
+      上より、$\alpha_f(h+I_{s-r}) = (fh) + I \neq 0$なので、
+      (a)を閉じて、0でないものが0に飛ぶことがわかった。
+      よって、$\alpha_f$は単射になる。
+    \end{enumerate}
+    \item
+    定理3の証明の2-(b)-v,viで、単射のときの等号条件が満たされたので、
+    \begin{align}
+      \dim k[x_0,\dots,x_n]_s/(I+\gen{f})_s
+      =
+      \dim \alpha_f(k[x_0,\dots,x_n]_{s-r}/I_{s-r})
+      =
+      \dim k[x_0,\dots,x_n]_{s-r}/I_{s-r}
+    \end{align}
+    \item
+    上より、
+    \begin{align}
+      \HP_{I+\gen{f}}(s) = \HP_I(s) - \HP_I(s-r).
+    \end{align}
+    \item
+    定理3の証明の次数の議論2-(b)-(e,f)と同様に
+    \begin{align}
+      \dim \var(I+\gen{f}) = \dim \var(I) - 1.
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題5:
+  $k$を代数的閉体、
+  $I$を$k[x_0,\dots,x_n]$の斉次イデアルとする。
+  定数でない$k[x_0,\dots,x_n]$の斉次多項式
+  $f_1,\dots,f_r$に対して
+  \begin{align}
+    \dim \var(I+\gen{f_1,\dots,f_r}) \ge \dim \var(I)- r
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  $r$に関する帰納法を定理3に使う。
+\end{myproof}
+
+\begin{framed}
+  命題6:
+  $V$を空でないアフィンまたは射影多様体とする。
+  このとき$V$が有限個の点からなることと、$\dim V = 0$で
+  あることは同値である。
+\end{framed}
+\begin{myproof}
+  (アフィン多様体の場合)
+  \begin{enumerate}
+    \item $>$を$k[x_1,\dots,x_n]$の次数付き順序とする。
+    \item $\Rightarrow$を示す？$V$が有限集合とする。
+    \begin{enumerate}
+      \item
+      $a_\bullet$:
+      $V$の点の第$i$座標のうち相異なるものを$a_j(j=1,\dots,m_i)$とすう。
+      \item
+      $f$:
+      $f=\prod_{j=1}^{m_i} (x_i-a_j) \in \ideal(V)$とする。
+      \item
+      定義より、$f$は$V$の点をすべて消し、$f\in \ideal(V)$となる。
+      \item
+      また、$\LT(f) = x_i^{m_i} \in \gen{\LT(\ideal(V))}$となる。
+      \item
+      上がすべての$i$(これは(a)で走らせた)について成立するので、
+      $\gen{\LT(\ideal(V))}$はすべての$x_1,\dots,x_n$の
+      羃を含む。
+      \item
+      よって、$\var(\gen{LT(\ideal(V))}) = \set{0}$である。
+      \item
+      \begin{align}
+        \dim V \desceq{定理8(次元定理)}
+        (\var(\gen{\LT(\ideal(V))})に含まれる座標部分空間の次元の最大値)
+        =
+        0.
+      \end{align}
+    \end{enumerate}
+    \item $\Leftarrow$を示す？$\dim V = 0$とする。
+    \begin{enumerate}
+      \item $C$: $\ideal(V)$のアフィン・ヒルベルト多項式は定数
+      $C$となる。
+      \item
+      \begin{align}
+        \dim k[x_1,\dots,x_n]_{\le s}/\ideal(V)_{\le s} = C
+      \end{align}
+      が十分大きい$s$について成り立つ。
+      (ただし、アフィン・ヒルベルト関数がこうなので、どんな$s$
+      でも多項式にはなっている。)
+      \item
+      $i$を座標の番号とする。
+      \item
+      $[1],\dots,[x_i^C] \in k[x_1,\dots,x_n]_{\le C}/\ideal(V)_{\le C}$
+      は次元$C$のベクトル空間の$C+1$個のベクトルなので、
+      これらは線形従属になる。
+      \item $a_\bullet$:
+      よって、自明でない線形関係
+      $[0] = \sum_{j=0}^C a_j [x_i^j]$があり、
+      $\sum_{j=0}^C a_j x_i^j \in \ideal(V)_{\le C}$に属する。
+      \item
+      $\su_\mm_j a_j x_i^j$は$V$を消すので、$V$の第
+      $i$座標の点は有限個しかない。これが(c)で固定した
+      $1\le i \le n$すべてについて正しいので、
+      $V$は有限個の点からなる。
+    \end{enumerate}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題7:
+  $k$を代数的閉体とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    $V\subset \P^n(k)$を次元が正の射影多様体とする。
+    すると定数でない任意の斉次多項式$f\in k[x_0,\dots,x_n]$
+    に対して、$V\cap \var(f) \neq \emptyset$が成り立つ。
+    つまり、$\P^n(k)$の任意の超曲面と交わりを持つ。
+    \item
+    $W\subset k^n$を次元が正のアフィン多様体とする。
+    $\ol W$を$W$の$\P^n(k)$における射影完備化とすると、
+    $W\neq \ol W$である。
+    つまり正次元のアフィン多様体は常に無限遠点を持つ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (i):
+  \begin{enumerate}
+    \item $V=\var(I)$とする。
+    \item$\dim V > 0$なので、定理3より
+    \begin{align}
+      \dim V \cap \var(f) \ge \dim V -1 \ge 0.
+    \end{align}
+    \item
+    $V\cap \var(f) \neq \emptyset$？
+    \begin{enumerate}
+      \item $V\cap \var(f) = \emptyset$と仮定する(背理法)。
+      \item $r$:
+      射影幾何での零点定理より、ある$r\ge 0$について
+      $\gen{x_0,\dots,x_n}^r \subset I+\gen{f}$である。
+      \item
+      $\HP_{I+\gen{f}}$は0多項式？
+      \begin{enumerate}
+        \item 命題3-9より、
+        \begin{align}
+          \HF_{I+\gen{f}}(s)
+          &=
+          \HF_{\gen{\LT(I+\gen{f})}}(s)\\
+          &=
+          (\gen{\LT(I+\gen{f})}に含まれない全次数sの単項式の個数)
+        \end{align}
+        だが、$\gen{x_0,\dots,x_n}^r \subset I+\gen{f}$
+        なので、$s$が十分大きいときにはこれは0になる。
+        \item
+        ヒルベルト多項式は、$s$が十分大きいときのヒルベルト関数なので、
+        上のことよりヒルベルト関数は0にならざるを得ず、
+        $\HF_{I+\gen{f}}(s) = 0$となる。
+      \end{enumerate}
+      \item
+      命題3の証明の2-(d)より、
+      \begin{align}
+        \HP_{I+\gen{f}}(s) \ge \HP_I(s) - \HP_I(s-r)
+      \end{align}
+      だが、$\HP_I(s)$は仮定より正次元なので、
+      $\HP_I(s)-\HP_I(s-r)$のLCは
+      $r\deg \HP_I(s)$であり、0でない。よって、
+      $\HP_{I+\gen{f}}$は0多項式でない。
+      \item
+      (c)と(d)は矛盾する。よって、(a)は誤りで、
+      $V\cap \var(f) = \emptyset$である。
+    \end{enumerate}
+  \end{enumerate}
+
+  (ii):
+  \begin{enumerate}
+    \item $\var(x_0)$は無限遠点のなす超平面である。
+    \item 上より、$W$の無限遠点は$\ol W \cap \var(x_0)$
+    である。
+    \item
+    \begin{align}
+      \dim \ol W \desceq{定理3-12} \dim W \descgt{仮定} 0.
+    \end{align}
+    \item (i)より、$\ol W \cap \var(x_0) \neq \emptyset$である。
+  \end{enumerate}
+\end{myproof}
+
+
+\begin{framed}
+  命題8:
+  $V$と$W$を$k^n$に含まれているか、あるいは$\P^n(k)$
+  に含まれている2つの(アフィン、あるいは射影)多様体とする。このとき
+  \begin{align}
+    \dim(V\cup W) = \max(\dim V,\dim W)
+  \end{align}
+  が成り立つ。
+\end{framed}
+\begin{myproof}
+  (アフィン多様体のとき):
+  \begin{enumerate}
+    \item $k$が有限のときは定理6より次元0なので考えなくてよい。
+    以下無限体とする。
+    \item
+    $I,J$:
+    $I=\ideal(V),J=\ideal(W)$とする。
+    \item
+    \begin{align}
+      \dim V &= \dim \aHP_{\ideal(V)} = \deg \aHP_I,\\
+      \dim W &= \dim \aHP_{\ideal(W)} =  \deg \aHP_J
+    \end{align}
+    である。
+    \item
+    イデアルと多様体の関係より、
+    \begin{align}
+      \ideal(V\cup W) = \ideal(V)\cap \ideal(W) = I\cap J.
+    \end{align}
+    \item
+    $IJ \subset I\cap J \subset \sqrt{IJ}$？
+    \begin{enumerate}
+      \item $IJ$の元は$I$の元の倍数であり$J$の元の倍数なので、
+      $IJ \subset I\cap J$である。
+      \item
+      $f\in I\cap J$とする。$f^2 = f\cdot f \in IJ$なので、
+      $f\in \sqrt{IJ}$となる。よって、$I\cap J \subset \sqrt{IJ}$となる。
+    \end{enumerate}
+  \item
+  5に演習問題3-8の、イデアルの包含と次数の関係より、
+  \begin{align}
+    \deg \aHP_{\sqrt{IJ}}
+    \le
+    \deg \aHP_{I\cap J}
+    \le
+    \deg \aHP_{IJ}.
+  \end{align}
+  となる。
+  \item
+  上は、命題3-6より外側2項が等しいので、
+  等号
+  \begin{align}
+    \deg \aHP_{\sqrt{IJ}}
+    =
+    \deg \aHP_{I\cap J}
+    =
+    \deg \aHP_{IJ}.
+  \end{align}
+  \item
+  \begin{align}
+    \dim (V\cup W)
+    &=
+    \deg \aHP_{\ideal(V\cup W)}\\
+    &\desceq{4}
+    \deg \aHP_{I\cap J}\\
+    &\desceq{(d)}
+    \deg \aHP_{IJ}.
+  \end{align}
+  \item
+  次数付き順序$>$を固定する。
+  \item
+  命題3-3「単項式イデアルの次元と座標部分空間の次元」
+  と命題3-4「ヒルベルト関数の計算はLTでできる」と
+  7より、
+  \begin{align}
+    \dim V
+    &=
+    \deg \aHP_I
+    =
+    (\var(\gen{\LT(I)})に含まれる座標部分空間の最大の次元),\\
+    \dim W
+    &=
+    \deg \aHP_J
+    =
+    (\var(\gen{\LT(J)})に含まれる座標部分空間の最大の次元),\\
+    \dim (V\cup W)
+    &\desceq{4}
+    \deg \aHP_{IJ}
+    =
+    (\var(\gen{\LT(IJ)})に含まれる座標部分空間の最大の次元).
+  \end{align}
+  \item $\gen{\LT(IJ)} \supset \gen{\LT(I)} \cdot \gen{\LT(J)}$？
+  \begin{enumerate}
+    \item
+    $f\in I,g\in J$すると、$\LT(f)\LT(g)\in \gen{\LT(I)}\cdot \gen{\LT(J)}$
+    となり、任意に左辺から取れる。$\LT(f)\LT(g) = \LT(fg)$だが、
+    $fg\in IJ$なので$\LT(fg) \in \gen{\LT(IJ)}$となり、
+    $\LT(f)\LT(g) \in \gen{\LT(IJ)}$となる。示された。
+  \end{enumerate}
+  \item
+  上より、
+  \begin{align}
+    \var(\gen{\LT(IJ)}) \subset \var(\gen{\LT(I)}) \cup
+    \var(\gen{\LT(J)}).
+  \end{align}
+  \item 座標部分空間は既約である？
+  \begin{enumerate}
+    \item $s\le n$とする。
+    $\var(x_1,\dots,x_s)$が既約であることを示せばよい。
+    \item まず、$\ideal(\var(x_1,\dots,x_s)) = \gen{x_1,\dots,x_s}$を示す。
+    $\supset$は明らか。$\subset$を示す。
+    $f\in \ideal(\var(x_1,\dots,x_s))$とする。
+    $f$を$x_1,\dots,x_s$で割ったあまりを$r$とする。
+    ここには、$x_1,\dots,x_s$は含まれず、$r\in k[x_{s+1},\dots,x_n]$
+    となる。
+    $r\neq 0$と仮定する(背理法)。
+    $r$が定数だとすると、$f$が$\var(x_1,\dots,x_n)$を消すという
+    $f$の取り方に反する。$r$が定数でないとき、
+    そこにあらわれる文字を1つだけ残して残りを$1$とすることにより
+    1変数多項式にできるが、この根は有限個である。
+    $k$は無限体なのだから、これらの根以外の
+    数を選ぶことで、$r$を非零にすることができる。
+    これは、$f$が$\var(x_1,\dots,x_n)$を消すという
+    $f$の取り方に反する。
+    \item
+    $\gen{x_1,\dots,x_s}$は既約である。なぜなら、
+    $k[x_1,\dots,x_n]/\gen{x_1,\dots,x_s} \simeq
+    k[x_{s+1},\dots,x_n]$となるが、これは整域だからである。
+    \item
+    (b),(c)より、$\ideal(\var(x_1,\dots,x_s))$が既約である。
+    \item
+    命題4-5-3によれば、$\var(x_1,\dots,x_s)$
+    の既約性は$\ideal(\var(x_1,\dots,x_s))$の既約性
+    と等価だが、これは(d)で示した。
+    よって、$\var(x_1,\dots,x_s)$は既約である。
+  \end{enumerate}
+  \item
+  12,13より、$\var(\gen{\LT(IJ)})$は
+  $\var(\gen{\LT(I)})$か
+  $\var(\gen{\LT(J)})$かのどちらかに含まれる。
+  \item
+  上と命題1「多様体の包含と次元の大小」と
+  10より、$\dim(V\cup W) \le \max(\dim V,\dim W)$となる。
+  \item
+  命題1より、$\max(\dim V,\dim W) \le \dim(V\cup W)$となる。
+  \item
+  15,16より、$\max(\dim V,\dim W) = \dim (V\cup W)$となる。
+
+  \end{enumerate}
+
+  (射影多様体について):
+  \begin{enumerate}
+    \item 射影多様体$V=\var_p(I),W=\var_p(J)$について、$C_V\cup C_W = C_{V\cup W}$となる？
+    \begin{align}
+      C_V \cup C_W
+      &=
+      C_{\var_p(I)}\cup C_{\var_p(J)}\\
+      &=
+      \var_a(I)\cup \var_a(J)\\
+      &=
+      \var_a(IJ)\\
+      &=
+      C_{\var_p(IJ)}\\
+      &=
+      C_{\var_p(I)\cup \var_p(J)}\\
+      &=
+      C_{V\cup W}.
+    \end{align}
+    \item
+    \begin{align}
+      \dim (V\cup W)
+      &\desceq{定理3-12(i)}
+      \dim C_{V\cup W} - 1\\
+      &\desceq{1}
+      \dim (C_V\cup C_W)- 1\\
+      &\desceq{アフィン多様体のとき}
+      \max(\dim C_V,\dim C_W)-1\\
+      &\desceq{定理3-12(i)}
+      \max(\dim V+1, \dim W + 1)-1\\
+      &=
+      \max(\dim V,\dim W).
+    \end{align}
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  系9:
+  多様体の次元は、その既約成分の次元の最大値に一致する。
+\end{framed}
+\begin{myproof}
+  $V=V_1\cup \dots \cup V_r$を$V$の既約成分への分解とし、
+  命題8を繰り返し使って
+  \begin{align}
+    \dim V = \max \set{\dim V_1,\dots,\dim V_r}.
+  \end{align}
+\end{myproof}
+
+\begin{framed}
+  演習8-4-11(使ってないし示せない):
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    斉次イデアル$I\subset k[x_0,\dots,x_n]$
+    が斉次素イデアルであるための必要十分条件
+    は、任意の斉次多項式$F,G$に対して、
+    $FG\in I$ならば$F\in I$または
+    $G\in I$となること。
+    \item
+    $I$を斉次イデアルとする。
+    もし$I$が素イデアルなら、射影多様体
+    $\var(I)$は既約であることを示せ。
+    また、もし$I$が根基イデアルなら、
+    逆も成り立つことを証明せよ。
+    つまり、もし$I$が根基イデアルでかつ
+    $\var(I)$が既約なら、$I$は素イデアルである。
+    \item
+    $k$を代数的閉体とする。
+    すると、写像$\var$と$\ideal$は
+    $k[x_0,\dots,x_n]$の
+    $\gen{x_0,\dots,x_n}$に真に含まれる
+    斉次素イデアルの集合と$\P^n(k)$の空でない
+    既約射影多様体の間の全単射対応を導くことを示せ。
+  \end{enumerate}
+\end{framed}
+\begin{myproof}
+  (a):
+  \begin{enumerate}
+    \item $\Rightarrow$は素イデアルなので明らか。
+    \item $\Leftarrow$は素イデアルなので明らか。
+  \end{enumerate}
+
+  (b前半):
+  \begin{enumerate}
+    \item $I$が素イデアルであるとする。
+    $\var(I) = \var(I_1) \cup \var(I_2)$とし、
+    $\var(I_1) \neq \var(I)$とする。このとき、
+    $\var(I_2) = \var(I)$が成立することを示す。
+    $\var(I_1)\subsetneq \var(I)$なので、
+    $\ideal$の単射性
+    \footnote{仮に等号が成立したら$\var$をかけて左可逆性
+    で$\var(I_1)=\var(I)$となってしまう。}
+    より$\ideal(\var(I)) \subsetneq \ideal(\var(I_1))$となる。
+    仮に$\var(I_2)\neq \var(I)$であるとする。
+    $\var(I_2)\subsetneq \var(I)$となっているので、
+    先と同様に$\ideal(\var(I)) \subsetneq \ideal(\var(I_2))$となっている。
+    まとめると、
+    一方、$\var(I) = \var(I_1)\cup \var(I_2)$から
+    $\ideal(\var(I)) = \ideal(\var(I_1)) \cap \ideal(\var(I_2))$
+    となるが、？？？
+  \end{enumerate}
+\end{myproof}
+
+\begin{framed}
+  命題10:
+  $k$を代数的閉体で、$V\subset \P^n(k)$を既約な多様体とする。
+  \begin{enumerate}[label=(\roman*)]
+    \item $f\in k[x_0,\dots,x_n]$が
+    $V$上で消えない多項式とすると、$\dim(V\cap \var(f)) = \dim V-1$が成り立つ。
+    \item
+    $W\subset V$を多様体であって、
+    $W\neq V$とすると、$\dim W < \dim V$が成り立つ。
+  \end{enumerate}
+
+\end{framed}
+\begin{myproof}
+  (i):
+  \begin{enumerate}
+    \item
+    $\ideal(V)$は素イデアル？
+    \begin{enumerate}
+      \item $fg \in \ideal(V)$とし、$f\notin \ideal(V)$とする。
+      \item $\var(\ideal(V)) \subset \var(fg)$となる。
+      \item $\ideal$の単射性より、$V \subset \var(f) \cup \var(g)$となる。
+      \item $V$の既約性より、$V\subset \var(f)$か$V\subset \var(g)$かである。
+      \item (a)で$f\notin \ideal(V)$として、
+      これは$f$は$V$のうち消さない点があることを意味する。
+      一方、$V\subset \var(f)$は$f$が消す点のほうが$V$より広いことを意味する。
+      よって、$V\subset \var(f)$は誤りであり、
+      $V\subset \var(g)$となる。
+      \item 上より、
+      $\ideal(\var(g)) \subset \ideal(V)$だが、
+      $g\in \ideal(\var(g))$なので、$g\in \ideal(V)$である。
+    \end{enumerate}
+    \item
+    上より、$k[V] \simeq k[x_0,\dots,x_n]/\ideal(V)$は整域である。
+    \item $f$は$V$上で消えない多項式なので
+    $f\notin \ideal(V)$であり、$f+\ideal(V) \neq 0 + \ideal(V)$である。
+    \item
+    \begin{align}
+      \dim(V\cap \var(f))
+      &\desceq{$\ideal$の単射性}
+      \dim(\var(\ideal(V))\cap \var(f))\\
+      &=
+      \dim(\var(\ideal(V)+\gen{f}))\\
+      &\desceq{系4}
+      \dim \var(\ideal(V)) - 1\\
+      &\desceq{$\ideal$の単射性}
+      \dim V - 1.
+    \end{align}
+  \end{enumerate}
+
+  (ii):
+  \begin{enumerate}
+    \item $W\subsetneq V$と$\ideal$の単射性(の背理法の利用)より、
+    $\ideal(V) \subsetneq \ideal(W)$が従う。
+    \item $f$:
+    上より、$f\in \ideal(W)-\ideal(V)$がある。
+    \item
+    $W\subsetneq V$であり、
+    上より$f$は$W$を消すので$W \subset \var(f)$なので、
+    $W \subset V\cap \var(f)$である。
+    \item
+    上より、
+    \begin{align}
+      \dim W
+      \descle{命題1}
+      \dim(V\cap \var(f))
+      \desceq{(i)}
+      \dim V - 1 < \dim V.
+    \end{align}
+  \end{enumerate}
 \end{myproof}
